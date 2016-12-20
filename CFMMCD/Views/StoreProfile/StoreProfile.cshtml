@@ -1,25 +1,19 @@
 ﻿@model CFMMCD.Models.ViewModel.StoreProfileViewModel
 
 @{
-    ViewBag.Title = "StoreProfile";
+    ViewBag.Title = "Store Profile";
 }
 
-<h2 align="center">StoreProfile</h2>
+<h2 align="center">Store Profile</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-
-
-
-
     <div class="form-horizontal">
-        <h4 align="center">StoreProfileViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.StoreNameNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StoreNameNumber, "Store Name/Number", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8">
                 @Html.TextBoxFor(model => model.StoreNameNumber, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.StoreNameNumber, "", new { @class = "text-danger" })
@@ -28,8 +22,9 @@
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" name="command" value="Search" class="btn btn-default" style="margin-left:770px; margin-top:-85px;" />
         </div>
+        <hr />
         <div class="form-group">
-            @Html.LabelFor(model => model.STORE_NO, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-left:-43px; margin-top:-15px;" })
+            @Html.LabelFor(model => model.STORE_NO, "Store number", htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-left:-43px; margin-top:-15px;" })
             <div class="col-md-3" style="margin-left:-5px; margin-top:-20px;">
                 @Html.TextBoxFor(model => model.STORE_NO, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.STORE_NO, "", new { @class = "text-danger" })
@@ -37,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.STORE_NAME, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-left:385px; margin-top:-50px;" })
+            @Html.LabelFor(model => model.STORE_NAME, "Store name", htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-left:385px; margin-top:-50px;" })
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.STORE_NAME, new { @class = "form-control", @style = "margin-left:585px; margin-top:-50px;" })
                 @Html.ValidationMessageFor(model => model.STORE_NAME, "", new { @class = "text-danger" })
@@ -45,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ADDRESS, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-left:-58px; margin-top:-10px;" })
+            @Html.LabelFor(model => model.ADDRESS, "address", htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-left:-58px; margin-top:-10px;" })
             <div class="col-md-9">
                 @Html.TextBoxFor(model => model.ADDRESS, new { @class = "form-control", @style = "margin-top:-12px; margin-left:10px; width:94%;" })
                 @Html.ValidationMessageFor(model => model.ADDRESS, "", new { @class = "text-danger" })
@@ -54,7 +49,7 @@
         <div class="business-container">
             <h4><strong>&emsp;Business Extension</strong></h4>
             <div class="form-group">
-                @Html.LabelFor(model => model.Hrs24Input, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Hrs24Input, "24-hrs", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
                     <div class="checkbox">
                         @Html.CheckBoxFor(model => model.Hrs24Input)
@@ -64,7 +59,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MallInput, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.MallInput, "Mall", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
                     <div class="checkbox">
                         @Html.CheckBoxFor(model => model.MallInput)
@@ -74,7 +69,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.McVanInput, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.McVanInput, "McVan", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
                     <div class="checkbox">
                         @Html.CheckBoxFor(model => model.McVanInput)
@@ -84,7 +79,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.McDeliveryInput, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.McDeliveryInput, "McDelivery", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
                     <div class="checkbox">
                         @Html.CheckBoxFor(model => model.McDeliveryInput)
@@ -94,7 +89,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.DriveThruInput, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.DriveThruInput, "Drive thru", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
                     <div class="checkbox">
                         @Html.CheckBoxFor(model => model.DriveThruInput)
@@ -104,7 +99,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TakeOutCounterInput, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TakeOutCounterInput, "Take out counter", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
                     <div class="checkbox">
                         @Html.CheckBoxFor(model => model.TakeOutCounterInput)
@@ -116,11 +111,11 @@
 
         <div class="tier-container">
             <div class="form-group">
-                @Html.LabelFor(model => model.BREAKFAST_PRICE_TIER, htmlAttributes: new
-           {
-               @class = "control-label col-md-2",
-               @style = "margin-top:-245px;"
-           })
+                @Html.LabelFor(model => model.BREAKFAST_PRICE_TIER, "Breakfast tier", htmlAttributes: new
+               {
+                   @class = "control-label col-md-3",
+                   @style = "margin-top:-245px;"
+               })
                 <div class="col-md-3">
                     @Html.TextBoxFor(model => model.BREAKFAST_PRICE_TIER, new { @class = "form-control", @style = "margin-left:230px; margin-top:-245px;" })
                     @Html.ValidationMessageFor(model => model.BREAKFAST_PRICE_TIER, "", new { @class = "text-danger" })
@@ -128,21 +123,21 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.REGULAR_PRICE_TIER, htmlAttributes: new
+                @Html.LabelFor(model => model.REGULAR_PRICE_TIER, "Regular price tier", htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-245px;"
            })
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.REGULAR_PRICE_TIER, new { @class = "form-control", @style = "margin-left:230px; margin-top:-245px;" })
+                    @Html.TextBoxFor(model => model.REGULAR_PRICE_TIER,  new { @class = "form-control", @style = "margin-left:230px; margin-top:-245px;" })
                     @Html.ValidationMessageFor(model => model.REGULAR_PRICE_TIER, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.DC_PRICE_TIER, htmlAttributes: new
+                @Html.LabelFor(model => model.DC_PRICE_TIER, "DC price tier", htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-219px; margin-left:-10px;"
            })
                 <div class="col-md-3">
@@ -152,9 +147,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MDS_PRICE_TIER, htmlAttributes: new
+                @Html.LabelFor(model => model.MDS_PRICE_TIER, "MDS price tier", htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-192px; margin-left:-2px;"
            })
                 <div class="col-md-3">
@@ -164,9 +159,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MCCAFE_LEVEL_2_PRICE_TIER, htmlAttributes: new
+                @Html.LabelFor(model => model.MCCAFE_LEVEL_2_PRICE_TIER, "McCafe Level 2 price tier",  htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-165px;"
            })
                 <div class="col-md-3">
@@ -176,11 +171,11 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MCCAFE_LEVEL_3_PRICE_TIER, htmlAttributes: new
-           {
-               @class = "control-label col-md-2",
-               @style = "margin-top:-137px;"
-           })
+                @Html.LabelFor(model => model.MCCAFE_LEVEL_3_PRICE_TIER, "McCafe level 3 price tier", htmlAttributes: new
+               {
+                   @class = "control-label col-md-3",
+                   @style = "margin-top:-137px;"
+               })
                 <div class="col-md-3">
                     @Html.TextBoxFor(model => model.MCCAFE_LEVEL_3_PRICE_TIER, new { @class = "form-control", @style = "margin-left:230px; margin-top:-137px;" })
                     @Html.ValidationMessageFor(model => model.MCCAFE_LEVEL_3_PRICE_TIER, "", new { @class = "text-danger" })
@@ -188,9 +183,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MCCAFE_BISTRO_PRICE_TIER, htmlAttributes: new
+                @Html.LabelFor(model => model.MCCAFE_BISTRO_PRICE_TIER, "McCafe BISTRO price tier", htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-108px;"
            })
                 <div class="col-md-3">
@@ -200,9 +195,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PROJECT_GOLD_PRICE_TIER, htmlAttributes: new
+                @Html.LabelFor(model => model.PROJECT_GOLD_PRICE_TIER, "Project Gold price tier", htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-80px;"
            })
                 <div class="col-md-3">
@@ -214,11 +209,11 @@
 
         <div class="location-container">
             <div class="form-group">
-                @Html.LabelFor(model => model.PROFIT_CENTER, htmlAttributes: new
-           {
-               @class = "control-label col-md-2",
-               @style = "margin-top:-398px;"
-           })
+                @Html.LabelFor(model => model.PROFIT_CENTER, "Profit center", htmlAttributes: new
+               {
+                   @class = "control-label col-md-3",
+                   @style = "margin-top:-398px;"
+               })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.PROFIT_CENTER, new { @class = "form-control", @style = "margin-left:150px; margin-top:-398px;" })
                     @Html.ValidationMessageFor(model => model.PROFIT_CENTER, "", new { @class = "text-danger" })
@@ -226,9 +221,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.OWNERSHIP, htmlAttributes: new
+                @Html.LabelFor(model => model.OWNERSHIP, "Ownership", htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-373px;"
            })
                 <div class="col-md-10">
@@ -237,9 +232,9 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.REGION, htmlAttributes: new
+                @Html.LabelFor(model => model.REGION, "Region", htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-348px;"
            })
                 <div class="col-md-10">
@@ -249,11 +244,11 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PROVINCE, htmlAttributes: new
-           {
-               @class = "control-label col-md-2",
-               @style = "margin-top:-323px;"
-           })
+                @Html.LabelFor(model => model.PROVINCE, "Province", htmlAttributes: new
+               {
+                   @class = "control-label col-md-3",
+                   @style = "margin-top:-323px;"
+               })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.PROVINCE, new { @class = "form-control", @style = "margin-left:150px; margin-top:-323px;" })
                     @Html.ValidationMessageFor(model => model.PROVINCE, "", new { @class = "text-danger" })
@@ -261,9 +256,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.LOCATION, htmlAttributes: new
+                @Html.LabelFor(model => model.LOCATION, "Location", htmlAttributes: new
            {
-               @class = "control-label col-md-2",
+               @class = "control-label col-md-3",
                @style = "margin-top:-298px;"
            })
                 <div class="col-md-10">
@@ -273,11 +268,11 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CITY, htmlAttributes: new
-           {
-               @class = "control-label col-md-2",
-               @style = "margin-top:-273px;"
-           })
+                @Html.LabelFor(model => model.CITY, "City", htmlAttributes: new
+                {
+                   @class = "control-label col-md-3",
+                   @style = "margin-top:-273px;"
+                })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.CITY, new { @class = "form-control", @style = "margin-left:150px; margin-top:-273px;" })
                     @Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger" })
@@ -285,70 +280,49 @@
             </div>
         </div>
 
-        <h4 align="center" style="margin-left:-825px; margin-top:-70px;"><strong>Store Attributes</strong></h4><br /><br />
-        <div class="form-group">
-            @Html.LabelFor(model => model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-left:-55px;" })
-            <div class="col-md-2">
-                @Html.TextBoxFor(model => model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, new
-               {
-                   @class = "form-control",
-                   @style = "margin-left:105px;"
-               })
-                @Html.ValidationMessageFor(model => model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="frozen-container">
-            <div class="form-group">
-                @Html.LabelFor(model => model.FRESH_OR_FROZEN, htmlAttributes: new
-           {
-               @class = "control-label col-md-2",
-               @style = "margin-top:-45px;"
-           })
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.FRESH_OR_FROZEN, new { @class = "form-control", @style = "margin-left:170px; margin-top:-45px;" })
+        <h4 align="center"><strong>Store Attributes</strong></h4>
+        <div class="container">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "Soft serve or vanilla powder mix", htmlAttributes: new { @class = "control-label col-md-5" })
+                    @Html.TextBoxFor(model => model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FRESH_OR_FROZEN, "Fresh or frozen", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.FRESH_OR_FROZEN, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.FRESH_OR_FROZEN, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.SIMPLOT_OR_MCCAIN, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-top:-48px;" })
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.SIMPLOT_OR_MCCAIN, new { @class = "form-control", @style = "margin-left:170px; margin-top:-48px;" })
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SIMPLOT_OR_MCCAIN, "Simplot or McCain", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.SIMPLOT_OR_MCCAIN, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.SIMPLOT_OR_MCCAIN, "", new { @class = "text-danger" })
                 </div>
-            </div>
-        </div>
-        <div class="paper-container">
-            <div class="form-group">
-                @Html.LabelFor(model => model.PAPER_OR_PLASTIC, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-top:-110px;" })
-                <div class="col-md-6">
-                    @Html.TextBoxFor(model => model.PAPER_OR_PLASTIC, new { @class = "form-control", @style = "margin-left:170px; margin-top:-110px;" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PAPER_OR_PLASTIC, "Paper or plastic", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.PAPER_OR_PLASTIC, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.PAPER_OR_PLASTIC, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.MCCORMICK_OR_GSF, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-top:-80px;" })
-                <div class="col-md-6">
-                    @Html.TextBoxFor(model => model.MCCORMICK_OR_GSF, new { @class = "form-control", @style = "margin-left:170px; margin-top:-80px;" })
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MCCORMICK_OR_GSF, "McCormick or GSF", htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.MCCORMICK_OR_GSF, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.MCCORMICK_OR_GSF, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
 
-        <div class="button-container">
+        <div class="button-container" align="center">
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" name="command" value="Save" class="btn btn-default" />
-                    <input type="submit" name="command" value="Update" class="btn btn-default" />
-                    <input type="submit" name="command" value="Delete" class="btn btn-default" />
-                </div>
+                <input type="submit" name="command" value="Save" class="btn btn-default" />
+                <input type="submit" name="command" value="Update" class="btn btn-default" />
+                <input type="submit" name="command" value="Delete" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div style="margin-left:500px;">
-    @Html.ActionLink("Back to List", "Index")
-</div>

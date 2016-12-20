@@ -63,6 +63,8 @@ namespace CFMMCD.Models.DB
         public Nullable<double> MIMNNP { get; set; }
         public string MIMNPT { get; set; }
         public Nullable<int> MIMMIC_NP6 { get; set; }
+        public string MIMLON { get; set; }
+        public string STATUS { get; set; }
     
         public virtual CSHMIMP0_NP6 CSHMIMP0_NP6 { get; set; }
     }

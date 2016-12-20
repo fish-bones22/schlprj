@@ -28,6 +28,8 @@
     <EntitySetMapping Name="CSHMIMP0">
       <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0">
         <MappingFragment StoreEntitySet="CSHMIMP0">
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="MIMLON" ColumnName="MIMLON" />
           <ScalarProperty Name="MIMMIC_NP6" ColumnName="MIMMIC_NP6" />
           <ScalarProperty Name="MIMNPT" ColumnName="MIMNPT" />
           <ScalarProperty Name="MIMNNP" ColumnName="MIMNNP" />

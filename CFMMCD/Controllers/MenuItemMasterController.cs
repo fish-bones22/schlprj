@@ -12,11 +12,18 @@ namespace CFMMCD.Controllers
 {
     public class MenuItemMasterController : Controller
     {
-        // GET: MenuItemMaster
         public ActionResult MenuItemMaster()
         {
-            return View();
+            return View(new MenuItemMasterViewModel());
         }
+
+        [HttpPost]
+        public ActionResult MenuItemMaster(MenuItemMasterViewModel MIMiewModel)
+        {
+            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
+            return View(MIMManager.SearchMIM(MIMiewModel));
+        }
+
         [HttpPost]
         public ActionResult UpdateDelete(MenuItemMasterViewModel MIMViewModel, string command)
         {
@@ -25,13 +32,21 @@ namespace CFMMCD.Controllers
                 if (ModelState.IsValid)
                 {
                     MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-                    UserSession user = (UserSession)Session["User"];
-                    MIMManager.SaveMIM(MIMViewModel, user.Username); 
+                    if (Session["User"] != null)
+                    {
+                        UserSession user = (UserSession)Session["User"];
+                        MIMManager.SaveMIM(MIMViewModel, user.Username);
+                    } else
+                        ModelState.AddModelError("", "Not logged in");
                 }
                 else
                     ModelState.AddModelError("", "Fill up all fields");
             }
-            return View();
+            else if (command.Equals("Delete"))
+            {
+
+            }
+            return RedirectToAction("MenuItemMaster");
         }
     }
 }

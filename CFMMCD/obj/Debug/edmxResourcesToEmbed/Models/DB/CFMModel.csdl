@@ -87,6 +87,8 @@
     <Property Name="MIMNPT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
     <Property Name="MIMMIC_NP6" Type="Int32" />
     <NavigationProperty Name="CSHMIMP0_NP6" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0" ToRole="CSHMIMP0_NP6" />
+    <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="CSHMIMP0_NP6">
     <Key>

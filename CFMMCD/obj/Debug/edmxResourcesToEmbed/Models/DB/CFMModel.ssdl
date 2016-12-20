@@ -75,6 +75,8 @@
     <Property Name="MIMNNP" Type="float" />
     <Property Name="MIMNPT" Type="nchar" MaxLength="2" />
     <Property Name="MIMMIC_NP6" Type="int" />
+    <Property Name="MIMLON" Type="nchar" MaxLength="16" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="CSHMIMP0_NP6">
     <Key>
