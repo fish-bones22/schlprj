@@ -110,7 +110,6 @@ label {
 }
 .center {
     position: relative;
-    text-align:auto;
 }
 footer {
     background-color: white;
@@ -128,22 +127,4 @@ footer {
   #desc-row {
     padding-left:5%;
   }
-}
-
-.control-label{
-    max-width:300px;
-}
-.business-container{
-   min-width:150px;
-   margin-top:50px;
-   margin-left:-30px;
-}
-.tier-container {
-    max-width: 1000px;
-    margin-left: 250px;
-    margin-top: -300px;
-}
-.location-container {
-    max-width:200px;
-    margin-left:770px;
 }
