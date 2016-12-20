@@ -55,6 +55,7 @@ namespace CFMMCD.Controllers
         {
             if(ModelState.IsValid)
             {
+                Session["pageact"] = "Create User";
                 AccountManager accMan = new AccountManager();
                 if (!accMan.IsUsernameExist(account.Username))
                 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using CFMMCD.Sessions;
 
 namespace CFMMCD.Models.ViewModel
 {
@@ -35,6 +36,7 @@ namespace CFMMCD.Models.ViewModel
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
 
+        //Inputs of the Selected Items that are not in the table
         public bool Hrs24Input { get; set; }
         public bool MallInput { get; set; }
         public bool McVanInput { get; set; }
