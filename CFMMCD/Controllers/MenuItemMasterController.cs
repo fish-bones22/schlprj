@@ -34,6 +34,7 @@ namespace CFMMCD.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    Session["pageact"] = "Update"; // Session for what a user did
                     MenuItemMasterManager MIMManager = new MenuItemMasterManager();
                     if (Session["User"] != null) // Guard in case unlogged access happened
                     {
@@ -54,6 +55,7 @@ namespace CFMMCD.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    Session["pageact"] = "Delete"; // Session for what a user did
                     MenuItemMasterManager MIMManager = new MenuItemMasterManager();
                     if (Session["User"] != null) // Guard in case unlogged access happened
                     {

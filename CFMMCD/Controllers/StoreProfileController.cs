@@ -30,18 +30,21 @@ namespace CFMMCD.Controllers
             else if (command == "Save")
             {
                 //Code for Add
+                Session["pageact"] = "Add"; // Session for what a user did
                 StoreProfileManager SPManager = new StoreProfileManager();
                 SPManager.CreateStoreProfile(StoreProf);
             }
             else if (command == "Update")
             {
                 //Code for Update
+                Session["pageact"] = "Update"; // Session for what a user did
                 StoreProfileManager SPManager = new StoreProfileManager();
                 SPManager.UpdateStoreProfile(StoreProf);
             }
             else if (command == "Delete")
             {
                 //Code for Delete
+                Session["pageact"] = "Delete"; // Session for what a user did
                 StoreProfileManager SPManager = new StoreProfileManager();
                 SPManager.DeleteStoreProfile(StoreProf);
             }
