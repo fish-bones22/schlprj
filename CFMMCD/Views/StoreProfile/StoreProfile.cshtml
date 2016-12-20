@@ -35,7 +35,7 @@
     @Html.AntiForgeryToken()
         <div class="container">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row">
+            <div class="form-group">
                 <div class="col-lg-4">
                     <div class="container">
                         @Html.LabelFor(model => model.STORE_NO, "Store number", new { @class = "form-label" })

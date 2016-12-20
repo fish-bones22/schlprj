@@ -9,8 +9,9 @@ namespace CFMMCD.Models.ViewModel
     public class StoreProfileViewModel
     {
         public string StoreNameNumber { get; set; }
-
+        [Required(ErrorMessage ="This field is required")]
         public int STORE_NO { get; set; }
+        [Required(ErrorMessage = "This field is required")]
         public string STORE_NAME { get; set; }
         public string OWNERSHIP { get; set; }
         public string BREAKFAST_PRICE_TIER { get; set; }
@@ -25,6 +26,7 @@ namespace CFMMCD.Models.ViewModel
         public string REGION { get; set; }
         public string PROVINCE { get; set; }
         public string LOCATION { get; set; }
+        [Required(ErrorMessage = "This field is required")]
         public string ADDRESS { get; set; }
         public string CITY { get; set; }
         public string FRESH_OR_FROZEN { get; set; }
