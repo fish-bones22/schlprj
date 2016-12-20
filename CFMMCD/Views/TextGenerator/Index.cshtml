@@ -1,0 +1,78 @@
+﻿@model CFMMCD.Models.ViewModel.TextGeneratorViewModel
+
+@{
+    ViewBag.Title = "Text Generation";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        @Html.TextBoxFor(m => m.PromoTitle, new { @class = "form-control", @placeholder = "Promo Title" })
+                    </div>
+                    <div class="row">
+                        <label class="checkbox-inline form-label">
+                            @Html.CheckBoxFor(m => m.IncludeMIM)Menu Item
+                        </label>
+                        <label class="checkbox-inline form-label">
+                            @Html.CheckBoxFor(m => m.IncludeREC)Recipe
+                        </label>
+                        <label class="checkbox-inline form-label">
+                            @Html.CheckBoxFor(m => m.IncludeRIM)Raw Item
+                        </label>
+                        <label class="checkbox-inline form-label">
+                            @Html.CheckBoxFor(m => m.IncludeAll)All Items
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-inline">
+                        @Html.LabelFor(m => m.DateFrom, "Date from", new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.DateFrom, new { @class = "form-control input-sm", @type = "date" })
+                    </div>
+                    <div class="form-inline">
+                        @Html.LabelFor(m => m.DateTo, "Date to", new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control input-sm", @type = "date" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="checkbox-inline form-label">
+                    @Html.CheckBoxFor(m => m.IncludeAllStores)All Stores
+                </label>
+            </div>
+
+            <div class="row">
+                <table class="table table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Store number</th>
+                            <th>Store name</th>
+                            <th>Company type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Html.CheckBox("storeCheckbox")</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="right-fixed">
+                    <button type="submit" class="btn btn-default">Generate packets</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

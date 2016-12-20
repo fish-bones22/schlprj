@@ -97,6 +97,7 @@ namespace CFMMCD.Models.EntityManager
                 //   pero merong input field para sa kanya sa pptx
                 MIMRow.MIMLON = MIMViewModel.MIMLON;
                 // Items that do not have Input fields
+                // but included in the table
                 MIMRow.MIMSSC = "08";
                 MIMRow.MIMCIN = "";
                 MIMRow.MIMDGC = 0;
@@ -122,6 +123,7 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.MIMCLR = "";
                 MIMRow.MIMSKI = 0;
                 MIMRow.MIMBMI = 0;
+                MIMRow.STATUS = "A";
 
                 // If NP6 fields are filled up
                 if (MIMViewModel.MIMMIC_NP6 != null)
@@ -139,6 +141,7 @@ namespace CFMMCD.Models.EntityManager
                     if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
                     {
                         var rowToUpdate = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
+                        MIMRow.STATUS = "E";
                         db.CSHMIMP0_NP6.Remove(rowToUpdate.CSHMIMP0_NP6); // Delete existing row before inserting 
                         db.CSHMIMP0.Remove(rowToUpdate);                  // updated replacement
                         db.CSHMIMP0.Add(MIMRow);

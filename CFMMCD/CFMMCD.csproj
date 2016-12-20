@@ -192,11 +192,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuItemMasterController.cs" />
     <Compile Include="Controllers\StoreProfileController.cs" />
+    <Compile Include="Controllers\TextGeneratorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Models\EntityManager\AuditLogManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
+=======
+    <Compile Include="Models\ViewModel\TextGeneratorViewModel.cs" />
+>>>>>>> 26dba585b35afd03707d4a032a041d95325656ca
     <Compile Include="Sessions\SessionData.cs" />
     <Compile Include="Models\DB\Account.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
@@ -254,6 +259,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\MenuItemMaster\MenuItemMaster.cshtml" />
     <Content Include="Views\StoreProfile\StoreProfile.cshtml" />
+    <Content Include="Views\TextGenerator\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
