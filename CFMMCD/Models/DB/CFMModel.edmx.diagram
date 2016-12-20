@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cb8038fffaa548f484d80a0eccf07b11" Name="Diagram1">
+        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0_NP6" Width="1.5" PointX="2.5" PointY="4.5" />
+        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="6.75" PointY="0.75" />
+        <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

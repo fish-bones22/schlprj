@@ -1,0 +1,144 @@
+﻿@model CFMMCD.Models.ViewModel.CreateAccountViewModel
+
+@{
+    ViewBag.Title = "Create User Account";
+}
+
+<div class="center-sm">
+    <div class="header"><h1>@ViewBag.Title</h1></div>
+    @using (Html.BeginForm())
+    { 
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Username" })
+            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.PasswordFor(m => m.PasswordVerify, new { @class = "form-control", @placeholder = "Confirm password" })
+            @Html.ValidationMessageFor(m => m.PasswordVerify, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger"})
+        </div>
+        <div class="form-group">
+            <div contentEditable="false" style="height:200px; overflow-y:scroll">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.MIMInput)
+                        Menu Item Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.RIMInput)
+                        Raw Item Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.MERInput)
+                        Menu Recipe Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.STPInput)
+                        Store Profile Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.SCMInput)
+                        SCM Vendor Recipe Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.VENInput)
+                        Vendor Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.VAMInput)
+                        Value Meal Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.UAPInput)
+                        User Access
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.MIPInput)
+                        Menu Item Price Update Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.RIPInput)
+                        Raw Item Price Update Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.AULInput)
+                        Audit Log Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.REGInput)
+                        Report Generation
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.TEGInput)
+                        Text Generation
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.TIPInput)
+                        Tier Pages
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.BUEInput)
+                        Business Extension Maintenance Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.OWNInput)
+                        Ownership Maintenance Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.PRCInput)
+                        Profit Center Maintenance Page
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.LOCInput)
+                        Location Maintenance Page
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-default btn-block">
+        </div>
+    }
+</div>
+

@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CFMMCDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserAccess" Type="varchar(max)" Nullable="false" />
+          <Property Name="AdminStatus" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Audit_Log">
+          <Key>
+            <PropertyRef Name="Audit_Id" />
+          </Key>
+          <Property Name="Audit_Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Page" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Page_Action" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CSHMIMP0">
+          <Key>
+            <PropertyRef Name="MIMMIC" />
+          </Key>
+          <Property Name="MIMMIC" Type="int" Nullable="false" />
+          <Property Name="MIMSTA" Type="char" MaxLength="1" />
+          <Property Name="MIMFGC" Type="nchar" MaxLength="2" />
+          <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
+          <Property Name="MIMDSC" Type="nchar" MaxLength="16" />
+          <Property Name="MIMSSC" Type="nchar" MaxLength="2" />
+          <Property Name="MIMDPC" Type="nchar" MaxLength="1" />
+          <Property Name="MIMCIN" Type="nchar" MaxLength="1" />
+          <Property Name="MIMDGC" Type="int" />
+          <Property Name="MIMASC" Type="nchar" MaxLength="2" />
+          <Property Name="MIMTXC" Type="nchar" MaxLength="1" />
+          <Property Name="MIMUTC" Type="int" />
+          <Property Name="MIMDWE" Type="nchar" MaxLength="1" />
+          <Property Name="MIMTCI" Type="nchar" MaxLength="2" />
+          <Property Name="MIMPRI" Type="float" />
+          <Property Name="MIMTCA" Type="nchar" MaxLength="2" />
+          <Property Name="MIMPRO" Type="float" />
+          <Property Name="MIMTCG" Type="nchar" MaxLength="2" />
+          <Property Name="MIMPRG" Type="float" />
+          <Property Name="MIMPND" Type="date" />
+          <Property Name="MIMKBP" Type="int" />
+          <Property Name="MIMKSC" Type="nchar" MaxLength="1" />
+          <Property Name="MIMSKT" Type="nchar" MaxLength="2" />
+          <Property Name="MIMGRP" Type="nchar" MaxLength="2" />
+          <Property Name="MIMWLV" Type="nchar" MaxLength="1" />
+          <Property Name="MIMWSD" Type="nchar" MaxLength="1" />
+          <Property Name="MIMWGR" Type="nchar" MaxLength="2" />
+          <Property Name="MIMHPT" Type="nchar" MaxLength="2" />
+          <Property Name="MIMUSR" Type="nchar" MaxLength="3" />
+          <Property Name="MIMDAT" Type="date" />
+          <Property Name="MIMEDT" Type="date" />
+          <Property Name="MIMFLG" Type="bit" />
+          <Property Name="MIMBIN" Type="nchar" MaxLength="1" />
+          <Property Name="MIMBIT" Type="int" />
+          <Property Name="MIMBIR" Type="nchar" MaxLength="1" />
+          <Property Name="MIMBGR" Type="nchar" MaxLength="6" />
+          <Property Name="MIMBQU" Type="int" />
+          <Property Name="MIMGRA" Type="nchar" MaxLength="1" />
+          <Property Name="MIMIST" Type="nchar" MaxLength="1" />
+          <Property Name="MIMCLR" Type="nchar" MaxLength="8" />
+          <Property Name="MIMNPI" Type="float" />
+          <Property Name="MIMNPO" Type="float" />
+          <Property Name="MIMNPD" Type="float" />
+          <Property Name="MIMSKI" Type="int" />
+          <Property Name="MIMBMI" Type="int" />
+          <Property Name="MIMNPA" Type="float" />
+          <Property Name="MIMNNP" Type="float" />
+          <Property Name="MIMNPT" Type="nchar" MaxLength="2" />
+          <Property Name="MIMMIC_NP6" Type="int" />
+        </EntityType>
+        <EntityType Name="CSHMIMP0_NP6">
+          <Key>
+            <PropertyRef Name="MIMMIC" />
+          </Key>
+          <Property Name="MIMMIC" Type="int" Nullable="false" />
+          <Property Name="MIMSTA" Type="nchar" MaxLength="1" />
+          <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
+          <Property Name="MIMLON" Type="nchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Store_Profile">
+          <Key>
+            <PropertyRef Name="STORE_NO" />
+          </Key>
+          <Property Name="STORE_NO" Type="int" Nullable="false" />
+          <Property Name="STORE_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OWNERSHIP" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="BREAKFAST_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="REGULAR_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="DC_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="MDS_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="PROJECT_GOLD_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="BET" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PROFIT_CENTER" Type="int" Nullable="false" />
+          <Property Name="REGION" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PROVINCE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LOCATION" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ADDRESS" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CITY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FRESH_OR_FROZEN" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PAPER_OR_PLASTIC" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="SIMPLOT_OR_MCCAIN" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MCCORMICK_OR_GSF" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CSHMIMP0_ToTable">
+          <End Role="CSHMIMP0_NP6" Type="Self.CSHMIMP0_NP6" Multiplicity="0..1" />
+          <End Role="CSHMIMP0" Type="Self.CSHMIMP0" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSHMIMP0_NP6">
+              <PropertyRef Name="MIMMIC" />
+            </Principal>
+            <Dependent Role="CSHMIMP0">
+              <PropertyRef Name="MIMMIC_NP6" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CFMMCDModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
+            <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
+            <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CFMMCDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CFMMCDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
+          <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
+          <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
+          <EntitySet Name="CSHMIMP0_NP6" EntityType="CFMMCDModel.CSHMIMP0_NP6" />
+          <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
+          <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="CFMMCDModel.FK_CSHMIMP0_ToTable">
+            <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
+            <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AdminStatus" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Audit_Log">
+          <Key>
+            <PropertyRef Name="Audit_Id" />
+          </Key>
+          <Property Name="Audit_Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CSHMIMP0">
+          <Key>
+            <PropertyRef Name="MIMMIC" />
+          </Key>
+          <Property Name="MIMMIC" Type="Int32" Nullable="false" />
+          <Property Name="MIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MIMFGC" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="MIMDSC" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+          <Property Name="MIMSSC" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMDPC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMCIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMDGC" Type="Int32" />
+          <Property Name="MIMASC" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMTXC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMUTC" Type="Int32" />
+          <Property Name="MIMDWE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMTCI" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMPRI" Type="Double" />
+          <Property Name="MIMTCA" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMPRO" Type="Double" />
+          <Property Name="MIMTCG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMPRG" Type="Double" />
+          <Property Name="MIMPND" Type="DateTime" Precision="0" />
+          <Property Name="MIMKBP" Type="Int32" />
+          <Property Name="MIMKSC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMSKT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMGRP" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMWLV" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMWSD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMWGR" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMHPT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="MIMDAT" Type="DateTime" Precision="0" />
+          <Property Name="MIMEDT" Type="DateTime" Precision="0" />
+          <Property Name="MIMFLG" Type="Boolean" />
+          <Property Name="MIMBIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMBIT" Type="Int32" />
+          <Property Name="MIMBIR" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMBGR" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="MIMBQU" Type="Int32" />
+          <Property Name="MIMGRA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMIST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMCLR" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="MIMNPI" Type="Double" />
+          <Property Name="MIMNPO" Type="Double" />
+          <Property Name="MIMNPD" Type="Double" />
+          <Property Name="MIMSKI" Type="Int32" />
+          <Property Name="MIMBMI" Type="Int32" />
+          <Property Name="MIMNPA" Type="Double" />
+          <Property Name="MIMNNP" Type="Double" />
+          <Property Name="MIMNPT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMMIC_NP6" Type="Int32" />
+          <NavigationProperty Name="CSHMIMP0_NP6" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0" ToRole="CSHMIMP0_NP6" />
+        </EntityType>
+        <EntityType Name="CSHMIMP0_NP6">
+          <Key>
+            <PropertyRef Name="MIMMIC" />
+          </Key>
+          <Property Name="MIMMIC" Type="Int32" Nullable="false" />
+          <Property Name="MIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CSHMIMP0" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0_NP6" ToRole="CSHMIMP0" />
+        </EntityType>
+        <EntityType Name="Store_Profile">
+          <Key>
+            <PropertyRef Name="STORE_NO" />
+          </Key>
+          <Property Name="STORE_NO" Type="Int32" Nullable="false" />
+          <Property Name="STORE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OWNERSHIP" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BREAKFAST_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="REGULAR_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="DC_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MDS_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="PROJECT_GOLD_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="BET" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PROFIT_CENTER" Type="Int32" Nullable="false" />
+          <Property Name="REGION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROVINCE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LOCATION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CITY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FRESH_OR_FROZEN" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PAPER_OR_PLASTIC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="SIMPLOT_OR_MCCAIN" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MCCORMICK_OR_GSF" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_CSHMIMP0_ToTable">
+          <End Type="CFMMCDModel.CSHMIMP0_NP6" Role="CSHMIMP0_NP6" Multiplicity="0..1" />
+          <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSHMIMP0_NP6">
+              <PropertyRef Name="MIMMIC" />
+            </Principal>
+            <Dependent Role="CSHMIMP0">
+              <PropertyRef Name="MIMMIC_NP6" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="CFMMCDModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="AdminStatus" ColumnName="AdminStatus" />
+                <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit_Log">
+            <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
+              <MappingFragment StoreEntitySet="Audit_Log">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Audit_Id" ColumnName="Audit_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSHMIMP0">
+            <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0">
+              <MappingFragment StoreEntitySet="CSHMIMP0">
+                <ScalarProperty Name="MIMMIC_NP6" ColumnName="MIMMIC_NP6" />
+                <ScalarProperty Name="MIMNPT" ColumnName="MIMNPT" />
+                <ScalarProperty Name="MIMNNP" ColumnName="MIMNNP" />
+                <ScalarProperty Name="MIMNPA" ColumnName="MIMNPA" />
+                <ScalarProperty Name="MIMBMI" ColumnName="MIMBMI" />
+                <ScalarProperty Name="MIMSKI" ColumnName="MIMSKI" />
+                <ScalarProperty Name="MIMNPD" ColumnName="MIMNPD" />
+                <ScalarProperty Name="MIMNPO" ColumnName="MIMNPO" />
+                <ScalarProperty Name="MIMNPI" ColumnName="MIMNPI" />
+                <ScalarProperty Name="MIMCLR" ColumnName="MIMCLR" />
+                <ScalarProperty Name="MIMIST" ColumnName="MIMIST" />
+                <ScalarProperty Name="MIMGRA" ColumnName="MIMGRA" />
+                <ScalarProperty Name="MIMBQU" ColumnName="MIMBQU" />
+                <ScalarProperty Name="MIMBGR" ColumnName="MIMBGR" />
+                <ScalarProperty Name="MIMBIR" ColumnName="MIMBIR" />
+                <ScalarProperty Name="MIMBIT" ColumnName="MIMBIT" />
+                <ScalarProperty Name="MIMBIN" ColumnName="MIMBIN" />
+                <ScalarProperty Name="MIMFLG" ColumnName="MIMFLG" />
+                <ScalarProperty Name="MIMEDT" ColumnName="MIMEDT" />
+                <ScalarProperty Name="MIMDAT" ColumnName="MIMDAT" />
+                <ScalarProperty Name="MIMUSR" ColumnName="MIMUSR" />
+                <ScalarProperty Name="MIMHPT" ColumnName="MIMHPT" />
+                <ScalarProperty Name="MIMWGR" ColumnName="MIMWGR" />
+                <ScalarProperty Name="MIMWSD" ColumnName="MIMWSD" />
+                <ScalarProperty Name="MIMWLV" ColumnName="MIMWLV" />
+                <ScalarProperty Name="MIMGRP" ColumnName="MIMGRP" />
+                <ScalarProperty Name="MIMSKT" ColumnName="MIMSKT" />
+                <ScalarProperty Name="MIMKSC" ColumnName="MIMKSC" />
+                <ScalarProperty Name="MIMKBP" ColumnName="MIMKBP" />
+                <ScalarProperty Name="MIMPND" ColumnName="MIMPND" />
+                <ScalarProperty Name="MIMPRG" ColumnName="MIMPRG" />
+                <ScalarProperty Name="MIMTCG" ColumnName="MIMTCG" />
+                <ScalarProperty Name="MIMPRO" ColumnName="MIMPRO" />
+                <ScalarProperty Name="MIMTCA" ColumnName="MIMTCA" />
+                <ScalarProperty Name="MIMPRI" ColumnName="MIMPRI" />
+                <ScalarProperty Name="MIMTCI" ColumnName="MIMTCI" />
+                <ScalarProperty Name="MIMDWE" ColumnName="MIMDWE" />
+                <ScalarProperty Name="MIMUTC" ColumnName="MIMUTC" />
+                <ScalarProperty Name="MIMTXC" ColumnName="MIMTXC" />
+                <ScalarProperty Name="MIMASC" ColumnName="MIMASC" />
+                <ScalarProperty Name="MIMDGC" ColumnName="MIMDGC" />
+                <ScalarProperty Name="MIMCIN" ColumnName="MIMCIN" />
+                <ScalarProperty Name="MIMDPC" ColumnName="MIMDPC" />
+                <ScalarProperty Name="MIMSSC" ColumnName="MIMSSC" />
+                <ScalarProperty Name="MIMDSC" ColumnName="MIMDSC" />
+                <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
+                <ScalarProperty Name="MIMFGC" ColumnName="MIMFGC" />
+                <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
+                <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSHMIMP0_NP6">
+            <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0_NP6">
+              <MappingFragment StoreEntitySet="CSHMIMP0_NP6">
+                <ScalarProperty Name="MIMLON" ColumnName="MIMLON" />
+                <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
+                <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
+                <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Profile">
+            <EntityTypeMapping TypeName="CFMMCDModel.Store_Profile">
+              <MappingFragment StoreEntitySet="Store_Profile">
+                <ScalarProperty Name="MCCORMICK_OR_GSF" ColumnName="MCCORMICK_OR_GSF" />
+                <ScalarProperty Name="SIMPLOT_OR_MCCAIN" ColumnName="SIMPLOT_OR_MCCAIN" />
+                <ScalarProperty Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" ColumnName="SOFT_SERVE_OR_VANILLA_POWDER_MIX" />
+                <ScalarProperty Name="PAPER_OR_PLASTIC" ColumnName="PAPER_OR_PLASTIC" />
+                <ScalarProperty Name="FRESH_OR_FROZEN" ColumnName="FRESH_OR_FROZEN" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="PROFIT_CENTER" ColumnName="PROFIT_CENTER" />
+                <ScalarProperty Name="BET" ColumnName="BET" />
+                <ScalarProperty Name="PROJECT_GOLD_PRICE_TIER" ColumnName="PROJECT_GOLD_PRICE_TIER" />
+                <ScalarProperty Name="MCCAFE_BISTRO_PRICE_TIER" ColumnName="MCCAFE_BISTRO_PRICE_TIER" />
+                <ScalarProperty Name="MCCAFE_LEVEL_3_PRICE_TIER" ColumnName="MCCAFE_LEVEL_3_PRICE_TIER" />
+                <ScalarProperty Name="MCCAFE_LEVEL_2_PRICE_TIER" ColumnName="MCCAFE_LEVEL_2_PRICE_TIER" />
+                <ScalarProperty Name="MDS_PRICE_TIER" ColumnName="MDS_PRICE_TIER" />
+                <ScalarProperty Name="DC_PRICE_TIER" ColumnName="DC_PRICE_TIER" />
+                <ScalarProperty Name="REGULAR_PRICE_TIER" ColumnName="REGULAR_PRICE_TIER" />
+                <ScalarProperty Name="BREAKFAST_PRICE_TIER" ColumnName="BREAKFAST_PRICE_TIER" />
+                <ScalarProperty Name="OWNERSHIP" ColumnName="OWNERSHIP" />
+                <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+                <ScalarProperty Name="STORE_NO" ColumnName="STORE_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

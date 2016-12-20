@@ -1,0 +1,115 @@
+﻿body {
+  font-family: 'Roboto';
+}
+.body-content {
+    margin-top: 50px;
+}
+label {
+  margin: 0;
+}
+.float-right {
+  position: relative;
+  float: right;
+}
+.navbar {
+  background-color: rgb(235, 90, 60);
+  border-radius: 0 !important;
+  -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow:  2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.navbar-header a {
+  padding-top: 10px;
+}
+.navbar-header a img {
+  width: 32px;
+  position: relative;
+}
+.navbar-nav a {
+  color: white;
+}
+.navbar-nav li a {
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+.navbar-nav li a:hover {
+  background-color: rgb(235, 60, 30);
+  color: white !important;
+}
+.header {
+  text-align: center;
+}
+.input-sm {
+  height: 30px;
+}
+.form-inline {
+  width: auto;
+}
+.right {
+  text-align: right;
+}
+.form-label {
+  font-family: 'Calibri Light';
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 100;
+  position: relative;
+}
+.form-control {
+  -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow:  2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.label-container-left {
+  padding-right: 0;
+}
+.label-container-right {
+  padding-left: 0;
+}
+.btn-default {
+  background-color: rgb(235, 90, 60);
+  color: white !important;
+  margin-top: 8px;
+  -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow:  2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.btn-default:hover {
+  background-color: rgb(237, 140, 80);
+  color: white;
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+.btn-default:focus {
+  background-color: rgb(235, 60, 30);
+  color: white;
+}
+.btn-default:active {
+  background-color: rgb(255, 217, 102);
+}
+.center-sm {
+    max-width: 400px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+footer {
+    background-color: white;
+    bottom: 5px;
+    margin-left:10px;
+    position: fixed;
+}
+@media (min-width: 1200px) {
+  .label-container-left {
+    text-align: right;
+  }
+  .btn-default {
+    margin-top: 0;
+  }
+  #desc-row {
+    padding-left:5%;
+  }
+}
+

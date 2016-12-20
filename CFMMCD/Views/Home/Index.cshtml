@@ -1,0 +1,14 @@
+﻿@using CFMMCD.Sessions
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="center-sm">
+    <div class="header"><h2>@ViewBag.Title</h2></div>
+    Welcome
+    @{ 
+        var user = (UserSession) Session["User"];
+    }
+    @user.Username
+</div>

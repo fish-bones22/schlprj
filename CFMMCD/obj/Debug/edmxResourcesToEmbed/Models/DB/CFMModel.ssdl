@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CFMMCDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserAccess" Type="varchar(max)" Nullable="false" />
+    <Property Name="AdminStatus" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Audit_Log">
+    <Key>
+      <PropertyRef Name="Audit_Id" />
+    </Key>
+    <Property Name="Audit_Id" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Page" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Page_Action" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CSHMIMP0">
+    <Key>
+      <PropertyRef Name="MIMMIC" />
+    </Key>
+    <Property Name="MIMMIC" Type="int" Nullable="false" />
+    <Property Name="MIMSTA" Type="char" MaxLength="1" />
+    <Property Name="MIMFGC" Type="nchar" MaxLength="2" />
+    <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
+    <Property Name="MIMDSC" Type="nchar" MaxLength="16" />
+    <Property Name="MIMSSC" Type="nchar" MaxLength="2" />
+    <Property Name="MIMDPC" Type="nchar" MaxLength="1" />
+    <Property Name="MIMCIN" Type="nchar" MaxLength="1" />
+    <Property Name="MIMDGC" Type="int" />
+    <Property Name="MIMASC" Type="nchar" MaxLength="2" />
+    <Property Name="MIMTXC" Type="nchar" MaxLength="1" />
+    <Property Name="MIMUTC" Type="int" />
+    <Property Name="MIMDWE" Type="nchar" MaxLength="1" />
+    <Property Name="MIMTCI" Type="nchar" MaxLength="2" />
+    <Property Name="MIMPRI" Type="float" />
+    <Property Name="MIMTCA" Type="nchar" MaxLength="2" />
+    <Property Name="MIMPRO" Type="float" />
+    <Property Name="MIMTCG" Type="nchar" MaxLength="2" />
+    <Property Name="MIMPRG" Type="float" />
+    <Property Name="MIMPND" Type="date" />
+    <Property Name="MIMKBP" Type="int" />
+    <Property Name="MIMKSC" Type="nchar" MaxLength="1" />
+    <Property Name="MIMSKT" Type="nchar" MaxLength="2" />
+    <Property Name="MIMGRP" Type="nchar" MaxLength="2" />
+    <Property Name="MIMWLV" Type="nchar" MaxLength="1" />
+    <Property Name="MIMWSD" Type="nchar" MaxLength="1" />
+    <Property Name="MIMWGR" Type="nchar" MaxLength="2" />
+    <Property Name="MIMHPT" Type="nchar" MaxLength="2" />
+    <Property Name="MIMUSR" Type="nchar" MaxLength="3" />
+    <Property Name="MIMDAT" Type="date" />
+    <Property Name="MIMEDT" Type="date" />
+    <Property Name="MIMFLG" Type="bit" />
+    <Property Name="MIMBIN" Type="nchar" MaxLength="1" />
+    <Property Name="MIMBIT" Type="int" />
+    <Property Name="MIMBIR" Type="nchar" MaxLength="1" />
+    <Property Name="MIMBGR" Type="nchar" MaxLength="6" />
+    <Property Name="MIMBQU" Type="int" />
+    <Property Name="MIMGRA" Type="nchar" MaxLength="1" />
+    <Property Name="MIMIST" Type="nchar" MaxLength="1" />
+    <Property Name="MIMCLR" Type="nchar" MaxLength="8" />
+    <Property Name="MIMNPI" Type="float" />
+    <Property Name="MIMNPO" Type="float" />
+    <Property Name="MIMNPD" Type="float" />
+    <Property Name="MIMSKI" Type="int" />
+    <Property Name="MIMBMI" Type="int" />
+    <Property Name="MIMNPA" Type="float" />
+    <Property Name="MIMNNP" Type="float" />
+    <Property Name="MIMNPT" Type="nchar" MaxLength="2" />
+    <Property Name="MIMMIC_NP6" Type="int" />
+  </EntityType>
+  <EntityType Name="CSHMIMP0_NP6">
+    <Key>
+      <PropertyRef Name="MIMMIC" />
+    </Key>
+    <Property Name="MIMMIC" Type="int" Nullable="false" />
+    <Property Name="MIMSTA" Type="nchar" MaxLength="1" />
+    <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
+    <Property Name="MIMLON" Type="nchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="Store_Profile">
+    <Key>
+      <PropertyRef Name="STORE_NO" />
+    </Key>
+    <Property Name="STORE_NO" Type="int" Nullable="false" />
+    <Property Name="STORE_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OWNERSHIP" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="BREAKFAST_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="REGULAR_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="DC_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="MDS_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="PROJECT_GOLD_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="BET" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PROFIT_CENTER" Type="int" Nullable="false" />
+    <Property Name="REGION" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PROVINCE" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LOCATION" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CITY" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FRESH_OR_FROZEN" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="PAPER_OR_PLASTIC" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="SIMPLOT_OR_MCCAIN" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="MCCORMICK_OR_GSF" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CSHMIMP0_ToTable">
+    <End Role="CSHMIMP0_NP6" Type="Self.CSHMIMP0_NP6" Multiplicity="0..1" />
+    <End Role="CSHMIMP0" Type="Self.CSHMIMP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSHMIMP0_NP6">
+        <PropertyRef Name="MIMMIC" />
+      </Principal>
+      <Dependent Role="CSHMIMP0">
+        <PropertyRef Name="MIMMIC_NP6" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CFMMCDModelStoreContainer">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
+      <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
+      <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="CFMMCDModel.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="AdminStatus" ColumnName="AdminStatus" />
+          <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit_Log">
+      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
+        <MappingFragment StoreEntitySet="Audit_Log">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
+          <ScalarProperty Name="Page" ColumnName="Page" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Audit_Id" ColumnName="Audit_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CSHMIMP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0">
+        <MappingFragment StoreEntitySet="CSHMIMP0">
+          <ScalarProperty Name="MIMMIC_NP6" ColumnName="MIMMIC_NP6" />
+          <ScalarProperty Name="MIMNPT" ColumnName="MIMNPT" />
+          <ScalarProperty Name="MIMNNP" ColumnName="MIMNNP" />
+          <ScalarProperty Name="MIMNPA" ColumnName="MIMNPA" />
+          <ScalarProperty Name="MIMBMI" ColumnName="MIMBMI" />
+          <ScalarProperty Name="MIMSKI" ColumnName="MIMSKI" />
+          <ScalarProperty Name="MIMNPD" ColumnName="MIMNPD" />
+          <ScalarProperty Name="MIMNPO" ColumnName="MIMNPO" />
+          <ScalarProperty Name="MIMNPI" ColumnName="MIMNPI" />
+          <ScalarProperty Name="MIMCLR" ColumnName="MIMCLR" />
+          <ScalarProperty Name="MIMIST" ColumnName="MIMIST" />
+          <ScalarProperty Name="MIMGRA" ColumnName="MIMGRA" />
+          <ScalarProperty Name="MIMBQU" ColumnName="MIMBQU" />
+          <ScalarProperty Name="MIMBGR" ColumnName="MIMBGR" />
+          <ScalarProperty Name="MIMBIR" ColumnName="MIMBIR" />
+          <ScalarProperty Name="MIMBIT" ColumnName="MIMBIT" />
+          <ScalarProperty Name="MIMBIN" ColumnName="MIMBIN" />
+          <ScalarProperty Name="MIMFLG" ColumnName="MIMFLG" />
+          <ScalarProperty Name="MIMEDT" ColumnName="MIMEDT" />
+          <ScalarProperty Name="MIMDAT" ColumnName="MIMDAT" />
+          <ScalarProperty Name="MIMUSR" ColumnName="MIMUSR" />
+          <ScalarProperty Name="MIMHPT" ColumnName="MIMHPT" />
+          <ScalarProperty Name="MIMWGR" ColumnName="MIMWGR" />
+          <ScalarProperty Name="MIMWSD" ColumnName="MIMWSD" />
+          <ScalarProperty Name="MIMWLV" ColumnName="MIMWLV" />
+          <ScalarProperty Name="MIMGRP" ColumnName="MIMGRP" />
+          <ScalarProperty Name="MIMSKT" ColumnName="MIMSKT" />
+          <ScalarProperty Name="MIMKSC" ColumnName="MIMKSC" />
+          <ScalarProperty Name="MIMKBP" ColumnName="MIMKBP" />
+          <ScalarProperty Name="MIMPND" ColumnName="MIMPND" />
+          <ScalarProperty Name="MIMPRG" ColumnName="MIMPRG" />
+          <ScalarProperty Name="MIMTCG" ColumnName="MIMTCG" />
+          <ScalarProperty Name="MIMPRO" ColumnName="MIMPRO" />
+          <ScalarProperty Name="MIMTCA" ColumnName="MIMTCA" />
+          <ScalarProperty Name="MIMPRI" ColumnName="MIMPRI" />
+          <ScalarProperty Name="MIMTCI" ColumnName="MIMTCI" />
+          <ScalarProperty Name="MIMDWE" ColumnName="MIMDWE" />
+          <ScalarProperty Name="MIMUTC" ColumnName="MIMUTC" />
+          <ScalarProperty Name="MIMTXC" ColumnName="MIMTXC" />
+          <ScalarProperty Name="MIMASC" ColumnName="MIMASC" />
+          <ScalarProperty Name="MIMDGC" ColumnName="MIMDGC" />
+          <ScalarProperty Name="MIMCIN" ColumnName="MIMCIN" />
+          <ScalarProperty Name="MIMDPC" ColumnName="MIMDPC" />
+          <ScalarProperty Name="MIMSSC" ColumnName="MIMSSC" />
+          <ScalarProperty Name="MIMDSC" ColumnName="MIMDSC" />
+          <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
+          <ScalarProperty Name="MIMFGC" ColumnName="MIMFGC" />
+          <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
+          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CSHMIMP0_NP6">
+      <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0_NP6">
+        <MappingFragment StoreEntitySet="CSHMIMP0_NP6">
+          <ScalarProperty Name="MIMLON" ColumnName="MIMLON" />
+          <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
+          <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
+          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Store_Profile">
+      <EntityTypeMapping TypeName="CFMMCDModel.Store_Profile">
+        <MappingFragment StoreEntitySet="Store_Profile">
+          <ScalarProperty Name="MCCORMICK_OR_GSF" ColumnName="MCCORMICK_OR_GSF" />
+          <ScalarProperty Name="SIMPLOT_OR_MCCAIN" ColumnName="SIMPLOT_OR_MCCAIN" />
+          <ScalarProperty Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" ColumnName="SOFT_SERVE_OR_VANILLA_POWDER_MIX" />
+          <ScalarProperty Name="PAPER_OR_PLASTIC" ColumnName="PAPER_OR_PLASTIC" />
+          <ScalarProperty Name="FRESH_OR_FROZEN" ColumnName="FRESH_OR_FROZEN" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+          <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+          <ScalarProperty Name="REGION" ColumnName="REGION" />
+          <ScalarProperty Name="PROFIT_CENTER" ColumnName="PROFIT_CENTER" />
+          <ScalarProperty Name="BET" ColumnName="BET" />
+          <ScalarProperty Name="PROJECT_GOLD_PRICE_TIER" ColumnName="PROJECT_GOLD_PRICE_TIER" />
+          <ScalarProperty Name="MCCAFE_BISTRO_PRICE_TIER" ColumnName="MCCAFE_BISTRO_PRICE_TIER" />
+          <ScalarProperty Name="MCCAFE_LEVEL_3_PRICE_TIER" ColumnName="MCCAFE_LEVEL_3_PRICE_TIER" />
+          <ScalarProperty Name="MCCAFE_LEVEL_2_PRICE_TIER" ColumnName="MCCAFE_LEVEL_2_PRICE_TIER" />
+          <ScalarProperty Name="MDS_PRICE_TIER" ColumnName="MDS_PRICE_TIER" />
+          <ScalarProperty Name="DC_PRICE_TIER" ColumnName="DC_PRICE_TIER" />
+          <ScalarProperty Name="REGULAR_PRICE_TIER" ColumnName="REGULAR_PRICE_TIER" />
+          <ScalarProperty Name="BREAKFAST_PRICE_TIER" ColumnName="BREAKFAST_PRICE_TIER" />
+          <ScalarProperty Name="OWNERSHIP" ColumnName="OWNERSHIP" />
+          <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+          <ScalarProperty Name="STORE_NO" ColumnName="STORE_NO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
