@@ -8,6 +8,16 @@
 <div class="center">
     <h2>Menu Item Master</h2>
 </div>
+<!--Alerts-->
+<div class="container">
+    @if (TempData["ErrorMessage"] != null) {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null) {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
+<!--Main content starts here-->
 <div class="form-horizontal">
     @using (Html.BeginForm("MenuItemMaster", "MenuItemMaster", FormMethod.Post, new { }))
     {

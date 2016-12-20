@@ -62,12 +62,12 @@ namespace CFMMCD.Models.EntityManager
 
             }
         }
-        public void SaveMIM(MenuItemMasterViewModel MIMViewModel, string user)
+        public bool SaveMIM(MenuItemMasterViewModel MIMViewModel, string user)
         {
             using ( CFMMCDEntities db = new CFMMCDEntities())
             {
                 CSHMIMP0 MIMRow = new CSHMIMP0();
-
+                // Columns with Input fields
                 MIMRow.MIMMIC = int.Parse(MIMViewModel.MIMMIC);
                 MIMRow.MIMSTA = MIMViewModel.MIMSTA;
                 MIMRow.MIMFGC = MIMViewModel.MIMFGC;
@@ -91,9 +91,12 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.MIMNPA = double.Parse(MIMViewModel.MIMNPA);
                 MIMRow.MIMNNP = double.Parse(MIMViewModel.MIMNNP);
                 MIMRow.MIMNPT = MIMViewModel.MIMNPT;
-
+                // Items not originally in the table but
+                // have Input field
+                // * Wala pong nakalista sa CSHMIMP0.dbf na Long Name
+                //   pero merong input field para sa kanya sa pptx
                 MIMRow.MIMLON = MIMViewModel.MIMLON;
-
+                // Items that do not have Input fields
                 MIMRow.MIMSSC = "08";
                 MIMRow.MIMCIN = "";
                 MIMRow.MIMDGC = 0;
@@ -120,35 +123,67 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.MIMSKI = 0;
                 MIMRow.MIMBMI = 0;
 
-
+                // If NP6 fields are filled up
                 if (MIMViewModel.MIMMIC_NP6 != null)
                 {
+                    MIMRow.CSHMIMP0_NP6 = new CSHMIMP0_NP6();
                     MIMRow.CSHMIMP0_NP6.MIMMIC = int.Parse(MIMViewModel.MIMMIC_NP6);
                     MIMRow.CSHMIMP0_NP6.MIMNAM = MIMViewModel.MIMNAM_NP6;
                     MIMRow.CSHMIMP0_NP6.MIMLON = MIMViewModel.MIMLON_NP6;
                 }
-                
-                // If MIMMIC is already existing, update it instead of adding a new row
-                if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
+                // Try...Catch to produce appropriate warnings if ever
+                // insertion is unsuccessful
+                try
                 {
-                    var rowToUpdate = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
-                    db.CSHMIMP0.Remove(rowToUpdate);
-                    db.CSHMIMP0.Add(MIMRow);
+                    // If MIMMIC is already existing, update it instead of inserting a new row
+                    if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
+                    {
+                        var rowToUpdate = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
+                        db.CSHMIMP0_NP6.Remove(rowToUpdate.CSHMIMP0_NP6); // Delete existing row before inserting 
+                        db.CSHMIMP0.Remove(rowToUpdate);                  // updated replacement
+                        db.CSHMIMP0.Add(MIMRow);
+                    }
+                    else
+                        db.CSHMIMP0.Add(MIMRow);
+                    db.SaveChanges();
+                    return true;
                 }
-                else
-                    db.CSHMIMP0.Add(MIMRow);
-                db.SaveChanges();
+                catch (Exception e)
+                {
+                    return false;
+                }
             }
         }
-
-        private void s()
+        
+        public bool DeleteMIM(MenuItemMasterViewModel MIMViewModel)
         {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteMIM(MenuItemMasterViewModel MIMViewModel)
-        {
-
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                CSHMIMP0 MIMRow = new CSHMIMP0();
+                if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
+                    MIMRow = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
+                else if (db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Equals(MIMViewModel.MIMNAM)).Any())
+                {
+                    var menuItem = db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Equals(MIMViewModel.MIMNAM));
+                    MIMRow = menuItem.FirstOrDefault();
+                }
+                else
+                {
+                    return false;
+                }
+                // Try...Catch to produce appropriate warnings if ever
+                // insertion is unsuccessful
+                try
+                {
+                    db.CSHMIMP0.Remove(MIMRow);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
         }
     }
 }

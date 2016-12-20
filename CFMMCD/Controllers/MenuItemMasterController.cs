@@ -21,7 +21,10 @@ namespace CFMMCD.Controllers
         public ActionResult MenuItemMaster(MenuItemMasterViewModel MIMiewModel)
         {
             MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            return View(MIMManager.SearchMIM(MIMiewModel));
+            MenuItemMasterViewModel ReturnedModel = MIMManager.SearchMIM(MIMiewModel);
+            if (ReturnedModel.MIMMIC == null)
+                ModelState.AddModelError("", "No results found");
+            return View(ReturnedModel);
         }
 
         [HttpPost]
@@ -32,11 +35,16 @@ namespace CFMMCD.Controllers
                 if (ModelState.IsValid)
                 {
                     MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-                    if (Session["User"] != null)
+                    if (Session["User"] != null) // Guard in case unlogged access happened
                     {
+                        // Used in CSHMIMP0 table, MIMUSR row 
                         UserSession user = (UserSession)Session["User"];
-                        MIMManager.SaveMIM(MIMViewModel, user.Username);
-                    } else
+                        bool isSuccessful = MIMManager.SaveMIM(MIMViewModel, user.Username);
+                        // Used for alert messages in view 
+                        if (isSuccessful) TempData["SuccessMessage"] = "Saved";
+                        else TempData["ErrorMessage"] = "Saving failed";
+                    }
+                    else
                         ModelState.AddModelError("", "Not logged in");
                 }
                 else
@@ -44,7 +52,19 @@ namespace CFMMCD.Controllers
             }
             else if (command.Equals("Delete"))
             {
-
+                if (ModelState.IsValid)
+                {
+                    MenuItemMasterManager MIMManager = new MenuItemMasterManager();
+                    if (Session["User"] != null) // Guard in case unlogged access happened
+                    {
+                        bool isSuccessful = MIMManager.DeleteMIM(MIMViewModel);
+                        // Used for alert messages in view 
+                        if (isSuccessful) TempData["SuccessMessage"] = "Successfully deleted";
+                        else TempData["ErrorMessage"] = "Failed to delete";
+                    }
+                    else
+                        ModelState.AddModelError("", "Not logged in");
+                }
             }
             return RedirectToAction("MenuItemMaster");
         }
