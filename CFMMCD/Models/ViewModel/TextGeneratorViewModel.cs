@@ -15,5 +15,10 @@ namespace CFMMCD.Models.ViewModel
         public bool IncludeRIM { get; set; }
         public bool IncludeAll { get; set; }
         public bool IncludeAllStores { get; set; }
+        public List<StoreProfileViewModel> StoreList { get; set; }
+    }
+    public class StoreInformation
+    {
+
     }
 }

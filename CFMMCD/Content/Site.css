@@ -128,3 +128,24 @@ footer {
     padding-left:5%;
   }
 }
+.position1{
+    position: fixed;
+    top: 150px;
+}
+.dropdown-submenu {
+    position: relative;
+}
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+.caret-right {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid;
+    display: inline-block;
+    height: 0;
+    vertical-align: middle;
+    width: 0;
+}

@@ -2,13 +2,117 @@
 
 @{
     ViewBag.Title = "Home";
+    UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
 }
 
-<div class="center-sm">
-    <div class="header"><h2>@ViewBag.Title</h2></div>
-    Welcome
-    @{ 
-        var user = (UserSession) Session["User"];
-    }
-    @user.Username
+<div class="header"><h2>@ViewBag.Title</h2></div>
+<div>
+    <div class="container position1">
+        <div class="dropdown">
+            <a href="#" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-align-right"></span> All Page</a>
+            <ul class="dropdown-menu">
+
+                @{ if (UASession.MIM)
+                    {
+                        <li>@Html.ActionLink("Menu Item Master", "MenuItemMaster", "MenuItemMaster")</li>
+                    }
+                    if (UASession.RIM)
+                    {
+                        <li>@Html.ActionLink("Raw Item Master", "Index", "Home")</li>
+                    }
+                    if (UASession.MER)
+                    {
+                        <li>@Html.ActionLink("Menu Recipe", "Index", "Home")</li>
+                    }
+                    if (UASession.STP)
+                    {
+                        <li>@Html.ActionLink("Store Profile", "StoreProfile", "StoreProfile")</li>
+                    }
+                    if (UASession.VEN)
+                    {
+                        <li>@Html.ActionLink("Vendor", "Index", "Home")</li>
+                    }
+                    if (UASession.VAM)
+                    {
+                        <li>@Html.ActionLink("Value Meal", "Index", "Home")</li>
+                    }
+                    if (UASession.UAP)
+                    {
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">User access <span class="caret-right"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Create user account", "CreateAccount", "Account")</li>
+                                <li>@Html.ActionLink("Edit user account", "CreateAccount", "Account")</li>
+                                <li>@Html.ActionLink("Delete user account", "CreateAccount", "Account")</li>
+                             </ul>
+                         </li>
+                    }
+                    if (UASession.MIP)
+                    {
+                        <li>@Html.ActionLink("Menu Item Price", "Index", "Home")</li>
+                    }
+                    if (UASession.RIM)
+                    {
+                        <li>@Html.ActionLink("Raw Item Price", "Index", "Home")</li>
+                    }
+                    if (UASession.AUL)
+                    {
+                        <li>@Html.ActionLink("Audit log", "Index", "AuditLog")</li>
+                    }
+                    if (UASession.REG)
+                    {
+                        <li>@Html.ActionLink("Report generation", "Index", "Home")</li>
+                    }
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Table Maintenance <span class="caret-right"></span></a>
+                            <ul class="dropdown-menu">
+                                @{ if (UASession.LOC)
+                                    {
+                                        <li>@Html.ActionLink("Location", "Index", "Home");</li>
+                                    }
+                                    if (UASession.PRC)
+                                    {
+                                        <li>@Html.ActionLink("Profit center", "Index", "Home")</li>
+                                    }
+                                    if (UASession.OWN)
+                                    {
+                                        <li>@Html.ActionLink("Ownership", "Index", "Home")</li>
+                                    }
+                                    if (UASession.BUE)
+                                    {
+                                        <li>@Html.ActionLink("Business Extension", "Index", "Home")</li>
+                                    }
+                                    if (UASession.TIP)
+                                    {
+                                        <li class="dropdown-submenu">
+                                            <a class="test" href="#">Tier Pages <span class="caret-right"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li>@Html.ActionLink("Dessert Enterprise Tier", "Index", "Home")</li>
+                                                <li>@Html.ActionLink("Breakfast Price Tier", "Index", "Home")</li>
+                                                <li>@Html.ActionLink("Regular Price Tier", "Index", "Home")</li>
+                                                <li>@Html.ActionLink("McCafe level 2 Price Tier", "Index", "Home")</li>
+                                                <li>@Html.ActionLink("McCafe level 3 Price Tier", "Index", "Home")</li>
+                                                <li>@Html.ActionLink("McCafe BISTRO Price Tier", "Index", "Home")</li>
+                                                <li>@Html.ActionLink("MDS Price Tier", "Index", "Home")</li>
+                                                <li>@Html.ActionLink("Project Gold Price Tier", "Index", "Home")</li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>  
+                    }
+            </ul>
+        </div>
+    </div>
 </div>
+<!-- Light JQuery for Dropdown behavior-->
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>

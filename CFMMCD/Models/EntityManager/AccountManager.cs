@@ -1,5 +1,6 @@
 ﻿using CFMMCD.Models.DB;
 using CFMMCD.Models.ViewModel;
+using CFMMCD.Sessions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,12 +58,26 @@ namespace CFMMCD.Models.EntityManager
                     return "";
             }
         }
+
+        public int GetUserID(string username)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                // Get `Username` that matches the specified username parameter
+                var user = db.Accounts.Where(o => o.Username.Equals(username));
+                if (user.Any())
+                    return user.FirstOrDefault().UserId;
+                else
+                    return -1;
+            }
+        }
+
         /*
-         * Creates a string list of the current logged account's accessible pages
-         * listed as boolean delimited by commas.
-         * 
-         * Returns the string created
-         */
+* Creates a string list of the current logged account's accessible pages
+* listed as boolean delimited by commas.
+* 
+* Returns the string created
+*/
         private string GetUserAccessString(CreateAccountViewModel account)
         {
             return account.MIMInput + "," +
@@ -113,6 +128,30 @@ namespace CFMMCD.Models.EntityManager
                 }
                 return userAccessArray;
             }
+        }
+        public UserAccessSession SetUserAccess(string username)
+        {
+            bool[] UAArray = GetUserAccessArray(username);
+            UserAccessSession UASession = new UserAccessSession();
+            UASession.MIM = UAArray[0];
+            UASession.RIM = UAArray[1];
+            UASession.MER = UAArray[2];
+            UASession.STP = UAArray[3];
+            UASession.SCM = UAArray[4];
+            UASession.VEN = UAArray[5];
+            UASession.VAM = UAArray[6];
+            UASession.UAP = UAArray[7];
+            UASession.MIP = UAArray[8];
+            UASession.RIP = UAArray[9];
+            UASession.AUL = UAArray[10];
+            UASession.REG = UAArray[11];
+            UASession.TEG = UAArray[12];
+            UASession.TIP = UAArray[13];
+            UASession.BUE = UAArray[14];
+            UASession.OWN = UAArray[15];
+            UASession.PRC = UAArray[16];
+            UASession.LOC = UAArray[17];
+            return UASession;
         }
     }
 }

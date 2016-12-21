@@ -1,0 +1,48 @@
+﻿@model CFMMCD.Models.ViewModel.AuditLogViewModel
+@using CFMMCD.Models.ViewModel;
+
+@{
+    ViewBag.Title = "Audit Log";
+    List<AuditLogViewModel> ALLList = (List<AuditLogViewModel>) ViewData["ModelList"];
+}
+
+<div>
+    <h4>@ViewBag.Title</h4>
+    <hr />
+    <div class="container">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>User ID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Page</th>
+                    <th>Page action</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{  foreach (AuditLogViewModel vm in ALLList)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@vm.UserId</td>
+                            <td>@vm.Date</td>
+                            <td>@vm.Time</td>
+                            <td>@vm.Page</td>
+                            <td>@vm.Page_Action</td>
+                            <td>@vm.Audit_Id</td>
+                            <td>@vm.Name</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table> 
+        <div class="right-fixed">
+            <button type="button" class="btn btn-default" value="toPDF" disabled>Export to PDF</button>
+            <button type="button" class="btn btn-default" value="toExcel" disabled>Export as Spreadsheet</button>
+        </div>
+    </div>
+</div>

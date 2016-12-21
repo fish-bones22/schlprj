@@ -72,7 +72,7 @@ namespace CFMMCD.Models.EntityManager
         /*
          * Updates a row in the `Store Profile` table
          */
-         public void UpdateStoreProfile(StoreProfileViewModel StoreProfile)
+         public bool UpdateStoreProfile(StoreProfileViewModel StoreProfile)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -86,33 +86,42 @@ namespace CFMMCD.Models.EntityManager
                     StoreProf = db.Store_Profile.Single(sp => sp.STORE_NO.ToString().Equals(StoreProfile.StoreNameNumber));
                 }
                 else
-                    return;
+                    return false;
 
-                StoreProf.STORE_NO = StoreProfile.STORE_NO;
-                StoreProf.STORE_NAME = StoreProfile.STORE_NAME;
-                StoreProf.OWNERSHIP = StoreProfile.OWNERSHIP;
-                StoreProf.BREAKFAST_PRICE_TIER = StoreProfile.BREAKFAST_PRICE_TIER;
-                StoreProf.REGULAR_PRICE_TIER = StoreProfile.REGULAR_PRICE_TIER;
-                StoreProf.DC_PRICE_TIER = StoreProfile.DC_PRICE_TIER;
-                StoreProf.MDS_PRICE_TIER = StoreProfile.MDS_PRICE_TIER;
-                StoreProf.MCCAFE_LEVEL_2_PRICE_TIER = StoreProfile.MCCAFE_LEVEL_2_PRICE_TIER;
-                StoreProf.MCCAFE_LEVEL_3_PRICE_TIER = StoreProfile.MCCAFE_LEVEL_3_PRICE_TIER;
-                StoreProf.MCCAFE_BISTRO_PRICE_TIER = StoreProfile.MCCAFE_BISTRO_PRICE_TIER;
-                StoreProf.PROJECT_GOLD_PRICE_TIER = StoreProfile.PROJECT_GOLD_PRICE_TIER;
-                StoreProf.BET = BetSelected(StoreProfile);
-                StoreProf.PROFIT_CENTER = StoreProfile.PROFIT_CENTER;
-                StoreProf.REGION = StoreProfile.REGION;
-                StoreProf.PROVINCE = StoreProfile.PROVINCE;
-                StoreProf.LOCATION = StoreProfile.LOCATION;
-                StoreProf.ADDRESS = StoreProfile.ADDRESS;
-                StoreProf.CITY = StoreProfile.CITY;
-                StoreProf.FRESH_OR_FROZEN = StoreProfile.FRESH_OR_FROZEN;
-                StoreProf.PAPER_OR_PLASTIC = StoreProfile.PAPER_OR_PLASTIC;
-                StoreProf.SOFT_SERVE_OR_VANILLA_POWDER_MIX = StoreProfile.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
-                StoreProf.SIMPLOT_OR_MCCAIN = StoreProfile.SIMPLOT_OR_MCCAIN;
-                StoreProf.MCCORMICK_OR_GSF = StoreProfile.MCCORMICK_OR_GSF;
+                try
+                {
+                    StoreProf.STORE_NO = StoreProfile.STORE_NO;
+                    StoreProf.STORE_NAME = StoreProfile.STORE_NAME;
+                    StoreProf.OWNERSHIP = StoreProfile.OWNERSHIP;
+                    StoreProf.BREAKFAST_PRICE_TIER = StoreProfile.BREAKFAST_PRICE_TIER;
+                    StoreProf.REGULAR_PRICE_TIER = StoreProfile.REGULAR_PRICE_TIER;
+                    StoreProf.DC_PRICE_TIER = StoreProfile.DC_PRICE_TIER;
+                    StoreProf.MDS_PRICE_TIER = StoreProfile.MDS_PRICE_TIER;
+                    StoreProf.MCCAFE_LEVEL_2_PRICE_TIER = StoreProfile.MCCAFE_LEVEL_2_PRICE_TIER;
+                    StoreProf.MCCAFE_LEVEL_3_PRICE_TIER = StoreProfile.MCCAFE_LEVEL_3_PRICE_TIER;
+                    StoreProf.MCCAFE_BISTRO_PRICE_TIER = StoreProfile.MCCAFE_BISTRO_PRICE_TIER;
+                    StoreProf.PROJECT_GOLD_PRICE_TIER = StoreProfile.PROJECT_GOLD_PRICE_TIER;
+                    StoreProf.BET = BetSelected(StoreProfile);
+                    StoreProf.PROFIT_CENTER = StoreProfile.PROFIT_CENTER;
+                    StoreProf.REGION = StoreProfile.REGION;
+                    StoreProf.PROVINCE = StoreProfile.PROVINCE;
+                    StoreProf.LOCATION = StoreProfile.LOCATION;
+                    StoreProf.ADDRESS = StoreProfile.ADDRESS;
+                    StoreProf.CITY = StoreProfile.CITY;
+                    StoreProf.FRESH_OR_FROZEN = StoreProfile.FRESH_OR_FROZEN;
+                    StoreProf.PAPER_OR_PLASTIC = StoreProfile.PAPER_OR_PLASTIC;
+                    StoreProf.SOFT_SERVE_OR_VANILLA_POWDER_MIX = StoreProfile.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
+                    StoreProf.SIMPLOT_OR_MCCAIN = StoreProfile.SIMPLOT_OR_MCCAIN;
+                    StoreProf.MCCORMICK_OR_GSF = StoreProfile.MCCORMICK_OR_GSF;
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    return false;
+                }
+                
             }
         }
         /*

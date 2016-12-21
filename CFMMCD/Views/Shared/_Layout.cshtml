@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using CFMMCD.Sessions
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,8 +8,23 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 </head>
 <body>
+    @{ 
+        CurrentPageSession CPSession = (CurrentPageSession) Session["CurrentPage"];
+        if (CPSession == null)
+        {
+            CPSession = new CurrentPageSession();
+            CPSession.Self = new CurrentPageSession.LinkString
+            {
+                Action = "Login",
+                Controller = "Account"
+            };
+        }
+
+    }
     <div class="navbar navbar-fixed-top">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,7 +34,20 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Login", "Login")</li>
+                @{
+                    if (CPSession.Grandparent != null)
+                    {
+                        <li>@Html.ActionLink(CPSession.Grandparent.Action, CPSession.Grandparent.Action, CPSession.Grandparent.Controller)</li>
+                    }
+                    if (CPSession.Parent != null)
+                    {
+                        <li>@Html.ActionLink(CPSession.Parent.Action, CPSession.Parent.Action, CPSession.Parent.Controller)</li>
+                    }
+                    if (CPSession.Self != null)
+                    {
+                        <li>@Html.ActionLink(CPSession.Self.Action, CPSession.Self.Action, CPSession.Self.Controller)</li>
+                    }
+                }
             </ul>
         </div>
     </div>
@@ -31,7 +60,6 @@
         <p>&copy; @DateTime.Now.Year - CFM McDonalds</p>
     </footer>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

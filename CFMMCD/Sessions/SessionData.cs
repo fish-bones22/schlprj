@@ -9,6 +9,7 @@ namespace CFMMCD.Sessions
     public class UserSession
     {
         public string Username { get; set; }
+        public int UserID { get; set; }
     }
 
     [Serializable]
@@ -32,5 +33,20 @@ namespace CFMMCD.Sessions
         public bool OWN { get; set; }
         public bool PRC { get; set; }
         public bool LOC { get; set; }
+    }
+    [Serializable]
+    public class CurrentPageSession
+    {
+        public LinkString Grandparent { get; set; }
+        public LinkString Parent { get; set; }
+        public LinkString Self { get; set; }
+        public LinkString Child { get; set; }
+        public LinkString Grandchild { get; set; }
+
+        public class LinkString
+        {
+            public string Action { get; set; }
+            public string Controller { get; set; }
+        }
     }
 }

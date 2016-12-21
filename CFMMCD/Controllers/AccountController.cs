@@ -14,6 +14,13 @@ namespace CFMMCD.Controllers
     {
         public ActionResult Login()
         {
+            CurrentPageSession CPSession = new CurrentPageSession();
+            CPSession.Self = new CurrentPageSession.LinkString
+            {
+                Action = "Login",
+                Controller = "Account"
+            };
+            Session["CurrentPage"] = CPSession;
             return View();
         }
         /*
@@ -37,7 +44,11 @@ namespace CFMMCD.Controllers
                     FormsAuthentication.SetAuthCookie(credentials.Username, false);
                     UserSession userSession = new UserSession();
                     userSession.Username = credentials.Username;
+                    userSession.UserID = accMan.GetUserID(credentials.Username);
                     Session["User"] = userSession;
+                    // Set User access
+                    UserAccessSession UASession = new UserAccessSession();
+                    Session["UserAccess"] = accMan.SetUserAccess(credentials.Username);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -48,6 +59,23 @@ namespace CFMMCD.Controllers
         }
         public ActionResult CreateAccount()
         {
+            CurrentPageSession CPSession = new CurrentPageSession();
+            CPSession.Self = new CurrentPageSession.LinkString
+            {
+                Action = "CreateAccount",
+                Controller = "Account"
+            };
+            CPSession.Parent = new CurrentPageSession.LinkString
+            {
+                Action = "Index",
+                Controller = "Home"
+            };
+            CPSession.Grandparent = new CurrentPageSession.LinkString
+            {
+                Action = "Login",
+                Controller = "Account"
+            };
+            Session["CurrentPage"] = CPSession;
             return View();
         }
         [HttpPost]
@@ -61,11 +89,26 @@ namespace CFMMCD.Controllers
                 {
                     accMan.CreateUserAccount(account);
                     FormsAuthentication.SetAuthCookie(account.Username, false);
+                    TempData["SuccessMessage"] = "Successfuly created account";
+                    //** Audit Log **
+                    // Prepare data to be passed to adit log manager
+                    UserSession us = (UserSession)Session["User"];
+                    AuditLogViewModel ALViewModel = new AuditLogViewModel
+                    {
+                        Date = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")),
+                        Time = TimeSpan.Parse(DateTime.Now.ToString("HH:mm")),
+                        Name = us.Username,
+                        Page = "USERACC",
+                        Page_Action = "Create",
+                        UserId = us.UserID
+                    };
+                    // Add to audit log
+                    new AuditLogManager().Audit(ALViewModel);
                 }
                 else
                     ModelState.AddModelError("", "Username already taken");
             }
-            return View();
+            return View(new CreateAccountViewModel());
         }
     }
 }

@@ -196,12 +196,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Models\EntityManager\AuditLogManager.cs" />
+    <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
-=======
     <Compile Include="Models\ViewModel\TextGeneratorViewModel.cs" />
->>>>>>> 26dba585b35afd03707d4a032a041d95325656ca
     <Compile Include="Sessions\SessionData.cs" />
     <Compile Include="Models\DB\Account.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
@@ -260,6 +258,7 @@
     <Content Include="Views\MenuItemMaster\MenuItemMaster.cshtml" />
     <Content Include="Views\StoreProfile\StoreProfile.cshtml" />
     <Content Include="Views\TextGenerator\Index.cshtml" />
+    <Content Include="Views\AuditLog\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -271,7 +270,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\AuditLog\" />
+    <Folder Include="SMS\SMSWEBCFM\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

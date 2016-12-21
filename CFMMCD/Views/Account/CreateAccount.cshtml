@@ -6,6 +6,12 @@
 
 <div class="center-sm">
     <div class="header"><h1>@ViewBag.Title</h1></div>
+    @{
+        if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+        }
+    }
     @using (Html.BeginForm())
     { 
         @Html.AntiForgeryToken()
