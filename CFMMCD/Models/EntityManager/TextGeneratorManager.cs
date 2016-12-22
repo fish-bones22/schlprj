@@ -127,7 +127,7 @@ namespace CFMMCD.Models.EntityManager
                 for (int i = 0; i < db.Store_Profile.Count(); i++)
                 {
                     StoreProfileViewModel spViewModel = new StoreProfileViewModel();
-                    spViewModel.STORE_NO = db.Store_Profile.ElementAt(i).STORE_NO;
+                    spViewModel.STORE_NO = db.Store_Profile.ElementAt(i).STORE_NO.ToString();
                     spViewModel.STORE_NAME = db.Store_Profile.ElementAt(i).STORE_NAME;
                     spViewModel.LOCATION = db.Store_Profile.ElementAt(i).LOCATION;
                     spList.Add(spViewModel);

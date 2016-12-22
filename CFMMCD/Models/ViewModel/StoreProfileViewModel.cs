@@ -11,7 +11,7 @@ namespace CFMMCD.Models.ViewModel
     {
         public string StoreNameNumber { get; set; }
         [Required(ErrorMessage ="This field is required")]
-        public int STORE_NO { get; set; }
+        public string STORE_NO { get; set; }
         [Required(ErrorMessage = "This field is required")]
         public string STORE_NAME { get; set; }
         public string OWNERSHIP { get; set; }
@@ -23,7 +23,7 @@ namespace CFMMCD.Models.ViewModel
         public string MCCAFE_LEVEL_3_PRICE_TIER { get; set; }
         public string MCCAFE_BISTRO_PRICE_TIER { get; set; }
         public string PROJECT_GOLD_PRICE_TIER { get; set; }
-        public int PROFIT_CENTER { get; set; }
+        public string PROFIT_CENTER { get; set; }
         public string REGION { get; set; }
         public string PROVINCE { get; set; }
         public string LOCATION { get; set; }
@@ -43,5 +43,6 @@ namespace CFMMCD.Models.ViewModel
         public bool McDeliveryInput { get; set; }
         public bool DriveThruInput { get; set; }
         public bool TakeOutCounterInput { get; set; }
+        
     }
 }

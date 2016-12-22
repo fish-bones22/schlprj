@@ -16,8 +16,8 @@ namespace CFMMCD.Models.DB
     {
         public int Audit_Id { get; set; }
         public int UserId { get; set; }
-        public System.DateTime Date { get; set; }
-        public System.TimeSpan Time { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
         public string Page { get; set; }
         public string Page_Action { get; set; }
         public string Name { get; set; }

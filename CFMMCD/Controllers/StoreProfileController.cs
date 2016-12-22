@@ -11,108 +11,57 @@ namespace CFMMCD.Controllers
 {
     public class StoreProfileController : Controller
     {
+        UserSession us;
         // GET: StoreProfile
-        public ActionResult StoreProfile()
+        public ActionResult Index()
         {
-            CurrentPageSession CPSession = new CurrentPageSession();
-            CPSession.Self = new CurrentPageSession.LinkString
-            {
-                Action = "StoreProfile",
-                Controller = "StoreProfile"
-            };
-            CPSession.Parent = new CurrentPageSession.LinkString
-            {
-                Action = "Index",
-                Controller = "Home"
-            };
-            CPSession.Grandparent = new CurrentPageSession.LinkString
-            {
-                Action = "Login",
-                Controller = "Account"
-            };
-            Session["CurrentPage"] = CPSession;
+            // Validate log in and user access
+            UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            if (UASession == null || !UASession.STP) return RedirectToAction("Login", "Account");
+
+            us = (UserSession)Session["User"];
+            Session["CurrentPage"] = new CurrentPageSession("STP", "HOME", "LOG");
             return View(new StoreProfileViewModel());
         }
-
         [HttpPost]
-        public ActionResult StoreProfile(StoreProfileViewModel StoreProf)
+        public ActionResult Index(StoreProfileViewModel StoreProf)
         {
             // Search
             StoreProfileManager SPManager = new StoreProfileManager();
             StoreProfileViewModel model = new StoreProfileViewModel();
             model = SPManager.SearchStoreProfile(StoreProf);
+            if (model == null)
+                ModelState.AddModelError("", "No items found");
             return View(model);
         }
+
         [HttpPost]
-        public ActionResult SaveUpdateDelete(StoreProfileViewModel SPViewModel, string command)
+        public ActionResult UpdateDelete(StoreProfileViewModel SPViewModel, string command)
         {
+            string PageAction = "";
+            bool result = false;
+            us = (UserSession)Session["User"];
+
             if (command == "Save")
             {
-                //Code for Add
-                Session["pageact"] = "Add"; // Session for what a user did
                 StoreProfileManager SPManager = new StoreProfileManager();
-                SPManager.CreateStoreProfile(SPViewModel);
-                
-                //** Audit Log **
-                // Prepare data to be passed to adit log manager
-                UserSession us = (UserSession)Session["User"];
-                AuditLogViewModel ALViewModel = new AuditLogViewModel
-                {
-                    Date = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")),
-                    Time = TimeSpan.Parse(DateTime.Now.ToString("HH:mm")),
-                    Name = us.Username,
-                    Page = "STORPROF",
-                    Page_Action = "Create",
-                    UserId = us.UserID
-                };
-                // Add to audit log
-                new AuditLogManager().Audit(ALViewModel);
-            }
-            else if (command == "Update")
-            {
-                //Code for Update
-                Session["pageact"] = "Update"; // Session for what a user did
-                StoreProfileManager SPManager = new StoreProfileManager();
-                SPManager.UpdateStoreProfile(SPViewModel);
-
-                //** Audit Log ** /       /*TODO: TO BE TRANSFERRED ON ITS OWN OBJECT (or methhod)
-                // Prepare data to be passed to adit log manager
-                UserSession us = (UserSession)Session["User"];
-                AuditLogViewModel ALViewModel = new AuditLogViewModel
-                {
-                    Date = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")),
-                    Time = TimeSpan.Parse(DateTime.Now.ToString("HH:mm")),
-                    Name = us.Username,
-                    Page = "STORPROF",
-                    Page_Action = "Update",
-                    UserId = us.UserID
-                };
-                // Add to audit log
-                new AuditLogManager().Audit(ALViewModel);
+                result = SPManager.UpdateStoreProfile(SPViewModel);
+                PageAction = "UPDATE";
             }
             else if (command == "Delete")
             {
-                //Code for Delete
-                Session["pageact"] = "Delete"; // Session for what a user did
                 StoreProfileManager SPManager = new StoreProfileManager();
-                SPManager.DeleteStoreProfile(SPViewModel);
-
-                //** Audit Log **
-                // Prepare data to be passed to adit log manager
-                UserSession us = (UserSession)Session["User"];
-                AuditLogViewModel ALViewModel = new AuditLogViewModel
-                {
-                    Date = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")),
-                    Time = TimeSpan.Parse(DateTime.Now.ToString("HH:mm")),
-                    Name = us.Username,
-                    Page = "STORPROF",
-                    Page_Action = "Delete",
-                    UserId = us.UserID
-                };
-                // Add to audit log
-                new AuditLogManager().Audit(ALViewModel);
+                result = SPManager.DeleteStoreProfile(SPViewModel);
+                PageAction = "DELETE";
             }
-            return RedirectToAction("StoreProfile");
+
+            if (result)
+            {
+                TempData["SuccessMessage"] = PageAction + " successful";
+                new AuditLogManager().Audit(us.UserID, DateTime.Now, "STOREPROFILE", PageAction, us.Username);
+            }
+            else TempData["ErrorMessage"] = PageAction + " failed";
+            return RedirectToAction("Index");
         }
     }
 }

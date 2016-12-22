@@ -10,114 +10,59 @@ namespace CFMMCD.Models.EntityManager
     public class StoreProfileManager
     {
         /*
-         * Creates a new `Store Profile` row and inserts it in the table
-         */
-        public void CreateStoreProfile(StoreProfileViewModel StoreProfile)
+         * Combined Create and Update Store profile method.
+         * Creates a Store_Profile instance (which will be a new table row)
+         * and instantiates each SPViewModel property to the respective property of the former.
+         * Also checks if the given Store profile number is already in the table,
+         * if true, the method performs an update, otherwise, creation. 
+         *
+         * Returns true if the operation is successful.
+         * */
+        public bool UpdateStoreProfile(StoreProfileViewModel SPViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 Store_Profile spRow = new Store_Profile();
-
-                spRow.STORE_NO = StoreProfile.STORE_NO;
-                spRow.STORE_NAME = StoreProfile.STORE_NAME;
-                spRow.OWNERSHIP = StoreProfile.OWNERSHIP;
-                spRow.BREAKFAST_PRICE_TIER = StoreProfile.BREAKFAST_PRICE_TIER;
-                spRow.REGULAR_PRICE_TIER = StoreProfile.REGULAR_PRICE_TIER;
-                spRow.DC_PRICE_TIER = StoreProfile.DC_PRICE_TIER;
-                spRow.MDS_PRICE_TIER = StoreProfile.MDS_PRICE_TIER;
-                spRow.MCCAFE_LEVEL_2_PRICE_TIER = StoreProfile.MCCAFE_LEVEL_2_PRICE_TIER;
-                spRow.MCCAFE_LEVEL_3_PRICE_TIER = StoreProfile.MCCAFE_LEVEL_3_PRICE_TIER;
-                spRow.MCCAFE_BISTRO_PRICE_TIER = StoreProfile.MCCAFE_BISTRO_PRICE_TIER;
-                spRow.PROJECT_GOLD_PRICE_TIER = StoreProfile.PROJECT_GOLD_PRICE_TIER;
-                spRow.BET = BetSelected(StoreProfile);
-                spRow.PROFIT_CENTER = StoreProfile.PROFIT_CENTER;
-                spRow.REGION = StoreProfile.REGION;
-                spRow.PROVINCE = StoreProfile.PROVINCE;
-                spRow.LOCATION = StoreProfile.LOCATION;
-                spRow.ADDRESS = StoreProfile.ADDRESS;
-                spRow.CITY = StoreProfile.CITY;
-                spRow.FRESH_OR_FROZEN = StoreProfile.FRESH_OR_FROZEN;
-                spRow.PAPER_OR_PLASTIC = StoreProfile.PAPER_OR_PLASTIC;
-                spRow.SOFT_SERVE_OR_VANILLA_POWDER_MIX = StoreProfile.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
-                spRow.SIMPLOT_OR_MCCAIN = StoreProfile.SIMPLOT_OR_MCCAIN;
-                spRow.MCCORMICK_OR_GSF = StoreProfile.MCCORMICK_OR_GSF;
-
-                db.Store_Profile.Add(spRow);
-                db.SaveChanges();
-            }
-        }
-        /*
-         * Deletes a row in the `Store Profile` table 
-         */
-         public void DeleteStoreProfile(StoreProfileViewModel StoreProfile)
-        {
-            using (CFMMCDEntities db = new CFMMCDEntities())
-            {
-                Store_Profile StoreProf;
-                if (db.Store_Profile.Where(o => o.STORE_NAME.Equals(StoreProfile.StoreNameNumber)).Any())
-                {
-                    StoreProf = db.Store_Profile.Single(sp => sp.STORE_NAME == StoreProfile.StoreNameNumber);
-                }
-                else if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(StoreProfile.StoreNameNumber)).Any())
-                {
-                    StoreProf = db.Store_Profile.Single(sp => sp.STORE_NO.ToString().Equals(StoreProfile.StoreNameNumber));
-                }
-                else
-                    return;
-
-                db.Store_Profile.Remove(StoreProf);
-                db.SaveChanges();
-            }
-        }
-        /*
-         * Updates a row in the `Store Profile` table
-         */
-         public bool UpdateStoreProfile(StoreProfileViewModel StoreProfile)
-        {
-            using (CFMMCDEntities db = new CFMMCDEntities())
-            {
-                Store_Profile StoreProf;
-                if (db.Store_Profile.Where(o => o.STORE_NAME.Equals(StoreProfile.StoreNameNumber)).Any())
-                {
-                    StoreProf = db.Store_Profile.Single(sp => sp.STORE_NAME == StoreProfile.StoreNameNumber);
-                }
-                else if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(StoreProfile.StoreNameNumber)).Any())
-                {
-                    StoreProf = db.Store_Profile.Single(sp => sp.STORE_NO.ToString().Equals(StoreProfile.StoreNameNumber));
-                }
-                else
-                    return false;
-
+                spRow.STORE_NO = int.Parse(SPViewModel.STORE_NO);
+                spRow.STORE_NAME = SPViewModel.STORE_NAME;
+                spRow.OWNERSHIP = SPViewModel.OWNERSHIP;
+                spRow.BREAKFAST_PRICE_TIER = SPViewModel.BREAKFAST_PRICE_TIER;
+                spRow.REGULAR_PRICE_TIER = SPViewModel.REGULAR_PRICE_TIER;
+                spRow.DC_PRICE_TIER = SPViewModel.DC_PRICE_TIER;
+                spRow.MDS_PRICE_TIER = SPViewModel.MDS_PRICE_TIER;
+                spRow.MCCAFE_LEVEL_2_PRICE_TIER = SPViewModel.MCCAFE_LEVEL_2_PRICE_TIER;
+                spRow.MCCAFE_LEVEL_3_PRICE_TIER = SPViewModel.MCCAFE_LEVEL_3_PRICE_TIER;
+                spRow.MCCAFE_BISTRO_PRICE_TIER = SPViewModel.MCCAFE_BISTRO_PRICE_TIER;
+                spRow.PROJECT_GOLD_PRICE_TIER = SPViewModel.PROJECT_GOLD_PRICE_TIER;
+                spRow.BET = BETSelectedToString(SPViewModel);
+                spRow.PROFIT_CENTER = int.Parse(SPViewModel.PROFIT_CENTER);
+                spRow.REGION = SPViewModel.REGION;
+                spRow.PROVINCE = SPViewModel.PROVINCE;
+                spRow.LOCATION = SPViewModel.LOCATION;
+                spRow.ADDRESS = SPViewModel.ADDRESS;
+                spRow.CITY = SPViewModel.CITY;
+                spRow.FRESH_OR_FROZEN = SPViewModel.FRESH_OR_FROZEN;
+                spRow.PAPER_OR_PLASTIC = SPViewModel.PAPER_OR_PLASTIC;
+                spRow.SOFT_SERVE_OR_VANILLA_POWDER_MIX = SPViewModel.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
+                spRow.SIMPLOT_OR_MCCAIN = SPViewModel.SIMPLOT_OR_MCCAIN;
+                spRow.MCCORMICK_OR_GSF = SPViewModel.MCCORMICK_OR_GSF;
+                spRow.STATUS = "A";
                 try
                 {
-                    StoreProf.STORE_NO = StoreProfile.STORE_NO;
-                    StoreProf.STORE_NAME = StoreProfile.STORE_NAME;
-                    StoreProf.OWNERSHIP = StoreProfile.OWNERSHIP;
-                    StoreProf.BREAKFAST_PRICE_TIER = StoreProfile.BREAKFAST_PRICE_TIER;
-                    StoreProf.REGULAR_PRICE_TIER = StoreProfile.REGULAR_PRICE_TIER;
-                    StoreProf.DC_PRICE_TIER = StoreProfile.DC_PRICE_TIER;
-                    StoreProf.MDS_PRICE_TIER = StoreProfile.MDS_PRICE_TIER;
-                    StoreProf.MCCAFE_LEVEL_2_PRICE_TIER = StoreProfile.MCCAFE_LEVEL_2_PRICE_TIER;
-                    StoreProf.MCCAFE_LEVEL_3_PRICE_TIER = StoreProfile.MCCAFE_LEVEL_3_PRICE_TIER;
-                    StoreProf.MCCAFE_BISTRO_PRICE_TIER = StoreProfile.MCCAFE_BISTRO_PRICE_TIER;
-                    StoreProf.PROJECT_GOLD_PRICE_TIER = StoreProfile.PROJECT_GOLD_PRICE_TIER;
-                    StoreProf.BET = BetSelected(StoreProfile);
-                    StoreProf.PROFIT_CENTER = StoreProfile.PROFIT_CENTER;
-                    StoreProf.REGION = StoreProfile.REGION;
-                    StoreProf.PROVINCE = StoreProfile.PROVINCE;
-                    StoreProf.LOCATION = StoreProfile.LOCATION;
-                    StoreProf.ADDRESS = StoreProfile.ADDRESS;
-                    StoreProf.CITY = StoreProfile.CITY;
-                    StoreProf.FRESH_OR_FROZEN = StoreProfile.FRESH_OR_FROZEN;
-                    StoreProf.PAPER_OR_PLASTIC = StoreProfile.PAPER_OR_PLASTIC;
-                    StoreProf.SOFT_SERVE_OR_VANILLA_POWDER_MIX = StoreProfile.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
-                    StoreProf.SIMPLOT_OR_MCCAIN = StoreProfile.SIMPLOT_OR_MCCAIN;
-                    StoreProf.MCCORMICK_OR_GSF = StoreProfile.MCCORMICK_OR_GSF;
-
+                    // Check if STORE_NO already exists in the database, perform an update if true
+                    if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SPViewModel.STORE_NO)).Any())
+                    {
+                        var rowToRemove = db.Store_Profile.Single(o => o.STORE_NO.ToString().Equals(SPViewModel.STORE_NO));
+                        spRow.STATUS = "E";
+                        db.Store_Profile.Remove(rowToRemove); // Remove old row      
+                        db.Store_Profile.Add(spRow);          // Insert replacement
+                    }
+                    else
+                        db.Store_Profile.Add(spRow);
                     db.SaveChanges();
                     return true;
                 }
-                catch(Exception e)
+                catch ( Exception e )
                 {
                     return false;
                 }
@@ -125,74 +70,98 @@ namespace CFMMCD.Models.EntityManager
             }
         }
         /*
-         * Searches for the StoreNumber/StoreName from the table
+         * Deletes a row in the `Store Profile` table 
+         * 
+         * Returns true if operation is successful.
          */
-         public StoreProfileViewModel SearchStoreProfile(StoreProfileViewModel StoreProfile)
+         public bool DeleteStoreProfile(StoreProfileViewModel SPViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                Store_Profile StoreProf;
-                if (db.Store_Profile.Where(o => o.STORE_NAME.Equals(StoreProfile.StoreNameNumber)).Any())
-                {
-                    StoreProf = db.Store_Profile.Single(sp => sp.STORE_NAME == StoreProfile.StoreNameNumber);
-                }
-                else if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(StoreProfile.StoreNameNumber)).Any())
-                {
-                    StoreProf = db.Store_Profile.Single(sp => sp.STORE_NO.ToString().Equals(StoreProfile.StoreNameNumber));
-                }
+                Store_Profile SPRow;
+                if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SPViewModel.STORE_NO)).Any())
+                    SPRow = db.Store_Profile.Single(sp => sp.STORE_NO.ToString().Equals(SPViewModel.STORE_NO));
                 else
-                    return StoreProfile;
+                    return false;
+                try
+                {
+                    db.Store_Profile.Remove(SPRow);
+                    db.SaveChanges();
+                    return true;
+                } catch ( Exception e )
+                {
+                    return false;
+                }
+            }
+        }
+        /*
+         * Searches for the StoreNumber/StoreName from the table
+         */
+         public StoreProfileViewModel SearchStoreProfile(StoreProfileViewModel SPViewModel)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                Store_Profile SPRow;
+                if (db.Store_Profile.Where(o => o.STORE_NAME.Equals(SPViewModel.StoreNameNumber)).Any())
+                    SPRow = db.Store_Profile.Single(sp => sp.STORE_NAME.Equals(SPViewModel.StoreNameNumber));
+                else if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SPViewModel.StoreNameNumber)).Any())
+                    SPRow = db.Store_Profile.Single(sp => sp.STORE_NO.ToString().Equals(SPViewModel.StoreNameNumber));
+                else
+                    return null; // Empty
 
-                StoreProfile.STORE_NO = StoreProf.STORE_NO;
-                StoreProfile.STORE_NAME = StoreProf.STORE_NAME;
-                StoreProfile.OWNERSHIP = StoreProf.OWNERSHIP;
-                StoreProfile.BREAKFAST_PRICE_TIER = StoreProf.BREAKFAST_PRICE_TIER;
-                StoreProfile.REGULAR_PRICE_TIER = StoreProf.REGULAR_PRICE_TIER;
-                StoreProfile.DC_PRICE_TIER = StoreProf.DC_PRICE_TIER;
-                StoreProfile.MDS_PRICE_TIER = StoreProf.MDS_PRICE_TIER;
-                StoreProfile.MCCAFE_LEVEL_2_PRICE_TIER = StoreProf.MCCAFE_LEVEL_2_PRICE_TIER;
-                StoreProfile.MCCAFE_LEVEL_3_PRICE_TIER = StoreProf.MCCAFE_LEVEL_3_PRICE_TIER;
-                StoreProfile.MCCAFE_BISTRO_PRICE_TIER = StoreProf.MCCAFE_BISTRO_PRICE_TIER;
-                StoreProfile.PROJECT_GOLD_PRICE_TIER = StoreProf.PROJECT_GOLD_PRICE_TIER;
-                StoreProfile.PROFIT_CENTER = StoreProf.PROFIT_CENTER;
-                StoreProfile.REGION = StoreProf.REGION;
-                StoreProfile.PROVINCE = StoreProf.PROVINCE;
-                StoreProfile.LOCATION = StoreProf.LOCATION;
-                StoreProfile.ADDRESS = StoreProf.ADDRESS;
-                StoreProfile.CITY = StoreProf.CITY;
-                StoreProfile.FRESH_OR_FROZEN = StoreProf.FRESH_OR_FROZEN;
-                StoreProfile.PAPER_OR_PLASTIC = StoreProf.PAPER_OR_PLASTIC;
-                StoreProfile.SOFT_SERVE_OR_VANILLA_POWDER_MIX = StoreProf.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
-                StoreProfile.SIMPLOT_OR_MCCAIN = StoreProf.SIMPLOT_OR_MCCAIN;
-                StoreProfile.MCCORMICK_OR_GSF = StoreProf.MCCORMICK_OR_GSF;
+                SPViewModel.STORE_NO = SPRow.STORE_NO.ToString();
+                SPViewModel.STORE_NAME = SPRow.STORE_NAME;
+                SPViewModel.OWNERSHIP = SPRow.OWNERSHIP;
+                SPViewModel.BREAKFAST_PRICE_TIER = SPRow.BREAKFAST_PRICE_TIER;
+                SPViewModel.REGULAR_PRICE_TIER = SPRow.REGULAR_PRICE_TIER;
+                SPViewModel.DC_PRICE_TIER = SPRow.DC_PRICE_TIER;
+                SPViewModel.MDS_PRICE_TIER = SPRow.MDS_PRICE_TIER;
+                SPViewModel.MCCAFE_LEVEL_2_PRICE_TIER = SPRow.MCCAFE_LEVEL_2_PRICE_TIER;
+                SPViewModel.MCCAFE_LEVEL_3_PRICE_TIER = SPRow.MCCAFE_LEVEL_3_PRICE_TIER;
+                SPViewModel.MCCAFE_BISTRO_PRICE_TIER = SPRow.MCCAFE_BISTRO_PRICE_TIER;
+                SPViewModel.PROJECT_GOLD_PRICE_TIER = SPRow.PROJECT_GOLD_PRICE_TIER;
+                SPViewModel.PROFIT_CENTER = SPRow.PROFIT_CENTER.ToString();
+                SPViewModel.REGION = SPRow.REGION;
+                SPViewModel.PROVINCE = SPRow.PROVINCE;
+                SPViewModel.LOCATION = SPRow.LOCATION;
+                SPViewModel.ADDRESS = SPRow.ADDRESS;
+                SPViewModel.CITY = SPRow.CITY;
+                SPViewModel.FRESH_OR_FROZEN = SPRow.FRESH_OR_FROZEN;
+                SPViewModel.PAPER_OR_PLASTIC = SPRow.PAPER_OR_PLASTIC;
+                SPViewModel.SOFT_SERVE_OR_VANILLA_POWDER_MIX = SPRow.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
+                SPViewModel.SIMPLOT_OR_MCCAIN = SPRow.SIMPLOT_OR_MCCAIN;
+                SPViewModel.MCCORMICK_OR_GSF = SPRow.MCCORMICK_OR_GSF;
+                // Initialize Business Extension Checkboxes
+                bool[] bet = BETSelectedToArray(SPRow.BET);
+                SPViewModel.Hrs24Input = bet[0];
+                SPViewModel.MallInput = bet[1];
+                SPViewModel.McVanInput = bet[2];
+                SPViewModel.McDeliveryInput = bet[3];
+                SPViewModel.DriveThruInput = bet[4];
+                SPViewModel.TakeOutCounterInput = bet[5];
 
-                return StoreProfile;
+                return SPViewModel;
             }
         }
         /*
          * Creates a string list of the selected Business Extension
          */
-         private string BetSelected(StoreProfileViewModel StoreProfile)
+        private string BETSelectedToString(StoreProfileViewModel SPViewModel)
         {
-            return StoreProfile.Hrs24Input + "," +
-                   StoreProfile.MallInput + "," +
-                   StoreProfile.McVanInput + "," +
-                   StoreProfile.McDeliveryInput + "," +
-                   StoreProfile.DriveThruInput + "," +
-                   StoreProfile.TakeOutCounterInput;
+            return SPViewModel.Hrs24Input + "," +
+                   SPViewModel.MallInput + "," +
+                   SPViewModel.McVanInput + "," +
+                   SPViewModel.McDeliveryInput + "," +
+                   SPViewModel.DriveThruInput + "," +
+                   SPViewModel.TakeOutCounterInput;
         }
-        /*
-         * 
-         */
-         public bool[] BetSelectedArray(string betselect)
+         public bool[] BETSelectedToArray(string st)
         {
-            //using (CFMMCDEntities db = new CFMMCDEntities())
-            //{
-                bool[] betsel = new bool[3];
-            //    var bet = db.Store_Profile.Where(o => o.)
-            //}
-
-            return betsel ;
+            string[] betSt = st.Split(',');
+            bool[] bet = new bool[betSt.Length];
+            for (int i = 0; i < betSt.Length; i++)
+                bet[i] = bool.Parse(betSt[i]);
+            return bet;
         }
 
 

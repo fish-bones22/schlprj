@@ -62,6 +62,15 @@ namespace CFMMCD.Models.EntityManager
 
             }
         }
+        /*
+         * Combined Create and Update Menu Item method.
+         * Creates a CSHMIMP0 instance (which will be a new table row)
+         * and instantiates each MIMViewModel property to the respective property of the former.
+         * Also checks if the given Menu Item Code is already in the table,
+         * if true, the method performs an update, otherwise, creation. 
+         *
+         * Returns true if the operation is successful.
+         * */
         public bool SaveMIM(MenuItemMasterViewModel MIMViewModel, string user)
         {
             using ( CFMMCDEntities db = new CFMMCDEntities())
@@ -157,7 +166,11 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-        
+        /*
+         * Deletes the specified row given in the ViewModel properties.
+         * 
+         * Returns true if operation is successful.
+         * */
         public bool DeleteMIM(MenuItemMasterViewModel MIMViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
@@ -165,15 +178,8 @@ namespace CFMMCD.Models.EntityManager
                 CSHMIMP0 MIMRow = new CSHMIMP0();
                 if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
                     MIMRow = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
-                else if (db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Equals(MIMViewModel.MIMNAM)).Any())
-                {
-                    var menuItem = db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Equals(MIMViewModel.MIMNAM));
-                    MIMRow = menuItem.FirstOrDefault();
-                }
                 else
-                {
                     return false;
-                }
                 // Try...Catch to produce appropriate warnings if ever
                 // insertion is unsuccessful
                 try

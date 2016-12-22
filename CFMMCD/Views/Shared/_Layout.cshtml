@@ -19,6 +19,7 @@
             CPSession = new CurrentPageSession();
             CPSession.Self = new CurrentPageSession.LinkString
             {
+                LinkName = "Login",
                 Action = "Login",
                 Controller = "Account"
             };
@@ -37,15 +38,15 @@
                 @{
                     if (CPSession.Grandparent != null)
                     {
-                        <li>@Html.ActionLink(CPSession.Grandparent.Action, CPSession.Grandparent.Action, CPSession.Grandparent.Controller)</li>
+                        <li>@Html.ActionLink(CPSession.Grandparent.LinkName, CPSession.Grandparent.Action, CPSession.Grandparent.Controller)</li>
                     }
                     if (CPSession.Parent != null)
                     {
-                        <li>@Html.ActionLink(CPSession.Parent.Action, CPSession.Parent.Action, CPSession.Parent.Controller)</li>
+                        <li>@Html.ActionLink(CPSession.Parent.LinkName, CPSession.Parent.Action, CPSession.Parent.Controller)</li>
                     }
                     if (CPSession.Self != null)
                     {
-                        <li>@Html.ActionLink(CPSession.Self.Action, CPSession.Self.Action, CPSession.Self.Controller)</li>
+                        <li>@Html.ActionLink(CPSession.Self.LinkName, CPSession.Self.Action, CPSession.Self.Controller)</li>
                     }
                 }
             </ul>

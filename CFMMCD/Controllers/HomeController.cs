@@ -13,18 +13,11 @@ namespace CFMMCD.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            CurrentPageSession CPSession = new CurrentPageSession();
-            CPSession.Self = new CurrentPageSession.LinkString
-            {
-                Action = "Index",
-                Controller = "Home"
-            };
-            CPSession.Parent = new CurrentPageSession.LinkString
-            {
-                Action = "Login",
-                Controller = "Account"
-            };
-            Session["CurrentPage"] = CPSession;
+            // Validate log in and user access
+            UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            if (UASession == null) return RedirectToAction("Login", "Account");
+
+            Session["CurrentPage"] = new CurrentPageSession("HOME", "LOG");
             return View();
         }
     }

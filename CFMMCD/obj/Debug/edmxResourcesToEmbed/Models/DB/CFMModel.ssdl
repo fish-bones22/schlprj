@@ -16,10 +16,10 @@
     </Key>
     <Property Name="Audit_Id" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Date" Type="date" Nullable="false" />
-    <Property Name="Time" Type="time" Precision="7" Nullable="false" />
-    <Property Name="Page" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Page_Action" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Time" Type="nchar" MaxLength="5" Nullable="false" />
+    <Property Name="Page" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Page_Action" Type="nchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="CSHMIMP0">
@@ -92,28 +92,29 @@
       <PropertyRef Name="STORE_NO" />
     </Key>
     <Property Name="STORE_NO" Type="int" Nullable="false" />
-    <Property Name="STORE_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="OWNERSHIP" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="BREAKFAST_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="REGULAR_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="DC_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="MDS_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="PROJECT_GOLD_PRICE_TIER" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="BET" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PROFIT_CENTER" Type="int" Nullable="false" />
-    <Property Name="REGION" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="PROVINCE" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="LOCATION" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ADDRESS" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CITY" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="FRESH_OR_FROZEN" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="PAPER_OR_PLASTIC" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="nchar" MaxLength="20" Nullable="false" />
-    <Property Name="SIMPLOT_OR_MCCAIN" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="MCCORMICK_OR_GSF" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="STORE_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="OWNERSHIP" Type="nchar" MaxLength="10" />
+    <Property Name="BREAKFAST_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="REGULAR_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="DC_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="MDS_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="PROJECT_GOLD_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="BET" Type="nvarchar(max)" />
+    <Property Name="PROFIT_CENTER" Type="int" />
+    <Property Name="REGION" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROVINCE" Type="nvarchar" MaxLength="50" />
+    <Property Name="LOCATION" Type="nvarchar" MaxLength="50" />
+    <Property Name="ADDRESS" Type="nvarchar(max)" />
+    <Property Name="CITY" Type="nvarchar" MaxLength="50" />
+    <Property Name="FRESH_OR_FROZEN" Type="nchar" MaxLength="10" />
+    <Property Name="PAPER_OR_PLASTIC" Type="nchar" MaxLength="10" />
+    <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="nchar" MaxLength="20" />
+    <Property Name="SIMPLOT_OR_MCCAIN" Type="nchar" MaxLength="10" />
+    <Property Name="MCCORMICK_OR_GSF" Type="nchar" MaxLength="10" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
   <Association Name="FK_CSHMIMP0_ToTable">
     <End Role="CSHMIMP0_NP6" Type="Self.CSHMIMP0_NP6" Multiplicity="0..1" />

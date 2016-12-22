@@ -14,26 +14,16 @@ namespace CFMMCD.Controllers
         // GET: AuditLog
         public ActionResult Index()
         {
-            CurrentPageSession CPSession = new CurrentPageSession();
-            CPSession.Self = new CurrentPageSession.LinkString
-            {
-                Action = "Index",
-                Controller = "AuditLog"
-            };
-            CPSession.Parent = new CurrentPageSession.LinkString
-            {
-                Action = "Index",
-                Controller = "Home"
-            };
-            CPSession.Grandparent = new CurrentPageSession.LinkString
-            {
-                Action = "Login",
-                Controller = "Account"
-            };
-            Session["CurrentPage"] = CPSession;
+            // Validate log in and user access
+            UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            if (UASession == null || !UASession.AUL) return RedirectToAction("Login", "Account");
+
+            Session["CurrentPage"] = new CurrentPageSession("AUL", "HOME", "LOG");
+
             AuditLogViewModel ULViewModel = new AuditLogViewModel();
             AuditLogManager ALManager = new AuditLogManager();
             List<AuditLogViewModel> ALList = ALManager.GetAuditLog();
+
             ViewData["ModelList"] = ALList;
             return View();
         }

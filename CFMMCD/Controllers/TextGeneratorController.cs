@@ -14,23 +14,11 @@ namespace CFMMCD.Controllers
         // GET: TextGenerator
         public ActionResult Index()
         {
-            CurrentPageSession CPSession = new CurrentPageSession();
-            CPSession.Self = new CurrentPageSession.LinkString
-            {
-                Action = "Index",
-                Controller = "TextGenerator"
-            };
-            CPSession.Parent = new CurrentPageSession.LinkString
-            {
-                Action = "Index",
-                Controller = "Home"
-            };
-            CPSession.Grandparent = new CurrentPageSession.LinkString
-            {
-                Action = "Login",
-                Controller = "Account"
-            };
-            Session["CurrentPage"] = CPSession;
+            // Validate log in and user access
+            UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            if (UASession == null || !UASession.TEG) return RedirectToAction("Login", "Account");
+
+            Session["CurrentPage"] = new CurrentPageSession("TEG", "HOME", "LOG");
             return View();
         }
         [HttpPost]

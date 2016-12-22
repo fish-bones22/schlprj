@@ -12,19 +12,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Audit_Log">
-      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
-        <MappingFragment StoreEntitySet="Audit_Log">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
-          <ScalarProperty Name="Page" ColumnName="Page" />
-          <ScalarProperty Name="Time" ColumnName="Time" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Audit_Id" ColumnName="Audit_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CSHMIMP0">
       <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0">
         <MappingFragment StoreEntitySet="CSHMIMP0">
@@ -95,6 +82,7 @@
     <EntitySetMapping Name="Store_Profile">
       <EntityTypeMapping TypeName="CFMMCDModel.Store_Profile">
         <MappingFragment StoreEntitySet="Store_Profile">
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
           <ScalarProperty Name="MCCORMICK_OR_GSF" ColumnName="MCCORMICK_OR_GSF" />
           <ScalarProperty Name="SIMPLOT_OR_MCCAIN" ColumnName="SIMPLOT_OR_MCCAIN" />
           <ScalarProperty Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" ColumnName="SOFT_SERVE_OR_VANILLA_POWDER_MIX" />
@@ -118,6 +106,19 @@
           <ScalarProperty Name="OWNERSHIP" ColumnName="OWNERSHIP" />
           <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
           <ScalarProperty Name="STORE_NO" ColumnName="STORE_NO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit_Log">
+      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
+        <MappingFragment StoreEntitySet="Audit_Log">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
+          <ScalarProperty Name="Page" ColumnName="Page" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Audit_Id" ColumnName="Audit_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

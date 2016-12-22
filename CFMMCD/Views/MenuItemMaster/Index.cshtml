@@ -19,7 +19,7 @@
 </div>
 <!--Main content starts here-->
 <div class="form-horizontal">
-    @using (Html.BeginForm("MenuItemMaster", "MenuItemMaster", FormMethod.Post, new { }))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         <div class="container-fluid">

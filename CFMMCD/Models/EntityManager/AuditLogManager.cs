@@ -54,5 +54,19 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
+        public bool Audit(int UserID, DateTime Date_Time, string Page, string PageAction, string Name )
+        {
+            AuditLogViewModel ALViewModel = new AuditLogViewModel
+            {
+                Date = Date_Time.ToString("yyyy-MM-dd"),
+                Time = Date_Time.ToString("HH:mm"),
+                Name = Name,
+                Page = Page,
+                Page_Action = PageAction,
+                UserId = UserID
+            };
+            Audit(ALViewModel);
+            return true;
+        }
     }
 }

@@ -2,7 +2,11 @@
 
 @{
     ViewBag.Title = "Home";
-    UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+    UserAccessSession UASession = new UserAccessSession();
+    if  (Session["UserAccess"] != null)
+    {
+        UASession = (UserAccessSession)Session["UserAccess"];
+    }
 }
 
 <div class="header"><h2>@ViewBag.Title</h2></div>
@@ -14,7 +18,7 @@
 
                 @{ if (UASession.MIM)
                     {
-                        <li>@Html.ActionLink("Menu Item Master", "MenuItemMaster", "MenuItemMaster")</li>
+                        <li>@Html.ActionLink("Menu Item Master", "Index", "MenuItemMaster")</li>
                     }
                     if (UASession.RIM)
                     {
@@ -26,7 +30,7 @@
                     }
                     if (UASession.STP)
                     {
-                        <li>@Html.ActionLink("Store Profile", "StoreProfile", "StoreProfile")</li>
+                        <li>@Html.ActionLink("Store Profile", "Index", "StoreProfile")</li>
                     }
                     if (UASession.VEN)
                     {
@@ -43,7 +47,6 @@
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Create user account", "CreateAccount", "Account")</li>
                                 <li>@Html.ActionLink("Edit user account", "CreateAccount", "Account")</li>
-                                <li>@Html.ActionLink("Delete user account", "CreateAccount", "Account")</li>
                              </ul>
                          </li>
                     }
@@ -68,7 +71,7 @@
                             <ul class="dropdown-menu">
                                 @{ if (UASession.LOC)
                                     {
-                                        <li>@Html.ActionLink("Location", "Index", "Home");</li>
+                                        <li>@Html.ActionLink("Location", "Index", "Home")</li>
                                     }
                                     if (UASession.PRC)
                                     {

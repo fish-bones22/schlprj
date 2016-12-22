@@ -2,7 +2,6 @@
 <Schema Namespace="CFMMCDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="CFMMCDEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
-    <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
     <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
     <EntitySet Name="CSHMIMP0_NP6" EntityType="CFMMCDModel.CSHMIMP0_NP6" />
     <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
@@ -10,6 +9,7 @@
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
+    <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
   </EntityContainer>
   <EntityType Name="Account">
     <Key>
@@ -20,18 +20,6 @@
     <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="AdminStatus" Type="Byte" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Audit_Log">
-    <Key>
-      <PropertyRef Name="Audit_Id" />
-    </Key>
-    <Property Name="Audit_Id" Type="Int32" Nullable="false" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CSHMIMP0">
     <Key>
@@ -105,28 +93,29 @@
       <PropertyRef Name="STORE_NO" />
     </Key>
     <Property Name="STORE_NO" Type="Int32" Nullable="false" />
-    <Property Name="STORE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="OWNERSHIP" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="BREAKFAST_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="REGULAR_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="DC_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="MDS_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="PROJECT_GOLD_PRICE_TIER" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="BET" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="PROFIT_CENTER" Type="Int32" Nullable="false" />
-    <Property Name="REGION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PROVINCE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="LOCATION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ADDRESS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CITY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FRESH_OR_FROZEN" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="PAPER_OR_PLASTIC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="SIMPLOT_OR_MCCAIN" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="MCCORMICK_OR_GSF" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="STORE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OWNERSHIP" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="BREAKFAST_PRICE_TIER" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="REGULAR_PRICE_TIER" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="DC_PRICE_TIER" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="MDS_PRICE_TIER" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="PROJECT_GOLD_PRICE_TIER" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="BET" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PROFIT_CENTER" Type="Int32" />
+    <Property Name="REGION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PROVINCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LOCATION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FRESH_OR_FROZEN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PAPER_OR_PLASTIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="SIMPLOT_OR_MCCAIN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MCCORMICK_OR_GSF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
   </EntityType>
   <Association Name="FK_CSHMIMP0_ToTable">
     <End Type="CFMMCDModel.CSHMIMP0_NP6" Role="CSHMIMP0_NP6" Multiplicity="0..1" />
@@ -140,4 +129,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Audit_Log">
+    <Key>
+      <PropertyRef Name="Audit_Id" />
+    </Key>
+    <Property Name="Audit_Id" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Time" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

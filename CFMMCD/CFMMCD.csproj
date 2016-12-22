@@ -255,8 +255,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\CreateAccount.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\MenuItemMaster\MenuItemMaster.cshtml" />
-    <Content Include="Views\StoreProfile\StoreProfile.cshtml" />
+    <Content Include="Views\MenuItemMaster\Index.cshtml" />
+    <Content Include="Views\StoreProfile\Index.cshtml" />
     <Content Include="Views\TextGenerator\Index.cshtml" />
     <Content Include="Views\AuditLog\Index.cshtml" />
     <None Include="Web.Debug.config">

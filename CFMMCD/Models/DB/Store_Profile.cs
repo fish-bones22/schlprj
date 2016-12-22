@@ -26,7 +26,7 @@ namespace CFMMCD.Models.DB
         public string MCCAFE_BISTRO_PRICE_TIER { get; set; }
         public string PROJECT_GOLD_PRICE_TIER { get; set; }
         public string BET { get; set; }
-        public int PROFIT_CENTER { get; set; }
+        public Nullable<int> PROFIT_CENTER { get; set; }
         public string REGION { get; set; }
         public string PROVINCE { get; set; }
         public string LOCATION { get; set; }
@@ -37,5 +37,6 @@ namespace CFMMCD.Models.DB
         public string SOFT_SERVE_OR_VANILLA_POWDER_MIX { get; set; }
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
+        public string STATUS { get; set; }
     }
 }
