@@ -28,6 +28,13 @@
           <Property Name="Page_Action" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Breakfast_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="CSHMIMP0">
           <Key>
             <PropertyRef Name="MIMMIC" />
@@ -93,6 +100,13 @@
           <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
           <Property Name="MIMLON" Type="nchar" MaxLength="16" />
         </EntityType>
+        <EntityType Name="Dessert_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="INVRIMP0">
           <Key>
             <PropertyRef Name="RIMRIC" />
@@ -144,19 +158,47 @@
           <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
           <Property Name="STATUS" Type="nchar" MaxLength="1" />
         </EntityType>
-        <EntityType Name="Price_Tier">
+        <EntityType Name="McCafe_Bistro_Price_Tier">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Dessers_Price_Tier" Type="nchar" MaxLength="1" />
-          <Property Name="Breakfast_Price_Tier" Type="nchar" MaxLength="1" />
-          <Property Name="Regular_Price_Tier" Type="nchar" MaxLength="1" />
-          <Property Name="McCafe_Level_2_Price_Tier" Type="nchar" MaxLength="1" />
-          <Property Name="McCafe_Level_3_Price_Tier" Type="nchar" MaxLength="1" />
-          <Property Name="McCafe_Bistro_Price_Tier" Type="nchar" MaxLength="1" />
-          <Property Name="MDS_Price_Tier" Type="nchar" MaxLength="1" />
-          <Property Name="Project_Gold_Price_Tier" Type="nchar" MaxLength="1" />
+          <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="McCafe_Level_2_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="McCafe_Level_3_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="MDS_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Project_Gold_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Regular_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="Store_Profile">
           <Key>
@@ -202,10 +244,17 @@
         <EntityContainer Name="CFMMCDModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Breakfast_Price_Tier" EntityType="Self.Breakfast_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Price_Tier" EntityType="Self.Price_Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
             <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
@@ -239,6 +288,13 @@
           <Property Name="Page" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Page_Action" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Breakfast_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="CSHMIMP0">
           <Key>
@@ -307,6 +363,13 @@
           <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="CSHMIMP0" Relationship="Self.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0_NP6" ToRole="CSHMIMP0" />
         </EntityType>
+        <EntityType Name="Dessert_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
         <EntityType Name="INVRIMP0">
           <Key>
             <PropertyRef Name="RIMRIC" />
@@ -358,19 +421,47 @@
           <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityType Name="Price_Tier">
+        <EntityType Name="McCafe_Bistro_Price_Tier">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Dessers_Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="Breakfast_Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="Regular_Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="McCafe_Level_2_Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="McCafe_Level_3_Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="McCafe_Bistro_Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MDS_Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="Project_Gold_Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="McCafe_Level_2_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="McCafe_Level_3_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MDS_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Project_Gold_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Regular_Price_Tier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Store_Profile">
           <Key>
@@ -413,13 +504,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CFMMCDEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CFMMCDEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" />
+          <EntitySet Name="Breakfast_Price_Tier" EntityType="Self.Breakfast_Price_Tier" />
           <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" />
           <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" />
+          <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" />
           <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" />
-          <EntitySet Name="Price_Tier" EntityType="Self.Price_Tier" />
+          <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" />
+          <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" />
+          <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" />
+          <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" />
+          <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" />
+          <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" />
           <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" />
           <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
             <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
@@ -431,7 +529,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities1">
+        <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities2">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="CFMMCDModel.Account">
               <MappingFragment StoreEntitySet="Accounts">
@@ -454,6 +552,14 @@
                 <ScalarProperty Name="Page" ColumnName="Page" />
                 <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Breakfast_Price_Tier">
+            <EntityTypeMapping TypeName="CFMMCDModel.Breakfast_Price_Tier">
+              <MappingFragment StoreEntitySet="Breakfast_Price_Tier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -524,6 +630,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Dessert_Price_Tier">
+            <EntityTypeMapping TypeName="CFMMCDModel.Dessert_Price_Tier">
+              <MappingFragment StoreEntitySet="Dessert_Price_Tier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="INVRIMP0">
             <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
               <MappingFragment StoreEntitySet="INVRIMP0">
@@ -576,18 +690,51 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Price_Tier">
-            <EntityTypeMapping TypeName="CFMMCDModel.Price_Tier">
-              <MappingFragment StoreEntitySet="Price_Tier">
+          <EntitySetMapping Name="McCafe_Bistro_Price_Tier">
+            <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Bistro_Price_Tier">
+              <MappingFragment StoreEntitySet="McCafe_Bistro_Price_Tier">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Dessers_Price_Tier" ColumnName="Dessers_Price_Tier" />
-                <ScalarProperty Name="Breakfast_Price_Tier" ColumnName="Breakfast_Price_Tier" />
-                <ScalarProperty Name="Regular_Price_Tier" ColumnName="Regular_Price_Tier" />
-                <ScalarProperty Name="McCafe_Level_2_Price_Tier" ColumnName="McCafe_Level_2_Price_Tier" />
-                <ScalarProperty Name="McCafe_Level_3_Price_Tier" ColumnName="McCafe_Level_3_Price_Tier" />
-                <ScalarProperty Name="McCafe_Bistro_Price_Tier" ColumnName="McCafe_Bistro_Price_Tier" />
-                <ScalarProperty Name="MDS_Price_Tier" ColumnName="MDS_Price_Tier" />
-                <ScalarProperty Name="Project_Gold_Price_Tier" ColumnName="Project_Gold_Price_Tier" />
+                <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="McCafe_Level_2_Price_Tier">
+            <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Level_2_Price_Tier">
+              <MappingFragment StoreEntitySet="McCafe_Level_2_Price_Tier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="McCafe_Level_3_Price_Tier">
+            <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Level_3_Price_Tier">
+              <MappingFragment StoreEntitySet="McCafe_Level_3_Price_Tier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MDS_Price_Tier">
+            <EntityTypeMapping TypeName="CFMMCDModel.MDS_Price_Tier">
+              <MappingFragment StoreEntitySet="MDS_Price_Tier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Gold_Price_Tier">
+            <EntityTypeMapping TypeName="CFMMCDModel.Project_Gold_Price_Tier">
+              <MappingFragment StoreEntitySet="Project_Gold_Price_Tier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regular_Price_Tier">
+            <EntityTypeMapping TypeName="CFMMCDModel.Regular_Price_Tier">
+              <MappingFragment StoreEntitySet="Regular_Price_Tier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -203,6 +203,9 @@
     <Compile Include="Models\DB\Audit_Log.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\Breakfast_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\CFMModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -224,10 +227,28 @@
     <Compile Include="Models\DB\CSHMIMP0_NP6.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\Dessert_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\INVRIMP0.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB\Price_Tier.cs">
+    <Compile Include="Models\DB\McCafe_Bistro_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\McCafe_Level_2_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\McCafe_Level_3_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\MDS_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Project_Gold_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Regular_Price_Tier.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\Store_Profile.cs">

@@ -4,14 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c968dc01efc948439f4acfa38a14b52a" Name="Diagram1">
+      <Diagram DiagramId="a79f81dddf474f8f934b7caf991f84f2" Name="Diagram1">
         <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.Breakfast_Price_Tier" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0_NP6" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CFMMCDModel.Price_Tier" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.Dessert_Price_Tier" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Bistro_Price_Tier" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_2_Price_Tier" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_3_Price_Tier" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.MDS_Price_Tier" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.Project_Gold_Price_Tier" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.Regular_Price_Tier" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
