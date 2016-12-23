@@ -14,8 +14,9 @@ namespace CFMMCD.Models.DB
     
     public partial class Audit_Log
     {
-        public int Audit_Id { get; set; }
-        public int UserId { get; set; }
+        public int Id { get; set; }
+        public string ItemId { get; set; }
+        public string UserId { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
         public string Page { get; set; }

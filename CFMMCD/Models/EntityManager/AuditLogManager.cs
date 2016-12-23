@@ -17,13 +17,14 @@ namespace CFMMCD.Models.EntityManager
                 foreach (Audit_Log al in db.Audit_Log)
                 {
                     AuditLogViewModel ALViewModel = new AuditLogViewModel();
-                    ALViewModel.Audit_Id = al.Audit_Id;
-                    ALViewModel.Date = al.Date;
-                    ALViewModel.Name = al.Name;
-                    ALViewModel.Page = al.Page;
-                    ALViewModel.Page_Action = al.Page_Action;
-                    ALViewModel.Time = al.Time;
+
                     ALViewModel.UserId = al.UserId;
+                    ALViewModel.Date = al.Date;
+                    ALViewModel.Time = al.Time;
+                    ALViewModel.Page = al.Page;
+                    ALViewModel.ItemId = al.ItemId;
+                    ALViewModel.Name = al.Name;
+                    ALViewModel.Page_Action = al.Page_Action;
                     ALList.Add(ALViewModel);
                 }
                 return ALList;
@@ -34,13 +35,14 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 Audit_Log alRow = new Audit_Log();
-                alRow.Audit_Id = int.Parse(DateTime.Now.ToString("yyMMdd")) + int.Parse(DateTime.Now.ToString("HHmmss")) + ( new Random().Next(9999));
-                alRow.Name = ALViewModel.Name;
-                alRow.Page = ALViewModel.Page;
-                alRow.Page_Action = ALViewModel.Page_Action;
-                alRow.Time = ALViewModel.Time;
+                alRow.Id = int.Parse(DateTime.Now.ToString("yyMMdd")) + new Random().Next(999) + new Random().Next(999); // To be changed soon
                 alRow.UserId = ALViewModel.UserId;
                 alRow.Date = ALViewModel.Date;
+                alRow.Time = ALViewModel.Time;
+                alRow.Page = ALViewModel.Page;
+                alRow.ItemId = ALViewModel.ItemId;
+                alRow.Page_Action = ALViewModel.Page_Action;
+                alRow.Name = ALViewModel.Name;
 
                 try
                 {
@@ -54,16 +56,18 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-        public bool Audit(int UserID, DateTime Date_Time, string Page, string PageAction, string Name )
+                        // Username, Date and time, Page audited, Action made, Id of affected item, Name of affected item
+        public bool Audit(string UserName, DateTime Date_Time, string Page, string PageAction, string ItemId, string Name )
         {
             AuditLogViewModel ALViewModel = new AuditLogViewModel
             {
+                UserId = UserName,
                 Date = Date_Time.ToString("yyyy-MM-dd"),
-                Time = Date_Time.ToString("HH:mm"),
+                Time = Date_Time.ToString("hh:mm"),
                 Name = Name,
                 Page = Page,
                 Page_Action = PageAction,
-                UserId = UserID
+                ItemId = ItemId
             };
             Audit(ALViewModel);
             return true;

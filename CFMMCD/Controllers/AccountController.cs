@@ -67,19 +67,19 @@ namespace CFMMCD.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateAccount(CreateAccountViewModel account)
+        public ActionResult CreateAccount(CreateAccountViewModel CAViewModel)
         {
             if(ModelState.IsValid)
             {
                 AccountManager accMan = new AccountManager();
-                if (!accMan.IsUsernameExist(account.Username))
+                if (!accMan.IsUsernameExist(CAViewModel.Username))
                 {
-                    accMan.CreateUserAccount(account);
-                    FormsAuthentication.SetAuthCookie(account.Username, false);
+                    accMan.CreateUserAccount(CAViewModel);
+                    FormsAuthentication.SetAuthCookie(CAViewModel.Username, false);
                     TempData["SuccessMessage"] = "Successfuly created account";
                     UserSession us = (UserSession)Session["User"];
                     // Add to audit log
-                    new AuditLogManager().Audit(us.UserID, DateTime.Now, "USERACCESS", "CREATE", us.Username);
+                    new AuditLogManager().Audit(us.Username, DateTime.Now, "User Access page", "CREATE", CAViewModel.Username, CAViewModel.Username);
                 }
                 else
                     ModelState.AddModelError("", "Username already taken");

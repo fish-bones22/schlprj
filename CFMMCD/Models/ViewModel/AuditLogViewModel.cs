@@ -7,8 +7,8 @@ namespace CFMMCD.Models.ViewModel
 {
     public class AuditLogViewModel
     {
-        public int Audit_Id { get; set; }
-        public int UserId { get; set; }
+        public string ItemId { get; set; }
+        public string UserId { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
         public string Page { get; set; }

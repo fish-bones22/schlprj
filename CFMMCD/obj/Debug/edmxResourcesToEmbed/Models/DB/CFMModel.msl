@@ -109,19 +109,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Audit_Log">
-      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
-        <MappingFragment StoreEntitySet="Audit_Log">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
-          <ScalarProperty Name="Page" ColumnName="Page" />
-          <ScalarProperty Name="Time" ColumnName="Time" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Audit_Id" ColumnName="Audit_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="INVRIMP0">
       <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
         <MappingFragment StoreEntitySet="INVRIMP0">
@@ -171,6 +158,20 @@
           <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
           <ScalarProperty Name="RIMVPC" ColumnName="RIMVPC" />
           <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit_Log">
+      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
+        <MappingFragment StoreEntitySet="Audit_Log">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
+          <ScalarProperty Name="Page" ColumnName="Page" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

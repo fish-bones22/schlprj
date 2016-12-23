@@ -9,8 +9,8 @@
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
-    <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
     <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
+    <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
   </EntityContainer>
   <EntityType Name="Account">
     <Key>
@@ -130,18 +130,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Audit_Log">
-    <Key>
-      <PropertyRef Name="Audit_Id" />
-    </Key>
-    <Property Name="Audit_Id" Type="Int32" Nullable="false" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="Date" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Time" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
-    <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="INVRIMP0">
     <Key>
       <PropertyRef Name="RIMRIC" />
@@ -175,7 +163,7 @@
     <Property Name="RIMUS3" Type="Int32" />
     <Property Name="RIMUS4" Type="Int32" />
     <Property Name="RIMUS5" Type="Int32" />
-    <Property Name="RIMUSX" Type="Int32" />
+    <Property Name="RIMUSX" Type="Double" />
     <Property Name="RIMMSD" Type="Int32" />
     <Property Name="RIMMSL" Type="Int32" />
     <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
@@ -192,5 +180,18 @@
     <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
     <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
     <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Audit_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Time" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

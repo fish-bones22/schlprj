@@ -12,10 +12,11 @@
   </EntityType>
   <EntityType Name="Audit_Log">
     <Key>
-      <PropertyRef Name="Audit_Id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Audit_Id" Type="int" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Date" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="Time" Type="nchar" MaxLength="5" Nullable="false" />
     <Property Name="Page" Type="nchar" MaxLength="20" Nullable="false" />
@@ -120,7 +121,7 @@
     <Property Name="RIMUS3" Type="int" />
     <Property Name="RIMUS4" Type="int" />
     <Property Name="RIMUS5" Type="int" />
-    <Property Name="RIMUSX" Type="int" />
+    <Property Name="RIMUSX" Type="float" />
     <Property Name="RIMMSD" Type="int" />
     <Property Name="RIMMSL" Type="int" />
     <Property Name="RIMLA1" Type="nchar" MaxLength="1" />

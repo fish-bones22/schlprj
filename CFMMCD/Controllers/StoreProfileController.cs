@@ -11,7 +11,7 @@ namespace CFMMCD.Controllers
 {
     public class StoreProfileController : Controller
     {
-        UserSession us;
+        UserSession user;
         // GET: StoreProfile
         public ActionResult Index()
         {
@@ -19,7 +19,7 @@ namespace CFMMCD.Controllers
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null || !UASession.STP) return RedirectToAction("Login", "Account");
 
-            us = (UserSession)Session["User"];
+            user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("STP", "HOME", "LOG");
             return View(new StoreProfileViewModel());
         }
@@ -40,7 +40,7 @@ namespace CFMMCD.Controllers
         {
             string PageAction = "";
             bool result = false;
-            us = (UserSession)Session["User"];
+            user = (UserSession)Session["User"];
 
             if (command == "Save")
             {
@@ -58,7 +58,7 @@ namespace CFMMCD.Controllers
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(us.UserID, DateTime.Now, "STOREPROFILE", PageAction, us.Username);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Raw Item Master", PageAction, SPViewModel.STORE_NO, SPViewModel.STORE_NAME);
             }
             else TempData["ErrorMessage"] = PageAction + " failed";
             return RedirectToAction("Index");
