@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Home";
     UserAccessSession UASession = new UserAccessSession();
-    if  (Session["UserAccess"] != null)
+    if (Session["UserAccess"] != null)
     {
         UASession = (UserAccessSession)Session["UserAccess"];
     }
@@ -42,13 +42,13 @@
                     }
                     if (UASession.UAP)
                     {
-                        <li class="dropdown-submenu">
-                            <a class="test" tabindex="-1" href="#">User access <span class="caret-right"></span></a>
+                        <li class="menu-item dropdown dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">User access </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Create user account", "CreateAccount", "Account")</li>
                                 <li>@Html.ActionLink("Edit user account", "CreateAccount", "Account")</li>
-                             </ul>
-                         </li>
+                            </ul>
+                        </li>
                     }
                     if (UASession.MIP)
                     {
@@ -62,60 +62,63 @@
                     {
                         <li>@Html.ActionLink("Audit log", "Index", "AuditLog")</li>
                     }
+                    if (UASession.TEG)
+                    {
+                        <li>@Html.ActionLink("Text generation", "Index", "TextGenerator")</li>
+                    }
                     if (UASession.REG)
                     {
                         <li>@Html.ActionLink("Report generation", "Index", "Home")</li>
                     }
-                        <li class="dropdown-submenu">
-                            <a class="test" tabindex="-1" href="#">Table Maintenance <span class="caret-right"></span></a>
-                            <ul class="dropdown-menu">
-                                @{ if (UASession.LOC)
-                                    {
-                                        <li>@Html.ActionLink("Location", "Index", "Home")</li>
-                                    }
-                                    if (UASession.PRC)
-                                    {
-                                        <li>@Html.ActionLink("Profit center", "Index", "Home")</li>
-                                    }
-                                    if (UASession.OWN)
-                                    {
-                                        <li>@Html.ActionLink("Ownership", "Index", "Home")</li>
-                                    }
-                                    if (UASession.BUE)
-                                    {
-                                        <li>@Html.ActionLink("Business Extension", "Index", "Home")</li>
-                                    }
-                                    if (UASession.TIP)
-                                    {
-                                        <li class="dropdown-submenu">
-                                            <a class="test" href="#">Tier Pages <span class="caret-right"></span></a>
-                                            <ul class="dropdown-menu">
-                                                <li>@Html.ActionLink("Dessert Enterprise Tier", "Index", "Home")</li>
-                                                <li>@Html.ActionLink("Breakfast Price Tier", "Index", "Home")</li>
-                                                <li>@Html.ActionLink("Regular Price Tier", "Index", "Home")</li>
-                                                <li>@Html.ActionLink("McCafe level 2 Price Tier", "Index", "Home")</li>
-                                                <li>@Html.ActionLink("McCafe level 3 Price Tier", "Index", "Home")</li>
-                                                <li>@Html.ActionLink("McCafe BISTRO Price Tier", "Index", "Home")</li>
-                                                <li>@Html.ActionLink("MDS Price Tier", "Index", "Home")</li>
-                                                <li>@Html.ActionLink("Project Gold Price Tier", "Index", "Home")</li>
-                                            </ul>
-                                        </li>
-                                    }
+                    <li class="menu-item dropdown dropdown-submenu">
+                        <a class="test" tabindex="-1" href="#">Table Maintenance</a>
+                        <ul class="dropdown-menu">
+                            @{ if (UASession.LOC)
+                                {
+                                    <li>@Html.ActionLink("Location", "Index", "Home")</li>
                                 }
-                            </ul>
-                        </li>  
-                    }
+                                if (UASession.PRC)
+                                {
+                                    <li>@Html.ActionLink("Profit center", "Index", "Home")</li>
+                                }
+                                if (UASession.OWN)
+                                {
+                                    <li>@Html.ActionLink("Ownership", "Index", "Home")</li>
+                                }
+                                if (UASession.BUE)
+                                {
+                                    <li>@Html.ActionLink("Business Extension", "Index", "Home")</li>
+                                }
+                                if (UASession.TIP)
+                                {
+                                    <li class="menu item dropdown dropdown-submenu">
+                                        <a class="test" href="#">Tier Page</a>
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("Dessert Enterprise Tier", "Index", "Home")</li>
+                                            <li>@Html.ActionLink("Breakfast Price Tier", "Index", "Home")</li>
+                                            <li>@Html.ActionLink("Regular Price Tier", "Index", "Home")</li>
+                                            <li>@Html.ActionLink("McCafe level 2 Price Tier", "Index", "Home")</li>
+                                            <li>@Html.ActionLink("McCafe level 3 Price Tier", "Index", "Home")</li>
+                                            <li>@Html.ActionLink("McCafe BISTRO Price Tier", "Index", "Home")</li>
+                                            <li>@Html.ActionLink("MDS Price Tier", "Index", "Home")</li>
+                                            <li>@Html.ActionLink("Project Gold Price Tier", "Index", "Home")</li>
+                                        </ul>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
             </ul>
         </div>
     </div>
 </div>
 <!-- Light JQuery for Dropdown behavior-->
 <script>
-$(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
+    $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+        $(this).parent().addClass('open');
+    });
 </script>

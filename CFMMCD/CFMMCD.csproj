@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CFMMCD</RootNamespace>
     <AssemblyName>CFMMCD</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -84,6 +85,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -92,16 +94,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -191,14 +191,20 @@
     <Compile Include="Controllers\AuditLogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuItemMasterController.cs" />
+    <Compile Include="Controllers\RawItemMasterController.cs" />
     <Compile Include="Controllers\StoreProfileController.cs" />
     <Compile Include="Controllers\TextGeneratorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\INVRIMP0.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityManager\AuditLogManager.cs" />
+    <Compile Include="Models\EntityManager\RawItemMasterManager.cs" />
     <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
+    <Compile Include="Models\ViewModel\RawItemMasterViewModel.cs" />
     <Compile Include="Models\ViewModel\TextGeneratorViewModel.cs" />
     <Compile Include="Sessions\SessionData.cs" />
     <Compile Include="Models\DB\Account.cs">
@@ -259,6 +265,7 @@
     <Content Include="Views\StoreProfile\Index.cshtml" />
     <Content Include="Views\TextGenerator\Index.cshtml" />
     <Content Include="Views\AuditLog\Index.cshtml" />
+    <Content Include="Views\RawItemMaster\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

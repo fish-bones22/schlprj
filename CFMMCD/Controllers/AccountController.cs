@@ -13,8 +13,7 @@ namespace CFMMCD.Controllers
     public class AccountController : Controller
     {
         public ActionResult Login()
-        {
-            // Reset Sessions
+        {   // Reset Sessions
             if (Session["User"] != null)
                 Session["User"] = null;
             if (Session["UserAccess"] != null)
@@ -59,8 +58,7 @@ namespace CFMMCD.Controllers
             return View();
         }
         public ActionResult CreateAccount()
-        {
-            // Validate log in and user access
+        {   // Validate log in and user access
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null || !UASession.UAP) return RedirectToAction("Login", "Account");

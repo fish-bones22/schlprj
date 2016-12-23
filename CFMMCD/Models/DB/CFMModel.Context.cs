@@ -30,5 +30,6 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<CSHMIMP0_NP6> CSHMIMP0_NP6 { get; set; }
         public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<Audit_Log> Audit_Log { get; set; }
+        public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
     }
 }

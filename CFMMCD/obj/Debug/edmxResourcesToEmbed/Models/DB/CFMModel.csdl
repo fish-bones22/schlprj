@@ -10,6 +10,7 @@
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
     <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
+    <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
   </EntityContainer>
   <EntityType Name="Account">
     <Key>
@@ -140,5 +141,56 @@
     <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
     <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="INVRIMP0">
+    <Key>
+      <PropertyRef Name="RIMRIC" />
+    </Key>
+    <Property Name="RIMRIC" Type="Int32" Nullable="false" />
+    <Property Name="RIMVPC" Type="Int32" />
+    <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUPC" Type="Int32" />
+    <Property Name="RIMSUQ" Type="Int32" />
+    <Property Name="RIMLAY" Type="Int32" />
+    <Property Name="RIMCPR" Type="Int32" />
+    <Property Name="RIMCPN" Type="Int32" />
+    <Property Name="RIMPDT" Type="DateTime" Precision="0" />
+    <Property Name="RIMPVN" Type="Int32" />
+    <Property Name="RIMSVN" Type="Int32" />
+    <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUSF" Type="Int32" />
+    <Property Name="RIMSDP" Type="Int32" />
+    <Property Name="RIMUS1" Type="Int32" />
+    <Property Name="RIMUS2" Type="Int32" />
+    <Property Name="RIMUS3" Type="Int32" />
+    <Property Name="RIMUS4" Type="Int32" />
+    <Property Name="RIMUS5" Type="Int32" />
+    <Property Name="RIMUSX" Type="Int32" />
+    <Property Name="RIMMSD" Type="Int32" />
+    <Property Name="RIMMSL" Type="Int32" />
+    <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLP1" Type="Int32" />
+    <Property Name="RIMLP2" Type="Int32" />
+    <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMDAT" Type="DateTime" Precision="0" />
+    <Property Name="RIMEDT" Type="DateTime" Precision="0" />
+    <Property Name="RIMFLG" Type="Boolean" />
+    <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLIN" Type="Int32" />
+    <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

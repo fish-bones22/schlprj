@@ -87,6 +87,57 @@
     <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
     <Property Name="MIMLON" Type="nchar" MaxLength="16" />
   </EntityType>
+  <EntityType Name="INVRIMP0">
+    <Key>
+      <PropertyRef Name="RIMRIC" />
+    </Key>
+    <Property Name="RIMRIC" Type="int" Nullable="false" />
+    <Property Name="RIMVPC" Type="int" />
+    <Property Name="RIMRID" Type="nchar" MaxLength="20" />
+    <Property Name="RIMRIG" Type="nchar" MaxLength="2" />
+    <Property Name="RIMTEM" Type="nchar" MaxLength="3" />
+    <Property Name="RIMPGR" Type="nchar" MaxLength="10" />
+    <Property Name="RIMPIS" Type="nchar" MaxLength="1" />
+    <Property Name="RIMBVP" Type="nchar" MaxLength="3" />
+    <Property Name="RIMBZP" Type="nchar" MaxLength="3" />
+    <Property Name="RIMUMC" Type="nchar" MaxLength="3" />
+    <Property Name="RIMUPC" Type="int" />
+    <Property Name="RIMSUQ" Type="int" />
+    <Property Name="RIMLAY" Type="int" />
+    <Property Name="RIMCPR" Type="int" />
+    <Property Name="RIMCPN" Type="int" />
+    <Property Name="RIMPDT" Type="date" />
+    <Property Name="RIMPVN" Type="int" />
+    <Property Name="RIMSVN" Type="int" />
+    <Property Name="RIMCWC" Type="nchar" MaxLength="1" />
+    <Property Name="RIMPRO" Type="nchar" MaxLength="1" />
+    <Property Name="RIMSE4" Type="nchar" MaxLength="1" />
+    <Property Name="RIMERT" Type="nchar" MaxLength="1" />
+    <Property Name="RIMUSF" Type="int" />
+    <Property Name="RIMSDP" Type="int" />
+    <Property Name="RIMUS1" Type="int" />
+    <Property Name="RIMUS2" Type="int" />
+    <Property Name="RIMUS3" Type="int" />
+    <Property Name="RIMUS4" Type="int" />
+    <Property Name="RIMUS5" Type="int" />
+    <Property Name="RIMUSX" Type="int" />
+    <Property Name="RIMMSD" Type="int" />
+    <Property Name="RIMMSL" Type="int" />
+    <Property Name="RIMLA1" Type="nchar" MaxLength="1" />
+    <Property Name="RIMLA2" Type="nchar" MaxLength="1" />
+    <Property Name="RIMLP1" Type="int" />
+    <Property Name="RIMLP2" Type="int" />
+    <Property Name="RIMSTA" Type="nchar" MaxLength="1" />
+    <Property Name="RIMUSR" Type="nchar" MaxLength="3" />
+    <Property Name="RIMDAT" Type="date" />
+    <Property Name="RIMEDT" Type="date" />
+    <Property Name="RIMFLG" Type="bit" />
+    <Property Name="RIMORD" Type="nchar" MaxLength="1" />
+    <Property Name="RIMLIN" Type="int" />
+    <Property Name="RIMADE" Type="nchar" MaxLength="1" />
+    <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
+  </EntityType>
   <EntityType Name="Store_Profile">
     <Key>
       <PropertyRef Name="STORE_NO" />
@@ -133,6 +184,7 @@
     <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
