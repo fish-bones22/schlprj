@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cb8038fffaa548f484d80a0eccf07b11" Name="Diagram1">
-        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0" Width="1.5" PointX="4" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0_NP6" Width="1.5" PointX="2.375" PointY="3.5" />
-        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="5.625" PointY="0.75" />
-        <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="7.25" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="2.375" PointY="0.75" />
+      <Diagram DiagramId="c968dc01efc948439f4acfa38a14b52a" Name="Diagram1">
+        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0_NP6" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.Price_Tier" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
