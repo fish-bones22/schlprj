@@ -189,6 +189,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuditLogController.cs" />
+    <Compile Include="Controllers\BreakfastPriceTierController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuItemMasterController.cs" />
     <Compile Include="Controllers\RawItemMasterController.cs" />
@@ -255,9 +256,11 @@
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityManager\AuditLogManager.cs" />
+    <Compile Include="Models\EntityManager\BreakfastPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\RawItemMasterManager.cs" />
     <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
+    <Compile Include="Models\ViewModel\BreakfastPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemMasterViewModel.cs" />
     <Compile Include="Models\ViewModel\TextGeneratorViewModel.cs" />
     <Compile Include="Sessions\SessionData.cs" />
@@ -302,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SMS\SMSWEBCFM\" />
+    <Folder Include="Views\BreakfastPriceTier\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
