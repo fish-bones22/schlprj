@@ -21,7 +21,7 @@ namespace CFMMCD.Controllers
 
             user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("BPT", "HOME", "LOG");
-            return View(new StoreProfileViewModel());
+            return View(new BreakfastPriceTierViewModel());
         }
         public ActionResult UpdateDelete(BreakfastPriceTierViewModel BPTViewModel, string command)
         {

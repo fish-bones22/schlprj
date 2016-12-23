@@ -23,6 +23,13 @@
     <Property Name="Page_Action" Type="nchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Breakfast_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
   <EntityType Name="CSHMIMP0">
     <Key>
       <PropertyRef Name="MIMMIC" />
@@ -88,6 +95,13 @@
     <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
     <Property Name="MIMLON" Type="nchar" MaxLength="16" />
   </EntityType>
+  <EntityType Name="Dessert_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
   <EntityType Name="INVRIMP0">
     <Key>
       <PropertyRef Name="RIMRIC" />
@@ -139,6 +153,48 @@
     <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="McCafe_Bistro_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="McCafe_Level_2_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="McCafe_Level_3_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="MDS_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Project_Gold_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Regular_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
   <EntityType Name="Store_Profile">
     <Key>
       <PropertyRef Name="STORE_NO" />
@@ -183,9 +239,17 @@
   <EntityContainer Name="CFMMCDModelStoreContainer">
     <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Breakfast_Price_Tier" EntityType="Self.Breakfast_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />

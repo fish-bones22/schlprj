@@ -190,9 +190,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuditLogController.cs" />
     <Compile Include="Controllers\BreakfastPriceTierController.cs" />
+    <Compile Include="Controllers\DessertPriceTierController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\McCafeBistroPriceTierController.cs" />
+    <Compile Include="Controllers\McCafeLevel2PriceTierController.cs" />
+    <Compile Include="Controllers\McCafeLevel3PriceTierController.cs" />
+    <Compile Include="Controllers\MDSPriceTierController.cs" />
     <Compile Include="Controllers\MenuItemMasterController.cs" />
+    <Compile Include="Controllers\ProjectGoldPriceTierController.cs" />
     <Compile Include="Controllers\RawItemMasterController.cs" />
+    <Compile Include="Controllers\RegularPriceTierController.cs" />
     <Compile Include="Controllers\StoreProfileController.cs" />
     <Compile Include="Controllers\TextGeneratorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -257,11 +264,25 @@
     </Compile>
     <Compile Include="Models\EntityManager\AuditLogManager.cs" />
     <Compile Include="Models\EntityManager\BreakfastPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\DessertPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\McCafeBistroPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\McCafeLevel2PriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\McCafeLevel3PriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\MDSPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\ProjectGoldPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\RawItemMasterManager.cs" />
+    <Compile Include="Models\EntityManager\RegularPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
     <Compile Include="Models\ViewModel\BreakfastPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\DessertPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\McCafeBistroPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\McCafeLevel2PriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\McCafeLevel3PriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\MDSPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProjectGoldPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemMasterViewModel.cs" />
+    <Compile Include="Models\ViewModel\RegularPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\TextGeneratorViewModel.cs" />
     <Compile Include="Sessions\SessionData.cs" />
     <Compile Include="Models\EntityManager\AccountManager.cs" />
@@ -306,6 +327,13 @@
   <ItemGroup>
     <Folder Include="SMS\SMSWEBCFM\" />
     <Folder Include="Views\BreakfastPriceTier\" />
+    <Folder Include="Views\DessertPriceTier\" />
+    <Folder Include="Views\McCafeBistroPriceTier\" />
+    <Folder Include="Views\McCafeLevel2PriceTier\" />
+    <Folder Include="Views\McCafeLevel3PriceTier\" />
+    <Folder Include="Views\MDSPriceTier\" />
+    <Folder Include="Views\ProjectGoldPriceTier\" />
+    <Folder Include="Views\RegularPriceTier\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
