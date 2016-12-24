@@ -18,9 +18,9 @@ namespace CFMMCD.Controllers
         public ActionResult Index()
         {
             // SearchItemSelected is assigned value at DisplaySearchResult
-            if (TempData["SearchItemSelected"] == null)
-                return View(new RawItemMasterViewModel());
             RawItemMasterViewModel RIMViewModel = (RawItemMasterViewModel)TempData["SearchItemSelected"];
+            if (RIMViewModel == null)
+                RIMViewModel = new RawItemMasterViewModel();
             return View(RIMViewModel);
         }
         [HttpPost]
