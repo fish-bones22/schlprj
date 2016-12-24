@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\JD Reyes\Documents\Visual Studio 2015\Projects\CFMMCD\CFMMCD\Models\DB\CFMModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\Models\DB\CFMModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

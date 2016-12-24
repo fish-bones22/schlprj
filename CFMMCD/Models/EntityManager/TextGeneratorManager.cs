@@ -24,9 +24,9 @@ namespace CFMMCD.Models.EntityManager
                 string StoreName = db.Store_Profile.First().STORE_NAME;
                 string StoreNo = db.Store_Profile.First().STORE_NO.ToString();
                 // Pad zeroes to left side of StoreNo
-                for (int i = 0; i < 5-StoreNo.Length+1; i++)
+                for (int i = 0; i < 5-StoreNo.Length+2; i++)
                     StoreNo = "0" + StoreNo;
-                sb.Append("01," + StoreNo + "," + StoreName + "," + DateTime.Now.ToString() + "," + TGViewModel.PromoTitle + "\n");
+                sb.Append("01," + StoreNo + "," + StoreName + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "," + TGViewModel.PromoTitle + "\n");
                 if (TGViewModel.IncludeAll || TGViewModel.IncludeMIM)
                 {
                     foreach (CSHMIMP0 c in db.CSHMIMP0)
@@ -36,7 +36,7 @@ namespace CFMMCD.Models.EntityManager
                         DateTime dateFrom = DateTime.Parse(TGViewModel.DateFrom);
                         DateTime dateTo = DateTime.Parse(TGViewModel.DateTo);
 
-                        if ((STATUS.Equals("A") || STATUS.Equals("B")) &&
+                        if ((STATUS.Equals("A") || STATUS.Equals("E")) &&
                             ((date.CompareTo(dateFrom) > 0) && (date.CompareTo(dateTo) <= 0)))
                         {
                             sb.Append("02,");
@@ -51,41 +51,42 @@ namespace CFMMCD.Models.EntityManager
                                 sb.Append(c.MIMNAM + ",");
                             else
                                 sb.Append(c.CSHMIMP0_NP6.MIMNAM + ",");
-                            sb.Append(c.MIMSSC + ",");
-                            sb.Append(c.MIMDPC + ",");
-                            sb.Append(c.MIMCIN + ",");
+                            sb.Append(c.MIMDSC.Trim() + ",");
+                            sb.Append(c.MIMSSC.Trim() + ",");
+                            sb.Append(c.MIMDPC.Trim() + ",");
+                            sb.Append(c.MIMCIN.Trim() + ",");
                             sb.Append(c.MIMDGC + ",");
-                            sb.Append(c.MIMASC + ",");
-                            sb.Append(c.MIMTXC + ",");
+                            sb.Append(c.MIMASC.Trim() + ",");
+                            sb.Append(c.MIMTXC.Trim() + ",");
                             sb.Append(c.MIMUTC + ",");
-                            sb.Append(c.MIMDWE + ",");
-                            sb.Append(c.MIMTCI + ",");
+                            sb.Append(c.MIMDWE.Trim() + ",");
+                            sb.Append(c.MIMTCI.Trim() + ",");
                             sb.Append(c.MIMPRI + ",");
-                            sb.Append(c.MIMTCA + ",");
+                            sb.Append(c.MIMTCA.Trim() + ",");
                             sb.Append(c.MIMPRO + ",");
-                            sb.Append(c.MIMTCG + ",");
+                            sb.Append(c.MIMTCG.Trim() + ",");
                             sb.Append(c.MIMPRG + ",");
-                            sb.Append(c.MIMPND + ",");
+                            sb.Append(((DateTime)c.MIMPND).ToString("yyyy-MM-dd") + ",");
                             sb.Append(c.MIMKBP + ",");
-                            sb.Append(c.MIMKSC + ",");
-                            sb.Append(c.MIMSKT + ",");
-                            sb.Append(c.MIMGRP + ",");
-                            sb.Append(c.MIMWLV + ",");
-                            sb.Append(c.MIMWSD + ",");
-                            sb.Append(c.MIMWGR + ",");
-                            sb.Append(c.MIMHPT + ",");
-                            sb.Append(c.MIMUSR + ",");
-                            sb.Append(c.MIMDAT + ",");
-                            sb.Append(c.MIMEDT + ",");
+                            sb.Append(c.MIMKSC.Trim() + ",");
+                            sb.Append(c.MIMSKT.Trim() + ",");
+                            sb.Append(c.MIMGRP.Trim() + ",");
+                            sb.Append(c.MIMWLV.Trim() + ",");
+                            sb.Append(c.MIMWSD.Trim() + ",");
+                            sb.Append(c.MIMWGR.Trim() + ",");
+                            sb.Append(c.MIMHPT.Trim() + ",");
+                            sb.Append(c.MIMUSR.Trim() + ",");
+                            sb.Append(((DateTime)c.MIMDAT).ToString("yyyy-MM-dd") + ",");
+                            sb.Append(((DateTime)c.MIMEDT).ToString("yyyy-MM-dd") + ",");
                             sb.Append(c.MIMFLG + ",");
-                            sb.Append(c.MIMBIN + ",");
+                            sb.Append(c.MIMBIN.Trim() + ",");
                             sb.Append(c.MIMBIT + ",");
-                            sb.Append(c.MIMBIR + ",");
-                            sb.Append(c.MIMBGR + ",");
+                            sb.Append(c.MIMBIR.Trim() + ",");
+                            sb.Append(c.MIMBGR.Trim() + ",");
                             sb.Append(c.MIMBQU + ",");
-                            sb.Append(c.MIMGRA + ",");
-                            sb.Append(c.MIMIST + ",");
-                            sb.Append(c.MIMCLR + ",");
+                            sb.Append(c.MIMGRA.Trim() + ",");
+                            sb.Append(c.MIMIST.Trim() + ",");
+                            sb.Append(c.MIMCLR.Trim() + ",");
                             sb.Append(c.MIMNPI + ",");
                             sb.Append(c.MIMNPO + ",");
                             sb.Append(c.MIMNPD + ",");
@@ -93,13 +94,71 @@ namespace CFMMCD.Models.EntityManager
                             sb.Append(c.MIMBMI + ",");
                             sb.Append(c.MIMNPA + ",");
                             sb.Append(c.MIMNNP + ",");
-                            sb.Append(c.MIMNPT + "\n");
+                            sb.Append(c.MIMNPT.Trim() + "\n");
                         } // end if
                     } // end for
                 }
                 if (TGViewModel.IncludeAll || TGViewModel.IncludeRIM)
                 {
+                    foreach (INVRIMP0 c in db.INVRIMP0)
+                    {
+                        string STATUS = c.STATUS;
+                        DateTime date = (DateTime)c.RIMEDT;
+                        DateTime dateFrom = DateTime.Parse(TGViewModel.DateFrom);
+                        DateTime dateTo = DateTime.Parse(TGViewModel.DateTo);
 
+                        if ((STATUS.Equals("A") || STATUS.Equals("E")) &&
+                            ((date.CompareTo(dateFrom) > 0) && (date.CompareTo(dateTo) <= 0)))
+                        {
+                             sb.Append("03,");
+                             sb.Append(STATUS.Trim() + ",");
+                             sb.Append(c.RIMRIC + ",");
+                             sb.Append(c.RIMVPC + ",");
+                             sb.Append(c.RIMRID.Trim() + ",");
+                             sb.Append(c.RIMRIG.Trim() + ",");
+                             sb.Append(c.RIMTEM.Trim() + ",");
+                             sb.Append(c.RIMPGR.Trim() + ",");
+                             sb.Append(c.RIMPIS.Trim() + ",");
+                             sb.Append(c.RIMBVP.Trim() + ",");
+                             sb.Append(c.RIMBZP.Trim() + ",");
+                             sb.Append(c.RIMUMC.Trim() + ",");
+                             sb.Append(c.RIMUPC + ",");
+                             sb.Append(c.RIMSUQ + ",");
+                             sb.Append(c.RIMLAY + ",");
+                             sb.Append(c.RIMCPR + ",");
+                             sb.Append(c.RIMCPN + ",");
+                            sb.Append(((DateTime)c.RIMPDT).ToString("yyyy-MM-dd") + ",");
+                            sb.Append(c.RIMPVN + ",");
+                             sb.Append(c.RIMSVN + ",");
+                             sb.Append(c.RIMCWC.Trim() + ",");
+                             sb.Append(c.RIMPRO.Trim() + ",");
+                             sb.Append(c.RIMSE4.Trim() + ",");
+                             sb.Append(c.RIMERT.Trim() + ",");
+                             sb.Append(c.RIMUSF + ",");
+                             sb.Append(c.RIMSDP + ",");
+                             sb.Append(c.RIMUS1 + ",");
+                             sb.Append(c.RIMUS2 + ",");
+                             sb.Append(c.RIMUS3 + ",");
+                             sb.Append(c.RIMUS4 + ",");
+                             sb.Append(c.RIMUS5 + ",");
+                             sb.Append(c.RIMUSX + ",");
+                             sb.Append(c.RIMMSD + ",");
+                             sb.Append(c.RIMMSL + ",");
+                             sb.Append(c.RIMLA1.Trim() + ",");
+                             sb.Append(c.RIMLA2.Trim() + ",");
+                             sb.Append(c.RIMLP1 + ",");
+                             sb.Append(c.RIMLP2 + ",");
+                             sb.Append(c.RIMSTA.Trim() + ",");
+                             sb.Append(c.RIMUSR.Trim() + ",");
+                             sb.Append(((DateTime)c.RIMDAT).ToString("yyyy-MM-dd") + ",");
+                             sb.Append(((DateTime)c.RIMEDT).ToString("yyyy-MM-dd") + ",");
+                             sb.Append(c.RIMFLG + ",");
+                             sb.Append(c.RIMORD.Trim() + ",");
+                             sb.Append(c.RIMLIN + ",");
+                             sb.Append(c.RIMADE.Trim() + ",");
+                             sb.Append(c.RIMBAR.Trim() + "\n");
+                        } // end if
+                    } // end for
                 }
                 if (TGViewModel.IncludeAll || TGViewModel.IncludeREC)
                 {

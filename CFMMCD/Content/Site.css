@@ -173,3 +173,29 @@ footer {
     -moz-border-radius:6px 0 6px 6px;
     border-radius:6px 0 6px 6px;
 }
+.modal {
+    margin: auto;
+    max-height: 80%;
+    max-width: 550px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.modal-body {
+    overflow-x: auto;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+.modal-item-select {
+    background-color: transparent;
+    border-color: transparent;
+    height: 50px;
+    width: 100%;
+}
+.modal-item-select:hover {
+    background-color: rgb(235, 90, 60);
+    color: white;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+}

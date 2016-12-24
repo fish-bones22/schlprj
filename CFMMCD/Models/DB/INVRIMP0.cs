@@ -24,11 +24,11 @@ namespace CFMMCD.Models.DB
         public string RIMBVP { get; set; }
         public string RIMBZP { get; set; }
         public string RIMUMC { get; set; }
-        public Nullable<int> RIMUPC { get; set; }
-        public Nullable<int> RIMSUQ { get; set; }
+        public Nullable<double> RIMUPC { get; set; }
+        public Nullable<double> RIMSUQ { get; set; }
         public Nullable<int> RIMLAY { get; set; }
-        public Nullable<int> RIMCPR { get; set; }
-        public Nullable<int> RIMCPN { get; set; }
+        public Nullable<double> RIMCPR { get; set; }
+        public Nullable<double> RIMCPN { get; set; }
         public Nullable<System.DateTime> RIMPDT { get; set; }
         public Nullable<int> RIMPVN { get; set; }
         public Nullable<int> RIMSVN { get; set; }
@@ -36,16 +36,16 @@ namespace CFMMCD.Models.DB
         public string RIMPRO { get; set; }
         public string RIMSE4 { get; set; }
         public string RIMERT { get; set; }
-        public Nullable<int> RIMUSF { get; set; }
-        public Nullable<int> RIMSDP { get; set; }
-        public Nullable<int> RIMUS1 { get; set; }
-        public Nullable<int> RIMUS2 { get; set; }
-        public Nullable<int> RIMUS3 { get; set; }
-        public Nullable<int> RIMUS4 { get; set; }
-        public Nullable<int> RIMUS5 { get; set; }
+        public Nullable<double> RIMUSF { get; set; }
+        public Nullable<double> RIMSDP { get; set; }
+        public Nullable<double> RIMUS1 { get; set; }
+        public Nullable<double> RIMUS2 { get; set; }
+        public Nullable<double> RIMUS3 { get; set; }
+        public Nullable<double> RIMUS4 { get; set; }
+        public Nullable<double> RIMUS5 { get; set; }
         public Nullable<double> RIMUSX { get; set; }
-        public Nullable<int> RIMMSD { get; set; }
-        public Nullable<int> RIMMSL { get; set; }
+        public Nullable<double> RIMMSD { get; set; }
+        public Nullable<double> RIMMSL { get; set; }
         public string RIMLA1 { get; set; }
         public string RIMLA2 { get; set; }
         public Nullable<int> RIMLP1 { get; set; }

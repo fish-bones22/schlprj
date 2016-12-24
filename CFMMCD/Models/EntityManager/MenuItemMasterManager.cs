@@ -78,28 +78,28 @@ namespace CFMMCD.Models.EntityManager
                 CSHMIMP0 MIMRow = new CSHMIMP0();
                 // Columns with Input fields
                 MIMRow.MIMMIC = int.Parse(MIMViewModel.MIMMIC);
-                MIMRow.MIMSTA = MIMViewModel.MIMSTA;
-                MIMRow.MIMFGC = MIMViewModel.MIMFGC;
-                MIMRow.MIMNAM = MIMViewModel.MIMNAM;
-                MIMRow.MIMDSC = MIMViewModel.MIMDSC;
-                MIMRow.MIMDPC = MIMViewModel.MIMDPC;
-                MIMRow.MIMTCI = MIMViewModel.MIMTCI;
+                MIMRow.MIMSTA = MIMViewModel.MIMSTA.Trim();
+                MIMRow.MIMFGC = MIMViewModel.MIMFGC.Trim();
+                MIMRow.MIMNAM = MIMViewModel.MIMNAM.Trim();
+                MIMRow.MIMDSC = MIMViewModel.MIMDSC.Trim();
+                MIMRow.MIMDPC = MIMViewModel.MIMDPC.Trim();
+                MIMRow.MIMTCI = MIMViewModel.MIMTCI.Trim();
                 MIMRow.MIMPRI = double.Parse(MIMViewModel.MIMPRI);
-                MIMRow.MIMTCA = MIMViewModel.MIMTCA;
+                MIMRow.MIMTCA = MIMViewModel.MIMTCA.Trim();
                 MIMRow.MIMPRO = double.Parse(MIMViewModel.MIMPRO);
-                MIMRow.MIMTCG = MIMViewModel.MIMTCG;
+                MIMRow.MIMTCG = MIMViewModel.MIMTCG.Trim();
                 MIMRow.MIMPRG = double.Parse(MIMViewModel.MIMPRG);
                 MIMRow.MIMPND = Convert.ToDateTime(MIMViewModel.MIMPND);
-                MIMRow.MIMWGR = MIMViewModel.MIMWGR;
+                MIMRow.MIMWGR = MIMViewModel.MIMWGR.Trim();
                 MIMRow.MIMUTC = int.Parse(MIMViewModel.MIMUTC);
-                MIMRow.MIMHPT = MIMViewModel.MIMHPT;
+                MIMRow.MIMHPT = MIMViewModel.MIMHPT.Trim();
                 MIMRow.MIMEDT = Convert.ToDateTime(MIMViewModel.MIMEDT);
                 MIMRow.MIMNPI = double.Parse(MIMViewModel.MIMNPI);
                 MIMRow.MIMNPO = double.Parse(MIMViewModel.MIMNPO);
                 MIMRow.MIMNPD = double.Parse(MIMViewModel.MIMNPD);
                 MIMRow.MIMNPA = double.Parse(MIMViewModel.MIMNPA);
                 MIMRow.MIMNNP = double.Parse(MIMViewModel.MIMNNP);
-                MIMRow.MIMNPT = MIMViewModel.MIMNPT;
+                MIMRow.MIMNPT = MIMViewModel.MIMNPT.Trim();
                 // Items not originally in the table but
                 // have Input field
                 // * Wala pong nakalista sa CSHMIMP0.dbf na Long Name

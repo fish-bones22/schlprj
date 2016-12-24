@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CFMMCDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CFMMCDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="UserId" />
@@ -107,11 +107,11 @@
           <Property Name="RIMBVP" Type="nchar" MaxLength="3" />
           <Property Name="RIMBZP" Type="nchar" MaxLength="3" />
           <Property Name="RIMUMC" Type="nchar" MaxLength="3" />
-          <Property Name="RIMUPC" Type="int" />
-          <Property Name="RIMSUQ" Type="int" />
+          <Property Name="RIMUPC" Type="float" />
+          <Property Name="RIMSUQ" Type="float" />
           <Property Name="RIMLAY" Type="int" />
-          <Property Name="RIMCPR" Type="int" />
-          <Property Name="RIMCPN" Type="int" />
+          <Property Name="RIMCPR" Type="float" />
+          <Property Name="RIMCPN" Type="float" />
           <Property Name="RIMPDT" Type="date" />
           <Property Name="RIMPVN" Type="int" />
           <Property Name="RIMSVN" Type="int" />
@@ -119,16 +119,16 @@
           <Property Name="RIMPRO" Type="nchar" MaxLength="1" />
           <Property Name="RIMSE4" Type="nchar" MaxLength="1" />
           <Property Name="RIMERT" Type="nchar" MaxLength="1" />
-          <Property Name="RIMUSF" Type="int" />
-          <Property Name="RIMSDP" Type="int" />
-          <Property Name="RIMUS1" Type="int" />
-          <Property Name="RIMUS2" Type="int" />
-          <Property Name="RIMUS3" Type="int" />
-          <Property Name="RIMUS4" Type="int" />
-          <Property Name="RIMUS5" Type="int" />
+          <Property Name="RIMUSF" Type="float" />
+          <Property Name="RIMSDP" Type="float" />
+          <Property Name="RIMUS1" Type="float" />
+          <Property Name="RIMUS2" Type="float" />
+          <Property Name="RIMUS3" Type="float" />
+          <Property Name="RIMUS4" Type="float" />
+          <Property Name="RIMUS5" Type="float" />
           <Property Name="RIMUSX" Type="float" />
-          <Property Name="RIMMSD" Type="int" />
-          <Property Name="RIMMSL" Type="int" />
+          <Property Name="RIMMSD" Type="float" />
+          <Property Name="RIMMSL" Type="float" />
           <Property Name="RIMLA1" Type="nchar" MaxLength="1" />
           <Property Name="RIMLA2" Type="nchar" MaxLength="1" />
           <Property Name="RIMLP1" Type="int" />
@@ -212,8 +212,7 @@
             <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CFMMCDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -307,57 +306,6 @@
           <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="CSHMIMP0" Relationship="Self.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0_NP6" ToRole="CSHMIMP0" />
         </EntityType>
-        <EntityType Name="INVRIMP0">
-          <Key>
-            <PropertyRef Name="RIMRIC" />
-          </Key>
-          <Property Name="RIMRIC" Type="Int32" Nullable="false" />
-          <Property Name="RIMVPC" Type="Int32" />
-          <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMUPC" Type="Int32" />
-          <Property Name="RIMSUQ" Type="Int32" />
-          <Property Name="RIMLAY" Type="Int32" />
-          <Property Name="RIMCPR" Type="Int32" />
-          <Property Name="RIMCPN" Type="Int32" />
-          <Property Name="RIMPDT" Type="DateTime" Precision="0" />
-          <Property Name="RIMPVN" Type="Int32" />
-          <Property Name="RIMSVN" Type="Int32" />
-          <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMUSF" Type="Int32" />
-          <Property Name="RIMSDP" Type="Int32" />
-          <Property Name="RIMUS1" Type="Int32" />
-          <Property Name="RIMUS2" Type="Int32" />
-          <Property Name="RIMUS3" Type="Int32" />
-          <Property Name="RIMUS4" Type="Int32" />
-          <Property Name="RIMUS5" Type="Int32" />
-          <Property Name="RIMUSX" Type="Double" />
-          <Property Name="RIMMSD" Type="Int32" />
-          <Property Name="RIMMSL" Type="Int32" />
-          <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMLP1" Type="Int32" />
-          <Property Name="RIMLP2" Type="Int32" />
-          <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMDAT" Type="DateTime" Precision="0" />
-          <Property Name="RIMEDT" Type="DateTime" Precision="0" />
-          <Property Name="RIMFLG" Type="Boolean" />
-          <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMLIN" Type="Int32" />
-          <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
-          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-        </EntityType>
         <EntityType Name="Price_Tier">
           <Key>
             <PropertyRef Name="Id" />
@@ -413,25 +361,76 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CFMMCDEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CFMMCDEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" />
           <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" />
           <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" />
-          <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" />
           <EntitySet Name="Price_Tier" EntityType="Self.Price_Tier" />
           <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" />
           <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
             <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
             <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
           </AssociationSet>
+          <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
         </EntityContainer>
+        <EntityType Name="INVRIMP0">
+          <Key>
+            <PropertyRef Name="RIMRIC" />
+          </Key>
+          <Property Name="RIMRIC" Type="Int32" Nullable="false" />
+          <Property Name="RIMVPC" Type="Int32" />
+          <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMUPC" Type="Double" />
+          <Property Name="RIMSUQ" Type="Double" />
+          <Property Name="RIMLAY" Type="Int32" />
+          <Property Name="RIMCPR" Type="Double" />
+          <Property Name="RIMCPN" Type="Double" />
+          <Property Name="RIMPDT" Type="DateTime" Precision="0" />
+          <Property Name="RIMPVN" Type="Int32" />
+          <Property Name="RIMSVN" Type="Int32" />
+          <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMUSF" Type="Double" />
+          <Property Name="RIMSDP" Type="Double" />
+          <Property Name="RIMUS1" Type="Double" />
+          <Property Name="RIMUS2" Type="Double" />
+          <Property Name="RIMUS3" Type="Double" />
+          <Property Name="RIMUS4" Type="Double" />
+          <Property Name="RIMUS5" Type="Double" />
+          <Property Name="RIMUSX" Type="Double" />
+          <Property Name="RIMMSD" Type="Double" />
+          <Property Name="RIMMSL" Type="Double" />
+          <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMLP1" Type="Int32" />
+          <Property Name="RIMLP2" Type="Int32" />
+          <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMDAT" Type="DateTime" Precision="0" />
+          <Property Name="RIMEDT" Type="DateTime" Precision="0" />
+          <Property Name="RIMFLG" Type="Boolean" />
+          <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMLIN" Type="Int32" />
+          <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities1">
+        <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="CFMMCDModel.Account">
               <MappingFragment StoreEntitySet="Accounts">
@@ -524,58 +523,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="INVRIMP0">
-            <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
-              <MappingFragment StoreEntitySet="INVRIMP0">
-                <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
-                <ScalarProperty Name="RIMVPC" ColumnName="RIMVPC" />
-                <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
-                <ScalarProperty Name="RIMRIG" ColumnName="RIMRIG" />
-                <ScalarProperty Name="RIMTEM" ColumnName="RIMTEM" />
-                <ScalarProperty Name="RIMPGR" ColumnName="RIMPGR" />
-                <ScalarProperty Name="RIMPIS" ColumnName="RIMPIS" />
-                <ScalarProperty Name="RIMBVP" ColumnName="RIMBVP" />
-                <ScalarProperty Name="RIMBZP" ColumnName="RIMBZP" />
-                <ScalarProperty Name="RIMUMC" ColumnName="RIMUMC" />
-                <ScalarProperty Name="RIMUPC" ColumnName="RIMUPC" />
-                <ScalarProperty Name="RIMSUQ" ColumnName="RIMSUQ" />
-                <ScalarProperty Name="RIMLAY" ColumnName="RIMLAY" />
-                <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
-                <ScalarProperty Name="RIMCPN" ColumnName="RIMCPN" />
-                <ScalarProperty Name="RIMPDT" ColumnName="RIMPDT" />
-                <ScalarProperty Name="RIMPVN" ColumnName="RIMPVN" />
-                <ScalarProperty Name="RIMSVN" ColumnName="RIMSVN" />
-                <ScalarProperty Name="RIMCWC" ColumnName="RIMCWC" />
-                <ScalarProperty Name="RIMPRO" ColumnName="RIMPRO" />
-                <ScalarProperty Name="RIMSE4" ColumnName="RIMSE4" />
-                <ScalarProperty Name="RIMERT" ColumnName="RIMERT" />
-                <ScalarProperty Name="RIMUSF" ColumnName="RIMUSF" />
-                <ScalarProperty Name="RIMSDP" ColumnName="RIMSDP" />
-                <ScalarProperty Name="RIMUS1" ColumnName="RIMUS1" />
-                <ScalarProperty Name="RIMUS2" ColumnName="RIMUS2" />
-                <ScalarProperty Name="RIMUS3" ColumnName="RIMUS3" />
-                <ScalarProperty Name="RIMUS4" ColumnName="RIMUS4" />
-                <ScalarProperty Name="RIMUS5" ColumnName="RIMUS5" />
-                <ScalarProperty Name="RIMUSX" ColumnName="RIMUSX" />
-                <ScalarProperty Name="RIMMSD" ColumnName="RIMMSD" />
-                <ScalarProperty Name="RIMMSL" ColumnName="RIMMSL" />
-                <ScalarProperty Name="RIMLA1" ColumnName="RIMLA1" />
-                <ScalarProperty Name="RIMLA2" ColumnName="RIMLA2" />
-                <ScalarProperty Name="RIMLP1" ColumnName="RIMLP1" />
-                <ScalarProperty Name="RIMLP2" ColumnName="RIMLP2" />
-                <ScalarProperty Name="RIMSTA" ColumnName="RIMSTA" />
-                <ScalarProperty Name="RIMUSR" ColumnName="RIMUSR" />
-                <ScalarProperty Name="RIMDAT" ColumnName="RIMDAT" />
-                <ScalarProperty Name="RIMEDT" ColumnName="RIMEDT" />
-                <ScalarProperty Name="RIMFLG" ColumnName="RIMFLG" />
-                <ScalarProperty Name="RIMORD" ColumnName="RIMORD" />
-                <ScalarProperty Name="RIMLIN" ColumnName="RIMLIN" />
-                <ScalarProperty Name="RIMADE" ColumnName="RIMADE" />
-                <ScalarProperty Name="RIMBAR" ColumnName="RIMBAR" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Price_Tier">
             <EntityTypeMapping TypeName="CFMMCDModel.Price_Tier">
               <MappingFragment StoreEntitySet="Price_Tier">
@@ -618,6 +565,58 @@
                 <ScalarProperty Name="SIMPLOT_OR_MCCAIN" ColumnName="SIMPLOT_OR_MCCAIN" />
                 <ScalarProperty Name="MCCORMICK_OR_GSF" ColumnName="MCCORMICK_OR_GSF" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVRIMP0">
+            <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
+              <MappingFragment StoreEntitySet="INVRIMP0">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="RIMBAR" ColumnName="RIMBAR" />
+                <ScalarProperty Name="RIMADE" ColumnName="RIMADE" />
+                <ScalarProperty Name="RIMLIN" ColumnName="RIMLIN" />
+                <ScalarProperty Name="RIMORD" ColumnName="RIMORD" />
+                <ScalarProperty Name="RIMFLG" ColumnName="RIMFLG" />
+                <ScalarProperty Name="RIMEDT" ColumnName="RIMEDT" />
+                <ScalarProperty Name="RIMDAT" ColumnName="RIMDAT" />
+                <ScalarProperty Name="RIMUSR" ColumnName="RIMUSR" />
+                <ScalarProperty Name="RIMSTA" ColumnName="RIMSTA" />
+                <ScalarProperty Name="RIMLP2" ColumnName="RIMLP2" />
+                <ScalarProperty Name="RIMLP1" ColumnName="RIMLP1" />
+                <ScalarProperty Name="RIMLA2" ColumnName="RIMLA2" />
+                <ScalarProperty Name="RIMLA1" ColumnName="RIMLA1" />
+                <ScalarProperty Name="RIMMSL" ColumnName="RIMMSL" />
+                <ScalarProperty Name="RIMMSD" ColumnName="RIMMSD" />
+                <ScalarProperty Name="RIMUSX" ColumnName="RIMUSX" />
+                <ScalarProperty Name="RIMUS5" ColumnName="RIMUS5" />
+                <ScalarProperty Name="RIMUS4" ColumnName="RIMUS4" />
+                <ScalarProperty Name="RIMUS3" ColumnName="RIMUS3" />
+                <ScalarProperty Name="RIMUS2" ColumnName="RIMUS2" />
+                <ScalarProperty Name="RIMUS1" ColumnName="RIMUS1" />
+                <ScalarProperty Name="RIMSDP" ColumnName="RIMSDP" />
+                <ScalarProperty Name="RIMUSF" ColumnName="RIMUSF" />
+                <ScalarProperty Name="RIMERT" ColumnName="RIMERT" />
+                <ScalarProperty Name="RIMSE4" ColumnName="RIMSE4" />
+                <ScalarProperty Name="RIMPRO" ColumnName="RIMPRO" />
+                <ScalarProperty Name="RIMCWC" ColumnName="RIMCWC" />
+                <ScalarProperty Name="RIMSVN" ColumnName="RIMSVN" />
+                <ScalarProperty Name="RIMPVN" ColumnName="RIMPVN" />
+                <ScalarProperty Name="RIMPDT" ColumnName="RIMPDT" />
+                <ScalarProperty Name="RIMCPN" ColumnName="RIMCPN" />
+                <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
+                <ScalarProperty Name="RIMLAY" ColumnName="RIMLAY" />
+                <ScalarProperty Name="RIMSUQ" ColumnName="RIMSUQ" />
+                <ScalarProperty Name="RIMUPC" ColumnName="RIMUPC" />
+                <ScalarProperty Name="RIMUMC" ColumnName="RIMUMC" />
+                <ScalarProperty Name="RIMBZP" ColumnName="RIMBZP" />
+                <ScalarProperty Name="RIMBVP" ColumnName="RIMBVP" />
+                <ScalarProperty Name="RIMPIS" ColumnName="RIMPIS" />
+                <ScalarProperty Name="RIMPGR" ColumnName="RIMPGR" />
+                <ScalarProperty Name="RIMTEM" ColumnName="RIMTEM" />
+                <ScalarProperty Name="RIMRIG" ColumnName="RIMRIG" />
+                <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
+                <ScalarProperty Name="RIMVPC" ColumnName="RIMVPC" />
+                <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
