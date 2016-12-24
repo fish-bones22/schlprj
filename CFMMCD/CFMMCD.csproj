@@ -202,6 +202,7 @@
     <Compile Include="Controllers\RegularPriceTierController.cs" />
     <Compile Include="Controllers\StoreProfileController.cs" />
     <Compile Include="Controllers\TextGeneratorController.cs" />
+    <Compile Include="Controllers\VendorMasterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,6 +242,9 @@
     <Compile Include="Models\DB\INVRIMP0.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\INVVEMP0.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\McCafe_Bistro_Price_Tier.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
@@ -273,6 +277,7 @@
     <Compile Include="Models\EntityManager\RawItemMasterManager.cs" />
     <Compile Include="Models\EntityManager\RegularPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
+    <Compile Include="Models\EntityManager\VendorMasterManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
     <Compile Include="Models\ViewModel\BreakfastPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\DessertPriceTierViewModel.cs" />
@@ -284,6 +289,7 @@
     <Compile Include="Models\ViewModel\RawItemMasterViewModel.cs" />
     <Compile Include="Models\ViewModel\RegularPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\TextGeneratorViewModel.cs" />
+    <Compile Include="Models\ViewModel\VendorMasterViewModel.cs" />
     <Compile Include="Sessions\SessionData.cs" />
     <Compile Include="Models\EntityManager\AccountManager.cs" />
     <Compile Include="Models\EntityManager\MenuItemMasterManager.cs" />
@@ -314,6 +320,7 @@
     <Content Include="Views\TextGenerator\Index.cshtml" />
     <Content Include="Views\AuditLog\Index.cshtml" />
     <Content Include="Views\RawItemMaster\Index.cshtml" />
+    <Content Include="Views\VendorMaster\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -32,9 +32,9 @@
                     {
                         <li>@Html.ActionLink("Store Profile", "Index", "StoreProfile")</li>
                     }
-                    if (UASession.VEN)
+                    if (UASession.VEM)
                     {
-                        <li>@Html.ActionLink("Vendor", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Vendor Master", "Index", "VendorMaster")</li>
                     }
                     if (UASession.VAM)
                     {

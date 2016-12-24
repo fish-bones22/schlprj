@@ -39,5 +39,6 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<Regular_Price_Tier> Regular_Price_Tier { get; set; }
         public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
+        public virtual DbSet<INVVEMP0> INVVEMP0 { get; set; }
     }
 }

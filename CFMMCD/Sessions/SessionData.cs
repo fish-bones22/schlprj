@@ -20,7 +20,7 @@ namespace CFMMCD.Sessions
         public bool MER { get; set; }
         public bool STP { get; set; }
         public bool SCM { get; set; }
-        public bool VEN { get; set; }
+        public bool VEM { get; set; }
         public bool VAM { get; set; }
         public bool UAP { get; set; }
         public bool MIP { get; set; }
@@ -124,6 +124,13 @@ namespace CFMMCD.Sessions
                     LinkName = "Text generation",
                     Action = "Index",
                     Controller = "TextGenerator"
+                };
+            else if (key.Equals("VEM"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Vendor Master",
+                    Action = "Index",
+                    Controller = "VendorMaster"
                 };
             else
                 return new CurrentPageSession.LinkString

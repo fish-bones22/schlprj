@@ -107,12 +107,17 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
+        /*
+         * Searches the table for any given SearchItem (Name or ID) in the ViewModel.
+         * 
+         * Returns List<ViewModel> if true, otherwise returns null
+         */
         public List<RawItemMasterViewModel> SearchRawItem(RawItemMasterViewModel RIMViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<RawItemMasterViewModel> RIMList = new List<RawItemMasterViewModel>();
-                List<INVRIMP0> RIMRowList = new List<INVRIMP0>();
+                List<INVRIMP0> RIMRowList;
                 if (RIMViewModel.SearchItem == null || RIMViewModel.SearchItem.Equals(""))
                     return null;
                 if (db.INVRIMP0.Where(o => o.RIMRID.Equals(RIMViewModel.SearchItem)).Any())
@@ -123,6 +128,7 @@ namespace CFMMCD.Models.EntityManager
                     return null;
                 foreach ( INVRIMP0 rim in RIMRowList )
                 {
+                    // Check if 'Include inactive items' is checked
                     if (RIMViewModel.InactiveItemsCb || rim.RIMSTA.Equals("0") )
                     {
                         RawItemMasterViewModel vm = new RawItemMasterViewModel();
@@ -157,7 +163,7 @@ namespace CFMMCD.Models.EntityManager
                         RIMList.Add(vm);
                     }
                 }
-                if (RIMList.ElementAt(0) == null)
+                if (RIMList == null || RIMList.ElementAt(0) == null)
                     return null;
                 return RIMList;
             }

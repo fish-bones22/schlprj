@@ -25,7 +25,7 @@ namespace CFMMCD.Models.ViewModel
         public bool MERInput { get; set; }
         public bool STPInput { get; set; }
         public bool SCMInput { get; set; }
-        public bool VENInput { get; set; }
+        public bool VEMInput { get; set; }
         public bool VAMInput { get; set; }
         public bool UAPInput { get; set; }
         public bool MIPInput { get; set; }

@@ -13,10 +13,16 @@ namespace CFMMCD.Controllers
     {
         /*
          * Default method.
-         * A TempData is used to store the ViewModel after a Search action.
+         * TempData is used to store the ViewModel after a Search action.
          */
         public ActionResult Index()
         {
+            // Validate log in and user access
+            UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            if (UASession == null || !UASession.RIM) return RedirectToAction("Login", "Account");
+            // Set NavBar Links accordingly
+            Session["CurrentPage"] = new CurrentPageSession("RIM", "HOME", "LOG");
+
             // SearchItemSelected is assigned value at DisplaySearchResult
             RawItemMasterViewModel RIMViewModel = (RawItemMasterViewModel)TempData["SearchItemSelected"];
             if (RIMViewModel == null)
@@ -31,7 +37,7 @@ namespace CFMMCD.Controllers
             if (RIMViewModel.RawItemMasterList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["RIMList"] = RIMViewModel.RawItemMasterList;
+                Session["ViewModelList"] = RIMViewModel.RawItemMasterList;
             }
             else
                 ModelState.AddModelError("", "No results found");
@@ -75,7 +81,7 @@ namespace CFMMCD.Controllers
         [HttpPost]
         public ActionResult DisplaySearchResult(string value)
         {
-            List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>) Session["RIMList"];
+            List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>) Session["ViewModelList"];
             RawItemMasterViewModel RIMViewModel = RIMList.Where(o => o.RIMRIC.ToString().Equals(value)).FirstOrDefault();
             TempData["SearchItemSelected"] = RIMViewModel;
             return RedirectToAction("Index", "RawItemMaster");

@@ -3,6 +3,11 @@
 
 @{
     ViewBag.Title = "Menu Item Master";
+    int HasSearch = 0;
+    if (TempData["SearchResult"] != null)
+    {
+        HasSearch = (int)TempData["SearchResult"];
+    }
 }
 
 <div class="center">
@@ -10,10 +15,12 @@
 </div>
 <!--Alerts-->
 <div class="container">
-    @if (TempData["ErrorMessage"] != null) {
+    @if (TempData["ErrorMessage"] != null)
+    {
         <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
     }
-    @if (TempData["SuccessMessage"] != null) {
+    @if (TempData["SuccessMessage"] != null)
+    {
         <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
     }
 </div>
@@ -160,8 +167,8 @@
                             <label class="form-label">Status</label>
                             @Html.DropDownListFor(m => m.MIMSTA, new SelectList(
                             new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
+                                new { value = "0" , text = "Active"  },
+                                new { value = "1" , text = "Inactive" }
                             },
                             "value",
                             "text",
@@ -345,3 +352,42 @@
         </div>
     }
 </div>
+
+<!--Search result modal-->
+<div class="modal fade" id="search-result-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Search results</h4>
+        </div>
+        @using (Html.BeginForm("DisplaySearchResult", "MenuItemMaster", FormMethod.Post, new { }))
+        {
+            List<MenuItemMasterViewModel> MIMList = (List<MenuItemMasterViewModel>)Session["ViewModelList"];
+            <div class="modal-body">
+                @{if (HasSearch == 1 && MIMList != null)
+                    {
+                        foreach (MenuItemMasterViewModel vm in MIMList)
+                        {
+                            <button type="submit" class="modal-item-select" name="value" value=@vm.MIMMIC>
+                                <div class="col-lg-3">
+                                    @vm.MIMMIC
+                                </div>
+                                <div class="col-lg-9">
+                                    @vm.MIMNAM
+                                </div>
+                            </button>
+                        }
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(window).ready(function () {
+        if (@HasSearch === 1) {
+            $("#search-result-modal").modal('show');
+        }
+    });
+</script>

@@ -85,7 +85,7 @@ namespace CFMMCD.Models.EntityManager
                    account.MERInput + "," +
                    account.STPInput + "," +
                    account.SCMInput + "," +
-                   account.VENInput + "," +
+                   account.VEMInput + "," +
                    account.VAMInput + "," +
                    account.UAPInput + "," +
                    account.MIPInput + "," +
@@ -138,7 +138,7 @@ namespace CFMMCD.Models.EntityManager
             UASession.MER = UAArray[2];
             UASession.STP = UAArray[3];
             UASession.SCM = UAArray[4];
-            UASession.VEN = UAArray[5];
+            UASession.VEM = UAArray[5];
             UASession.VAM = UAArray[6];
             UASession.UAP = UAArray[7];
             UASession.MIP = UAArray[8];

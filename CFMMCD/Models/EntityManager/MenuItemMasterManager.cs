@@ -9,57 +9,69 @@ namespace CFMMCD.Models.EntityManager
 {
     public class MenuItemMasterManager
     {
-        public MenuItemMasterViewModel SearchMIM(MenuItemMasterViewModel MIMViewModel)
+        /*
+         * Searches the table for any given SearchItem (Name or ID) in the ViewModel.
+         * 
+         * Returns List<ViewModel> if true, otherwise returns null
+         */
+        public List<MenuItemMasterViewModel> SearchMenuItem(MenuItemMasterViewModel MIMViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                CSHMIMP0 MIMRow = new CSHMIMP0();
+                List<CSHMIMP0> MIMRowList;
+                List<MenuItemMasterViewModel> MIMList = new List<MenuItemMasterViewModel>();
+
                 if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.SearchItem)).Any())
+                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.SearchItem)).ToList();
+                else if (db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Contains(MIMViewModel.SearchItem)).Any())
                 {
-                    MIMRow = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.SearchItem));
-                }
-                else if (db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Equals(MIMViewModel.SearchItem)).Any())
-                {
-                    var menuItem = db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Equals(MIMViewModel.SearchItem));
-                    MIMRow = menuItem.FirstOrDefault();
+                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Contains(MIMViewModel.SearchItem)).ToList();
                 }
                 else
-                    return new MenuItemMasterViewModel();
-
-                MIMViewModel.MIMMIC = MIMRow.MIMMIC.ToString();
-                MIMViewModel.MIMSTA = MIMRow.MIMSTA;
-                MIMViewModel.MIMFGC = MIMRow.MIMFGC;
-                MIMViewModel.MIMNAM = MIMRow.MIMNAM;
-                MIMViewModel.MIMDSC = MIMRow.MIMDSC;
-                MIMViewModel.MIMDPC = MIMRow.MIMDPC;
-                MIMViewModel.MIMTCI = MIMRow.MIMTCI;
-                MIMViewModel.MIMPRI = MIMRow.MIMPRI.ToString();
-                MIMViewModel.MIMTCA = MIMRow.MIMTCA;
-                MIMViewModel.MIMPRO = MIMRow.MIMPRO.ToString();
-                MIMViewModel.MIMTCG = MIMRow.MIMTCG;
-                MIMViewModel.MIMPRG = MIMRow.MIMPRG.ToString();
-                MIMViewModel.MIMPND = Convert.ToDateTime(MIMRow.MIMPND).ToString("yyyy-MM-dd");
-                MIMViewModel.MIMWGR = MIMRow.MIMWGR;
-                MIMViewModel.MIMHPT = MIMRow.MIMHPT;
-                MIMViewModel.MIMEDT = Convert.ToDateTime(MIMRow.MIMEDT).ToString("yyyy-MM-dd");
-                MIMViewModel.MIMNPI = MIMRow.MIMNPI.ToString();
-                MIMViewModel.MIMNPO = MIMRow.MIMNPO.ToString();
-                MIMViewModel.MIMNPD = MIMRow.MIMNPD.ToString();
-                MIMViewModel.MIMNPA = MIMRow.MIMNPA.ToString();
-                MIMViewModel.MIMNNP = MIMRow.MIMNNP.ToString();
-                MIMViewModel.MIMNPT = MIMRow.MIMNPT;
-                MIMViewModel.MIMLON = MIMRow.MIMLON;
-                MIMViewModel.MIMUTC = MIMRow.MIMUTC.ToString();
-
-                if (MIMRow.MIMMIC_NP6 != null || MIMRow.MIMMIC_NP6.HasValue)
+                    return null;
+                foreach (CSHMIMP0 MIMRow in MIMRowList)
                 {
-                    MIMViewModel.MIMMIC_NP6 = MIMRow.CSHMIMP0_NP6.MIMMIC.ToString();
-                    MIMViewModel.MIMNAM_NP6 = MIMRow.CSHMIMP0_NP6.MIMNAM;
-                    MIMViewModel.MIMLON_NP6 = MIMRow.CSHMIMP0_NP6.MIMLON;
+                    // Check if 'Include inactive items' is checked
+                    if (MIMViewModel.InactiveItemsCb || MIMRow.MIMSTA.Equals("0"))
+                    {
+                        MenuItemMasterViewModel vm = new MenuItemMasterViewModel();
+                        vm.MIMMIC = MIMRow.MIMMIC.ToString();
+                        vm.MIMSTA = MIMRow.MIMSTA.Trim();
+                        vm.MIMFGC = MIMRow.MIMFGC.Trim();
+                        vm.MIMNAM = MIMRow.MIMNAM.Trim();
+                        vm.MIMDSC = MIMRow.MIMDSC.Trim();
+                        vm.MIMDPC = MIMRow.MIMDPC.Trim();
+                        vm.MIMTCI = MIMRow.MIMTCI.Trim();
+                        vm.MIMPRI = MIMRow.MIMPRI.ToString();
+                        vm.MIMTCA = MIMRow.MIMTCA.Trim();
+                        vm.MIMPRO = MIMRow.MIMPRO.ToString();
+                        vm.MIMTCG = MIMRow.MIMTCG.Trim();
+                        vm.MIMPRG = MIMRow.MIMPRG.ToString();
+                        vm.MIMPND = Convert.ToDateTime(MIMRow.MIMPND).ToString("yyyy-MM-dd");
+                        vm.MIMWGR = MIMRow.MIMWGR.Trim();
+                        vm.MIMHPT = MIMRow.MIMHPT.Trim();
+                        vm.MIMEDT = Convert.ToDateTime(MIMRow.MIMEDT).ToString("yyyy-MM-dd");
+                        vm.MIMNPI = MIMRow.MIMNPI.ToString();
+                        vm.MIMNPO = MIMRow.MIMNPO.ToString();
+                        vm.MIMNPD = MIMRow.MIMNPD.ToString();
+                        vm.MIMNPA = MIMRow.MIMNPA.ToString();
+                        vm.MIMNNP = MIMRow.MIMNNP.ToString();
+                        vm.MIMNPT = MIMRow.MIMNPT.Trim();
+                        vm.MIMLON = MIMRow.MIMLON.Trim();
+                        vm.MIMUTC = MIMRow.MIMUTC.ToString();
+
+                        if (MIMRow.MIMMIC_NP6 != null || MIMRow.MIMMIC_NP6.HasValue)
+                        {
+                            vm.MIMMIC_NP6 = MIMRow.CSHMIMP0_NP6.MIMMIC.ToString();
+                            vm.MIMNAM_NP6 = MIMRow.CSHMIMP0_NP6.MIMNAM.Trim();
+                            vm.MIMLON_NP6 = MIMRow.CSHMIMP0_NP6.MIMLON.Trim();
+                        }
+                        MIMList.Add(vm);
+                    }
                 }
-
-                return MIMViewModel;
-
+                if (MIMList == null || MIMList.ElementAt(0) == null)
+                    return null;
+                return MIMList;
             }
         }
         /*
@@ -71,7 +83,7 @@ namespace CFMMCD.Models.EntityManager
          *
          * Returns true if the operation is successful.
          * */
-        public bool SaveMIM(MenuItemMasterViewModel MIMViewModel, string user)
+        public bool UpdateMenuItem(MenuItemMasterViewModel MIMViewModel, string user)
         {
             using ( CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -171,7 +183,7 @@ namespace CFMMCD.Models.EntityManager
          * 
          * Returns true if operation is successful.
          * */
-        public bool DeleteMIM(MenuItemMasterViewModel MIMViewModel)
+        public bool DeleteMenuItem(MenuItemMasterViewModel MIMViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {

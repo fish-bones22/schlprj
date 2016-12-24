@@ -9,7 +9,7 @@
     }
 }
 
-<h2>Raw Item Master</h2>
+<h2>@ViewBag.Title</h2>
 <!--Alerts-->
 <div class="container">
     @if (TempData["ErrorMessage"] != null)
@@ -270,8 +270,8 @@
                             @Html.LabelFor(m => m.RIMCWC, "Raw waste", new { @class = "form-label" })
                             @Html.DropDownListFor(m => m.RIMCWC, new SelectList(
                                 new List<Object>{
-                                    new { value = "0" , text = "ACTIVE"  },
-                                    new { value = "1" , text = "INACTIVE" }
+                                    new { value = "0" , text = "Active"  },
+                                    new { value = "1" , text = "Inactive" }
                                 },
                                 "value", "text", "0"),
                                  new { @class = "form-control input-sm", @Value = Model.RIMCWC })
@@ -280,10 +280,9 @@
                             @Html.LabelFor(m => m.RIMSTA, "Status", new { @class = "form-label" })
                             @Html.DropDownListFor(m => m.RIMSTA, new SelectList(
                                 new List<Object>{
-                                    new { value = "0" , text = "ACTIVE"  },
-                                    new { value = "1" , text = "INACTIVE" }
-                                },
-                                "value", "text", "0"),
+                                    new { value = "0" , text = "Active"  },
+                                    new { value = "1" , text = "Inactive" }
+                                }, "value", "text", "0"),
                                  new { @class = "form-control input-sm", @Value = Model.RIMSTA })
                         </div>
                         <div class="form-group">
@@ -470,7 +469,6 @@
                 <button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
             </div>
         }
-        <input type="hidden" id="show-search-results" value=@HasSearch>
     </div>
 </div>
 
@@ -482,7 +480,7 @@
         </div>
         @using (Html.BeginForm("DisplaySearchResult", "RawItemMaster", FormMethod.Post, new { }))
         {
-            List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>)Session["RIMList"];
+            List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>)Session["ViewModelList"];
             <div class="modal-body">
                 @{if (HasSearch == 1 && RIMList != null)
                     {

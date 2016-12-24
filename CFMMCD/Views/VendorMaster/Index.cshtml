@@ -1,0 +1,188 @@
+﻿@model CFMMCD.Models.ViewModel.VendorMasterViewModel
+@using CFMMCD.Models.ViewModel
+
+@{
+    ViewBag.Title = "Vendor Master";
+    int HasSearch = 0;
+    if (TempData["SearchResult"] != null)
+    {
+        HasSearch = (int)TempData["SearchResult"];
+    }
+}
+
+<h2>Vendor Master</h2>
+<!--Alerts-->
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
+<!-- Main body -->
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-fluid">
+            <div class="col-lg-2 label-container-left">
+                <label class="form-label" for="menu-item">Search Vendor number/description</label>
+            </div>
+            <div class="col-lg-7">
+                @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
+                <div class="input-group float-right" style="padding-top:8px">
+                    <label class="checkbox-inline form-label">
+                        @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
+                    </label>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-1">
+                <button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
+            </div>
+        </div>
+    }
+    <hr/>
+    @using (Html.BeginForm("UpdateDelete", "VendorMaster", FormMethod.Post, new { }))
+    {
+        <div class="container-fluid">
+            <div class="col-lg-6">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.VEMVEN, "Vendor number", new {  @class = "form-label" } )
+                        @Html.TextBoxFor(m => m.VEMVEN, new { @class = "form-control input-sm", @Value = Model.VEMADE, @type = "number", @maxlength = "3" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.VEMDS1, "Vendor description", new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.VEMDS1, new { @class = "form-control input-sm", @Value = Model.VEMDS1, @maxlength = "20" })
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.VEMCCD, "Country code", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.VEMCCD, new { @class = "form-control input-sm", @Value = Model.VEMCCD, @maxlength = "3" })
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.VEMZIP, "ZIP code", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.VEMZIP, new { @class = "form-control input-sm", @Value = Model.VEMZIP, @type = "number", @maxlength = "5" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.VEMCTY, "City", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.VEMCTY, new { @class = "form-control input-sm", @Value = Model.VEMCTY, @maxlength = "20" })
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.VEMSTR, "Street", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.VEMSTR, new { @class = "form-control input-sm", @Value = Model.VEMSTR, @maxlength = "20" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.VEMTEL, "Phone number", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.VEMTEL, new { @class = "form-control input-sm", @Value = Model.VEMTEL, @maxlength = "18" })
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.VEMSTN, "Short number", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.VEMSTN, new { @class = "form-control input-sm", @Value = Model.VEMSTN, @maxlength = "5" })
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.VEMDAY, "Minimum stock buffer/Global reserve", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.VEMDAY, new { @class = "form-control input-sm", @Value = Model.VEMDAY, @type = "number", @maxlength = "5" })
+                            </div>
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.VEMADE, "Auto-delivery", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.VEMADE, new { @class = "form-control input-sm", @Value = Model.VEMADE, @maxlength = "1" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.VEMWSI, "WSI number", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.VEMWSI, new { @class = "form-control input-sm", @Value = Model.VEMWSI, @type = "number", @maxlength = "5" })
+                            </div>
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.VEMTID, "COM. number ID", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.VEMTID, new { @class = "form-control input-sm", @Value = Model.VEMTID, @maxlength = "5" }) 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.VEMLOC, "Local vendor", new { @class = "form-label" })
+                                @Html.DropDownListFor(m => m.VEMLOC, new SelectList(
+                                new List<Object>{
+                                    new { value = "0" , text = "0"  },
+                                    new { value = "1" , text = "1" }
+                                }, "value", "text", "0"),
+                                new { @class = "form-control input-sm", @Value = Model.VEMLOC })
+                            </div>
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.VEMDEL, "Central vendor", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.VEMDEL, new { @class = "form-control input-sm", @Value = Model.VEMDEL, @maxlength = "5" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.VEMSTA, "Status", new { @class = "form-label" })
+                                @Html.DropDownListFor(m => m.VEMSTA, new SelectList(
+                                new List<Object>{
+                                    new { value = "0" , text = "Active"  },
+                                    new { value = "1" , text = "Inactive" }
+                                }, "value", "text", "0"),
+                                 new { @class = "form-control input-sm", @Value = Model.VEMSTA })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline bottom float" style="right:50px">
+                <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
+                <button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="search-result-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Search results</h4>
+        </div>
+        @using (Html.BeginForm("DisplaySearchResult", "VendorMaster", FormMethod.Post, new { }))
+        {
+            List<VendorMasterViewModel> VEMList = (List<VendorMasterViewModel>)Session["ViewModelList"];
+            <div class="modal-body">
+                @{if (HasSearch == 1 && VEMList != null)
+                    {
+                        foreach (VendorMasterViewModel vm in VEMList)
+                        {
+                            <button type="submit" class="modal-item-select" name="value" value=@vm.VEMVEN>
+                                <div class="col-lg-3">
+                                    @vm.VEMVEN
+                                </div>
+                                <div class="col-lg-9">
+                                    @vm.VEMVEN
+                                </div>
+                            </button>
+                        }
+                    }
+                }
+            </div>
+                    }
+    </div>
+</div>
+
+<script>
+    $(window).ready(function () {
+        if (@HasSearch === 1) {
+            $("#search-result-modal").modal('show');
+        }
+    });
+</script>

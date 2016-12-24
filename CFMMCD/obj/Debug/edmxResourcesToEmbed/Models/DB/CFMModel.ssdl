@@ -153,6 +153,30 @@
     <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="INVVEMP0">
+    <Key>
+      <PropertyRef Name="VEMVEN" />
+    </Key>
+    <Property Name="VEMVEN" Type="int" Nullable="false" />
+    <Property Name="VEMWSI" Type="int" />
+    <Property Name="VEMDS1" Type="nchar" MaxLength="20" />
+    <Property Name="VEMDS2" Type="nchar" MaxLength="20" />
+    <Property Name="VEMCCD" Type="nchar" MaxLength="3" />
+    <Property Name="VEMZIP" Type="nchar" MaxLength="5" />
+    <Property Name="VEMCTY" Type="nchar" MaxLength="20" />
+    <Property Name="VEMSTR" Type="nchar" MaxLength="20" />
+    <Property Name="VEMTEL" Type="nchar" MaxLength="18" />
+    <Property Name="VEMSTN" Type="nchar" MaxLength="5" />
+    <Property Name="VEMLOC" Type="nchar" MaxLength="1" />
+    <Property Name="VEMDAY" Type="float" />
+    <Property Name="VEMTID" Type="nchar" MaxLength="5" />
+    <Property Name="VEMSTA" Type="nchar" MaxLength="1" />
+    <Property Name="VEMDAT" Type="date" />
+    <Property Name="VEMUSR" Type="nchar" MaxLength="3" />
+    <Property Name="VEMADE" Type="nchar" MaxLength="1" />
+    <Property Name="VEMDEL" Type="nchar" MaxLength="1" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
+  </EntityType>
   <EntityType Name="McCafe_Bistro_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
@@ -244,6 +268,7 @@
     <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />

@@ -52,5 +52,7 @@ namespace CFMMCD.Models.ViewModel
         public string StoreList { get; set; }
         public bool SelectAllCb { get; set; }
         public bool SelectExcept { get; set; }
+
+        public List<MenuItemMasterViewModel> MenuItemMasterList { get; set; }
     }
 }
