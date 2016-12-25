@@ -29,8 +29,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{  foreach (BreakfastPriceTierViewModel bpt in BPTList)
+                    @{
+                        if (BPTList != null)
                         {
+                            foreach (BreakfastPriceTierViewModel bpt in BPTList)
+                            {
                             <tr>
                                 <td></td>
                                 <td>@bpt.Id</td>
@@ -38,6 +41,13 @@
                             </tr>
                         }
                     }
+                        
+                        else
+                        {
+                            <text>No Inputs</text>
+                        }
+                    }
+                        
                 </tbody>
             </table>
             <div class="right-fixed">

@@ -29,14 +29,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{  foreach (MDSPriceTierViewModel mds in MDSList)
+                    @{
+                        if (MDSList != null)
                         {
+                            foreach (MDSPriceTierViewModel mds in MDSList)
+                            {
                             <tr>
                                 <td></td>
                                 <td>@mds.Id</td>
                                 <td>@mds.Price_Tier</td>
                             </tr>
                         }
+                    }
+                    else
+                    {
+                    <text>No Inputs</text>
+                    }
                     }
                 </tbody>
             </table>

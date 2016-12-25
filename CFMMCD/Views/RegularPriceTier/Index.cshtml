@@ -29,14 +29,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{  foreach (RegularPriceTierViewModel rpt in RPTList)
+                    @{
+                        if (RPTList != null)
                         {
+                            foreach (RegularPriceTierViewModel rpt in RPTList)
+                            {
                             <tr>
                                 <td></td>
                                 <td>@rpt.Id</td>
                                 <td>@rpt.Price_Tier</td>
                             </tr>
                         }
+                    }
+                    else
+                    {
+                    <text>No Inputs</text>
+                    }
                     }
                 </tbody>
             </table>

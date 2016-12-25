@@ -29,15 +29,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{  foreach (McCafeLevel3PriceTierViewModel ml3 in ML3List)
+                    @{
+                        if (ML3List != null)
                         {
+                            foreach (McCafeLevel3PriceTierViewModel ml3 in ML3List)
+                            {
                             <tr>
                                 <td></td>
                                 <td>@ml3.Id</td>
                                 <td>@ml3.Price_Tier</td>
                             </tr>
+                            }
                         }
-                    }
+
+                        else
+                        {
+                            <text>No Inputs</text>
+    }
+}
                 </tbody>
             </table>
             <div class="right-fixed">

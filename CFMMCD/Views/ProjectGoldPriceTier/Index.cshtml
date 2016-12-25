@@ -29,15 +29,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{  foreach (ProjectGoldPriceTierViewModel pg in PGList)
+                    @{
+                        if (PGList != null)
                         {
+                            foreach (ProjectGoldPriceTierViewModel pg in PGList)
+                            {
                             <tr>
                                 <td></td>
                                 <td>@pg.Id</td>
                                 <td>@pg.Price_Tier</td>
                             </tr>
+                            }
                         }
-                    }
+                        else
+                        {
+                            <text>No Inputs</text>
+    }
+}
                 </tbody>
             </table>
             <div class="right-fixed">

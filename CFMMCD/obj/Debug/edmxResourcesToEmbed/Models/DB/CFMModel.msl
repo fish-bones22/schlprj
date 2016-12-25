@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
+  <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities1">
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="CFMMCDModel.Account">
         <MappingFragment StoreEntitySet="Accounts">
@@ -109,6 +109,83 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="INVRIMP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
+        <MappingFragment StoreEntitySet="INVRIMP0">
+          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+          <ScalarProperty Name="RIMVPC" ColumnName="RIMVPC" />
+          <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
+          <ScalarProperty Name="RIMRIG" ColumnName="RIMRIG" />
+          <ScalarProperty Name="RIMTEM" ColumnName="RIMTEM" />
+          <ScalarProperty Name="RIMPGR" ColumnName="RIMPGR" />
+          <ScalarProperty Name="RIMPIS" ColumnName="RIMPIS" />
+          <ScalarProperty Name="RIMBVP" ColumnName="RIMBVP" />
+          <ScalarProperty Name="RIMBZP" ColumnName="RIMBZP" />
+          <ScalarProperty Name="RIMUMC" ColumnName="RIMUMC" />
+          <ScalarProperty Name="RIMUPC" ColumnName="RIMUPC" />
+          <ScalarProperty Name="RIMSUQ" ColumnName="RIMSUQ" />
+          <ScalarProperty Name="RIMLAY" ColumnName="RIMLAY" />
+          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
+          <ScalarProperty Name="RIMCPN" ColumnName="RIMCPN" />
+          <ScalarProperty Name="RIMPDT" ColumnName="RIMPDT" />
+          <ScalarProperty Name="RIMPVN" ColumnName="RIMPVN" />
+          <ScalarProperty Name="RIMSVN" ColumnName="RIMSVN" />
+          <ScalarProperty Name="RIMCWC" ColumnName="RIMCWC" />
+          <ScalarProperty Name="RIMPRO" ColumnName="RIMPRO" />
+          <ScalarProperty Name="RIMSE4" ColumnName="RIMSE4" />
+          <ScalarProperty Name="RIMERT" ColumnName="RIMERT" />
+          <ScalarProperty Name="RIMUSF" ColumnName="RIMUSF" />
+          <ScalarProperty Name="RIMSDP" ColumnName="RIMSDP" />
+          <ScalarProperty Name="RIMUS1" ColumnName="RIMUS1" />
+          <ScalarProperty Name="RIMUS2" ColumnName="RIMUS2" />
+          <ScalarProperty Name="RIMUS3" ColumnName="RIMUS3" />
+          <ScalarProperty Name="RIMUS4" ColumnName="RIMUS4" />
+          <ScalarProperty Name="RIMUS5" ColumnName="RIMUS5" />
+          <ScalarProperty Name="RIMUSX" ColumnName="RIMUSX" />
+          <ScalarProperty Name="RIMMSD" ColumnName="RIMMSD" />
+          <ScalarProperty Name="RIMMSL" ColumnName="RIMMSL" />
+          <ScalarProperty Name="RIMLA1" ColumnName="RIMLA1" />
+          <ScalarProperty Name="RIMLA2" ColumnName="RIMLA2" />
+          <ScalarProperty Name="RIMLP1" ColumnName="RIMLP1" />
+          <ScalarProperty Name="RIMLP2" ColumnName="RIMLP2" />
+          <ScalarProperty Name="RIMSTA" ColumnName="RIMSTA" />
+          <ScalarProperty Name="RIMUSR" ColumnName="RIMUSR" />
+          <ScalarProperty Name="RIMDAT" ColumnName="RIMDAT" />
+          <ScalarProperty Name="RIMEDT" ColumnName="RIMEDT" />
+          <ScalarProperty Name="RIMFLG" ColumnName="RIMFLG" />
+          <ScalarProperty Name="RIMORD" ColumnName="RIMORD" />
+          <ScalarProperty Name="RIMLIN" ColumnName="RIMLIN" />
+          <ScalarProperty Name="RIMADE" ColumnName="RIMADE" />
+          <ScalarProperty Name="RIMBAR" ColumnName="RIMBAR" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVVEMP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.INVVEMP0">
+        <MappingFragment StoreEntitySet="INVVEMP0">
+          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
+          <ScalarProperty Name="VEMWSI" ColumnName="VEMWSI" />
+          <ScalarProperty Name="VEMDS1" ColumnName="VEMDS1" />
+          <ScalarProperty Name="VEMDS2" ColumnName="VEMDS2" />
+          <ScalarProperty Name="VEMCCD" ColumnName="VEMCCD" />
+          <ScalarProperty Name="VEMZIP" ColumnName="VEMZIP" />
+          <ScalarProperty Name="VEMCTY" ColumnName="VEMCTY" />
+          <ScalarProperty Name="VEMSTR" ColumnName="VEMSTR" />
+          <ScalarProperty Name="VEMTEL" ColumnName="VEMTEL" />
+          <ScalarProperty Name="VEMSTN" ColumnName="VEMSTN" />
+          <ScalarProperty Name="VEMLOC" ColumnName="VEMLOC" />
+          <ScalarProperty Name="VEMDAY" ColumnName="VEMDAY" />
+          <ScalarProperty Name="VEMTID" ColumnName="VEMTID" />
+          <ScalarProperty Name="VEMSTA" ColumnName="VEMSTA" />
+          <ScalarProperty Name="VEMDAT" ColumnName="VEMDAT" />
+          <ScalarProperty Name="VEMUSR" ColumnName="VEMUSR" />
+          <ScalarProperty Name="VEMADE" ColumnName="VEMADE" />
+          <ScalarProperty Name="VEMDEL" ColumnName="VEMDEL" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="McCafe_Bistro_Price_Tier">
       <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Bistro_Price_Tier">
         <MappingFragment StoreEntitySet="McCafe_Bistro_Price_Tier">
@@ -157,6 +234,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="RIM_VEM_Lookup">
+      <EntityTypeMapping TypeName="CFMMCDModel.RIM_VEM_Lookup">
+        <MappingFragment StoreEntitySet="RIM_VEM_Lookup">
+          <ScalarProperty Name="RIM_VEM_ID" ColumnName="RIM_VEM_ID" />
+          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
+          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
+          <ScalarProperty Name="PPERUN" ColumnName="PPERUN" />
+          <ScalarProperty Name="SCMCOD" ColumnName="SCMCOD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STORE_MIMMIC_Lookup">
+      <EntityTypeMapping TypeName="CFMMCDModel.STORE_MIMMIC_Lookup">
+        <MappingFragment StoreEntitySet="STORE_MIMMIC_Lookup">
+          <ScalarProperty Name="STORE_MIMMIC_Id" ColumnName="STORE_MIMMIC_Id" />
+          <ScalarProperty Name="STORE_NO" ColumnName="STORE_NO" />
+          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Store_Profile">
       <EntityTypeMapping TypeName="CFMMCDModel.Store_Profile">
         <MappingFragment StoreEntitySet="Store_Profile">
@@ -187,80 +285,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="INVRIMP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
-        <MappingFragment StoreEntitySet="INVRIMP0">
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="RIMBAR" ColumnName="RIMBAR" />
-          <ScalarProperty Name="RIMADE" ColumnName="RIMADE" />
-          <ScalarProperty Name="RIMLIN" ColumnName="RIMLIN" />
-          <ScalarProperty Name="RIMORD" ColumnName="RIMORD" />
-          <ScalarProperty Name="RIMFLG" ColumnName="RIMFLG" />
-          <ScalarProperty Name="RIMEDT" ColumnName="RIMEDT" />
-          <ScalarProperty Name="RIMDAT" ColumnName="RIMDAT" />
-          <ScalarProperty Name="RIMUSR" ColumnName="RIMUSR" />
-          <ScalarProperty Name="RIMSTA" ColumnName="RIMSTA" />
-          <ScalarProperty Name="RIMLP2" ColumnName="RIMLP2" />
-          <ScalarProperty Name="RIMLP1" ColumnName="RIMLP1" />
-          <ScalarProperty Name="RIMLA2" ColumnName="RIMLA2" />
-          <ScalarProperty Name="RIMLA1" ColumnName="RIMLA1" />
-          <ScalarProperty Name="RIMMSL" ColumnName="RIMMSL" />
-          <ScalarProperty Name="RIMMSD" ColumnName="RIMMSD" />
-          <ScalarProperty Name="RIMUSX" ColumnName="RIMUSX" />
-          <ScalarProperty Name="RIMUS5" ColumnName="RIMUS5" />
-          <ScalarProperty Name="RIMUS4" ColumnName="RIMUS4" />
-          <ScalarProperty Name="RIMUS3" ColumnName="RIMUS3" />
-          <ScalarProperty Name="RIMUS2" ColumnName="RIMUS2" />
-          <ScalarProperty Name="RIMUS1" ColumnName="RIMUS1" />
-          <ScalarProperty Name="RIMSDP" ColumnName="RIMSDP" />
-          <ScalarProperty Name="RIMUSF" ColumnName="RIMUSF" />
-          <ScalarProperty Name="RIMERT" ColumnName="RIMERT" />
-          <ScalarProperty Name="RIMSE4" ColumnName="RIMSE4" />
-          <ScalarProperty Name="RIMPRO" ColumnName="RIMPRO" />
-          <ScalarProperty Name="RIMCWC" ColumnName="RIMCWC" />
-          <ScalarProperty Name="RIMSVN" ColumnName="RIMSVN" />
-          <ScalarProperty Name="RIMPVN" ColumnName="RIMPVN" />
-          <ScalarProperty Name="RIMPDT" ColumnName="RIMPDT" />
-          <ScalarProperty Name="RIMCPN" ColumnName="RIMCPN" />
-          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
-          <ScalarProperty Name="RIMLAY" ColumnName="RIMLAY" />
-          <ScalarProperty Name="RIMSUQ" ColumnName="RIMSUQ" />
-          <ScalarProperty Name="RIMUPC" ColumnName="RIMUPC" />
-          <ScalarProperty Name="RIMUMC" ColumnName="RIMUMC" />
-          <ScalarProperty Name="RIMBZP" ColumnName="RIMBZP" />
-          <ScalarProperty Name="RIMBVP" ColumnName="RIMBVP" />
-          <ScalarProperty Name="RIMPIS" ColumnName="RIMPIS" />
-          <ScalarProperty Name="RIMPGR" ColumnName="RIMPGR" />
-          <ScalarProperty Name="RIMTEM" ColumnName="RIMTEM" />
-          <ScalarProperty Name="RIMRIG" ColumnName="RIMRIG" />
-          <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
-          <ScalarProperty Name="RIMVPC" ColumnName="RIMVPC" />
-          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="INVVEMP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.INVVEMP0">
-        <MappingFragment StoreEntitySet="INVVEMP0">
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="VEMDEL" ColumnName="VEMDEL" />
-          <ScalarProperty Name="VEMADE" ColumnName="VEMADE" />
-          <ScalarProperty Name="VEMUSR" ColumnName="VEMUSR" />
-          <ScalarProperty Name="VEMDAT" ColumnName="VEMDAT" />
-          <ScalarProperty Name="VEMSTA" ColumnName="VEMSTA" />
-          <ScalarProperty Name="VEMTID" ColumnName="VEMTID" />
-          <ScalarProperty Name="VEMDAY" ColumnName="VEMDAY" />
-          <ScalarProperty Name="VEMLOC" ColumnName="VEMLOC" />
-          <ScalarProperty Name="VEMSTN" ColumnName="VEMSTN" />
-          <ScalarProperty Name="VEMTEL" ColumnName="VEMTEL" />
-          <ScalarProperty Name="VEMSTR" ColumnName="VEMSTR" />
-          <ScalarProperty Name="VEMCTY" ColumnName="VEMCTY" />
-          <ScalarProperty Name="VEMZIP" ColumnName="VEMZIP" />
-          <ScalarProperty Name="VEMCCD" ColumnName="VEMCCD" />
-          <ScalarProperty Name="VEMDS2" ColumnName="VEMDS2" />
-          <ScalarProperty Name="VEMDS1" ColumnName="VEMDS1" />
-          <ScalarProperty Name="VEMWSI" ColumnName="VEMWSI" />
-          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
+    <EntitySetMapping Name="Tier_Lookup">
+      <EntityTypeMapping TypeName="CFMMCDModel.Tier_Lookup">
+        <MappingFragment StoreEntitySet="Tier_Lookup">
+          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+          <ScalarProperty Name="OLDPRA" ColumnName="OLDPRA" />
+          <ScalarProperty Name="NEWPRA" ColumnName="NEWPRA" />
+          <ScalarProperty Name="OLDPRB" ColumnName="OLDPRB" />
+          <ScalarProperty Name="NEWPRB" ColumnName="NEWPRB" />
+          <ScalarProperty Name="OLDPRC" ColumnName="OLDPRC" />
+          <ScalarProperty Name="NEWPRC" ColumnName="NEWPRC" />
+          <ScalarProperty Name="OLDPRD" ColumnName="OLDPRD" />
+          <ScalarProperty Name="NEWPRD" ColumnName="NEWPRD" />
+          <ScalarProperty Name="OLDPRE" ColumnName="OLDPRE" />
+          <ScalarProperty Name="NEWPRE" ColumnName="NEWPRE" />
+          <ScalarProperty Name="OLDPRF" ColumnName="OLDPRF" />
+          <ScalarProperty Name="NEWPRF" ColumnName="NEWPRF" />
+          <ScalarProperty Name="OLDMDS" ColumnName="OLDMDS" />
+          <ScalarProperty Name="NEWMDS" ColumnName="NEWMDS" />
+          <ScalarProperty Name="OLDPRS" ColumnName="OLDPRS" />
+          <ScalarProperty Name="NEWPRS" ColumnName="NEWPRS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

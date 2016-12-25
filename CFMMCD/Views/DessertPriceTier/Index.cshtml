@@ -29,13 +29,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{  foreach (DessertPriceTierViewModel dpt in DPTList)
+                    @{
+                        if (DPTList != null)
                         {
-                            <tr>
-                                <td></td>
-                                <td>@dpt.Id</td>
-                                <td>@dpt.Price_Tier</td>
-                            </tr>
+                            foreach (DessertPriceTierViewModel dpt in DPTList)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>@dpt.Id</td>
+                                    <td>@dpt.Price_Tier</td>
+                                </tr>
+                            }
+                        }
+
+                        else
+                        {
+                            <text>No Inputs</text>
                         }
                     }
                 </tbody>

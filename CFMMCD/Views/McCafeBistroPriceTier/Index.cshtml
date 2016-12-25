@@ -29,13 +29,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{  foreach (McCafeBistroPriceTierViewModel mcb in MCBList)
+                    @{
+                        if (MCBList != null)
                         {
-                            <tr>
-                                <td></td>
-                                <td>@mcb.Id</td>
-                                <td>@mcb.Price_Tier</td>
-                            </tr>
+                            foreach (McCafeBistroPriceTierViewModel mcb in MCBList)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>@mcb.Id</td>
+                                    <td>@mcb.Price_Tier</td>
+                                </tr>
+                            }
+                        }
+
+                        else
+                        {
+                            <text>No Inputs</text>
                         }
                     }
                 </tbody>
