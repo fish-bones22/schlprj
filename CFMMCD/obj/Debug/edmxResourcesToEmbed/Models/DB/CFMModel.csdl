@@ -86,6 +86,7 @@
     <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
     <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="CSHMIMP0_NP6" Relationship="Self.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0" ToRole="CSHMIMP0_NP6" />
+    <NavigationProperty Name="STORE_MIMMIC_Lookup" Relationship="CFMMCDModel.FK_STORE_MIMMIC_Lookup_CSHMIMP0" FromRole="CSHMIMP0" ToRole="STORE_MIMMIC_Lookup" />
   </EntityType>
   <EntityType Name="CSHMIMP0_NP6">
     <Key>
@@ -174,6 +175,7 @@
     <Property Name="SIMPLOT_OR_MCCAIN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="MCCORMICK_OR_GSF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="STORE_MIMMIC_Lookup" Relationship="CFMMCDModel.FK_STORE_MIMMIC_Lookup_STORE_NO" FromRole="Store_Profile" ToRole="STORE_MIMMIC_Lookup" />
   </EntityType>
   <Association Name="FK_CSHMIMP0_ToTable">
     <End Role="CSHMIMP0_NP6" Type="Self.CSHMIMP0_NP6" Multiplicity="0..1" />
@@ -207,6 +209,17 @@
     </AssociationSet>
     <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
     <EntitySet Name="INVVEMP0" EntityType="CFMMCDModel.INVVEMP0" />
+    <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="CFMMCDModel.STORE_MIMMIC_Lookup" />
+    <EntitySet Name="Tier_Lookup" EntityType="CFMMCDModel.Tier_Lookup" />
+    <AssociationSet Name="FK_STORE_MIMMIC_Lookup_CSHMIMP0" Association="CFMMCDModel.FK_STORE_MIMMIC_Lookup_CSHMIMP0">
+      <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+      <End Role="STORE_MIMMIC_Lookup" EntitySet="STORE_MIMMIC_Lookup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STORE_MIMMIC_Lookup_STORE_NO" Association="CFMMCDModel.FK_STORE_MIMMIC_Lookup_STORE_NO">
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+      <End Role="STORE_MIMMIC_Lookup" EntitySet="STORE_MIMMIC_Lookup" />
+    </AssociationSet>
+    <EntitySet Name="RIM_VEM_Lookup" EntityType="CFMMCDModel.RIM_VEM_Lookup" />
   </EntityContainer>
   <EntityType Name="INVRIMP0">
     <Key>
@@ -282,5 +295,72 @@
     <Property Name="VEMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
     <Property Name="VEMDEL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
     <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="STORE_MIMMIC_Lookup">
+    <Key>
+      <PropertyRef Name="STORE_MIMMIC_Id" />
+    </Key>
+    <Property Name="STORE_MIMMIC_Id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="STORE_NO" Type="Int32" />
+    <Property Name="MIMMIC" Type="Int32" />
+    <NavigationProperty Name="CSHMIMP0" Relationship="CFMMCDModel.FK_STORE_MIMMIC_Lookup_CSHMIMP0" FromRole="STORE_MIMMIC_Lookup" ToRole="CSHMIMP0" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_STORE_MIMMIC_Lookup_STORE_NO" FromRole="STORE_MIMMIC_Lookup" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="Tier_Lookup">
+    <Key>
+      <PropertyRef Name="MIMMIC" />
+    </Key>
+    <Property Name="MIMMIC" Type="Int32" Nullable="false" />
+    <Property Name="OLDPRA" Type="Double" />
+    <Property Name="NEWPRA" Type="Double" />
+    <Property Name="OLDPRB" Type="Double" />
+    <Property Name="NEWPRB" Type="Double" />
+    <Property Name="OLDPRC" Type="Double" />
+    <Property Name="NEWPRC" Type="Double" />
+    <Property Name="OLDPRD" Type="Double" />
+    <Property Name="NEWPRD" Type="Double" />
+    <Property Name="OLDPRE" Type="Double" />
+    <Property Name="NEWPRE" Type="Double" />
+    <Property Name="OLDPRF" Type="Double" />
+    <Property Name="NEWPRF" Type="Double" />
+    <Property Name="OLDMDS" Type="Double" />
+    <Property Name="NEWMDS" Type="Double" />
+    <Property Name="OLDPRS" Type="Double" />
+    <Property Name="NEWPRS" Type="Double" />
+  </EntityType>
+  <Association Name="FK_STORE_MIMMIC_Lookup_CSHMIMP0">
+    <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.STORE_MIMMIC_Lookup" Role="STORE_MIMMIC_Lookup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSHMIMP0">
+        <PropertyRef Name="MIMMIC" />
+      </Principal>
+      <Dependent Role="STORE_MIMMIC_Lookup">
+        <PropertyRef Name="MIMMIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STORE_MIMMIC_Lookup_STORE_NO">
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.STORE_MIMMIC_Lookup" Role="STORE_MIMMIC_Lookup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store_Profile">
+        <PropertyRef Name="STORE_NO" />
+      </Principal>
+      <Dependent Role="STORE_MIMMIC_Lookup">
+        <PropertyRef Name="STORE_NO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RIM_VEM_Lookup">
+    <Key>
+      <PropertyRef Name="RIM_VEM_ID" />
+    </Key>
+    <Property Name="RIM_VEM_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="RIMRIC" Type="Int32" />
+    <Property Name="VEMVEN" Type="Int32" />
+    <Property Name="RIMCPR" Type="Double" />
+    <Property Name="PPERUN" Type="Double" />
+    <Property Name="SCMCOD" Type="Double" />
   </EntityType>
 </Schema>

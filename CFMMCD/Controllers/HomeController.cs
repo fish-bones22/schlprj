@@ -13,6 +13,10 @@ namespace CFMMCD.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            // Reset ViewModelList Session
+            if (Session["ViewModelList"] != null)
+                Session["ViewModelList"] = null;
+
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null) return RedirectToAction("Login", "Account");

@@ -219,6 +219,25 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="RIM_VEM_Lookup">
+    <Key>
+      <PropertyRef Name="RIM_VEM_ID" />
+    </Key>
+    <Property Name="RIM_VEM_ID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="RIMRIC" Type="int" />
+    <Property Name="VEMVEN" Type="int" />
+    <Property Name="RIMCPR" Type="float" />
+    <Property Name="PPERUN" Type="float" />
+    <Property Name="SCMCOD" Type="float" />
+  </EntityType>
+  <EntityType Name="STORE_MIMMIC_Lookup">
+    <Key>
+      <PropertyRef Name="STORE_MIMMIC_Id" />
+    </Key>
+    <Property Name="STORE_MIMMIC_Id" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="STORE_NO" Type="int" />
+    <Property Name="MIMMIC" Type="int" />
+  </EntityType>
   <EntityType Name="Store_Profile">
     <Key>
       <PropertyRef Name="STORE_NO" />
@@ -248,6 +267,28 @@
     <Property Name="MCCORMICK_OR_GSF" Type="nchar" MaxLength="10" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="Tier_Lookup">
+    <Key>
+      <PropertyRef Name="MIMMIC" />
+    </Key>
+    <Property Name="MIMMIC" Type="int" Nullable="false" />
+    <Property Name="OLDPRA" Type="float" />
+    <Property Name="NEWPRA" Type="float" />
+    <Property Name="OLDPRB" Type="float" />
+    <Property Name="NEWPRB" Type="float" />
+    <Property Name="OLDPRC" Type="float" />
+    <Property Name="NEWPRC" Type="float" />
+    <Property Name="OLDPRD" Type="float" />
+    <Property Name="NEWPRD" Type="float" />
+    <Property Name="OLDPRE" Type="float" />
+    <Property Name="NEWPRE" Type="float" />
+    <Property Name="OLDPRF" Type="float" />
+    <Property Name="NEWPRF" Type="float" />
+    <Property Name="OLDMDS" Type="float" />
+    <Property Name="NEWMDS" Type="float" />
+    <Property Name="OLDPRS" Type="float" />
+    <Property Name="NEWPRS" Type="float" />
+  </EntityType>
   <Association Name="FK_CSHMIMP0_ToTable">
     <End Role="CSHMIMP0_NP6" Type="Self.CSHMIMP0_NP6" Multiplicity="0..1" />
     <End Role="CSHMIMP0" Type="Self.CSHMIMP0" Multiplicity="*" />
@@ -257,6 +298,30 @@
       </Principal>
       <Dependent Role="CSHMIMP0">
         <PropertyRef Name="MIMMIC_NP6" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STORE_MIMMIC_Lookup_CSHMIMP0">
+    <End Role="CSHMIMP0" Type="Self.CSHMIMP0" Multiplicity="0..1" />
+    <End Role="STORE_MIMMIC_Lookup" Type="Self.STORE_MIMMIC_Lookup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSHMIMP0">
+        <PropertyRef Name="MIMMIC" />
+      </Principal>
+      <Dependent Role="STORE_MIMMIC_Lookup">
+        <PropertyRef Name="MIMMIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STORE_MIMMIC_Lookup_STORE_NO">
+    <End Role="Store_Profile" Type="Self.Store_Profile" Multiplicity="0..1" />
+    <End Role="STORE_MIMMIC_Lookup" Type="Self.STORE_MIMMIC_Lookup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store_Profile">
+        <PropertyRef Name="STORE_NO" />
+      </Principal>
+      <Dependent Role="STORE_MIMMIC_Lookup">
+        <PropertyRef Name="STORE_NO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -275,10 +340,21 @@
     <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RIM_VEM_Lookup" EntityType="Self.RIM_VEM_Lookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="Self.STORE_MIMMIC_Lookup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tier_Lookup" EntityType="Self.Tier_Lookup" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STORE_MIMMIC_Lookup_CSHMIMP0" Association="Self.FK_STORE_MIMMIC_Lookup_CSHMIMP0">
+      <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+      <End Role="STORE_MIMMIC_Lookup" EntitySet="STORE_MIMMIC_Lookup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STORE_MIMMIC_Lookup_STORE_NO" Association="Self.FK_STORE_MIMMIC_Lookup_STORE_NO">
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+      <End Role="STORE_MIMMIC_Lookup" EntitySet="STORE_MIMMIC_Lookup" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

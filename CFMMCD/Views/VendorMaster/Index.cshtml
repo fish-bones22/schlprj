@@ -158,24 +158,27 @@
         @using (Html.BeginForm("DisplaySearchResult", "VendorMaster", FormMethod.Post, new { }))
         {
             List<VendorMasterViewModel> VEMList = (List<VendorMasterViewModel>)Session["ViewModelList"];
-            <div class="modal-body">
-                @{if (HasSearch == 1 && VEMList != null)
-                    {
-                        foreach (VendorMasterViewModel vm in VEMList)
+            if (VEMList != null)
+            {
+                <div class="modal-body">
+                    @{if (HasSearch == 1 && VEMList != null)
                         {
-                            <button type="submit" class="modal-item-select" name="value" value=@vm.VEMVEN>
-                                <div class="col-lg-3">
-                                    @vm.VEMVEN
-                                </div>
-                                <div class="col-lg-9">
-                                    @vm.VEMVEN
-                                </div>
-                            </button>
+                            foreach (VendorMasterViewModel vm in VEMList)
+                            {
+                                <button type="submit" class="modal-item-select" name="value" value=@vm.VEMVEN>
+                                    <div class="col-lg-3">
+                                        @vm.VEMVEN
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @vm.VEMDS1
+                                    </div>
+                                </button>
+                            }
                         }
                     }
-                }
-            </div>
-                    }
+                </div>
+            }
+        }
     </div>
 </div>
 

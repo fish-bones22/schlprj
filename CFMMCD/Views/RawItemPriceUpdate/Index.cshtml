@@ -1,0 +1,126 @@
+﻿@model CFMMCD.Models.ViewModel.RawItemMasterViewModel
+@using CFMMCD.Models.ViewModel
+
+@{
+    ViewBag.Title = "Raw Item Price Update";
+    int HasSearch = 0;
+    if (TempData["SearchResult"] != null)
+    {
+        HasSearch = (int)TempData["SearchResult"];
+    }
+}
+<h2>@ViewBag.Title</h2>
+<!--Alerts-->
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
+<div class="form-horizontal">
+    <div class="container-fluid">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-lg-4 label-container-left">
+                <label class="form-label" for="menu-item">Raw item name / Raw item number</label>
+            </div>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
+                <div class="input-group float-right" style="padding-top:8px">
+                    <label class="checkbox-inline form-label">
+                        @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
+                    </label>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-1">
+                <button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
+            </div>
+        }
+    </div>
+    <div class="container-fluid">
+        @using (Html.BeginForm("DisplaySearchResult", "RawItemPriceUpdateMaster", FormMethod.Post, new { }))
+        {
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Raw item number</th>
+                    <th>Raw item name</th>
+                    <th>Price per CS</th>
+                    <th>New price per CS</th>
+                    <th>New price date</th>
+                    <th>Vendor name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    <tr>
+                        if (HasSearch == 1)
+                        {
+                        <td></td>
+                        <td>@Model.RIMRIC</td>
+                        <td>@Model.RIMRID</td>
+                        <td>@Model.RIMCPR</td>
+                        <td>@Html.TextBoxFor(m => m.RIMCPN, new { @class = "form-control", @type = "number" })</td>
+                        <td>@Html.TextBoxFor(m => m.RIMPDT, new { @class = "form-control", @type = "date" })</td>
+                        <td>@Model.RIMCPR</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+        <div class="form-inline bottom float" style="right:50px">
+            <button type="submit" name="command" value="Switch" class="btn btn-default">Switch</button>
+            <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
+            <button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="search-result-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Search results</h4>
+        </div>
+        @using (Html.BeginForm("DisplaySearchResult", "RawItemMaster", FormMethod.Post, new { }))
+        {
+            List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>)Session["ViewModelList"];
+            if (RIMList != null)
+            {
+                <div class="modal-body">
+                    @{if (HasSearch == 1 && RIMList != null)
+                        {
+                            foreach (RawItemMasterViewModel vm in RIMList)
+                            {
+                                <button type="submit" class="modal-item-select" name="value" value=@vm.RIMRIC>
+                                    <div class="col-lg-3">
+                                        @vm.RIMRIC
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @vm.RIMRID
+                                    </div>
+                                </button>
+                            }
+                        }
+                    }
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<script>
+    $(window).ready(function () {
+        if (@HasSearch === 1) {
+            $("#search-result-modal").modal('show');
+        }
+    });
+</script>

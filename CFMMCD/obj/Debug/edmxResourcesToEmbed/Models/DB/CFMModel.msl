@@ -264,5 +264,49 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="STORE_MIMMIC_Lookup">
+      <EntityTypeMapping TypeName="CFMMCDModel.STORE_MIMMIC_Lookup">
+        <MappingFragment StoreEntitySet="STORE_MIMMIC_Lookup">
+          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+          <ScalarProperty Name="STORE_NO" ColumnName="STORE_NO" />
+          <ScalarProperty Name="STORE_MIMMIC_Id" ColumnName="STORE_MIMMIC_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tier_Lookup">
+      <EntityTypeMapping TypeName="CFMMCDModel.Tier_Lookup">
+        <MappingFragment StoreEntitySet="Tier_Lookup">
+          <ScalarProperty Name="NEWPRS" ColumnName="NEWPRS" />
+          <ScalarProperty Name="OLDPRS" ColumnName="OLDPRS" />
+          <ScalarProperty Name="NEWMDS" ColumnName="NEWMDS" />
+          <ScalarProperty Name="OLDMDS" ColumnName="OLDMDS" />
+          <ScalarProperty Name="NEWPRF" ColumnName="NEWPRF" />
+          <ScalarProperty Name="OLDPRF" ColumnName="OLDPRF" />
+          <ScalarProperty Name="NEWPRE" ColumnName="NEWPRE" />
+          <ScalarProperty Name="OLDPRE" ColumnName="OLDPRE" />
+          <ScalarProperty Name="NEWPRD" ColumnName="NEWPRD" />
+          <ScalarProperty Name="OLDPRD" ColumnName="OLDPRD" />
+          <ScalarProperty Name="NEWPRC" ColumnName="NEWPRC" />
+          <ScalarProperty Name="OLDPRC" ColumnName="OLDPRC" />
+          <ScalarProperty Name="NEWPRB" ColumnName="NEWPRB" />
+          <ScalarProperty Name="OLDPRB" ColumnName="OLDPRB" />
+          <ScalarProperty Name="NEWPRA" ColumnName="NEWPRA" />
+          <ScalarProperty Name="OLDPRA" ColumnName="OLDPRA" />
+          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RIM_VEM_Lookup">
+      <EntityTypeMapping TypeName="CFMMCDModel.RIM_VEM_Lookup">
+        <MappingFragment StoreEntitySet="RIM_VEM_Lookup">
+          <ScalarProperty Name="SCMCOD" ColumnName="SCMCOD" />
+          <ScalarProperty Name="PPERUN" ColumnName="PPERUN" />
+          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
+          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
+          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+          <ScalarProperty Name="RIM_VEM_ID" ColumnName="RIM_VEM_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

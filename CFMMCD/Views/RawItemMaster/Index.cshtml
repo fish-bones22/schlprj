@@ -1,513 +1,533 @@
 ﻿@model CFMMCD.Models.ViewModel.RawItemMasterViewModel
 @using CFMMCD.Models.ViewModel
+
 @{
-    ViewBag.Title = "Raw Item Master";
-    int HasSearch = 0;
-    if (TempData["SearchResult"] != null)
-    {
-        HasSearch = (int)TempData["SearchResult"];
-    }
+	ViewBag.Title = "Raw Item Master";
+	int HasSearch = 0;
+	if (TempData["SearchResult"] != null)
+	{
+		HasSearch = (int)TempData["SearchResult"];
+	}
 }
 
 <h2>@ViewBag.Title</h2>
 <!--Alerts-->
 <div class="container">
-    @if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
-    }
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
-    }
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+	}
+	@if (TempData["SuccessMessage"] != null)
+	{
+		<div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+	}
 </div>
 <div class="form-horizontal">
-    <div class="container-fluid">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="col-lg-3 label-container-left">
-                <label class="form-label" for="menu-item">Raw item name/ Raw item number</label>
-            </div>
-            <div class="col-lg-6">
-                @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
-                <div class="input-group float-right" style="padding-top:8px">
-                    <label class="checkbox-inline form-label">
-                        @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
-                    </label>
-                </div>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-lg-1">
-                <button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
-            </div>
-        }
-    </div>
-    <div class="container-fluid">
-        @using (Html.BeginForm("UpdateDelete", "RawItemMaster", FormMethod.Post, new { }))
-        {
-            <div class="row">
-                <!-- Row 1 Col 1-->
-                <div class="col-lg-4">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMRIC, "Raw item number", new { @class = "form-label", @type = "number" })
-                            @Html.TextBoxFor(m => m.RIMRIC, new { @class = "form-control input-sm", @Value = Model.RIMRIC, @maxlength = "6" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMRID, "Raw item name", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.RIMRID, new { @class = "form-control input-sm", @Value = Model.RIMRID, @maxlength = "16" })
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMPIS, "Inventory period", new { @class = "form-label" })
-                                    @Html.DropDownListFor(m => m.RIMPIS, new SelectList(
-                                new List<Object>{
-                                    new { value = "0" , text = "Day"  },
-                                    new { value = "1" , text = "Week" },
-                                    new { value = "2" , text = "Month" }
-                                },
-                                "value", "text", "0"),
-                                new { @class = "form-control input-sm", @Value = Model.RIMPIS })
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMRIG, "Raw item group", new { @class = "form-label" })
-                                    @Html.DropDownListFor(m => m.RIMRIG, new SelectList(
-                                new List<Object>{
-                                    new { value = "00" , text = "Refer to"  },
-                                    new { value = "01" , text = "Product Group" }
-                                },
-                                "value", "text", "00"),
-                                new { @class = "form-control input-sm", @Value = Model.RIMRIG })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMUMC, "Unit of Usage (UN)", new { @class = "form-label" })
-                                    @Html.DropDownListFor(m => m.RIMUMC, new SelectList(
-                                    new List<Object>{
-                                        new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-                                        new { value = "TRY" , text = "Tray" }
-                                    },
-                                    "value", "text", "BOX"),
-                                    new { @class = "form-control input-sm", @Value = Model.RIMUMC })
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMUPC, "Unit of Usage per CS", new { @class = "form-label" })
-                                    @Html.TextBoxFor(m => m.RIMUPC, new { @class = "form-control input-sm", @Value = Model.RIMUPC, @type = "number", @maxlength = "9" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMBZP, "Sub unit (TRAY)", new { @class = "form-label" })
-                                    @Html.DropDownListFor(m => m.RIMBZP, new SelectList(
-                                    new List<Object>{
-                                        new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-                                        new { value = "TRY" , text = "Tray" }
-                                    },
-                                    "value", "text", "BOX"),
-                                    new { @class = "form-control input-sm", @Value = Model.RIMBZP })
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMSUQ, "Sub unit per CS", new { @class = "form-label" })
-                                    @Html.TextBoxFor(m => m.RIMSUQ, new { @class = "form-control input-sm", @Value = Model.RIMSUQ, @type = "number", @maxlength = "8" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMBVP, "Packing unit (CS)", new { @class = "form-label" })
-                                    @Html.DropDownListFor(m => m.RIMBVP, new SelectList(
-                                    new List<Object>{
-                                        new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-                                        new { value = "TRY" , text = "Tray" }
-                                    },
-                                    "value", "text", "BOX"),
-                                    new { @class = "form-control input-sm", @Value = Model.RIMBVP })
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMLAY, "CS/Vendor unit", new { @class = "form-label" })
-                                    @Html.TextBoxFor(m => m.RIMLAY, new { @class = "form-control input-sm", @Value = Model.RIMLAY, @maxlength = "2" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMCPR, "Price per CS", new { @class = "form-label" })
-                                    @Html.TextBoxFor(m => m.RIMCPR, new { @class = "form-control input-sm", @Value = Model.RIMCPR, @type = "number", @maxlength = "15" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMCPN, "New price", new { @class = "form-label" })
-                                    @Html.TextBoxFor(m => m.RIMCPN, new { @class = "form-control input-sm", @Value = Model.RIMCPN, @type = "number", @maxlength = "15"})
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.RIMPDT, "New date", new { @class = "form-label" })
-                                    @Html.TextBoxFor(m => m.RIMPDT, new { @class = "form-control input-sm", @Value = Model.RIMPDT, @type = "date" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Row 1 Col 2-->
-                <div class="col-lg-2">
+	<div class="container-fluid">
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+			<div class="col-lg-4 label-container-left">
+				<label class="form-label" for="menu-item">Raw item name/ Raw item number</label>
+			</div>
+			<div class="col-lg-6">
+				@Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
+				<div class="input-group float-right" style="padding-top:8px">
+					<label class="checkbox-inline form-label">
+						@Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
+					</label>
+				</div>
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			</div>
+			<div class="col-lg-1">
+				<button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
+			</div>
+		}
+	</div>
+	<div class="container-fluid">
+		@using (Html.BeginForm("UpdateDelete", "RawItemMaster", FormMethod.Post, new { }))
+		{
+			<div class="row">
+				<!-- Row 1 Col 1-->
+				<div class="col-lg-4">
+					<div class="col-lg-12">
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMRIC, "Raw item number", new { @class = "form-label", @type = "number" })
+							@Html.TextBoxFor(m => m.RIMRIC, new { @class = "form-control input-sm", @Value = Model.RIMRIC, @maxlength = "6" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMRID, "Raw item name", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.RIMRID, new { @class = "form-control input-sm", @Value = Model.RIMRID, @maxlength = "16" })
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMPIS, "Inventory period", new { @class = "form-label" })
+									@Html.DropDownListFor(m => m.RIMPIS, new SelectList(
+ new List<Object>{
+									new { value = "0" , text = "Day"  },
+									new { value = "1" , text = "Week" },
+									new { value = "2" , text = "Month" }
+ },
+ "value", "text", "0"),
+ new { @class = "form-control input-sm", @Value = Model.RIMPIS })
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMRIG, "Raw item group", new { @class = "form-label" })
+									@Html.DropDownListFor(m => m.RIMRIG, new SelectList(
+ new List<Object>{
+									new { value = "00" , text = "Refer to"  },
+									new { value = "01" , text = "Product Group" }
+ },
+ "value", "text", "00"),
+ new { @class = "form-control input-sm", @Value = Model.RIMRIG })
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMUMC, "Unit of Usage (UN)", new { @class = "form-label" })
+									@Html.DropDownListFor(m => m.RIMUMC, new SelectList(
+	 new List<Object>{
+										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
+										new { value = "TRY" , text = "Tray" }
+	 },
+	 "value", "text", "BOX"),
+	 new { @class = "form-control input-sm", @Value = Model.RIMUMC })
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMUPC, "Unit of Usage per CS", new { @class = "form-label" })
+									@Html.TextBoxFor(m => m.RIMUPC, new { @class = "form-control input-sm", @Value = Model.RIMUPC, @type = "number", @maxlength = "9" })
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMBZP, "Sub unit (TRAY)", new { @class = "form-label" })
+									@Html.DropDownListFor(m => m.RIMBZP, new SelectList(
+	 new List<Object>{
+										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
+										new { value = "TRY" , text = "Tray" }
+	 },
+	 "value", "text", "BOX"),
+	 new { @class = "form-control input-sm", @Value = Model.RIMBZP })
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMSUQ, "Sub unit per CS", new { @class = "form-label" })
+									@Html.TextBoxFor(m => m.RIMSUQ, new { @class = "form-control input-sm", @Value = Model.RIMSUQ, @type = "number", @maxlength = "8" })
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMBVP, "Packing unit (CS)", new { @class = "form-label" })
+									@Html.DropDownListFor(m => m.RIMBVP, new SelectList(
+	 new List<Object>{
+										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
+										new { value = "TRY" , text = "Tray" }
+	 },
+	 "value", "text", "BOX"),
+	 new { @class = "form-control input-sm", @Value = Model.RIMBVP })
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMLAY, "CS/Vendor unit", new { @class = "form-label" })
+									@Html.TextBoxFor(m => m.RIMLAY, new { @class = "form-control input-sm", @Value = Model.RIMLAY, @maxlength = "2" })
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMCPR, "Price per CS", new { @class = "form-label" })
+									@Html.TextBoxFor(m => m.RIMCPR, new { @class = "form-control input-sm", @Value = Model.RIMCPR, @type = "number", @maxlength = "15" })
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMCPN, "New price", new { @class = "form-label" })
+									@Html.TextBoxFor(m => m.RIMCPN, new { @class = "form-control input-sm", @Value = Model.RIMCPN, @type = "number", @maxlength = "15" })
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.RIMPDT, "New date", new { @class = "form-label" })
+									@Html.TextBoxFor(m => m.RIMPDT, new { @class = "form-control input-sm", @Value = Model.RIMPDT, @type = "date" })
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row 1 Col 2-->
+				<div class="col-lg-2">
 
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMPVN, "Primary vendor", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.RIMPVN, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Primary Vendor"  }, // Sample OPTIONS only
-                                new { value = "1" , text = "Tier" }
-                            },
-                            "value", "text", "0"),
-                             new { @class = "form-control input-sm", @Value = Model.RIMPVN })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMLA1, "Warehouse 1", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.RIMLA1, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Active"  },
-                                new { value = "1" , text = "Inactive" }
-                            },
-                            "value", "text", "0"),
-                             new { @class = "form-control input-sm", @Value = Model.RIMLA1 })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMLA2, "Warehouse 2", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.RIMLA2, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Active"  },
-                                new { value = "1" , text = "Inactive" }
-                            },
-                            "value", "text", "0"),
-                             new { @class = "form-control input-sm", @Value = Model.RIMLA2 })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMUSF, "Yield", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.RIMUSF, new { @class = "form-control input-sm", @Value = Model.RIMUSF, @maxlength = "8" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMERT, "Warehouse 2", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.RIMERT, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "YES"  },
-                                new { value = "1" , text = "NO" }
-                            },
-                            "value", "text", "0"),
-                             new { @class = "form-control input-sm", @Value = Model.RIMERT })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMADE, "Auto deliver", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.RIMADE, new { @class = "form-control input-sm", @Value = Model.RIMADE, @type = "number", @maxlength = "1" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMMSD, "Minimum days", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.RIMMSD, new { @class = "form-control input-sm", @Value = Model.RIMMSD, @type = "number", @maxlength = "5" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMORD, "Order item", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.RIMORD, new { @class = "form-control input-sm", @Value = Model.RIMORD, @maxlength = "1" })
-                        </div>
-                    </div>
-                </div>
-                <!--Row 1 Col 3-->
-                <div class="col-lg-2">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMMSL, "Min. stock lvl", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.RIMMSL, new { @class = "form-control input-sm", @Value = Model.RIMMSL, @type = "number", @maxlength = "9" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMBAR, "Barcode", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.RIMBAR, new { @class = "form-control input-sm", @Value = Model.RIMBAR, @maxlength = "13" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMPRO, "Raw promo", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.RIMPRO, new SelectList(
-                                new List<Object>{
-                                new { value = "0" , text = "Active"  },
-                                new { value = "1" , text = "Inactive" }
-                                },
-                                "value", "text", "0"),
-                                 new { @class = "form-control input-sm", @Value = Model.RIMPRO })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMSE4, "Recipe", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.RIMSE4, new SelectList(
-                                new List<Object>{
-                                new { value = "0" , text = "Active"  },
-                                new { value = "1" , text = "Inactive" }
-                                },
-                                "value", "text", "0"),
-                                 new { @class = "form-control input-sm", @Value = Model.RIMSE4 })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMEDT, "Active on", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.RIMEDT, new { @class = "form-control input-sm", @Value = Model.RIMEDT, @type = "date" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMCWC, "Raw waste", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.RIMCWC, new SelectList(
-                                new List<Object>{
-                                    new { value = "0" , text = "Active"  },
-                                    new { value = "1" , text = "Inactive" }
-                                },
-                                "value", "text", "0"),
-                                 new { @class = "form-control input-sm", @Value = Model.RIMCWC })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RIMSTA, "Status", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.RIMSTA, new SelectList(
-                                new List<Object>{
-                                    new { value = "0" , text = "Active"  },
-                                    new { value = "1" , text = "Inactive" }
-                                }, "value", "text", "0"),
-                                 new { @class = "form-control input-sm", @Value = Model.RIMSTA })
-                        </div>
-                        <div class="form-group">
-                            @Html.Label("Menu affected", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.DUMMY, new { @class = "form-control input-sm", @Value = "" }) <!--DUMMY-->
-                        </div>
-                    </div>
-                </div>
-                <!--Row 1 Col 4-->
-                <div class="col-lg-4">
-                    <h4>In Items</h4>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <table class="table table-responsive table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Menu item number</th>
-                                        <th>Menu item name</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr/>
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label class="form-label">Location</label>
-                            @Html.DropDownListFor(m => m.Location, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "To be added after"  },
-                                new { value = "1" , text = "Location" },
-                                new { value = "2" , text = "tier" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Region</label>
-                            @Html.DropDownListFor(m => m.Region, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "NCR"  },
-                                new { value = "1" , text = "REGION I" },
-                                new { value = "2" , text = "REGION II" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Province</label>
-                            @Html.DropDownListFor(m => m.Province, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Batanggas"  },
-                                new { value = "1" , text = "Laguna" },
-                                new { value = "2" , text = "Quezon" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">City</label>
-                            @Html.DropDownListFor(m => m.City, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Batangas City"  },
-                                new { value = "1" , text = "Lucena City" },
-                                new { value = "2" , text = "Manila City" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Store list</label>
-                            @Html.TextBoxFor(m => m.StoreList, new { @class = "form-control input-sm" })
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">
-                                @Html.CheckBoxFor(m => m.SelectAllCb)
-                                Select all
-                            </label>
-                            <label class="form-label">
-                                @Html.CheckBoxFor(m => m.SelectExceptCb)
-                                Select except
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "Soft serve or vanilla powder mix", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Soft serve"  },
-                                 new { value = "1" , text = "Vanilla powder mix" }
-                            }, "value", "text", "0"),
-                             new { @class = "form-control input-sm", @Value = Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX })
-                            @Html.ValidationMessageFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.FRESH_OR_FROZEN, "Fresh or frozen", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.FRESH_OR_FROZEN, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Fresh"  },
-                                new { value = "1" , text = "Frozen" }
-                            }, "value", "text", "0"),
-                            new { @class = "form-control input-sm", @Value = Model.FRESH_OR_FROZEN })
-                            @Html.ValidationMessageFor(m => m.FRESH_OR_FROZEN, "", new { @class = "text-danger" })
-                        </div>
+					<div class="col-lg-12">
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMPVN, "Primary vendor", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.RIMPVN, new SelectList(
+	 new List<Object>{
+								new { value = "0" , text = "Primary Vendor"  }, // Sample OPTIONS only
+								new { value = "1" , text = "Tier" }
+	 },
+	 "value", "text", "0"),
+	  new { @class = "form-control input-sm", @Value = Model.RIMPVN })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMLA1, "Warehouse 1", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.RIMLA1, new SelectList(
+	 new List<Object>{
+								new { value = "0" , text = "Active"  },
+								new { value = "1" , text = "Inactive" }
+	 },
+	 "value", "text", "0"),
+	  new { @class = "form-control input-sm", @Value = Model.RIMLA1 })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMLA2, "Warehouse 2", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.RIMLA2, new SelectList(
+	 new List<Object>{
+								new { value = "0" , text = "Active"  },
+								new { value = "1" , text = "Inactive" }
+	 },
+	 "value", "text", "0"),
+	  new { @class = "form-control input-sm", @Value = Model.RIMLA2 })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMUSF, "Yield", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.RIMUSF, new { @class = "form-control input-sm", @Value = Model.RIMUSF, @maxlength = "8" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMERT, "Warehouse 2", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.RIMERT, new SelectList(
+	 new List<Object>{
+								new { value = "0" , text = "YES"  },
+								new { value = "1" , text = "NO" }
+	 },
+	 "value", "text", "0"),
+	  new { @class = "form-control input-sm", @Value = Model.RIMERT })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMADE, "Auto deliver", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.RIMADE, new { @class = "form-control input-sm", @Value = Model.RIMADE, @type = "number", @maxlength = "1" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMMSD, "Minimum days", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.RIMMSD, new { @class = "form-control input-sm", @Value = Model.RIMMSD, @type = "number", @maxlength = "5" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMORD, "Order item", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.RIMORD, new { @class = "form-control input-sm", @Value = Model.RIMORD, @maxlength = "1" })
+						</div>
+					</div>
+				</div>
+				<!--Row 1 Col 3-->
+				<div class="col-lg-2">
+					<div class="col-lg-12">
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMMSL, "Min. stock lvl", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.RIMMSL, new { @class = "form-control input-sm", @Value = Model.RIMMSL, @type = "number", @maxlength = "9" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMBAR, "Barcode", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.RIMBAR, new { @class = "form-control input-sm", @Value = Model.RIMBAR, @maxlength = "13" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMPRO, "Raw promo", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.RIMPRO, new SelectList(
+		 new List<Object>{
+								new { value = "0" , text = "Active"  },
+								new { value = "1" , text = "Inactive" }
+		 },
+		 "value", "text", "0"),
+		  new { @class = "form-control input-sm", @Value = Model.RIMPRO })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMSE4, "Recipe", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.RIMSE4, new SelectList(
+		 new List<Object>{
+								new { value = "0" , text = "Active"  },
+								new { value = "1" , text = "Inactive" }
+		 },
+		 "value", "text", "0"),
+		  new { @class = "form-control input-sm", @Value = Model.RIMSE4 })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMEDT, "Active on", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.RIMEDT, new { @class = "form-control input-sm", @Value = Model.RIMEDT, @type = "date" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMCWC, "Raw waste", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.RIMCWC, new SelectList(
+		 new List<Object>{
+									new { value = "0" , text = "Active"  },
+									new { value = "1" , text = "Inactive" }
+		 },
+		 "value", "text", "0"),
+		  new { @class = "form-control input-sm", @Value = Model.RIMCWC })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.RIMSTA, "Status", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.RIMSTA, new SelectList(
+		 new List<Object>{
+									new { value = "0" , text = "Active"  },
+									new { value = "1" , text = "Inactive" }
+		 }, "value", "text", "0"),
+		  new { @class = "form-control input-sm", @Value = Model.RIMSTA })
+						</div>
+						<div class="form-group">
+							@Html.Label("Menu affected", new { @class = "form-label" })
+							@Html.TextBoxFor(m => m.DUMMY, new { @class = "form-control input-sm", @Value = "" }) <!--DUMMY-->
+						</div>
+					</div>
+				</div>
+				<!--Row 1 Col 4-->
+				<div class="col-lg-4">
+					<h4>In Items</h4>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<table class="table table-responsive table-hover">
+								<thead>
+									<tr>
+										<th>Menu item number</th>
+										<th>Menu item name</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<label class="form-label">Location</label>
+							@Html.DropDownListFor(m => m.Location, new SelectList( new List<Object>{
+								new { value = "0" , text = "To be added after"  },
+								new { value = "1" , text = "Location" },
+								new { value = "2" , text = "tier" }}, "value", "text", "0"), new { @class = "form-control input-sm" })
+						</div>
+						<div class="form-group">
+							<label class="form-label">Region</label>
+                            <select id="region" class="form-control"></select>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Province</label>
+                            <select id="province" class="form-control"></select>
+						</div>
+						<div class="form-group">
+							<label class="form-label">City</label>
+                            <select id="city" class="form-control"></select>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Store list</label>
+							@Html.TextBoxFor(m => m.StoreList, new { @class = "form-control input-sm" })
+						</div>
+						<div class="form-group">
+							<label class="form-label">
+								@Html.CheckBoxFor(m => m.SelectAllCb)
+								Select all
+							</label>
+							<label class="form-label">
+								@Html.CheckBoxFor(m => m.SelectExceptCb)
+								Select except
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="col-lg-12">
+						<div class="form-group">
+							@Html.LabelFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "Soft serve or vanilla powder mix", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, new SelectList( new List<Object>{
+								new { value = "0" , text = "Soft serve"  },
+								new { value = "1" , text = "Vanilla powder mix" }}, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX })
+							@Html.ValidationMessageFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "", new { @class = "text-danger" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.FRESH_OR_FROZEN, "Fresh or frozen", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.FRESH_OR_FROZEN, new SelectList( new List<Object>{
+								new { value = "0" , text = "Fresh"  },
+								new { value = "1" , text = "Frozen" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.FRESH_OR_FROZEN })
+							@Html.ValidationMessageFor(m => m.FRESH_OR_FROZEN, "", new { @class = "text-danger" })
+						</div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.SIMPLOT_OR_MCCAIN, "Simplot or McCain", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.SIMPLOT_OR_MCCAIN, new SelectList(
-                        new List<Object>{
-                            new { value = "0" , text = "Simplot"  },
-                            new { value = "1" , text = "McCain" }
-                            }, "value", "text", "0"),
-                        new { @class = "form-control input-sm", @Value = Model.SIMPLOT_OR_MCCAIN })
-                            @Html.ValidationMessageFor(m => m.SIMPLOT_OR_MCCAIN, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.PAPER_OR_PLASTIC, "Paper or plastic", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.PAPER_OR_PLASTIC, new SelectList(
-                        new List<Object>{
-                            new { value = "0" , text = "Paper"  },
-                            new { value = "1" , text = "Plastic" }
-                        }, "value", "text", "0"),
-                        new { @class = "form-control input-sm", @Value = Model.PAPER_OR_PLASTIC })
-                            @Html.ValidationMessageFor(m => m.PAPER_OR_PLASTIC, "", new { @class = "text-danger" })
-                        </div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.SIMPLOT_OR_MCCAIN, "Simplot or McCain", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.SIMPLOT_OR_MCCAIN, new SelectList( new List<Object>{
+							    new { value = "0" , text = "Simplot"  },
+							    new { value = "1" , text = "McCain" }
+	                         }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.SIMPLOT_OR_MCCAIN })
+							@Html.ValidationMessageFor(m => m.SIMPLOT_OR_MCCAIN, "", new { @class = "text-danger" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.PAPER_OR_PLASTIC, "Paper or plastic", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.PAPER_OR_PLASTIC, new SelectList(new List<Object>{
+							new { value = "0" , text = "Paper"  },
+							new { value = "1" , text = "Plastic" }}, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.PAPER_OR_PLASTIC })
+							@Html.ValidationMessageFor(m => m.PAPER_OR_PLASTIC, "", new { @class = "text-danger" })
+						</div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.MCCORMICK_OR_GSF, "McCormick or GSF", new { @class = "form-label" })
-                            @Html.DropDownListFor(m => m.MCCORMICK_OR_GSF, new SelectList(
-                        new List<Object> {
-                            new { value = "0" , text = "McCormick"  },
-                            new { value = "1" , text = "GSF" }
-                        }, "value", "text", "0"),
-                        new { @class = "form-control input-sm", @Value = Model.MCCORMICK_OR_GSF })
-                            @Html.ValidationMessageFor(m => m.MCCORMICK_OR_GSF, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="col-lg-12">
-                        <div class="form-inline">
-                            <div class="col-lg-1">
-                                @Html.LabelFor(m => m.SearchVendor, "Vendor", new { @class = "form-label" })
-                            </div>
-                            <div class="col-lg-8">
-                                @Html.TextBoxFor(m => m.SearchVendor, new { @class = "form-control input-sm" })
-                            </div>
-                            <button type="submit" class="btn btn-default">Search</button>
-                        </div>
-                        <div class="form-group">
-                            <table class="table table-responsive table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Vendor</th>
-                                        <th>Price per CS</th>
-                                        <th>Price per UN</th>
-                                        <th>SCM Code</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-inline bottom float" style="right:50px">
-                <button type="submit" name="command" value="Switch" class="btn btn-default">Switch</button>
-                <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
-                <button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
-            </div>
-        }
-    </div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.MCCORMICK_OR_GSF, "McCormick or GSF", new { @class = "form-label" })
+							@Html.DropDownListFor(m => m.MCCORMICK_OR_GSF, new SelectList( new List<Object> {
+							new { value = "0" , text = "McCormick"  },
+							new { value = "1" , text = "GSF" }}, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.MCCORMICK_OR_GSF })
+							@Html.ValidationMessageFor(m => m.MCCORMICK_OR_GSF, "", new { @class = "text-danger" })
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6" style="max-height:500px;overflow-y:auto">
+					<div class="col-lg-12">
+						<div class="form-inline">
+							<div class="col-lg-8">
+								@Html.TextBoxFor(m => m.SearchVendor, new { @class = "form-control input-sm", @placeholder = "Search vendor" })
+							</div>
+						</div>
+						<div class="form-group">
+							<table class="table table-responsive table-hover">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Vendor</th>
+										<th>Price per CS</th>
+										<th>Price per UN</th>
+										<th>SCM Code</th>
+									</tr>
+								</thead>
+								<tbody>
+									@{  if (Model.VendorList != null)
+                                        {
+                                            int i = 0;
+                                            foreach (Vendor vendorVM in Model.VendorList)
+                                            {
+                                                string idst = "tr-" + vendorVM.vendorId;
+                                                string classst = "tr-vendor " + vendorVM.vendorId + " " + vendorVM.VendorName;
+												<tr id="@idst" class="@classst">
+													<td>
+														@Html.CheckBoxFor(m => m.VendorList[i].VendorCheckBox, new { @Value = vendorVM.VendorCheckBox } )
+													</td>
+													<td>
+                                                        @Html.LabelFor(m => m.VendorList[i].VendorCheckBox, vendorVM.VendorName, new { @class = "form-label" })
+                                                        @Html.HiddenFor(m => m.VendorList[i].vendorId, new { @Value = vendorVM.vendorId })
+													</td>
+													<td>
+														@Html.TextBoxFor(m => m.VendorList[i].RIMCPR, new { @class = "form-control input-sm", @Value = vendorVM.RIMCPR })
+													</td>
+													<td>
+														@Html.TextBoxFor(m => m.VendorList[i].PPERUN, new { @class = "form-control input-sm", @Value = vendorVM.PPERUN })
+													</td>
+													<td>
+														@Html.TextBoxFor(m => m.VendorList[i].SCMCOD, new { @class = "form-control input-sm", @Value = vendorVM.SCMCOD })
+													</td>
+												</tr>
+												i++;
+											}
+										}
+										else
+										{
+											<tr>No vendors available</tr>
+										}
+									 }
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-inline bottom float" style="right:50px">
+				<button type="submit" name="command" value="Switch" class="btn btn-default">Switch</button>
+				<button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
+				<button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
+			</div>
+		}
+	</div>
 </div>
 
 <div class="modal fade" id="search-result-modal" role="dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button class="close" data-dismiss="modal">&times;</button>
-            <h4>Search results</h4>
-        </div>
-        @using (Html.BeginForm("DisplaySearchResult", "RawItemMaster", FormMethod.Post, new { }))
-        {
-            List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>)Session["ViewModelList"];
-            <div class="modal-body">
-                @{if (HasSearch == 1 && RIMList != null)
-                    {
-                        foreach (RawItemMasterViewModel vm in RIMList)
-                        {
-                        <button type="submit" class="modal-item-select" name="value" value=@vm.RIMRIC>
-                            <div class="col-lg-3">
-                                @vm.RIMRIC
-                            </div>
-                            <div class="col-lg-9">
-                                @vm.RIMRID
-                            </div>
-                        </button>
-                        }
-                    }
-                }
-        </div>
-        }
-    </div>
+	<div class="modal-content">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">&times;</button>
+			<h4>Search results</h4>
+		</div>
+		@using (Html.BeginForm("DisplaySearchResult", "RawItemMaster", FormMethod.Post, new { }))
+		{
+			List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>)Session["ViewModelList"];
+			if (RIMList != null)
+			{
+				<div class="modal-body">
+					@{if (HasSearch == 1 && RIMList != null)
+						{
+							foreach (RawItemMasterViewModel vm in RIMList)
+							{
+							<button type="submit" class="modal-item-select" name="value" value=@vm.RIMRIC>
+								<div class="col-lg-3">
+									@vm.RIMRIC
+								</div>
+								<div class="col-lg-9">
+									@vm.RIMRID
+								</div>
+							</button>
+							}
+						}
+					}
+				</div>
+			}
+		}
+	</div>
 </div>
-
+<!--Modal Script-->
 <script>
-    $(window).ready(function () {
-        if (@HasSearch === 1) {
-            $("#search-result-modal").modal('show');
-        }
-    });
+	$(window).ready(function () {
+		if (@HasSearch === 1) {
+			$("#search-result-modal").modal('show');
+		}
+	});
 </script>
+<!--Vendor Search Script-->
+<script>
+	disableInputsOnCb();
+	$("#SearchVendor").keyup(function () {
+		// Hide items not relevant to the search term
+		if ($("#SearchVendor").val() != "") {
+			var searchTerm = $("#SearchVendor").val().toLowerCase();
+			$(".tr-vendor").addClass("hidden");
+			$(".tr-vendor").each(function() {
+				if ($(this).attr("class").toLowerCase().includes(searchTerm) || 
+					$(this).children("td").children("[type='checkbox']").is(':checked'))
+					$(this).removeClass("hidden");
+			});
+		} else {
+			$(".tr-vendor").removeClass("hidden");
+		}
+	});
+	// Disable TextBoxes if sibling checkbox is not checked
+	$("[type='checkbox']").change(function() {
+		disableInputsOnCb();
+	});
 
+	function disableInputsOnCb() {
+		$(".tr-vendor").each(function() {
+			if (!$(this).children("td").children("[type='checkbox']").is(':checked'))
+				$(this).children("td").children(".form-control").attr("disabled", "");
+			else
+				$(this).children("td").children(".form-control").removeAttr("disabled");
+		});
+	}
+</script>
 

@@ -363,8 +363,10 @@
         @using (Html.BeginForm("DisplaySearchResult", "MenuItemMaster", FormMethod.Post, new { }))
         {
             List<MenuItemMasterViewModel> MIMList = (List<MenuItemMasterViewModel>)Session["ViewModelList"];
-            <div class="modal-body">
-                @{if (HasSearch == 1 && MIMList != null)
+            if (MIMList != null)
+            {
+                <div class="modal-body">
+                    @{if (HasSearch == 1 && MIMList != null)
                     {
                         foreach (MenuItemMasterViewModel vm in MIMList)
                         {
@@ -378,9 +380,10 @@
                             </button>
                         }
                     }
+                    }
+                </div>
                 }
-            </div>
-        }
+            }
     </div>
 </div>
 

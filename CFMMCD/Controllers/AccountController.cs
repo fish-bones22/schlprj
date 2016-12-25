@@ -18,6 +18,8 @@ namespace CFMMCD.Controllers
                 Session["User"] = null;
             if (Session["UserAccess"] != null)
                 Session["UserAccess"] = null;
+            if (Session["ViewModelList"] != null)
+                Session["ViewModelList"] = null;
 
             Session["CurrentPage"] = new CurrentPageSession("LOG");
             return View();

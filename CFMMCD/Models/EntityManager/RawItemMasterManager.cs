@@ -14,6 +14,7 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 INVRIMP0 RIMRow = new INVRIMP0();
+                RIM_VEM_Lookup RVLRow = new RIM_VEM_Lookup();
                 RIMRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
                 RIMRow.RIMRID = RIMViewModel.RIMRID.Trim();
                 RIMRow.RIMRIG = RIMViewModel.RIMRIG.Trim();
@@ -60,6 +61,31 @@ namespace CFMMCD.Models.EntityManager
                 RIMRow.RIMDAT = DateTime.Now;
                 RIMRow.RIMFLG = false;
                 RIMRow.RIMLIN = null; // Report line
+                
+                // Raw Item and Vendor
+                if (RIMViewModel.VendorList == null)
+                    RIMViewModel.VendorList = new List<Vendor>();
+                foreach (Vendor vendor in RIMViewModel.VendorList)
+                {
+                    if (vendor.VendorCheckBox)
+                    {
+                        RVLRow.RIM_VEM_ID = RIMViewModel.RIMRIC + vendor.vendorId;
+                        RVLRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
+                        RVLRow.VEMVEN = int.Parse(vendor.vendorId);
+                        RVLRow.RIMCPR = double.Parse(vendor.RIMCPR);
+                        // Perform update
+                        if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RVLRow.RIM_VEM_ID)).Any())
+                        {
+                            RIM_VEM_Lookup rowToDelete = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(RVLRow.RIM_VEM_ID));
+                            db.RIM_VEM_Lookup.Remove(rowToDelete);
+                            db.RIM_VEM_Lookup.Add(RVLRow);
+                        }
+                        else
+                            db.RIM_VEM_Lookup.Add(RVLRow);
+                    }
+                }
+
+
                 try
                 {
                     // If RIMRIC exists in the Table, perform an update
@@ -94,6 +120,11 @@ namespace CFMMCD.Models.EntityManager
                     if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC)).Any())
                     {
                         INVRIMP0 rowToRemove = db.INVRIMP0.FirstOrDefault(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC));
+                        List<RIM_VEM_Lookup> listOfRowsToRemove = db.RIM_VEM_Lookup.Where(o => o.RIMRIC == rowToRemove.RIMRIC).ToList();
+                        foreach ( RIM_VEM_Lookup RVLRow in listOfRowsToRemove )
+                        {
+                            db.RIM_VEM_Lookup.Remove(RVLRow);
+                        }
                         db.INVRIMP0.Remove(rowToRemove);
                         db.SaveChanges();
                         return true;
@@ -160,12 +191,82 @@ namespace CFMMCD.Models.EntityManager
                         vm.RIMORD = rim.RIMORD.Trim();
                         vm.RIMADE = rim.RIMADE.Trim();
                         vm.RIMBAR = rim.RIMBAR.Trim();
+                        vm.VendorList = GetVendorList();
+                        List<RIM_VEM_Lookup> RVLRowList = db.RIM_VEM_Lookup.Where(o => o.RIMRIC == rim.RIMRIC).ToList();
+                        foreach ( RIM_VEM_Lookup RVLRow in  RVLRowList )
+                        {
+                            foreach ( Vendor vendor in vm.VendorList )
+                            {
+                                if (vendor.vendorId.Equals(RVLRow.VEMVEN.ToString()))
+                                {
+                                    vendor.RIMCPR = RVLRow.RIMCPR.ToString();
+                                    vendor.VendorCheckBox = true;
+                                }
+                            }
+                        }
                         RIMList.Add(vm);
                     }
                 }
                 if (RIMList == null || RIMList.ElementAt(0) == null)
                     return null;
                 return RIMList;
+            }
+        }
+        //public bool UpdateRawItemPrice( RawItemMasterViewModel RIMList, string user )
+        //{
+        //    using ( CFMMCDEntities db = new CFMMCDEntities() )
+        //    {
+        //        try
+        //        {
+        //            foreach (RawItemMasterViewModel vm in RIMList)
+        //            {
+        //                if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(vm.RIMRIC)).Any())
+        //                {
+        //                    INVRIMP0 RIMRow = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(vm.RIMRIC));
+        //                    db.INVRIMP0.Remove(RIMRow);
+        //                    RIMRow.RIMCPN = double.Parse(vm.RIMCPN);
+        //                    RIMRow.RIMPDT = DateTime.Parse(vm.RIMPDT);
+        //                    RIMRow.STATUS = "E";
+        //                    RIMRow.RIMUSR = user.Substring(0, 3).ToUpper();
+        //                    db.INVRIMP0.Add(RIMRow);
+        //                }
+        //                else
+        //                {
+        //                    return false;
+        //                }
+        //            }
+        //            db.SaveChanges();
+        //            return true;
+        //        }
+        //        catch ( Exception e )
+        //        {
+        //            return false;
+        //        }
+                
+        //    }
+        //}
+
+        public List<Vendor> GetVendorList()
+        {
+            using ( CFMMCDEntities db = new CFMMCDEntities() )
+            {
+                RawItemMasterViewModel RIMViewModel = new RawItemMasterViewModel();
+                RIMViewModel.VendorList = new List<Vendor>();
+                List<INVVEMP0> VEMRowList = db.INVVEMP0.ToList();
+                if (VEMRowList == null)
+                    return new List<Vendor>();
+                foreach ( INVVEMP0 VEMRow in VEMRowList )
+                {
+                    Vendor vendor = new Vendor();
+                    vendor.vendorId = VEMRow.VEMVEN.ToString();
+                    vendor.VendorName = VEMRow.VEMDS1.Trim();
+                    vendor.VendorCheckBox = false;
+                    vendor.RIMCPR = "";
+                    vendor.PPERUN = "";
+                    vendor.SCMCOD = "";
+                    RIMViewModel.VendorList.Add(vendor);
+                }
+                return RIMViewModel.VendorList;
             }
         }
     }

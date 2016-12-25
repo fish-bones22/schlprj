@@ -40,5 +40,8 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
         public virtual DbSet<INVVEMP0> INVVEMP0 { get; set; }
+        public virtual DbSet<STORE_MIMMIC_Lookup> STORE_MIMMIC_Lookup { get; set; }
+        public virtual DbSet<Tier_Lookup> Tier_Lookup { get; set; }
+        public virtual DbSet<RIM_VEM_Lookup> RIM_VEM_Lookup { get; set; }
     }
 }

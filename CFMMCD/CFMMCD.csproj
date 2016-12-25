@@ -181,6 +181,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\philippines\index.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -197,8 +198,10 @@
     <Compile Include="Controllers\McCafeLevel3PriceTierController.cs" />
     <Compile Include="Controllers\MDSPriceTierController.cs" />
     <Compile Include="Controllers\MenuItemMasterController.cs" />
+    <Compile Include="Controllers\MenuItemPriceUpdateController.cs" />
     <Compile Include="Controllers\ProjectGoldPriceTierController.cs" />
     <Compile Include="Controllers\RawItemMasterController.cs" />
+    <Compile Include="Controllers\RawItemPriceUpdateController.cs" />
     <Compile Include="Controllers\RegularPriceTierController.cs" />
     <Compile Include="Controllers\StoreProfileController.cs" />
     <Compile Include="Controllers\TextGeneratorController.cs" />
@@ -263,7 +266,16 @@
     <Compile Include="Models\DB\Regular_Price_Tier.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\RIM_VEM_Lookup.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\STORE_MIMMIC_Lookup.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\Store_Profile.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Tier_Lookup.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityManager\AuditLogManager.cs" />
@@ -321,6 +333,9 @@
     <Content Include="Views\AuditLog\Index.cshtml" />
     <Content Include="Views\RawItemMaster\Index.cshtml" />
     <Content Include="Views\VendorMaster\Index.cshtml" />
+    <Content Include="Views\MenuItemPriceUpdate\Index.cshtml" />
+    <Content Include="Views\RawItemPriceUpdate\Index.cshtml" />
+    <Content Include="Scripts\philippines\LICENSE" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

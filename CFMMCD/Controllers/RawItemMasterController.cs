@@ -25,8 +25,16 @@ namespace CFMMCD.Controllers
 
             // SearchItemSelected is assigned value at DisplaySearchResult
             RawItemMasterViewModel RIMViewModel = (RawItemMasterViewModel)TempData["SearchItemSelected"];
+            RawItemMasterManager RIMManager = new RawItemMasterManager();
             if (RIMViewModel == null)
+            {
                 RIMViewModel = new RawItemMasterViewModel();
+                RIMViewModel.VendorList = RIMManager.GetVendorList();
+            }
+            System.Diagnostics.Debug.WriteLine(RIMViewModel.VendorList[0].VendorName);
+            System.Diagnostics.Debug.WriteLine(RIMViewModel.VendorList[0].VendorCheckBox);
+            System.Diagnostics.Debug.WriteLine(RIMViewModel.VendorList[0].RIMCPR);
+
             return View(RIMViewModel);
         }
         [HttpPost]
@@ -50,6 +58,7 @@ namespace CFMMCD.Controllers
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
+
             if (command == "Save")
             {
                 result = RIMManager.UpdateRawItem(RIMViewModel, user.Username);
@@ -83,6 +92,8 @@ namespace CFMMCD.Controllers
         {
             List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>) Session["ViewModelList"];
             RawItemMasterViewModel RIMViewModel = RIMList.Where(o => o.RIMRIC.ToString().Equals(value)).FirstOrDefault();
+
+
             TempData["SearchItemSelected"] = RIMViewModel;
             return RedirectToAction("Index", "RawItemMaster");
         }
