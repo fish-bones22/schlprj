@@ -1,0 +1,50 @@
+﻿@model CFMMCD.Models.ViewModel.DessertPriceTierViewModel
+@using CFMMCD.Models.ViewModel;
+
+@{
+    ViewBag.Title = "Dessert Price Tier";
+    List<DessertPriceTierViewModel> DPTList = (List<DessertPriceTierViewModel>)ViewData["ModelList"];
+}
+
+<h2>Index</h2>
+
+<div>
+    @using (Html.BeginForm("UpdateDelete", "DessertPriceTier", FormMethod.Post, new { }))
+    {
+        <div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Id, "Id", new { @class = "form-label", @type = "number" })
+                @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @maxlength = "6" })
+                @Html.LabelFor(m => m.Price_Tier, "Price Tier", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Price_Tier, new { @class = "form-control input-sm", @Value = Model.Price_Tier, @maxlength = "1" })
+            </div>
+        </div>
+        <div class="container">
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Id</th>
+                        <th>Price Tier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{  foreach (DessertPriceTierViewModel dpt in DPTList)
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@dpt.Id</td>
+                                <td>@dpt.Price_Tier</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="right-fixed">
+                <button type="button" class="btn btn-default" name="command" value="Save">Save</button>
+                <button type="button" class="btn btn-default" name="command" value="Update">Update</button>
+                <button type="button" class="btn btn-default" name="command" value="Delete">Delete</button>
+            </div>
+        </div>
+                        }
+</div>

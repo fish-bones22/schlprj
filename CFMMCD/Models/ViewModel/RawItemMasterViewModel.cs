@@ -61,5 +61,17 @@ namespace CFMMCD.Models.ViewModel
 
         public string SearchVendor { get; set; }
         public List<RawItemMasterViewModel> RawItemMasterList { get; set; }
+        public List<Vendor> VendorList { get; set; }
+    }
+
+    public class Vendor
+    {
+        public bool VendorCheckBox { get; set; }
+        public string VendorName { get; set; }
+        public string vendorId { get; set; }
+        public string RIMCPR { get; set; }
+        public string PPERUN { get; set; }  // Calculate using RIMCPR
+        public string SCMCOD { get; set; }
+
     }
 }

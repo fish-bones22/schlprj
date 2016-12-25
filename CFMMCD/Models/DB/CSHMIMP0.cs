@@ -14,6 +14,12 @@ namespace CFMMCD.Models.DB
     
     public partial class CSHMIMP0
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CSHMIMP0()
+        {
+            this.STORE_MIMMIC_Lookup = new HashSet<STORE_MIMMIC_Lookup>();
+        }
+    
         public int MIMMIC { get; set; }
         public string MIMSTA { get; set; }
         public string MIMFGC { get; set; }
@@ -67,5 +73,7 @@ namespace CFMMCD.Models.DB
         public string STATUS { get; set; }
     
         public virtual CSHMIMP0_NP6 CSHMIMP0_NP6 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<STORE_MIMMIC_Lookup> STORE_MIMMIC_Lookup { get; set; }
     }
 }

@@ -321,6 +321,14 @@
     <Content Include="Views\AuditLog\Index.cshtml" />
     <Content Include="Views\RawItemMaster\Index.cshtml" />
     <Content Include="Views\VendorMaster\Index.cshtml" />
+    <Content Include="Views\BreakfastPriceTier\Index.cshtml" />
+    <Content Include="Views\DessertPriceTier\Index.cshtml" />
+    <Content Include="Views\McCafeBistroPriceTier\Index.cshtml" />
+    <Content Include="Views\McCafeLevel2PriceTier\Index.cshtml" />
+    <Content Include="Views\McCafeLevel3PriceTier\Index.cshtml" />
+    <Content Include="Views\MDSPriceTier\Index.cshtml" />
+    <Content Include="Views\ProjectGoldPriceTier\Index.cshtml" />
+    <Content Include="Views\RegularPriceTier\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -333,14 +341,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SMS\SMSWEBCFM\" />
-    <Folder Include="Views\BreakfastPriceTier\" />
-    <Folder Include="Views\DessertPriceTier\" />
-    <Folder Include="Views\McCafeBistroPriceTier\" />
-    <Folder Include="Views\McCafeLevel2PriceTier\" />
-    <Folder Include="Views\McCafeLevel3PriceTier\" />
-    <Folder Include="Views\MDSPriceTier\" />
-    <Folder Include="Views\ProjectGoldPriceTier\" />
-    <Folder Include="Views\RegularPriceTier\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

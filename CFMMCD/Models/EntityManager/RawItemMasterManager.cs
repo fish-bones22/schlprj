@@ -168,5 +168,58 @@ namespace CFMMCD.Models.EntityManager
                 return RIMList;
             }
         }
+        //public bool UpdateRawItemPrice( RawItemMasterViewModel RIMList, string user )
+        //{
+        //    using ( CFMMCDEntities db = new CFMMCDEntities() )
+        //    {
+        //        try
+        //        {
+        //            foreach (RawItemMasterViewModel vm in RIMList)
+        //            {
+        //                if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(vm.RIMRIC)).Any())
+        //                {
+        //                    INVRIMP0 RIMRow = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(vm.RIMRIC));
+        //                    db.INVRIMP0.Remove(RIMRow);
+        //                    RIMRow.RIMCPN = double.Parse(vm.RIMCPN);
+        //                    RIMRow.RIMPDT = DateTime.Parse(vm.RIMPDT);
+        //                    RIMRow.STATUS = "E";
+        //                    RIMRow.RIMUSR = user.Substring(0, 3).ToUpper();
+        //                    db.INVRIMP0.Add(RIMRow);
+        //                }
+        //                else
+        //                {
+        //                    return false;
+        //                }
+        //            }
+        //            db.SaveChanges();
+        //            return true;
+        //        }
+        //        catch ( Exception e )
+        //        {
+        //            return false;
+        //        }
+                
+        //    }
+        //}
+
+        public List<Vendor> GetVendorList()
+        {
+            using ( CFMMCDEntities db = new CFMMCDEntities() )
+            {
+                RawItemMasterViewModel RIMViewModel = new RawItemMasterViewModel();
+                RIMViewModel.VendorList = new List<Vendor>();
+                List<INVVEMP0> VEMRowList = db.INVVEMP0.ToList();
+                if (VEMRowList == null)
+                    return new List<Vendor>();
+                foreach ( INVVEMP0 VEMRow in VEMRowList )
+                {
+                    Vendor vendor = new Vendor();
+                    vendor.vendorId = VEMRow.VEMVEN.ToString();
+                    vendor.VendorName = VEMRow.VEMDS1.Trim();
+                    RIMViewModel.VendorList.Add(vendor);
+                }
+                return RIMViewModel.VendorList;
+            }
+        }
     }
 }
