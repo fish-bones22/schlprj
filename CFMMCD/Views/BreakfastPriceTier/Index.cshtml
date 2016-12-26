@@ -6,55 +6,67 @@
     List<BreakfastPriceTierViewModel> BPTList = (List<BreakfastPriceTierViewModel>)ViewData["ModelList"];
 }
 
-<h2>Index</h2>
+<h2 align="center">@ViewBag.Title</h2>
 
-<div>
+<div class="form-horizontal">
     @using (Html.BeginForm("UpdateDelete", "BreakfastPriceTier", FormMethod.Post, new { }))
     {
-        <div>
+        <div class="container-fluid">
             <div class="form-group">
-                @Html.LabelFor(m => m.Id, "Id", new { @class = "form-label", @type = "number" })
-                @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @maxlength = "6" })
-                @Html.LabelFor(m => m.Price_Tier, "Price Tier", new { @class = "form-label" })
-                @Html.TextBoxFor(m => m.Price_Tier, new { @class = "form-control input-sm", @Value = Model.Price_Tier, @maxlength = "1" })
+                <div class="row" style="margin-top: 70px;">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="col-lg-1">
+                            @Html.LabelFor(m => m.Id, "Id", new { @class = "control-label", @type = "number" })
+                        </div>
+                        <div class="col-lg-3">
+                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @maxlength = "6" })
+                        </div>
+                        <div class="col-lg-2" style="margin-left: 40px;">
+                            @Html.LabelFor(m => m.Price_Tier, "Price Tier", new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-5" style="margin-left: -40px;">
+                            @Html.TextBoxFor(m => m.Price_Tier, new { @class = "form-control input-sm", @Value = Model.Price_Tier, @maxlength = "1" })
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <table class="table table-responsive table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Id</th>
-                        <th>Price Tier</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        if (BPTList != null)
-                        {
-                            foreach (BreakfastPriceTierViewModel bpt in BPTList)
+            <div class="container">
+                <table class="table table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Id</th>
+                            <th>Price Tier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (BPTList != null)
                             {
-                            <tr>
-                                <td></td>
-                                <td>@bpt.Id</td>
-                                <td>@bpt.Price_Tier</td>
-                            </tr>
+                                foreach (BreakfastPriceTierViewModel bpt in BPTList)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@bpt.Id</td>
+                                        <td>@bpt.Price_Tier</td>
+                                    </tr>
+                                }
+                            }
+
+                            else
+                            {
+                                <text>No Inputs</text>
+                            }
                         }
-                    }
-                        
-                        else
-                        {
-                            <text>No Inputs</text>
-                        }
-                    }
-                        
-                </tbody>
-            </table>
-            <div class="right-fixed">
-                <button type="button" class="btn btn-default" name="command" value="Save">Save</button>
-                <button type="button" class="btn btn-default" name="command" value="Update">Update</button>
-                <button type="button" class="btn btn-default" name="command" value="Delete">Delete</button>
+
+                    </tbody>
+                </table>
+                <div class="right-fixed" align="center">
+                    <button type="button" class="btn btn-default" name="command" value="Save">Save</button>
+                    <button type="button" class="btn btn-default" name="command" value="Update">Update</button>
+                    <button type="button" class="btn btn-default" name="command" value="Delete">Delete</button>
+                </div>
             </div>
         </div>
-                        }
+                            }
 </div>

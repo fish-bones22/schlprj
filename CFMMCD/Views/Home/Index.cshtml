@@ -9,7 +9,7 @@
     }
 }
 
-    <div class="header"><h2>@ViewBag.Title</h2></div>
+<div class="header"><h2>@ViewBag.Title</h2></div>
 <div class="container">
     <div class="col-lg-4" style="padding-left:0">
         <div class="scrollable-button">
@@ -27,7 +27,7 @@
                                 }
                                 if (UASession.RIM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Raw Item Master", "Index", "Home")</li>
+                                    <li class="list-group-item">@Html.ActionLink("Raw Item Master", "Index", "RawItemMaster")</li>
                                 }
                                 if (UASession.MER)
                                 {
@@ -39,7 +39,7 @@
                                 }
                                 if (UASession.VEM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Vendor Master", "Index", "Home")</li>
+                                    <li class="list-group-item">@Html.ActionLink("Vendor Master", "Index", "VendorMaster")</li>
                                 }
                                 if (UASession.VAM)
                                 {
