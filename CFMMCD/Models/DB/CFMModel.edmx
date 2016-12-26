@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CFMMCDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-      <EntityType Name="Accounts">
+        <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
@@ -34,6 +34,13 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="BUSINESS_EXT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="LONGNM" Type="nvarchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="CSHMIMP0">
           <Key>
@@ -182,6 +189,13 @@
           <Property Name="VEMDEL" Type="nchar" MaxLength="1" />
           <Property Name="STATUS" Type="nchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="LOCATION">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="LOCATN" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="McCafe_Bistro_Price_Tier">
           <Key>
             <PropertyRef Name="Id" />
@@ -209,6 +223,20 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="OWNERSHIP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="OWNSHP" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PROFIT_CEN">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PRFCNT" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Project_Gold_Price_Tier">
           <Key>
@@ -314,15 +342,19 @@
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Breakfast_Price_Tier" EntityType="Self.Breakfast_Price_Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BUSINESS_EXT" EntityType="Self.BUSINESS_EXT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OWNERSHIP" EntityType="Self.OWNERSHIP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROFIT_CEN" EntityType="Self.PROFIT_CEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RIM_VEM_Lookup" EntityType="Self.RIM_VEM_Lookup" Schema="dbo" store:Type="Tables" />
@@ -361,6 +393,10 @@
             <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
             <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
           </AssociationSet>
+          <EntitySet Name="BUSINESS_EXT" EntityType="CFMMCDModel.BUSINESS_EXT" />
+          <EntitySet Name="OWNERSHIPs" EntityType="CFMMCDModel.OWNERSHIP" />
+          <EntitySet Name="PROFIT_CEN" EntityType="CFMMCDModel.PROFIT_CEN" />
+          <EntitySet Name="LOCATIONs" EntityType="CFMMCDModel.LOCATION" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -669,6 +705,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BUSINESS_EXT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="LONGNM" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OWNERSHIP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="OWNSHP" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PROFIT_CEN">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PRFCNT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LOCATION">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="LOCATN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -983,6 +1047,38 @@
                 <ScalarProperty Name="NEWPRA" ColumnName="NEWPRA" />
                 <ScalarProperty Name="OLDPRA" ColumnName="OLDPRA" />
                 <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BUSINESS_EXT">
+            <EntityTypeMapping TypeName="CFMMCDModel.BUSINESS_EXT">
+              <MappingFragment StoreEntitySet="BUSINESS_EXT">
+                <ScalarProperty Name="LONGNM" ColumnName="LONGNM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OWNERSHIPs">
+            <EntityTypeMapping TypeName="CFMMCDModel.OWNERSHIP">
+              <MappingFragment StoreEntitySet="OWNERSHIP">
+                <ScalarProperty Name="OWNSHP" ColumnName="OWNSHP" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROFIT_CEN">
+            <EntityTypeMapping TypeName="CFMMCDModel.PROFIT_CEN">
+              <MappingFragment StoreEntitySet="PROFIT_CEN">
+                <ScalarProperty Name="PRFCNT" ColumnName="PRFCNT" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOCATIONs">
+            <EntityTypeMapping TypeName="CFMMCDModel.LOCATION">
+              <MappingFragment StoreEntitySet="LOCATION">
+                <ScalarProperty Name="LOCATN" ColumnName="LOCATN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

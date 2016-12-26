@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
 <<<<<<< HEAD
-      <Diagram DiagramId="a79f81dddf474f8f934b7caf991f84f2" Name="Diagram1" ZoomLevel="92">
+      <Diagram DiagramId="a79f81dddf474f8f934b7caf991f84f2" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="10.125" PointY="6" />
         <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="7" PointY="2" />
         <EntityTypeShape EntityType="CFMMCDModel.Breakfast_Price_Tier" Width="1.5" PointX="10.5" PointY="10.25" />
@@ -25,6 +25,10 @@
         <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="14.75" PointY="9.5" />
         <EntityTypeShape EntityType="CFMMCDModel.Tier_Lookup" Width="1.5" PointX="5.5" PointY="13.625" />
         <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" />
+        <EntityTypeShape EntityType="CFMMCDModel.BUSINESS_EXT" Width="1.5" PointX="1.5" PointY="4.5" />
+        <EntityTypeShape EntityType="CFMMCDModel.OWNERSHIP" Width="1.5" PointX="1.5" PointY="1.5" />
+        <EntityTypeShape EntityType="CFMMCDModel.PROFIT_CEN" Width="1.5" PointX="1.5107567429126969" PointY="3.03307151935672" />
+        <EntityTypeShape EntityType="CFMMCDModel.LOCATION" Width="1.5" PointX="3.9624472781840927" PointY="14.650847039488539" />
       </Diagram>
 =======
       <Diagram DiagramId="3b3d34b0e6f448fa9bddfa0f5790fe9e" Name="Diagram1">

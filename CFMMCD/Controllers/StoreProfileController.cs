@@ -18,50 +18,72 @@ namespace CFMMCD.Controllers
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null || !UASession.STP) return RedirectToAction("Login", "Account");
-
-            user = (UserSession)Session["User"];
+            // Set NavBar Links accordingly
             Session["CurrentPage"] = new CurrentPageSession("STP", "HOME", "LOG");
-            return View(new StoreProfileViewModel());
+
+            // SearchItemSelected is assigned value at DisplaySearchResult
+            StoreProfileViewModel SPViewModel = (StoreProfileViewModel)TempData["SearchItemSelected"];
+            if (SPViewModel == null)
+                SPViewModel = new StoreProfileViewModel();
+            return View(SPViewModel);
         }
         [HttpPost]
-        public ActionResult Index(StoreProfileViewModel StoreProf)
+        public ActionResult Index(StoreProfileViewModel SPViewModel)
         {
-            // Search
             StoreProfileManager SPManager = new StoreProfileManager();
-            StoreProfileViewModel model = new StoreProfileViewModel();
-            model = SPManager.SearchStoreProfile(StoreProf);
-            if (model == null)
-                ModelState.AddModelError("", "No items found");
-            return View(model);
+            SPViewModel.StoreList = SPManager.SearchStore(SPViewModel);
+            if (SPViewModel.StoreList != null)
+            {
+                TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
+                Session["ViewModelList"] = SPViewModel.StoreList;
+            }
+            else
+                ModelState.AddModelError("", "No results found");
+            return View(SPViewModel);
         }
 
         [HttpPost]
         public ActionResult UpdateDelete(StoreProfileViewModel SPViewModel, string command)
         {
+            StoreProfileManager SPManager = new StoreProfileManager();
+            UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
-            user = (UserSession)Session["User"];
-
             if (command == "Save")
             {
-                StoreProfileManager SPManager = new StoreProfileManager();
-                result = SPManager.UpdateStoreProfile(SPViewModel);
-                PageAction = "UPDATE";
+                result = SPManager.UpdateStore(SPViewModel);
+                PageAction = "Update";
             }
             else if (command == "Delete")
             {
-                StoreProfileManager SPManager = new StoreProfileManager();
-                result = SPManager.DeleteStoreProfile(SPViewModel);
-                PageAction = "DELETE";
+                result = SPManager.DeleteStore(SPViewModel);
+                PageAction = "Delete";
             }
-
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "Raw Item Master", PageAction, SPViewModel.STORE_NO, SPViewModel.STORE_NAME);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Store Profile", PageAction, SPViewModel.STORE_NO, SPViewModel.STORE_NAME);
             }
-            else TempData["ErrorMessage"] = PageAction + " failed";
+            else
+            {
+                TempData["ErrorMessage"] = PageAction + " failed";
+            }
             return RedirectToAction("Index");
+        }
+        /*
+         * This method is called after selecting an item from a list of search result.
+         * Parameter SPViewModel still holds the list of searched ViewModels and
+         * parameter value stores the value of the item selected.
+         * 
+         * The value is then searched in the list and stores it in a TempData to be used by Index().
+         * */
+        [HttpPost]
+        public ActionResult DisplaySearchResult(string value)
+        {
+            List<StoreProfileViewModel> SPList = (List<StoreProfileViewModel>)Session["ViewModelList"];
+            StoreProfileViewModel SPViewModel = SPList.Where(o => o.STORE_NO.ToString().Equals(value)).FirstOrDefault();
+            TempData["SearchItemSelected"] = SPViewModel;
+            return RedirectToAction("Index", "StoreProfile");
         }
     }
 }

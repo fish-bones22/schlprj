@@ -31,18 +31,18 @@ namespace CFMMCD.Controllers
             return View(MIMViewModel);
         }
         [HttpPost]
-        public ActionResult Index(MenuItemMasterViewModel MIMViewModel)
+        public ActionResult Index(StoreProfileViewModel SPViewModel)
         {   // Search
-            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItem(MIMViewModel);
-            if (MIMViewModel.MenuItemMasterList != null)
+            StoreProfileManager SPManager = new StoreProfileManager();
+            SPViewModel.StoreList = SPManager.SearchStore(SPViewModel);
+            if (SPViewModel.StoreList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = MIMViewModel.MenuItemMasterList;
+                Session["ViewModelList"] = SPViewModel.StoreList;
             }
             else
                 ModelState.AddModelError("", "No results found");
-            return View(MIMViewModel);
+            return View(SPViewModel);
         }
         [HttpPost]
         public ActionResult UpdateDelete(MenuItemMasterViewModel MIMViewModel, string command)

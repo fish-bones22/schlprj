@@ -24,46 +24,46 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("RIP", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
-            RawItemMasterViewModel RIMViewModel = (RawItemMasterViewModel)TempData["SearchItemSelected"];
-            if (RIMViewModel == null)
-                RIMViewModel = new RawItemMasterViewModel();
-            return View(RIMViewModel);
+            RawItemPriceUpdateViewModel RIPViewModel = (RawItemPriceUpdateViewModel)TempData["SearchItemSelected"];
+            if (RIPViewModel == null)
+                RIPViewModel = new RawItemPriceUpdateViewModel();
+            return View(RIPViewModel);
         }
         [HttpPost]
-        public ActionResult Index(RawItemMasterViewModel RIMViewModel)
+        public ActionResult Index(RawItemPriceUpdateViewModel RIPViewModel)
         {   // Search
-            RawItemMasterManager RIMManager = new RawItemMasterManager();
-            RIMViewModel.RawItemMasterList = RIMManager.SearchRawItem(RIMViewModel);
-            if (RIMViewModel.RawItemMasterList != null)
+            RawItemPriceManager RIMManager = new RawItemPriceManager();
+            RIPViewModel.RawItemPriceMasterList = RIMManager.SearchRawItemPrice(RIPViewModel);
+            if (RIPViewModel.RawItemPriceMasterList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = RIMViewModel.RawItemMasterList;
+                Session["ViewModelList"] = RIPViewModel.RawItemPriceMasterList;
             }
             else
                 ModelState.AddModelError("", "No results found");
-            return View(RIMViewModel);
+            return View(RIPViewModel);
         }
         [HttpPost]
-        public ActionResult UpdateDelete(RawItemMasterViewModel RIMViewModel, string command)
+        public ActionResult UpdateDelete(RawItemPriceUpdateViewModel RIPViewModel, string command)
         {
-            RawItemMasterManager RIMManager = new RawItemMasterManager();
+            RawItemPriceManager RIPManager = new RawItemPriceManager();
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
             if (command == "Save")
             {
-                result = RIMManager.UpdateRawItem( RIMViewModel, user.Username );
+                result = RIPManager.UpdateRawItemPrice( RIPViewModel );
                 PageAction = "Update price";
             }
             else if (command == "Delete")
             {
-                result = RIMManager.DeleteRawItem(RIMViewModel);
-                PageAction = "Delete";
+                result = RIPManager.DeleteRawItemPrice(RIPViewModel);
+                PageAction = "Delete price";
             }
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "Raw Item Master", PageAction, RIMViewModel.RIMRIC, RIMViewModel.RIMRID);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Raw Item Price Update", PageAction, RIPViewModel.RIMRIC, RIPViewModel.RIMRID);
             }
             else
             {
@@ -73,7 +73,7 @@ namespace CFMMCD.Controllers
         }
         /*
          * This method is called after selecting an item from a list of search result.
-         * Parameter RIMViewModel still holds the list of searched ViewModels and
+         * Parameter RIPViewModel still holds the list of searched ViewModels and
          * parameter value stores the value of the item selected.
          * 
          * The value is then searched in the list and stores it in a TempData to be used by Index().
@@ -81,9 +81,9 @@ namespace CFMMCD.Controllers
         [HttpPost]
         public ActionResult DisplaySearchResult(string value)
         {
-            List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>)Session["ViewModelList"];
-            RawItemMasterViewModel RIMViewModel = RIMList.Where(o => o.RIMRIC.ToString().Equals(value)).FirstOrDefault();
-            TempData["SearchItemSelected"] = RIMViewModel;
+            List<RawItemPriceUpdateViewModel> RIPList = (List<RawItemPriceUpdateViewModel>)Session["ViewModelList"];
+            RawItemPriceUpdateViewModel RIPViewModel = RIPList.Where(o => o.RIM_VEM_ID.Equals(value)).FirstOrDefault();
+            TempData["SearchItemSelected"] = RIPViewModel;
             return RedirectToAction("Index", "RawItemPriceUpdate");
         }
     }

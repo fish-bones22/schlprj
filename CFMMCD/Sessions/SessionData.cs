@@ -139,6 +139,20 @@ namespace CFMMCD.Sessions
                     Action = "Login",
                     Controller = "Account"
                 };
+            else if (key.Equals("RIP"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Raw Item Price Update",
+                    Action = "Index",
+                    Controller = "RawItemPriceUpdate"
+                };
+            else if (key.Equals("MIP"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Menu Item Price Update",
+                    Action = "Index",
+                    Controller = "MenuItemPriceUpdate"
+                };
             else
                 return new CurrentPageSession.LinkString
                 {

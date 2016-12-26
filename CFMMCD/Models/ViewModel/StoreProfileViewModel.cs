@@ -36,13 +36,25 @@ namespace CFMMCD.Models.ViewModel
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
 
-        //Inputs of the Selected Items that are not in the table
-        public bool Hrs24Input { get; set; }
-        public bool MallInput { get; set; }
-        public bool McVanInput { get; set; }
-        public bool McDeliveryInput { get; set; }
-        public bool DriveThruInput { get; set; }
-        public bool TakeOutCounterInput { get; set; }
-        
+        public bool[] BET { get; set; }
+
+        public List<StoreProfileViewModel> StoreList { get; set; }
+        public List<BusinessExt> BusinessExtList { get; set; }
+        public List<GenericDropDownList> OwnershipList { get; set; }
+        public List<GenericDropDownList> LocationList { get; set; }
+        public List<GenericDropDownList> ProfitCenter { get; set; }
+
+        public class BusinessExt
+        {
+            public bool Cb { get; set; }
+            public string text { get; set; }
+            public string value { get; set; }
+        }
+        public class GenericDropDownList
+        {
+            public string text { get; set; }
+            public string val { get; set; }
+        }
+
     }
 }

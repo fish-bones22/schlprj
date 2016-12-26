@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
@@ -287,6 +287,7 @@
     <Compile Include="Models\EntityManager\MDSPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\ProjectGoldPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\RawItemMasterManager.cs" />
+    <Compile Include="Models\EntityManager\RawItemPriceManager.cs" />
     <Compile Include="Models\EntityManager\RegularPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
     <Compile Include="Models\EntityManager\VendorMasterManager.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="Models\ViewModel\MDSPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\ProjectGoldPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemMasterViewModel.cs" />
+    <Compile Include="Models\ViewModel\RawItemPriceUpdateViewModel.cs" />
     <Compile Include="Models\ViewModel\RegularPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\TextGeneratorViewModel.cs" />
     <Compile Include="Models\ViewModel\VendorMasterViewModel.cs" />
