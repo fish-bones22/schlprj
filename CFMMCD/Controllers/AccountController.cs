@@ -21,7 +21,7 @@ namespace CFMMCD.Controllers
             if (Session["ViewModelList"] != null)
                 Session["ViewModelList"] = null;
 
-            Session["CurrentPage"] = new CurrentPageSession("LOG");
+            Session["CurrentPage"] = new CurrentPageSession("LOGIN");
             return View();
         }
         /*

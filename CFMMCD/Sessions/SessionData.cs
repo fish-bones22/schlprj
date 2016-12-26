@@ -132,6 +132,13 @@ namespace CFMMCD.Sessions
                     Action = "Index",
                     Controller = "VendorMaster"
                 };
+            else if(key.Equals("LOG"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Log out",
+                    Action = "Login",
+                    Controller = "Account"
+                };
             else
                 return new CurrentPageSession.LinkString
                 {

@@ -16,15 +16,13 @@ namespace CFMMCD.Models.DB
     {
         public string RIM_VEM_ID { get; set; }
         public Nullable<int> RIMRIC { get; set; }
+        public string RIMRID { get; set; }
         public Nullable<int> VEMVEN { get; set; }
+        public string VEMDS1 { get; set; }
         public Nullable<double> RIMCPR { get; set; }
         public Nullable<double> PPERUN { get; set; }
         public Nullable<double> SCMCOD { get; set; }
-<<<<<<< HEAD
-=======
-    
-        public virtual INVRIMP0 INVRIMP0 { get; set; }
-        public virtual INVVEMP0 INVVEMP0 { get; set; }
->>>>>>> 6dc5ebba081e3bc811a0f4a80a4611c1e8cf37bd
+        public Nullable<double> RIMCPN { get; set; }
+        public Nullable<System.DateTime> RIMPDT { get; set; }
     }
 }

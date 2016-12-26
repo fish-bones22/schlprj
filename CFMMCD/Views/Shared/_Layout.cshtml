@@ -51,14 +51,23 @@
                     }
                 }
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a class="btn btn-default " data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications <span class="badge">New</span></a></li>
-                <div id="popover-content" class="hide col-lg-5">
-                    <div class="content-height">
-                        <input type="text" class="form-control size">
-                    </div>
-                </div>
-            </ul>
+            @{if (CPSession.Self.Controller.Equals("MenuItemMaster") || CPSession.Self.Controller.Equals("RawItemMaster"))
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications <span class="badge">New</span></a></li>
+                        <li id="popover-content" class="hide col-lg-5">
+                            <div class="content-height">
+                                <table class="table-hover table-responsive table-condensed">
+                                    <tbody>
+                                        <tr>Under construction</tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                }
+            }
+
         </div>
     </div>
 
@@ -66,9 +75,6 @@
         @RenderBody()
         <hr />
     </div>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - CFM McDonalds</p>
-    </footer>
 
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>

@@ -14,12 +14,6 @@ namespace CFMMCD.Models.DB
     
     public partial class Store_Profile
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Store_Profile()
-        {
-            this.STORE_MIMMIC_Lookup = new HashSet<STORE_MIMMIC_Lookup>();
-        }
-    
         public int STORE_NO { get; set; }
         public string STORE_NAME { get; set; }
         public string OWNERSHIP { get; set; }
@@ -44,8 +38,5 @@ namespace CFMMCD.Models.DB
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
         public string STATUS { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STORE_MIMMIC_Lookup> STORE_MIMMIC_Lookup { get; set; }
     }
 }

@@ -17,8 +17,5 @@ namespace CFMMCD.Models.DB
         public string STORE_MIMMIC_Id { get; set; }
         public Nullable<int> STORE_NO { get; set; }
         public Nullable<int> MIMMIC { get; set; }
-    
-        public virtual CSHMIMP0 CSHMIMP0 { get; set; }
-        public virtual Store_Profile Store_Profile { get; set; }
     }
 }

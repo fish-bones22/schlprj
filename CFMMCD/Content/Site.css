@@ -1,5 +1,5 @@
 ﻿body {
-  font-family: 'Roboto';
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 .body-content {
     margin-top: 50px;
@@ -34,6 +34,10 @@ label {
   transition-duration: 0.4s;
 }
 .navbar-nav li a:hover {
+  background-color: rgb(235, 60, 30);
+  color: white !important;
+}
+.navbar-nav li a:focus {
   background-color: rgb(235, 60, 30);
   color: white !important;
 }
@@ -128,6 +132,11 @@ footer {
     padding-left:5%;
   }
 }
+@media (max-width: 1200px) {
+  .scrollable-button {
+      position:relative;
+  }
+}
 .modal {
     margin: auto;
     max-height: 80%;
@@ -154,33 +163,72 @@ footer {
     -moz-transition-duration: 0.2s;
     transition-duration: 0.2s;
 }
-.position1{
-    position: fixed;
-    top: 100px;
-   
+li {
+    list-style:none;
 }
-.position2{
-    margin-top: 60px;
-    margin-left: 350px;
+.list-group {
+    display: normal;
+    padding: 0;
+    position:relative;
+    left: 10px;
 }
-
-.scrollable{
-    overflow: auto;
-    height: 300px;
-    width: 500px;
+.list-group-item {
+    display: normal;
+    padding: 0;
+    border: none;
+    vertical-align:middle;
+}
+.list-group-item a {
+    color: brown;
+    display: list-item;
+    height:100%;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:15px;
+    padding-right:30px;
+    text-decoration: none;
+}
+.list-group-item a:hover{
+    color: white;
+    background-color: rgb(235, 60, 30);
+    text-decoration: none;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+}
+ .list-group-item a:active{
+     border:none;
+ }
+.start {
+    left:0;
+    width: 100%;
+    position:relative;
+}
+.start button {
+    width:30%;
+    border-radius: 0;
 }
 .scrollable-button{
-    overflow: auto;
-    height: 460px;
+    padding-left:0;
+    position:fixed;
+    max-height:300px;
+    left:0;
+    width: 300px;
 }
-.size{
-    width:248px;
+.scrollable-button .panel {
+    overflow:auto;
+    position:relative;
+    max-height:500px;
 }
 .popover {
-    max-width:280px;
-    margin-left:-75px;
+    max-height: 20%;
+    position: absolute;
+    right:0;
 }
 .content-height{
     overflow: auto;
     height: 100px;
+}
+.badge {
+    background-color: salmon;
 }

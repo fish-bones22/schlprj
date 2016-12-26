@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
@@ -333,11 +333,9 @@
     <Content Include="Views\AuditLog\Index.cshtml" />
     <Content Include="Views\RawItemMaster\Index.cshtml" />
     <Content Include="Views\VendorMaster\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\MenuItemPriceUpdate\Index.cshtml" />
     <Content Include="Views\RawItemPriceUpdate\Index.cshtml" />
     <Content Include="Scripts\philippines\LICENSE" />
-=======
     <Content Include="Views\BreakfastPriceTier\Index.cshtml" />
     <Content Include="Views\DessertPriceTier\Index.cshtml" />
     <Content Include="Views\McCafeBistroPriceTier\Index.cshtml" />
@@ -346,7 +344,6 @@
     <Content Include="Views\MDSPriceTier\Index.cshtml" />
     <Content Include="Views\ProjectGoldPriceTier\Index.cshtml" />
     <Content Include="Views\RegularPriceTier\Index.cshtml" />
->>>>>>> 6dc5ebba081e3bc811a0f4a80a4611c1e8cf37bd
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CFMMCDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserAccess" Type="varchar(max)" Nullable="false" />
+    <Property Name="AdminStatus" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Audit_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Time" Type="nchar" MaxLength="5" Nullable="false" />
+    <Property Name="Page" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Page_Action" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Breakfast_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="CSHMIMP0">
+    <Key>
+      <PropertyRef Name="MIMMIC" />
+    </Key>
+    <Property Name="MIMMIC" Type="int" Nullable="false" />
+    <Property Name="MIMSTA" Type="char" MaxLength="1" />
+    <Property Name="MIMFGC" Type="nchar" MaxLength="2" />
+    <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
+    <Property Name="MIMDSC" Type="nchar" MaxLength="16" />
+    <Property Name="MIMSSC" Type="nchar" MaxLength="2" />
+    <Property Name="MIMDPC" Type="nchar" MaxLength="1" />
+    <Property Name="MIMCIN" Type="nchar" MaxLength="1" />
+    <Property Name="MIMDGC" Type="int" />
+    <Property Name="MIMASC" Type="nchar" MaxLength="2" />
+    <Property Name="MIMTXC" Type="nchar" MaxLength="1" />
+    <Property Name="MIMUTC" Type="int" />
+    <Property Name="MIMDWE" Type="nchar" MaxLength="1" />
+    <Property Name="MIMTCI" Type="nchar" MaxLength="2" />
+    <Property Name="MIMPRI" Type="float" />
+    <Property Name="MIMTCA" Type="nchar" MaxLength="2" />
+    <Property Name="MIMPRO" Type="float" />
+    <Property Name="MIMTCG" Type="nchar" MaxLength="2" />
+    <Property Name="MIMPRG" Type="float" />
+    <Property Name="MIMPND" Type="date" />
+    <Property Name="MIMKBP" Type="int" />
+    <Property Name="MIMKSC" Type="nchar" MaxLength="1" />
+    <Property Name="MIMSKT" Type="nchar" MaxLength="2" />
+    <Property Name="MIMGRP" Type="nchar" MaxLength="2" />
+    <Property Name="MIMWLV" Type="nchar" MaxLength="1" />
+    <Property Name="MIMWSD" Type="nchar" MaxLength="1" />
+    <Property Name="MIMWGR" Type="nchar" MaxLength="2" />
+    <Property Name="MIMHPT" Type="nchar" MaxLength="2" />
+    <Property Name="MIMUSR" Type="nchar" MaxLength="3" />
+    <Property Name="MIMDAT" Type="date" />
+    <Property Name="MIMEDT" Type="date" />
+    <Property Name="MIMFLG" Type="bit" />
+    <Property Name="MIMBIN" Type="nchar" MaxLength="1" />
+    <Property Name="MIMBIT" Type="int" />
+    <Property Name="MIMBIR" Type="nchar" MaxLength="1" />
+    <Property Name="MIMBGR" Type="nchar" MaxLength="6" />
+    <Property Name="MIMBQU" Type="int" />
+    <Property Name="MIMGRA" Type="nchar" MaxLength="1" />
+    <Property Name="MIMIST" Type="nchar" MaxLength="1" />
+    <Property Name="MIMCLR" Type="nchar" MaxLength="8" />
+    <Property Name="MIMNPI" Type="float" />
+    <Property Name="MIMNPO" Type="float" />
+    <Property Name="MIMNPD" Type="float" />
+    <Property Name="MIMSKI" Type="int" />
+    <Property Name="MIMBMI" Type="int" />
+    <Property Name="MIMNPA" Type="float" />
+    <Property Name="MIMNNP" Type="float" />
+    <Property Name="MIMNPT" Type="nchar" MaxLength="2" />
+    <Property Name="MIMMIC_NP6" Type="int" />
+    <Property Name="MIMLON" Type="nchar" MaxLength="16" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="CSHMIMP0_NP6">
+    <Key>
+      <PropertyRef Name="MIMMIC" />
+    </Key>
+    <Property Name="MIMMIC" Type="int" Nullable="false" />
+    <Property Name="MIMSTA" Type="nchar" MaxLength="1" />
+    <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
+    <Property Name="MIMLON" Type="nchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="Dessert_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="INVRIMP0">
+    <Key>
+      <PropertyRef Name="RIMRIC" />
+    </Key>
+    <Property Name="RIMRIC" Type="int" Nullable="false" />
+    <Property Name="RIMVPC" Type="int" />
+    <Property Name="RIMRID" Type="nchar" MaxLength="20" />
+    <Property Name="RIMRIG" Type="nchar" MaxLength="2" />
+    <Property Name="RIMTEM" Type="nchar" MaxLength="3" />
+    <Property Name="RIMPGR" Type="nchar" MaxLength="10" />
+    <Property Name="RIMPIS" Type="nchar" MaxLength="1" />
+    <Property Name="RIMBVP" Type="nchar" MaxLength="3" />
+    <Property Name="RIMBZP" Type="nchar" MaxLength="3" />
+    <Property Name="RIMUMC" Type="nchar" MaxLength="3" />
+    <Property Name="RIMUPC" Type="float" />
+    <Property Name="RIMSUQ" Type="float" />
+    <Property Name="RIMLAY" Type="int" />
+    <Property Name="RIMCPR" Type="float" />
+    <Property Name="RIMCPN" Type="float" />
+    <Property Name="RIMPDT" Type="date" />
+    <Property Name="RIMPVN" Type="int" />
+    <Property Name="RIMSVN" Type="int" />
+    <Property Name="RIMCWC" Type="nchar" MaxLength="1" />
+    <Property Name="RIMPRO" Type="nchar" MaxLength="1" />
+    <Property Name="RIMSE4" Type="nchar" MaxLength="1" />
+    <Property Name="RIMERT" Type="nchar" MaxLength="1" />
+    <Property Name="RIMUSF" Type="float" />
+    <Property Name="RIMSDP" Type="float" />
+    <Property Name="RIMUS1" Type="float" />
+    <Property Name="RIMUS2" Type="float" />
+    <Property Name="RIMUS3" Type="float" />
+    <Property Name="RIMUS4" Type="float" />
+    <Property Name="RIMUS5" Type="float" />
+    <Property Name="RIMUSX" Type="float" />
+    <Property Name="RIMMSD" Type="float" />
+    <Property Name="RIMMSL" Type="float" />
+    <Property Name="RIMLA1" Type="nchar" MaxLength="1" />
+    <Property Name="RIMLA2" Type="nchar" MaxLength="1" />
+    <Property Name="RIMLP1" Type="int" />
+    <Property Name="RIMLP2" Type="int" />
+    <Property Name="RIMSTA" Type="nchar" MaxLength="1" />
+    <Property Name="RIMUSR" Type="nchar" MaxLength="3" />
+    <Property Name="RIMDAT" Type="date" />
+    <Property Name="RIMEDT" Type="date" />
+    <Property Name="RIMFLG" Type="bit" />
+    <Property Name="RIMORD" Type="nchar" MaxLength="1" />
+    <Property Name="RIMLIN" Type="int" />
+    <Property Name="RIMADE" Type="nchar" MaxLength="1" />
+    <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="INVVEMP0">
+    <Key>
+      <PropertyRef Name="VEMVEN" />
+    </Key>
+    <Property Name="VEMVEN" Type="int" Nullable="false" />
+    <Property Name="VEMWSI" Type="int" />
+    <Property Name="VEMDS1" Type="nchar" MaxLength="20" />
+    <Property Name="VEMDS2" Type="nchar" MaxLength="20" />
+    <Property Name="VEMCCD" Type="nchar" MaxLength="3" />
+    <Property Name="VEMZIP" Type="nchar" MaxLength="5" />
+    <Property Name="VEMCTY" Type="nchar" MaxLength="20" />
+    <Property Name="VEMSTR" Type="nchar" MaxLength="20" />
+    <Property Name="VEMTEL" Type="nchar" MaxLength="18" />
+    <Property Name="VEMSTN" Type="nchar" MaxLength="5" />
+    <Property Name="VEMLOC" Type="nchar" MaxLength="1" />
+    <Property Name="VEMDAY" Type="float" />
+    <Property Name="VEMTID" Type="nchar" MaxLength="5" />
+    <Property Name="VEMSTA" Type="nchar" MaxLength="1" />
+    <Property Name="VEMDAT" Type="date" />
+    <Property Name="VEMUSR" Type="nchar" MaxLength="3" />
+    <Property Name="VEMADE" Type="nchar" MaxLength="1" />
+    <Property Name="VEMDEL" Type="nchar" MaxLength="1" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="McCafe_Bistro_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="McCafe_Level_2_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="McCafe_Level_3_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="MDS_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Project_Gold_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Regular_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="RIM_VEM_Lookup">
+    <Key>
+      <PropertyRef Name="RIM_VEM_ID" />
+    </Key>
+    <Property Name="RIM_VEM_ID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="RIMRIC" Type="int" />
+    <Property Name="RIMRID" Type="nvarchar" MaxLength="20" />
+    <Property Name="VEMVEN" Type="int" />
+    <Property Name="VEMDS1" Type="nvarchar" MaxLength="20" />
+    <Property Name="RIMCPR" Type="float" />
+    <Property Name="PPERUN" Type="float" />
+    <Property Name="SCMCOD" Type="float" />
+    <Property Name="RIMCPN" Type="float" />
+    <Property Name="RIMPDT" Type="date" />
+  </EntityType>
+  <EntityType Name="STORE_MIMMIC_Lookup">
+    <Key>
+      <PropertyRef Name="STORE_MIMMIC_Id" />
+    </Key>
+    <Property Name="STORE_MIMMIC_Id" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="STORE_NO" Type="int" />
+    <Property Name="MIMMIC" Type="int" />
+  </EntityType>
+  <EntityType Name="Store_Profile">
+    <Key>
+      <PropertyRef Name="STORE_NO" />
+    </Key>
+    <Property Name="STORE_NO" Type="int" Nullable="false" />
+    <Property Name="STORE_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="OWNERSHIP" Type="nchar" MaxLength="10" />
+    <Property Name="BREAKFAST_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="REGULAR_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="DC_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="MDS_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="PROJECT_GOLD_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="BET" Type="nvarchar(max)" />
+    <Property Name="PROFIT_CENTER" Type="int" />
+    <Property Name="REGION" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROVINCE" Type="nvarchar" MaxLength="50" />
+    <Property Name="LOCATION" Type="nvarchar" MaxLength="50" />
+    <Property Name="ADDRESS" Type="nvarchar(max)" />
+    <Property Name="CITY" Type="nvarchar" MaxLength="50" />
+    <Property Name="FRESH_OR_FROZEN" Type="nchar" MaxLength="10" />
+    <Property Name="PAPER_OR_PLASTIC" Type="nchar" MaxLength="10" />
+    <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="nchar" MaxLength="20" />
+    <Property Name="SIMPLOT_OR_MCCAIN" Type="nchar" MaxLength="10" />
+    <Property Name="MCCORMICK_OR_GSF" Type="nchar" MaxLength="10" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Tier_Lookup">
+    <Key>
+      <PropertyRef Name="MIMMIC" />
+    </Key>
+    <Property Name="MIMMIC" Type="int" Nullable="false" />
+    <Property Name="OLDPRA" Type="float" />
+    <Property Name="NEWPRA" Type="float" />
+    <Property Name="OLDPRB" Type="float" />
+    <Property Name="NEWPRB" Type="float" />
+    <Property Name="OLDPRC" Type="float" />
+    <Property Name="NEWPRC" Type="float" />
+    <Property Name="OLDPRD" Type="float" />
+    <Property Name="NEWPRD" Type="float" />
+    <Property Name="OLDPRE" Type="float" />
+    <Property Name="NEWPRE" Type="float" />
+    <Property Name="OLDPRF" Type="float" />
+    <Property Name="NEWPRF" Type="float" />
+    <Property Name="OLDMDS" Type="float" />
+    <Property Name="NEWMDS" Type="float" />
+    <Property Name="OLDPRS" Type="float" />
+    <Property Name="NEWPRS" Type="float" />
+  </EntityType>
+  <Association Name="FK_CSHMIMP0_ToTable">
+    <End Role="CSHMIMP0_NP6" Type="Self.CSHMIMP0_NP6" Multiplicity="0..1" />
+    <End Role="CSHMIMP0" Type="Self.CSHMIMP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSHMIMP0_NP6">
+        <PropertyRef Name="MIMMIC" />
+      </Principal>
+      <Dependent Role="CSHMIMP0">
+        <PropertyRef Name="MIMMIC_NP6" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CFMMCDModelStoreContainer">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Breakfast_Price_Tier" EntityType="Self.Breakfast_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RIM_VEM_Lookup" EntityType="Self.RIM_VEM_Lookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="Self.STORE_MIMMIC_Lookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tier_Lookup" EntityType="Self.Tier_Lookup" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
+      <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
+      <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
