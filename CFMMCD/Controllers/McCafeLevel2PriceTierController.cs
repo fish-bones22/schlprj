@@ -17,12 +17,14 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
-            if (UASession == null || !UASession.STP) return RedirectToAction("Login", "Account");
+            if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("MCL2", "HOME", "LOG");
             return View(new McCafeLevel2PriceTierViewModel());
         }
+
+        [HttpPost]
         public ActionResult UpdateDelete(McCafeLevel2PriceTierViewModel MCL2ViewModel, string command)
         {
             string PageAction = "";

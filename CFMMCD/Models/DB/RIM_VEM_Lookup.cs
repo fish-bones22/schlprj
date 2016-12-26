@@ -20,5 +20,11 @@ namespace CFMMCD.Models.DB
         public Nullable<double> RIMCPR { get; set; }
         public Nullable<double> PPERUN { get; set; }
         public Nullable<double> SCMCOD { get; set; }
+<<<<<<< HEAD
+=======
+    
+        public virtual INVRIMP0 INVRIMP0 { get; set; }
+        public virtual INVVEMP0 INVVEMP0 { get; set; }
+>>>>>>> 6dc5ebba081e3bc811a0f4a80a4611c1e8cf37bd
     }
 }

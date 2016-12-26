@@ -17,12 +17,14 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
-            if (UASession == null || !UASession.STP) return RedirectToAction("Login", "Account");
+            if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("RPT", "HOME", "LOG");
             return View(new RegularPriceTierViewModel());
         }
+
+        [HttpPost]
         public ActionResult UpdateDelete(RegularPriceTierViewModel RPTViewModel, string command)
         {
             string PageAction = "";

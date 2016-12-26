@@ -1,0 +1,59 @@
+﻿@model CFMMCD.Models.ViewModel.McCafeBistroPriceTierViewModel
+@using CFMMCD.Models.ViewModel;
+
+@{
+    ViewBag.Title = "McCafe Bistro Price Tier";
+    List<McCafeBistroPriceTierViewModel> MCBList = (List<McCafeBistroPriceTierViewModel>)ViewData["ModelList"];
+}
+
+<h2>Index</h2>
+
+<div>
+    @using (Html.BeginForm("UpdateDelete", "McCafeBistroPriceTier", FormMethod.Post, new { }))
+    {
+        <div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Id, "Id", new { @class = "form-label", @type = "number" })
+                @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @maxlength = "6" })
+                @Html.LabelFor(m => m.Price_Tier, "Price Tier", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Price_Tier, new { @class = "form-control input-sm", @Value = Model.Price_Tier, @maxlength = "1" })
+            </div>
+        </div>
+        <div class="container">
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Id</th>
+                        <th>Price Tier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (MCBList != null)
+                        {
+                            foreach (McCafeBistroPriceTierViewModel mcb in MCBList)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>@mcb.Id</td>
+                                    <td>@mcb.Price_Tier</td>
+                                </tr>
+                            }
+                        }
+
+                        else
+                        {
+                            <text>No Inputs</text>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="right-fixed">
+                <button type="button" class="btn btn-default" name="command" value="Save">Save</button>
+                <button type="button" class="btn btn-default" name="command" value="Update">Update</button>
+                <button type="button" class="btn btn-default" name="command" value="Delete">Delete</button>
+            </div>
+        </div>
+                        }
+</div>

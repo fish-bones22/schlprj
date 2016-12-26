@@ -8,14 +8,13 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/fonts.css" rel="stylesheet" type="text/css" />
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/philippines/index.js"></script>
 </head>
 <body>
-    @{ 
-        CurrentPageSession CPSession = (CurrentPageSession) Session["CurrentPage"];
+    @{
+        CurrentPageSession CPSession = (CurrentPageSession)Session["CurrentPage"];
         if (CPSession == null)
         {
             CPSession = new CurrentPageSession();
@@ -52,6 +51,14 @@
                     }
                 }
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="btn btn-default " data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications <span class="badge">New</span></a></li>
+                <div id="popover-content" class="hide col-lg-5">
+                    <div class="content-height">
+                        <input type="text" class="form-control size">
+                    </div>
+                </div>
+            </ul>
         </div>
     </div>
 
@@ -66,3 +73,17 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
+<script>
+    /*pop over*/
+    /*jslint browser: true*/
+    /*global $, jQuery*/
+    $(document).ready(function () {
+        "use strict";
+        $("[data-toggle=popover]").popover({
+            html: true,
+            content: function () {
+                return $('#popover-content').html();
+            }
+        });
+    });
+</script>

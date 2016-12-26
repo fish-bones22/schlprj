@@ -14,6 +14,12 @@ namespace CFMMCD.Models.DB
     
     public partial class INVRIMP0
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public INVRIMP0()
+        {
+            this.RIM_VEM_Lookup = new HashSet<RIM_VEM_Lookup>();
+        }
+    
         public int RIMRIC { get; set; }
         public Nullable<int> RIMVPC { get; set; }
         public string RIMRID { get; set; }
@@ -60,5 +66,8 @@ namespace CFMMCD.Models.DB
         public string RIMADE { get; set; }
         public string RIMBAR { get; set; }
         public string STATUS { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RIM_VEM_Lookup> RIM_VEM_Lookup { get; set; }
     }
 }
