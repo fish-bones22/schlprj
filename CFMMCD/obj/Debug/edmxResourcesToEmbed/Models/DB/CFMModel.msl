@@ -1,39 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
-    <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="CFMMCDModel.Account">
-        <MappingFragment StoreEntitySet="Accounts">
-          <ScalarProperty Name="AdminStatus" ColumnName="AdminStatus" />
-          <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Audit_Log">
-      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
-        <MappingFragment StoreEntitySet="Audit_Log">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
-          <ScalarProperty Name="Page" ColumnName="Page" />
-          <ScalarProperty Name="Time" ColumnName="Time" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Breakfast_Price_Tier">
-      <EntityTypeMapping TypeName="CFMMCDModel.Breakfast_Price_Tier">
-        <MappingFragment StoreEntitySet="Breakfast_Price_Tier">
-          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CSHMIMP0">
       <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0">
         <MappingFragment StoreEntitySet="CSHMIMP0">
@@ -88,6 +55,47 @@
           <ScalarProperty Name="MIMFGC" ColumnName="MIMFGC" />
           <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
           <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="CFMMCDModel.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="AdminStatus" ColumnName="AdminStatus" />
+          <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit_Log">
+      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
+        <MappingFragment StoreEntitySet="Audit_Log">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
+          <ScalarProperty Name="Page" ColumnName="Page" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Breakfast_Price_Tier">
+      <EntityTypeMapping TypeName="CFMMCDModel.Breakfast_Price_Tier">
+        <MappingFragment StoreEntitySet="Breakfast_Price_Tier">
+          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BUSINESS_EXT">
+      <EntityTypeMapping TypeName="CFMMCDModel.BUSINESS_EXT">
+        <MappingFragment StoreEntitySet="BUSINESS_EXT">
+          <ScalarProperty Name="LONGNM" ColumnName="LONGNM" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -186,6 +194,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="LOCATIONs">
+      <EntityTypeMapping TypeName="CFMMCDModel.LOCATION">
+        <MappingFragment StoreEntitySet="LOCATION">
+          <ScalarProperty Name="LOCATN" ColumnName="LOCATN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="McCafe_Bistro_Price_Tier">
       <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Bistro_Price_Tier">
         <MappingFragment StoreEntitySet="McCafe_Bistro_Price_Tier">
@@ -214,6 +230,22 @@
       <EntityTypeMapping TypeName="CFMMCDModel.MDS_Price_Tier">
         <MappingFragment StoreEntitySet="MDS_Price_Tier">
           <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OWNERSHIPs">
+      <EntityTypeMapping TypeName="CFMMCDModel.OWNERSHIP">
+        <MappingFragment StoreEntitySet="OWNERSHIP">
+          <ScalarProperty Name="OWNSHP" ColumnName="OWNSHP" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROFIT_CEN">
+      <EntityTypeMapping TypeName="CFMMCDModel.PROFIT_CEN">
+        <MappingFragment StoreEntitySet="PROFIT_CEN">
+          <ScalarProperty Name="PRFCNT" ColumnName="PRFCNT" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -292,20 +324,84 @@
     <EntitySetMapping Name="Tier_Lookup">
       <EntityTypeMapping TypeName="CFMMCDModel.Tier_Lookup">
         <MappingFragment StoreEntitySet="Tier_Lookup">
+          <ScalarProperty Name="PNDS" ColumnName="PNDS" />
+          <ScalarProperty Name="EDTS" ColumnName="EDTS" />
+          <ScalarProperty Name="PNDM" ColumnName="PNDM" />
+          <ScalarProperty Name="EDTM" ColumnName="EDTM" />
+          <ScalarProperty Name="PNDF" ColumnName="PNDF" />
+          <ScalarProperty Name="EDTF" ColumnName="EDTF" />
+          <ScalarProperty Name="PNDE" ColumnName="PNDE" />
+          <ScalarProperty Name="EDTE" ColumnName="EDTE" />
+          <ScalarProperty Name="PNDD" ColumnName="PNDD" />
+          <ScalarProperty Name="EDTD" ColumnName="EDTD" />
+          <ScalarProperty Name="PNDC" ColumnName="PNDC" />
+          <ScalarProperty Name="EDTC" ColumnName="EDTC" />
+          <ScalarProperty Name="PNDB" ColumnName="PNDB" />
+          <ScalarProperty Name="EDTB" ColumnName="EDTB" />
+          <ScalarProperty Name="PNDA" ColumnName="PNDA" />
+          <ScalarProperty Name="EDTA" ColumnName="EDTA" />
+          <ScalarProperty Name="NEWNPS" ColumnName="NEWNPS" />
+          <ScalarProperty Name="OLDNPS" ColumnName="OLDNPS" />
+          <ScalarProperty Name="NEWSOT" ColumnName="NEWSOT" />
+          <ScalarProperty Name="OLDSOT" ColumnName="OLDSOT" />
+          <ScalarProperty Name="NEWPSO" ColumnName="NEWPSO" />
+          <ScalarProperty Name="OLDPSO" ColumnName="OLDPSO" />
           <ScalarProperty Name="NEWPRS" ColumnName="NEWPRS" />
           <ScalarProperty Name="OLDPRS" ColumnName="OLDPRS" />
+          <ScalarProperty Name="NEWMDN" ColumnName="NEWMDN" />
+          <ScalarProperty Name="OLDMDN" ColumnName="OLDMDN" />
+          <ScalarProperty Name="NEWMOT" ColumnName="NEWMOT" />
+          <ScalarProperty Name="OLDMOT" ColumnName="OLDMOT" />
+          <ScalarProperty Name="NEWMDO" ColumnName="NEWMDO" />
+          <ScalarProperty Name="OLDMDO" ColumnName="OLDMDO" />
           <ScalarProperty Name="NEWMDS" ColumnName="NEWMDS" />
           <ScalarProperty Name="OLDMDS" ColumnName="OLDMDS" />
+          <ScalarProperty Name="NEWNPF" ColumnName="NEWNPF" />
+          <ScalarProperty Name="OLDNPF" ColumnName="OLDNPF" />
+          <ScalarProperty Name="NEWFOT" ColumnName="NEWFOT" />
+          <ScalarProperty Name="OLDFOT" ColumnName="OLDFOT" />
+          <ScalarProperty Name="NEWPFO" ColumnName="NEWPFO" />
+          <ScalarProperty Name="OLDPFO" ColumnName="OLDPFO" />
           <ScalarProperty Name="NEWPRF" ColumnName="NEWPRF" />
           <ScalarProperty Name="OLDPRF" ColumnName="OLDPRF" />
+          <ScalarProperty Name="NEWNPE" ColumnName="NEWNPE" />
+          <ScalarProperty Name="OLDNPE" ColumnName="OLDNPE" />
+          <ScalarProperty Name="NEWEOT" ColumnName="NEWEOT" />
+          <ScalarProperty Name="OLDEOT" ColumnName="OLDEOT" />
+          <ScalarProperty Name="NEWPEO" ColumnName="NEWPEO" />
+          <ScalarProperty Name="OLDPEO" ColumnName="OLDPEO" />
           <ScalarProperty Name="NEWPRE" ColumnName="NEWPRE" />
           <ScalarProperty Name="OLDPRE" ColumnName="OLDPRE" />
+          <ScalarProperty Name="NEWNPD" ColumnName="NEWNPD" />
+          <ScalarProperty Name="OLDNPD" ColumnName="OLDNPD" />
+          <ScalarProperty Name="NEWDOT" ColumnName="NEWDOT" />
+          <ScalarProperty Name="OLDDOT" ColumnName="OLDDOT" />
+          <ScalarProperty Name="NEWPDO" ColumnName="NEWPDO" />
+          <ScalarProperty Name="OLDPDO" ColumnName="OLDPDO" />
           <ScalarProperty Name="NEWPRD" ColumnName="NEWPRD" />
           <ScalarProperty Name="OLDPRD" ColumnName="OLDPRD" />
+          <ScalarProperty Name="NEWNPC" ColumnName="NEWNPC" />
+          <ScalarProperty Name="OLDNPC" ColumnName="OLDNPC" />
+          <ScalarProperty Name="NEWCOT" ColumnName="NEWCOT" />
+          <ScalarProperty Name="OLDCOT" ColumnName="OLDCOT" />
+          <ScalarProperty Name="NEWPCO" ColumnName="NEWPCO" />
+          <ScalarProperty Name="OLDPCO" ColumnName="OLDPCO" />
           <ScalarProperty Name="NEWPRC" ColumnName="NEWPRC" />
           <ScalarProperty Name="OLDPRC" ColumnName="OLDPRC" />
+          <ScalarProperty Name="NEWNPB" ColumnName="NEWNPB" />
+          <ScalarProperty Name="OLDNPB" ColumnName="OLDNPB" />
+          <ScalarProperty Name="NEWBOT" ColumnName="NEWBOT" />
+          <ScalarProperty Name="OLDBOT" ColumnName="OLDBOT" />
+          <ScalarProperty Name="NEWPBO" ColumnName="NEWPBO" />
+          <ScalarProperty Name="OLDPBO" ColumnName="OLDPBO" />
           <ScalarProperty Name="NEWPRB" ColumnName="NEWPRB" />
           <ScalarProperty Name="OLDPRB" ColumnName="OLDPRB" />
+          <ScalarProperty Name="NEWNPA" ColumnName="NEWNPA" />
+          <ScalarProperty Name="OLDNPA" ColumnName="OLDNPA" />
+          <ScalarProperty Name="NEWAOT" ColumnName="NEWAOT" />
+          <ScalarProperty Name="OLDAOT" ColumnName="OLDAOT" />
+          <ScalarProperty Name="NEWPAO" ColumnName="NEWPAO" />
+          <ScalarProperty Name="OLDPAO" ColumnName="OLDPAO" />
           <ScalarProperty Name="NEWPRA" ColumnName="NEWPRA" />
           <ScalarProperty Name="OLDPRA" ColumnName="OLDPRA" />
           <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />

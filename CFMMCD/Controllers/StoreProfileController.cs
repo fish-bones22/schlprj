@@ -11,7 +11,6 @@ namespace CFMMCD.Controllers
 {
     public class StoreProfileController : Controller
     {
-        UserSession user;
         // GET: StoreProfile
         public ActionResult Index()
         {
@@ -22,9 +21,18 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("STP", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
+            StoreProfileManager SPManager = new StoreProfileManager();
             StoreProfileViewModel SPViewModel = (StoreProfileViewModel)TempData["SearchItemSelected"];
             if (SPViewModel == null)
+            {
                 SPViewModel = new StoreProfileViewModel();
+                SPViewModel.BusinessExtList = new List<CheckBoxList>();
+                SPViewModel = SPManager.InitializeDropDowns(SPViewModel);
+                SPViewModel.BusinessExtList = SPManager.SetBusinessExtension();
+            }
+            System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].Cb);
+            System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].value);
+            System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].text);
             return View(SPViewModel);
         }
         [HttpPost]
@@ -51,6 +59,11 @@ namespace CFMMCD.Controllers
             bool result = false;
             if (command == "Save")
             {
+                System.Diagnostics.Debug.WriteLine(SPViewModel.STORE_NAME);
+                System.Diagnostics.Debug.WriteLine(SPViewModel.STORE_NO);
+                System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].Cb);
+                System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].value);
+                System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].text);
                 result = SPManager.UpdateStore(SPViewModel);
                 PageAction = "Update";
             }

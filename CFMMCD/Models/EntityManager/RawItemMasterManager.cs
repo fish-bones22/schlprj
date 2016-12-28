@@ -82,10 +82,10 @@ namespace CFMMCD.Models.EntityManager
                         }
                         else
                             db.RIM_VEM_Lookup.Add(RVLRow);
+                        db.SaveChanges();
                     }
                 }
-
-
+                
                 try
                 {
                     // If RIMRIC exists in the Table, perform an update

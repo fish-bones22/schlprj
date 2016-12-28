@@ -1841,27 +1841,34 @@ $(window).ready(function () {
         option += '<option value="' + regions[i]["key"] + '">' + regions[i]["long"] + '</option>';
     }
     $("#region").append(option);
+    updateProvince();
+    updateCity();
 
-    $("#region").change(function () {
-        option = "";
-        $("#province").empty();
-        var selectedRegion = $("#region").val();
-        for (var i = 0; i < provinces.length; i++) {
-            if (provinces[i]["region"] === selectedRegion)
-                option += '<option value="' + provinces[i]["key"] + '">' + provinces[i]["name"] + '</option>';
-        }
-        $("#province").append(option);
+    $("#region").click(function () {
+        updateProvince();
     });
-    $("#province").change(function () {
-        option = "";
-        $("#city").empty();
-        var selectedProvince = $("#province").val();
-        for (var i = 0; i < cities.length; i++) {
-            if (cities[i]["province"] === selectedProvince)
-                option += '<option value="' + cities[i]["key"] + '">' + cities[i]["name"] + '</option>';
-        }
-        $("#city").append(option);
+    $("#province").click(function () {
+        updateCity();
     });
 });
 
-
+function updateCity() {
+    option = "";
+    $("#city").empty();
+    var selectedProvince = $("#province").val();
+    for (var i = 0; i < cities.length; i++) {
+        if (cities[i]["province"] === selectedProvince)
+            option += '<option value="' + cities[i]["key"] + '">' + cities[i]["name"] + '</option>';
+    }
+    $("#city").append(option);
+}
+function updateProvince() {
+    option = "";
+    $("#province").empty();
+    var selectedRegion = $("#region").val();
+    for (var i = 0; i < provinces.length; i++) {
+        if (provinces[i]["region"] === selectedRegion)
+            option += '<option value="' + provinces[i]["key"] + '">' + provinces[i]["name"] + '</option>';
+    }
+    $("#province").append(option);
+}

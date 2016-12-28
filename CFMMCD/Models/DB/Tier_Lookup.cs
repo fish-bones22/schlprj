@@ -17,19 +17,83 @@ namespace CFMMCD.Models.DB
         public int MIMMIC { get; set; }
         public Nullable<double> OLDPRA { get; set; }
         public Nullable<double> NEWPRA { get; set; }
+        public Nullable<double> OLDPAO { get; set; }
+        public Nullable<double> NEWPAO { get; set; }
+        public Nullable<double> OLDAOT { get; set; }
+        public Nullable<double> NEWAOT { get; set; }
+        public Nullable<double> OLDNPA { get; set; }
+        public Nullable<double> NEWNPA { get; set; }
         public Nullable<double> OLDPRB { get; set; }
         public Nullable<double> NEWPRB { get; set; }
+        public Nullable<double> OLDPBO { get; set; }
+        public Nullable<double> NEWPBO { get; set; }
+        public Nullable<double> OLDBOT { get; set; }
+        public Nullable<double> NEWBOT { get; set; }
+        public Nullable<double> OLDNPB { get; set; }
+        public Nullable<double> NEWNPB { get; set; }
         public Nullable<double> OLDPRC { get; set; }
         public Nullable<double> NEWPRC { get; set; }
+        public Nullable<double> OLDPCO { get; set; }
+        public Nullable<double> NEWPCO { get; set; }
+        public Nullable<double> OLDCOT { get; set; }
+        public Nullable<double> NEWCOT { get; set; }
+        public Nullable<double> OLDNPC { get; set; }
+        public Nullable<double> NEWNPC { get; set; }
         public Nullable<double> OLDPRD { get; set; }
         public Nullable<double> NEWPRD { get; set; }
+        public Nullable<double> OLDPDO { get; set; }
+        public Nullable<double> NEWPDO { get; set; }
+        public Nullable<double> OLDDOT { get; set; }
+        public Nullable<double> NEWDOT { get; set; }
+        public Nullable<double> OLDNPD { get; set; }
+        public Nullable<double> NEWNPD { get; set; }
         public Nullable<double> OLDPRE { get; set; }
         public Nullable<double> NEWPRE { get; set; }
+        public Nullable<double> OLDPEO { get; set; }
+        public Nullable<double> NEWPEO { get; set; }
+        public Nullable<double> OLDEOT { get; set; }
+        public Nullable<double> NEWEOT { get; set; }
+        public Nullable<double> OLDNPE { get; set; }
+        public Nullable<double> NEWNPE { get; set; }
         public Nullable<double> OLDPRF { get; set; }
         public Nullable<double> NEWPRF { get; set; }
+        public Nullable<double> OLDPFO { get; set; }
+        public Nullable<double> NEWPFO { get; set; }
+        public Nullable<double> OLDFOT { get; set; }
+        public Nullable<double> NEWFOT { get; set; }
+        public Nullable<double> OLDNPF { get; set; }
+        public Nullable<double> NEWNPF { get; set; }
         public Nullable<double> OLDMDS { get; set; }
         public Nullable<double> NEWMDS { get; set; }
+        public Nullable<double> OLDMDO { get; set; }
+        public Nullable<double> NEWMDO { get; set; }
+        public Nullable<double> OLDMOT { get; set; }
+        public Nullable<double> NEWMOT { get; set; }
+        public Nullable<double> OLDMDN { get; set; }
+        public Nullable<double> NEWMDN { get; set; }
         public Nullable<double> OLDPRS { get; set; }
         public Nullable<double> NEWPRS { get; set; }
+        public Nullable<double> OLDPSO { get; set; }
+        public Nullable<double> NEWPSO { get; set; }
+        public Nullable<double> OLDSOT { get; set; }
+        public Nullable<double> NEWSOT { get; set; }
+        public Nullable<double> OLDNPS { get; set; }
+        public Nullable<double> NEWNPS { get; set; }
+        public Nullable<System.DateTime> EDTA { get; set; }
+        public Nullable<System.DateTime> PNDA { get; set; }
+        public Nullable<System.DateTime> EDTB { get; set; }
+        public Nullable<System.DateTime> PNDB { get; set; }
+        public Nullable<System.DateTime> EDTC { get; set; }
+        public Nullable<System.DateTime> PNDC { get; set; }
+        public Nullable<System.DateTime> EDTD { get; set; }
+        public Nullable<System.DateTime> PNDD { get; set; }
+        public Nullable<System.DateTime> EDTE { get; set; }
+        public Nullable<System.DateTime> PNDE { get; set; }
+        public Nullable<System.DateTime> EDTF { get; set; }
+        public Nullable<System.DateTime> PNDF { get; set; }
+        public Nullable<System.DateTime> EDTM { get; set; }
+        public Nullable<System.DateTime> PNDM { get; set; }
+        public Nullable<System.DateTime> EDTS { get; set; }
+        public Nullable<System.DateTime> PNDS { get; set; }
     }
 }

@@ -206,6 +206,7 @@
     <Compile Include="Controllers\StoreProfileController.cs" />
     <Compile Include="Controllers\TextGeneratorController.cs" />
     <Compile Include="Controllers\VendorMasterController.cs" />
+    <Compile Include="DropDown\TableDropDown.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +217,9 @@
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\Breakfast_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\BUSINESS_EXT.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\CFMModel.Context.cs">
@@ -248,6 +252,9 @@
     <Compile Include="Models\DB\INVVEMP0.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\LOCATION.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\McCafe_Bistro_Price_Tier.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
@@ -258,6 +265,12 @@
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\MDS_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\OWNERSHIP.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\PROFIT_CEN.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\Project_Gold_Price_Tier.cs">

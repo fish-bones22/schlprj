@@ -30,6 +30,13 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="BUSINESS_EXT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="LONGNM" Type="nvarchar" MaxLength="25" />
+  </EntityType>
   <EntityType Name="CSHMIMP0">
     <Key>
       <PropertyRef Name="MIMMIC" />
@@ -177,6 +184,13 @@
     <Property Name="VEMDEL" Type="nchar" MaxLength="1" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="LOCATION">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="LOCATN" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="McCafe_Bistro_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
@@ -205,6 +219,20 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="OWNERSHIP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="OWNSHP" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PROFIT_CEN">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="PRFCNT" Type="nvarchar" MaxLength="10" />
+  </EntityType>
   <EntityType Name="Project_Gold_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
@@ -223,7 +251,7 @@
     <Key>
       <PropertyRef Name="RIM_VEM_ID" />
     </Key>
-    <Property Name="RIM_VEM_ID" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="RIM_VEM_ID" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="RIMRIC" Type="int" />
     <Property Name="RIMRID" Type="nvarchar" MaxLength="20" />
     <Property Name="VEMVEN" Type="int" />
@@ -278,20 +306,84 @@
     <Property Name="MIMMIC" Type="int" Nullable="false" />
     <Property Name="OLDPRA" Type="float" />
     <Property Name="NEWPRA" Type="float" />
+    <Property Name="OLDPAO" Type="float" />
+    <Property Name="NEWPAO" Type="float" />
+    <Property Name="OLDAOT" Type="float" />
+    <Property Name="NEWAOT" Type="float" />
+    <Property Name="OLDNPA" Type="float" />
+    <Property Name="NEWNPA" Type="float" />
     <Property Name="OLDPRB" Type="float" />
     <Property Name="NEWPRB" Type="float" />
+    <Property Name="OLDPBO" Type="float" />
+    <Property Name="NEWPBO" Type="float" />
+    <Property Name="OLDBOT" Type="float" />
+    <Property Name="NEWBOT" Type="float" />
+    <Property Name="OLDNPB" Type="float" />
+    <Property Name="NEWNPB" Type="float" />
     <Property Name="OLDPRC" Type="float" />
     <Property Name="NEWPRC" Type="float" />
+    <Property Name="OLDPCO" Type="float" />
+    <Property Name="NEWPCO" Type="float" />
+    <Property Name="OLDCOT" Type="float" />
+    <Property Name="NEWCOT" Type="float" />
+    <Property Name="OLDNPC" Type="float" />
+    <Property Name="NEWNPC" Type="float" />
     <Property Name="OLDPRD" Type="float" />
     <Property Name="NEWPRD" Type="float" />
+    <Property Name="OLDPDO" Type="float" />
+    <Property Name="NEWPDO" Type="float" />
+    <Property Name="OLDDOT" Type="float" />
+    <Property Name="NEWDOT" Type="float" />
+    <Property Name="OLDNPD" Type="float" />
+    <Property Name="NEWNPD" Type="float" />
     <Property Name="OLDPRE" Type="float" />
     <Property Name="NEWPRE" Type="float" />
+    <Property Name="OLDPEO" Type="float" />
+    <Property Name="NEWPEO" Type="float" />
+    <Property Name="OLDEOT" Type="float" />
+    <Property Name="NEWEOT" Type="float" />
+    <Property Name="OLDNPE" Type="float" />
+    <Property Name="NEWNPE" Type="float" />
     <Property Name="OLDPRF" Type="float" />
     <Property Name="NEWPRF" Type="float" />
+    <Property Name="OLDPFO" Type="float" />
+    <Property Name="NEWPFO" Type="float" />
+    <Property Name="OLDFOT" Type="float" />
+    <Property Name="NEWFOT" Type="float" />
+    <Property Name="OLDNPF" Type="float" />
+    <Property Name="NEWNPF" Type="float" />
     <Property Name="OLDMDS" Type="float" />
     <Property Name="NEWMDS" Type="float" />
+    <Property Name="OLDMDO" Type="float" />
+    <Property Name="NEWMDO" Type="float" />
+    <Property Name="OLDMOT" Type="float" />
+    <Property Name="NEWMOT" Type="float" />
+    <Property Name="OLDMDN" Type="float" />
+    <Property Name="NEWMDN" Type="float" />
     <Property Name="OLDPRS" Type="float" />
     <Property Name="NEWPRS" Type="float" />
+    <Property Name="OLDPSO" Type="float" />
+    <Property Name="NEWPSO" Type="float" />
+    <Property Name="OLDSOT" Type="float" />
+    <Property Name="NEWSOT" Type="float" />
+    <Property Name="OLDNPS" Type="float" />
+    <Property Name="NEWNPS" Type="float" />
+    <Property Name="EDTA" Type="date" />
+    <Property Name="PNDA" Type="date" />
+    <Property Name="EDTB" Type="date" />
+    <Property Name="PNDB" Type="date" />
+    <Property Name="EDTC" Type="date" />
+    <Property Name="PNDC" Type="date" />
+    <Property Name="EDTD" Type="date" />
+    <Property Name="PNDD" Type="date" />
+    <Property Name="EDTE" Type="date" />
+    <Property Name="PNDE" Type="date" />
+    <Property Name="EDTF" Type="date" />
+    <Property Name="PNDF" Type="date" />
+    <Property Name="EDTM" Type="date" />
+    <Property Name="PNDM" Type="date" />
+    <Property Name="EDTS" Type="date" />
+    <Property Name="PNDS" Type="date" />
   </EntityType>
   <Association Name="FK_CSHMIMP0_ToTable">
     <End Role="CSHMIMP0_NP6" Type="Self.CSHMIMP0_NP6" Multiplicity="0..1" />
@@ -309,15 +401,19 @@
     <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Breakfast_Price_Tier" EntityType="Self.Breakfast_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BUSINESS_EXT" EntityType="Self.BUSINESS_EXT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OWNERSHIP" EntityType="Self.OWNERSHIP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROFIT_CEN" EntityType="Self.PROFIT_CEN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RIM_VEM_Lookup" EntityType="Self.RIM_VEM_Lookup" Schema="dbo" store:Type="Tables" />

@@ -1,9 +1,11 @@
-﻿using CFMMCD.Models.DB;
+﻿using CFMMCD.DropDown;
+using CFMMCD.Models.DB;
 using CFMMCD.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static CFMMCD.Models.ViewModel.StoreProfileViewModel;
 
 namespace CFMMCD.Models.EntityManager
 {
@@ -142,65 +144,38 @@ namespace CFMMCD.Models.EntityManager
                 return SPViewModelList;
             }
         }
-        public List<StoreProfileViewModel.GenericDropDownList> SetOwnershipDropDown()
+        public StoreProfileViewModel InitializeDropDowns(StoreProfileViewModel SPViewModel)
         {
-            using ( CFMMCDEntities db = new CFMMCDEntities() )
-            {
-                List<StoreProfileViewModel.GenericDropDownList> list = new List<StoreProfileViewModel.GenericDropDownList>();
-                foreach ( var i in db.OWNERSHIPs )
-                {
-                    StoreProfileViewModel.GenericDropDownList option = new StoreProfileViewModel.GenericDropDownList();
-                    option.text = i.OWNSHP;
-                    option.val = i.Id.ToString();
-                    list.Add(option);
-                }
-                return list;
-            }
-        }
-        public List<StoreProfileViewModel.GenericDropDownList> SetPofitCenterDropDown()
-        {
-            using (CFMMCDEntities db = new CFMMCDEntities())
-            {
-                List<StoreProfileViewModel.GenericDropDownList> list = new List<StoreProfileViewModel.GenericDropDownList>();
-                foreach (var i in db.PROFIT_CEN)
-                {
-                    StoreProfileViewModel.GenericDropDownList option = new StoreProfileViewModel.GenericDropDownList();
-                    option.text = i.PRFCNT;
-                    option.val = i.Id.ToString();
-                    list.Add(option);
-                }
-                return list;
-            }
-        }
-        public List<StoreProfileViewModel.GenericDropDownList> SetLocationDropDown()
-        {
-            using (CFMMCDEntities db = new CFMMCDEntities())
-            {
-                List<StoreProfileViewModel.GenericDropDownList> list = new List<StoreProfileViewModel.GenericDropDownList>();
-                foreach (var i in db.LOCATIONs)
-                {
-                    StoreProfileViewModel.GenericDropDownList option = new StoreProfileViewModel.GenericDropDownList();
-                    option.text = i.LOCATN;
-                    option.val = i.Id.ToString();
-                    list.Add(option);
-                }
-                return list;
-            }
+            TableDropDown tdd = new TableDropDown();
+            SPViewModel.RegularTier = tdd.SetRegularPriceTierDropDown();
+            SPViewModel.BreakfastTier = tdd.SetBreakfastPriceTierDropDown();
+            SPViewModel.DCTier = tdd.SetDessertPriceTierDropDown();
+            SPViewModel.McCafeBistroTier = tdd.SetMcCafeBistroPriceTierDropDown();
+            SPViewModel.McCafeLevel2Tier = tdd.SetMcCafeLevel2PriceTierDropDown();
+            SPViewModel.McCafeLevel3Tier = tdd.SetMcCafeLevel3PriceTierDropDown();
+            SPViewModel.ProjectGoldTier = tdd.SetProjectGoldPriceTierDropDown();
+            SPViewModel.MDSTier = tdd.SetMDSPriceTierDropDown();
+
+            SPViewModel.OwnershipList = tdd.SetOwnershipDropDown();
+            SPViewModel.ProfitCenter = tdd.SetProfitCenterDropDown();
+            SPViewModel.BusinessExtList = SetBusinessExtension();
+            SPViewModel.LocationList = tdd.SetLocationDropDown();
+            return SPViewModel;
         }
         /*
          * Creates a string list of the selected Business Extension
          */
-        private List<StoreProfileViewModel.BusinessExt> GetBusinessExtension( string stArr )
+        private List<CheckBoxList> GetBusinessExtension( string stArr )
         {
             using ( CFMMCDEntities db = new CFMMCDEntities() )
             {
                 int capacity = db.BUSINESS_EXT.ToArray().Length;
                 List<BUSINESS_EXT> BERowList = db.BUSINESS_EXT.ToList();
-                List<StoreProfileViewModel.BusinessExt> BEList = new List<StoreProfileViewModel.BusinessExt>();
+                List<CheckBoxList> BEList = new List<CheckBoxList>();
                 string[] initArr = stArr.Split(',');
                 for (int i = 0; i < capacity; i++)
                 {
-                    StoreProfileViewModel.BusinessExt BE = new StoreProfileViewModel.BusinessExt();
+                    CheckBoxList BE = new CheckBoxList();
                     BE.value = BERowList[i].ID.ToString();
                     BE.text = BERowList[i].LONGNM.Trim();
                     if (initArr.Contains(i.ToString()))
@@ -212,19 +187,36 @@ namespace CFMMCD.Models.EntityManager
                 return BEList;
             }
         }
-        private string SetBusinessExtention ( List<StoreProfileViewModel.BusinessExt> list )
+        private string SetBusinessExtention ( List<CheckBoxList> list )
         {
             string st = "";
             int i = 0;
-            foreach ( StoreProfileViewModel.BusinessExt be in list )
+            foreach ( CheckBoxList be in list )
             {
                 if (be.Cb)
                     st += i + ",";
                 i++;
             }
+            if (st.Length <= 0)
+                return st;
             return st.Substring(0, st.Length - 1);
         }
-
+        public List<CheckBoxList> SetBusinessExtension()
+        {
+            using ( CFMMCDEntities db = new CFMMCDEntities() )
+            {
+                List<CheckBoxList> list = new List<CheckBoxList>();
+                foreach ( var i in db.BUSINESS_EXT )
+                {
+                    CheckBoxList cbList = new CheckBoxList();
+                    cbList.Cb = false;
+                    cbList.value = i.ID.ToString();
+                    cbList.text = i.LONGNM.Trim();
+                    list.Add(cbList);
+                }
+                return list;
+            }
+        }
 
     }
 }

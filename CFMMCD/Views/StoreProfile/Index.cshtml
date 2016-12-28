@@ -1,7 +1,15 @@
 ﻿@model CFMMCD.Models.ViewModel.StoreProfileViewModel
 
+@using CFMMCD.Models.ViewModel
+@using CFMMCD.DropDown
+
 @{
     ViewBag.Title = "Store Profile";
+    int HasSearch = 0;
+    if (TempData["SearchResult"] != null)
+    {
+        HasSearch = (int)TempData["SearchResult"];
+    }
 }
 
 <h2 align="center">Store Profile</h2>
@@ -69,135 +77,64 @@
 
             <div class="col-lg-4">
                 <h4><strong>Business Extension</strong></h4>
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.Hrs24Input, new { @Value = Model.Hrs24Input })
-                    @Html.LabelFor(model => model.Hrs24Input, "24-hrs", new { @class = "form-label " })
-                </div>
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.MallInput, new { @Value = Model.MallInput })
-                    @Html.LabelFor(model => model.MallInput, "Mall", new { @class = "form-label " })
-                </div>
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.McVanInput, new { @Value = Model.McVanInput })
-                    @Html.LabelFor(model => model.McVanInput, "McVan", new { @class = "form-label " })
-                </div>
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.McDeliveryInput, new { @Value = Model.McDeliveryInput })
-                    @Html.LabelFor(model => model.McDeliveryInput, "McDelivery", new { @class = "form-label " })
-                </div>
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.DriveThruInput, new { @Value = Model.DriveThruInput } )
-                    @Html.LabelFor(model => model.DriveThruInput, "DriveT Thru", new { @class = "form-label" })
-                </div>
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.TakeOutCounterInput, new { @Value = Model.TakeOutCounterInput })
-                    @Html.LabelFor(model => model.TakeOutCounterInput, "Takeout counter", new { @class = "form-label " })
-                </div>
+                @{
+                    for ( var i = 0; i < Model.BusinessExtList.Count; i++ )
+                    {
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => Model.BusinessExtList[i].Cb, new { @Value = Model.BusinessExtList[i].Cb, @Id = Model.BusinessExtList[i].value })
+                            @Html.LabelFor(m => Model.BusinessExtList[i].value, Model.BusinessExtList[i].text, new { @class = "form-label " })
+                        </div>
+                    }
+                }
             </div>
 
             <div class="col-lg-4">
                 <div class="container">
                     <div class="form-group">
                         @Html.LabelFor(model => model.BREAKFAST_PRICE_TIER, "Breakfast tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.BREAKFAST_PRICE_TIER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.BREAKFAST_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.BREAKFAST_PRICE_TIER, new SelectList(Model.BreakfastTier, "value", "text", Model.BreakfastTier[0].value), new { @class = "form-control input-sm", @Value = Model.BREAKFAST_PRICE_TIER })
                         @Html.ValidationMessageFor(model => model.BREAKFAST_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.REGULAR_PRICE_TIER, "Regular price tier", new { @class = "form-label " })
-                        @Html.DropDownListFor(m => m.REGULAR_PRICE_TIER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.REGULAR_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.REGULAR_PRICE_TIER, new SelectList(Model.RegularTier, "value", "text", Model.RegularTier[0].value), new { @class = "form-control input-sm", @Value = Model.REGULAR_PRICE_TIER })
                         @Html.ValidationMessageFor(model => model.REGULAR_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.DC_PRICE_TIER, "DC price tier", new { @class = "form-label " })
-                        @Html.DropDownListFor(m => m.DC_PRICE_TIER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.DC_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.DC_PRICE_TIER, new SelectList(Model.DCTier, "value", "text", Model.DCTier[0].value), new { @class = "form-control input-sm", @Value = Model.DC_PRICE_TIER })
                         @Html.ValidationMessageFor(model => model.DC_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.MDS_PRICE_TIER, "MDS price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.MDS_PRICE_TIER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.MDS_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.MDS_PRICE_TIER, new SelectList(Model.MDSTier, "value", "text", Model.MDSTier[0].value), new { @class = "form-control input-sm", @Value = Model.MDS_PRICE_TIER })
                         @Html.ValidationMessageFor(model => model.MDS_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.MCCAFE_LEVEL_2_PRICE_TIER, "McCafe Level 2 price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.MCCAFE_LEVEL_2_PRICE_TIER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.MCCAFE_LEVEL_2_PRICE_TIER })
+                       @Html.DropDownListFor(m => m.MCCAFE_LEVEL_2_PRICE_TIER, new SelectList(Model.McCafeLevel2Tier, "value", "text", Model.McCafeLevel2Tier[0].value), new { @class = "form-control input-sm", @Value = Model.MCCAFE_LEVEL_2_PRICE_TIER })
                         @Html.ValidationMessageFor(model => model.MCCAFE_LEVEL_2_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.MCCAFE_LEVEL_3_PRICE_TIER, "McCafe Level 3 price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.MCCAFE_LEVEL_3_PRICE_TIER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.MCCAFE_LEVEL_3_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.MCCAFE_LEVEL_3_PRICE_TIER, new SelectList( Model.McCafeLevel3Tier, "value", "text", Model.McCafeLevel3Tier[0].value), new { @class = "form-control input-sm", @Value = Model.MCCAFE_LEVEL_3_PRICE_TIER })
                         @Html.ValidationMessageFor(model => model.MCCAFE_LEVEL_3_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.MCCAFE_BISTRO_PRICE_TIER, "McCafe BISTRO price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.MCCAFE_BISTRO_PRICE_TIER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.MCCAFE_BISTRO_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.MCCAFE_BISTRO_PRICE_TIER, new SelectList(Model.McCafeBistroTier, "value", "text", Model.McCafeBistroTier[0].value), new { @class = "form-control input-sm", @Value = Model.MCCAFE_BISTRO_PRICE_TIER })
                         @Html.ValidationMessageFor(model => model.MCCAFE_BISTRO_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.PROJECT_GOLD_PRICE_TIER, "Project Gold price tier", new { @class = "form-label " })
-                        @Html.DropDownListFor(m => m.PROJECT_GOLD_PRICE_TIER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.PROJECT_GOLD_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.PROJECT_GOLD_PRICE_TIER, new SelectList(Model.ProjectGoldTier, "value", "text", Model.ProjectGoldTier[0].value), new { @class = "form-control input-sm", @Value = Model.PROJECT_GOLD_PRICE_TIER })
                         @Html.ValidationMessageFor(model => model.PROJECT_GOLD_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -207,80 +144,36 @@
                 <div class="container">
                     <div class="form-group">
                         @Html.LabelFor(model => model.PROFIT_CENTER, "Profit center", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.PROFIT_CENTER, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.DC_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.PROFIT_CENTER, new SelectList(Model.ProfitCenter, "value", "text", Model.ProfitCenter[0].value), new { @class = "form-control input-sm", @Value = Model.PROFIT_CENTER })
                         @Html.ValidationMessageFor(model => model.PROFIT_CENTER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.OWNERSHIP, "Ownership", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.OWNERSHIP, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.DC_PRICE_TIER })
+                        @Html.DropDownListFor(m => m.OWNERSHIP, new SelectList( Model.OwnershipList, "value", "text", Model.OwnershipList[0].value), new { @class = "form-control input-sm", @Value = Model.OWNERSHIP })
                         @Html.ValidationMessageFor(model => model.OWNERSHIP, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
+                        @Html.LabelFor(model => model.LOCATION, "Location", new { @class = "form-label" })
+                        @Html.DropDownListFor(m => m.LOCATION, new SelectList(Model.LocationList, "value", "text", Model.LocationList[0].value), new { @class = "form-control input-sm", @Value = Model.LOCATION })
+                        @Html.ValidationMessageFor(model => model.LOCATION, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="form-group">
                         @Html.LabelFor(model => model.REGION, "Region", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.REGION, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.REGION })
-                        @Html.ValidationMessageFor(model => model.REGION, "", new { @class = "text-danger" })
+                        <select id="region" class="form-control input-sm"></select>
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.PROVINCE, "Province", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.PROVINCE, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.PROVINCE })
-                        @Html.ValidationMessageFor(model => model.PROVINCE, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.LOCATION, "Location", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => m.LOCATION, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.LOCATION })
-                        @Html.ValidationMessageFor(model => model.LOCATION, "", new { @class = "text-danger" })
+                        <select id="province" class="form-control input-sm"></select>
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.CITY, "City", new { @class = "form-label col-md-3" })
-                        @Html.DropDownListFor(m => m.CITY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "0"  },
-                                new { value = "1" , text = "1" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.CITY })
-                        @Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger" })
+                        <select id="city" class="form-control input-sm"></select>
                     </div>
                 </div>
             </div>
@@ -372,3 +265,44 @@
         </div>
 }
 </div>
+<!--Search result modal-->
+<div class="modal fade" id="search-result-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Search results</h4>
+        </div>
+        @using (Html.BeginForm("DisplaySearchResult", "MenuItemMaster", FormMethod.Post, new { }))
+        {
+            List<StoreProfileViewModel> SPList = (List<StoreProfileViewModel>)Session["ViewModelList"];
+            if (SPList != null)
+            {
+                <div class="modal-body">
+                    @{if (HasSearch == 1 && SPList != null)
+                    {
+                        foreach (StoreProfileViewModel vm in SPList)
+                        {
+                                <button type="submit" class="modal-item-select" name="value" value=@vm.STORE_NO>
+                                    <div class="col-lg-3">
+                                        @vm.STORE_NO
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @vm.STORE_NAME
+                                    </div>
+                                </button>
+                            }
+                        }
+                    }
+                </div>
+                            }
+                        }
+    </div>
+</div>
+
+<script>
+    $(window).ready(function () {
+        if (@HasSearch === 1) {
+            $("#search-result-modal").modal('show');
+        }
+    });
+</script>

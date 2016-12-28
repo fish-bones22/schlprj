@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using CFMMCD.Sessions;
+using CFMMCD.DropDown;
 
 namespace CFMMCD.Models.ViewModel
 {
@@ -39,22 +40,25 @@ namespace CFMMCD.Models.ViewModel
         public bool[] BET { get; set; }
 
         public List<StoreProfileViewModel> StoreList { get; set; }
-        public List<BusinessExt> BusinessExtList { get; set; }
+        public List<CheckBoxList> BusinessExtList { get; set; }
         public List<GenericDropDownList> OwnershipList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
         public List<GenericDropDownList> ProfitCenter { get; set; }
+        public List<GenericDropDownList> BreakfastTier { get; set; }
+        public List<GenericDropDownList> RegularTier { get; set; }
+        public List<GenericDropDownList> DCTier { get; set; }
+        public List<GenericDropDownList> MDSTier { get; set; }
+        public List<GenericDropDownList> McCafeLevel2Tier { get; set; }
+        public List<GenericDropDownList> McCafeLevel3Tier { get; set; }
+        public List<GenericDropDownList> McCafeBistroTier { get; set; }
+        public List<GenericDropDownList> ProjectGoldTier { get; set; }
 
-        public class BusinessExt
-        {
-            public bool Cb { get; set; }
-            public string text { get; set; }
-            public string value { get; set; }
-        }
-        public class GenericDropDownList
-        {
-            public string text { get; set; }
-            public string val { get; set; }
-        }
 
+    }
+    public class CheckBoxList
+    {
+        public bool Cb { get; set; }
+        public string value { get; set; }
+        public string text { get; set; }
     }
 }

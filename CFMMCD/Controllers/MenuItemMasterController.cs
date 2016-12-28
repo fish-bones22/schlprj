@@ -25,24 +25,27 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("MIM", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
+            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
             MenuItemMasterViewModel MIMViewModel = (MenuItemMasterViewModel)TempData["SearchItemSelected"];
             if (MIMViewModel == null)
+            {
                 MIMViewModel = new MenuItemMasterViewModel();
+            }
             return View(MIMViewModel);
         }
         [HttpPost]
-        public ActionResult Index(StoreProfileViewModel SPViewModel)
+        public ActionResult Index(MenuItemMasterViewModel MIMViewModel)
         {   // Search
-            StoreProfileManager SPManager = new StoreProfileManager();
-            SPViewModel.StoreList = SPManager.SearchStore(SPViewModel);
-            if (SPViewModel.StoreList != null)
+            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
+            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItem(MIMViewModel);
+            if (MIMViewModel.MenuItemMasterList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = SPViewModel.StoreList;
+                Session["ViewModelList"] = MIMViewModel.MenuItemMasterList;
             }
             else
                 ModelState.AddModelError("", "No results found");
-            return View(SPViewModel);
+            return View(MIMViewModel);
         }
         [HttpPost]
         public ActionResult UpdateDelete(MenuItemMasterViewModel MIMViewModel, string command)
