@@ -27,6 +27,7 @@
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
     <EntitySet Name="Tier_Lookup" EntityType="CFMMCDModel.Tier_Lookup" />
+    <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
   </EntityContainer>
   <EntityType Name="CSHMIMP0">
     <Key>
@@ -426,5 +427,22 @@
     <Property Name="PNDM" Type="DateTime" Precision="0" />
     <Property Name="EDTS" Type="DateTime" Precision="0" />
     <Property Name="PNDS" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="INVRIRP0">
+    <Key>
+      <PropertyRef Name="RIRRID" />
+    </Key>
+    <Property Name="RIRRID" Type="Int32" Nullable="false" />
+    <Property Name="RIRMIC" Type="Int32" />
+    <Property Name="RIRRIC" Type="Int32" />
+    <Property Name="RIRVPC" Type="Int32" />
+    <Property Name="RIRSFQ" Type="Int32" />
+    <Property Name="RIRCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIRVST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIRUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIRDAT" Type="DateTime" Precision="0" />
+    <Property Name="RIRFLG" Type="Boolean" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

@@ -5,30 +5,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
 <<<<<<< HEAD
-      <Diagram DiagramId="a79f81dddf474f8f934b7caf991f84f2" Name="Diagram1" ZoomLevel="107">
+      <Diagram DiagramId="a79f81dddf474f8f934b7caf991f84f2" Name="Diagram1" ZoomLevel="80">
         <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0" Width="1.5" PointX="4.34318162889368" PointY="8.040674183536634" />
-        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="3.9966879170372556" PointY="22.487831275205981" />
+        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="7" PointY="22" />
         <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="4" PointY="4" />
         <EntityTypeShape EntityType="CFMMCDModel.Breakfast_Price_Tier" Width="1.5" PointX="11.585984179557293" PointY="6.6574945182807248" />
         <EntityTypeShape EntityType="CFMMCDModel.BUSINESS_EXT" Width="1.5" PointX="9.2960125642344416" PointY="4.1897406597573967" />
         <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0_NP6" Width="1.5" PointX="2" PointY="2.875" />
         <EntityTypeShape EntityType="CFMMCDModel.Dessert_Price_Tier" Width="1.5" PointX="2.75" PointY="8.5" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="6.0299506550794248" PointY="29.008406429089796" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="5.375" PointY="27.375" />
         <EntityTypeShape EntityType="CFMMCDModel.INVVEMP0" Width="1.5" PointX="5.9625694462855208" PointY="3.7792437094167077" />
         <EntityTypeShape EntityType="CFMMCDModel.LOCATION" Width="1.5" PointX="9.8650491078687139" PointY="26.400172365084369" />
         <EntityTypeShape EntityType="CFMMCDModel.McCafe_Bistro_Price_Tier" Width="1.5" PointX="4.0109549611857886" PointY="25.674394336377453" />
-        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_2_Price_Tier" Width="1.5" PointX="6.7275987466460085" PointY="27.697354374312496" />
+        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_2_Price_Tier" Width="1.5" PointX="9.5" PointY="23.75" />
         <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_3_Price_Tier" Width="1.5" PointX="2.5747944016823516" PointY="28.994393749625605" />
-        <EntityTypeShape EntityType="CFMMCDModel.MDS_Price_Tier" Width="1.5" PointX="3.7177716957953626" PointY="18.597832673507664" />
-        <EntityTypeShape EntityType="CFMMCDModel.OWNERSHIP" Width="1.5" PointX="1.7641055275518938" PointY="27.808475924566611" />
+        <EntityTypeShape EntityType="CFMMCDModel.MDS_Price_Tier" Width="1.5" PointX="4.375" PointY="19.125" />
+        <EntityTypeShape EntityType="CFMMCDModel.OWNERSHIP" Width="1.5" PointX="1.125" PointY="26.625" />
         <EntityTypeShape EntityType="CFMMCDModel.PROFIT_CEN" Width="1.5" PointX="6.620944588734277" PointY="18.869841137374678" />
         <EntityTypeShape EntityType="CFMMCDModel.Project_Gold_Price_Tier" Width="1.5" PointX="7.6109322344935189" PointY="13.069534114128693" />
         <EntityTypeShape EntityType="CFMMCDModel.Regular_Price_Tier" Width="1.5" PointX="3.3336606451001303" PointY="22.439361076075286" />
-        <EntityTypeShape EntityType="CFMMCDModel.RIM_VEM_Lookup" Width="1.5" PointX="3.625" PointY="2.125" />
+        <EntityTypeShape EntityType="CFMMCDModel.RIM_VEM_Lookup" Width="1.5" PointX="3.625" PointY="0.875" />
         <EntityTypeShape EntityType="CFMMCDModel.STORE_MIMMIC_Lookup" Width="1.5" PointX="8.06525920334517" PointY="1.5665451891564508" />
-        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="2.9914962979925313" PointY="25.40439806571435" />
+        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="8.75" PointY="23" />
         <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" />
-        <EntityTypeShape EntityType="CFMMCDModel.Tier_Lookup" Width="1.5" PointX="10.5207764629837" PointY="3.9433150309805365" />
+        <EntityTypeShape EntityType="CFMMCDModel.Tier_Lookup" Width="1.5" PointX="9.125" PointY="6" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVRIRP0" Width="1.5" PointX="9.4668640426671438" PointY="25.210320350346304" />
       </Diagram>
 =======
       <Diagram DiagramId="3b3d34b0e6f448fa9bddfa0f5790fe9e" Name="Diagram1">

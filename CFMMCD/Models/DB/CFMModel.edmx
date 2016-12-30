@@ -165,6 +165,23 @@
           <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
           <Property Name="STATUS" Type="nchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="INVRIRP0">
+          <Key>
+            <PropertyRef Name="RIRRID" />
+          </Key>
+          <Property Name="RIRRID" Type="int" Nullable="false" />
+          <Property Name="RIRMIC" Type="int" />
+          <Property Name="RIRRIC" Type="int" />
+          <Property Name="RIRVPC" Type="int" />
+          <Property Name="RIRSFQ" Type="int" />
+          <Property Name="RIRCWC" Type="nchar" MaxLength="1" />
+          <Property Name="RIRSTA" Type="nchar" MaxLength="1" />
+          <Property Name="RIRVST" Type="nchar" MaxLength="1" />
+          <Property Name="RIRUSR" Type="nchar" MaxLength="3" />
+          <Property Name="RIRDAT" Type="date" />
+          <Property Name="RIRFLG" Type="bit" />
+          <Property Name="STATUS" Type="nchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="INVVEMP0">
           <Key>
             <PropertyRef Name="VEMVEN" />
@@ -411,6 +428,7 @@
           <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVRIRP0" EntityType="Self.INVRIRP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
@@ -461,6 +479,7 @@
             <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
           </AssociationSet>
           <EntitySet Name="Tier_Lookup" EntityType="CFMMCDModel.Tier_Lookup" />
+          <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
         </EntityContainer>
         <EntityType Name="CSHMIMP0">
           <Key>
@@ -860,6 +879,23 @@
           <Property Name="PNDM" Type="DateTime" Precision="0" />
           <Property Name="EDTS" Type="DateTime" Precision="0" />
           <Property Name="PNDS" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="INVRIRP0">
+          <Key>
+            <PropertyRef Name="RIRRID" />
+          </Key>
+          <Property Name="RIRRID" Type="Int32" Nullable="false" />
+          <Property Name="RIRMIC" Type="Int32" />
+          <Property Name="RIRRIC" Type="Int32" />
+          <Property Name="RIRVPC" Type="Int32" />
+          <Property Name="RIRSFQ" Type="Int32" />
+          <Property Name="RIRCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIRVST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIRUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIRDAT" Type="DateTime" Precision="0" />
+          <Property Name="RIRFLG" Type="Boolean" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1271,6 +1307,24 @@
                 <ScalarProperty Name="NEWPRA" ColumnName="NEWPRA" />
                 <ScalarProperty Name="OLDPRA" ColumnName="OLDPRA" />
                 <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVRIRP0">
+            <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
+              <MappingFragment StoreEntitySet="INVRIRP0">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="RIRFLG" ColumnName="RIRFLG" />
+                <ScalarProperty Name="RIRDAT" ColumnName="RIRDAT" />
+                <ScalarProperty Name="RIRUSR" ColumnName="RIRUSR" />
+                <ScalarProperty Name="RIRVST" ColumnName="RIRVST" />
+                <ScalarProperty Name="RIRSTA" ColumnName="RIRSTA" />
+                <ScalarProperty Name="RIRCWC" ColumnName="RIRCWC" />
+                <ScalarProperty Name="RIRSFQ" ColumnName="RIRSFQ" />
+                <ScalarProperty Name="RIRVPC" ColumnName="RIRVPC" />
+                <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
+                <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
+                <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

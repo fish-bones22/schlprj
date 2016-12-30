@@ -160,6 +160,23 @@
     <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="INVRIRP0">
+    <Key>
+      <PropertyRef Name="RIRRID" />
+    </Key>
+    <Property Name="RIRRID" Type="int" Nullable="false" />
+    <Property Name="RIRMIC" Type="int" />
+    <Property Name="RIRRIC" Type="int" />
+    <Property Name="RIRVPC" Type="int" />
+    <Property Name="RIRSFQ" Type="int" />
+    <Property Name="RIRCWC" Type="nchar" MaxLength="1" />
+    <Property Name="RIRSTA" Type="nchar" MaxLength="1" />
+    <Property Name="RIRVST" Type="nchar" MaxLength="1" />
+    <Property Name="RIRUSR" Type="nchar" MaxLength="3" />
+    <Property Name="RIRDAT" Type="date" />
+    <Property Name="RIRFLG" Type="bit" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
+  </EntityType>
   <EntityType Name="INVVEMP0">
     <Key>
       <PropertyRef Name="VEMVEN" />
@@ -406,6 +423,7 @@
     <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVRIRP0" EntityType="Self.INVRIRP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />

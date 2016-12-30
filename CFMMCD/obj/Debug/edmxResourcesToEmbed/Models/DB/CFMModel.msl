@@ -408,5 +408,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="INVRIRP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
+        <MappingFragment StoreEntitySet="INVRIRP0">
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="RIRFLG" ColumnName="RIRFLG" />
+          <ScalarProperty Name="RIRDAT" ColumnName="RIRDAT" />
+          <ScalarProperty Name="RIRUSR" ColumnName="RIRUSR" />
+          <ScalarProperty Name="RIRVST" ColumnName="RIRVST" />
+          <ScalarProperty Name="RIRSTA" ColumnName="RIRSTA" />
+          <ScalarProperty Name="RIRCWC" ColumnName="RIRCWC" />
+          <ScalarProperty Name="RIRSFQ" ColumnName="RIRSFQ" />
+          <ScalarProperty Name="RIRVPC" ColumnName="RIRVPC" />
+          <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
+          <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
+          <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

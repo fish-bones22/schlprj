@@ -211,6 +211,7 @@
     <Compile Include="Controllers\MDSPriceTierController.cs" />
     <Compile Include="Controllers\MenuItemMasterController.cs" />
     <Compile Include="Controllers\MenuItemPriceUpdateController.cs" />
+    <Compile Include="Controllers\MenuRecipeController.cs" />
     <Compile Include="Controllers\ProjectGoldPriceTierController.cs" />
     <Compile Include="Controllers\RawItemMasterController.cs" />
     <Compile Include="Controllers\RawItemPriceUpdateController.cs" />
@@ -259,6 +260,9 @@
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\INVRIMP0.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\INVRIRP0.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\INVVEMP0.cs">
@@ -323,6 +327,7 @@
     <Compile Include="Models\ViewModel\McCafeLevel2PriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\McCafeLevel3PriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\MDSPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\MenuRecipeViewModel.cs" />
     <Compile Include="Models\ViewModel\ProjectGoldPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemMasterViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemPriceUpdateViewModel.cs" />
@@ -371,6 +376,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Account\EditAccount.cshtml" />
     <Content Include="Views\Account\EditAccess.cshtml" />
+    <Content Include="Views\MenuRecipe\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

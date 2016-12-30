@@ -47,5 +47,6 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<STORE_MIMMIC_Lookup> STORE_MIMMIC_Lookup { get; set; }
         public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<Tier_Lookup> Tier_Lookup { get; set; }
+        public virtual DbSet<INVRIRP0> INVRIRP0 { get; set; }
     }
 }
