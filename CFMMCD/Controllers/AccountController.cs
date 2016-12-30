@@ -69,14 +69,14 @@ namespace CFMMCD.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateAccount(CreateAccountViewModel CAViewModel)
+        public ActionResult CreateAccount(AccountViewModel CAViewModel)
         {
             if(ModelState.IsValid)
             {
                 AccountManager accMan = new AccountManager();
                 if (!accMan.IsUsernameExist(CAViewModel.Username))
                 {
-                    accMan.CreateUserAccount(CAViewModel);
+                    accMan.UpdateUserAccount(CAViewModel);
                     FormsAuthentication.SetAuthCookie(CAViewModel.Username, false);
                     TempData["SuccessMessage"] = "Successfuly created account";
                     UserSession us = (UserSession)Session["User"];
@@ -86,7 +86,148 @@ namespace CFMMCD.Controllers
                 else
                     ModelState.AddModelError("", "Username already taken");
             }
-            return View(new CreateAccountViewModel());
+            return View(new AccountViewModel());
+        }
+
+
+        public ActionResult EditAccount()
+        {
+            // Validate log in and user access
+            UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            if (UASession == null || !UASession.UAP) return RedirectToAction("Login", "Account");
+            // Set NavBar Links accordingly
+            Session["CurrentPage"] = new CurrentPageSession("UAP_EDIT", "HOME", "LOG");
+
+            // SearchItemSelected is assigned value at DisplaySearchResult
+            AccountManager AManager = new AccountManager();
+            AccountViewModel AViewModel = (AccountViewModel)TempData["SearchItemSelected"];
+            if (AViewModel == null)
+            {
+                AViewModel = new AccountViewModel();
+            }
+            return View(AViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditAccount ( AccountViewModel AViewModel, string command )
+        {
+            AccountManager AManager = new AccountManager();
+            UserSession user = (UserSession)Session["User"];
+            string PageAction = "";
+            bool result = false;
+            if ( command == "Search" )
+            {
+                AViewModel.AccountList = AManager.SearchAccount(AViewModel.SearchItem);
+                if (AViewModel.AccountList != null)
+                {
+                    TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
+                    Session["ViewModelList"] = AViewModel.AccountList;
+                }
+                else
+                    ModelState.AddModelError("", "No results found");
+
+                return View(AViewModel);
+            }
+            else if (command == "Save")
+            {
+                if (AViewModel.Username.Equals(""))
+                    ModelState.AddModelError("", "The username field is required");
+                if (AViewModel.Password == null || AViewModel.Password.Equals(""))
+                    ModelState.AddModelError("", "The password field is required");
+                if (AViewModel.Password == null || !AViewModel.PasswordVerify.Equals(AViewModel.Password))
+                    ModelState.AddModelError("", "Passwords didn't matched");
+                else result = AManager.UpdateUserAccount(AViewModel);
+                PageAction = "Update";
+            }
+            else if (command == "Delete")
+            {
+                result = AManager.DeleteUserAccount(AViewModel);
+                PageAction = "Delete";
+            }
+            if (result)
+            {
+                TempData["SuccessMessage"] = PageAction + " successful";
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Edit User Account", PageAction, AViewModel.Username, AViewModel.Username);
+            }
+            else
+            {
+                TempData["ErrorMessage"] = PageAction + " failed";
+            }
+            return RedirectToAction("EditAccount");
+        }
+
+        [HttpPost]
+        public ActionResult DisplaySearchResultEAcc(string value)
+        {
+            List<AccountViewModel> AList = (List<AccountViewModel>)Session["ViewModelList"];
+            AccountViewModel AViewModel = AList.Where(o => o.Username.ToString().Equals(value)).FirstOrDefault();
+            TempData["SearchItemSelected"] = AViewModel;
+            return RedirectToAction("EditAccount", "Account");
+        }
+
+        public ActionResult EditAccess()
+        {
+            // Validate log in and user access
+            UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            if (UASession == null || !UASession.UAP) return RedirectToAction("Login", "Account");
+            // Set NavBar Links accordingly
+            Session["CurrentPage"] = new CurrentPageSession("UAP_ACCESS_EDIT", "HOME", "LOG");
+
+            // SearchItemSelected is assigned value at DisplaySearchResult
+            AccountManager AManager = new AccountManager();
+            AccountViewModel AViewModel = (AccountViewModel)TempData["SearchItemSelected"];
+            if (AViewModel == null)
+            {
+                AViewModel = new AccountViewModel();
+            }
+            return View(AViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditAccess(AccountViewModel AViewModel, string command)
+        {
+            AccountManager AManager = new AccountManager();
+            UserSession user = (UserSession)Session["User"];
+            string PageAction = "";
+            bool result = false;
+            
+            if (command == "Search")
+            {
+                AViewModel.AccountList = AManager.SearchAccount(AViewModel.SearchItem);
+                if (AViewModel.AccountList != null)
+                {
+                    TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
+                    Session["ViewModelList"] = AViewModel.AccountList;
+                }
+                else
+                    ModelState.AddModelError("", "No results found");
+
+                return View(AViewModel);
+            }
+            else if (command == "Save")
+            {
+                result = AManager.UpdateUserAccount(AViewModel);
+                PageAction = "Update";
+            }
+            if (result)
+            {
+                TempData["SuccessMessage"] = PageAction + " successful";
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Edit User Account", PageAction, AViewModel.Username, AViewModel.Username);
+            }
+            else
+            {
+                TempData["ErrorMessage"] = PageAction + " failed";
+            }
+            return RedirectToAction("EditAccess");
+        }
+
+        [HttpPost]
+        public ActionResult DisplaySearchResultEA(string value)
+        {
+            List<AccountViewModel> AList = (List<AccountViewModel>)Session["ViewModelList"];
+            AccountViewModel AViewModel = AList.Where(o => o.Username.ToString().Equals(value)).FirstOrDefault();
+            TempData["SearchItemSelected"] = AViewModel;
+            return RedirectToAction("EditAccess", "Account");
         }
     }
 }

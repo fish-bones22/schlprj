@@ -10,6 +10,26 @@ namespace CFMMCD.Models.ViewModel
 {
     public class StoreProfileViewModel
     {
+        public StoreProfileViewModel()
+        {
+            TableDropDown tdd = new TableDropDown();
+            OwnershipList = tdd.SetOwnershipDropDown();
+            LocationList = tdd.SetLocationDropDown();
+            ProfitCenter = tdd.SetProfitCenterDropDown();
+            BreakfastTier = tdd.SetBreakfastPriceTierDropDown();
+            RegularTier = tdd.SetRegularPriceTierDropDown();
+            DCTier = tdd.SetDessertPriceTierDropDown();
+            MDSTier = tdd.SetMDSPriceTierDropDown();
+            McCafeLevel2Tier = tdd.SetMcCafeLevel2PriceTierDropDown();
+            McCafeLevel3Tier = tdd.SetMcCafeLevel3PriceTierDropDown();
+            McCafeBistroTier = tdd.SetMcCafeBistroPriceTierDropDown();
+            ProjectGoldTier = tdd.SetProjectGoldPriceTierDropDown();
+            BusinessExtList = tdd.SetBusinessExtensionList();
+            BET = new List<bool>();
+            foreach (CheckBoxList cbl in BusinessExtList)
+                BET.Add(cbl.Cb);
+    }
+
         public string StoreNameNumber { get; set; }
         [Required(ErrorMessage ="This field is required")]
         public string STORE_NO { get; set; }
@@ -37,9 +57,8 @@ namespace CFMMCD.Models.ViewModel
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
 
-        public bool[] BET { get; set; }
+        public List<bool> BET { get; set; }
 
-        public List<StoreProfileViewModel> StoreList { get; set; }
         public List<CheckBoxList> BusinessExtList { get; set; }
         public List<GenericDropDownList> OwnershipList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
@@ -53,12 +72,6 @@ namespace CFMMCD.Models.ViewModel
         public List<GenericDropDownList> McCafeBistroTier { get; set; }
         public List<GenericDropDownList> ProjectGoldTier { get; set; }
 
-
-    }
-    public class CheckBoxList
-    {
-        public bool Cb { get; set; }
-        public string value { get; set; }
-        public string text { get; set; }
+        public List<StoreProfileViewModel> StoreList { get; set; }
     }
 }

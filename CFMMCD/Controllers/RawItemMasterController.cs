@@ -29,11 +29,7 @@ namespace CFMMCD.Controllers
             if (RIMViewModel == null)
             {
                 RIMViewModel = new RawItemMasterViewModel();
-                RIMViewModel.VendorList = RIMManager.GetVendorList();
             }
-            System.Diagnostics.Debug.WriteLine(RIMViewModel.VendorList[0].VendorName);
-            System.Diagnostics.Debug.WriteLine(RIMViewModel.VendorList[0].VendorCheckBox);
-            System.Diagnostics.Debug.WriteLine(RIMViewModel.VendorList[0].RIMCPR);
 
             return View(RIMViewModel);
         }

@@ -1837,18 +1837,26 @@ var cities = [
 
 $(window).ready(function () {
     var option = "";
+    console.log($("#region").val());
     for (var i = 0; i < regions.length; i++) {
-        option += '<option value="' + regions[i]["key"] + '">' + regions[i]["long"] + '</option>';
+        option += '<option value="' + regions[i]["key"] + '" ';
+        if (($("#region").val() != null && $("#region").val() != "") &&
+            ($("#region").val() === regions[i]["key"]))
+            option += 'selected="selected"';
+        option += '>' + regions[i]["long"] + '</option>';
     }
     $("#region").append(option);
+    $("option[value='" + $("#region").val() + "'").attr("selected", "selected");
     updateProvince();
     updateCity();
 
     $("#region").click(function () {
         updateProvince();
+        $("option[value='" + $("#province").val()+ "'").attr("selected", "selected");
     });
     $("#province").click(function () {
         updateCity();
+        $("option[value='" + $("#city").val() + "'").attr("selected", "selected");
     });
 });
 
@@ -1858,7 +1866,7 @@ function updateCity() {
     var selectedProvince = $("#province").val();
     for (var i = 0; i < cities.length; i++) {
         if (cities[i]["province"] === selectedProvince)
-            option += '<option value="' + cities[i]["key"] + '">' + cities[i]["name"] + '</option>';
+            option += '<option value="' + cities[i]["name"] + '">' + cities[i]["name"] + '</option>';
     }
     $("#city").append(option);
 }

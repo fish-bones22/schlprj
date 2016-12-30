@@ -1,4 +1,5 @@
-﻿@model CFMMCD.Models.ViewModel.CreateAccountViewModel
+﻿@model CFMMCD.Models.ViewModel.AccountViewModel
+
 
 @{
     ViewBag.Title = "Create User Account";
@@ -31,112 +32,118 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.AllExceptUAC)
+                    All Except User Account Access
+                </label>
+            </div>
             <div contentEditable="false" style="height:200px; overflow-y:scroll">
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.MIMInput)
+                        @Html.CheckBoxFor(m => Model.MIMInput)
                         Menu Item Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.RIMInput)
+                        @Html.CheckBoxFor(m => Model.RIMInput)
                         Raw Item Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.MERInput)
+                        @Html.CheckBoxFor(m => Model.MERInput)
                         Menu Recipe Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.STPInput)
+                        @Html.CheckBoxFor(m => Model.STPInput)
                         Store Profile Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.SCMInput)
+                        @Html.CheckBoxFor(m => Model.SCMInput)
                         SCM Master Recipe Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.VEMInput)
+                        @Html.CheckBoxFor(m => Model.VEMInput)
                         Vendor Master Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.VAMInput)
+                        @Html.CheckBoxFor(m => Model.VAMInput)
                         Value Meal Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.UAPInput)
+                        @Html.CheckBoxFor(m => Model.UAPInput)
                         User Access
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.MIPInput)
+                        @Html.CheckBoxFor(m => Model.MIPInput)
                         Menu Item Price Update Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.RIPInput)
+                        @Html.CheckBoxFor(m => Model.RIPInput)
                         Raw Item Price Update Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.AULInput)
+                        @Html.CheckBoxFor(m => Model.AULInput)
                         Audit Log Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.REGInput)
+                        @Html.CheckBoxFor(m => Model.REGInput)
                         Report Generation
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.TEGInput)
+                        @Html.CheckBoxFor(m => Model.TEGInput)
                         Text Generation
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.TIPInput)
+                        @Html.CheckBoxFor(m => Model.TIPInput)
                         Tier Pages
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.BUEInput)
+                        @Html.CheckBoxFor(m => Model.BUEInput)
                         Business Extension Maintenance Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.OWNInput)
+                        @Html.CheckBoxFor(m => Model.OWNInput)
                         Ownership Maintenance Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.PRCInput)
+                        @Html.CheckBoxFor(m => Model.PRCInput)
                         Profit Center Maintenance Page
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        @Html.CheckBoxFor(m => m.LOCInput)
+                        @Html.CheckBoxFor(m => Model.LOCInput)
                         Location Maintenance Page
                     </label>
                 </div>

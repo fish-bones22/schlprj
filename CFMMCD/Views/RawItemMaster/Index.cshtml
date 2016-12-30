@@ -1,5 +1,6 @@
 ﻿@model CFMMCD.Models.ViewModel.RawItemMasterViewModel
 @using CFMMCD.Models.ViewModel
+@using CFMMCD.DropDown
 
 @{
 	ViewBag.Title = "Raw Item Master";
@@ -63,26 +64,18 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMPIS, "Inventory period", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMPIS, new SelectList(
- new List<Object>{
-									new { value = "0" , text = "Day"  },
-									new { value = "1" , text = "Week" },
-									new { value = "2" , text = "Month" }
- },
- "value", "text", "0"),
- new { @class = "form-control input-sm", @Value = Model.RIMPIS })
+									@Html.DropDownListFor(m => m.RIMPIS, new SelectList( new List<Object>{
+									    new { value = "0" , text = "Day"  },
+									    new { value = "1" , text = "Week" },
+									    new { value = "2" , text = "Month" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMPIS })
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMRIG, "Raw item group", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMRIG, new SelectList(
- new List<Object>{
-									new { value = "00" , text = "Refer to"  },
-									new { value = "01" , text = "Product Group" }
- },
- "value", "text", "00"),
- new { @class = "form-control input-sm", @Value = Model.RIMRIG })
+									@Html.DropDownListFor(m => m.RIMRIG, new SelectList( new List<Object>{
+									    new { value = "00" , text = "Refer to"  },
+									    new { value = "01" , text = "Product Group" } }, "value", "text", "00"), new { @class = "form-control input-sm", @Value = Model.RIMRIG })
 								</div>
 							</div>
 						</div>
@@ -90,13 +83,9 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMUMC, "Unit of Usage (UN)", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMUMC, new SelectList(
-	 new List<Object>{
+									@Html.DropDownListFor(m => m.RIMUMC, new SelectList( new List<Object>{
 										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-										new { value = "TRY" , text = "Tray" }
-	 },
-	 "value", "text", "BOX"),
-	 new { @class = "form-control input-sm", @Value = Model.RIMUMC })
+										new { value = "TRY" , text = "Tray" }}, "value", "text", "BOX"), new { @class = "form-control input-sm", @Value = Model.RIMUMC })
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -110,13 +99,9 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMBZP, "Sub unit (TRAY)", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMBZP, new SelectList(
-	 new List<Object>{
+									@Html.DropDownListFor(m => m.RIMBZP, new SelectList( new List<Object>{
 										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-										new { value = "TRY" , text = "Tray" }
-	 },
-	 "value", "text", "BOX"),
-	 new { @class = "form-control input-sm", @Value = Model.RIMBZP })
+										new { value = "TRY" , text = "Tray" } },"value", "text", "BOX"), new { @class = "form-control input-sm", @Value = Model.RIMBZP })
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -130,41 +115,15 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMBVP, "Packing unit (CS)", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMBVP, new SelectList(
-	 new List<Object>{
+									@Html.DropDownListFor(m => m.RIMBVP, new SelectList( new List<Object>{
 										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-										new { value = "TRY" , text = "Tray" }
-	 },
-	 "value", "text", "BOX"),
-	 new { @class = "form-control input-sm", @Value = Model.RIMBVP })
+										new { value = "TRY" , text = "Tray" } }, "value", "text", "BOX"), new { @class = "form-control input-sm", @Value = Model.RIMBVP })
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMLAY, "CS/Vendor unit", new { @class = "form-label" })
 									@Html.TextBoxFor(m => m.RIMLAY, new { @class = "form-control input-sm", @Value = Model.RIMLAY, @maxlength = "2" })
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="form-group">
-									@Html.LabelFor(m => m.RIMCPR, "Price per CS", new { @class = "form-label" })
-									@Html.TextBoxFor(m => m.RIMCPR, new { @class = "form-control input-sm", @Value = Model.RIMCPR, @type = "number", @maxlength = "15" })
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="form-group">
-									@Html.LabelFor(m => m.RIMCPN, "New price", new { @class = "form-label" })
-									@Html.TextBoxFor(m => m.RIMCPN, new { @class = "form-control input-sm", @Value = Model.RIMCPN, @type = "number", @maxlength = "15" })
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="form-group">
-									@Html.LabelFor(m => m.RIMPDT, "New date", new { @class = "form-label" })
-									@Html.TextBoxFor(m => m.RIMPDT, new { @class = "form-control input-sm", @Value = Model.RIMPDT, @type = "date" })
 								</div>
 							</div>
 						</div>
@@ -176,33 +135,19 @@
 					<div class="col-lg-12">
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMPVN, "Primary vendor", new { @class = "form-label" })
-							@Html.DropDownListFor(m => m.RIMPVN, new SelectList(
-	 new List<Object>{
-								new { value = "0" , text = "Primary Vendor"  }, // Sample OPTIONS only
-								new { value = "1" , text = "Tier" }
-	 },
-	 "value", "text", "0"),
-	  new { @class = "form-control input-sm", @Value = Model.RIMPVN })
+							@Html.DropDownListFor(m => m.RIMPVN, new SelectList( Model.PrimaryVendorList, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMPVN })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMLA1, "Warehouse 1", new { @class = "form-label" })
-							@Html.DropDownListFor(m => m.RIMLA1, new SelectList(
-	 new List<Object>{
+							@Html.DropDownListFor(m => m.RIMLA1, new SelectList( new List<Object>{
 								new { value = "0" , text = "Active"  },
-								new { value = "1" , text = "Inactive" }
-	 },
-	 "value", "text", "0"),
-	  new { @class = "form-control input-sm", @Value = Model.RIMLA1 })
+								new { value = "1" , text = "Inactive" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMLA1 })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMLA2, "Warehouse 2", new { @class = "form-label" })
-							@Html.DropDownListFor(m => m.RIMLA2, new SelectList(
-	 new List<Object>{
+							@Html.DropDownListFor(m => m.RIMLA2, new SelectList( new List<Object>{
 								new { value = "0" , text = "Active"  },
-								new { value = "1" , text = "Inactive" }
-	 },
-	 "value", "text", "0"),
-	  new { @class = "form-control input-sm", @Value = Model.RIMLA2 })
+								new { value = "1" , text = "Inactive" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMLA2 })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMUSF, "Yield", new { @class = "form-label" })
@@ -210,13 +155,9 @@
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMERT, "Warehouse 2", new { @class = "form-label" })
-							@Html.DropDownListFor(m => m.RIMERT, new SelectList(
-	 new List<Object>{
-								new { value = "0" , text = "YES"  },
-								new { value = "1" , text = "NO" }
-	 },
-	 "value", "text", "0"),
-	  new { @class = "form-control input-sm", @Value = Model.RIMERT })
+							@Html.DropDownListFor(m => m.RIMERT, new SelectList( new List<Object>{
+								new { value = "0" , text = "Yes"  },
+								new { value = "1" , text = "No" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMERT })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMADE, "Auto deliver", new { @class = "form-label" })
@@ -245,23 +186,15 @@
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMPRO, "Raw promo", new { @class = "form-label" })
-							@Html.DropDownListFor(m => m.RIMPRO, new SelectList(
-		 new List<Object>{
+							@Html.DropDownListFor(m => m.RIMPRO, new SelectList( new List<Object>{
 								new { value = "0" , text = "Active"  },
-								new { value = "1" , text = "Inactive" }
-		 },
-		 "value", "text", "0"),
-		  new { @class = "form-control input-sm", @Value = Model.RIMPRO })
+								new { value = "1" , text = "Inactive" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMPRO })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMSE4, "Recipe", new { @class = "form-label" })
-							@Html.DropDownListFor(m => m.RIMSE4, new SelectList(
-		 new List<Object>{
+							@Html.DropDownListFor(m => m.RIMSE4, new SelectList( new List<Object>{
 								new { value = "0" , text = "Active"  },
-								new { value = "1" , text = "Inactive" }
-		 },
-		 "value", "text", "0"),
-		  new { @class = "form-control input-sm", @Value = Model.RIMSE4 })
+								new { value = "1" , text = "Inactive" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMSE4 })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMEDT, "Active on", new { @class = "form-label" })
@@ -269,22 +202,15 @@
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMCWC, "Raw waste", new { @class = "form-label" })
-							@Html.DropDownListFor(m => m.RIMCWC, new SelectList(
-		 new List<Object>{
+							@Html.DropDownListFor(m => m.RIMCWC, new SelectList( new List<Object>{
 									new { value = "0" , text = "Active"  },
-									new { value = "1" , text = "Inactive" }
-		 },
-		 "value", "text", "0"),
-		  new { @class = "form-control input-sm", @Value = Model.RIMCWC })
+									new { value = "1" , text = "Inactive" } },"value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMCWC })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMSTA, "Status", new { @class = "form-label" })
-							@Html.DropDownListFor(m => m.RIMSTA, new SelectList(
-		 new List<Object>{
+							@Html.DropDownListFor(m => m.RIMSTA, new SelectList( new List<Object>{
 									new { value = "0" , text = "Active"  },
-									new { value = "1" , text = "Inactive" }
-		 }, "value", "text", "0"),
-		  new { @class = "form-control input-sm", @Value = Model.RIMSTA })
+									new { value = "1" , text = "Inactive" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMSTA })
 						</div>
 						<div class="form-group">
 							@Html.Label("Menu affected", new { @class = "form-label" })
@@ -335,7 +261,7 @@
 						</div>
 						<div class="form-group">
 							<label class="form-label">Store list</label>
-							@Html.TextBoxFor(m => m.StoreList, new { @class = "form-control input-sm" })
+							@Html.DropDownListFor( m => Model.StoreSelected, new SelectList( Model.StoreList, "value", "text", "0"), new { @class = "form-control input-sm"} )
 						</div>
 						<div class="form-group">
 							<label class="form-label">
@@ -412,34 +338,32 @@
 								<tbody>
 									@{  if (Model.VendorList != null)
                                         {
-                                            int i = 0;
-                                            foreach (Vendor vendorVM in Model.VendorList)
+                                            for (int i = 0; i < Model.VendorList.Count(); i++)
                                             {
-                                                string idst = "tr-" + vendorVM.vendorId;
-                                                string classst = "tr-vendor " + vendorVM.vendorId + " " + vendorVM.VendorName;
-												<tr id="@idst" class="@classst">
+                                                string idst = "tr-" + Model.VendorList[i].value;
+                                                string classst = "tr-vendor " + Model.VendorList[i].value + " " + Model.VendorList[i].text;
+												<tr id="@idst" class="@classst" for="@Model.VendorsSelectedList[i]">
 													<td>
-														@Html.CheckBoxFor(m => m.VendorList[i].VendorCheckBox, new { @Value = vendorVM.VendorCheckBox } )
+														@Html.CheckBoxFor(m => Model.VendorsSelectedList[i] )
 													</td>
 													<td>
-                                                        @Html.LabelFor(m => m.VendorList[i].VendorCheckBox, vendorVM.VendorName, new { @class = "form-label" })
-                                                        @Html.HiddenFor(m => m.VendorList[i].vendorId, new { @Value = vendorVM.vendorId })
+                                                        @Html.LabelFor(m => m.VendorsSelectedList[i], Model.VendorList[i].text, new { @class = "form-label" })
+                                                        @Html.HiddenFor(m => Model.VendorList[i].value, new { @Value = Model.VendorList[i].value })
 													</td>
 													<td>
-														@Html.TextBoxFor(m => m.VendorList[i].RIMCPR, new { @class = "form-control input-sm", @Value = vendorVM.RIMCPR })
+														@Html.TextBoxFor(m => Model.VendorCPR[i], new { @class = "form-control input-sm", @Value = Model.VendorCPR.ElementAt(i) })
 													</td>
 													<td>
-														@Html.TextBoxFor(m => m.VendorList[i].PPERUN, new { @class = "form-control input-sm", @Value = vendorVM.PPERUN })
+														@Html.TextBoxFor(m => Model.VendorPUN[i], new { @class = "form-control input-sm", @Value = Model.VendorPUN.ElementAt(i) })
 													</td>
 													<td>
-														@Html.TextBoxFor(m => m.VendorList[i].SCMCOD, new { @class = "form-control input-sm", @Value = vendorVM.SCMCOD })
+                                                        @Html.TextBoxFor(m => Model.VendorSCM[i], new { @class = "form-control input-sm", @Value = Model.VendorSCM.ElementAt(i) })
 													</td>
 												</tr>
-												i++;
-											}
-										}
-										else
-										{
+                                            }
+                                        }
+                                        else
+                                        {
 											<tr>No vendors available</tr>
 										}
 									 }
@@ -530,4 +454,5 @@
 		});
 	}
 </script>
+
 

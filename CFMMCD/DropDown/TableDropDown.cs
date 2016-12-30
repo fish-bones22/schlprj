@@ -188,10 +188,64 @@ namespace CFMMCD.DropDown
                 return list;
             }
         }
+        public List<CheckBoxList> SetBusinessExtensionList()
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<CheckBoxList> list = new List<CheckBoxList>();
+                foreach (var i in db.BUSINESS_EXT)
+                {
+                    CheckBoxList cbList = new CheckBoxList();
+                    cbList.Cb = false;
+                    cbList.value = i.ID.ToString();
+                    cbList.text = i.LONGNM.Trim();
+                    list.Add(cbList);
+                }
+                return list;
+            }
+        }
+        public List<GenericDropDownList> SetPrimaryVendorList()
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<GenericDropDownList> list = new List<GenericDropDownList>();
+                foreach (var i in db.INVVEMP0)
+                {
+                    GenericDropDownList option = new GenericDropDownList();
+                    option.text = i.VEMDS1;
+                    option.value = i.VEMVEN.ToString();
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
+         public List<CheckBoxList> SetVendorList()
+        {
+            using ( CFMMCDEntities db = new CFMMCDEntities() )
+            {
+                List<CheckBoxList> list = new List<CheckBoxList>();
+                foreach ( var i in db.INVVEMP0 )
+                {
+                    CheckBoxList option = new CheckBoxList();
+                    option.Cb = false;
+                    option.value = i.VEMVEN.ToString();
+                    option.text = i.VEMDS1.ToString();
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
     }
+
     public class GenericDropDownList
     {
         public string value { get; set; }
         public string text { get; set; }
+    }
+    public class CheckBoxList
+    {
+        public bool Cb { get; set; }
+        public string value { get; set; }
+       public string text { get; set; }
     }
 }

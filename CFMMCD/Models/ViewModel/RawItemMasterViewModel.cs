@@ -1,4 +1,5 @@
-﻿using CFMMCD.Models.EntityManager;
+﻿using CFMMCD.DropDown;
+using CFMMCD.Models.EntityManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,26 @@ namespace CFMMCD.Models.ViewModel
 {
     public class RawItemMasterViewModel
     {
+        public RawItemMasterViewModel()
+        {
+            TableDropDown tdd = new TableDropDown();
+            PrimaryVendorList = tdd.SetPrimaryVendorList();
+            StoreList = tdd.SetStoreDropDown();
+            VendorList = tdd.SetVendorList();
+            VendorsSelectedList = new List<bool>(VendorList.Count());
+            VendorCPR = new List<string>(VendorList.Count());
+            VendorPUN = new List<string>(VendorList.Count());
+            VendorSCM = new List<string>(VendorList.Count());
+            int i = 0;
+            foreach (var v in VendorList)
+            {
+                VendorsSelectedList.Add(v.Cb);
+                VendorCPR.Add("");
+                VendorPUN.Add("");
+                VendorSCM.Add("");
+                i++;
+            }
+        }
         public string SearchItem { get; set; }
         public bool InactiveItemsCb { get; set; }
         [Required(ErrorMessage="This field is required")]
@@ -44,12 +65,11 @@ namespace CFMMCD.Models.ViewModel
         public string STATUS { get; set; }
 
         public string DUMMY { get; set; }
-
+        public string StoreSelected { get; set; }
         public string Location { get; set; }
         public string Region { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
-        public string StoreList { get; set; }
         public bool SelectAllCb { get; set; }
         public bool SelectExceptCb { get; set; }
 
@@ -59,20 +79,14 @@ namespace CFMMCD.Models.ViewModel
         public string SOFT_SERVE_OR_VANILLA_POWDER_MIX { get; set; }
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
-
+        public List<GenericDropDownList> PrimaryVendorList { get; set; }
+        public List<GenericDropDownList> StoreList { get; set; }
         public string SearchVendor { get; set; }
         public List<RawItemMasterViewModel> RawItemMasterList { get; set; }
-        public List<Vendor> VendorList { get; set; }
-    }
-
-    public class Vendor
-    {
-        public bool VendorCheckBox { get; set; }
-        public string VendorName { get; set; }
-        public string vendorId { get; set; }
-        public string RIMCPR { get; set; }
-        public string PPERUN { get; set; }  // Calculate using RIMCPR
-        public string SCMCOD { get; set; }
-
+        public List<bool> VendorsSelectedList { get; set; }
+        public List<string> VendorCPR { get; set; }
+        public List<string> VendorPUN { get; set; }
+        public List<string> VendorSCM { get; set; }
+        public List<CheckBoxList> VendorList { get; set; }
     }
 }

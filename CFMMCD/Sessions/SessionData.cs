@@ -101,7 +101,14 @@ namespace CFMMCD.Sessions
                 return new CurrentPageSession.LinkString
                 {
                     LinkName = "Edit Account",
-                    Action = "CreateAccount",
+                    Action = "EditAccount",
+                    Controller = "Account"
+                };
+            else if (key.Equals("UAP_ACCESS_EDIT"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Edit Account Access",
+                    Action = "EditAccess",
                     Controller = "Account"
                 };
             else if (key.Equals("STP"))

@@ -51,8 +51,9 @@
                                         <a role="menuitem" data-toggle="collapse" tabindex="-1" href="#collapse2">User access&emsp;<span class="glyphicon glyphicon-chevron-down right"></span></a>
                                         <div id="collapse2" class="panel-collapse collapse">
                                             <ul class="list-group">
-                                                <li class="list-group-item">@Html.ActionLink("Manage user account (UD)", "CreateAccount", "Account")</li>
-                                                <li class="list-group-item">@Html.ActionLink("Manage user access (UD)", "CreateAccount", "Account")</li>
+                                                <li class="list-group-item">@Html.ActionLink("Create user account", "CreateAccount", "Account")</li>
+                                                <li class="list-group-item">@Html.ActionLink("Manage user account", "EditAccount", "Account")</li>
+                                                <li class="list-group-item">@Html.ActionLink("Manage user access", "EditAccess", "Account")</li>
                                             </ul>
                                         </div>
                                     </li>

@@ -1,4 +1,6 @@
-﻿using CFMMCD.Models.EntityManager;
+﻿#define DEBUG
+
+using CFMMCD.Models.EntityManager;
 using CFMMCD.Models.ViewModel;
 using CFMMCD.Sessions;
 using System;
@@ -26,13 +28,12 @@ namespace CFMMCD.Controllers
             if (SPViewModel == null)
             {
                 SPViewModel = new StoreProfileViewModel();
-                SPViewModel.BusinessExtList = new List<CheckBoxList>();
-                SPViewModel = SPManager.InitializeDropDowns(SPViewModel);
-                SPViewModel.BusinessExtList = SPManager.SetBusinessExtension();
             }
-            System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].Cb);
-            System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].value);
-            System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].text);
+
+            // DEBUGGING
+            foreach ( var v in SPViewModel.BusinessExtList)
+                System.Diagnostics.Debug.WriteLine("INDEX:" + v.value + " " + v.text+ ": " + v.Cb);
+
             return View(SPViewModel);
         }
         [HttpPost]
@@ -59,11 +60,6 @@ namespace CFMMCD.Controllers
             bool result = false;
             if (command == "Save")
             {
-                System.Diagnostics.Debug.WriteLine(SPViewModel.STORE_NAME);
-                System.Diagnostics.Debug.WriteLine(SPViewModel.STORE_NO);
-                System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].Cb);
-                System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].value);
-                System.Diagnostics.Debug.WriteLine(SPViewModel.BusinessExtList[0].text);
                 result = SPManager.UpdateStore(SPViewModel);
                 PageAction = "Update";
             }
