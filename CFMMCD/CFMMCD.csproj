@@ -203,8 +203,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuditLogController.cs" />
     <Compile Include="Controllers\BreakfastPriceTierController.cs" />
+    <Compile Include="Controllers\BusinessExtensionController.cs" />
     <Compile Include="Controllers\DessertPriceTierController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\McCafeBistroPriceTierController.cs" />
     <Compile Include="Controllers\McCafeLevel2PriceTierController.cs" />
     <Compile Include="Controllers\McCafeLevel3PriceTierController.cs" />
@@ -212,6 +214,8 @@
     <Compile Include="Controllers\MenuItemMasterController.cs" />
     <Compile Include="Controllers\MenuItemPriceUpdateController.cs" />
     <Compile Include="Controllers\MenuRecipeController.cs" />
+    <Compile Include="Controllers\OwnershipController.cs" />
+    <Compile Include="Controllers\ProfitCenterController.cs" />
     <Compile Include="Controllers\ProjectGoldPriceTierController.cs" />
     <Compile Include="Controllers\RawItemMasterController.cs" />
     <Compile Include="Controllers\RawItemPriceUpdateController.cs" />
@@ -309,11 +313,15 @@
     </Compile>
     <Compile Include="Models\EntityManager\AuditLogManager.cs" />
     <Compile Include="Models\EntityManager\BreakfastPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\BusinessExtensionManager.cs" />
     <Compile Include="Models\EntityManager\DessertPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\LocationManager.cs" />
     <Compile Include="Models\EntityManager\McCafeBistroPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\McCafeLevel2PriceTierManager.cs" />
     <Compile Include="Models\EntityManager\McCafeLevel3PriceTierManager.cs" />
     <Compile Include="Models\EntityManager\MDSPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\OwnershipManager.cs" />
+    <Compile Include="Models\EntityManager\ProfitCenterManager.cs" />
     <Compile Include="Models\EntityManager\ProjectGoldPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\RawItemMasterManager.cs" />
     <Compile Include="Models\EntityManager\RawItemPriceManager.cs" />
@@ -322,12 +330,16 @@
     <Compile Include="Models\EntityManager\VendorMasterManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
     <Compile Include="Models\ViewModel\BreakfastPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\BusinessExtensionViewModel.cs" />
     <Compile Include="Models\ViewModel\DessertPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\LocationViewModel.cs" />
     <Compile Include="Models\ViewModel\McCafeBistroPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\McCafeLevel2PriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\McCafeLevel3PriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\MDSPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\MenuRecipeViewModel.cs" />
+    <Compile Include="Models\ViewModel\OwnershipViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProfitCenterViewModel.cs" />
     <Compile Include="Models\ViewModel\ProjectGoldPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemMasterViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemPriceUpdateViewModel.cs" />
@@ -377,6 +389,10 @@
     <Content Include="Views\Account\EditAccount.cshtml" />
     <Content Include="Views\Account\EditAccess.cshtml" />
     <Content Include="Views\MenuRecipe\Index.cshtml" />
+    <Content Include="Views\BusinessExtension\Index.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Ownership\Index.cshtml" />
+    <Content Include="Views\ProfitCenter\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
