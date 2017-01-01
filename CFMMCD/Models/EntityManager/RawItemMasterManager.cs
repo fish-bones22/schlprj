@@ -14,7 +14,6 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 INVRIMP0 RIMRow = new INVRIMP0();
-                RIM_VEM_Lookup RVLRow = new RIM_VEM_Lookup();
                 RIMRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
                 RIMRow.RIMRID = RIMViewModel.RIMRID.Trim();
                 RIMRow.RIMRIG = RIMViewModel.RIMRIG.Trim();
@@ -69,6 +68,7 @@ namespace CFMMCD.Models.EntityManager
                 {
                     if (RIMViewModel.VendorsSelectedList[i])
                     {
+                        RIM_VEM_Lookup RVLRow = new RIM_VEM_Lookup();
                         RVLRow.RIM_VEM_ID = RIMViewModel.RIMRIC + vendor.value;
                         RVLRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
                         RVLRow.VEMVEN = int.Parse(vendor.value);
@@ -77,9 +77,9 @@ namespace CFMMCD.Models.EntityManager
                         RVLRow.PPERUN = double.Parse(RIMViewModel.VendorPUN[i]);
                         RVLRow.SCMCOD = double.Parse(RIMViewModel.VendorSCM[i]);
                         // Perform update
-                        if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RVLRow.RIM_VEM_ID)).Any())
+                        if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Trim().Equals(RVLRow.RIM_VEM_ID.Trim())).Any())
                         {
-                            RIM_VEM_Lookup rowToDelete = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(RVLRow.RIM_VEM_ID));
+                            RIM_VEM_Lookup rowToDelete = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Trim().Equals(RVLRow.RIM_VEM_ID.Trim()));
                             RVLRow.RIMCPN = rowToDelete.RIMCPN;
                             RVLRow.RIMPDT = rowToDelete.RIMPDT;
                             db.RIM_VEM_Lookup.Remove(rowToDelete);
@@ -87,7 +87,6 @@ namespace CFMMCD.Models.EntityManager
                         }
                         else
                             db.RIM_VEM_Lookup.Add(RVLRow);
-                        db.SaveChanges();
                     }
                     i++;
                 }
@@ -223,38 +222,5 @@ namespace CFMMCD.Models.EntityManager
                 return RIMList;
             }
         }
-        //public bool UpdateRawItemPrice( RawItemMasterViewModel RIMList, string user )
-        //{
-        //    using ( CFMMCDEntities db = new CFMMCDEntities() )
-        //    {
-        //        try
-        //        {
-        //            foreach (RawItemMasterViewModel vm in RIMList)
-        //            {
-        //                if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(vm.RIMRIC)).Any())
-        //                {
-        //                    INVRIMP0 RIMRow = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(vm.RIMRIC));
-        //                    db.INVRIMP0.Remove(RIMRow);
-        //                    RIMRow.RIMCPN = double.Parse(vm.RIMCPN);
-        //                    RIMRow.RIMPDT = DateTime.Parse(vm.RIMPDT);
-        //                    RIMRow.STATUS = "E";
-        //                    RIMRow.RIMUSR = user.Substring(0, 3).ToUpper();
-        //                    db.INVRIMP0.Add(RIMRow);
-        //                }
-        //                else
-        //                {
-        //                    return false;
-        //                }
-        //            }
-        //            db.SaveChanges();
-        //            return true;
-        //        }
-        //        catch ( Exception e )
-        //        {
-        //            return false;
-        //        }
-                
-        //    }
-        //}
     }
 }

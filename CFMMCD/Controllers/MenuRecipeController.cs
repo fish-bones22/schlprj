@@ -12,7 +12,7 @@ namespace CFMMCD.Controllers
         // GET: MenuRecipe
         public ActionResult Index()
         {
-            return View();
+            return View(new MenuRecipeViewModel());
         }
     }
 }

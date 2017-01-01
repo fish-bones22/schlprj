@@ -235,6 +235,28 @@ namespace CFMMCD.DropDown
                 return list;
             }
         }
+        public List<RecipeTextBox> SetRecipeList()
+        {
+            using ( CFMMCDEntities db = new CFMMCDEntities() )
+            {
+                List<RecipeTextBox> list = new List<RecipeTextBox>();
+                foreach (var i in db.INVRIRP0)
+                {
+                    RecipeTextBox option = new RecipeTextBox();
+                    option.RIRRID = i.RIRRID;
+                    option.RIRRIC = i.RIRRIC.ToString();
+                    option.RIRMIC = i.RIRMIC.ToString();
+                    option.RIMRID = db.INVRIMP0.Single(o => o.RIMRIC == i.RIRRIC).RIMRID;
+                    option.RIRSFQ = i.RIRSFQ.ToString();
+                    option.RIRCWC = i.RIRCWC;
+                    option.RIRSTA = i.RIRSTA;
+                    option.MIMLON = db.CSHMIMP0.Single(o => o.MIMMIC == i.RIRMIC).MIMLON;
+                    option.STOATT = "";
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
     }
 
     public class GenericDropDownList
@@ -247,5 +269,17 @@ namespace CFMMCD.DropDown
         public bool Cb { get; set; }
         public string value { get; set; }
        public string text { get; set; }
+    }
+    public class RecipeTextBox
+    {
+        public int RIRRID { get; set; }
+        public string RIRRIC { get; set; }
+        public string RIMRID { get; set; }
+        public string RIRMIC { get; set; }
+        public string RIRSFQ { get; set; }
+        public string RIRCWC { get; set; }
+        public string RIRSTA { get; set; }
+        public string MIMLON { get; set; }
+        public string STOATT { get; set; }
     }
 }

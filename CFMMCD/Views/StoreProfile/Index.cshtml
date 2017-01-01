@@ -17,60 +17,58 @@
 
 
 <div class="form-horizontal">
-<hr />
-        
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
-    }
-    if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
-    }
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="col-lg-4">
-                @Html.LabelFor(model => Model.StoreNameNumber, "Store Name/Number", new { @class = "form-label right" })
-            </div>
-            <div class="col-lg-8">
-                @Html.TextBoxFor(model => Model.StoreNameNumber, new { @class = "form-control input-sm" })
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <button type="submit" name="command" value="Search" class="btn btn-default">Search</button>
-        </div>
-    </div>
-}
     <hr />
-@using (Html.BeginForm("UpdateDelete", "StoreProfile", FormMethod.Post, new { }))
-{
-    @Html.AntiForgeryToken()
-        <div class="container">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container">
+        @if (TempData["ErrorMessage"] != null)
+        {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+        }
+    </div>
+    @using (Html.BeginForm("Index", "StoreProfile", FormMethod.Post, new { }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="col-lg-4">
+                    @Html.LabelFor(model => Model.StoreNameNumber, "Store Name/Number", new { @class = "form-label right" })
+                </div>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(model => Model.StoreNameNumber, new { @class = "form-control input-sm" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <button type="submit" name="command" value="Search" class="btn btn-default">Search</button>
+            </div>
+        </div>
+    }
+    <hr />
+    @using (Html.BeginForm("UpdateDelete", "StoreProfile", FormMethod.Post, new { }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-fluid">
             <div class="form-group">
                 <div class="col-lg-4">
-                    <div class="container">
+                    <div class="container-fluid">
                         @Html.LabelFor(model => Model.STORE_NO, "Store number", new { @class = "form-label" })
                         @Html.TextBoxFor(model => Model.STORE_NO, new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.STORE_NO, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="container">
+                    <div class="container-fluid">
                         @Html.LabelFor(model => Model.STORE_NAME, "Store name", new { @class = "form-label" })
                         @Html.TextBoxFor(model => Model.STORE_NAME, new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.STORE_NAME, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="container">
+                    <div class="container-fluid">
                         @Html.LabelFor(model => Model.ADDRESS, "Address", new { @class = "form-label" })
                         @Html.TextBoxFor(model => Model.ADDRESS, new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.ADDRESS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -78,19 +76,19 @@
             <div class="col-lg-4">
                 <h4><strong>Business Extension</strong></h4>
                 @{
-                        List<CheckBoxList> mod = Model.BusinessExtList;
-                        for ( int i = 0; i < Model.BusinessExtList.Count(); i++ )
-                        {
+                    List<CheckBoxList> mod = Model.BusinessExtList;
+                    for (int i = 0; i < Model.BusinessExtList.Count(); i++)
+                    {
                         <div class="checkbox">
-                            @Html.CheckBoxFor( m => Model.BET[i] )
-                            @Html.LabelFor( m => Model.BET[i], mod[i].text, new { @class = "form-label" })
+                            @Html.CheckBoxFor(m => Model.BET[i])
+                            @Html.LabelFor(m => Model.BET[i], mod[i].text, new { @class = "form-label" })
                         </div>
                     }
                 }
             </div>
 
             <div class="col-lg-4">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="form-group">
                         @Html.LabelFor(model => Model.BREAKFAST_PRICE_TIER, "Breakfast tier", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.BREAKFAST_PRICE_TIER, new SelectList(Model.BreakfastTier, "value", "text", Model.BreakfastTier[0].value), new { @class = "form-control input-sm" })
@@ -100,83 +98,73 @@
                     <div class="form-group">
                         @Html.LabelFor(model => Model.REGULAR_PRICE_TIER, "Regular price tier", new { @class = "form-label " })
                         @Html.DropDownListFor(m => Model.REGULAR_PRICE_TIER, new SelectList(Model.RegularTier, "value", "text", Model.RegularTier[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.REGULAR_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.DC_PRICE_TIER, "DC price tier", new { @class = "form-label " })
                         @Html.DropDownListFor(m => Model.DC_PRICE_TIER, new SelectList(Model.DCTier, "value", "text", Model.DCTier[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.DC_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.MDS_PRICE_TIER, "MDS price tier", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.MDS_PRICE_TIER, new SelectList(Model.MDSTier, "value", "text", Model.MDSTier[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.MDS_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.MCCAFE_LEVEL_2_PRICE_TIER, "McCafe Level 2 price tier", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_2_PRICE_TIER, new SelectList(Model.McCafeLevel2Tier, "value", "text", Model.McCafeLevel2Tier[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.MCCAFE_LEVEL_2_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.MCCAFE_LEVEL_3_PRICE_TIER, "McCafe Level 3 price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_3_PRICE_TIER, new SelectList( Model.McCafeLevel3Tier, "value", "text", Model.McCafeLevel3Tier[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.MCCAFE_LEVEL_3_PRICE_TIER, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_3_PRICE_TIER, new SelectList(Model.McCafeLevel3Tier, "value", "text", Model.McCafeLevel3Tier[0].value), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.MCCAFE_BISTRO_PRICE_TIER, "McCafe BISTRO price tier", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.MCCAFE_BISTRO_PRICE_TIER, new SelectList(Model.McCafeBistroTier, "value", "text", Model.McCafeBistroTier[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.MCCAFE_BISTRO_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.PROJECT_GOLD_PRICE_TIER, "Project Gold price tier", new { @class = "form-label " })
                         @Html.DropDownListFor(m => Model.PROJECT_GOLD_PRICE_TIER, new SelectList(Model.ProjectGoldTier, "value", "text", Model.ProjectGoldTier[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.PROJECT_GOLD_PRICE_TIER, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-4">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="form-group">
                         @Html.LabelFor(model => Model.PROFIT_CENTER, "Profit center", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.PROFIT_CENTER, new SelectList(Model.ProfitCenter, "value", "text", Model.ProfitCenter[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.PROFIT_CENTER, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.OWNERSHIP, "Ownership", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.OWNERSHIP, new SelectList( Model.OwnershipList, "value", "text", Model.OwnershipList[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.OWNERSHIP, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(m => Model.OWNERSHIP, new SelectList(Model.OwnershipList, "value", "text", Model.OwnershipList[0].value), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.LOCATION, "Location", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.LOCATION, new SelectList(Model.LocationList, "value", "text", Model.LocationList[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.LOCATION, "", new { @class = "text-danger" })
                     </div>
 
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.REGION, "Region", new { @class = "form-label" })
-                         @Html.DropDownListFor(m => Model.REGION, new SelectList( new List<Object>() ), new { @class = "form-control input-sm", @Id = "region", @Value = Model.REGION })
+                        @Html.DropDownListFor(m => Model.REGION, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "region", @Value = Model.REGION })
                         <!--select id="region" name="REGION" class="form-control input-sm"></!--select-->
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.PROVINCE, "Province", new { @class = "form-label" })
-                         @Html.DropDownListFor(m => Model.PROVINCE, new SelectList( new List<Object>() ), new { @class = "form-control input-sm", @Id = "province", @Value = Model.PROVINCE })
+                        @Html.DropDownListFor(m => Model.PROVINCE, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "province", @Value = Model.PROVINCE })
                         <!--select-- id="province" name="PROVINCE" class="form-control input-sm"></!--select-->
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.CITY, "City", new { @class = "form-label col-md-3" })
-                        @Html.DropDownListFor(m => Model.CITY, new SelectList( new List<Object>() ), new { @class = "form-control input-sm", @Id = "city", @Value = Model.CITY })
+                        @Html.DropDownListFor(m => Model.CITY, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "city", @Value = Model.CITY })
                         <!--select id="city" name="CITY" class="form-control input-sm"></!--select>-->
                     </div>
                 </div>
@@ -186,74 +174,67 @@
         <div class="row">
             <h4 align="center"><strong>Store Attributes</strong></h4>
             <div class="col-md-4">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="form-group">
                         @Html.LabelFor(m => Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "Soft serve or vanilla powder mix", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Soft serve"  },
-                                new { value = "1" , text = "Vanilla powder mix" }
-                            }, "value", "text", Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(m => Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "", new { @class = "text-danger" })
+                        new List<Object>{
+                            new { value = "0" , text = "Soft serve"  },
+                            new { value = "1" , text = "Vanilla powder mix" }
+                        }, "value", "text", Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX), new { @class = "form-control input-sm" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => Model.FRESH_OR_FROZEN, "Fresh or frozen", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.FRESH_OR_FROZEN, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Fresh"  },
-                                new { value = "1" , text = "Frozen" }
-                            }, "value", "text", Model.FRESH_OR_FROZEN), new { @class = "form-control input-sm", @Value = Model.FRESH_OR_FROZEN })
-                        @Html.ValidationMessageFor(m => Model.FRESH_OR_FROZEN, "", new { @class = "text-danger" })
+                        new List<Object>{
+                            new { value = "0" , text = "Fresh"  },
+                            new { value = "1" , text = "Frozen" }
+                        }, "value", "text", Model.FRESH_OR_FROZEN), new { @class = "form-control input-sm", @Value = Model.FRESH_OR_FROZEN })
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="form-group">
                         @Html.LabelFor(m => Model.SIMPLOT_OR_MCCAIN, "Simplot or McCain", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.SIMPLOT_OR_MCCAIN, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Simplot"  },
-                                new { value = "1" , text = "McCain" }
-                            }, "value", "text", Model.SIMPLOT_OR_MCCAIN), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(m => Model.SIMPLOT_OR_MCCAIN, "", new { @class = "text-danger", @Value = Model.SIMPLOT_OR_MCCAIN })
+                        new List<Object>{
+                            new { value = "0" , text = "Simplot"  },
+                            new { value = "1" , text = "McCain" }
+                        }, "value", "text", Model.SIMPLOT_OR_MCCAIN), new { @class = "form-control input-sm" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => Model.PAPER_OR_PLASTIC, "Paper or plastic", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.PAPER_OR_PLASTIC, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Paper"  },
-                                new { value = "1" , text = "Plastic" }
-                            }, "value", "text", Model.PAPER_OR_PLASTIC), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(m => Model.PAPER_OR_PLASTIC, "", new { @class = "text-danger" })
+                        new List<Object>{
+                            new { value = "0" , text = "Paper"  },
+                            new { value = "1" , text = "Plastic" }
+                        }, "value", "text", Model.PAPER_OR_PLASTIC), new { @class = "form-control input-sm" })
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="form-group">
                         @Html.LabelFor(m => Model.MCCORMICK_OR_GSF, "McCormick or GSF", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.MCCORMICK_OR_GSF, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "McCormick"  },
-                                new { value = "1" , text = "GSF" }
-                            }, "value", "text", Model.MCCORMICK_OR_GSF), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(m => Model.MCCORMICK_OR_GSF, "", new { @class = "text-danger" })
+                        new List<Object>{
+                            new { value = "0" , text = "McCormick"  },
+                            new { value = "1" , text = "GSF" }
+                        }, "value", "text", Model.MCCORMICK_OR_GSF), new { @class = "form-control input-sm" })
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="button-container" align="right">
-            <div class="form-group">
-                <input type="submit" name="command" value="Save" class="btn btn-default" />
-                <input type="submit" name="command" value="Delete" class="btn btn-default" />
-            </div>
+        <div class="form-inline bottom float" style="right:50px">
+            <input type="submit" name="command" value="Save" class="btn btn-default" />
+            <input type="submit" name="command" value="Delete" class="btn btn-default" />
         </div>
-}
-</div>
+    }
+    </div>
 <!--Search result modal-->
 <div class="modal fade" id="search-result-modal" role="dialog">
     <div class="modal-content">
@@ -283,8 +264,8 @@
                         }
                     }
                 </div>
-                        }
-                    }
+            }
+        }
     </div>
 </div>
 
@@ -312,6 +293,7 @@
 
             option = "";
         }
+
         $("option[value='@region'").attr("selected", "selected");
         updateProvince();
         $("option[value='@province'").attr("selected", "selected");

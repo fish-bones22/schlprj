@@ -247,18 +247,24 @@
 								new { value = "1" , text = "Location" },
 								new { value = "2" , text = "tier" }}, "value", "text", "0"), new { @class = "form-control input-sm" })
 						</div>
-						<div class="form-group">
-							<label class="form-label">Region</label>
-                            <select id="region" class="form-control"></select>
-						</div>
-						<div class="form-group">
-							<label class="form-label">Province</label>
-                            <select id="province" class="form-control"></select>
-						</div>
-						<div class="form-group">
-							<label class="form-label">City</label>
-                            <select id="city" class="form-control"></select>
-						</div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => Model.Region, "Region", new { @class = "form-label" })
+                            @Html.DropDownListFor(m => Model.Region, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "region", @Value = Model.Region })
+                            <!--select id="region" name="Region" class="form-control input-sm"></!--select-->
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => Model.Province, "Province", new { @class = "form-label" })
+                            @Html.DropDownListFor(m => Model.Province, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "province", @Value = Model.Province })
+                            <!--select-- id="province" name="Province" class="form-control input-sm"></!--select-->
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => Model.City, "City", new { @class = "form-label col-md-3" })
+                            @Html.DropDownListFor(m => Model.City, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "city", @Value = Model.City })
+                            <!--select id="city" name="City" class="form-control input-sm"></!--select>-->
+                        </div>
+
 						<div class="form-group">
 							<label class="form-label">Store list</label>
 							@Html.DropDownListFor( m => Model.StoreSelected, new SelectList( Model.StoreList, "value", "text", "0"), new { @class = "form-control input-sm"} )
@@ -280,39 +286,43 @@
 						<div class="form-group">
 							@Html.LabelFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "Soft serve or vanilla powder mix", new { @class = "form-label" })
 							@Html.DropDownListFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, new SelectList( new List<Object>{
-								new { value = "0" , text = "Soft serve"  },
-								new { value = "1" , text = "Vanilla powder mix" }}, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX })
+                                new { value = "0" , text = ""  },
+                                new { value = "SOFTSERVE" , text = "Soft serve"  },
+                                new { value = "VANILLA" , text = "Vanilla powder mix" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX })
 							@Html.ValidationMessageFor(m => m.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "", new { @class = "text-danger" })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.FRESH_OR_FROZEN, "Fresh or frozen", new { @class = "form-label" })
 							@Html.DropDownListFor(m => m.FRESH_OR_FROZEN, new SelectList( new List<Object>{
-								new { value = "0" , text = "Fresh"  },
-								new { value = "1" , text = "Frozen" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.FRESH_OR_FROZEN })
+                                new { value = "0" , text = ""  },
+                                new { value = "FRESH" , text = "Fresh"  },
+                                new { value = "FROZEN" , text = "Frozen" } }, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.FRESH_OR_FROZEN })
 							@Html.ValidationMessageFor(m => m.FRESH_OR_FROZEN, "", new { @class = "text-danger" })
 						</div>
 
 						<div class="form-group">
 							@Html.LabelFor(m => m.SIMPLOT_OR_MCCAIN, "Simplot or McCain", new { @class = "form-label" })
 							@Html.DropDownListFor(m => m.SIMPLOT_OR_MCCAIN, new SelectList( new List<Object>{
-							    new { value = "0" , text = "Simplot"  },
-							    new { value = "1" , text = "McCain" }
-	                         }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.SIMPLOT_OR_MCCAIN })
+                                new { value = "0" , text = ""  },
+                                new { value = "SIMPLOT" , text = "Simplot"  },
+                                new { value = "MCCAIN" , text = "McCain" } }, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.SIMPLOT_OR_MCCAIN })
 							@Html.ValidationMessageFor(m => m.SIMPLOT_OR_MCCAIN, "", new { @class = "text-danger" })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.PAPER_OR_PLASTIC, "Paper or plastic", new { @class = "form-label" })
 							@Html.DropDownListFor(m => m.PAPER_OR_PLASTIC, new SelectList(new List<Object>{
-							new { value = "0" , text = "Paper"  },
-							new { value = "1" , text = "Plastic" }}, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.PAPER_OR_PLASTIC })
+                                new { value = "0" , text = ""  },
+                                new { value = "PAPER" , text = "Paper"  },
+                                new { value = "PLASTIC" , text = "Plastic" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.PAPER_OR_PLASTIC })
 							@Html.ValidationMessageFor(m => m.PAPER_OR_PLASTIC, "", new { @class = "text-danger" })
 						</div>
 
 						<div class="form-group">
 							@Html.LabelFor(m => m.MCCORMICK_OR_GSF, "McCormick or GSF", new { @class = "form-label" })
 							@Html.DropDownListFor(m => m.MCCORMICK_OR_GSF, new SelectList( new List<Object> {
-							new { value = "0" , text = "McCormick"  },
-							new { value = "1" , text = "GSF" }}, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.MCCORMICK_OR_GSF })
+                                new { value = "0" , text = ""  },
+                                new { value = "MCORMICK" , text = "McCormick"  },
+                                new { value = "GSF" , text = "GSF" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.MCCORMICK_OR_GSF })
 							@Html.ValidationMessageFor(m => m.MCCORMICK_OR_GSF, "", new { @class = "text-danger" })
 						</div>
 					</div>
@@ -415,12 +425,51 @@
 		}
 	</div>
 </div>
-<!--Modal Script-->
+<!--Modal Script & Dropdown script-->
 <script>
-	$(window).ready(function () {
+ @{
+        string region = "NCR";
+        string province = "";
+        string city = "";
+        if (@Model.Region != null)
+        {
+            region = @Model.Region;
+        }
+        if (@Model.Province != null)
+        {
+            province = @Model.Province;
+        }
+        if (@Model.City != null)
+        {
+            city = @Model.City;
+        }
+    }
+    $(window).ready(function () {
+        // Modal
 		if (@HasSearch === 1) {
 			$("#search-result-modal").modal('show');
 		}
+        // Location Select
+	    $("option[value='@region'").attr("selected", "selected");
+	    updateProvince();
+	    $("option[value='@province'").attr("selected", "selected");
+	    updateCity();
+	    $("option[value='@city'").attr("selected", "selected");
+        // Store Attribute Select
+        $(".store-attrib").click(function(e) {
+            $(".store-attrib").not(this).each(function() {
+                $(this).attr("value", "0");
+                $(this).val("0");
+                $(".store-attrib option[value='0']").attr("selected", "selected");
+            });
+            $(".store-attrib").each(function() {
+                if ($(this).val() == "0") {
+                    $(this).css("background-color", "#eee");
+                } else {
+                    $(this).css("background-color", "white");
+                }
+            });
+        });
 	});
 </script>
 <!--Vendor Search Script-->
@@ -447,10 +496,21 @@
 
 	function disableInputsOnCb() {
 		$(".tr-vendor").each(function() {
-			if (!$(this).children("td").children("[type='checkbox']").is(':checked'))
-				$(this).children("td").children(".form-control").attr("disabled", "");
-			else
-				$(this).children("td").children(".form-control").removeAttr("disabled");
+		    if (!$(this).children("td").children("[type='checkbox']").is(':checked')) {
+		        var textBox = $(this).children("td").children(".form-control");
+		        textBox.css("background-color", "#eee");
+		        textBox.click( function (e) {
+		            e.preventDefault();
+		            e.target.blur();
+		        });
+		    }
+		    else {
+		        var textBox = $(this).children("td").children(".form-control");
+		        textBox.css("background-color", "white");
+		        textBox.click( function (e) {
+		            e.target.focus();
+		        });
+		    }
 		});
 	}
 </script>

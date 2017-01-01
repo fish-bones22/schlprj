@@ -94,28 +94,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @{ 
-                                for (int i = 0; i < Model.RIRRIC.Count(); i++)
+                        @{
+                            if (Model.RecipeList != null || Model.RecipeList.Count() != 0)
+                            {
+                                for (int i = 0; i < Model.RecipeList.Count(); i++)
                                 {
                                     <tr>
                                         <td></td>
                                         <td>
                                             <div class="input-group">
-                                                @Html.TextBoxFor(m => Model.RIRMIC[i], new { @class = "form - control input-sm" })
+                                                @Html.TextBoxFor(m => Model.RecipeList[i].RIRRIC, new { @class = "form - control input-sm" })
                                                 <div class="input-group-btn"><button class="btn btn-default"><span class="glyphicon-search"></span></button></div>
                                             </div>
                                         </td>
-                                        <td> @Html.DisplayFor(m => Model.RIMRID[i], new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.TextBoxFor(m => Model.RIRSFQ[i], new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.TextBoxFor(m => Model.RIRMIC[i], new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.DropDownListFor(m => Model.RIRMIC[i], new SelectList( new List<string>() ) ,new { @class = "form-control" }) </td>
-                                        <td> @Html.DropDownListFor(m => Model.RIRCWC[i], new SelectList( new List<Object>() {
+                                        <td> @Html.DisplayFor(m => Model.RecipeList[i].RIMRID, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.TextBoxFor(m => Model.RecipeList[i].RIRSFQ, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.TextBoxFor(m => Model.RecipeList[i].RIRMIC, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.DropDownListFor(m => Model.RecipeList[i].RIRMIC, new SelectList(new List<string>()), new { @class = "form-control" }) </td>
+                                        <td> @Html.DropDownListFor(m => Model.RecipeList[i].RIRCWC, new SelectList(new List<Object>() {
                                             new { value = "0" , text = "Active"  },
-                                            new { value = "1" , text = "Inactive" }}, new { @class = "form-control input-sm" } ))
+                                            new { value = "1" , text = "Inactive" }}, new { @class = "form-control input-sm" }))
                                         </td>
-                                        <td>@Html.DisplayFor(m => Model.STOATT[i], new { @class = "form-control input-sm" })</td>
+                                        <td>@Html.DisplayFor(m => Model.RecipeList[i].STOATT, new { @class = "form-control input-sm" })</td>
                                     </tr>
                                 }
+                            }
                             <tr id="add-row">
                                 <td></td>
                                 <td colspan="6"><button class="btn btn-default btn-sm">Add raw item</button></td>
@@ -128,7 +131,7 @@
             <div class="form-inline bottom float" style="right:50px">
                 <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
             </div>
-    }
+                            }
     </div>
 </div>
 
