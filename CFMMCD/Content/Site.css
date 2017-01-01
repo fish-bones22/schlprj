@@ -121,22 +121,6 @@ footer {
     margin-left:10px;
     position: fixed;
 }
-@media (min-width: 1200px) {
-  .label-container-left {
-    text-align: right;
-  }
-  .btn-default {
-    margin-top: 0;
-  }
-  #desc-row {
-    padding-left:5%;
-  }
-}
-@media (max-width: 1200px) {
-  .scrollable-button {
-      position:relative;
-  }
-}
 .modal {
     margin: auto;
     max-height: 80%;
@@ -231,4 +215,23 @@ li {
 }
 .badge {
     background-color: salmon;
+}
+.tr-element:hover {
+    cursor:pointer;
+}
+@media (min-width: 1200px) {
+  .label-container-left {
+    text-align: right;
+  }
+  .btn-default {
+    margin-top: 0;
+  }
+  #desc-row {
+    padding-left:5%;
+  }
+}
+@media (max-width: 1200px) {
+  .scrollable-button {
+      position:relative;
+  }
 }

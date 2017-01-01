@@ -14,7 +14,7 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<OwnershipViewModel> OSPList = new List<OwnershipViewModel>();
-                foreach (OWNERSHIP osp in db.OWNERSHIP)
+                foreach (OWNERSHIP osp in db.OWNERSHIPs)
                 {
                     OwnershipViewModel OSPViewModel = new OwnershipViewModel();
 
@@ -35,14 +35,14 @@ namespace CFMMCD.Models.EntityManager
                 ospRow.OWNSHP = OSPViewModel.OWNSHP;
                 try
                 {
-                    if (db.OWNERSHIP.Where(o => o.Id.Equals(OSPViewModel.Id)).Any())
+                    if (db.OWNERSHIPs.Where(o => o.Id.Equals(OSPViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.OWNERSHIP.Single(o => o.Id.Equals(OSPViewModel.Id));
-                        db.OWNERSHIP.Remove(rowToRemove);
-                        db.OWNERSHIP.Add(ospRow);
+                        var rowToRemove = db.OWNERSHIPs.Single(o => o.Id.Equals(OSPViewModel.Id));
+                        db.OWNERSHIPs.Remove(rowToRemove);
+                        db.OWNERSHIPs.Add(ospRow);
                     }
                     else
-                        db.OWNERSHIP.Add(ospRow);
+                        db.OWNERSHIPs.Add(ospRow);
                     db.SaveChanges();
                     return true;
                 }
@@ -59,13 +59,13 @@ namespace CFMMCD.Models.EntityManager
             {
                 OWNERSHIP ospRow;
 
-                if (db.OWNERSHIP.Where(o => o.Id.Equals(OSPViewModel.Id)).Any())
-                    ospRow = db.OWNERSHIP.Single(o => o.Id.Equals(OSPViewModel.Id));
+                if (db.OWNERSHIPs.Where(o => o.Id.Equals(OSPViewModel.Id)).Any())
+                    ospRow = db.OWNERSHIPs.Single(o => o.Id.Equals(OSPViewModel.Id));
                 else
                     return false;
                 try
                 {
-                    db.OWNERSHIP.Remove(ospRow);
+                    db.OWNERSHIPs.Remove(ospRow);
                     db.SaveChanges();
                     return true;
                 }

@@ -14,7 +14,7 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<LocationViewModel> LCNList = new List<LocationViewModel>();
-                foreach (LOCATION lcn in db.LOCATION)
+                foreach (LOCATION lcn in db.LOCATIONs)
                 {
                     LocationViewModel LCNViewModel = new LocationViewModel();
 
@@ -35,14 +35,14 @@ namespace CFMMCD.Models.EntityManager
                 lcnRow.LOCATN = LCNViewModel.LOCATN;
                 try
                 {
-                    if (db.LOCATION.Where(o => o.Id.Equals(LCNViewModel.Id)).Any())
+                    if (db.LOCATIONs.Where(o => o.Id.Equals(LCNViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.LOCATION.Single(o => o.Id.Equals(LCNViewModel.Id));
-                        db.LOCATION.Remove(rowToRemove);
-                        db.LOCATION.Add(lcnRow);
+                        var rowToRemove = db.LOCATIONs.Single(o => o.Id.Equals(LCNViewModel.Id));
+                        db.LOCATIONs.Remove(rowToRemove);
+                        db.LOCATIONs.Add(lcnRow);
                     }
                     else
-                        db.LOCATION.Add(lcnRow);
+                        db.LOCATIONs.Add(lcnRow);
                     db.SaveChanges();
                     return true;
                 }
@@ -59,13 +59,13 @@ namespace CFMMCD.Models.EntityManager
             {
                 LOCATION lcnRow;
 
-                if (db.LOCATION.Where(o => o.Id.Equals(LCNViewModel.Id)).Any())
-                    lcnRow = db.LOCATION.Single(o => o.Id.Equals(LCNViewModel.Id));
+                if (db.LOCATIONs.Where(o => o.Id.Equals(LCNViewModel.Id)).Any())
+                    lcnRow = db.LOCATIONs.Single(o => o.Id.Equals(LCNViewModel.Id));
                 else
                     return false;
                 try
                 {
-                    db.LOCATION.Remove(lcnRow);
+                    db.LOCATIONs.Remove(lcnRow);
                     db.SaveChanges();
                     return true;
                 }

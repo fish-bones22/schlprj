@@ -159,6 +159,10 @@
     <Property Name="RIMADE" Type="nchar" MaxLength="1" />
     <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
+    <Property Name="Store" Type="nvarchar" MaxLength="20" />
+    <Property Name="Except_Store" Type="nvarchar" MaxLength="20" />
+    <Property Name="Location" Type="nvarchar" MaxLength="20" />
+    <Property Name="Store_Attrib" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="INVRIRP0">
     <Key>

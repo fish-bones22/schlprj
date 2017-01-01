@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CFMMCDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="CFMMCDEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
     <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
     <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
     <EntitySet Name="Breakfast_Price_Tier" EntityType="CFMMCDModel.Breakfast_Price_Tier" />
     <EntitySet Name="BUSINESS_EXT" EntityType="CFMMCDModel.BUSINESS_EXT" />
+    <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
     <EntitySet Name="CSHMIMP0_NP6" EntityType="CFMMCDModel.CSHMIMP0_NP6" />
     <EntitySet Name="Dessert_Price_Tier" EntityType="CFMMCDModel.Dessert_Price_Tier" />
-    <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
     <EntitySet Name="INVVEMP0" EntityType="CFMMCDModel.INVVEMP0" />
     <EntitySet Name="LOCATIONs" EntityType="CFMMCDModel.LOCATION" />
     <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="CFMMCDModel.McCafe_Bistro_Price_Tier" />
@@ -22,13 +21,51 @@
     <EntitySet Name="RIM_VEM_Lookup" EntityType="CFMMCDModel.RIM_VEM_Lookup" />
     <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="CFMMCDModel.STORE_MIMMIC_Lookup" />
     <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
+    <EntitySet Name="Tier_Lookup" EntityType="CFMMCDModel.Tier_Lookup" />
     <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="CFMMCDModel.FK_CSHMIMP0_ToTable">
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
-    <EntitySet Name="Tier_Lookup" EntityType="CFMMCDModel.Tier_Lookup" />
+    <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
     <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
   </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AdminStatus" Type="Byte" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Audit_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Time" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Breakfast_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BUSINESS_EXT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="LONGNM" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="CSHMIMP0">
     <Key>
       <PropertyRef Name="MIMMIC" />
@@ -86,43 +123,6 @@
     <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="CSHMIMP0_NP6" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0" ToRole="CSHMIMP0_NP6" />
   </EntityType>
-  <EntityType Name="Account">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="AdminStatus" Type="Byte" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Audit_Log">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Date" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Time" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
-    <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Breakfast_Price_Tier">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="BUSINESS_EXT">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="LONGNM" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="CSHMIMP0_NP6">
     <Key>
       <PropertyRef Name="MIMMIC" />
@@ -139,57 +139,6 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Price_Tier" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="INVRIMP0">
-    <Key>
-      <PropertyRef Name="RIMRIC" />
-    </Key>
-    <Property Name="RIMRIC" Type="Int32" Nullable="false" />
-    <Property Name="RIMVPC" Type="Int32" />
-    <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-    <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMUPC" Type="Double" />
-    <Property Name="RIMSUQ" Type="Double" />
-    <Property Name="RIMLAY" Type="Int32" />
-    <Property Name="RIMCPR" Type="Double" />
-    <Property Name="RIMCPN" Type="Double" />
-    <Property Name="RIMPDT" Type="DateTime" Precision="0" />
-    <Property Name="RIMPVN" Type="Int32" />
-    <Property Name="RIMSVN" Type="Int32" />
-    <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMUSF" Type="Double" />
-    <Property Name="RIMSDP" Type="Double" />
-    <Property Name="RIMUS1" Type="Double" />
-    <Property Name="RIMUS2" Type="Double" />
-    <Property Name="RIMUS3" Type="Double" />
-    <Property Name="RIMUS4" Type="Double" />
-    <Property Name="RIMUS5" Type="Double" />
-    <Property Name="RIMUSX" Type="Double" />
-    <Property Name="RIMMSD" Type="Double" />
-    <Property Name="RIMMSL" Type="Double" />
-    <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMLP1" Type="Int32" />
-    <Property Name="RIMLP2" Type="Int32" />
-    <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMDAT" Type="DateTime" Precision="0" />
-    <Property Name="RIMEDT" Type="DateTime" Precision="0" />
-    <Property Name="RIMFLG" Type="Boolean" />
-    <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMLIN" Type="Int32" />
-    <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="INVVEMP0">
     <Key>
@@ -330,18 +279,6 @@
     <Property Name="MCCORMICK_OR_GSF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
   </EntityType>
-  <Association Name="FK_CSHMIMP0_ToTable">
-    <End Type="CFMMCDModel.CSHMIMP0_NP6" Role="CSHMIMP0_NP6" Multiplicity="0..1" />
-    <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CSHMIMP0_NP6">
-        <PropertyRef Name="MIMMIC" />
-      </Principal>
-      <Dependent Role="CSHMIMP0">
-        <PropertyRef Name="MIMMIC_NP6" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Tier_Lookup">
     <Key>
       <PropertyRef Name="MIMMIC" />
@@ -427,6 +364,73 @@
     <Property Name="PNDM" Type="DateTime" Precision="0" />
     <Property Name="EDTS" Type="DateTime" Precision="0" />
     <Property Name="PNDS" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK_CSHMIMP0_ToTable">
+    <End Type="CFMMCDModel.CSHMIMP0_NP6" Role="CSHMIMP0_NP6" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSHMIMP0_NP6">
+        <PropertyRef Name="MIMMIC" />
+      </Principal>
+      <Dependent Role="CSHMIMP0">
+        <PropertyRef Name="MIMMIC_NP6" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="INVRIMP0">
+    <Key>
+      <PropertyRef Name="RIMRIC" />
+    </Key>
+    <Property Name="RIMRIC" Type="Int32" Nullable="false" />
+    <Property Name="RIMVPC" Type="Int32" />
+    <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUPC" Type="Double" />
+    <Property Name="RIMSUQ" Type="Double" />
+    <Property Name="RIMLAY" Type="Int32" />
+    <Property Name="RIMCPR" Type="Double" />
+    <Property Name="RIMCPN" Type="Double" />
+    <Property Name="RIMPDT" Type="DateTime" Precision="0" />
+    <Property Name="RIMPVN" Type="Int32" />
+    <Property Name="RIMSVN" Type="Int32" />
+    <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUSF" Type="Double" />
+    <Property Name="RIMSDP" Type="Double" />
+    <Property Name="RIMUS1" Type="Double" />
+    <Property Name="RIMUS2" Type="Double" />
+    <Property Name="RIMUS3" Type="Double" />
+    <Property Name="RIMUS4" Type="Double" />
+    <Property Name="RIMUS5" Type="Double" />
+    <Property Name="RIMUSX" Type="Double" />
+    <Property Name="RIMMSD" Type="Double" />
+    <Property Name="RIMMSL" Type="Double" />
+    <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLP1" Type="Int32" />
+    <Property Name="RIMLP2" Type="Int32" />
+    <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMDAT" Type="DateTime" Precision="0" />
+    <Property Name="RIMEDT" Type="DateTime" Precision="0" />
+    <Property Name="RIMFLG" Type="Boolean" />
+    <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLIN" Type="Int32" />
+    <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Except_Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Store_Attrib" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="INVRIRP0">
     <Key>

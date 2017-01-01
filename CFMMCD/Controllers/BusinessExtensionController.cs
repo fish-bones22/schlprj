@@ -17,11 +17,21 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
-            if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
+                                // BUE -> Business Extension
+                                // Refer to UserAccessSession 
+            if (UASession == null || !UASession.BUE) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("BEX", "HOME", "LOG");
-            return View(new BusinessExtensionViewModel());
+
+            // Get all data stored in DB table
+            BusinessExtensionManager BEXManager = new BusinessExtensionManager();
+            BusinessExtensionViewModel BEXViewModel = new BusinessExtensionViewModel();
+            BEXViewModel.BusinessExtList = BEXManager.GetBEX();
+            if (BEXViewModel.BusinessExtList == null || BEXViewModel.BusinessExtList.Count() == 0)
+                BEXViewModel.BusinessExtList = new List<BusinessExtensionViewModel>();
+            // return View with ViewModel
+            return View(BEXViewModel);
         }
 
         [HttpPost]
@@ -46,7 +56,7 @@ namespace CFMMCD.Controllers
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "Breakfast Price Tier", PageAction, BEXViewModel.Id, BEXViewModel.LONGNM);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Business Extension Model", PageAction, BEXViewModel.ID, BEXViewModel.LONGNM);
             }
             else TempData["ErrorMessage"] = PageAction + " failed";
             return RedirectToAction("Index");

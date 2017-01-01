@@ -2,12 +2,22 @@
 @using CFMMCD.Models.ViewModel;
 
 @{
-    ViewBag.Title = "BusinessExtension";
+    ViewBag.Title = "Business Extension";
     List<BusinessExtensionViewModel> BEXList = (List<BusinessExtensionViewModel>)ViewData["ModelList"];
 }
 
 <h2 align="center">@ViewBag.Title</h2>
-
+<!--Alerts-->
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
 <div class="form-horizontal">
     @using (Html.BeginForm("UpdateDelete", "BusinessExtension", FormMethod.Post, new { }))
     {
@@ -15,58 +25,65 @@
             <div class="form-group">
                 <div class="row" style="margin-top: 70px;">
                     <div class="col-lg-10 col-lg-offset-1">
-                        <div class="col-lg-1">
-                            @Html.LabelFor(m => m.Id, "Id", new { @class = "control-label", @type = "number" })
+                        <div class="col-lg-4">
+                            @Html.LabelFor(m => m.ID, "Id", new { @class = "form-label"})
+                            @Html.TextBoxFor(m => m.ID, new { @class = "form-control input-sm", @Value = Model.ID, @maxlength = "6" })
                         </div>
-                        <div class="col-lg-3">
-                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @maxlength = "6" })
-                        </div>
-                        <div class="col-lg-2" style="margin-left: 40px;">
-                            @Html.LabelFor(m => m.LONGNM, "BusinessExtension", new { @class = "control-label" })
-                        </div>
-                        <div class="col-lg-5" style="margin-left: -40px;">
-                            @Html.TextBoxFor(m => m.LONGNM, new { @class = "form-control input-sm", @Value = Model.LONGNM, @maxlength = "1" })
+                        <div class="col-lg-8">
+                            @Html.LabelFor(m => m.LONGNM, "Business Extension", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.LONGNM, new { @class = "form-control input-sm", @Value = Model.LONGNM})
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container-fluid">
                 <table class="table table-responsive table-hover">
                     <thead>
                         <tr>
                             <th></th>
                             <th>Id</th>
-                            <th>BusinessExtension</th>
+                            <th>Business Extension name</th>
                         </tr>
                     </thead>
                     <tbody>
                         @{
-                            if (BEXList != null)
+                            if (Model.BusinessExtList != null)
                             {
-                                foreach (BusinessExtensionViewModel bex in BEXList)
+                                // for each BusinessExtList declared in ViewModel
+                                foreach (BusinessExtensionViewModel bex in Model.BusinessExtList)
                                 {
-                                    <tr>
+                                    <tr class="tr-element">
                                         <td></td>
-                                        <td>@bex.Id</td>
-                                        <td>@bex.LONGNM</td>
+                                        <td class="td-id">@bex.ID</td>
+                                        <td class="td-name">@bex.LONGNM</td>
                                     </tr>
                                 }
                             }
-
                             else
                             {
-                                <text>No Inputs</text>
+                                <tr class="text-danger">No data available</tr>
                             }
                         }
-
                     </tbody>
                 </table>
-                <div class="right-fixed" align="center">
-                    <button type="button" class="btn btn-default" name="command" value="Save">Save</button>
-                    <button type="button" class="btn btn-default" name="command" value="Update">Update</button>
-                    <button type="button" class="btn btn-default" name="command" value="Delete">Delete</button>
+                <!--Right aligned button group-->
+                <div class="right-fixed" align="right">
+                    <button type="submit" class="btn btn-default" name="command" value="Save">Save</button>
+                    <button type="submit" class="btn btn-default" name="command" value="Delete">Delete</button>
                 </div>
             </div>
         </div>
-                            }
+    }
 </div>
+
+<script>
+    // Row selection script
+    $(window).ready(function () {
+        $(".tr-element").click(function (e) {
+            var id = $(this).children(".td-id").text();
+            var name = $(this).children(".td-name").text();
+            $("#ID").val(id);
+            $("#LONGNM").val(name);
+        });
+    });
+</script>

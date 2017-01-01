@@ -9,5 +9,7 @@ namespace CFMMCD.Models.ViewModel
     {
         public string ID { get; set; }
         public string LONGNM { get; set; }
+        // Added 
+        public List<BusinessExtensionViewModel> BusinessExtList { get; set; }
     }
 }

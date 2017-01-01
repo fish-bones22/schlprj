@@ -17,9 +17,10 @@ namespace CFMMCD.Models.EntityManager
                 foreach (BUSINESS_EXT bex in db.BUSINESS_EXT)
                 {
                     BusinessExtensionViewModel BEXViewModel = new BusinessExtensionViewModel();
-
                     BEXViewModel.ID = (bex.ID).ToString();
                     BEXViewModel.LONGNM = bex.LONGNM;
+                    // Add to List
+                    BEXList.Add(BEXViewModel);
                 }
                 return BEXList;
             }
@@ -30,14 +31,13 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 BUSINESS_EXT bexRow = new BUSINESS_EXT();
-
                 bexRow.ID = int.Parse(BEXViewModel.ID);
                 bexRow.LONGNM = BEXViewModel.LONGNM;
                 try
                 {
-                    if (db.BUSINESS_EXT.Where(o => o.ID.Equals(BEXViewModel.ID)).Any())
+                    if (db.BUSINESS_EXT.Where(o => o.ID.ToString().Equals(BEXViewModel.ID)).Any())
                     {
-                        var rowToRemove = db.BUSINESS_EXT.Single(o => o.ID.Equals(BEXViewModel.ID));
+                        var rowToRemove = db.BUSINESS_EXT.Single(o => o.ID.ToString().Equals(BEXViewModel.ID));
                         db.BUSINESS_EXT.Remove(rowToRemove);
                         db.BUSINESS_EXT.Add(bexRow);
                     }
@@ -59,8 +59,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 BUSINESS_EXT bexRow;
 
-                if (db.BUSINESS_EXT.Where(o => o.ID.Equals(BEXViewModel.ID)).Any())
-                    bexRow = db.BUSINESS_EXT.Single(o => o.ID.Equals(BEXViewModel.ID));
+                if (db.BUSINESS_EXT.Where(o => o.ID.ToString().Equals(BEXViewModel.ID)).Any())
+                    bexRow = db.BUSINESS_EXT.Single(o => o.ID.ToString().Equals(BEXViewModel.ID));
                 else
                     return false;
                 try

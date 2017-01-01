@@ -89,19 +89,19 @@
                                         <ul class="list-group">
                                             @{ if (UASession.LOC)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Location (UD)", "Index", "Home")</li>
+                                                    <li class="list-group-item">@Html.ActionLink("Location (UD)", "Index", "Location")</li>
                                                 }
                                                 if (UASession.PRC)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Profit center (UD)", "Index", "Home")</li>
+                                                    <li class="list-group-item">@Html.ActionLink("Profit center (UD)", "Index", "ProfitCenter")</li>
                                                 }
                                                 if (UASession.OWN)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Ownership (UD)", "Index", "Home")</li>
+                                                    <li class="list-group-item">@Html.ActionLink("Ownership (UD)", "Index", "Ownership")</li>
                                                 }
                                                 if (UASession.BUE)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Business Extension (UD)", "Index", "Home")</li>
+                                                    <li class="list-group-item">@Html.ActionLink("Business Extension", "Index", "BusinessExtension")</li>
                                                 }
                                                 if (UASession.TIP)
                                                 {

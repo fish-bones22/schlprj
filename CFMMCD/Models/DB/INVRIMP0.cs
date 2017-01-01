@@ -60,5 +60,9 @@ namespace CFMMCD.Models.DB
         public string RIMADE { get; set; }
         public string RIMBAR { get; set; }
         public string STATUS { get; set; }
+        public string Store { get; set; }
+        public string Except_Store { get; set; }
+        public string Location { get; set; }
+        public string Store_Attrib { get; set; }
     }
 }
