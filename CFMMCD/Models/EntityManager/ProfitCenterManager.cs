@@ -17,9 +17,10 @@ namespace CFMMCD.Models.EntityManager
                 foreach (PROFIT_CEN prc in db.PROFIT_CEN)
                 {
                     ProfitCenterViewModel PRCViewModel = new ProfitCenterViewModel();
-
                     PRCViewModel.Id = (prc.Id).ToString();
                     PRCViewModel.PRFCNT = prc.PRFCNT;
+                    // Add to List
+                    PRCList.Add(PRCViewModel);
                 }
                 return PRCList;
             }

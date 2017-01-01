@@ -9,5 +9,8 @@ namespace CFMMCD.Models.ViewModel
     {
         public string Id { get; set; }
         public string Price_Tier { get; set; }
+        // Added 
+        public List<McCafeLevel2PriceTierViewModel> M2PTList { get; set; }
     }
+}
 }

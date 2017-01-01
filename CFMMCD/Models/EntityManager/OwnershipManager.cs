@@ -17,9 +17,10 @@ namespace CFMMCD.Models.EntityManager
                 foreach (OWNERSHIP osp in db.OWNERSHIPs)
                 {
                     OwnershipViewModel OSPViewModel = new OwnershipViewModel();
-
                     OSPViewModel.Id = (osp.Id).ToString();
                     OSPViewModel.OWNSHP = osp.OWNSHP;
+                    // Add to List
+                    OSPList.Add(OSPViewModel);
                 }
                 return OSPList;
             }

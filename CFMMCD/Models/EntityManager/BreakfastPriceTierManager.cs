@@ -17,9 +17,10 @@ namespace CFMMCD.Models.EntityManager
                 foreach (Breakfast_Price_Tier bpt in db.Breakfast_Price_Tier)
                 {
                     BreakfastPriceTierViewModel BPTViewModel = new BreakfastPriceTierViewModel();
-
                     BPTViewModel.Id = (bpt.Id).ToString();
                     BPTViewModel.Price_Tier = bpt.Price_Tier;
+                    // Add to List
+                    BPTList.Add(BPTViewModel);
                 }
                 return BPTList;
             }
@@ -30,7 +31,6 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 Breakfast_Price_Tier bptRow = new Breakfast_Price_Tier();
-
                 bptRow.Id = int.Parse(BPTViewModel.Id);
                 bptRow.Price_Tier = BPTViewModel.Price_Tier;
                 try

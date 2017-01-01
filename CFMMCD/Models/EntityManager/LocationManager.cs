@@ -17,9 +17,10 @@ namespace CFMMCD.Models.EntityManager
                 foreach (LOCATION lcn in db.LOCATIONs)
                 {
                     LocationViewModel LCNViewModel = new LocationViewModel();
-
                     LCNViewModel.Id = (lcn.Id).ToString();
                     LCNViewModel.LOCATN = lcn.LOCATN;
+                    // Add to List
+                    LCNList.Add(LCNViewModel);
                 }
                 return LCNList;
             }

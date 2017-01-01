@@ -17,11 +17,21 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
-            if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
+            // LOC -> ProfitCenter
+            // Refer to UserAccessSession 
+            if (UASession == null || !UASession.LOC) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("PRC", "HOME", "LOG");
-            return View(new ProfitCenterViewModel());
+
+            // Get all data stored in DB table
+            ProfitCenterManager PRCManager = new ProfitCenterManager();
+            ProfitCenterViewModel PRCViewModel = new ProfitCenterViewModel();
+            PRCViewModel.PCList = PRCManager.GetPRC();
+            if (PRCViewModel.PCList == null || PRCViewModel.PCList.Count() == 0)
+                PRCViewModel.PCList = new List<ProfitCenterViewModel>();
+            // return View with ViewModel
+            return View(PRCViewModel);
         }
 
         [HttpPost]
@@ -46,7 +56,7 @@ namespace CFMMCD.Controllers
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "Breakfast Price Tier", PageAction, PRCViewModel.Id, PRCViewModel.PRFCNT);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "ProfitCenter", PageAction, PRCViewModel.Id, PRCViewModel.PRFCNT);
             }
             else TempData["ErrorMessage"] = PageAction + " failed";
             return RedirectToAction("Index");

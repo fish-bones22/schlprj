@@ -9,40 +9,40 @@ namespace CFMMCD.Models.EntityManager
 {
     public class McCafeBistroPriceTierManager
     {
-        public List<McCafeBistroPriceTierViewModel> GetMCB()
+        public List<McCafeBistroPriceTierViewModel> GetMBT()
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<McCafeBistroPriceTierViewModel> MCBList = new List<McCafeBistroPriceTierViewModel>();
-                foreach (McCafe_Bistro_Price_Tier mcb in db.McCafe_Bistro_Price_Tier)
+                List<McCafeBistroPriceTierViewModel> MBTList = new List<McCafeBistroPriceTierViewModel>();
+                foreach (McCafe_Bistro_Price_Tier mbt in db.McCafe_Bistro_Price_Tier)
                 {
-                    McCafeBistroPriceTierViewModel MCBViewModel = new McCafeBistroPriceTierViewModel();
-
-                    MCBViewModel.Id = (mcb.Id).ToString();
-                    MCBViewModel.Price_Tier = mcb.Price_Tier;
+                    McCafeBistroPriceTierViewModel MBTViewModel = new McCafeBistroPriceTierViewModel();
+                    MBTViewModel.Id = (mbt.Id).ToString();
+                    MBTViewModel.Price_Tier = mbt.Price_Tier;
+                    // Add to List
+                    MBTList.Add(MBTViewModel);
                 }
-                return MCBList;
+                return MBTList;
             }
         }
 
-        public bool UpdateMcCafeBistroPriceTier(McCafeBistroPriceTierViewModel MCBViewModel)
+        public bool UpdateMcCafeBistroPriceTier(McCafeBistroPriceTierViewModel MBTViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                McCafe_Bistro_Price_Tier mcbRow = new McCafe_Bistro_Price_Tier();
-
-                mcbRow.Id = int.Parse(MCBViewModel.Id);
-                mcbRow.Price_Tier = MCBViewModel.Price_Tier;
+                McCafe_Bistro_Price_Tier mbtRow = new McCafe_Bistro_Price_Tier();
+                mbtRow.Id = int.Parse(MBTViewModel.Id);
+                mbtRow.Price_Tier = MBTViewModel.Price_Tier;
                 try
                 {
-                    if (db.McCafe_Bistro_Price_Tier.Where(o => o.Id.Equals(MCBViewModel.Id)).Any())
+                    if (db.McCafe_Bistro_Price_Tier.Where(o => o.Id.Equals(MBTViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.McCafe_Bistro_Price_Tier.Single(o => o.Id.Equals(MCBViewModel.Id));
+                        var rowToRemove = db.McCafe_Bistro_Price_Tier.Single(o => o.Id.Equals(MBTViewModel.Id));
                         db.McCafe_Bistro_Price_Tier.Remove(rowToRemove);
-                        db.McCafe_Bistro_Price_Tier.Add(mcbRow);
+                        db.McCafe_Bistro_Price_Tier.Add(mbtRow);
                     }
                     else
-                        db.McCafe_Bistro_Price_Tier.Add(mcbRow);
+                        db.McCafe_Bistro_Price_Tier.Add(mbtRow);
                     db.SaveChanges();
                     return true;
                 }
@@ -53,19 +53,19 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public bool DeleteMcCafeBistroPriceTier(McCafeBistroPriceTierViewModel MCBViewModel)
+        public bool DeleteMcCafeBistroPriceTier(McCafeBistroPriceTierViewModel MBTViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                McCafe_Bistro_Price_Tier mcbRow;
+                McCafe_Bistro_Price_Tier mbtRow;
 
-                if (db.McCafe_Bistro_Price_Tier.Where(o => o.Id.Equals(MCBViewModel.Id)).Any())
-                    mcbRow = db.McCafe_Bistro_Price_Tier.Single(o => o.Id.Equals(MCBViewModel.Id));
+                if (db.McCafe_Bistro_Price_Tier.Where(o => o.Id.Equals(MBTViewModel.Id)).Any())
+                    mbtRow = db.McCafe_Bistro_Price_Tier.Single(o => o.Id.Equals(MBTViewModel.Id));
                 else
                     return false;
                 try
                 {
-                    db.McCafe_Bistro_Price_Tier.Remove(mcbRow);
+                    db.McCafe_Bistro_Price_Tier.Remove(mbtRow);
                     db.SaveChanges();
                     return true;
                 }

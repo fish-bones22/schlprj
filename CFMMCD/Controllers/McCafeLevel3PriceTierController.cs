@@ -17,15 +17,25 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            // TIP -> Price Tier
+            // Refer to UserAccessSession 
             if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("MCL3", "HOME", "LOG");
-            return View(new McCafeLevel3PriceTierViewModel());
+            Session["CurrentPage"] = new CurrentPageSession("ML3", "HOME", "LOG");
+
+            // Get all data stored in DB table
+            McCafeLevel3PriceTierManager ML3Manager = new McCafeLevel3PriceTierManager();
+            McCafeLevel3PriceTierViewModel ML3ViewModel = new McCafeLevel3PriceTierViewModel();
+            ML3ViewModel.M3PTList = ML3Manager.GetML3();
+            if (ML3ViewModel.M3PTList == null || ML3ViewModel.M3PTList.Count() == 0)
+                ML3ViewModel.M3PTList = new List<McCafeLevel3PriceTierViewModel>();
+            // return View with ViewModel
+            return View(ML3ViewModel);
         }
 
         [HttpPost]
-        public ActionResult UpdateDelete(McCafeLevel3PriceTierViewModel MCL3ViewModel, string command)
+        public ActionResult UpdateDelete(McCafeLevel3PriceTierViewModel ML3ViewModel, string command)
         {
             string PageAction = "";
             bool result = false;
@@ -33,20 +43,20 @@ namespace CFMMCD.Controllers
 
             if (command == "Save")
             {
-                McCafeLevel3PriceTierManager MCL3Manager = new McCafeLevel3PriceTierManager();
-                result = MCL3Manager.UpdateMcCafeLevel3PriceTier(MCL3ViewModel);
+                McCafeLevel3PriceTierManager ML3Manager = new McCafeLevel3PriceTierManager();
+                result = ML3Manager.UpdateMcCafeLevel3PriceTier(ML3ViewModel);
                 PageAction = "UPDATE";
             }
             else if (command == "Delete")
             {
-                McCafeLevel3PriceTierManager MCL3Manager = new McCafeLevel3PriceTierManager();
-                result = MCL3Manager.DeleteMcCafeLevel3PriceTier(MCL3ViewModel);
+                McCafeLevel3PriceTierManager ML3Manager = new McCafeLevel3PriceTierManager();
+                result = ML3Manager.DeleteMcCafeLevel3PriceTier(ML3ViewModel);
                 PageAction = "DELETE";
             }
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "McCafeLevel3 Price Tier", PageAction, MCL3ViewModel.Id, MCL3ViewModel.Price_Tier);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "McCafeLevel3 Price Tier", PageAction, ML3ViewModel.Id, ML3ViewModel.Price_Tier);
             }
             else TempData["ErrorMessage"] = PageAction + " failed";
             return RedirectToAction("Index");

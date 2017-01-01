@@ -17,9 +17,10 @@ namespace CFMMCD.Models.EntityManager
                 foreach (MDS_Price_Tier mds in db.MDS_Price_Tier)
                 {
                     MDSPriceTierViewModel MDSViewModel = new MDSPriceTierViewModel();
-
                     MDSViewModel.Id = (mds.Id).ToString();
                     MDSViewModel.Price_Tier = mds.Price_Tier;
+                    // Add to List
+                    MDSList.Add(MDSViewModel);
                 }
                 return MDSList;
             }
@@ -30,7 +31,6 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 MDS_Price_Tier mdsRow = new MDS_Price_Tier();
-
                 mdsRow.Id = int.Parse(MDSViewModel.Id);
                 mdsRow.Price_Tier = MDSViewModel.Price_Tier;
                 try

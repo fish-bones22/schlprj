@@ -9,5 +9,7 @@ namespace CFMMCD.Models.ViewModel
     {
         public string Id { get; set; }
         public string OWNSHP { get; set; }
+        // Added 
+        public List<OwnershipViewModel> OHPList { get; set; }
     }
 }

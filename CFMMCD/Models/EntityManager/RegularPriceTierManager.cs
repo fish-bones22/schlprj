@@ -17,9 +17,10 @@ namespace CFMMCD.Models.EntityManager
                 foreach (Regular_Price_Tier rpt in db.Regular_Price_Tier)
                 {
                     RegularPriceTierViewModel RPTViewModel = new RegularPriceTierViewModel();
-
                     RPTViewModel.Id = (rpt.Id).ToString();
                     RPTViewModel.Price_Tier = rpt.Price_Tier;
+                    // Add to List
+                    RPTList.Add(RPTViewModel);
                 }
                 return RPTList;
             }
@@ -30,7 +31,6 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 Regular_Price_Tier rptRow = new Regular_Price_Tier();
-
                 rptRow.Id = int.Parse(RPTViewModel.Id);
                 rptRow.Price_Tier = RPTViewModel.Price_Tier;
                 try
