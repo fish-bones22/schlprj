@@ -1,0 +1,72 @@
+﻿@model CFMMCD.Models.ViewModel.BusinessExtensionViewModel
+@using CFMMCD.Models.ViewModel;
+
+@{
+    ViewBag.Title = "BusinessExtension";
+    List<BusinessExtensionViewModel> BEXList = (List<BusinessExtensionViewModel>)ViewData["ModelList"];
+}
+
+<h2 align="center">@ViewBag.Title</h2>
+
+<div class="form-horizontal">
+    @using (Html.BeginForm("UpdateDelete", "BusinessExtension", FormMethod.Post, new { }))
+    {
+        <div class="container-fluid">
+            <div class="form-group">
+                <div class="row" style="margin-top: 70px;">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="col-lg-1">
+                            @Html.LabelFor(m => m.Id, "Id", new { @class = "control-label", @type = "number" })
+                        </div>
+                        <div class="col-lg-3">
+                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @maxlength = "6" })
+                        </div>
+                        <div class="col-lg-2" style="margin-left: 40px;">
+                            @Html.LabelFor(m => m.LONGNM, "BusinessExtension", new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-5" style="margin-left: -40px;">
+                            @Html.TextBoxFor(m => m.LONGNM, new { @class = "form-control input-sm", @Value = Model.LONGNM, @maxlength = "1" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <table class="table table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Id</th>
+                            <th>BusinessExtension</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (BEXList != null)
+                            {
+                                foreach (BusinessExtensionViewModel bex in BEXList)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@bex.Id</td>
+                                        <td>@bex.LONGNM</td>
+                                    </tr>
+                                }
+                            }
+
+                            else
+                            {
+                                <text>No Inputs</text>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+                <div class="right-fixed" align="center">
+                    <button type="button" class="btn btn-default" name="command" value="Save">Save</button>
+                    <button type="button" class="btn btn-default" name="command" value="Update">Update</button>
+                    <button type="button" class="btn btn-default" name="command" value="Delete">Delete</button>
+                </div>
+            </div>
+        </div>
+                            }
+</div>
