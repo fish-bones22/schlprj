@@ -320,6 +320,7 @@
     <Compile Include="Models\EntityManager\McCafeLevel2PriceTierManager.cs" />
     <Compile Include="Models\EntityManager\McCafeLevel3PriceTierManager.cs" />
     <Compile Include="Models\EntityManager\MDSPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\MenuRecipeManager.cs" />
     <Compile Include="Models\EntityManager\OwnershipManager.cs" />
     <Compile Include="Models\EntityManager\ProfitCenterManager.cs" />
     <Compile Include="Models\EntityManager\ProjectGoldPriceTierManager.cs" />

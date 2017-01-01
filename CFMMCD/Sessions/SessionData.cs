@@ -90,6 +90,13 @@ namespace CFMMCD.Sessions
                     Action = "Index",
                     Controller = "RawItemMaster"
                 };
+            else if (key.Equals("MER"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Menu Recipe Master",
+                    Action = "Index",
+                    Controller = "MenuRecipe"
+                };
             else if (key.Equals("UAP_CREATE"))
                 return new CurrentPageSession.LinkString
                 {
@@ -159,6 +166,20 @@ namespace CFMMCD.Sessions
                     LinkName = "Menu Item Price Update",
                     Action = "Index",
                     Controller = "MenuItemPriceUpdate"
+                };
+            else if (key.Equals("BUE"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Business Extensions",
+                    Action = "Index",
+                    Controller = "BusinessExtension"
+                };
+            else if (key.Equals("LOC"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Location",
+                    Action = "Index",
+                    Controller = "Location"
                 };
             else
                 return new CurrentPageSession.LinkString

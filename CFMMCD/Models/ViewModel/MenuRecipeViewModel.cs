@@ -19,7 +19,14 @@ namespace CFMMCD.Models.ViewModel
             RIRCWC = new List<string>();
             RIRSTA = new List<string>();
             STOATT = new List<string>();
-            RecipeList = tdd.SetRecipeList();
+            RIRRIC.Add("");
+            RIMRID.Add("");
+            RIMCPR.Add("");
+            RIRSFQ.Add("");
+            RIRCWC.Add("");
+            RIRSTA.Add("");
+            STOATT.Add("");
+            MenuRecipeList = new List<MenuRecipe>();
         }
         public string SearchItem { get; set; }
         public bool InactiveItemsCb { get; set; }
@@ -34,5 +41,25 @@ namespace CFMMCD.Models.ViewModel
         public List<string> RIRCWC { get; set; }
         public List<string> RIRSTA { get; set; }
         public List<string> STOATT { get; set; }
+        public List<MenuItem> MenuItemList { get; set; }
+        public List<MenuRecipe> MenuRecipeList { get; set; }
+    }
+
+    public class MenuItem
+    {
+        public string RIRMIC { get; set; }
+        public string MIMLON { get; set; }
+        public string MIMDSC { get; set; }
+    }
+    public class MenuRecipe
+    {
+        public int RIRRID { get; set; }
+        public string RIRRIC { get; set; }
+        public string RIMRID { get; set; }
+        public string RIMCPR { get; set; }
+        public string RIRSFQ { get; set; }
+        public string RIRCWC { get; set; }
+        public string RIRSTA { get; set; }
+        public string STOATT { get; set; }
     }
 }

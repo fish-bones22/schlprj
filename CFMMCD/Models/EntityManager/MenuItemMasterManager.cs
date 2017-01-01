@@ -81,7 +81,7 @@ namespace CFMMCD.Models.EntityManager
                         MIMList.Add(vm);
                     }
                 }
-                if (MIMList == null || MIMList.ElementAt(0) == null)
+               if (MIMList == null || MIMList.Count() == 0 )
                     return null;
                 return MIMList;
             }
@@ -392,7 +392,7 @@ namespace CFMMCD.Models.EntityManager
             {
                 Tier_Lookup MIMRow;
 
-                if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
+                if (db.Tier_Lookup.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
                     MIMRow = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
                 else
                     return null;

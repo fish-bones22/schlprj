@@ -17,10 +17,10 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
-            if (UASession == null || !UASession.LCN) return RedirectToAction("Login", "Account");
+            if (UASession == null || !UASession.LOC) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("LCN", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("LOC", "HOME", "LOG");
             return View(new LocationViewModel());
         }
 

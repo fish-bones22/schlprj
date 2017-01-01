@@ -485,7 +485,7 @@
             if (MIMList != null)
             {
                 <div class="modal-body">
-                    @{if (HasSearch == 1 && MIMList != null)
+                    @{if (HasSearch == 1 && MIMList[0] != null)
                     {
                         foreach (MenuItemMasterViewModel vm in MIMList)
                         {
