@@ -17,15 +17,25 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            // TIP -> Price Tier
+            // Refer to UserAccessSession 
             if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("PG", "HOME", "LOG");
-            return View(new ProjectGoldPriceTierViewModel());
+            Session["CurrentPage"] = new CurrentPageSession("PGT", "HOME", "LOG");
+
+            // Get all data stored in DB table
+            ProjectGoldPriceTierManager PGTManager = new ProjectGoldPriceTierManager();
+            ProjectGoldPriceTierViewModel PGTViewModel = new ProjectGoldPriceTierViewModel();
+            PGTViewModel.PrjPTList = PGTManager.GetPGT();
+            if (PGTViewModel.PrjPTList == null || PGTViewModel.PrjPTList.Count() == 0)
+                PGTViewModel.PrjPTList = new List<ProjectGoldPriceTierViewModel>();
+            // return View with ViewModel
+            return View(PGTViewModel);
         }
 
         [HttpPost]
-        public ActionResult UpdateDelete(ProjectGoldPriceTierViewModel PGViewModel, string command)
+        public ActionResult UpdateDelete(ProjectGoldPriceTierViewModel PGTViewModel, string command)
         {
             string PageAction = "";
             bool result = false;
@@ -33,20 +43,20 @@ namespace CFMMCD.Controllers
 
             if (command == "Save")
             {
-                ProjectGoldPriceTierManager PGManager = new ProjectGoldPriceTierManager();
-                result = PGManager.UpdateProjectGoldPriceTier(PGViewModel);
+                ProjectGoldPriceTierManager PGTManager = new ProjectGoldPriceTierManager();
+                result = PGTManager.UpdateProjectGoldPriceTier(PGTViewModel);
                 PageAction = "UPDATE";
             }
             else if (command == "Delete")
             {
-                ProjectGoldPriceTierManager PGManager = new ProjectGoldPriceTierManager();
-                result = PGManager.DeleteProjectGoldPriceTier(PGViewModel);
+                ProjectGoldPriceTierManager PGTManager = new ProjectGoldPriceTierManager();
+                result = PGTManager.DeleteProjectGoldPriceTier(PGTViewModel);
                 PageAction = "DELETE";
             }
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "ProjectGold Price Tier", PageAction, PGViewModel.Id, PGViewModel.Price_Tier);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "ProjectGold Price Tier", PageAction, PGTViewModel.Id, PGTViewModel.Price_Tier);
             }
             else TempData["ErrorMessage"] = PageAction + " failed";
             return RedirectToAction("Index");

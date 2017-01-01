@@ -9,5 +9,7 @@ namespace CFMMCD.Models.ViewModel
     {
         public string Id { get; set; }
         public string PRFCNT { get; set; }
+        // Added 
+        public List<ProfitCenterViewModel> PCList { get; set; }
     }
 }

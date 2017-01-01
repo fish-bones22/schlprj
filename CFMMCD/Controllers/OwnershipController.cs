@@ -17,11 +17,21 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
-            if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
+            // OWN -> Ownership
+            // Refer to UserAccessSession
+            if (UASession == null || !UASession.OWN) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("OSP", "HOME", "LOG");
-            return View(new OwnershipViewModel());
+
+            // Get all data stored in DB table
+            OwnershipManager OSPManager = new OwnershipManager();
+            OwnershipViewModel OSPViewModel = new OwnershipViewModel();
+            OSPViewModel.OHPList = OSPManager.GetOSP();
+            if (OSPViewModel.OHPList == null || OSPViewModel.OHPList.Count() == 0)
+                OSPViewModel.OHPList = new List<OwnershipViewModel>();
+            // return View with ViewModel
+            return View(OSPViewModel);
         }
 
         [HttpPost]

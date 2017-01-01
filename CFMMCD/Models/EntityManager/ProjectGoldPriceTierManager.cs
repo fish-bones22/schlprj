@@ -9,40 +9,40 @@ namespace CFMMCD.Models.EntityManager
 {
     public class ProjectGoldPriceTierManager
     {
-        public List<ProjectGoldPriceTierViewModel> GetPG()
+        public List<ProjectGoldPriceTierViewModel> GetPGT()
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<ProjectGoldPriceTierViewModel> PGList = new List<ProjectGoldPriceTierViewModel>();
-                foreach (Project_Gold_Price_Tier pg in db.Project_Gold_Price_Tier)
+                List<ProjectGoldPriceTierViewModel> PGTList = new List<ProjectGoldPriceTierViewModel>();
+                foreach (Project_Gold_Price_Tier pgt in db.Project_Gold_Price_Tier)
                 {
-                    ProjectGoldPriceTierViewModel PGViewModel = new ProjectGoldPriceTierViewModel();
-
-                    PGViewModel.Id = (pg.Id).ToString();
-                    PGViewModel.Price_Tier = pg.Price_Tier;
+                    ProjectGoldPriceTierViewModel PGTViewModel = new ProjectGoldPriceTierViewModel();
+                    PGTViewModel.Id = (pgt.Id).ToString();
+                    PGTViewModel.Price_Tier = pgt.Price_Tier;
+                    // Add to List
+                    PGTList.Add(PGTViewModel);
                 }
-                return PGList;
+                return PGTList;
             }
         }
 
-        public bool UpdateProjectGoldPriceTier(ProjectGoldPriceTierViewModel PGViewModel)
+        public bool UpdateProjectGoldPriceTier(ProjectGoldPriceTierViewModel PGTViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                Project_Gold_Price_Tier pgRow = new Project_Gold_Price_Tier();
-
-                pgRow.Id = int.Parse(PGViewModel.Id);
-                pgRow.Price_Tier = PGViewModel.Price_Tier;
+                Project_Gold_Price_Tier pgtRow = new Project_Gold_Price_Tier();
+                pgtRow.Id = int.Parse(PGTViewModel.Id);
+                pgtRow.Price_Tier = PGTViewModel.Price_Tier;
                 try
                 {
-                    if (db.Project_Gold_Price_Tier.Where(o => o.Id.Equals(PGViewModel.Id)).Any())
+                    if (db.Project_Gold_Price_Tier.Where(o => o.Id.Equals(PGTViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.Project_Gold_Price_Tier.Single(o => o.Id.Equals(PGViewModel.Id));
+                        var rowToRemove = db.Project_Gold_Price_Tier.Single(o => o.Id.Equals(PGTViewModel.Id));
                         db.Project_Gold_Price_Tier.Remove(rowToRemove);
-                        db.Project_Gold_Price_Tier.Add(pgRow);
+                        db.Project_Gold_Price_Tier.Add(pgtRow);
                     }
                     else
-                        db.Project_Gold_Price_Tier.Add(pgRow);
+                        db.Project_Gold_Price_Tier.Add(pgtRow);
                     db.SaveChanges();
                     return true;
                 }
@@ -53,19 +53,19 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public bool DeleteProjectGoldPriceTier(ProjectGoldPriceTierViewModel PGViewModel)
+        public bool DeleteProjectGoldPriceTier(ProjectGoldPriceTierViewModel PGTViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                Project_Gold_Price_Tier pgRow;
+                Project_Gold_Price_Tier pgtRow;
 
-                if (db.Project_Gold_Price_Tier.Where(o => o.Id.Equals(PGViewModel.Id)).Any())
-                    pgRow = db.Project_Gold_Price_Tier.Single(o => o.Id.Equals(PGViewModel.Id));
+                if (db.Project_Gold_Price_Tier.Where(o => o.Id.Equals(PGTViewModel.Id)).Any())
+                    pgtRow = db.Project_Gold_Price_Tier.Single(o => o.Id.Equals(PGTViewModel.Id));
                 else
                     return false;
                 try
                 {
-                    db.Project_Gold_Price_Tier.Remove(pgRow);
+                    db.Project_Gold_Price_Tier.Remove(pgtRow);
                     db.SaveChanges();
                     return true;
                 }

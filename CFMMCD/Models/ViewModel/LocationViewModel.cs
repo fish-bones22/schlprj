@@ -9,5 +9,7 @@ namespace CFMMCD.Models.ViewModel
     {
         public string Id { get; set; }
         public string LOCATN { get; set; }
+        // Added 
+        public List<LocationViewModel> LCList { get; set; }
     }
 }

@@ -17,11 +17,21 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            // LOC -> Location
+            // Refer to UserAccessSession 
             if (UASession == null || !UASession.LOC) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("LOC", "HOME", "LOG");
-            return View(new LocationViewModel());
+            Session["CurrentPage"] = new CurrentPageSession("LCN", "HOME", "LOG");
+
+            // Get all data stored in DB table
+            LocationManager LCNManager = new LocationManager();
+            LocationViewModel LCNViewModel = new LocationViewModel();
+            LCNViewModel.LCList = LCNManager.GetLCN();
+            if (LCNViewModel.LCList == null || LCNViewModel.LCList.Count() == 0)
+                LCNViewModel.LCList = new List<LocationViewModel>();
+            // return View with ViewModel
+            return View(LCNViewModel);
         }
 
         [HttpPost]
@@ -46,7 +56,7 @@ namespace CFMMCD.Controllers
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "Breakfast Price Tier", PageAction, LCNViewModel.Id, LCNViewModel.LOCATN);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Location", PageAction, LCNViewModel.Id, LCNViewModel.LOCATN);
             }
             else TempData["ErrorMessage"] = PageAction + " failed";
             return RedirectToAction("Index");

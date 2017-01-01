@@ -9,5 +9,7 @@ namespace CFMMCD.Models.ViewModel
     {
         public string Id { get; set; }
         public string Price_Tier { get; set; }
+        // Added 
+        public List<ProjectGoldPriceTierViewModel> PrjPTList { get; set; }
     }
 }

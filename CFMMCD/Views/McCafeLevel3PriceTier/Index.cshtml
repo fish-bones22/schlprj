@@ -2,12 +2,22 @@
 @using CFMMCD.Models.ViewModel;
 
 @{
-    ViewBag.Title = "McCafe Level3 Price Tier";
+    ViewBag.Title = "McCafeLevel3 Price Tier";
     List<McCafeLevel3PriceTierViewModel> ML3List = (List<McCafeLevel3PriceTierViewModel>)ViewData["ModelList"];
 }
 
 <h2 align="center">@ViewBag.Title</h2>
-
+<!--Alerts-->
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
 <div class="form-horizontal">
     @using (Html.BeginForm("UpdateDelete", "McCafeLevel3PriceTier", FormMethod.Post, new { }))
     {
@@ -15,22 +25,18 @@
             <div class="form-group">
                 <div class="row" style="margin-top: 70px;">
                     <div class="col-lg-10 col-lg-offset-1">
-                        <div class="col-lg-1">
+                        <div class="col-lg-4">
                             @Html.LabelFor(m => m.Id, "Id", new { @class = "control-label", @type = "number" })
-                        </div>
-                        <div class="col-lg-3">
                             @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @maxlength = "6" })
                         </div>
-                        <div class="col-lg-2" style="margin-left: 40px;">
+                        <div class="col-lg-8">
                             @Html.LabelFor(m => m.Price_Tier, "Price Tier", new { @class = "control-label" })
-                        </div>
-                        <div class="col-lg-5" style="margin-left: -40px;">
                             @Html.TextBoxFor(m => m.Price_Tier, new { @class = "form-control input-sm", @Value = Model.Price_Tier, @maxlength = "1" })
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container-fluid">
                 <table class="table table-responsive table-hover">
                     <thead>
                         <tr>
@@ -43,29 +49,41 @@
                         @{
                             if (ML3List != null)
                             {
-                                foreach (McCafeLevel3PriceTierViewModel ml3 in ML3List)
+                                // for each M3PTList declared in ViewModel
+                                foreach (McCafeLevel3PriceTierViewModel ml3 in Model.M3PTList)
                                 {
-                                    <tr>
+                                    <tr class="tr-element">
                                         <td></td>
-                                        <td>@ml3.Id</td>
-                                        <td>@ml3.Price_Tier</td>
+                                        <td class="td-id">@ml3.Id</td>
+                                        <td class="td-name">@ml3.Price_Tier</td>
                                     </tr>
                                 }
                             }
-
                             else
                             {
-                                <text>No Inputs</text>
+                                <tr class="text-danger">No data available</tr>
                             }
                         }
                     </tbody>
                 </table>
-                <div class="right-fixed" align="center">
-                    <button type="button" class="btn btn-default" name="command" value="Save">Save</button>
-                    <button type="button" class="btn btn-default" name="command" value="Update">Update</button>
-                    <button type="button" class="btn btn-default" name="command" value="Delete">Delete</button>
+                <!--Right aligned button group-->
+                <div class="right-fixed" align="right">
+                    <button type="submit" class="btn btn-default" name="command" value="Save">Save</button>
+                    <button type="submit" class="btn btn-default" name="command" value="Delete">Delete</button>
                 </div>
             </div>
         </div>
                             }
 </div>
+
+<script>
+    // Row selection script
+    $(window).ready(function () {
+        $(".tr-element").click(function (e) {
+            var id = $(this).children(".td-id").text();
+            var name = $(this).children(".td-name").text();
+            $("#Id").val(id);
+            $("#Price_Tier").val(name);
+        });
+    });
+</script>

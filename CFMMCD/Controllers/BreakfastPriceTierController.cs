@@ -17,11 +17,21 @@ namespace CFMMCD.Controllers
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+                                // TIP -> Price Tier
+                                // Refer to UserAccessSession 
             if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("BPT", "HOME", "LOG");
-            return View(new BreakfastPriceTierViewModel());
+
+            // Get all data stored in DB table
+            BreakfastPriceTierManager BPTManager = new BreakfastPriceTierManager();
+            BreakfastPriceTierViewModel BPTViewModel = new BreakfastPriceTierViewModel();
+            BPTViewModel.BreakPTList = BPTManager.GetBPT();
+            if (BPTViewModel.BreakPTList == null || BPTViewModel.BreakPTList.Count() == 0)
+                BPTViewModel.BreakPTList = new List<BreakfastPriceTierViewModel>();
+            // return View with ViewModel
+            return View(BPTViewModel);
         }
 
         [HttpPost]
