@@ -102,6 +102,29 @@
     <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
     <Property Name="MIMLON" Type="nchar" MaxLength="16" />
   </EntityType>
+  <EntityType Name="CSHVMLP0">
+    <Key>
+      <PropertyRef Name="VMLNUM" />
+    </Key>
+    <Property Name="VMLNUM" Type="int" Nullable="false" />
+    <Property Name="VMLMIC" Type="int" />
+    <Property Name="VMLQUA" Type="int" />
+    <Property Name="VMLNAM" Type="nvarchar" MaxLength="20" />
+    <Property Name="VMLPRI" Type="float" />
+    <Property Name="VMLPRO" Type="float" />
+    <Property Name="VMLID" Type="nvarchar" MaxLength="20" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="CSM_Master_Recipe">
+    <Key>
+      <PropertyRef Name="CSMID" />
+    </Key>
+    <Property Name="CSMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="RIMRIC" Type="int" />
+    <Property Name="CSMSFQ" Type="float" />
+    <Property Name="CSMCWC" Type="nchar" MaxLength="1" />
+    <Property Name="CSMDES" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="Dessert_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
@@ -168,11 +191,11 @@
     <Key>
       <PropertyRef Name="RIRRID" />
     </Key>
-    <Property Name="RIRRID" Type="int" Nullable="false" />
+    <Property Name="RIRRID" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="RIRMIC" Type="int" />
     <Property Name="RIRRIC" Type="int" />
     <Property Name="RIRVPC" Type="int" />
-    <Property Name="RIRSFQ" Type="int" />
+    <Property Name="RIRSFQ" Type="float" />
     <Property Name="RIRCWC" Type="nchar" MaxLength="1" />
     <Property Name="RIRSTA" Type="nchar" MaxLength="1" />
     <Property Name="RIRVST" Type="nchar" MaxLength="1" />
@@ -180,6 +203,9 @@
     <Property Name="RIRDAT" Type="date" />
     <Property Name="RIRFLG" Type="bit" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
+    <Property Name="RIMCPR" Type="float" />
+    <Property Name="LongName" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="INVVEMP0">
     <Key>
@@ -425,6 +451,8 @@
     <EntitySet Name="BUSINESS_EXT" EntityType="Self.BUSINESS_EXT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CSHVMLP0" EntityType="Self.CSHVMLP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CSM_Master_Recipe" EntityType="Self.CSM_Master_Recipe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVRIRP0" EntityType="Self.INVRIRP0" Schema="dbo" store:Type="Tables" />

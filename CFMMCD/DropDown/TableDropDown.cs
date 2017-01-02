@@ -243,7 +243,7 @@ namespace CFMMCD.DropDown
                 foreach (var i in db.INVRIRP0)
                 {
                     RecipeTextBox option = new RecipeTextBox();
-                    option.RIRRID = i.RIRRID;
+                    option.RIRRID = i.RIRRID.Trim();
                     option.RIRRIC = i.RIRRIC.ToString();
                     option.RIRMIC = i.RIRMIC.ToString();
                     option.RIMRID = db.INVRIMP0.Single(o => o.RIMRIC == i.RIRRIC).RIMRID;
@@ -272,7 +272,7 @@ namespace CFMMCD.DropDown
     }
     public class RecipeTextBox
     {
-        public int RIRRID { get; set; }
+        public string RIRRID { get; set; }
         public string RIRRIC { get; set; }
         public string RIMRID { get; set; }
         public string RIRMIC { get; set; }

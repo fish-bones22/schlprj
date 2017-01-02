@@ -1,0 +1,196 @@
+﻿@model CFMMCD.Models.ViewModel.ValueMealViewModel
+@using CFMMCD.Models.ViewModel
+
+@{  int j = 0;
+    int HasSearch = 0;
+    if (TempData["SearchResult"] != null)
+    {
+        HasSearch = (int)TempData["SearchResult"];
+    }
+    ViewBag.Title = "Value Meal";
+}
+
+
+<h2 align="center">@ViewBag.Title</h2>
+<hr />
+<!--Alerts-->
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
+<!--Main content starts here-->
+<div class="form-horizontal">
+
+    <div class="form-horizontal">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="container-fluid">
+                <div class="col-lg-2 col-lg-offset-2">
+                    <label class="form-label" for="menu-item">Value meal name/number</label>
+                </div>
+                <div class="col-lg-5">
+                    @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-1">
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <hr />
+
+    <div class="form-horizontal">
+        @using (Html.BeginForm("UpdateDelete", "ValueMeal", FormMethod.Post, new { }))
+        {
+            <div class="container-fluid">
+                <div class="col-lg-4 col-lg-offset-3">
+                    <div class="col-lg-12">
+                        @Html.LabelFor(m => Model.VMLNUM, "Value meal number", new { @class = "form-label" })
+                        @Html.TextBoxFor(m => Model.VMLNUM, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.LabelFor(m => Model.VMLNAM, "Value meal name", new { @class = "form-label" })
+                        @Html.TextBoxFor(m => Model.VMLNAM, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="col-lg-12">
+                        @Html.LabelFor(m => Model.VMLPRI, "Price in", new { @class = "form-label" })
+                        @Html.TextBoxFor(m => Model.VMLPRI, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.LabelFor(m => Model.VMLPRO, "Price out", new { @class = "form-label" })
+                        @Html.TextBoxFor(m => Model.VMLPRO, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="container-fluid">
+                <table class="table-hover table-responsive table">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Item number</td>
+                            <td>Name</td>
+                            <td>Price in</td>
+                            <td>Price out</td>
+                            <td>Quantity</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (Model.MenuItemList != null || Model.MenuItemList.Count() <= 1)
+                            {
+                                for (int i = 0; i < Model.MenuItemList.Count(); i++)
+                                {
+                                    <!--Generated rows-->
+                                    <tr>
+                                        <td></td>
+                                        <td> @Html.TextBoxFor(m => Model.MenuItemList[i].MIMMIC, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.DisplayFor(m => Model.MenuItemList[i].MIMNAM, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.DisplayFor(m => Model.MenuItemList[i].MIMPRI, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.DisplayFor(m => Model.MenuItemList[i].MIMPRO, new { @class = "form-control input-sm" }) </td>
+                                        <td>@Html.TextBoxFor(m => Model.MenuItemList[i].VMLQUA, new { @class = "form-control input-sm" })</td>
+                                    </tr>
+                                }
+                            }
+                            <!--Empty row-->
+                            <tr>
+                                <td></td>
+                                <td> @Html.TextBoxFor(m => Model.MIMMIC[0], new { @class = "form-control input-sm" }) </td>
+                                <td> @Html.DisplayFor(m => Model.MIMNAM[0], new { @class = "form-control input-sm" }) </td>
+                                <td> @Html.DisplayFor(m => Model.MIMPRI[0], new { @class = "form-control input-sm" }) </td>
+                                <td> @Html.DisplayFor(m => Model.MIMPRO[0], new { @class = "form-control input-sm" }) </td>
+                                <td>@Html.TextBoxFor(m => Model.VMLQUA[0], new { @class = "form-control input-sm" })</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <!--Add new row-->
+                        <tr id="add-row">
+                            <td></td>
+                            <td><button type="button" class="btn btn-default btn-sm" id="add-row">Add new item</button></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="form-inline bottom float" style="right:50px">
+                <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
+            </div>
+                            }
+    </div>
+</div>
+
+<!--Search result modal-->
+<div class="modal fade" id="search-result-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Search results</h4>
+        </div>
+        @using (Html.BeginForm("DisplaySearchResult", "ValueMeal", FormMethod.Post, new { }))
+        {
+            List<ValueMealViewModel> VMList = (List<ValueMealViewModel>)Session["ViewModelList"];
+            if (VMList != null)
+            {
+                <div class="modal-body">
+                    @{
+                        if (HasSearch == 1 && VMList != null)
+                        {
+                            foreach (ValueMealViewModel vm in VMList)
+                            {
+                                <button type="submit" class="modal-item-select" name="value" value=@vm.VMLNUM>
+                                    <div class="col-lg-3">
+                                        @vm.VMLNUM
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @vm.VMLNAM
+                                    </div>
+                                </button>
+                            }
+                        }
+                    }
+                </div>
+                            }
+                        }
+    </div>
+</div>
+
+<script>
+    var index = 0;
+    var newRow = '<tr>'+
+                    '<td></td>'+
+                    '<td><input class="form-control input-sm" id="MIMMIC_'+(++index)+'_" name="MIMMIC['+index+']" type="text" value="" /> </td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td><input class="form-control input-sm" id="VMLQUA_'+index+'_" name="VMLQUA['+index+']" type="text" value="" /> </td>'+
+                '</tr>';
+
+    console.log(newRow);
+    $(window).ready(function () {
+        if (@HasSearch === 1) {
+            $("#search-result-modal").modal('show');
+        }
+
+        $("#add-row").click(function() {
+            $("tbody").append (newRow);
+        });
+    });
+</script>

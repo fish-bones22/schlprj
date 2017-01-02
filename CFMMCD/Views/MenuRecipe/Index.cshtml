@@ -1,7 +1,7 @@
 ﻿@model CFMMCD.Models.ViewModel.MenuRecipeViewModel
 @using CFMMCD.Models.ViewModel
 
-@{  int i = 0;
+@{  int j = 0;
     int HasSearch = 0;
     if (TempData["SearchResult"] != null)
     {
@@ -99,7 +99,7 @@
                         @{
                             if (Model.MenuRecipeList != null || Model.MenuRecipeList.Count() <= 1)
                             {
-                                for (i = 0; i < Model.MenuRecipeList.Count(); i++)
+                                for (int i = 0; i < Model.MenuRecipeList.Count(); i++)
                                 {
                                     <!--Generated rows-->
                                     <tr>
@@ -131,13 +131,15 @@
                                 </td>
                                 <td>@Html.DisplayFor(m => m.STOATT[0], new { @class = "form-control input-sm" })</td>
                             </tr>
-                            <!--Add new row-->
-                            <tr id="add-row">
-                                <td></td>
-                                <td colspan="6"><button class="btn btn-default btn-sm btn-blk">Add new raw item</button></td>
-                            </tr>
                         }
                     </tbody>
+                    <tfoot>
+                        <!--Add new row-->
+                        <tr id="add-row">
+                            <td></td>
+                            <td><button type="button" class="btn btn-default btn-sm" id="add-row">Add new raw item</button></td>
+                        </tr>
+                    </tfoot>
                 </table> 
             </div>
 
@@ -161,10 +163,11 @@
             if (MIList != null)
             {
                 <div class="modal-body">
-                    @{if (HasSearch == 1 && MIList != null)
-                    {
-                        foreach (MenuItem vm in MIList)
+                    @{
+                        if (HasSearch == 1 && MIList != null)
                         {
+                            foreach (MenuItem vm in MIList)
+                            {
                                 <button type="submit" class="modal-item-select" name="value" value=@vm.RIRMIC>
                                     <div class="col-lg-3">
                                         @vm.RIRMIC
@@ -183,9 +186,28 @@
 </div>
 
 <script>
+    var index = 0;
+    var newRow = '<tr>'+
+                    '<td></td>'+
+                        '<td><input class="form-control input-sm" id="RIRRIC_'+(++index)+'_" name="RIRRIC['+index+']" type="text" value="" /></td>' +
+                        '<td>  </td>' +
+                        '<td> <input class="form-control input-sm" id="RIRSFQ_'+index+'_" name="RIRSFQ['+index+']" type="text" value="" /> </td>' +
+                        '<td> <input class="form-control input-sm" id="RIMCPR_'+index+'_" name="RIMCPR['+index+']" type="text" value="" /> </td>' +
+                        '<td>' +
+                            '<select class="form-control input-sm" id="RIRCWC_'+index+'_" name="RIRCWC['+index+']"><option value="0">Active</option>'+
+                            '<option value="1">Inactive</option></select>' +
+                        '</td>' +
+                        '<td></td>' +
+                    '</tr>';
+
+    console.log(newRow);
     $(window).ready(function () {
         if (@HasSearch === 1) {
             $("#search-result-modal").modal('show');
         }
+
+        $("#add-row").click(function() {
+            $("tbody").append (newRow);
+        });
     });
 </script>

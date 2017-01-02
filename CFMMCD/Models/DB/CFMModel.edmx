@@ -107,6 +107,29 @@
           <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
           <Property Name="MIMLON" Type="nchar" MaxLength="16" />
         </EntityType>
+        <EntityType Name="CSHVMLP0">
+          <Key>
+            <PropertyRef Name="VMLNUM" />
+          </Key>
+          <Property Name="VMLNUM" Type="int" Nullable="false" />
+          <Property Name="VMLMIC" Type="int" />
+          <Property Name="VMLQUA" Type="int" />
+          <Property Name="VMLNAM" Type="nvarchar" MaxLength="20" />
+          <Property Name="VMLPRI" Type="float" />
+          <Property Name="VMLPRO" Type="float" />
+          <Property Name="VMLID" Type="nvarchar" MaxLength="20" />
+          <Property Name="STATUS" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CSM_Master_Recipe">
+          <Key>
+            <PropertyRef Name="CSMID" />
+          </Key>
+          <Property Name="CSMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RIMRIC" Type="int" />
+          <Property Name="CSMSFQ" Type="float" />
+          <Property Name="CSMCWC" Type="nchar" MaxLength="1" />
+          <Property Name="CSMDES" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Dessert_Price_Tier">
           <Key>
             <PropertyRef Name="Id" />
@@ -173,11 +196,11 @@
           <Key>
             <PropertyRef Name="RIRRID" />
           </Key>
-          <Property Name="RIRRID" Type="int" Nullable="false" />
+          <Property Name="RIRRID" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="RIRMIC" Type="int" />
           <Property Name="RIRRIC" Type="int" />
           <Property Name="RIRVPC" Type="int" />
-          <Property Name="RIRSFQ" Type="int" />
+          <Property Name="RIRSFQ" Type="float" />
           <Property Name="RIRCWC" Type="nchar" MaxLength="1" />
           <Property Name="RIRSTA" Type="nchar" MaxLength="1" />
           <Property Name="RIRVST" Type="nchar" MaxLength="1" />
@@ -185,6 +208,9 @@
           <Property Name="RIRDAT" Type="date" />
           <Property Name="RIRFLG" Type="bit" />
           <Property Name="STATUS" Type="nchar" MaxLength="1" />
+          <Property Name="RIMCPR" Type="float" />
+          <Property Name="LongName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="INVVEMP0">
           <Key>
@@ -430,6 +456,8 @@
           <EntitySet Name="BUSINESS_EXT" EntityType="Self.BUSINESS_EXT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSHVMLP0" EntityType="Self.CSHVMLP0" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSM_Master_Recipe" EntityType="Self.CSM_Master_Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVRIRP0" EntityType="Self.INVRIRP0" Schema="dbo" store:Type="Tables" />
@@ -483,7 +511,9 @@
             <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
           </AssociationSet>
           <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
+          <EntitySet Name="CSM_Master_Recipe" EntityType="CFMMCDModel.CSM_Master_Recipe" />
           <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
+          <EntitySet Name="CSHVMLP0" EntityType="CFMMCDModel.CSHVMLP0" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -888,21 +918,47 @@
           <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Store_Attrib" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="CSM_Master_Recipe">
+          <Key>
+            <PropertyRef Name="CSMID" />
+          </Key>
+          <Property Name="CSMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RIMRIC" Type="Int32" />
+          <Property Name="CSMSFQ" Type="Double" />
+          <Property Name="CSMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="CSMDES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="INVRIRP0">
           <Key>
             <PropertyRef Name="RIRRID" />
           </Key>
-          <Property Name="RIRRID" Type="Int32" Nullable="false" />
+          <Property Name="RIRRID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="RIRMIC" Type="Int32" />
           <Property Name="RIRRIC" Type="Int32" />
           <Property Name="RIRVPC" Type="Int32" />
-          <Property Name="RIRSFQ" Type="Int32" />
+          <Property Name="RIRSFQ" Type="Double" />
           <Property Name="RIRCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="RIRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="RIRVST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="RIRUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
           <Property Name="RIRDAT" Type="DateTime" Precision="0" />
           <Property Name="RIRFLG" Type="Boolean" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMCPR" Type="Double" />
+          <Property Name="LongName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CSHVMLP0">
+          <Key>
+            <PropertyRef Name="VMLNUM" />
+          </Key>
+          <Property Name="VMLNUM" Type="Int32" Nullable="false" />
+          <Property Name="VMLMIC" Type="Int32" />
+          <Property Name="VMLQUA" Type="Int32" />
+          <Property Name="VMLNAM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VMLPRI" Type="Double" />
+          <Property Name="VMLPRO" Type="Double" />
+          <Property Name="VMLID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
         </Schema>
@@ -1322,9 +1378,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CSM_Master_Recipe">
+            <EntityTypeMapping TypeName="CFMMCDModel.CSM_Master_Recipe">
+              <MappingFragment StoreEntitySet="CSM_Master_Recipe">
+                <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
+                <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
+                <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
+                <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+                <ScalarProperty Name="CSMID" ColumnName="CSMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="INVRIRP0">
             <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
               <MappingFragment StoreEntitySet="INVRIRP0">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LongName" ColumnName="LongName" />
+                <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="RIRFLG" ColumnName="RIRFLG" />
                 <ScalarProperty Name="RIRDAT" ColumnName="RIRDAT" />
@@ -1337,6 +1407,20 @@
                 <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
                 <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
                 <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSHVMLP0">
+            <EntityTypeMapping TypeName="CFMMCDModel.CSHVMLP0">
+              <MappingFragment StoreEntitySet="CSHVMLP0">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="VMLID" ColumnName="VMLID" />
+                <ScalarProperty Name="VMLPRO" ColumnName="VMLPRO" />
+                <ScalarProperty Name="VMLPRI" ColumnName="VMLPRI" />
+                <ScalarProperty Name="VMLNAM" ColumnName="VMLNAM" />
+                <ScalarProperty Name="VMLQUA" ColumnName="VMLQUA" />
+                <ScalarProperty Name="VMLMIC" ColumnName="VMLMIC" />
+                <ScalarProperty Name="VMLNUM" ColumnName="VMLNUM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

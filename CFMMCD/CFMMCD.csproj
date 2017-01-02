@@ -220,8 +220,10 @@
     <Compile Include="Controllers\RawItemMasterController.cs" />
     <Compile Include="Controllers\RawItemPriceUpdateController.cs" />
     <Compile Include="Controllers\RegularPriceTierController.cs" />
+    <Compile Include="Controllers\ReportGenerationController .cs" />
     <Compile Include="Controllers\StoreProfileController.cs" />
     <Compile Include="Controllers\TextGeneratorController.cs" />
+    <Compile Include="Controllers\ValueMealController.cs" />
     <Compile Include="Controllers\VendorMasterController.cs" />
     <Compile Include="DropDown\TableDropDown.cs" />
     <Compile Include="Global.asax.cs">
@@ -258,6 +260,12 @@
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\CSHMIMP0_NP6.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\CSHVMLP0.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\CSM_Master_Recipe.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\Dessert_Price_Tier.cs">
@@ -328,6 +336,7 @@
     <Compile Include="Models\EntityManager\RawItemPriceManager.cs" />
     <Compile Include="Models\EntityManager\RegularPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
+    <Compile Include="Models\EntityManager\ValueMealManager.cs" />
     <Compile Include="Models\EntityManager\VendorMasterManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
     <Compile Include="Models\ViewModel\BreakfastPriceTierViewModel.cs" />
@@ -346,6 +355,7 @@
     <Compile Include="Models\ViewModel\RawItemPriceUpdateViewModel.cs" />
     <Compile Include="Models\ViewModel\RegularPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\TextGeneratorViewModel.cs" />
+    <Compile Include="Models\ViewModel\ValueMealViewModel.cs" />
     <Compile Include="Models\ViewModel\VendorMasterViewModel.cs" />
     <Compile Include="Sessions\SessionData.cs" />
     <Compile Include="Models\EntityManager\AccountManager.cs" />
@@ -394,6 +404,8 @@
     <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\Ownership\Index.cshtml" />
     <Content Include="Views\ProfitCenter\Index.cshtml" />
+    <Content Include="Views\ReportGeneration\Index.cshtml" />
+    <Content Include="Views\ValueMeal\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

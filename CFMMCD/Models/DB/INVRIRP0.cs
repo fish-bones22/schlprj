@@ -14,11 +14,11 @@ namespace CFMMCD.Models.DB
     
     public partial class INVRIRP0
     {
-        public int RIRRID { get; set; }
+        public string RIRRID { get; set; }
         public Nullable<int> RIRMIC { get; set; }
         public Nullable<int> RIRRIC { get; set; }
         public Nullable<int> RIRVPC { get; set; }
-        public Nullable<int> RIRSFQ { get; set; }
+        public Nullable<double> RIRSFQ { get; set; }
         public string RIRCWC { get; set; }
         public string RIRSTA { get; set; }
         public string RIRVST { get; set; }
@@ -26,5 +26,8 @@ namespace CFMMCD.Models.DB
         public Nullable<System.DateTime> RIRDAT { get; set; }
         public Nullable<bool> RIRFLG { get; set; }
         public string STATUS { get; set; }
+        public Nullable<double> RIMCPR { get; set; }
+        public string LongName { get; set; }
+        public string Description { get; set; }
     }
 }

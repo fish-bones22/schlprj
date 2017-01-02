@@ -13,4 +13,3 @@ namespace CFMMCD.Models.ViewModel
         public List<McCafeLevel3PriceTierViewModel> M3PTList { get; set; }
     }
 }
-}

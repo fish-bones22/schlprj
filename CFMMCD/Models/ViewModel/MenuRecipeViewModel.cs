@@ -53,7 +53,7 @@ namespace CFMMCD.Models.ViewModel
     }
     public class MenuRecipe
     {
-        public int RIRRID { get; set; }
+        public string RIRRID { get; set; }
         public string RIRRIC { get; set; }
         public string RIMRID { get; set; }
         public string RIMCPR { get; set; }

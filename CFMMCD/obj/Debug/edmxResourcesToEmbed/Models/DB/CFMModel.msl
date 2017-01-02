@@ -412,9 +412,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CSM_Master_Recipe">
+      <EntityTypeMapping TypeName="CFMMCDModel.CSM_Master_Recipe">
+        <MappingFragment StoreEntitySet="CSM_Master_Recipe">
+          <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
+          <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
+          <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
+          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+          <ScalarProperty Name="CSMID" ColumnName="CSMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="INVRIRP0">
       <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
         <MappingFragment StoreEntitySet="INVRIRP0">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LongName" ColumnName="LongName" />
+          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
           <ScalarProperty Name="RIRFLG" ColumnName="RIRFLG" />
           <ScalarProperty Name="RIRDAT" ColumnName="RIRDAT" />
@@ -427,6 +441,20 @@
           <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
           <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
           <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CSHVMLP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.CSHVMLP0">
+        <MappingFragment StoreEntitySet="CSHVMLP0">
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VMLID" ColumnName="VMLID" />
+          <ScalarProperty Name="VMLPRO" ColumnName="VMLPRO" />
+          <ScalarProperty Name="VMLPRI" ColumnName="VMLPRI" />
+          <ScalarProperty Name="VMLNAM" ColumnName="VMLNAM" />
+          <ScalarProperty Name="VMLQUA" ColumnName="VMLQUA" />
+          <ScalarProperty Name="VMLMIC" ColumnName="VMLMIC" />
+          <ScalarProperty Name="VMLNUM" ColumnName="VMLNUM" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

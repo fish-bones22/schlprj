@@ -43,7 +43,7 @@
                                 }
                                 if (UASession.VAM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Value Meal (UD)", "Index", "Home")</li>
+                                    <li class="list-group-item">@Html.ActionLink("Value Meal", "Index", "ValueMeal")</li>
                                 }
                                 if (UASession.UAP)
                                 {
@@ -64,7 +64,7 @@
                                 }
                                 if (UASession.SCM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("SCM Master Recipe (UD)", "Index", "Home")</li>
+                                    <li class="list-group-item">@Html.ActionLink("SCM Master Recipe (UD)", "Index", "SCMRecipe")</li>
                                 }
                                 if (UASession.TEG)
                                 {
@@ -89,15 +89,15 @@
                                         <ul class="list-group">
                                             @{ if (UASession.LOC)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Location (UD)", "Index", "Location")</li>
+                                                    <li class="list-group-item">@Html.ActionLink("Location", "Index", "Location")</li>
                                                 }
                                                 if (UASession.PRC)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Profit center (UD)", "Index", "ProfitCenter")</li>
+                                                    <li class="list-group-item">@Html.ActionLink("Profit center", "Index", "ProfitCenter")</li>
                                                 }
                                                 if (UASession.OWN)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Ownership (UD)", "Index", "Ownership")</li>
+                                                    <li class="list-group-item">@Html.ActionLink("Ownership", "Index", "Ownership")</li>
                                                 }
                                                 if (UASession.BUE)
                                                 {

@@ -47,6 +47,8 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<Tier_Lookup> Tier_Lookup { get; set; }
         public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
+        public virtual DbSet<CSM_Master_Recipe> CSM_Master_Recipe { get; set; }
         public virtual DbSet<INVRIRP0> INVRIRP0 { get; set; }
+        public virtual DbSet<CSHVMLP0> CSHVMLP0 { get; set; }
     }
 }

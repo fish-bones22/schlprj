@@ -34,7 +34,8 @@ namespace CFMMCD.Models.EntityManager
                 }
                 else
                     return null;
-                foreach (CSHMIMP0 MIMRow in MIMRowList)
+
+                foreach (var MIMRow in MIMRowList)
                 {
                     // Check if 'Include inactive items' is checked
                     if (MIMViewModel.InactiveItemsCb || MIMRow.MIMSTA.Equals("0"))

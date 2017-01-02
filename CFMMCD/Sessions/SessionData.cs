@@ -181,6 +181,34 @@ namespace CFMMCD.Sessions
                     Action = "Index",
                     Controller = "Location"
                 };
+            else if (key.Equals("PRC"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Profit Center",
+                    Action = "Index",
+                    Controller = "ProfitCenter"
+                };
+            else if (key.Equals("OWN"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Ownership",
+                    Action = "Index",
+                    Controller = "Ownership"
+                };
+            else if (key.Equals("VAM"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Value Meal",
+                    Action = "Index",
+                    Controller = "ValueMeal"
+                };
+            else if (key.Equals("SCM"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "SCM Recipe",
+                    Action = "Index",
+                    Controller = "SCMRecipe"
+                };
             else
                 return new CurrentPageSession.LinkString
                 {

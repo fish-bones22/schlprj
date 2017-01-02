@@ -82,15 +82,17 @@ namespace CFMMCD.Models.EntityManager
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
+                if (MRViewModel.RIRMIC == null || MRViewModel.RIRMIC.Equals(""))
+                    return false;
                 // Existing
                 foreach (var v in MRViewModel.MenuRecipeList)
                 {
                     INVRIRP0 MRRow = new INVRIRP0();
-                    MRRow.RIRRID = int.Parse(MRViewModel.RIRMIC + v.RIRRIC);
+                    MRRow.RIRRID = MRViewModel.RIRMIC + v.RIRRIC;
                     MRRow.RIRMIC = int.Parse(MRViewModel.RIRMIC);
                     MRRow.RIRRIC = int.Parse(v.RIRRIC);
                     MRRow.RIRVPC = 0;
-                    MRRow.RIRSFQ = int.Parse(v.RIRSFQ);
+                    MRRow.RIRSFQ = double.Parse(v.RIRSFQ);
                     MRRow.RIRCWC = v.RIRCWC;
                     MRRow.RIRSTA = "0";
                     MRRow.RIRVST = "";
@@ -122,11 +124,11 @@ namespace CFMMCD.Models.EntityManager
                 for (int i = 0; i < MRViewModel.RIMRID.Count(); i++)
                 {
                     INVRIRP0 MRRow = new INVRIRP0();
-                    MRRow.RIRRID = int.Parse(MRViewModel.RIRMIC + MRViewModel.RIRRIC[i]);
+                    MRRow.RIRRID = MRViewModel.RIRMIC + MRViewModel.RIRRIC[i];
                     MRRow.RIRMIC = int.Parse(MRViewModel.RIRMIC);
                     MRRow.RIRRIC = int.Parse(MRViewModel.RIRRIC[i]);
                     MRRow.RIRVPC = 0;
-                    MRRow.RIRSFQ = int.Parse(MRViewModel.RIRSFQ[i]);
+                    MRRow.RIRSFQ = double.Parse(MRViewModel.RIRSFQ[i]);
                     MRRow.RIRCWC = MRViewModel.RIRCWC[i];
                     MRRow.RIRSTA = "0";
                     MRRow.RIRVST = "";
