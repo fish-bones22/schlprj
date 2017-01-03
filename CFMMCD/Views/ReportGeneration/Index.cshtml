@@ -5,7 +5,7 @@
 }
 <div class="center">
     <h2>@ViewBag.Title</h2>
-</div>
+</div><br/>
 <div class="container">
     @if (TempData["ErrorMessage"] != null)
     {
@@ -29,33 +29,33 @@
                             }, "value", "text", "0"), new { @class = "form-control input-sm" })
                 </div>
                 <div class="col-lg-8 col-lg-offset-4">
-                    <label class="control-label"> @Html.RadioButtonFor(m => m.DUMMY, "List of Stores")</label>
+                    <label class="form-label2"> @Html.RadioButtonFor(m => m.DUMMY, "List of Stores") List of Stores</label>
                 </div>
             </div>
             <div class="col-lg-5">
                 @Html.TextBoxFor(m => m.DUMMY, new { @class = "form-control input-sm" })
                 <div class="col-lg-3">
-                    <label class="control-label">@Html.RadioButtonFor(m => m.DUMMY, "Items:")</label>
+                    <label class="form-label2">@Html.RadioButtonFor(m => m.DUMMY, "Items:") Items:</label>
                 </div>
                 <div class="col-lg-3">
-                    <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)Menu Item</label>
+                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.DUMMYb)Menu Item</label>
                 </div>
                 <div class="col-lg-3">
-                    <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)Recipe</label>
+                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.DUMMYb)Recipe</label>
                 </div>
                 <div class="col-lg-3">
-                    <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)Raw Items</label>
+                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.DUMMYb)Raw Items</label>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="col-lg-5">
-                    <label class="control-label input-sm">Date From</label>
+                    <label class="form-label2 input-sm">Date From</label>
                 </div>
                 <div class="col-lg-7">
                     @Html.TextBoxFor(m => m.DUMMY, new { @class = "form-control input-sm" })
                 </div><br /><br />
                 <div class="col-lg-5">
-                    <label class="control-label input-sm">Date To</label>
+                    <label class="form-label2 input-sm">Date To</label>
                 </div>
                 <div class="col-lg-7">
                     @Html.TextBoxFor(m => m.DUMMY, new { @class = "form-control input-sm" })
@@ -78,16 +78,16 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-4 col-lg-offset-1">
-                            <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)NP3</label>
+                            <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)NP3</label>
                         </div>
                         <div class="col-lg-4">
-                            <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)NP6</label>
+                            <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)NP6</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-offset-1">
                             <div class="col-lg-6">
-                                <label class="control-label input-sm">Breakfast Price Tier</label>
+                                <label class="form-label2 input-sm">Breakfast Price Tier</label>
                             </div>
                             <div class="col-lg-6">
                                 @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <div class="col-lg-offset-1">
                             <div class="col-lg-6">
-                                <label class="control-label input-sm">Regulars Price Tier</label>
+                                <label class="form-label2 input-sm">Regulars Price Tier</label>
                             </div>
                             <div class="col-lg-6">
                                 @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -116,7 +116,7 @@
                     <div class="form-group">
                         <div class="col-lg-offset-1">
                             <div class="col-lg-6">
-                                <label class="control-label input-sm">McDelivery Price Tier</label>
+                                <label class="form-label2 input-sm">McDelivery Price Tier</label>
                             </div>
                             <div class="col-lg-6">
                                 @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -132,7 +132,7 @@
                     <div class="form-group">
                         <div class="col-lg-offset-1">
                             <div class="col-lg-6">
-                                <label class="control-label input-sm">Dessert Center Price Tier</label>
+                                <label class="form-label2 input-sm">Dessert Center Price Tier</label>
                             </div>
                             <div class="col-lg-6">
                                 @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -148,7 +148,7 @@
                     <div class="form-group">
                         <div class="col-lg-offset-1">
                             <div class="col-lg-6">
-                                <label class="control-label input-sm">McCafe Level2 Price Tier</label>
+                                <label class="form-label2 input-sm">McCafe Level2 Price Tier</label>
                             </div>
                             <div class="col-lg-6">
                                 @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -164,7 +164,7 @@
                     <div class="form-group">
                         <div class="col-lg-offset-1">
                             <div class="col-lg-6">
-                                <label class="control-label input-sm">McCafe Level3 Price Tier</label>
+                                <label class="form-label2 input-sm">McCafe Level3 Price Tier</label>
                             </div>
                             <div class="col-lg-6">
                                 @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -180,7 +180,7 @@
                     <div class="form-group">
                         <div class="col-lg-offset-1">
                             <div class="col-lg-6">
-                                <label class="control-label input-sm">McCafe BISTRO Price Tier</label>
+                                <label class="form-label2 input-sm">McCafe BISTRO Price Tier</label>
                             </div>
                             <div class="col-lg-6">
                                 @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -196,7 +196,7 @@
                     <div class="form-group">
                         <div class="col-lg-offset-1">
                             <div class="col-lg-6">
-                                <label class="control-label input-sm">Project Gold  Price Tier</label>
+                                <label class="form-label2 input-sm">Project Gold  Price Tier</label>
                             </div>
                             <div class="col-lg-6">
                                 @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -218,28 +218,28 @@
                 </div>
                 <div class="form-group" contenteditable="false">
                     <div class="col-lg-offset-1">
-                        <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)24HRS</label>
+                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)24HRS</label>
                     </div>
                     <div class="col-lg-offset-1">
-                        <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)Mall</label>
+                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)Mall</label>
                     </div>
                     <div class="col-lg-offset-1">
-                        <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)McVan</label>
+                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)McVan</label>
                     </div>
                     <div class="col-lg-offset-1">
-                        <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)McDelivery</label>
+                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)McDelivery</label>
                     </div>
                     <div class="col-lg-offset-1">
-                        <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)Drive Thru</label>
+                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)Drive Thru</label>
                     </div>
                     <div class="col-lg-offset-1">
-                        <label class="checkbox-inline control-label">@Html.CheckBoxFor(m => m.DUMMYb)Take Out Counter</label>
+                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)Take Out Counter</label>
                     </div>
                 </div><br /><br />
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Ownership</label>
+                            <label class="form-label input-sm">Ownership</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -255,7 +255,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Profit Center</label>
+                            <label class="form-label2 input-sm">Profit Center</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -276,7 +276,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Location</label>
+                            <label class="form-label input-sm">Location</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -292,7 +292,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Region</label>
+                            <label class="form-label input-sm">Region</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -308,7 +308,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Province</label>
+                            <label class="form-label input-sm">Province</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -324,7 +324,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">City</label>
+                            <label class="form-label input-sm">City</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -340,7 +340,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Paper/Plastic</label>
+                            <label class="form-label input-sm">Paper/Plastic</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -356,7 +356,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Frozen/Fresh</label>
+                            <label class="form-label input-sm">Frozen/Fresh</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -372,7 +372,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Simplot/McCain</label>
+                            <label class="form-label input-sm">Simplot/McCain</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -388,7 +388,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">McCornick/GSF</label>
+                            <label class="form-label input-sm">McCornick/GSF</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -404,7 +404,7 @@
                 <div class="form-group">
                     <div>
                         <div class="col-lg-4">
-                            <label class="control-label input-sm">Soft Serve/Vanilla Powder Mix</label>
+                            <label class="form-label2 input-sm">Soft Serve/Vanilla Powder Mix</label>
                         </div>
                         <div class="col-lg-6">
                             @Html.DropDownListFor(m => m.DUMMY, new SelectList(
@@ -430,7 +430,7 @@
                     </label>
                 </div>
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-danger">Export</button>
+                    <a href="@Url.Action("ExportPDF", "ReportGeneration")" type="button" class="btn btn-danger">Export</a>
                 </div>
             </div>
         </div>

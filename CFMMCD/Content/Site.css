@@ -73,6 +73,13 @@ label {
   font-weight: 100;
   position: relative;
 }
+.form-label2 {
+  font-family: 'Calibri Light';
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 100;
+  position: relative;
+}
 .form-control {
   -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
