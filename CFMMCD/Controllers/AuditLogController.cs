@@ -27,5 +27,23 @@ namespace CFMMCD.Controllers
             ViewData["ModelList"] = ALList;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ExpToExcel(AuditLogViewModel ALVM, string command)
+        {
+            bool result = false;
+
+            if (command == "toExcel")
+            {
+                AuditLogManager ALM = new AuditLogManager();
+                result = ALM.ExportToExcel(ALVM);
+            }
+            else if (command == "toPDF")
+            {
+
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
