@@ -104,7 +104,7 @@
   </EntityType>
   <EntityType Name="CSHVMLP0">
     <Key>
-      <PropertyRef Name="VMLNUM" />
+      <PropertyRef Name="VMLID" />
     </Key>
     <Property Name="VMLNUM" Type="int" Nullable="false" />
     <Property Name="VMLMIC" Type="int" />
@@ -112,7 +112,7 @@
     <Property Name="VMLNAM" Type="nvarchar" MaxLength="20" />
     <Property Name="VMLPRI" Type="float" />
     <Property Name="VMLPRO" Type="float" />
-    <Property Name="VMLID" Type="nvarchar" MaxLength="20" />
+    <Property Name="VMLID" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="CSM_Master_Recipe">
@@ -309,6 +309,16 @@
     <Property Name="RIMCPN" Type="float" />
     <Property Name="RIMPDT" Type="date" />
   </EntityType>
+  <EntityType Name="SCM_Master_Recipe">
+    <Key>
+      <PropertyRef Name="CSMID" />
+    </Key>
+    <Property Name="CSMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="RIMRIC" Type="int" />
+    <Property Name="CSMSFQ" Type="float" />
+    <Property Name="CSMCWC" Type="nchar" MaxLength="1" />
+    <Property Name="CSMDES" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="STORE_MIMMIC_Lookup">
     <Key>
       <PropertyRef Name="STORE_MIMMIC_Id" />
@@ -467,6 +477,7 @@
     <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RIM_VEM_Lookup" EntityType="Self.RIM_VEM_Lookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SCM_Master_Recipe" EntityType="Self.SCM_Master_Recipe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="Self.STORE_MIMMIC_Lookup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tier_Lookup" EntityType="Self.Tier_Lookup" Schema="dbo" store:Type="Tables" />

@@ -29,9 +29,10 @@
         <EntityTypeShape EntityType="CFMMCDModel.Tier_Lookup" Width="1.5" PointX="0.43304801566202566" PointY="29.486668630264081" />
         <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" />
         <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="11.625" PointY="30.875" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSM_Master_Recipe" Width="1.5" PointX="11.342885987527151" PointY="26.754074094236863" />
         <EntityTypeShape EntityType="CFMMCDModel.INVRIRP0" Width="1.5" PointX="1.0570807126616504" PointY="28.644537864553062" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSHVMLP0" Width="1.5" PointX="0.60866843937368531" PointY="6.4553461402912378" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHVMLP0" Width="1.5" PointX="5.7705381837536294" PointY="27.450223220256262" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSM_Master_Recipe" Width="1.5" PointX="2.4657416057147747" PointY="28.198888821619978" />
+        <EntityTypeShape EntityType="CFMMCDModel.SCM_Master_Recipe" Width="1.5" PointX="7.0436225529031944" PointY="18.546376311474656" />
       </Diagram>
 =======
       <Diagram DiagramId="3b3d34b0e6f448fa9bddfa0f5790fe9e" Name="Diagram1">

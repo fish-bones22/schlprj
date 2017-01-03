@@ -109,7 +109,7 @@
         </EntityType>
         <EntityType Name="CSHVMLP0">
           <Key>
-            <PropertyRef Name="VMLNUM" />
+            <PropertyRef Name="VMLID" />
           </Key>
           <Property Name="VMLNUM" Type="int" Nullable="false" />
           <Property Name="VMLMIC" Type="int" />
@@ -117,7 +117,7 @@
           <Property Name="VMLNAM" Type="nvarchar" MaxLength="20" />
           <Property Name="VMLPRI" Type="float" />
           <Property Name="VMLPRO" Type="float" />
-          <Property Name="VMLID" Type="nvarchar" MaxLength="20" />
+          <Property Name="VMLID" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="STATUS" Type="nchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="CSM_Master_Recipe">
@@ -314,6 +314,16 @@
           <Property Name="RIMCPN" Type="float" />
           <Property Name="RIMPDT" Type="date" />
         </EntityType>
+        <EntityType Name="SCM_Master_Recipe">
+          <Key>
+            <PropertyRef Name="CSMID" />
+          </Key>
+          <Property Name="CSMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RIMRIC" Type="int" />
+          <Property Name="CSMSFQ" Type="float" />
+          <Property Name="CSMCWC" Type="nchar" MaxLength="1" />
+          <Property Name="CSMDES" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="STORE_MIMMIC_Lookup">
           <Key>
             <PropertyRef Name="STORE_MIMMIC_Id" />
@@ -472,6 +482,7 @@
           <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Regular_Price_Tier" EntityType="Self.Regular_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RIM_VEM_Lookup" EntityType="Self.RIM_VEM_Lookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SCM_Master_Recipe" EntityType="Self.SCM_Master_Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="Self.STORE_MIMMIC_Lookup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tier_Lookup" EntityType="Self.Tier_Lookup" Schema="dbo" store:Type="Tables" />
@@ -511,9 +522,10 @@
             <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
           </AssociationSet>
           <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
-          <EntitySet Name="CSM_Master_Recipe" EntityType="CFMMCDModel.CSM_Master_Recipe" />
           <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
           <EntitySet Name="CSHVMLP0" EntityType="CFMMCDModel.CSHVMLP0" />
+          <EntitySet Name="CSM_Master_Recipe" EntityType="CFMMCDModel.CSM_Master_Recipe" />
+          <EntitySet Name="SCM_Master_Recipe" EntityType="CFMMCDModel.SCM_Master_Recipe" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -918,16 +930,6 @@
           <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Store_Attrib" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="CSM_Master_Recipe">
-          <Key>
-            <PropertyRef Name="CSMID" />
-          </Key>
-          <Property Name="CSMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RIMRIC" Type="Int32" />
-          <Property Name="CSMSFQ" Type="Double" />
-          <Property Name="CSMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="CSMDES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="INVRIRP0">
           <Key>
             <PropertyRef Name="RIRRID" />
@@ -950,7 +952,7 @@
         </EntityType>
         <EntityType Name="CSHVMLP0">
           <Key>
-            <PropertyRef Name="VMLNUM" />
+            <PropertyRef Name="VMLID" />
           </Key>
           <Property Name="VMLNUM" Type="Int32" Nullable="false" />
           <Property Name="VMLMIC" Type="Int32" />
@@ -958,8 +960,28 @@
           <Property Name="VMLNAM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="VMLPRI" Type="Double" />
           <Property Name="VMLPRO" Type="Double" />
-          <Property Name="VMLID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VMLID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CSM_Master_Recipe">
+          <Key>
+            <PropertyRef Name="CSMID" />
+          </Key>
+          <Property Name="CSMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RIMRIC" Type="Int32" />
+          <Property Name="CSMSFQ" Type="Double" />
+          <Property Name="CSMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="CSMDES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SCM_Master_Recipe">
+          <Key>
+            <PropertyRef Name="CSMID" />
+          </Key>
+          <Property Name="CSMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RIMRIC" Type="Int32" />
+          <Property Name="CSMSFQ" Type="Double" />
+          <Property Name="CSMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="CSMDES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1378,17 +1400,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CSM_Master_Recipe">
-            <EntityTypeMapping TypeName="CFMMCDModel.CSM_Master_Recipe">
-              <MappingFragment StoreEntitySet="CSM_Master_Recipe">
-                <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
-                <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
-                <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
-                <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
-                <ScalarProperty Name="CSMID" ColumnName="CSMID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="INVRIRP0">
             <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
               <MappingFragment StoreEntitySet="INVRIRP0">
@@ -1421,6 +1432,28 @@
                 <ScalarProperty Name="VMLQUA" ColumnName="VMLQUA" />
                 <ScalarProperty Name="VMLMIC" ColumnName="VMLMIC" />
                 <ScalarProperty Name="VMLNUM" ColumnName="VMLNUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSM_Master_Recipe">
+            <EntityTypeMapping TypeName="CFMMCDModel.CSM_Master_Recipe">
+              <MappingFragment StoreEntitySet="CSM_Master_Recipe">
+                <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
+                <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
+                <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
+                <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+                <ScalarProperty Name="CSMID" ColumnName="CSMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SCM_Master_Recipe">
+            <EntityTypeMapping TypeName="CFMMCDModel.SCM_Master_Recipe">
+              <MappingFragment StoreEntitySet="SCM_Master_Recipe">
+                <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
+                <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
+                <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
+                <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+                <ScalarProperty Name="CSMID" ColumnName="CSMID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

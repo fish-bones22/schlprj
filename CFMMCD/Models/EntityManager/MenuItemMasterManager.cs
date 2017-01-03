@@ -396,8 +396,7 @@ namespace CFMMCD.Models.EntityManager
                 if (db.Tier_Lookup.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
                     MIMRow = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
                 else
-                    return null;
-                MenuItemMasterViewModel vm = new MenuItemMasterViewModel();
+                    return MIMViewModel;
                 MIMViewModel.MIMMIC = MIMRow.MIMMIC.ToString();
                 MIMViewModel.OLDPRA = (double)MIMRow.OLDPRA;
                 MIMViewModel.NEWPRA = (double)MIMRow.NEWPRA;

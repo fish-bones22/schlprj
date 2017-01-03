@@ -2,6 +2,7 @@
 using CFMMCD.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -110,41 +111,74 @@ namespace CFMMCD.Models.EntityManager
                     }
                     catch (Exception e)
                     {
+                        System.Diagnostics.Debug.WriteLine(e.Source);
+                        System.Diagnostics.Debug.WriteLine(e.Message);
+                        System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                        System.Diagnostics.Debug.WriteLine(e.Data);
+                        foreach (var eve in ((DbEntityValidationException)e).EntityValidationErrors)
+                        {
+                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                                    ve.PropertyName,
+                                    eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                                    ve.ErrorMessage);
+                            }
+                        }
                         return false;
                     }
                 }
                 // New
-                for (int i = 0; i < VMViewModel.MIMMIC.Count(); i++)
-                {
-                    CSHVMLP0 VMRow = new CSHVMLP0();
-                    VMRow.VMLID = VMViewModel.VMLNUM + VMViewModel.MIMMIC[i];
-                    VMRow.VMLNUM = int.Parse(VMViewModel.VMLNUM);
-                    VMRow.VMLNAM = VMViewModel.VMLNAM.ToString();
-                    VMRow.VMLMIC = int.Parse(VMViewModel.MIMMIC[i]);
-                    VMRow.VMLQUA = int.Parse(VMViewModel.VMLQUA[i]);
-                    VMRow.VMLPRI = double.Parse(VMViewModel.VMLPRI);
-                    VMRow.VMLPRO = double.Parse(VMViewModel.VMLPRO);
-                    try
+                if (!VMViewModel.MIMMIC[0].Equals(""))
+                    for (int i = 0; i < VMViewModel.MIMMIC.Count(); i++)
                     {
-                        if (db.CSHVMLP0.Where(o => o.VMLID == VMRow.VMLID).Any())
+                        CSHVMLP0 VMRow = new CSHVMLP0();
+                        VMRow.VMLID = VMViewModel.VMLNUM + VMViewModel.MIMMIC[i];
+                        VMRow.VMLNUM = int.Parse(VMViewModel.VMLNUM);
+                        VMRow.VMLNAM = VMViewModel.VMLNAM.ToString();
+                        VMRow.VMLMIC = int.Parse(VMViewModel.MIMMIC[i]);
+                        VMRow.VMLQUA = int.Parse(VMViewModel.VMLQUA[i]);
+                        VMRow.VMLPRI = double.Parse(VMViewModel.VMLPRI);
+                        VMRow.VMLPRO = double.Parse(VMViewModel.VMLPRO);
+                        try
                         {
-                            CSHVMLP0 rowToDelete = db.CSHVMLP0.Single(o => o.VMLID == VMRow.VMLID);
-                            db.CSHVMLP0.Remove(rowToDelete);
-                            VMRow.STATUS = "E";
-                            db.CSHVMLP0.Add(VMRow);
+                            if (db.CSHVMLP0.Where(o => o.VMLID == VMRow.VMLID).Any())
+                            {
+                                CSHVMLP0 rowToDelete = db.CSHVMLP0.Single(o => o.VMLID == VMRow.VMLID);
+                                db.CSHVMLP0.Remove(rowToDelete);
+                                VMRow.STATUS = "E";
+                                db.CSHVMLP0.Add(VMRow);
+                            }
+                            else
+                            {
+                                VMRow.STATUS = "A";
+                                db.CSHVMLP0.Add(VMRow);
+                            }
+                            db.SaveChanges();
                         }
-                        else
+                        catch (Exception e)
                         {
-                            VMRow.STATUS = "A";
-                            db.CSHVMLP0.Add(VMRow);
+                            System.Diagnostics.Debug.WriteLine(e.Source);
+                            System.Diagnostics.Debug.WriteLine(e.Message);
+                            System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                            System.Diagnostics.Debug.WriteLine(e.Data);
+                            foreach (var eve in ((DbEntityValidationException)e).EntityValidationErrors)
+                            {
+                                Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                                foreach (var ve in eve.ValidationErrors)
+                                {
+                                    Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                                        ve.PropertyName,
+                                        eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                                        ve.ErrorMessage);
+                                }
+                            }
+                            return false;
                         }
-                        db.SaveChanges();
                     }
-                    catch (Exception e)
-                    {
-                        return false;
-                    }
-                }
                 return true;
             }
         }

@@ -156,8 +156,8 @@ namespace CFMMCD.Models.EntityManager
                 List<INVRIMP0> RIMRowList;
                 if (RIMViewModel.SearchItem == null || RIMViewModel.SearchItem.Equals(""))
                     return null;
-                if (db.INVRIMP0.Where(o => o.RIMRID.Equals(RIMViewModel.SearchItem)).Any())
-                    RIMRowList = db.INVRIMP0.Where(o => o.RIMRID.Equals(RIMViewModel.SearchItem)).ToList();
+                if (db.INVRIMP0.Where(o => o.RIMRID.Contains(RIMViewModel.SearchItem)).Any())
+                    RIMRowList = db.INVRIMP0.Where(o => o.RIMRID.Contains(RIMViewModel.SearchItem)).ToList();
                 else if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(RIMViewModel.SearchItem)).Any())
                     RIMRowList = db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(RIMViewModel.SearchItem)).ToList();
                 else
