@@ -1,3 +1,4 @@
+C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\obj\Debug\CFMMCD.csprojResolveAssemblyReference.cache
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\ApplicationInsights.config
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\roslyn\csc.exe
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\roslyn\csc.exe.config
@@ -39,6 +40,7 @@ C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsof
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsoft.ApplicationInsights.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Rotativa.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Helpers.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Mvc.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Razor.dll
@@ -61,4 +63,3 @@ C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.W
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Mvc.xml
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\obj\Debug\CFMMCD.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\obj\Debug\CFMMCD.pdb
-C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\obj\Debug\CFMMCD.csprojResolveAssemblyReference.cache
