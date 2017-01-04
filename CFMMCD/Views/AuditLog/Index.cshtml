@@ -40,9 +40,12 @@
                 }
             </tbody>
         </table> 
-        <div class="right-fixed">
-            <button type="button" class="btn btn-default" name="command" value="toPDF" disabled>Export to PDF</button>
-            <button type="button" class="btn btn-default" name="command" value="toExcel" disabled>Export as Spreadsheet</button>
-        </div>
+        @using (Html.BeginForm("ExpToExcel", "AuditLog", FormMethod.Post, new { }))
+        {
+            <div class="right-fixed">
+                <button type="button" class="btn btn-default" name="command" value="toPDF" disabled>Export to PDF</button>
+                <button type="submit" class="btn btn-default" name="command" value="toExcel">Export as Spreadsheet</button>
+            </div>
+        }
     </div>
 </div>

@@ -24,11 +24,15 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("MIP", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
+            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
             MenuItemMasterViewModel MIMViewModel = (MenuItemMasterViewModel)TempData["SearchItemSelected"];
             if (MIMViewModel == null)
                 MIMViewModel = new MenuItemMasterViewModel();
+            MIMViewModel.SearchItem = "ALL";
+            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItem(MIMViewModel);
             return View(MIMViewModel);
         }
+
         [HttpPost]
         public ActionResult Index(MenuItemMasterViewModel MIMViewModel)
         {   // Search
@@ -52,7 +56,7 @@ namespace CFMMCD.Controllers
             bool result = false;
             if (command == "Save")
             {
-                result = MIMManager.UpdatePriceTier(MIMViewModel);
+                result = MIMManager.UpdatePriceTier(MIMViewModel.MenuItemMasterList);
                 PageAction = "Update price";
             }
             if (result)

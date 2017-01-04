@@ -36,9 +36,9 @@ namespace CFMMCD.Models.EntityManager
                 prcRow.PRFCNT = PRCViewModel.PRFCNT;
                 try
                 {
-                    if (db.PROFIT_CEN.Where(o => o.Id.Equals(PRCViewModel.Id)).Any())
+                    if (db.PROFIT_CEN.Where(o => o.Id.ToString().Equals(PRCViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.PROFIT_CEN.Single(o => o.Id.Equals(PRCViewModel.Id));
+                        var rowToRemove = db.PROFIT_CEN.Single(o => o.Id.ToString().Equals(PRCViewModel.Id));
                         db.PROFIT_CEN.Remove(rowToRemove);
                         db.PROFIT_CEN.Add(prcRow);
                     }
@@ -60,8 +60,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 PROFIT_CEN prcRow;
 
-                if (db.PROFIT_CEN.Where(o => o.Id.Equals(PRCViewModel.Id)).Any())
-                    prcRow = db.PROFIT_CEN.Single(o => o.Id.Equals(PRCViewModel.Id));
+                if (db.PROFIT_CEN.Where(o => o.Id.ToString().Equals(PRCViewModel.Id)).Any())
+                    prcRow = db.PROFIT_CEN.Single(o => o.Id.ToString().Equals(PRCViewModel.Id));
                 else
                     return false;
                 try

@@ -35,9 +35,9 @@ namespace CFMMCD.Models.EntityManager
                 bptRow.Price_Tier = BPTViewModel.Price_Tier;
                 try
                 {
-                    if (db.Breakfast_Price_Tier.Where(o => o.Id.Equals(BPTViewModel.Id)).Any())
+                    if (db.Breakfast_Price_Tier.Where(o => o.Id.ToString().Equals(BPTViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.Breakfast_Price_Tier.Single(o => o.Id.Equals(BPTViewModel.Id));
+                        var rowToRemove = db.Breakfast_Price_Tier.Single(o => o.Id.ToString().Equals(BPTViewModel.Id));
                         db.Breakfast_Price_Tier.Remove(rowToRemove);
                         db.Breakfast_Price_Tier.Add(bptRow);
                     }
@@ -59,8 +59,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 Breakfast_Price_Tier bptRow;
 
-                if (db.Breakfast_Price_Tier.Where(o => o.Id.Equals(BPTViewModel.Id)).Any())
-                    bptRow = db.Breakfast_Price_Tier.Single(o => o.Id.Equals(BPTViewModel.Id));
+                if (db.Breakfast_Price_Tier.Where(o => o.Id.ToString().Equals(BPTViewModel.Id)).Any())
+                    bptRow = db.Breakfast_Price_Tier.Single(o => o.Id.ToString().Equals(BPTViewModel.Id));
                 else
                     return false;
                 try

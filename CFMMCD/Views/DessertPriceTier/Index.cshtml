@@ -26,12 +26,12 @@
                 <div class="row" style="margin-top: 70px;">
                     <div class="col-lg-10 col-lg-offset-1">
                         <div class="col-lg-4">
-                            @Html.LabelFor(m => m.Id, "Id", new { @class = "control-label", @type = "number" })
-                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @maxlength = "6" })
+                            @Html.LabelFor(m => m.Id, "Id", new { @class = "control-label"})
+                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control input-sm", @Value = Model.Id, @type = "number" })
                         </div>
                         <div class="col-lg-8">
                             @Html.LabelFor(m => m.Price_Tier, "Price Tier", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Price_Tier, new { @class = "form-control input-sm", @Value = Model.Price_Tier, @maxlength = "1" })
+                            @Html.TextBoxFor(m => m.Price_Tier, new { @class = "form-control input-sm", @Value = Model.Price_Tier, @maxlength = "20" })
                         </div>
                     </div>
                 </div>

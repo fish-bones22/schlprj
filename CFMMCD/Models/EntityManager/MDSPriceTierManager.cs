@@ -35,9 +35,9 @@ namespace CFMMCD.Models.EntityManager
                 mdsRow.Price_Tier = MDSViewModel.Price_Tier;
                 try
                 {
-                    if (db.MDS_Price_Tier.Where(o => o.Id.Equals(MDSViewModel.Id)).Any())
+                    if (db.MDS_Price_Tier.Where(o => o.Id.ToString().Equals(MDSViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.MDS_Price_Tier.Single(o => o.Id.Equals(MDSViewModel.Id));
+                        var rowToRemove = db.MDS_Price_Tier.Single(o => o.Id.ToString().Equals(MDSViewModel.Id));
                         db.MDS_Price_Tier.Remove(rowToRemove);
                         db.MDS_Price_Tier.Add(mdsRow);
                     }
@@ -59,8 +59,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 MDS_Price_Tier mdsRow;
 
-                if (db.MDS_Price_Tier.Where(o => o.Id.Equals(MDSViewModel.Id)).Any())
-                    mdsRow = db.MDS_Price_Tier.Single(o => o.Id.Equals(MDSViewModel.Id));
+                if (db.MDS_Price_Tier.Where(o => o.Id.ToString().Equals(MDSViewModel.Id)).Any())
+                    mdsRow = db.MDS_Price_Tier.Single(o => o.Id.ToString().Equals(MDSViewModel.Id));
                 else
                     return false;
                 try

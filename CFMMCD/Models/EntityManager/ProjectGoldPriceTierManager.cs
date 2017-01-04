@@ -35,9 +35,9 @@ namespace CFMMCD.Models.EntityManager
                 pgtRow.Price_Tier = PGTViewModel.Price_Tier;
                 try
                 {
-                    if (db.Project_Gold_Price_Tier.Where(o => o.Id.Equals(PGTViewModel.Id)).Any())
+                    if (db.Project_Gold_Price_Tier.Where(o => o.Id.ToString().Equals(PGTViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.Project_Gold_Price_Tier.Single(o => o.Id.Equals(PGTViewModel.Id));
+                        var rowToRemove = db.Project_Gold_Price_Tier.Single(o => o.Id.ToString().Equals(PGTViewModel.Id));
                         db.Project_Gold_Price_Tier.Remove(rowToRemove);
                         db.Project_Gold_Price_Tier.Add(pgtRow);
                     }
@@ -59,8 +59,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 Project_Gold_Price_Tier pgtRow;
 
-                if (db.Project_Gold_Price_Tier.Where(o => o.Id.Equals(PGTViewModel.Id)).Any())
-                    pgtRow = db.Project_Gold_Price_Tier.Single(o => o.Id.Equals(PGTViewModel.Id));
+                if (db.Project_Gold_Price_Tier.Where(o => o.Id.ToString().Equals(PGTViewModel.Id)).Any())
+                    pgtRow = db.Project_Gold_Price_Tier.Single(o => o.Id.ToString().Equals(PGTViewModel.Id));
                 else
                     return false;
                 try

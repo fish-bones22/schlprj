@@ -9,9 +9,8 @@
         HasSearch = (int)TempData["SearchResult"];
     }
 }
-<div class="center">
-    <h2>@ViewBag.Title</h2>
-</div>
+<h2 align="center">@ViewBag.Title</h2>
+<hr/>
 <!--Alerts-->
 <div class="container">
     @if (TempData["ErrorMessage"] != null)
@@ -29,20 +28,17 @@
         {
             @Html.AntiForgeryToken()
             <div class="container-fluid">
-                <div class="col-lg-2 label-container-left">
-                    <label class="form-label" for="menu-item">Menu item/ Product name</label>
+                <div class="col-lg-2 text-right">
+                    <label class="form-label" for="menu-item">Menu item code / name</label>
                 </div>
                 <div class="col-lg-7">
-                    @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
-                    <div class="input-group float-right" style="padding-top:8px">
-                        <label class="checkbox-inline form-label">
-                            @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
-                        </label>
-                    </div>
+                    <input type="text" class="form-control" id="SearchFrontEnd"/>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-lg-1">
-                    <button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
+                <div class="col-lg-3">
+                    <label class="checkbox-inline form-label">
+                        @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
+                    </label>
                 </div>
             </div>
         }
@@ -51,7 +47,6 @@
     <div class="row">
         @using (Html.BeginForm("UpdateDelete", "MenuItemPriceUpdate", FormMethod.Post, new { }))
         {
-            @Html.HiddenFor(m => Model.MIMMIC)
             <div class="col-lg-12">
                 <table class="table table-responsive table-hover">
                     <thead>
@@ -74,11 +69,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-
-                        </tr>
+                        @{ 
+                            for (int i = 0; i < Model.MenuItemMasterList.Count(); i++)
+                            {
+                                string activeOrInactive = "active";
+                                if (Model.MenuItemMasterList[i].InactiveItemsCb)
+                                {
+                                    activeOrInactive = "inactive";
+                                }
+                                <tr class="@Model.MenuItemMasterList[i].MIMMIC @Model.MenuItemMasterList[i].MIMNAM @activeOrInactive tr-collapse">
+                                    <td></td>
+                                    <td>
+                                        @Html.LabelFor(m => Model.MenuItemMasterList[i].MIMMIC, Model.MenuItemMasterList[i].MIMMIC, new { @class = "form-label" })
+                                        @Html.HiddenFor(m => Model.MenuItemMasterList[i].MIMMIC)
+                                    </td>
+                                    <td>@Html.LabelFor(m => Model.MenuItemMasterList[i].MIMNAM, Model.MenuItemMasterList[i].MIMNAM, new { @class = "form-label" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].OLDPRA, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].NEWPRA, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].OLDPRB, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].NEWPRB, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].OLDPRC, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].NEWPRC, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].EffectiveDate, new { @class = "form-control", @type="date" })</td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table> 
+
+            </div>
+            <div class="form-inline bottom float" style="right:50px">
+                <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
             </div>
             <!--div class="row" style="overflow-y:scroll">
                 <table class="table table-responsive">
@@ -254,9 +275,6 @@
                 </table>
 
             </!div-->
-            <div class="form-inline bottom float" style="right:50px">
-                <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
-            </div>
         }
     </div>
 </div>
@@ -301,5 +319,33 @@
         if (@HasSearch === 1) {
             $("#search-result-modal").modal('show');
         }
+        filterSearch();
     });
+    $("#SearchFrontEnd").keyup(filterSearch);
+    $("#InactiveItemsCb").click(filterSearch);
+    function filterSearch() {
+        // Hide items not relevant to the search term
+        if ($("#SearchFrontEnd").val() != "") {
+            var searchTerm = $("#SearchFrontEnd").val().toLowerCase();
+            $(".tr-collapse").addClass("hidden");
+            $(".tr-collapse").each(function() {
+                if ($(this).attr("class").toLowerCase().includes(searchTerm))
+                    if ($(this).hasClass("inactive") && ($("#InactiveItemsCb").prop("checked")))
+                        $(this).removeClass("hidden");
+                    else if ($(this).hasClass("active"))
+                        $(this).removeClass("hidden");
+            });
+        } else {
+            $(".tr-collapse").each(function () {
+                if ($(this).hasClass("inactive") && $("#InactiveItemsCb").prop("checked")) {
+                    $(this).removeClass("hidden");
+                }
+                else if ($(this).hasClass("active"))
+                    $(this).removeClass("hidden");
+                else
+                    $(this).addClass("hidden");
+            });
+
+        }
+    }
 </script>

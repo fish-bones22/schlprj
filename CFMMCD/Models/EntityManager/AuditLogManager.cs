@@ -76,7 +76,7 @@ namespace CFMMCD.Models.EntityManager
             Audit(ALViewModel);
             return true;
         }
-        public bool ExportToExcel(AuditLogViewModel ALVM)
+        public bool ExportToExcel(AuditLogViewModel ALViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -93,8 +93,8 @@ namespace CFMMCD.Models.EntityManager
                 dt.Columns.Add("Name", typeof(string));
 
                 //Puts all the rows of the Audit Log Table
-                //
-                foreach (var vm in Audit_Log)
+                List<Audit_Log> AlRow = db.Audit_Log.ToList();
+                foreach (var vm in AlRow)
                 {
                     var row = dt.NewRow();
                     row["UserId"] = vm.UserId;
@@ -107,7 +107,6 @@ namespace CFMMCD.Models.EntityManager
                     dt.Rows.Add(row);
                 }
 
-                //Don't know how this works but I think this exports the DataTable to Spreadsheet in .xlsx format
                 using (XLWorkbook wb = new XLWorkbook())
                 {
                     wb.Worksheets.Add(dt);

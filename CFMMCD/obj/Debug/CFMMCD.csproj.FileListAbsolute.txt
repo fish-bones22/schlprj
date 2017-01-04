@@ -29,6 +29,8 @@ C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\roslyn\V
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\CFMMCD.dll.config
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\CFMMCD.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\CFMMCD.pdb
+C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\ClosedXML.dll
+C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\DocumentFormat.OpenXml.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\EntityFramework.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\EntityFramework.SqlServer.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsoft.AI.Agent.Intercept.dll
@@ -47,6 +49,8 @@ C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.W
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Webpages.Deployment.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Webpages.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Webpages.Razor.dll
+C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\ClosedXML.pdb
+C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\ClosedXML.xml
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\EntityFramework.xml
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\EntityFramework.SqlServer.xml
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsoft.AI.DependencyCollector.xml

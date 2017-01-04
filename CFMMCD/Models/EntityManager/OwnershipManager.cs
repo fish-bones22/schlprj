@@ -36,9 +36,9 @@ namespace CFMMCD.Models.EntityManager
                 ospRow.OWNSHP = OSPViewModel.OWNSHP;
                 try
                 {
-                    if (db.OWNERSHIPs.Where(o => o.Id.Equals(OSPViewModel.Id)).Any())
+                    if (db.OWNERSHIPs.Where(o => o.Id.ToString().Equals(OSPViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.OWNERSHIPs.Single(o => o.Id.Equals(OSPViewModel.Id));
+                        var rowToRemove = db.OWNERSHIPs.Single(o => o.Id.ToString().Equals(OSPViewModel.Id));
                         db.OWNERSHIPs.Remove(rowToRemove);
                         db.OWNERSHIPs.Add(ospRow);
                     }
@@ -60,8 +60,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 OWNERSHIP ospRow;
 
-                if (db.OWNERSHIPs.Where(o => o.Id.Equals(OSPViewModel.Id)).Any())
-                    ospRow = db.OWNERSHIPs.Single(o => o.Id.Equals(OSPViewModel.Id));
+                if (db.OWNERSHIPs.Where(o => o.Id.ToString().Equals(OSPViewModel.Id)).Any())
+                    ospRow = db.OWNERSHIPs.Single(o => o.Id.ToString().Equals(OSPViewModel.Id));
                 else
                     return false;
                 try

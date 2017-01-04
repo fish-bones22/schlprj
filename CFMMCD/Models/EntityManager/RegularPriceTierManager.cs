@@ -35,9 +35,9 @@ namespace CFMMCD.Models.EntityManager
                 rptRow.Price_Tier = RPTViewModel.Price_Tier;
                 try
                 {
-                    if (db.Regular_Price_Tier.Where(o => o.Id.Equals(RPTViewModel.Id)).Any())
+                    if (db.Regular_Price_Tier.Where(o => o.Id.ToString().Equals(RPTViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.Regular_Price_Tier.Single(o => o.Id.Equals(RPTViewModel.Id));
+                        var rowToRemove = db.Regular_Price_Tier.Single(o => o.Id.ToString().Equals(RPTViewModel.Id));
                         db.Regular_Price_Tier.Remove(rowToRemove);
                         db.Regular_Price_Tier.Add(rptRow);
                     }
@@ -59,8 +59,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 Regular_Price_Tier rptRow;
 
-                if (db.Regular_Price_Tier.Where(o => o.Id.Equals(RPTViewModel.Id)).Any())
-                    rptRow = db.Regular_Price_Tier.Single(o => o.Id.Equals(RPTViewModel.Id));
+                if (db.Regular_Price_Tier.Where(o => o.Id.ToString().Equals(RPTViewModel.Id)).Any())
+                    rptRow = db.Regular_Price_Tier.Single(o => o.Id.ToString().Equals(RPTViewModel.Id));
                 else
                     return false;
                 try

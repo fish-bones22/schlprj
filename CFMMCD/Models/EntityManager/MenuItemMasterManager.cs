@@ -32,55 +32,59 @@ namespace CFMMCD.Models.EntityManager
                 {
                     MIMRowList = db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Contains(MIMViewModel.SearchItem)).ToList();
                 }
+                else if (MIMViewModel.SearchItem.ToUpper().Equals("ALL"))
+                {
+                    MIMRowList = db.CSHMIMP0.ToList();
+                }
                 else
                     return null;
 
                 foreach (var MIMRow in MIMRowList)
                 {
-                    // Check if 'Include inactive items' is checked
-                    if (MIMViewModel.InactiveItemsCb || MIMRow.MIMSTA.Equals("0"))
+                    MenuItemMasterViewModel vm = new MenuItemMasterViewModel();
+                    vm.MIMMIC = MIMRow.MIMMIC.ToString();
+                    vm.MIMSTA = MIMRow.MIMSTA.Trim();
+                    vm.MIMFGC = MIMRow.MIMFGC.Trim();
+                    vm.MIMNAM = MIMRow.MIMNAM.Trim();
+                    vm.MIMDSC = MIMRow.MIMDSC.Trim();
+                    vm.MIMDPC = MIMRow.MIMDPC.Trim();
+                    vm.MIMTCI = MIMRow.MIMTCI.Trim();
+                    vm.MIMPRI = MIMRow.MIMPRI.ToString();
+                    vm.MIMTCA = MIMRow.MIMTCA.Trim();
+                    vm.MIMPRO = MIMRow.MIMPRO.ToString();
+                    vm.MIMTCG = MIMRow.MIMTCG.Trim();
+                    vm.MIMPRG = MIMRow.MIMPRG.ToString();
+                    vm.MIMPND = Convert.ToDateTime(MIMRow.MIMPND).ToString("yyyy-MM-dd");
+                    vm.MIMWGR = MIMRow.MIMWGR.Trim();
+                    vm.MIMHPT = MIMRow.MIMHPT.Trim();
+                    vm.MIMEDT = Convert.ToDateTime(MIMRow.MIMEDT).ToString("yyyy-MM-dd");
+                    vm.MIMNPI = MIMRow.MIMNPI.ToString();
+                    vm.MIMNPO = MIMRow.MIMNPO.ToString();
+                    vm.MIMNPD = MIMRow.MIMNPD.ToString();
+                    vm.MIMNPA = MIMRow.MIMNPA.ToString();
+                    vm.MIMNNP = MIMRow.MIMNNP.ToString();
+                    vm.MIMNPT = MIMRow.MIMNPT.Trim();
+                    vm.MIMLON = MIMRow.MIMLON.Trim();
+                    vm.MIMUTC = MIMRow.MIMUTC.ToString();
+                    if (MIMRow.MIMSTA.Trim().Equals("1"))
+                        vm.InactiveItemsCb = true;
+                    else
+                        vm.InactiveItemsCb = false;
+                    vm.Location = "";
+                    vm.Store = "";
+
+
+                    if (MIMRow.MIMMIC_NP6 != null || MIMRow.MIMMIC_NP6.HasValue)
                     {
-                        MenuItemMasterViewModel vm = new MenuItemMasterViewModel();
-                        vm.MIMMIC = MIMRow.MIMMIC.ToString();
-                        vm.MIMSTA = MIMRow.MIMSTA.Trim();
-                        vm.MIMFGC = MIMRow.MIMFGC.Trim();
-                        vm.MIMNAM = MIMRow.MIMNAM.Trim();
-                        vm.MIMDSC = MIMRow.MIMDSC.Trim();
-                        vm.MIMDPC = MIMRow.MIMDPC.Trim();
-                        vm.MIMTCI = MIMRow.MIMTCI.Trim();
-                        vm.MIMPRI = MIMRow.MIMPRI.ToString();
-                        vm.MIMTCA = MIMRow.MIMTCA.Trim();
-                        vm.MIMPRO = MIMRow.MIMPRO.ToString();
-                        vm.MIMTCG = MIMRow.MIMTCG.Trim();
-                        vm.MIMPRG = MIMRow.MIMPRG.ToString();
-                        vm.MIMPND = Convert.ToDateTime(MIMRow.MIMPND).ToString("yyyy-MM-dd");
-                        vm.MIMWGR = MIMRow.MIMWGR.Trim();
-                        vm.MIMHPT = MIMRow.MIMHPT.Trim();
-                        vm.MIMEDT = Convert.ToDateTime(MIMRow.MIMEDT).ToString("yyyy-MM-dd");
-                        vm.MIMNPI = MIMRow.MIMNPI.ToString();
-                        vm.MIMNPO = MIMRow.MIMNPO.ToString();
-                        vm.MIMNPD = MIMRow.MIMNPD.ToString();
-                        vm.MIMNPA = MIMRow.MIMNPA.ToString();
-                        vm.MIMNNP = MIMRow.MIMNNP.ToString();
-                        vm.MIMNPT = MIMRow.MIMNPT.Trim();
-                        vm.MIMLON = MIMRow.MIMLON.Trim();
-                        vm.MIMUTC = MIMRow.MIMUTC.ToString();
-                        vm.Location = "";
-                        vm.Store = "";
-
-
-                        if (MIMRow.MIMMIC_NP6 != null || MIMRow.MIMMIC_NP6.HasValue)
-                        {
-                            vm.MIMMIC_NP6 = MIMRow.CSHMIMP0_NP6.MIMMIC.ToString();
-                            vm.MIMNAM_NP6 = MIMRow.CSHMIMP0_NP6.MIMNAM.Trim();
-                            vm.MIMLON_NP6 = MIMRow.CSHMIMP0_NP6.MIMLON.Trim();
-                        }
-                        // Initialize external table row values
-                        if (ItemCode.Equals(""))
-                            ItemCode = MIMRow.MIMMIC.ToString();
-                        vm = SearchPriceTier(vm);
-                        MIMList.Add(vm);
+                        vm.MIMMIC_NP6 = MIMRow.CSHMIMP0_NP6.MIMMIC.ToString();
+                        vm.MIMNAM_NP6 = MIMRow.CSHMIMP0_NP6.MIMNAM.Trim();
+                        vm.MIMLON_NP6 = MIMRow.CSHMIMP0_NP6.MIMLON.Trim();
                     }
+                    // Initialize external table row values
+                    if (ItemCode.Equals(""))
+                        ItemCode = MIMRow.MIMMIC.ToString();
+                    vm = SearchPriceTier(vm);
+                    MIMList.Add(vm);
                 }
                if (MIMList == null || MIMList.Count() == 0 )
                     return null;
@@ -174,27 +178,19 @@ namespace CFMMCD.Models.EntityManager
                     // If MIMMIC is already existing, update it instead of inserting a new row
                     if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
                     {
-                        var rowToUpdate = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
-                        System.Diagnostics.Debug.WriteLine("Passed: fetching existing table");
+                        var rowToUpdate = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));;
                         MIMRow.STATUS = "E";
-                        System.Diagnostics.Debug.WriteLine("Passed: assignment of STATUS");
                         if (rowToUpdate.CSHMIMP0_NP6 != null)
                             db.CSHMIMP0_NP6.Remove(rowToUpdate.CSHMIMP0_NP6);   // Delete existing row before inserting 
-                        System.Diagnostics.Debug.WriteLine("Passed: removal of np6");
                         db.CSHMIMP0.Remove(rowToUpdate);                        // updated replacement
-                        System.Diagnostics.Debug.WriteLine("Passed: removal of row");
                         db.CSHMIMP0.Add(MIMRow);
-                        System.Diagnostics.Debug.WriteLine("Passed: update of row");
                     }
                     else
                     {
                         db.CSHMIMP0.Add(MIMRow);
-                        System.Diagnostics.Debug.WriteLine("Passed:saving of row");
                     }
                     UpdatePriceTier(MIMViewModel);
-                    System.Diagnostics.Debug.WriteLine("Passed: Update of price tier");
                     db.SaveChanges();
-                    System.Diagnostics.Debug.WriteLine("Passed:saving of DB");
                     return true;
                 }
                 catch (Exception e)
@@ -203,18 +199,6 @@ namespace CFMMCD.Models.EntityManager
                     System.Diagnostics.Debug.WriteLine(e.Message);
                     System.Diagnostics.Debug.WriteLine(e.StackTrace);
                     System.Diagnostics.Debug.WriteLine(e.Data);
-                    foreach (var eve in ((DbEntityValidationException)e).EntityValidationErrors)
-                    {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
-                                ve.PropertyName,
-                                eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
-                                ve.ErrorMessage);
-                        }
-                    }
                     return false;
                 }
             }
@@ -345,19 +329,14 @@ namespace CFMMCD.Models.EntityManager
                     if(db.Tier_Lookup.Where( o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
                     {
                         Tier_Lookup RowToDelete = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
-                        System.Diagnostics.Debug.WriteLine("Passed: fetching existing row");
                         db.Tier_Lookup.Remove(RowToDelete);
-                        System.Diagnostics.Debug.WriteLine("Passed: removal of existing row");
                         db.Tier_Lookup.Add(tier);
-                        System.Diagnostics.Debug.WriteLine("Passed: update of existing row");
                     }
                     else
                     {
                         db.Tier_Lookup.Add(tier);
-                        System.Diagnostics.Debug.WriteLine("Passed: addition of new row");
                     }
                     db.SaveChanges();
-                    System.Diagnostics.Debug.WriteLine("Passed: DB saved changes");
                     return true;
                 }
                 catch ( Exception e )
@@ -367,24 +346,12 @@ namespace CFMMCD.Models.EntityManager
                     System.Diagnostics.Debug.WriteLine(e.StackTrace);
                     System.Diagnostics.Debug.WriteLine(e.InnerException);
                     System.Diagnostics.Debug.WriteLine(e.Data);
-                    foreach (var eve in ((DbEntityValidationException) e).EntityValidationErrors )
-                    {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
-                                ve.PropertyName,
-                                eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
-                                ve.ErrorMessage);
-                        }
-                    }
-                    throw;
+                    return false;
                 }
             }
         }
         /*
-         * IMPORTANT: Method used by Search Menu item. Not designed to be used by Menu Item Price Tier, 
+         * IMPORTANT: Method used by SearchMenuItem. Not designed to be used by Menu Item Price Tier, 
          * as it uses the same ViewModel of Menu Item Master.
          * */
         private MenuItemMasterViewModel SearchPriceTier(MenuItemMasterViewModel MIMViewModel)
@@ -479,12 +446,68 @@ namespace CFMMCD.Models.EntityManager
                 MIMViewModel.EDTM = ((DateTime)MIMRow.EDTM).ToString("yyyy-MM-dd");
                 MIMViewModel.EDTS = ((DateTime)MIMRow.EDTS).ToString("yyyy-MM-dd");
                 MIMViewModel.PNDS = ((DateTime)MIMRow.PNDS).ToString("yyyy-MM-dd");
+                MIMViewModel.EffectiveDate = MIMViewModel.PNDA;
                 if (MIMViewModel == null || MIMViewModel.MIMMIC == null)
                     return null;
                 return MIMViewModel;
 
             }
+        }
 
+        public bool UpdatePriceTier(List<MenuItemMasterViewModel> MIMViewModelList)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                foreach (var vm in MIMViewModelList)
+                {
+                    Tier_Lookup MIMRow, RowToDelete;
+                    if (db.Tier_Lookup.Where(o => o.MIMMIC.ToString().Equals(vm.MIMMIC)).Any())
+                    {
+                        // Produce two copies of the row:
+                        // RowToDelete is to reference the original preupdate row
+                        // MIMRow is to hold values to be updated retaining original unupdated values.
+                        MIMRow = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(vm.MIMMIC));
+                        RowToDelete = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(vm.MIMMIC));
+                    }
+                    else continue;
+                    if (!vm.OLDPRA.Equals(""))
+                        MIMRow.OLDPRA = vm.OLDPRA;
+                    if (!vm.NEWPRA.Equals(""))
+                        MIMRow.NEWPRA = vm.NEWPRA;
+                    if (!vm.OLDPRB.Equals(""))
+                        MIMRow.OLDPRB = vm.OLDPRB;
+                    if (!vm.NEWPRB.Equals(""))
+                        MIMRow.NEWPRB = vm.NEWPRB;
+                    if (!vm.OLDPRC.Equals(""))
+                        MIMRow.OLDPRC = vm.OLDPRC;
+                    if (!vm.NEWPRC.Equals(""))
+                        MIMRow.NEWPRC = vm.NEWPRC;
+                    if (!vm.EffectiveDate.Equals(""))
+                    {
+                        MIMRow.PNDA = DateTime.Parse(vm.EffectiveDate);
+                        MIMRow.PNDB = DateTime.Parse(vm.EffectiveDate);
+                        MIMRow.PNDC = DateTime.Parse(vm.EffectiveDate);
+                    }
+
+                    try
+                    {
+                        db.Tier_Lookup.Remove(RowToDelete);
+                        db.SaveChanges();
+                        db.Tier_Lookup.Add(MIMRow);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine(e.Source);
+                        System.Diagnostics.Debug.WriteLine(e.Message);
+                        System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                        System.Diagnostics.Debug.WriteLine(e.InnerException);
+                        System.Diagnostics.Debug.WriteLine(e.Data);
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
     }
 }

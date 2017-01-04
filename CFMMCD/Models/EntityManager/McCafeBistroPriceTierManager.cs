@@ -35,9 +35,9 @@ namespace CFMMCD.Models.EntityManager
                 mbtRow.Price_Tier = MBTViewModel.Price_Tier;
                 try
                 {
-                    if (db.McCafe_Bistro_Price_Tier.Where(o => o.Id.Equals(MBTViewModel.Id)).Any())
+                    if (db.McCafe_Bistro_Price_Tier.Where(o => o.Id.ToString().Equals(MBTViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.McCafe_Bistro_Price_Tier.Single(o => o.Id.Equals(MBTViewModel.Id));
+                        var rowToRemove = db.McCafe_Bistro_Price_Tier.Single(o => o.Id.ToString().Equals(MBTViewModel.Id));
                         db.McCafe_Bistro_Price_Tier.Remove(rowToRemove);
                         db.McCafe_Bistro_Price_Tier.Add(mbtRow);
                     }
@@ -59,8 +59,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 McCafe_Bistro_Price_Tier mbtRow;
 
-                if (db.McCafe_Bistro_Price_Tier.Where(o => o.Id.Equals(MBTViewModel.Id)).Any())
-                    mbtRow = db.McCafe_Bistro_Price_Tier.Single(o => o.Id.Equals(MBTViewModel.Id));
+                if (db.McCafe_Bistro_Price_Tier.Where(o => o.Id.ToString().Equals(MBTViewModel.Id)).Any())
+                    mbtRow = db.McCafe_Bistro_Price_Tier.Single(o => o.Id.ToString().Equals(MBTViewModel.Id));
                 else
                     return false;
                 try

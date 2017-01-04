@@ -49,34 +49,37 @@
     @using (Html.BeginForm("UpdateDelete", "VendorMaster", FormMethod.Post, new { }))
     {
         <div class="container-fluid">
+
+        </div>
+        <!--div class="container-fluid">
             <div class="col-lg-6">
                 <div class="col-lg-12">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.VEMVEN, "Vendor number", new {  @class = "form-label" } )
-                        @Html.TextBoxFor(m => m.VEMVEN, new { @class = "form-control input-sm", @Value = Model.VEMADE, @type = "number", @maxlength = "3" })
+                        Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMVEN, "Vendor number", new {  Model.MenuItemMasterList[i]class = "form-label" } )
+                        Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMVEN, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMADE, Model.MenuItemMasterList[i]type = "number", Model.MenuItemMasterList[i]maxlength = "3" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.VEMDS1, "Vendor description", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => m.VEMDS1, new { @class = "form-control input-sm", @Value = Model.VEMDS1, @maxlength = "20" })
+                        Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMDS1, "Vendor description", new { Model.MenuItemMasterList[i]class = "form-label" })
+                        Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMDS1, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMDS1, Model.MenuItemMasterList[i]maxlength = "20" })
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            @Html.LabelFor(m => m.VEMCCD, "Country code", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.VEMCCD, new { @class = "form-control input-sm", @Value = Model.VEMCCD, @maxlength = "3" })
+                            Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMCCD, "Country code", new { Model.MenuItemMasterList[i]class = "form-label" })
+                            Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMCCD, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMCCD, Model.MenuItemMasterList[i]maxlength = "3" })
                         </div>
                         <div class="col-lg-6">
-                            @Html.LabelFor(m => m.VEMZIP, "ZIP code", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.VEMZIP, new { @class = "form-control input-sm", @Value = Model.VEMZIP, @type = "number", @maxlength = "5" })
+                            Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMZIP, "ZIP code", new { Model.MenuItemMasterList[i]class = "form-label" })
+                            Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMZIP, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMZIP, Model.MenuItemMasterList[i]type = "number", Model.MenuItemMasterList[i]maxlength = "5" })
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            @Html.LabelFor(m => m.VEMCTY, "City", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.VEMCTY, new { @class = "form-control input-sm", @Value = Model.VEMCTY, @maxlength = "20" })
+                            Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMCTY, "City", new { Model.MenuItemMasterList[i]class = "form-label" })
+                            Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMCTY, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMCTY, Model.MenuItemMasterList[i]maxlength = "20" })
                         </div>
                         <div class="col-lg-6">
-                            @Html.LabelFor(m => m.VEMSTR, "Street", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.VEMSTR, new { @class = "form-control input-sm", @Value = Model.VEMSTR, @maxlength = "20" })
+                            Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMSTR, "Street", new { Model.MenuItemMasterList[i]class = "form-label" })
+                            Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMSTR, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMSTR, Model.MenuItemMasterList[i]maxlength = "20" })
                         </div>
                     </div>
                 </div>
@@ -85,57 +88,57 @@
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-6">
-                            @Html.LabelFor(m => m.VEMTEL, "Phone number", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.VEMTEL, new { @class = "form-control input-sm", @Value = Model.VEMTEL, @maxlength = "18" })
+                            Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMTEL, "Phone number", new { Model.MenuItemMasterList[i]class = "form-label" })
+                            Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMTEL, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMTEL, Model.MenuItemMasterList[i]maxlength = "18" })
                         </div>
                         <div class="col-lg-6">
-                            @Html.LabelFor(m => m.VEMSTN, "Short number", new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.VEMSTN, new { @class = "form-control input-sm", @Value = Model.VEMSTN, @maxlength = "5" })
+                            Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMSTN, "Short number", new { Model.MenuItemMasterList[i]class = "form-label" })
+                            Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMSTN, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMSTN, Model.MenuItemMasterList[i]maxlength = "5" })
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                @Html.LabelFor(m => m.VEMDAY, "Minimum stock buffer/Global reserve", new { @class = "form-label" })
-                                @Html.TextBoxFor(m => m.VEMDAY, new { @class = "form-control input-sm", @Value = Model.VEMDAY, @type = "number", @maxlength = "5" })
+                                Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMDAY, "Minimum stock buffer/Global reserve", new { Model.MenuItemMasterList[i]class = "form-label" })
+                                Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMDAY, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMDAY, Model.MenuItemMasterList[i]type = "number", Model.MenuItemMasterList[i]maxlength = "5" })
                             </div>
                             <div class="col-lg-6">
-                                @Html.LabelFor(m => m.VEMADE, "Auto-delivery", new { @class = "form-label" })
-                                @Html.TextBoxFor(m => m.VEMADE, new { @class = "form-control input-sm", @Value = Model.VEMADE, @maxlength = "1" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                @Html.LabelFor(m => m.VEMWSI, "WSI number", new { @class = "form-label" })
-                                @Html.TextBoxFor(m => m.VEMWSI, new { @class = "form-control input-sm", @Value = Model.VEMWSI, @type = "number", @maxlength = "5" })
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.LabelFor(m => m.VEMTID, "COM. number ID", new { @class = "form-label" })
-                                @Html.TextBoxFor(m => m.VEMTID, new { @class = "form-control input-sm", @Value = Model.VEMTID, @maxlength = "5" }) 
+                                Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMADE, "Auto-delivery", new { Model.MenuItemMasterList[i]class = "form-label" })
+                                Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMADE, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMADE, Model.MenuItemMasterList[i]maxlength = "1" })
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                @Html.LabelFor(m => m.VEMLOC, "Local vendor", new { @class = "form-label" })
-                                @Html.DropDownListFor(m => m.VEMLOC, new SelectList(
+                                Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMWSI, "WSI number", new { Model.MenuItemMasterList[i]class = "form-label" })
+                                Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMWSI, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMWSI, Model.MenuItemMasterList[i]type = "number", Model.MenuItemMasterList[i]maxlength = "5" })
+                            </div>
+                            <div class="col-lg-6">
+                                Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMTID, "COM. number ID", new { Model.MenuItemMasterList[i]class = "form-label" })
+                                Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMTID, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMTID, Model.MenuItemMasterList[i]maxlength = "5" }) 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMLOC, "Local vendor", new { Model.MenuItemMasterList[i]class = "form-label" })
+                                Model.MenuItemMasterList[i]Html.DropDownListFor(m => m.VEMLOC, new SelectList(
                                 new List<Object>{
                                     new { value = "0" , text = "0"  },
                                     new { value = "1" , text = "1" }
                                 }, "value", "text", "0"),
-                                new { @class = "form-control input-sm", @Value = Model.VEMLOC })
+                                new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMLOC })
                             </div>
                             <div class="col-lg-6">
-                                @Html.LabelFor(m => m.VEMDEL, "Central vendor", new { @class = "form-label" })
-                                @Html.TextBoxFor(m => m.VEMDEL, new { @class = "form-control input-sm", @Value = Model.VEMDEL, @maxlength = "5" })
+                                Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMDEL, "Central vendor", new { Model.MenuItemMasterList[i]class = "form-label" })
+                                Model.MenuItemMasterList[i]Html.TextBoxFor(m => m.VEMDEL, new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMDEL, Model.MenuItemMasterList[i]maxlength = "5" })
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                @Html.LabelFor(m => m.VEMSTA, "Status", new { @class = "form-label" })
-                                @Html.DropDownListFor(m => m.VEMSTA, new SelectList(
+                                Model.MenuItemMasterList[i]Html.LabelFor(m => m.VEMSTA, "Status", new { Model.MenuItemMasterList[i]class = "form-label" })
+                                Model.MenuItemMasterList[i]Html.DropDownListFor(m => m.VEMSTA, new SelectList(
                                 new List<Object>{
                                     new { value = "0" , text = "Active"  },
                                     new { value = "1" , text = "Inactive" }
                                 }, "value", "text", "0"),
-                                 new { @class = "form-control input-sm", @Value = Model.VEMSTA })
+                                 new { Model.MenuItemMasterList[i]class = "form-control input-sm", Model.MenuItemMasterList[i]Value = Model.VEMSTA })
                             </div>
                         </div>
                     </div>
@@ -145,7 +148,7 @@
                 <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
                 <button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
             </div>
-        </div>
+        </div-->
     }
 </div>
 

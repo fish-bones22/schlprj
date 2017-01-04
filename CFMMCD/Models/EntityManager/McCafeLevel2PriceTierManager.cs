@@ -35,9 +35,9 @@ namespace CFMMCD.Models.EntityManager
                 ml2Row.Price_Tier = ML2ViewModel.Price_Tier;
                 try
                 {
-                    if (db.McCafe_Level_2_Price_Tier.Where(o => o.Id.Equals(ML2ViewModel.Id)).Any())
+                    if (db.McCafe_Level_2_Price_Tier.Where(o => o.Id.ToString().Equals(ML2ViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.McCafe_Level_2_Price_Tier.Single(o => o.Id.Equals(ML2ViewModel.Id));
+                        var rowToRemove = db.McCafe_Level_2_Price_Tier.Single(o => o.Id.ToString().Equals(ML2ViewModel.Id));
                         db.McCafe_Level_2_Price_Tier.Remove(rowToRemove);
                         db.McCafe_Level_2_Price_Tier.Add(ml2Row);
                     }
@@ -59,8 +59,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 McCafe_Level_2_Price_Tier ml2Row;
 
-                if (db.McCafe_Level_2_Price_Tier.Where(o => o.Id.Equals(ML2ViewModel.Id)).Any())
-                    ml2Row = db.McCafe_Level_2_Price_Tier.Single(o => o.Id.Equals(ML2ViewModel.Id));
+                if (db.McCafe_Level_2_Price_Tier.Where(o => o.Id.ToString().Equals(ML2ViewModel.Id)).Any())
+                    ml2Row = db.McCafe_Level_2_Price_Tier.Single(o => o.Id.ToString().Equals(ML2ViewModel.Id));
                 else
                     return false;
                 try

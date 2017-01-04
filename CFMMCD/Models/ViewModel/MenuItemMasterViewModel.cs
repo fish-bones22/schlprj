@@ -13,6 +13,7 @@ namespace CFMMCD.Models.ViewModel
             TableDropDown tdd = new TableDropDown();
             LocationList = tdd.SetLocationDropDown();
             StoreList = tdd.SetStoreDropDown();
+            MenuItemMasterList = new List<MenuItemMasterViewModel>();
         }
 
         public string SearchItem { get; set; }
@@ -62,6 +63,7 @@ namespace CFMMCD.Models.ViewModel
 
         public List<MenuItemMasterViewModel> MenuItemMasterList { get; set; }
 
+        // Tier items
         public double OLDPRA { get; set; }
         public double NEWPRA { get; set; }
         public double OLDPAO { get; set; }
@@ -144,8 +146,9 @@ namespace CFMMCD.Models.ViewModel
         public string EDTS { get; set; }
         public string PNDS { get; set; }
 
+        public string EffectiveDate { get; set; }
+
         public List<GenericDropDownList> StoreList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
-
     }
 }

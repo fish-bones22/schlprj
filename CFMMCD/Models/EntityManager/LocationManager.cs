@@ -36,9 +36,9 @@ namespace CFMMCD.Models.EntityManager
                 lcnRow.LOCATN = LCNViewModel.LOCATN;
                 try
                 {
-                    if (db.LOCATIONs.Where(o => o.Id.Equals(LCNViewModel.Id)).Any())
+                    if (db.LOCATIONs.Where(o => o.Id.ToString().Equals(LCNViewModel.Id)).Any())
                     {
-                        var rowToRemove = db.LOCATIONs.Single(o => o.Id.Equals(LCNViewModel.Id));
+                        var rowToRemove = db.LOCATIONs.Single(o => o.Id.ToString().Equals(LCNViewModel.Id));
                         db.LOCATIONs.Remove(rowToRemove);
                         db.LOCATIONs.Add(lcnRow);
                     }
@@ -49,6 +49,10 @@ namespace CFMMCD.Models.EntityManager
                 }
                 catch (Exception e)
                 {
+                    System.Diagnostics.Debug.WriteLine(e.Source);
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                    System.Diagnostics.Debug.WriteLine(e.Data);
                     return false;
                 }
             }
@@ -60,8 +64,8 @@ namespace CFMMCD.Models.EntityManager
             {
                 LOCATION lcnRow;
 
-                if (db.LOCATIONs.Where(o => o.Id.Equals(LCNViewModel.Id)).Any())
-                    lcnRow = db.LOCATIONs.Single(o => o.Id.Equals(LCNViewModel.Id));
+                if (db.LOCATIONs.Where(o => o.Id.ToString().Equals(LCNViewModel.Id)).Any())
+                    lcnRow = db.LOCATIONs.Single(o => o.Id.ToString().Equals(LCNViewModel.Id));
                 else
                     return false;
                 try
@@ -72,6 +76,10 @@ namespace CFMMCD.Models.EntityManager
                 }
                 catch (Exception e)
                 {
+                    System.Diagnostics.Debug.WriteLine(e.Source);
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                    System.Diagnostics.Debug.WriteLine(e.Data);
                     return false;
                 }
             }
