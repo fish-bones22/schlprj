@@ -1,9 +1,13 @@
 ﻿using CFMMCD.Models.DB;
 using CFMMCD.Models.ViewModel;
+using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
+using System.IO;
 
 namespace CFMMCD.Models.EntityManager
 {
@@ -56,8 +60,8 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-                        // Username, Date and time, Page audited, Action made, Id of affected item, Name of affected item
-        public bool Audit(string UserName, DateTime Date_Time, string Page, string PageAction, string ItemId, string Name )
+        // Username, Date and time, Page audited, Action made, Id of affected item, Name of affected item
+        public bool Audit(string UserName, DateTime Date_Time, string Page, string PageAction, string ItemId, string Name)
         {
             AuditLogViewModel ALViewModel = new AuditLogViewModel
             {
@@ -70,6 +74,61 @@ namespace CFMMCD.Models.EntityManager
                 ItemId = ItemId
             };
             Audit(ALViewModel);
+            return true;
+        }
+        public bool ExportToExcel(AuditLogViewModel ALVM)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                //Creates a DataTable
+                DataTable dt = new DataTable();
+
+                //Adds the Columns to the DataTable based on the AuditLog
+                dt.Columns.Add("UserId", typeof(string));
+                dt.Columns.Add("Date", typeof(string));
+                dt.Columns.Add("Time", typeof(string));
+                dt.Columns.Add("Page", typeof(string));
+                dt.Columns.Add("Page_Action", typeof(string));
+                dt.Columns.Add("ID", typeof(string));
+                dt.Columns.Add("Name", typeof(string));
+
+                //Puts all the rows of the Audit Log Table
+                //
+                foreach (var vm in Audit_Log)
+                {
+                    var row = dt.NewRow();
+                    row["UserId"] = vm.UserId;
+                    row["Date"] = vm.Date;
+                    row["Time"] = vm.Time;
+                    row["Page"] = vm.Page;
+                    row["Page_Action"] = vm.Page_Action;
+                    row["ID"] = vm.Id;
+                    row["Name"] = vm.Name;
+                    dt.Rows.Add(row);
+                }
+
+                //Don't know how this works but I think this exports the DataTable to Spreadsheet in .xlsx format
+                using (XLWorkbook wb = new XLWorkbook())
+                {
+                    wb.Worksheets.Add(dt);
+                    wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    wb.Style.Font.Bold = true;
+
+                    HttpContext.Current.Response.Clear();
+                    HttpContext.Current.Response.Buffer = true;
+                    HttpContext.Current.Response.Charset = "";
+                    HttpContext.Current.Response.ContentType = "application/vnd.openxmlformats-officedocuments.spreadsheetml.sheet";
+                    HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename= AuditLog.xlsx");
+
+                    using (MemoryStream MyMemoryStream = new MemoryStream())
+                    {
+                        wb.SaveAs(MyMemoryStream);
+                        MyMemoryStream.WriteTo(HttpContext.Current.Response.OutputStream);
+                        HttpContext.Current.Response.Flush();
+                        HttpContext.Current.Response.End();
+                    }
+                }
+            }
             return true;
         }
     }
