@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c73a0b347ce49a9b17152b45363f091" Name="Diagram1">
+      <Diagram DiagramId="5c73a0b347ce49a9b17152b45363f091" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.Breakfast_Price_Tier" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="CFMMCDModel.Dessert_Price_Tier" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.INVRIRP0" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVVEMP0" Width="1.5" PointX="11.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.LOCATION" Width="1.5" PointX="5.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.McCafe_Bistro_Price_Tier" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_2_Price_Tier" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
@@ -32,6 +31,7 @@
         <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CFMMCDModel.Tier_Lookup" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="true" />
         <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVVEMP0" Width="1.5" PointX="11.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -219,31 +219,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="INVVEMP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.INVVEMP0">
-        <MappingFragment StoreEntitySet="INVVEMP0">
-          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
-          <ScalarProperty Name="VEMWSI" ColumnName="VEMWSI" />
-          <ScalarProperty Name="VEMDS1" ColumnName="VEMDS1" />
-          <ScalarProperty Name="VEMDS2" ColumnName="VEMDS2" />
-          <ScalarProperty Name="VEMCCD" ColumnName="VEMCCD" />
-          <ScalarProperty Name="VEMZIP" ColumnName="VEMZIP" />
-          <ScalarProperty Name="VEMCTY" ColumnName="VEMCTY" />
-          <ScalarProperty Name="VEMSTR" ColumnName="VEMSTR" />
-          <ScalarProperty Name="VEMTEL" ColumnName="VEMTEL" />
-          <ScalarProperty Name="VEMSTN" ColumnName="VEMSTN" />
-          <ScalarProperty Name="VEMLOC" ColumnName="VEMLOC" />
-          <ScalarProperty Name="VEMDAY" ColumnName="VEMDAY" />
-          <ScalarProperty Name="VEMTID" ColumnName="VEMTID" />
-          <ScalarProperty Name="VEMSTA" ColumnName="VEMSTA" />
-          <ScalarProperty Name="VEMDAT" ColumnName="VEMDAT" />
-          <ScalarProperty Name="VEMUSR" ColumnName="VEMUSR" />
-          <ScalarProperty Name="VEMADE" ColumnName="VEMADE" />
-          <ScalarProperty Name="VEMDEL" ColumnName="VEMDEL" />
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="LOCATIONs">
       <EntityTypeMapping TypeName="CFMMCDModel.LOCATION">
         <MappingFragment StoreEntitySet="LOCATION">
@@ -466,6 +441,36 @@
           <ScalarProperty Name="PNDM" ColumnName="PNDM" />
           <ScalarProperty Name="EDTS" ColumnName="EDTS" />
           <ScalarProperty Name="PNDS" ColumnName="PNDS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVVEMP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.INVVEMP0">
+        <MappingFragment StoreEntitySet="INVVEMP0">
+          <ScalarProperty Name="Except_Store" ColumnName="Except_Store" />
+          <ScalarProperty Name="Store" ColumnName="Store" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VEMDEL" ColumnName="VEMDEL" />
+          <ScalarProperty Name="VEMADE" ColumnName="VEMADE" />
+          <ScalarProperty Name="VEMUSR" ColumnName="VEMUSR" />
+          <ScalarProperty Name="VEMDAT" ColumnName="VEMDAT" />
+          <ScalarProperty Name="VEMSTA" ColumnName="VEMSTA" />
+          <ScalarProperty Name="VEMTID" ColumnName="VEMTID" />
+          <ScalarProperty Name="VEMDAY" ColumnName="VEMDAY" />
+          <ScalarProperty Name="VEMLOC" ColumnName="VEMLOC" />
+          <ScalarProperty Name="VEMSTN" ColumnName="VEMSTN" />
+          <ScalarProperty Name="VEMTEL" ColumnName="VEMTEL" />
+          <ScalarProperty Name="VEMSTR" ColumnName="VEMSTR" />
+          <ScalarProperty Name="VEMCTY" ColumnName="VEMCTY" />
+          <ScalarProperty Name="VEMZIP" ColumnName="VEMZIP" />
+          <ScalarProperty Name="VEMCCD" ColumnName="VEMCCD" />
+          <ScalarProperty Name="VEMDS2" ColumnName="VEMDS2" />
+          <ScalarProperty Name="VEMDS1" ColumnName="VEMDS1" />
+          <ScalarProperty Name="VEMWSI" ColumnName="VEMWSI" />
+          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

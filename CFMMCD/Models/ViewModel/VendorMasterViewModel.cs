@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CFMMCD.DropDown;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,13 @@ namespace CFMMCD.Models.ViewModel
 {
     public class VendorMasterViewModel
     {
+        public VendorMasterViewModel()
+        {
+            TableDropDown tdd = new TableDropDown();
+            LocationList = tdd.SetLocationDropDown();
+            StoreList = tdd.SetStoreDropDown();
+            VendorMasterList = new List<VendorMasterViewModel>();
+        }
         public string SearchItem { get; set; }
         public bool InactiveItemsCb { get; set; }
         public string VEMVEN { get; set; }
@@ -28,6 +36,15 @@ namespace CFMMCD.Models.ViewModel
         public string VEMADE { get; set; }
         public string VEMDEL { get; set; }
 
+        public string Region { get; set; }
+        public string Province { get; set; }
+        public string City { get; set; }
+        public string Store { get; set; }
+        public bool SelectAllCb { get; set; }
+        public bool SelectExceptCb { get; set; }
+
+        public List<GenericDropDownList> StoreList { get; set; }
+        public List<GenericDropDownList> LocationList { get; set; }
         public List<VendorMasterViewModel> VendorMasterList { get; set; }
     }
 }

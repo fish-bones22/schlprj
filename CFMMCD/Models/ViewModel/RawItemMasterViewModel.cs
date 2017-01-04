@@ -15,6 +15,7 @@ namespace CFMMCD.Models.ViewModel
             TableDropDown tdd = new TableDropDown();
             PrimaryVendorList = tdd.SetPrimaryVendorList();
             StoreList = tdd.SetStoreDropDown();
+            LocationList = tdd.SetLocationDropDown();
             VendorList = tdd.SetVendorList();
             VendorsSelectedList = new List<bool>(VendorList.Count());
             VendorCPR = new List<string>(VendorList.Count());
@@ -81,6 +82,7 @@ namespace CFMMCD.Models.ViewModel
         public string MCCORMICK_OR_GSF { get; set; }
         public List<GenericDropDownList> PrimaryVendorList { get; set; }
         public List<GenericDropDownList> StoreList { get; set; }
+        public List<GenericDropDownList> LocationList { get; set; }
         public string SearchVendor { get; set; }
         public List<RawItemMasterViewModel> RawItemMasterList { get; set; }
         public List<bool> VendorsSelectedList { get; set; }

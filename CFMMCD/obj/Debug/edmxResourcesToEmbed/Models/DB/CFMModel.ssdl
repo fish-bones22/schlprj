@@ -230,6 +230,11 @@
     <Property Name="VEMADE" Type="nchar" MaxLength="1" />
     <Property Name="VEMDEL" Type="nchar" MaxLength="1" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
+    <Property Name="Region" Type="nvarchar" MaxLength="20" />
+    <Property Name="Province" Type="nvarchar" MaxLength="20" />
+    <Property Name="City" Type="nvarchar" MaxLength="20" />
+    <Property Name="Store" Type="nvarchar" MaxLength="20" />
+    <Property Name="Except_Store" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="LOCATION">
     <Key>

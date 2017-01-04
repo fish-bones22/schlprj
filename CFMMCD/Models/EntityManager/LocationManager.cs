@@ -52,6 +52,15 @@ namespace CFMMCD.Models.EntityManager
                     System.Diagnostics.Debug.WriteLine(e.Source);
                     System.Diagnostics.Debug.WriteLine(e.Message);
                     System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                    System.Diagnostics.Debug.WriteLine(e.InnerException);
+                    Exception f = e.InnerException;
+                    while (f != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("INNER:");
+                        System.Diagnostics.Debug.WriteLine(f.Message);
+                        System.Diagnostics.Debug.WriteLine(f.Source);
+                        f = f.InnerException;
+                    }
                     System.Diagnostics.Debug.WriteLine(e.Data);
                     return false;
                 }
@@ -79,6 +88,15 @@ namespace CFMMCD.Models.EntityManager
                     System.Diagnostics.Debug.WriteLine(e.Source);
                     System.Diagnostics.Debug.WriteLine(e.Message);
                     System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                    System.Diagnostics.Debug.WriteLine(e.InnerException);
+                    Exception f = e.InnerException;
+                    while (f != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("INNER:");
+                        System.Diagnostics.Debug.WriteLine(f.Message);
+                        System.Diagnostics.Debug.WriteLine(f.Source);
+                        f = f.InnerException;
+                    }
                     System.Diagnostics.Debug.WriteLine(e.Data);
                     return false;
                 }

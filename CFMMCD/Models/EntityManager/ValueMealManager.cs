@@ -114,19 +114,16 @@ namespace CFMMCD.Models.EntityManager
                         System.Diagnostics.Debug.WriteLine(e.Source);
                         System.Diagnostics.Debug.WriteLine(e.Message);
                         System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                        System.Diagnostics.Debug.WriteLine(e.Data);
-                        foreach (var eve in ((DbEntityValidationException)e).EntityValidationErrors)
+                        System.Diagnostics.Debug.WriteLine(e.InnerException);
+                        Exception f = e.InnerException;
+                        while (f != null)
                         {
-                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
-                                    ve.PropertyName,
-                                    eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
-                                    ve.ErrorMessage);
-                            }
+                            System.Diagnostics.Debug.WriteLine("INNER:");
+                            System.Diagnostics.Debug.WriteLine(f.Message);
+                            System.Diagnostics.Debug.WriteLine(f.Source);
+                            f = f.InnerException;
                         }
+                        System.Diagnostics.Debug.WriteLine(e.Data);
                         return false;
                     }
                 }
@@ -163,19 +160,16 @@ namespace CFMMCD.Models.EntityManager
                             System.Diagnostics.Debug.WriteLine(e.Source);
                             System.Diagnostics.Debug.WriteLine(e.Message);
                             System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                            System.Diagnostics.Debug.WriteLine(e.Data);
-                            foreach (var eve in ((DbEntityValidationException)e).EntityValidationErrors)
+                            System.Diagnostics.Debug.WriteLine(e.InnerException);
+                            Exception f = e.InnerException;
+                            while (f != null)
                             {
-                                Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                    eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                                foreach (var ve in eve.ValidationErrors)
-                                {
-                                    Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
-                                        ve.PropertyName,
-                                        eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
-                                        ve.ErrorMessage);
-                                }
+                                System.Diagnostics.Debug.WriteLine("INNER:");
+                                System.Diagnostics.Debug.WriteLine(f.Message);
+                                System.Diagnostics.Debug.WriteLine(f.Source);
+                                f = f.InnerException;
                             }
+                            System.Diagnostics.Debug.WriteLine(e.Data);
                             return false;
                         }
                     }
