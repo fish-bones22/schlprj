@@ -13,7 +13,18 @@ namespace CFMMCD.Models.EntityManager
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                INVRIMP0 RIMRow = new INVRIMP0();
+                INVRIMP0 RIMRow;
+                bool isUpdating;
+                if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC)).Any())
+                {
+                    RIMRow = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC));
+                    isUpdating = true;
+                }
+                else
+                {
+                    RIMRow = new INVRIMP0();
+                    isUpdating = false;
+                }
                 RIMRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
                 RIMRow.RIMRID = RIMViewModel.RIMRID.Trim();
                 RIMRow.RIMRIG = RIMViewModel.RIMRIG.Trim();
@@ -40,27 +51,29 @@ namespace CFMMCD.Models.EntityManager
                 RIMRow.RIMADE = RIMViewModel.RIMADE.Trim();
                 RIMRow.RIMBAR = RIMViewModel.RIMBAR.Trim();
                 // Non-field Row with default values
-
-                RIMRow.RIMCPR = 0;
-                RIMRow.RIMCPN = 0;
-                RIMRow.RIMPDT = null;
-                RIMRow.RIMVPC = 0;
-                RIMRow.RIMTEM = "0";
-                RIMRow.RIMPGR = "";
-                RIMRow.RIMSVN = 0;
-                RIMRow.RIMSDP = null;
-                RIMRow.RIMUS1 = null; // System generated
-                RIMRow.RIMUS2 = null; // System generated
-                RIMRow.RIMUS3 = null; // System generated
-                RIMRow.RIMUS4 = null; // System generated
-                RIMRow.RIMUS5 = null; // System generated
-                RIMRow.RIMUSX = 0.0000;
-                RIMRow.RIMLP1 = null;
-                RIMRow.RIMLP2 = null;
                 RIMRow.RIMUSR = user.Substring(0, 3).ToUpper();
                 RIMRow.RIMDAT = DateTime.Now;
-                RIMRow.RIMFLG = false;
-                RIMRow.RIMLIN = null; // Report line
+                if (!isUpdating)
+                {
+                    RIMRow.RIMCPR = 0;
+                    RIMRow.RIMCPN = 0;
+                    RIMRow.RIMPDT = null;
+                    RIMRow.RIMVPC = 0;
+                    RIMRow.RIMTEM = "0";
+                    RIMRow.RIMPGR = "";
+                    RIMRow.RIMSVN = 0;
+                    RIMRow.RIMSDP = null;
+                    RIMRow.RIMUS1 = null; // System generated
+                    RIMRow.RIMUS2 = null; // System generated
+                    RIMRow.RIMUS3 = null; // System generated
+                    RIMRow.RIMUS4 = null; // System generated
+                    RIMRow.RIMUS5 = null; // System generated
+                    RIMRow.RIMUSX = 0.0000;
+                    RIMRow.RIMLP1 = null;
+                    RIMRow.RIMLP2 = null;
+                    RIMRow.RIMFLG = false;
+                    RIMRow.RIMLIN = null; // Report line
+                }
 
                 // Raw Item and Vendor
                 int i = 0;
@@ -69,7 +82,12 @@ namespace CFMMCD.Models.EntityManager
                     if (RIMViewModel.VendorsSelectedList[i])
                     {
                         RIM_VEM_Lookup RVLRow = new RIM_VEM_Lookup();
+                        if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RIMViewModel.RIMRIC + vendor.value)).Any())
+                            RVLRow = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(RIMViewModel.RIMRIC + vendor.value));
+                        else
+                            RVLRow = new RIM_VEM_Lookup();
                         RVLRow.RIM_VEM_ID = RIMViewModel.RIMRIC + vendor.value;
+                        RVLRow.RIMRID = RIMViewModel.RIMRID;
                         RVLRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
                         RVLRow.VEMVEN = int.Parse(vendor.value);
                         RVLRow.VEMDS1 = vendor.text;
@@ -77,15 +95,7 @@ namespace CFMMCD.Models.EntityManager
                         RVLRow.PPERUN = double.Parse(RIMViewModel.VendorPUN[i]);
                         RVLRow.SCMCOD = double.Parse(RIMViewModel.VendorSCM[i]);
                         // Perform update
-                        if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Trim().Equals(RVLRow.RIM_VEM_ID.Trim())).Any())
-                        {
-                            RIM_VEM_Lookup rowToDelete = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Trim().Equals(RVLRow.RIM_VEM_ID.Trim()));
-                            RVLRow.RIMCPN = rowToDelete.RIMCPN;
-                            RVLRow.RIMPDT = rowToDelete.RIMPDT;
-                            db.RIM_VEM_Lookup.Remove(rowToDelete);
-                            db.RIM_VEM_Lookup.Add(RVLRow);
-                        }
-                        else
+                        if (!db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Trim().Equals(RVLRow.RIM_VEM_ID.Trim())).Any())
                             db.RIM_VEM_Lookup.Add(RVLRow);
                     }
                     i++;
@@ -94,12 +104,9 @@ namespace CFMMCD.Models.EntityManager
                 try
                 {
                     // If RIMRIC exists in the Table, perform an update
-                    if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC)).Any())
+                    if (isUpdating)
                     {
-                        INVRIMP0 rowToRemove = db.INVRIMP0.SingleOrDefault(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC));
                         RIMRow.STATUS = "E";
-                        db.INVRIMP0.Remove(rowToRemove);
-                        db.INVRIMP0.Add(RIMRow);
                     }
                     else
                     {

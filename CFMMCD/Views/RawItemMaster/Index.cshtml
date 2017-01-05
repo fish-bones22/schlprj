@@ -355,7 +355,8 @@
 													</td>
 													<td>
                                                         @Html.LabelFor(m => m.VendorsSelectedList[i], Model.VendorList[i].text, new { @class = "form-label" })
-                                                        @Html.HiddenFor(m => Model.VendorList[i].value, new { @Value = Model.VendorList[i].value })
+                                                        @Html.HiddenFor(m => Model.VendorList[i].value )
+                                                        @Html.HiddenFor(m => Model.VendorList[i].text )
 													</td>
 													<td>
 														@Html.TextBoxFor(m => Model.VendorCPR[i], new { @class = "form-control input-sm", @Value = Model.VendorCPR.ElementAt(i) })

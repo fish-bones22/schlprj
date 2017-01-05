@@ -59,6 +59,12 @@ label {
     position:relative;
     bottom: 10px;
 }
+.md-element {
+    margin-left:auto;
+    margin-right:auto;
+    max-width:650px;
+    position:relative;
+}
 .right-fixed {
     position: relative;
     right: 10px;
@@ -190,6 +196,9 @@ li {
  .list-group-item a:active{
      border:none;
  }
+  .list-group-item a:focus{
+    outline: 0 none -webkit-focus-ring-color;
+ }
 .start {
     left:0;
     width: 100%;
@@ -202,14 +211,15 @@ li {
 .scrollable-button{
     padding-left:0;
     position:fixed;
-    max-height:300px;
     left:0;
-    width: 300px;
+    width: 500px;
 }
 .scrollable-button .panel {
-    overflow:auto;
-    position:relative;
-    max-height:500px;
+    max-height:80%;
+    overflow-x:hidden;
+    overflow-y:visible;
+    position:fixed;
+    margin-bottom:20px;
 }
 .popover {
     max-height: 20%;
@@ -226,6 +236,7 @@ li {
 .tr-element:hover {
     cursor:pointer;
 }
+
 @media (min-width: 1200px) {
   .label-container-left {
     text-align: right;

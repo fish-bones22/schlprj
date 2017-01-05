@@ -38,9 +38,9 @@ namespace CFMMCD.Models.EntityManager
                 RVLRow.VEMVEN = int.Parse(RIPViewModel.VEMVEN);
                 RVLRow.VEMDS1 = RIPViewModel.VEMDS1.Trim();
                 RVLRow.RIMCPR = double.Parse(RIPViewModel.RIMCPR);
-                RVLRow.RIMRID = RIPViewModel.RIMRID;
-                RVLRow.RIMPDT = DateTime.Parse(RIPViewModel.RIMPDT);
-                RVLRow.RIMCPN = double.Parse(RIPViewModel.RIMCPN);
+                RVLRow.RIMRID = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(RIPViewModel.RIMRIC)).RIMRID;
+                //RVLRow.RIMPDT = DateTime.Parse(RIPViewModel.RIMPDT);
+                //RVLRow.RIMCPN = double.Parse(RIPViewModel.RIMCPN);
 
                 try
                 {
@@ -123,11 +123,20 @@ namespace CFMMCD.Models.EntityManager
                 {
                     RawItemPriceUpdateViewModel vm = new RawItemPriceUpdateViewModel();
                     vm.RIM_VEM_ID = rim.RIM_VEM_ID;
-                    vm.RIMRIC = rim.RIMRIC.ToString();
-                    vm.VEMVEN = rim.VEMVEN.ToString();
-                    vm.VEMDS1 = rim.VEMDS1.Trim();
-                    vm.RIMCPR = rim.RIMCPR.ToString();
-                    vm.RIMRID = rim.RIMRID.ToString();
+                    if (rim.RIMRIC != null)
+                        vm.RIMRIC = rim.RIMRIC.ToString();
+                    if (rim.VEMVEN != null)
+                        vm.VEMVEN = rim.VEMVEN.ToString();
+                    if (rim.VEMDS1 != null)
+                        vm.VEMDS1 = rim.VEMDS1.Trim();
+                    if (rim.RIMCPR != null)
+                        vm.RIMCPR = rim.RIMCPR.ToString();
+                    if (rim.RIMRID != null)
+                        vm.RIMRID = rim.RIMRID.ToString();
+                    string Status = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(rim.RIMRIC.ToString())).RIMSTA;
+                    if (Status != null && Status.Equals("0"))
+                        vm.RIMSTA = true;
+
                     RIPList.Add(vm);
                 }
                 if (RIPList == null || RIPList.ElementAt(0) == null)

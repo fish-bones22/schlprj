@@ -7,6 +7,10 @@ namespace CFMMCD.Models.ViewModel
 {
     public class RawItemPriceUpdateViewModel
     {
+        public RawItemPriceUpdateViewModel()
+        {
+            RawItemPriceMasterList = new List<RawItemPriceUpdateViewModel>();
+        }
         public string SearchItem { get; set; }
         public string RIM_VEM_ID { get; set; }
         public string RIMRIC { get; set; }
@@ -16,6 +20,7 @@ namespace CFMMCD.Models.ViewModel
         public string RIMCPR { get; set; }
         public string RIMCPN { get; set; }
         public string RIMPDT { get; set; }
+        public bool RIMSTA { get; set; }
 
         public List<RawItemPriceUpdateViewModel> RawItemPriceMasterList { get; set; }
     }

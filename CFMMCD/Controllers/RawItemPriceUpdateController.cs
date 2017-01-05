@@ -55,13 +55,13 @@ namespace CFMMCD.Controllers
             bool result = false;
             if (command == "Save")
             {
-                result = RIPManager.UpdateRawItemPrice( RIPViewModel );
+                result = RIPManager.UpdateRawItemPrice( RIPViewModel.RawItemPriceMasterList );
                 PageAction = "Update price";
             }
-            else if (command == "Delete")
+            else if (command == "Import")
             {
-                result = RIPManager.DeleteRawItemPrice(RIPViewModel);
-                PageAction = "Delete price";
+                result = true;
+                PageAction = "(NO ACTION) Import price";
             }
             if (result)
             {

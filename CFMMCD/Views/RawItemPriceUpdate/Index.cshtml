@@ -10,6 +10,7 @@
     }
 }
 <h2 align="center">@ViewBag.Title</h2>
+<hr />
 <!--Alerts-->
 <div class="container">
     @if (TempData["ErrorMessage"] != null)
@@ -21,23 +22,15 @@
         <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
     }
 </div>
-<div class="form-horizontal" style="top:100px;position:relative;">
-    <div class="container-fluid">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="col-lg-4 text-right">
-                <label class="form-label" for="menu-item">Raw item name / number</label>
-            </div>
-            <div class="col-lg-5">
-                <input type="search" class="form-control" id="SearchItemFrontEnd" />
-            </div>
-        }
+<div class="form-horizontal">
+    <div class="container-fluid md-element">
+        <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search raw item" />
     </div>
-    <div class="container-fluid" style="padding-top:100px">
-        @using (Html.BeginForm("DisplaySearchResult", "RawItemPriceUpdate", FormMethod.Post, new { }))
+    <hr />
+    <div class="container-fluid">
+        @using (Html.BeginForm("UpdateDelete", "RawItemPriceUpdate", FormMethod.Post, new { }))
         {
-            <table class="table table-responsive table-hover">
+            <table class="table table-responsive table-hover md-element">
                 <thead>
                     <tr>
                         <th></th>
@@ -51,63 +44,78 @@
                     @{
                         for (int i = 0; i < Model.RawItemPriceMasterList.Count(); i++)
                         {
-                            var mod = Model.RawItemPriceMasterList[i];
-                            <tr class="@mod.RIMRIC @mod.RIMRID tr-collapse">
-                                @Html.HiddenFor(m => mod.RIM_VEM_ID)
+                            string ActiveInactive = "active";
+                            if (!Model.RawItemPriceMasterList[i].RIMSTA)
+                            {
+                                ActiveInactive = "inactive";
+                            }
+                            <tr class="@Model.RawItemPriceMasterList[i].RIMRIC @Model.RawItemPriceMasterList[i].RIMRID @ActiveInactive tr-collapse">
+                                @Html.HiddenFor(m => Model.RawItemPriceMasterList[i].RIM_VEM_ID)
+                                @Html.HiddenFor(m => Model.RawItemPriceMasterList[i].VEMVEN)
                                 <td></td>
-                                <td>@Html.DisplayFor(m => mod.RIMRIC, new { @class = "form-label" })</td>
-                                <td>@Html.DisplayFor(m => mod.RIMRID, new { @class = "form-label" })</td>
-                                <td>@Html.TextBoxFor(m => mod.RIMCPR, new { @class = "form-control input-sm" })</td>
-                                <td>@Html.TextBoxFor(m => mod.VEMDS1, new { @class = "form-control input-sm" })</td>
+                                <td>
+                                    @Html.DisplayFor(m => Model.RawItemPriceMasterList[i].RIMRIC, new { @class = "form-label" })
+                                    @Html.HiddenFor(m => Model.RawItemPriceMasterList[i].RIMRIC)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => Model.RawItemPriceMasterList[i].RIMRID, new { @class = "form-label" })
+                                    @Html.HiddenFor(m => Model.RawItemPriceMasterList[i].RIMRID)
+                                </td>
+                                <td>@Html.TextBoxFor(m => Model.RawItemPriceMasterList[i].RIMCPR, new { @class = "form-control input-sm", @type = "number" })</td>
+                                <td>
+                                    @Html.DisplayFor(m => Model.RawItemPriceMasterList[i].VEMDS1, new { @class = "form-control" })
+                                    @Html.HiddenFor(m => Model.RawItemPriceMasterList[i].VEMDS1)
+                                </td>
                             </tr>
                         }
                     }
                 </tbody>
             </table>
 
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="form-inline bottom float" style="right:50px">
+                <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
+                <button type="submit" name="command" value="Import" class="btn btn-default">Import</button>
+            </div>
+
+            <!--div class="col-lg-8 col-lg-offset-2">
                 <div class="col-lg-3">
-                    @Html.HiddenFor(m => m.RIM_VEM_ID, new { @Value = Model.RIM_VEM_ID })
+                    #Html.HiddenFor(m => m.RIM_VEM_ID, new { #Value = Model.RIM_VEM_ID })
                     <div class="form-group">
                         <label class="form-label">Raw item number</label>
-                        <p class="label-info">@Model.RIMRIC</p>
-                        @Html.HiddenFor(m => m.RIMRIC, new { @Value = Model.RIMRIC })
+                        <p class="label-info">#Model.RIMRIC</p>
+                        #Html.HiddenFor(m => m.RIMRIC, new { #Value = Model.RIMRIC })
                     </div>
                     <div class="form-group">
                         <label class="form-label">Raw item name</label>
-                        <p class="label-info">@Model.RIMRID</p>
-                        @Html.HiddenFor(m => m.RIMRID, new { @Value = Model.RIMRID })
+                        <p class="label-info">#Model.RIMRID</p>
+                        #Html.HiddenFor(m => m.RIMRID, new { #Value = Model.RIMRID })
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label class="form-label">Price per CS</label>
-                        <p class="label-info">@Model.RIMCPR</p>
-                        @Html.HiddenFor(m => m.RIMCPR, new { @Value = Model.RIMCPR })
+                        <p class="label-info">#Model.RIMCPR</p>
+                        #Html.HiddenFor(m => m.RIMCPR, new { #Value = Model.RIMCPR })
                     </div>
                     <div class="form-group">
                         <label class="form-label">Vendor name</label>
-                        <p class="label-info">@Model.VEMDS1</p>
-                        @Html.HiddenFor(m => m.VEMDS1, new { @Value = Model.VEMDS1 })
-                        @Html.HiddenFor(m => m.VEMVEN, new { @Value = Model.VEMVEN })
+                        <p class="label-info">#Model.VEMDS1</p>
+                        #Html.HiddenFor(m => m.VEMDS1, new { #Value = Model.VEMDS1 })
+                        #Html.HiddenFor(m => m.VEMVEN, new { #Value = Model.VEMVEN })
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.RIMCPN, "New price per CS", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => m.RIMCPN, new { @class = "form-control", @Value = Model.RIMCPN, @type = "number", @maxlength = "15" })
+                        #Html.LabelFor(m => m.RIMCPN, "New price per CS", new { #class = "form-label" })
+                        #Html.TextBoxFor(m => m.RIMCPN, new { #class = "form-control", #Value = Model.RIMCPN, #type = "number", #maxlength = "15" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.RIMPDT, "New date", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => m.RIMPDT, new { @class = "form-control", @Value = Model.RIMPDT, @type = "date" })
+                        #Html.LabelFor(m => m.RIMPDT, "New date", new { #class = "form-label" })
+                        #Html.TextBoxFor(m => m.RIMPDT, new { #class = "form-control", #Value = Model.RIMPDT, #type = "date" })
                     </div>
                 </div>
-            </div> 
+            </div--> 
         }
-        <div class="form-inline bottom float" style="right:50px">
-            <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
-            <button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
-        </div>
     </div>
 </div>
 

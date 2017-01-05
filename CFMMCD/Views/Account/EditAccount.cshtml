@@ -10,8 +10,9 @@
     }
 }
 
+<h1 align="center">@ViewBag.Title</h1>
+<hr />
 <div class="center-sm">
-    <div class="header"><h1>@ViewBag.Title</h1></div>
     <!--Alerts-->
     <div class="container">
         @if (TempData["ErrorMessage"] != null)
@@ -27,17 +28,12 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <div class="container-fluid">
-                <div class="col-lg-2 label-container-left">
-                    <label class="form-label" for="menu-item">Username</label>
-                </div>
-                <div class="col-lg-7">
-                    @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-lg-1">
-                    <button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
-                </div>
+            <div class="col-lg-9">
+                @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control", @placeholder = "Search Username" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3">
+                <button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
             </div>
         }
     </div>
@@ -47,7 +43,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor( m => Model.OldUsername ) // 
         @Html.HiddenFor( m => Model.EditMode, new { @Value = false })
-        @Html.HiddenFor( m => Model.UserAcces )
+        @Html.HiddenFor( m => Model.UserAccess )
         <div class="form-group">
             @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Username" })
             @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
