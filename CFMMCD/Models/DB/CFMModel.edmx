@@ -126,7 +126,7 @@
           <Key>
             <PropertyRef Name="PMGGID" />
           </Key>
-          <Property Name="PMGGID" Type="int" Nullable="false" />
+          <Property Name="PMGGID" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="PMGGRP" Type="nvarchar" MaxLength="6" />
           <Property Name="PMGNUM" Type="nchar" MaxLength="2" />
           <Property Name="PMGTXT" Type="nvarchar" MaxLength="20" />
@@ -562,7 +562,6 @@
           <EntitySet Name="Categories" EntityType="CFMMCDModel.Category" />
           <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
           <EntitySet Name="CSHMIMP0_NP6" EntityType="CFMMCDModel.CSHMIMP0_NP6" />
-          <EntitySet Name="CSHPMGP0" EntityType="CFMMCDModel.CSHPMGP0" />
           <EntitySet Name="CSHVMLP0" EntityType="CFMMCDModel.CSHVMLP0" />
           <EntitySet Name="CSM_Master_Recipe" EntityType="CFMMCDModel.CSM_Master_Recipe" />
           <EntitySet Name="Dessert_Price_Tier" EntityType="CFMMCDModel.Dessert_Price_Tier" />
@@ -590,6 +589,7 @@
             <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
             <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
           </AssociationSet>
+          <EntitySet Name="CSHPMGP0" EntityType="CFMMCDModel.CSHPMGP0" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -709,16 +709,6 @@
           <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
           <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="CSHMIMP0" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0_NP6" ToRole="CSHMIMP0" />
-        </EntityType>
-        <EntityType Name="CSHPMGP0">
-          <Key>
-            <PropertyRef Name="PMGGID" />
-          </Key>
-          <Property Name="PMGGID" Type="Int32" Nullable="false" />
-          <Property Name="PMGGRP" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="PMGNUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="PMGTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PMGSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="CSHVMLP0">
           <Key>
@@ -1101,6 +1091,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CSHPMGP0">
+          <Key>
+            <PropertyRef Name="PMGGID" />
+          </Key>
+          <Property Name="PMGGID" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="PMGGRP" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="PMGNUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="PMGTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PMGSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1228,17 +1228,6 @@
                 <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
                 <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
                 <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CSHPMGP0">
-            <EntityTypeMapping TypeName="CFMMCDModel.CSHPMGP0">
-              <MappingFragment StoreEntitySet="CSHPMGP0">
-                <ScalarProperty Name="PMGSTA" ColumnName="PMGSTA" />
-                <ScalarProperty Name="PMGTXT" ColumnName="PMGTXT" />
-                <ScalarProperty Name="PMGNUM" ColumnName="PMGNUM" />
-                <ScalarProperty Name="PMGGRP" ColumnName="PMGGRP" />
-                <ScalarProperty Name="PMGGID" ColumnName="PMGGID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1631,6 +1620,17 @@
               <MappingFragment StoreEntitySet="Trading_Area">
                 <ScalarProperty Name="Trading_Areea" ColumnName="Trading_Areea" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSHPMGP0">
+            <EntityTypeMapping TypeName="CFMMCDModel.CSHPMGP0">
+              <MappingFragment StoreEntitySet="CSHPMGP0">
+                <ScalarProperty Name="PMGSTA" ColumnName="PMGSTA" />
+                <ScalarProperty Name="PMGTXT" ColumnName="PMGTXT" />
+                <ScalarProperty Name="PMGNUM" ColumnName="PMGNUM" />
+                <ScalarProperty Name="PMGGRP" ColumnName="PMGGRP" />
+                <ScalarProperty Name="PMGGID" ColumnName="PMGGID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -93,6 +93,31 @@ namespace CFMMCD.Models.EntityManager
                 vm.MIMNPT = MIMRow.MIMNPT.Trim();
                 vm.MIMLON = MIMRow.MIMLON.Trim();
                 vm.MIMUTC = MIMRow.MIMUTC.ToString();
+                // Store
+                vm.Store = MIMRow.Store;
+                if ((MIMRow.Store != null) && MIMRow.Store.Equals("ALL"))
+                {
+                    vm.SelectAllCb = true;
+                    vm.Store = "";
+                }
+                if ((MIMRow.Except_Store != null) && !(MIMRow.Except_Store.Equals("")))
+                    vm.SelectExcept = true;
+                // Attributes
+                if (MIMRow.Category != null)
+                    vm.Category = MIMRow.Category.ToString();
+                if (MIMRow.Trading_Area != null)
+                    vm.Category = MIMRow.Trading_Area.ToString();
+                // Location
+                if (MIMRow.Location != null)
+                    vm.Location = MIMRow.Location.ToString();
+                if (MIMRow.Region != null)
+                    vm.Region = MIMRow.Region;
+                if (MIMRow.Province != null)
+                    vm.Province = MIMRow.Province;
+                if (MIMRow.City != null)
+                    vm.City = MIMRow.City;
+
+
                 if (MIMRow.MIMSTA.Trim().Equals("1"))
                     vm.InactiveItemsCb = true;
                 else
@@ -170,8 +195,6 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.MIMNPT = MIMViewModel.MIMNPT.Trim();
                 // Items not originally in the table but
                 // have Input field
-                // * Wala pong nakalista sa CSHMIMP0.dbf na Long Name
-                //   pero merong input field para sa kanya sa pptx
                 MIMRow.MIMLON = MIMViewModel.MIMLON;
                 // Items that do not have Input fields
                 // but included in the table
@@ -201,7 +224,30 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.MIMSKI = 0;
                 MIMRow.MIMBMI = 0;
                 MIMRow.STATUS = "A";
-                
+                // Attributes
+                MIMRow.Category = int.Parse(MIMViewModel.Category);
+                MIMRow.Trading_Area = int.Parse(MIMViewModel.Trading_Area);
+                // Location
+                MIMRow.City = MIMViewModel.City;
+                MIMRow.Province = MIMViewModel.Province;
+                MIMRow.Region = MIMViewModel.Region;
+                if (MIMViewModel.Location != null && MIMViewModel.Location.Equals(""))
+                    MIMRow.Location = int.Parse(MIMViewModel.Location);
+                // Store
+                MIMRow.Store = MIMViewModel.Store;
+                if (MIMViewModel.SelectAllCb)
+                {
+                    MIMRow.Store = "ALL";
+                }
+                if (MIMViewModel.SelectExcept)
+                {
+                    MIMRow.Store = "ALL";
+                    MIMRow.Except_Store = MIMViewModel.Store.Trim();
+                }
+                else
+                {
+                    MIMRow.Except_Store = null;
+                }
                 // If NP6 fields are filled up
                 if (MIMViewModel.MIMMIC_NP6 != null)
                 {

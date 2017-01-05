@@ -37,6 +37,13 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="LONGNM" Type="nvarchar" MaxLength="25" />
   </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="CSHMIMP0">
     <Key>
       <PropertyRef Name="MIMMIC" />
@@ -44,9 +51,9 @@
     <Property Name="MIMMIC" Type="int" Nullable="false" />
     <Property Name="MIMSTA" Type="char" MaxLength="1" />
     <Property Name="MIMFGC" Type="nchar" MaxLength="2" />
-    <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
-    <Property Name="MIMDSC" Type="nchar" MaxLength="16" />
-    <Property Name="MIMSSC" Type="nchar" MaxLength="2" />
+    <Property Name="MIMNAM" Type="nvarchar" MaxLength="6" />
+    <Property Name="MIMDSC" Type="nvarchar" MaxLength="16" />
+    <Property Name="MIMSSC" Type="nvarchar" MaxLength="2" />
     <Property Name="MIMDPC" Type="nchar" MaxLength="1" />
     <Property Name="MIMCIN" Type="nchar" MaxLength="1" />
     <Property Name="MIMDGC" Type="int" />
@@ -90,8 +97,16 @@
     <Property Name="MIMNNP" Type="float" />
     <Property Name="MIMNPT" Type="nchar" MaxLength="2" />
     <Property Name="MIMMIC_NP6" Type="int" />
-    <Property Name="MIMLON" Type="nchar" MaxLength="16" />
+    <Property Name="MIMLON" Type="nvarchar" MaxLength="16" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
+    <Property Name="Category" Type="int" />
+    <Property Name="Trading_Area" Type="int" />
+    <Property Name="Location" Type="int" />
+    <Property Name="Region" Type="nvarchar" MaxLength="20" />
+    <Property Name="Province" Type="nvarchar" MaxLength="20" />
+    <Property Name="City" Type="nvarchar" MaxLength="20" />
+    <Property Name="Store" Type="nvarchar" MaxLength="20" />
+    <Property Name="Except_Store" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="CSHMIMP0_NP6">
     <Key>
@@ -101,6 +116,16 @@
     <Property Name="MIMSTA" Type="nchar" MaxLength="1" />
     <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
     <Property Name="MIMLON" Type="nchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="CSHPMGP0">
+    <Key>
+      <PropertyRef Name="PMGGID" />
+    </Key>
+    <Property Name="PMGGID" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="PMGGRP" Type="nvarchar" MaxLength="6" />
+    <Property Name="PMGNUM" Type="nchar" MaxLength="2" />
+    <Property Name="PMGTXT" Type="nvarchar" MaxLength="20" />
+    <Property Name="PMGSTA" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="CSHVMLP0">
     <Key>
@@ -132,16 +157,24 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="INVMGRP0">
+    <Key>
+      <PropertyRef Name="MGRGRP" />
+    </Key>
+    <Property Name="MGRGRP" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="MGRTXT" Type="nvarchar" MaxLength="20" />
+    <Property Name="MGRSTA" Type="nchar" MaxLength="1" />
+  </EntityType>
   <EntityType Name="INVRIMP0">
     <Key>
       <PropertyRef Name="RIMRIC" />
     </Key>
     <Property Name="RIMRIC" Type="int" Nullable="false" />
     <Property Name="RIMVPC" Type="int" />
-    <Property Name="RIMRID" Type="nchar" MaxLength="20" />
+    <Property Name="RIMRID" Type="nvarchar" MaxLength="20" />
     <Property Name="RIMRIG" Type="nchar" MaxLength="2" />
     <Property Name="RIMTEM" Type="nchar" MaxLength="3" />
-    <Property Name="RIMPGR" Type="nchar" MaxLength="10" />
+    <Property Name="RIMPGR" Type="nvarchar" MaxLength="10" />
     <Property Name="RIMPIS" Type="nchar" MaxLength="1" />
     <Property Name="RIMBVP" Type="nchar" MaxLength="3" />
     <Property Name="RIMBZP" Type="nchar" MaxLength="3" />
@@ -180,7 +213,7 @@
     <Property Name="RIMORD" Type="nchar" MaxLength="1" />
     <Property Name="RIMLIN" Type="int" />
     <Property Name="RIMADE" Type="nchar" MaxLength="1" />
-    <Property Name="RIMBAR" Type="nchar" MaxLength="13" />
+    <Property Name="RIMBAR" Type="nvarchar" MaxLength="13" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
     <Property Name="Store" Type="nvarchar" MaxLength="20" />
     <Property Name="Except_Store" Type="nvarchar" MaxLength="20" />
@@ -206,6 +239,15 @@
     <Property Name="RIMCPR" Type="float" />
     <Property Name="LongName" Type="nvarchar" MaxLength="20" />
     <Property Name="Description" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="INVUOMP0">
+    <Key>
+      <PropertyRef Name="UOMDES" />
+    </Key>
+    <Property Name="UOMDES" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="UOMDEL" Type="nvarchar" MaxLength="15" />
+    <Property Name="UOMDAT" Type="date" />
+    <Property Name="UOMUSR" Type="nchar" MaxLength="3" />
   </EntityType>
   <EntityType Name="INVVEMP0">
     <Key>
@@ -447,6 +489,13 @@
     <Property Name="EDTS" Type="date" />
     <Property Name="PNDS" Type="date" />
   </EntityType>
+  <EntityType Name="Trading_Area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Trading_Areea" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <Association Name="FK_CSHMIMP0_ToTable">
     <End Role="CSHMIMP0_NP6" Type="Self.CSHMIMP0_NP6" Multiplicity="0..1" />
     <End Role="CSHMIMP0" Type="Self.CSHMIMP0" Multiplicity="*" />
@@ -464,13 +513,17 @@
     <EntitySet Name="Audit_Log" EntityType="Self.Audit_Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Breakfast_Price_Tier" EntityType="Self.Breakfast_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BUSINESS_EXT" EntityType="Self.BUSINESS_EXT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0" EntityType="Self.CSHMIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHMIMP0_NP6" EntityType="Self.CSHMIMP0_NP6" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CSHPMGP0" EntityType="Self.CSHPMGP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSHVMLP0" EntityType="Self.CSHVMLP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CSM_Master_Recipe" EntityType="Self.CSM_Master_Recipe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dessert_Price_Tier" EntityType="Self.Dessert_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVMGRP0" EntityType="Self.INVMGRP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVRIMP0" EntityType="Self.INVRIMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVRIRP0" EntityType="Self.INVRIRP0" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVUOMP0" EntityType="Self.INVUOMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
@@ -486,6 +539,7 @@
     <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="Self.STORE_MIMMIC_Lookup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tier_Lookup" EntityType="Self.Tier_Lookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trading_Area" EntityType="Self.Trading_Area" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />

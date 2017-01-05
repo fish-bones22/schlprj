@@ -15,6 +15,11 @@ namespace CFMMCD.Models.ViewModel
             StoreList = tdd.SetStoreDropDown();
             MenuItemMasterList = new List<MenuItemMasterViewModel>();
             MenuRecipeList = new List<MenuRecipe>();
+            TradingAreaList = tdd.SetTradingAreaList();
+            CategoryList = tdd.SetCategoryList();
+            MIMFGCList = tdd.SetPMGList("PMGFGC");
+            MIMHPTList = tdd.SetPMGList("PMGHPT");
+            MIMWGRList = tdd.SetPMGList("PMGWGR");
         }
 
         public string SearchItem { get; set; }
@@ -154,6 +159,9 @@ namespace CFMMCD.Models.ViewModel
 
         public List<GenericDropDownList> TradingAreaList { get; set; }
         public List<GenericDropDownList> CategoryList { get; set; }
+        public List<GenericDropDownList> MIMFGCList { get; set; }
+        public List<GenericDropDownList> MIMHPTList { get; set; }
+        public List<GenericDropDownList> MIMWGRList { get; set; }
         public List<GenericDropDownList> StoreList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
         public List<MenuRecipe> MenuRecipeList { get; set; }

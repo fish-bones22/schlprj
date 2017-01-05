@@ -14,7 +14,7 @@ namespace CFMMCD.Models.DB
     
     public partial class CSHPMGP0
     {
-        public int PMGGID { get; set; }
+        public string PMGGID { get; set; }
         public string PMGGRP { get; set; }
         public string PMGNUM { get; set; }
         public string PMGTXT { get; set; }

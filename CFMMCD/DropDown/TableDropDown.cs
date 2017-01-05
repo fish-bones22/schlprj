@@ -219,7 +219,53 @@ namespace CFMMCD.DropDown
                 return list;
             }
         }
-         public List<CheckBoxList> SetVendorList()
+        public List<GenericDropDownList> SetTradingAreaList()
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<GenericDropDownList> list = new List<GenericDropDownList>();
+                foreach (var i in db.Trading_Area)
+                {
+                    GenericDropDownList option = new GenericDropDownList();
+                    option.text = i.Trading_Areea;
+                    option.value = i.Id.ToString();
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
+        public List<GenericDropDownList> SetCategoryList()
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<GenericDropDownList> list = new List<GenericDropDownList>();
+                foreach (var i in db.Categories)
+                {
+                    GenericDropDownList option = new GenericDropDownList();
+                    option.text = i.Category1;
+                    option.value = i.Id.ToString();
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
+        public List<GenericDropDownList> SetPMGList(String group)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<GenericDropDownList> list = new List<GenericDropDownList>();
+                foreach (var i in db.CSHPMGP0.Where(o => o.PMGGRP.Equals(group)))
+                {
+                    GenericDropDownList option = new GenericDropDownList();
+                    option.text = i.PMGTXT;
+                    option.value = i.PMGNUM;
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
+       
+        public List<CheckBoxList> SetVendorList()
         {
             using ( CFMMCDEntities db = new CFMMCDEntities() )
             {
