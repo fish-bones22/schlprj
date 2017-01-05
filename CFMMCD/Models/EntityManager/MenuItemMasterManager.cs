@@ -13,82 +13,121 @@ namespace CFMMCD.Models.EntityManager
     {
         /*
          * Searches the table for any given SearchItem (Name or ID) in the ViewModel.
-         * 
+         * Calls SearchSingleMenuItem
          * Returns List<ViewModel> if true, otherwise returns null
          */
-        public List<MenuItemMasterViewModel> SearchMenuItem(MenuItemMasterViewModel MIMViewModel)
+        public List<MenuItemMasterViewModel> SearchMenuItems(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<CSHMIMP0> MIMRowList;
                 List<MenuItemMasterViewModel> MIMList = new List<MenuItemMasterViewModel>();
                 string ItemCode = "";
-                if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.SearchItem)).Any())
-                {
-                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.SearchItem)).ToList();
-                    ItemCode = MIMViewModel.SearchItem;
-                }
-                else if (db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Contains(MIMViewModel.SearchItem)).Any())
-                {
-                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Contains(MIMViewModel.SearchItem)).ToList();
-                }
-                else if (MIMViewModel.SearchItem.ToUpper().Equals("ALL"))
+                if (SearchItem.ToUpper().Equals("ALL"))
                 {
                     MIMRowList = db.CSHMIMP0.ToList();
                 }
+                else if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(SearchItem)).Any())
+                {
+                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(SearchItem)).ToList();
+                    ItemCode = SearchItem;
+                }
+                else if (db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Contains(SearchItem)).Any())
+                {
+                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Contains(SearchItem)).ToList();
+                }
                 else
+                {
                     return null;
+                }
 
                 foreach (var MIMRow in MIMRowList)
                 {
                     MenuItemMasterViewModel vm = new MenuItemMasterViewModel();
-                    vm.MIMMIC = MIMRow.MIMMIC.ToString();
-                    vm.MIMSTA = MIMRow.MIMSTA.Trim();
-                    vm.MIMFGC = MIMRow.MIMFGC.Trim();
-                    vm.MIMNAM = MIMRow.MIMNAM.Trim();
-                    vm.MIMDSC = MIMRow.MIMDSC.Trim();
-                    vm.MIMDPC = MIMRow.MIMDPC.Trim();
-                    vm.MIMTCI = MIMRow.MIMTCI.Trim();
-                    vm.MIMPRI = MIMRow.MIMPRI.ToString();
-                    vm.MIMTCA = MIMRow.MIMTCA.Trim();
-                    vm.MIMPRO = MIMRow.MIMPRO.ToString();
-                    vm.MIMTCG = MIMRow.MIMTCG.Trim();
-                    vm.MIMPRG = MIMRow.MIMPRG.ToString();
-                    vm.MIMPND = Convert.ToDateTime(MIMRow.MIMPND).ToString("yyyy-MM-dd");
-                    vm.MIMWGR = MIMRow.MIMWGR.Trim();
-                    vm.MIMHPT = MIMRow.MIMHPT.Trim();
-                    vm.MIMEDT = Convert.ToDateTime(MIMRow.MIMEDT).ToString("yyyy-MM-dd");
-                    vm.MIMNPI = MIMRow.MIMNPI.ToString();
-                    vm.MIMNPO = MIMRow.MIMNPO.ToString();
-                    vm.MIMNPD = MIMRow.MIMNPD.ToString();
-                    vm.MIMNPA = MIMRow.MIMNPA.ToString();
-                    vm.MIMNNP = MIMRow.MIMNNP.ToString();
-                    vm.MIMNPT = MIMRow.MIMNPT.Trim();
-                    vm.MIMLON = MIMRow.MIMLON.Trim();
-                    vm.MIMUTC = MIMRow.MIMUTC.ToString();
-                    if (MIMRow.MIMSTA.Trim().Equals("1"))
-                        vm.InactiveItemsCb = true;
-                    else
-                        vm.InactiveItemsCb = false;
-                    vm.Location = "";
-                    vm.Store = "";
-
-
-                    if (MIMRow.MIMMIC_NP6 != null || MIMRow.MIMMIC_NP6.HasValue)
-                    {
-                        vm.MIMMIC_NP6 = MIMRow.CSHMIMP0_NP6.MIMMIC.ToString();
-                        vm.MIMNAM_NP6 = MIMRow.CSHMIMP0_NP6.MIMNAM.Trim();
-                        vm.MIMLON_NP6 = MIMRow.CSHMIMP0_NP6.MIMLON.Trim();
-                    }
-                    // Initialize external table row values
-                    if (ItemCode.Equals(""))
-                        ItemCode = MIMRow.MIMMIC.ToString();
-                    vm = SearchPriceTier(vm);
-                    MIMList.Add(vm);
+                    vm = SearchSingleMenuItem(MIMRow.MIMMIC.ToString());
+                    if (vm != null)
+                        MIMList.Add(vm);
                 }
                if (MIMList == null || MIMList.Count() == 0 )
                     return null;
                 return MIMList;
+            }
+        }
+        public MenuItemMasterViewModel SearchSingleMenuItem(string SearchItem)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                CSHMIMP0 MIMRow = new CSHMIMP0();
+                string ItemCode = "";
+                if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(SearchItem)).Any())
+                {
+                    MIMRow = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(SearchItem));
+                    ItemCode = SearchItem;
+                }
+                else
+                {
+                    return null;
+                }
+                MenuItemMasterViewModel vm = new MenuItemMasterViewModel();
+                vm.MIMMIC = MIMRow.MIMMIC.ToString();
+                vm.MIMSTA = MIMRow.MIMSTA.Trim();
+                vm.MIMFGC = MIMRow.MIMFGC.Trim();
+                vm.MIMNAM = MIMRow.MIMNAM.Trim();
+                vm.MIMDSC = MIMRow.MIMDSC.Trim();
+                vm.MIMDPC = MIMRow.MIMDPC.Trim();
+                vm.MIMTCI = MIMRow.MIMTCI.Trim();
+                vm.MIMPRI = MIMRow.MIMPRI.ToString();
+                vm.MIMTCA = MIMRow.MIMTCA.Trim();
+                vm.MIMPRO = MIMRow.MIMPRO.ToString();
+                vm.MIMTCG = MIMRow.MIMTCG.Trim();
+                vm.MIMPRG = MIMRow.MIMPRG.ToString();
+                vm.MIMPND = Convert.ToDateTime(MIMRow.MIMPND).ToString("yyyy-MM-dd");
+                vm.MIMWGR = MIMRow.MIMWGR.Trim();
+                vm.MIMHPT = MIMRow.MIMHPT.Trim();
+                vm.MIMEDT = Convert.ToDateTime(MIMRow.MIMEDT).ToString("yyyy-MM-dd");
+                vm.MIMNPI = MIMRow.MIMNPI.ToString();
+                vm.MIMNPO = MIMRow.MIMNPO.ToString();
+                vm.MIMNPD = MIMRow.MIMNPD.ToString();
+                vm.MIMNPA = MIMRow.MIMNPA.ToString();
+                vm.MIMNNP = MIMRow.MIMNNP.ToString();
+                vm.MIMNPT = MIMRow.MIMNPT.Trim();
+                vm.MIMLON = MIMRow.MIMLON.Trim();
+                vm.MIMUTC = MIMRow.MIMUTC.ToString();
+                if (MIMRow.MIMSTA.Trim().Equals("1"))
+                    vm.InactiveItemsCb = true;
+                else
+                    vm.InactiveItemsCb = false;
+                vm.Location = "";
+                vm.Store = "";
+                // NP6
+                if (MIMRow.MIMMIC_NP6 != null || MIMRow.MIMMIC_NP6.HasValue)
+                {
+                    vm.MIMMIC_NP6 = MIMRow.CSHMIMP0_NP6.MIMMIC.ToString();
+                    vm.MIMNAM_NP6 = MIMRow.CSHMIMP0_NP6.MIMNAM.Trim();
+                    vm.MIMLON_NP6 = MIMRow.CSHMIMP0_NP6.MIMLON.Trim();
+                }
+                // Initialize external table row values
+                if (ItemCode.Equals(""))
+                    ItemCode = MIMRow.MIMMIC.ToString();
+                // Price tier
+                vm = SearchPriceTier(vm);
+                // Recipe List
+                List<INVRIRP0> RIRRowList;
+                if (db.INVRIRP0.Where(o => o.RIRMIC == MIMRow.MIMMIC).Any())
+                    RIRRowList = db.INVRIRP0.Where(o => o.RIRMIC == MIMRow.MIMMIC).ToList();
+                else
+                    RIRRowList = new List<INVRIRP0>();
+                foreach(INVRIRP0 RIRRow in RIRRowList)
+                {
+                    MenuRecipe mr = new MenuRecipe();
+                    mr.RIRRIC = RIRRow.RIRRIC.ToString();
+                    mr.RIMRID = db.INVRIMP0.Single(o => o.RIMRIC == RIRRow.RIRRIC).RIMRID;
+                    vm.MenuRecipeList.Add(mr);
+                }
+
+                if (vm != null && vm.MIMMIC != null && !vm.MIMMIC.Equals(""))
+                    return vm;
+                else return null;
             }
         }
         /*
@@ -212,6 +251,7 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
+
         /*
          * Deletes the specified row given in the ViewModel properties.
          * 

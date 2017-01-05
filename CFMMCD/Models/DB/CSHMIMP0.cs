@@ -65,6 +65,14 @@ namespace CFMMCD.Models.DB
         public Nullable<int> MIMMIC_NP6 { get; set; }
         public string MIMLON { get; set; }
         public string STATUS { get; set; }
+        public Nullable<int> Category { get; set; }
+        public Nullable<int> Trading_Area { get; set; }
+        public Nullable<int> Location { get; set; }
+        public string Region { get; set; }
+        public string Province { get; set; }
+        public string City { get; set; }
+        public string Store { get; set; }
+        public string Except_Store { get; set; }
     
         public virtual CSHMIMP0_NP6 CSHMIMP0_NP6 { get; set; }
     }

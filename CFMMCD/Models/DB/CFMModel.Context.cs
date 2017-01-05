@@ -29,13 +29,18 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<Audit_Log> Audit_Log { get; set; }
         public virtual DbSet<Breakfast_Price_Tier> Breakfast_Price_Tier { get; set; }
         public virtual DbSet<BUSINESS_EXT> BUSINESS_EXT { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CSHMIMP0> CSHMIMP0 { get; set; }
         public virtual DbSet<CSHMIMP0_NP6> CSHMIMP0_NP6 { get; set; }
+        public virtual DbSet<CSHPMGP0> CSHPMGP0 { get; set; }
         public virtual DbSet<CSHVMLP0> CSHVMLP0 { get; set; }
         public virtual DbSet<CSM_Master_Recipe> CSM_Master_Recipe { get; set; }
         public virtual DbSet<Dessert_Price_Tier> Dessert_Price_Tier { get; set; }
+        public virtual DbSet<INVMGRP0> INVMGRP0 { get; set; }
         public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
         public virtual DbSet<INVRIRP0> INVRIRP0 { get; set; }
+        public virtual DbSet<INVUOMP0> INVUOMP0 { get; set; }
+        public virtual DbSet<INVVEMP0> INVVEMP0 { get; set; }
         public virtual DbSet<LOCATION> LOCATIONs { get; set; }
         public virtual DbSet<McCafe_Bistro_Price_Tier> McCafe_Bistro_Price_Tier { get; set; }
         public virtual DbSet<McCafe_Level_2_Price_Tier> McCafe_Level_2_Price_Tier { get; set; }
@@ -50,6 +55,6 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<STORE_MIMMIC_Lookup> STORE_MIMMIC_Lookup { get; set; }
         public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<Tier_Lookup> Tier_Lookup { get; set; }
-        public virtual DbSet<INVVEMP0> INVVEMP0 { get; set; }
+        public virtual DbSet<Trading_Area> Trading_Area { get; set; }
     }
 }

@@ -10,9 +10,8 @@
     }
 }
 
-<div class="center">
-    <h2>@ViewBag.Title</h2>
-</div>
+
+<h2 align="center">@ViewBag.Title</h2>
 <!--Alerts-->
 <div class="container">
     @if (TempData["ErrorMessage"] != null)
@@ -26,28 +25,10 @@
 </div>
 <!--Main content starts here-->
 <div class="form-horizontal">
-    <div class="col-lg-12">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="container-fluid">
-                <div class="col-lg-2 label-container-left">
-                    <label class="form-label" for="menu-item">Menu item/ Product name</label>
-                </div>
-                <div class="col-lg-7">
-                    @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
-                    <div class="input-group float-right" style="padding-top:8px">
-                        <label class="checkbox-inline form-label">
-                            @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
-                        </label>
-                    </div>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-lg-1">
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
-                </div>
-            </div>
-        }
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <input type="text" class="form-control" placeholder="Search menu item" id="search_dummy" />
+        </div>
     </div>
     <hr/>
     <div class="col-lg-12">
@@ -56,6 +37,18 @@
             <div class="container-fluid">
                 <div class="col-lg-8">
                     <div class="col-lg-8">
+                        <div class="col-lg-12">
+                            <div class="container-fluid">
+                                <div class="col-lg-6">
+                                    @Html.DropDownListFor(m => Model.Trading_Area, new SelectList(
+                                        new List<Object>{
+                                            new { value = "0" , text = "Breakfast"  },
+                                            new { value = "1" , text = "product mix group" },
+                                            new { value = "2" , text = "implementation" }
+                                        }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.Trading_Area })
+                                </div>
+                            </div>
+                        </div>
 
                         <!--NP3 and NP6 Tab-->
                         <div class="col-lg-12">
@@ -119,21 +112,16 @@
                                 new { value = "1" , text = "product mix group" },
                                 new { value = "2" , text = "implementation" }
                             },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
+                            "value", "text", "0"), new { @class = "form-control input-sm" })
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="menu-item-1">PMX main group 1</label>
                                 @Html.DropDownListFor(m => Model.MIMWGR, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "To be added after"  },
-                                new { value = "1" , text = "product mix group" },
-                                new { value = "2" , text = "implementation" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.MIMWGR })
+                                new List<Object>{
+                                    new { value = "0" , text = "To be added after"  },
+                                    new { value = "1" , text = "product mix group" },
+                                    new { value = "2" , text = "implementation" }
+                                },"value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.MIMWGR })
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="menu-item-1">PMX main group 2</label>
@@ -142,10 +130,7 @@
                                 new { value = "0" , text = "To be added after"  },
                                 new { value = "1" , text = "product mix group" },
                                 new { value = "2" , text = "implementation" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm", @Value = Model.MIMHPT })
+                            }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.MIMHPT })
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="menu-item-1">Daypart code</label>
@@ -172,10 +157,7 @@
                             new List<Object>{
                                 new { value = "0" , text = "Active"  },
                                 new { value = "1" , text = "Inactive" }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
+                            }, "value", "text", "0"), new { @class = "form-control input-sm" })
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Tax code</label>
@@ -457,7 +439,17 @@
                                         <th>Raw item name</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    @{ 
+                                        for(int i = 0; i < Model.MenuRecipeList.Count(); i++)
+                                        {
+                                            <tr>
+                                                <td>@Model.MenuRecipeList[i].RIRRIC</td>
+                                                <td>@Model.MenuRecipeList[i].RIMRID</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -477,39 +469,48 @@
     <div class="modal-content">
         <div class="modal-header">
             <button class="close" data-dismiss="modal">&times;</button>
-            <h4>Search results</h4>
+            <h4>All items</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search menu item" autofocus/>
+                <div class="input-group float-right" style="padding-top:8px">
+                    <label class="checkbox-inline form-label">
+                        @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
+                    </label>
+                </div>
+            </div>
         </div>
         @using (Html.BeginForm("DisplaySearchResult", "MenuItemMaster", FormMethod.Post, new { }))
         {
-            List<MenuItemMasterViewModel> MIMList = (List<MenuItemMasterViewModel>)Session["ViewModelList"];
-            if (MIMList != null)
-            {
-                <div class="modal-body">
-                    @{if (HasSearch == 1 && MIMList[0] != null)
+            <div class="modal-body">
+                @for (int i = 0; i < Model.MenuItemMasterList.Count(); i++)
+                { 
+                    string ActiveInactive = "active";
+                    if (Model.MenuItemMasterList[i].MIMSTA.Equals("1"))
                     {
-                        foreach (MenuItemMasterViewModel vm in MIMList)
-                        {
-                            <button type="submit" class="modal-item-select" name="value" value=@vm.MIMMIC>
-                                <div class="col-lg-3">
-                                    @vm.MIMMIC
-                                </div>
-                                <div class="col-lg-9">
-                                    @vm.MIMNAM
-                                </div>
-                            </button>
-                        }
+                        ActiveInactive = "inactive";
                     }
-                    }
-                </div>
+                    <button type="submit" class="modal-item-select tr-collapse @Model.MenuItemMasterList[i].MIMMIC @Model.MenuItemMasterList[i].MIMNAM @ActiveInactive" name="value" value=@Model.MenuItemMasterList[i].MIMMIC>
+                        <div class="col-lg-3">
+                            @Model.MenuItemMasterList[i].MIMMIC
+                        </div>
+                        <div class="col-lg-9">
+                            @Model.MenuItemMasterList[i].MIMNAM
+                        </div>
+                    </button>
                 }
-            }
+            </div>
+        }
     </div>
 </div>
-
 <script>
     $(window).ready(function () {
-        if (@HasSearch === 1) {
-            $("#search-result-modal").modal('show');
-        }
+        $("#search_dummy").click(function () {
+            $("#search-result-modal").modal("show");
+            $("#search_dummy").blur();
+            if (!$("#SearchFrontEnd").is(":focus") || $("#search-result-modal").hasClass("in")) {
+                console.log("focus");
+                $("#SearchFrontEnd").focus();
+            }
+        });
     });
 </script>

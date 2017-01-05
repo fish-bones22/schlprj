@@ -256,6 +256,9 @@
     <Compile Include="Models\DB\BUSINESS_EXT.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\Category.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\CFMModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -277,6 +280,9 @@
     <Compile Include="Models\DB\CSHMIMP0_NP6.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\CSHPMGP0.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\CSHVMLP0.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
@@ -286,10 +292,16 @@
     <Compile Include="Models\DB\Dessert_Price_Tier.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\INVMGRP0.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\INVRIMP0.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\INVRIRP0.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\INVUOMP0.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\INVVEMP0.cs">
@@ -335,6 +347,9 @@
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\Tier_Lookup.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Trading_Area.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityManager\AuditLogManager.cs" />

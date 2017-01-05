@@ -14,6 +14,7 @@ namespace CFMMCD.Models.ViewModel
             LocationList = tdd.SetLocationDropDown();
             StoreList = tdd.SetStoreDropDown();
             MenuItemMasterList = new List<MenuItemMasterViewModel>();
+            MenuRecipeList = new List<MenuRecipe>();
         }
 
         public string SearchItem { get; set; }
@@ -53,6 +54,9 @@ namespace CFMMCD.Models.ViewModel
         public string MIMNAM_NP6 { get; set; }
         public string MIMLON_NP6 { get; set; }
 
+        // Misc
+        public string Trading_Area { get; set; }
+        public string Category { get; set; }
         public string Location { get; set; }
         public string Region { get; set; }
         public string Province { get; set; }
@@ -148,7 +152,10 @@ namespace CFMMCD.Models.ViewModel
 
         public string EffectiveDate { get; set; }
 
+        public List<GenericDropDownList> TradingAreaList { get; set; }
+        public List<GenericDropDownList> CategoryList { get; set; }
         public List<GenericDropDownList> StoreList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
+        public List<MenuRecipe> MenuRecipeList { get; set; }
     }
 }

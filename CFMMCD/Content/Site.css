@@ -136,15 +136,17 @@ footer {
 }
 .modal {
     margin: auto;
-    max-height: 80%;
     max-width: 550px;
+    padding-top:5%;
     overflow: hidden;
     vertical-align: middle;
 }
 .modal-body {
-    overflow-x: auto;
+    max-height: 350px;
+    overflow-y: scroll;
     padding-left: 0;
     padding-right: 0;
+    position:relative;
     text-align: center;
 }
 .modal-item-select {

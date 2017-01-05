@@ -31,13 +31,14 @@ namespace CFMMCD.Controllers
             {
                 MIMViewModel = new MenuItemMasterViewModel();
             }
+            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("ALL");
             return View(MIMViewModel);
         }
         [HttpPost]
         public ActionResult Index(MenuItemMasterViewModel MIMViewModel)
         {   // Search
             MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItem(MIMViewModel);
+            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("");
             if (MIMViewModel.MenuItemMasterList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
@@ -85,8 +86,8 @@ namespace CFMMCD.Controllers
         [HttpPost]
         public ActionResult DisplaySearchResult(string value)
         {
-            List<MenuItemMasterViewModel> MIMList = (List<MenuItemMasterViewModel>)Session["ViewModelList"];
-            MenuItemMasterViewModel MIMViewModel = MIMList.Where(o => o.MIMMIC.ToString().Equals(value)).FirstOrDefault();
+            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
+            MenuItemMasterViewModel MIMViewModel = MIMManager.SearchSingleMenuItem(value);
             TempData["SearchItemSelected"] = MIMViewModel;
             return RedirectToAction("Index", "MenuItemMaster");
         }

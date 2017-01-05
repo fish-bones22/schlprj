@@ -29,7 +29,7 @@ namespace CFMMCD.Controllers
             if (MIMViewModel == null)
                 MIMViewModel = new MenuItemMasterViewModel();
             MIMViewModel.SearchItem = "ALL";
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItem(MIMViewModel);
+            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("ALL");
             return View(MIMViewModel);
         }
 
@@ -37,7 +37,7 @@ namespace CFMMCD.Controllers
         public ActionResult Index(MenuItemMasterViewModel MIMViewModel)
         {   // Search
             MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItem(MIMViewModel);
+            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems(MIMViewModel.SearchItem);
             if (MIMViewModel.MenuItemMasterList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
