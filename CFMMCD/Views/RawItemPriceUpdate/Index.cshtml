@@ -26,21 +26,44 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <div class="col-lg-4 label-container-left">
-                <label class="form-label" for="menu-item">Raw item name / Raw item number</label>
+            <div class="col-lg-4 text-right">
+                <label class="form-label" for="menu-item">Raw item name / number</label>
             </div>
             <div class="col-lg-5">
-                @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-lg-1">
-                <button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
+                <input type="search" class="form-control" id="SearchItemFrontEnd" />
             </div>
         }
     </div>
     <div class="container-fluid" style="padding-top:100px">
         @using (Html.BeginForm("DisplaySearchResult", "RawItemPriceUpdate", FormMethod.Post, new { }))
         {
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Raw item number</th>
+                        <th>Raw item name</th>
+                        <th>Price per CS</th>
+                        <th>Vendor name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        for (int i = 0; i < Model.RawItemPriceMasterList.Count(); i++)
+                        {
+                            var mod = Model.RawItemPriceMasterList[i];
+                            <tr class="@mod.RIMRIC @mod.RIMRID tr-collapse">
+                                @Html.HiddenFor(m => mod.RIM_VEM_ID)
+                                <td></td>
+                                <td>@Html.DisplayFor(m => mod.RIMRIC, new { @class = "form-label" })</td>
+                                <td>@Html.DisplayFor(m => mod.RIMRID, new { @class = "form-label" })</td>
+                                <td>@Html.TextBoxFor(m => mod.RIMCPR, new { @class = "form-control input-sm" })</td>
+                                <td>@Html.TextBoxFor(m => mod.VEMDS1, new { @class = "form-control input-sm" })</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
 
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="col-lg-3">

@@ -24,9 +24,12 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("RIP", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
+            RawItemPriceManager RIMManager = new RawItemPriceManager();
             RawItemPriceUpdateViewModel RIPViewModel = (RawItemPriceUpdateViewModel)TempData["SearchItemSelected"];
             if (RIPViewModel == null)
                 RIPViewModel = new RawItemPriceUpdateViewModel();
+            RIPViewModel.SearchItem = "ALL";
+            RIPViewModel.RawItemPriceMasterList = RIMManager.SearchRawItemPrice(RIPViewModel);
             return View(RIPViewModel);
         }
         [HttpPost]
