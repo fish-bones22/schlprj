@@ -1,18 +1,29 @@
 ﻿@using CFMMCD.Sessions
 @{
-    ViewBag.Title = "Home";
     UserAccessSession UASession = new UserAccessSession();
     if (Session["UserAccess"] != null)
     {
         UASession = (UserAccessSession)Session["UserAccess"];
     }
-}
+    CurrentPageSession CPSession = (CurrentPageSession)Session["CurrentPage"];
+    if (CPSession == null)
+    {
+        CPSession = new CurrentPageSession();
+        CPSession.Self = new CurrentPageSession.LinkString
+        {
+            LinkName = "Login",
+            Action = "Login",
+            Controller = "Account"
+        };
+    }
+
+} 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@CPSession.Self.LinkName</title>
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
@@ -24,20 +35,6 @@
     <script src="~/Scripts/philippines/index.js"></script>
 </head>
 <body>
-    @{
-        CurrentPageSession CPSession = (CurrentPageSession)Session["CurrentPage"];
-        if (CPSession == null)
-        {
-            CPSession = new CurrentPageSession();
-            CPSession.Self = new CurrentPageSession.LinkString
-            {
-                LinkName = "Login",
-                Action = "Login",
-                Controller = "Account"
-            };
-        }
-
-    }
     <div class="navbar navbar-fixed-top">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

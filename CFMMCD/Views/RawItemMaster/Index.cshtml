@@ -329,11 +329,14 @@
                                         {
                                             for (int i = 0; i < Model.VendorList.Count(); i++)
                                             {
-                                                string idst = "tr-" + Model.VendorList[i].value;
-                                                string classst = "tr-vendor " + Model.VendorList[i].value + " " + Model.VendorList[i].text;
-												<tr id="@idst" class="@classst" for="@Model.VendorsSelectedList[i]">
+                                                // Store previous values of selected vendors.
+                                                // In case a selected vendor has been unselected,
+                                                // the receiving method can compare the current vs previous checkbox values
+                                                Model.PreviousVendorsSelectedList[i] = Model.VendorsSelectedList[i];
+												<tr id="tr-@Model.VendorList[i].value" class="tr-vendor @Model.VendorList[i].value @Model.VendorList[i].text" for="@Model.VendorsSelectedList[i]">
 													<td>
 														@Html.CheckBoxFor(m => Model.VendorsSelectedList[i] )
+                                                        @Html.HiddenFor(m => Model.PreviousVendorsSelectedList[i])
 													</td>
 													<td>
                                                         @Html.LabelFor(m => Model.VendorsSelectedList[i], Model.VendorList[i].text, new { @class = "form-label" })
@@ -434,21 +437,25 @@
 	    updateCity();
 	    $("option[value='@city'").attr("selected", "selected");
         // Store Attribute Select
-        $(".store-attrib").click(function(e) {
-            $(".store-attrib").not(this).each(function() {
+        setStoreAttribute();
+        $(".store-attrib").click(function () {
+            $(".store-attrib").not(this).each(function () {
                 $(this).attr("value", "0");
                 $(this).val("0");
                 $(".store-attrib option[value='0']").attr("selected", "selected");
             });
-            $(".store-attrib").each(function() {
-                if ($(this).val() == "0") {
-                    $(this).css("background-color", "#eee");
-                } else {
-                    $(this).css("background-color", "white");
-                }
-            });
+            setStoreAttribute();
         });
-	});
+    });
+    function setStoreAttribute() {
+        $(".store-attrib").each(function () {
+            if ($(this).val() == "0") {
+                $(this).css("background-color", "#eee");
+            } else {
+                $(this).css("background-color", "white");
+            }
+        });
+    }
 </script>
 <!--Vendor Search Script-->
 <script>
@@ -486,13 +493,13 @@
 	    if ( $("#tr-" + previousPrimary).children("td").children("[type='text']").val() == "") {
 	        $("#tr-" + previousPrimary).children("td").children("[type='checkbox']").removeAttr("checked");
 	    }
-	    $("#tr-" + previousPrimary).children("td").children("[type='checkbox']").removeAttr("disabled");
+	    $("#tr-" + previousPrimary).children("td").children("[type='checkbox']").removeClass("hidden");
 	    $("#tr-" + previousPrimary).children(".primary").text("");
         // check and disable selected primary vendor
 	    $("#tr-" + primaryVendor).children("td").children("[type='checkbox']").attr("checked", "checked");
-	    disableInputsOnCb();
-	    $("#tr-" + primaryVendor).children("td").children("[type='checkbox']").attr("disabled", "disabled");
+	    $("#tr-" + primaryVendor).children("td").children("[type='checkbox']").addClass("hidden");
 	    $("#tr-" + primaryVendor).children(".primary").text("Primary");
+	    disableInputsOnCb();
 	    previousPrimary = primaryVendor;
 	}
 

@@ -36,7 +36,6 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<CSM_Master_Recipe> CSM_Master_Recipe { get; set; }
         public virtual DbSet<Dessert_Price_Tier> Dessert_Price_Tier { get; set; }
         public virtual DbSet<INVMGRP0> INVMGRP0 { get; set; }
-        public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
         public virtual DbSet<INVRIRP0> INVRIRP0 { get; set; }
         public virtual DbSet<INVUOMP0> INVUOMP0 { get; set; }
         public virtual DbSet<INVVEMP0> INVVEMP0 { get; set; }
@@ -56,5 +55,6 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<Tier_Lookup> Tier_Lookup { get; set; }
         public virtual DbSet<Trading_Area> Trading_Area { get; set; }
         public virtual DbSet<CSHPMGP0> CSHPMGP0 { get; set; }
+        public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
     }
 }

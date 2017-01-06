@@ -50,6 +50,7 @@ namespace CFMMCD.Models.ViewModel
         public string RIRMIC { get; set; }
         public string MIMLON { get; set; }
         public string MIMDSC { get; set; }
+        public string MIMSTA { get; set; }
     }
     public class MenuRecipe
     {
@@ -61,5 +62,6 @@ namespace CFMMCD.Models.ViewModel
         public string RIRCWC { get; set; }
         public string RIRSTA { get; set; }
         public string STOATT { get; set; }
+        public string PreviousRIRRIC { get; set; }
     }
 }

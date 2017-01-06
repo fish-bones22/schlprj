@@ -12,7 +12,6 @@
     <EntitySet Name="CSM_Master_Recipe" EntityType="CFMMCDModel.CSM_Master_Recipe" />
     <EntitySet Name="Dessert_Price_Tier" EntityType="CFMMCDModel.Dessert_Price_Tier" />
     <EntitySet Name="INVMGRP0" EntityType="CFMMCDModel.INVMGRP0" />
-    <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
     <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
     <EntitySet Name="INVUOMP0" EntityType="CFMMCDModel.INVUOMP0" />
     <EntitySet Name="INVVEMP0" EntityType="CFMMCDModel.INVVEMP0" />
@@ -36,6 +35,7 @@
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
     <EntitySet Name="CSHPMGP0" EntityType="CFMMCDModel.CSHPMGP0" />
+    <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
   </EntityContainer>
   <EntityType Name="Account">
     <Key>
@@ -193,61 +193,6 @@
     <Property Name="MGRGRP" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
     <Property Name="MGRTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="MGRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="INVRIMP0">
-    <Key>
-      <PropertyRef Name="RIMRIC" />
-    </Key>
-    <Property Name="RIMRIC" Type="Int32" Nullable="false" />
-    <Property Name="RIMVPC" Type="Int32" />
-    <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-    <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMUPC" Type="Double" />
-    <Property Name="RIMSUQ" Type="Double" />
-    <Property Name="RIMLAY" Type="Int32" />
-    <Property Name="RIMCPR" Type="Double" />
-    <Property Name="RIMCPN" Type="Double" />
-    <Property Name="RIMPDT" Type="DateTime" Precision="0" />
-    <Property Name="RIMPVN" Type="Int32" />
-    <Property Name="RIMSVN" Type="Int32" />
-    <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMUSF" Type="Double" />
-    <Property Name="RIMSDP" Type="Double" />
-    <Property Name="RIMUS1" Type="Double" />
-    <Property Name="RIMUS2" Type="Double" />
-    <Property Name="RIMUS3" Type="Double" />
-    <Property Name="RIMUS4" Type="Double" />
-    <Property Name="RIMUS5" Type="Double" />
-    <Property Name="RIMUSX" Type="Double" />
-    <Property Name="RIMMSD" Type="Double" />
-    <Property Name="RIMMSL" Type="Double" />
-    <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMLP1" Type="Int32" />
-    <Property Name="RIMLP2" Type="Int32" />
-    <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIMDAT" Type="DateTime" Precision="0" />
-    <Property Name="RIMEDT" Type="DateTime" Precision="0" />
-    <Property Name="RIMFLG" Type="Boolean" />
-    <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMLIN" Type="Int32" />
-    <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Except_Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Store_Attrib" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="INVRIRP0">
     <Key>
@@ -546,5 +491,63 @@
     <Property Name="PMGNUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
     <Property Name="PMGTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="PMGSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="INVRIMP0">
+    <Key>
+      <PropertyRef Name="RIMRIC" />
+    </Key>
+    <Property Name="RIMRIC" Type="Int32" Nullable="false" />
+    <Property Name="RIMVPC" Type="Int32" />
+    <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUPC" Type="Double" />
+    <Property Name="RIMSUQ" Type="Double" />
+    <Property Name="RIMLAY" Type="Int32" />
+    <Property Name="RIMCPR" Type="Double" />
+    <Property Name="RIMCPN" Type="Double" />
+    <Property Name="RIMPDT" Type="DateTime" Precision="0" />
+    <Property Name="RIMPVN" Type="Int32" />
+    <Property Name="RIMSVN" Type="Int32" />
+    <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUSF" Type="Double" />
+    <Property Name="RIMSDP" Type="Double" />
+    <Property Name="RIMUS1" Type="Double" />
+    <Property Name="RIMUS2" Type="Double" />
+    <Property Name="RIMUS3" Type="Double" />
+    <Property Name="RIMUS4" Type="Double" />
+    <Property Name="RIMUS5" Type="Double" />
+    <Property Name="RIMUSX" Type="Double" />
+    <Property Name="RIMMSD" Type="Double" />
+    <Property Name="RIMMSL" Type="Double" />
+    <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLP1" Type="Int32" />
+    <Property Name="RIMLP2" Type="Int32" />
+    <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIMDAT" Type="DateTime" Precision="0" />
+    <Property Name="RIMEDT" Type="DateTime" Precision="0" />
+    <Property Name="RIMFLG" Type="Boolean" />
+    <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMLIN" Type="Int32" />
+    <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Except_Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Store_Attrib" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

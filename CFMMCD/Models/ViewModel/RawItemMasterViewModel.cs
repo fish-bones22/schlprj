@@ -22,6 +22,7 @@ namespace CFMMCD.Models.ViewModel
             RawItemMasterList = new List<RawItem>();
             MenuItemList = new List<MenuItem>();
             VendorsSelectedList = new List<bool>(VendorList.Count());
+            PreviousVendorsSelectedList = new List<bool>();
             VendorCPR = new List<string>(VendorList.Count());
             VendorPUN = new List<string>(VendorList.Count());
             VendorSCM = new List<string>(VendorList.Count());
@@ -29,6 +30,7 @@ namespace CFMMCD.Models.ViewModel
             foreach (var v in VendorList)
             {
                 VendorsSelectedList.Add(v.Cb);
+                PreviousVendorsSelectedList.Add(v.Cb);
                 VendorCPR.Add("");
                 VendorPUN.Add("");
                 VendorSCM.Add("");
@@ -90,6 +92,7 @@ namespace CFMMCD.Models.ViewModel
         public string SearchVendor { get; set; }
         public List<RawItem> RawItemMasterList { get; set; }
         public List<bool> VendorsSelectedList { get; set; }
+        public List<bool> PreviousVendorsSelectedList { get; set; }
         public List<string> VendorCPR { get; set; }
         public List<string> VendorPUN { get; set; }
         public List<string> VendorSCM { get; set; }

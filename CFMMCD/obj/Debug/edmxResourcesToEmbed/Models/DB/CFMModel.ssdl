@@ -219,6 +219,9 @@
     <Property Name="Except_Store" Type="nvarchar" MaxLength="20" />
     <Property Name="Location" Type="nvarchar" MaxLength="20" />
     <Property Name="Store_Attrib" Type="nvarchar" MaxLength="20" />
+    <Property Name="Region" Type="nvarchar" MaxLength="20" />
+    <Property Name="Province" Type="nvarchar" MaxLength="20" />
+    <Property Name="City" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="INVRIRP0">
     <Key>

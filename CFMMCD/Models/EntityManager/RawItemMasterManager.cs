@@ -62,6 +62,43 @@ namespace CFMMCD.Models.EntityManager
                 // Non-field Row with default values
                 RIMRow.RIMUSR = user.Substring(0, 3).ToUpper();
                 RIMRow.RIMDAT = DateTime.Now;
+                // Location
+                RIMRow.Location = RIMViewModel.Location;
+                RIMRow.Region = RIMViewModel.Region;
+                RIMRow.Province = RIMViewModel.Province;
+                RIMRow.City = RIMViewModel.City;
+                // Store
+                RIMRow.Store = RIMViewModel.StoreSelected;
+                if (RIMViewModel.SelectAllCb)
+                {
+                    RIMRow.Store = "ALL";
+                }
+                if (RIMViewModel.SelectExceptCb)
+                {
+                    RIMRow.Store = "ALL";
+                    RIMRow.Except_Store = RIMViewModel.StoreSelected.Trim();
+                }
+                else
+                {
+                    RIMRow.Except_Store = null;
+                }
+                // Store attributes
+                if (RIMViewModel.SOFT_SERVE_OR_VANILLA_POWDER_MIX != null && !RIMViewModel.SOFT_SERVE_OR_VANILLA_POWDER_MIX.Equals("0"))
+                    RIMRow.Store_Attrib = RIMViewModel.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
+
+                if (RIMViewModel.FRESH_OR_FROZEN != null && !RIMViewModel.FRESH_OR_FROZEN.Equals("0"))
+                    RIMRow.Store_Attrib = RIMViewModel.FRESH_OR_FROZEN;
+
+                if (RIMViewModel.MCCORMICK_OR_GSF != null && !RIMViewModel.MCCORMICK_OR_GSF.Equals("0"))
+                    RIMRow.Store_Attrib = RIMViewModel.MCCORMICK_OR_GSF;
+
+                if (RIMViewModel.PAPER_OR_PLASTIC != null && !RIMViewModel.PAPER_OR_PLASTIC.Equals("0"))
+                    RIMRow.Store_Attrib = RIMViewModel.PAPER_OR_PLASTIC;
+
+                if (RIMViewModel.SIMPLOT_OR_MCCAIN != null && !RIMViewModel.SIMPLOT_OR_MCCAIN.Equals("0"))
+                    RIMRow.Store_Attrib = RIMViewModel.SIMPLOT_OR_MCCAIN;
+                
+                // Default values assignment
                 if (!isUpdating)
                 {
                     RIMRow.RIMCPR = 0;
@@ -84,13 +121,22 @@ namespace CFMMCD.Models.EntityManager
                     RIMRow.RIMLIN = null; // Report line
                 }
 
-                // Raw Item and Vendor
+                // Vendor
                 int i = 0;
                 foreach (var vendor in RIMViewModel.VendorList)
                 {
-                    if (RIMViewModel.VendorsSelectedList[i])
+                    // If previous previous state is true and current state is false, perform deletion of vendor entry
+                    if (RIMViewModel.PreviousVendorsSelectedList[i] && !RIMViewModel.VendorsSelectedList[i])
                     {
-                        RIM_VEM_Lookup RVLRow = new RIM_VEM_Lookup();
+                        if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RIMViewModel.RIMRIC + vendor.value)).Any())
+                        {
+                            RIM_VEM_Lookup RVLRow = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(RIMViewModel.RIMRIC + vendor.value));
+                            db.RIM_VEM_Lookup.Remove(RVLRow);
+                        }
+                    } // if current state is false
+                    else if (RIMViewModel.VendorsSelectedList[i])
+                    {
+                        RIM_VEM_Lookup RVLRow;
                         if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RIMViewModel.RIMRIC + vendor.value)).Any())
                             RVLRow = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(RIMViewModel.RIMRIC + vendor.value));
                         else
@@ -100,9 +146,12 @@ namespace CFMMCD.Models.EntityManager
                         RVLRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
                         RVLRow.VEMVEN = int.Parse(vendor.value);
                         RVLRow.VEMDS1 = vendor.text;
-                        RVLRow.RIMCPR = double.Parse(RIMViewModel.VendorCPR[i]);
-                        RVLRow.PPERUN = double.Parse(RIMViewModel.VendorPUN[i]);
-                        RVLRow.SCMCOD = double.Parse(RIMViewModel.VendorSCM[i]);
+                        if (RIMViewModel.VendorCPR[i] != null && !RIMViewModel.VendorCPR[i].Equals(""))
+                            RVLRow.RIMCPR = double.Parse(RIMViewModel.VendorCPR[i]);
+                        if (RIMViewModel.VendorPUN[i] != null && !RIMViewModel.VendorPUN[i].Equals(""))
+                            RVLRow.PPERUN = double.Parse(RIMViewModel.VendorPUN[i]);
+                        if (RIMViewModel.VendorSCM[i] != null && !RIMViewModel.VendorSCM[i].Equals(""))
+                            RVLRow.SCMCOD = double.Parse(RIMViewModel.VendorSCM[i]);
                         // Perform update
                         if (!db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Trim().Equals(RVLRow.RIM_VEM_ID.Trim())).Any())
                             db.RIM_VEM_Lookup.Add(RVLRow);
@@ -154,10 +203,17 @@ namespace CFMMCD.Models.EntityManager
                     if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC)).Any())
                     {
                         INVRIMP0 rowToRemove = db.INVRIMP0.FirstOrDefault(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC));
-                        List<RIM_VEM_Lookup> listOfRowsToRemove = db.RIM_VEM_Lookup.Where(o => o.RIMRIC == rowToRemove.RIMRIC).ToList();
-                        foreach ( RIM_VEM_Lookup RVLRow in listOfRowsToRemove )
+                        // Remove vendor
+                        List<RIM_VEM_Lookup> RIVendor = db.RIM_VEM_Lookup.Where(o => o.RIMRIC == rowToRemove.RIMRIC).ToList();
+                        foreach ( RIM_VEM_Lookup RVLRow in RIVendor)
                         {
                             db.RIM_VEM_Lookup.Remove(RVLRow);
+                        }
+                        // Remove recipe
+                        List<INVRIRP0> RIRecipe = db.INVRIRP0.Where(o => o.RIRRIC == rowToRemove.RIMRIC).ToList();
+                        foreach ( INVRIRP0 ri in RIRecipe )
+                        {
+                            db.INVRIRP0.Remove(ri);
                         }
                         db.INVRIMP0.Remove(rowToRemove);
                         db.SaveChanges();
@@ -253,8 +309,21 @@ namespace CFMMCD.Models.EntityManager
                 vm.RIMORD = rim.RIMORD.Trim();
                 vm.RIMADE = rim.RIMADE.Trim();
                 vm.RIMBAR = rim.RIMBAR.Trim();
+                // Location
                 vm.Location = rim.Location;
+                vm.Region = rim.Region;
+                vm.Province = rim.Province;
+                vm.City = rim.City;
+                // Store
                 vm.StoreSelected = rim.Store;
+                if ((rim.Store != null) && rim.Store.Equals("ALL"))
+                {
+                    vm.SelectAllCb = true;
+                    vm.StoreSelected = "";
+                }
+                if ((rim.Except_Store != null) && !(rim.Except_Store.Equals("")))
+                    vm.SelectExceptCb = true;
+                // Store attributes
                 if (rim.Store_Attrib != null)
                 {
                     if (rim.Store_Attrib.Equals("SOFTSERVE") || rim.Store_Attrib.Equals("VANILLA"))

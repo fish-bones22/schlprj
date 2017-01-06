@@ -9,35 +9,36 @@ namespace CFMMCD.Models.EntityManager
 {
     public class MenuRecipeManager
     {
-        public List<MenuItem> SearchMenuItem(MenuRecipeViewModel MRViewModel)
+        public List<MenuItem> SearchMenuItem( string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<MenuItem> MIList = new List<MenuItem>();
                 List<CSHMIMP0> MIMRowList;
-                if (MRViewModel.SearchItem == null || MRViewModel.SearchItem.Equals(""))
+                if (SearchItem == null || SearchItem.Equals(""))
                     return null;
-                if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MRViewModel.SearchItem)).Any())
+                if (SearchItem.ToUpper().Equals("ALL"))
                 {
-                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(MRViewModel.SearchItem)).ToList();
+                    MIMRowList = db.CSHMIMP0.ToList();
+                }
+                else if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(SearchItem)).Any())
+                {
+                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(SearchItem)).ToList();
                 } 
-                else if (db.CSHMIMP0.Where(o => o.MIMNAM.Trim().Equals(MRViewModel.SearchItem)).Any())
+                else if (db.CSHMIMP0.Where(o => o.MIMNAM.Trim().Equals(SearchItem)).Any())
                 {
-                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMNAM.Trim().Equals(MRViewModel.SearchItem)).ToList();
+                    MIMRowList = db.CSHMIMP0.Where(o => o.MIMNAM.Trim().Equals(SearchItem)).ToList();
                 }
                 else
                     return null;
                 foreach (CSHMIMP0 rim in MIMRowList)
                 {
-                    // Check if 'Include inactive items' is checked
-                    if (MRViewModel.InactiveItemsCb || rim.MIMSTA.Equals("0"))
-                    {
-                        MenuItem mi = new MenuItem();
-                        mi.RIRMIC = rim.MIMMIC.ToString();
-                        mi.MIMDSC = rim.MIMDSC.Trim();
-                        mi.MIMLON = rim.MIMLON.Trim();
-                        MIList.Add(mi);
-                    }
+                    MenuItem mi = new MenuItem();
+                    mi.RIRMIC = rim.MIMMIC.ToString();
+                    mi.MIMDSC = rim.MIMDSC.Trim();
+                    mi.MIMLON = rim.MIMLON.Trim();
+                    mi.MIMSTA = rim.MIMSTA;
+                    MIList.Add(mi);
                 }
                 if (MIList == null || MIList.ElementAt(0) == null)
                     return null;
@@ -67,11 +68,15 @@ namespace CFMMCD.Models.EntityManager
                     mr.RIRRID = v.RIRRID;
                     mr.RIRRIC = v.RIRRIC.ToString();
                     mr.RIMRID = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(mr.RIRRIC)).RIMRID;
-                    mr.RIMCPR = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(mr.RIRRIC)).RIMCPR.ToString();
+                    // Get price by getting primary vendor id first
+                    int primVenId = (int)db.INVRIMP0.Single(o => o.RIMRIC == v.RIRRIC).RIMPVN;
+                    // Look up Raw item and Vendor
+                    if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(v.RIRRIC.ToString() + primVenId.ToString())).Any())
+                        mr.RIMCPR = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(v.RIRRIC.ToString() + primVenId.ToString())).RIMCPR.ToString();
                     mr.RIRSFQ = v.RIRSFQ.ToString();
                     mr.RIRCWC = v.RIRCWC;
                     mr.RIRSTA = v.RIRSTA;
-                    mr.STOATT = "";
+                    mr.STOATT = db.INVRIMP0.Single(o => o.RIMRIC == v.RIRRIC).Store_Attrib;
                     MRViewModel.MenuRecipeList.Add(mr);
                 }
                 return MRViewModel;
@@ -84,10 +89,21 @@ namespace CFMMCD.Models.EntityManager
             {
                 if (MRViewModel.RIRMIC == null || MRViewModel.RIRMIC.Equals(""))
                     return false;
-                // Existing
+                // Existing row
                 foreach (var v in MRViewModel.MenuRecipeList)
                 {
-                    INVRIRP0 MRRow = new INVRIRP0();
+                    if (!v.PreviousRIRRIC.Equals(v.RIRRIC))
+                    {
+                        INVRIRP0 MRRowToDelete = db.INVRIRP0.Single(o => o.RIRRID.Equals(v.RIRRID));
+                        db.INVRIRP0.Remove(MRRowToDelete);
+                    }
+                    if (!db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(v.RIRRIC)).Any())
+                        continue;
+                    INVRIRP0 MRRow;
+                    if (db.INVRIRP0.Where(o => o.RIRRID.Equals(MRViewModel.RIRMIC + v.RIRRIC)).Any())
+                        MRRow = db.INVRIRP0.Single(o => o.RIRRID.Equals(MRViewModel.RIRMIC + v.RIRRIC));
+                    else MRRow = new INVRIRP0();
+                    
                     MRRow.RIRRID = MRViewModel.RIRMIC + v.RIRRIC;
                     MRRow.RIRMIC = int.Parse(MRViewModel.RIRMIC);
                     MRRow.RIRRIC = int.Parse(v.RIRRIC);
@@ -103,10 +119,7 @@ namespace CFMMCD.Models.EntityManager
                     {
                         if (db.INVRIRP0.Where(o => o.RIRRID == MRRow.RIRRID).Any())
                         {
-                            INVRIRP0 rowToDelete = db.INVRIRP0.Single(o => o.RIRRID == MRRow.RIRRID);
-                            db.INVRIRP0.Remove(rowToDelete);
                             MRRow.STATUS = "E";
-                            db.INVRIRP0.Add(MRRow);
                         }
                         else
                         {
@@ -133,9 +146,11 @@ namespace CFMMCD.Models.EntityManager
                         return false;
                     }
                 }
-                // New
+                // New created row
                 for (int i = 0; i < MRViewModel.RIMRID.Count(); i++)
                 {
+                    if (MRViewModel.RIRRIC[i] == null || MRViewModel.RIRRIC[i].Equals(""))
+                        continue;
                     INVRIRP0 MRRow = new INVRIRP0();
                     MRRow.RIRRID = MRViewModel.RIRMIC + MRViewModel.RIRRIC[i];
                     MRRow.RIRMIC = int.Parse(MRViewModel.RIRMIC);

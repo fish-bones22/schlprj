@@ -20,26 +20,17 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("MER", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
-            MenuRecipeViewModel MRViewModel = (MenuRecipeViewModel)TempData["SearchItemSelected"];
             MenuRecipeManager MRManager = new MenuRecipeManager();
-            if (MRViewModel == null)
-            {
-                MRViewModel = new MenuRecipeViewModel();
-            }
+            MenuRecipeViewModel MRViewModel = new MenuRecipeViewModel();
+            MRViewModel.MenuItemList = MRManager.SearchMenuItem("ALL");
             return View(MRViewModel);
         }
         [HttpPost]
-        public ActionResult Index(MenuRecipeViewModel MRViewModel)
+        public ActionResult Index(MenuRecipeViewModel MRViewModel, string value)
         {
             MenuRecipeManager MRManager = new MenuRecipeManager();
-            MRViewModel.MenuItemList = MRManager.SearchMenuItem(MRViewModel);
-            if (MRViewModel.MenuItemList != null)
-            {
-                TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = MRViewModel.MenuItemList;
-            }
-            else
-                ModelState.AddModelError("", "No results found");
+            MRViewModel = new MenuRecipeManager().SearchMenuRecipe(value);
+            MRViewModel.MenuItemList = MRManager.SearchMenuItem("ALL");
             return View(MRViewModel);
         }
 
@@ -65,14 +56,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult DisplaySearchResult(string value)
-        {
-            MenuRecipeViewModel MRViewModel = new MenuRecipeManager().SearchMenuRecipe(value);
-            TempData["SearchItemSelected"] = MRViewModel;
-            return RedirectToAction("Index", "MenuRecipe");
         }
     }
 }

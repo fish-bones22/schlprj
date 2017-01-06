@@ -324,6 +324,12 @@ namespace CFMMCD.Models.EntityManager
                 // insertion is unsuccessful
                 try
                 {
+                    // Delete Recipe
+                    List<INVRIRP0> MIRecipe = db.INVRIRP0.Where(o => o.RIRMIC == MIMRow.MIMMIC).ToList();
+                    foreach (INVRIRP0 ri in MIRecipe)
+                    {
+                        db.INVRIRP0.Remove(ri);
+                    }
                     db.CSHMIMP0.Remove(MIMRow);
                     db.SaveChanges();
                     return true;
