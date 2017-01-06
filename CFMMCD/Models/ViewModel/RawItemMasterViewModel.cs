@@ -19,6 +19,8 @@ namespace CFMMCD.Models.ViewModel
             VendorList = tdd.SetVendorList();
             UnitOfMeasureList = tdd.SetUnitOfMeasureList();
             MaterialsGroupList = tdd.SetMaterialsGroupList();
+            RawItemMasterList = new List<RawItem>();
+            MenuItemList = new List<MenuItem>();
             VendorsSelectedList = new List<bool>(VendorList.Count());
             VendorCPR = new List<string>(VendorList.Count());
             VendorPUN = new List<string>(VendorList.Count());
@@ -35,9 +37,7 @@ namespace CFMMCD.Models.ViewModel
         }
         public string SearchItem { get; set; }
         public bool InactiveItemsCb { get; set; }
-        [Required(ErrorMessage="This field is required")]
         public string RIMRIC { get; set; }
-        [Required(ErrorMessage = "This field is required")]
         public string RIMRID { get; set; }
         public string RIMRIG { get; set; }
         public string RIMPIS { get; set; }
@@ -88,11 +88,18 @@ namespace CFMMCD.Models.ViewModel
         public List<GenericDropDownList> StoreList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
         public string SearchVendor { get; set; }
-        public List<RawItemMasterViewModel> RawItemMasterList { get; set; }
+        public List<RawItem> RawItemMasterList { get; set; }
         public List<bool> VendorsSelectedList { get; set; }
         public List<string> VendorCPR { get; set; }
         public List<string> VendorPUN { get; set; }
         public List<string> VendorSCM { get; set; }
         public List<CheckBoxList> VendorList { get; set; }
+        public List<MenuItem> MenuItemList { get; set; }
+    }
+    public class RawItem
+    {
+        public string RIMRIC { get; set; }
+        public string RIMRID { get; set; }
+        public string RIMSTA { get; set; }
     }
 }

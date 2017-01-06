@@ -190,26 +190,27 @@ namespace CFMMCD.Models.EntityManager
          * 
          * Returns List<ViewModel> if true, otherwise returns null
          */
-        public List<RawItemMasterViewModel> SearchRawItems(string SearchItem)
+        public List<RawItem> GetRawItems(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<RawItemMasterViewModel> RIMList = new List<RawItemMasterViewModel>();
+                List<RawItem> RIMList = new List<RawItem>();
                 List<INVRIMP0> RIMRowList;
-                if (SearchItem == null || SearchItem.Equals(""))
-                    return null;
-                if (db.INVRIMP0.Where(o => o.RIMRID.Contains(SearchItem)).Any())
+                if (SearchItem.ToUpper().Equals("ALL"))
+                    RIMRowList = db.INVRIMP0.ToList();
+                else if (db.INVRIMP0.Where(o => o.RIMRID.Contains(SearchItem)).Any())
                     RIMRowList = db.INVRIMP0.Where(o => o.RIMRID.Contains(SearchItem)).ToList();
                 else if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(SearchItem)).Any())
                     RIMRowList = db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(SearchItem)).ToList();
                 else
-                    return null;
-                foreach ( INVRIMP0 rim in RIMRowList )
+                    return RIMList;
+                foreach (INVRIMP0 rim in RIMRowList)
                 {
-                    RawItemMasterViewModel vm = new RawItemMasterViewModel();
-                    vm = SearchSingleRawItem(rim.RIMRID.ToString());
-                    if (vm != null)
-                        RIMList.Add(vm);
+                    RawItem vm = new RawItem();
+                    vm.RIMRIC = rim.RIMRIC.ToString();
+                    vm.RIMRID = rim.RIMRID;
+                    vm.RIMSTA = rim.RIMSTA;
+                    RIMList.Add(vm);
                 }
                 if (RIMList == null || RIMList.ElementAt(0) == null)
                     return null;
@@ -252,6 +253,31 @@ namespace CFMMCD.Models.EntityManager
                 vm.RIMORD = rim.RIMORD.Trim();
                 vm.RIMADE = rim.RIMADE.Trim();
                 vm.RIMBAR = rim.RIMBAR.Trim();
+                vm.Location = rim.Location;
+                vm.StoreSelected = rim.Store;
+                if (rim.Store_Attrib != null)
+                {
+                    if (rim.Store_Attrib.Equals("SOFTSERVE") || rim.Store_Attrib.Equals("VANILLA"))
+                        vm.SOFT_SERVE_OR_VANILLA_POWDER_MIX = rim.Store_Attrib;
+                    else if (rim.Store_Attrib.Equals("FRESH") || rim.Store_Attrib.Equals("FROZEN"))
+                        vm.FRESH_OR_FROZEN = rim.Store_Attrib;
+                    else if (rim.Store_Attrib.Equals("SIMPLOT") || rim.Store_Attrib.Equals("MCCAIN"))
+                        vm.SIMPLOT_OR_MCCAIN = rim.Store_Attrib;
+                    else if (rim.Store_Attrib.Equals("PAPER") || rim.Store_Attrib.Equals("PLASTIC"))
+                        vm.PAPER_OR_PLASTIC = rim.Store_Attrib;
+                    else if (rim.Store_Attrib.Equals("MCORMICK") || rim.Store_Attrib.Equals("GSF"))
+                        vm.MCCORMICK_OR_GSF = rim.Store_Attrib;
+                }
+                // Menu item list
+                var MIList = db.INVRIRP0.Where(o => o.RIRRIC == rim.RIMRIC).ToList();
+                foreach (var v in MIList)
+                {
+                    MenuItem mi = new MenuItem();
+                    mi.RIRMIC = v.RIRMIC.ToString();
+                    mi.MIMDSC = db.CSHMIMP0.SingleOrDefault(o => o.MIMMIC == v.RIRMIC).MIMNAM;
+                    vm.MenuItemList.Add(mi);
+                }
+                // Vendor List
                 var rowList = db.RIM_VEM_Lookup.Where(o => o.RIMRIC == rim.RIMRIC);
                 int i = 0;
                 foreach (var v in vm.VendorList)

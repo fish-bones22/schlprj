@@ -24,27 +24,17 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("RIM", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
-            RawItemMasterViewModel RIMViewModel = (RawItemMasterViewModel)TempData["SearchItemSelected"];
             RawItemMasterManager RIMManager = new RawItemMasterManager();
-            if (RIMViewModel == null)
-            {
-                RIMViewModel = new RawItemMasterViewModel();
-            }
-
+            RawItemMasterViewModel RIMViewModel = new RawItemMasterViewModel();
+            RIMViewModel.RawItemMasterList = RIMManager.GetRawItems("ALL");
             return View(RIMViewModel);
         }
         [HttpPost]
-        public ActionResult Index(RawItemMasterViewModel RIMViewModel)
+        public ActionResult Index(RawItemMasterViewModel RIMViewModel, string value)
         {   // Search
             RawItemMasterManager RIMManager = new RawItemMasterManager();
-            RIMViewModel.RawItemMasterList = RIMManager.SearchRawItem(RIMViewModel);
-            if (RIMViewModel.RawItemMasterList != null)
-            {
-                TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = RIMViewModel.RawItemMasterList;
-            }
-            else
-                ModelState.AddModelError("", "No results found");
+            RIMViewModel = RIMManager.SearchSingleRawItem(value);
+            RIMViewModel.RawItemMasterList = RIMManager.GetRawItems("ALL");
             return View(RIMViewModel);
         }
         [HttpPost]
@@ -75,23 +65,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("Index");
-        }
-        /*
-         * This method is called after selecting an item from a list of search result.
-         * Parameter RIMViewModel still holds the list of searched ViewModels and
-         * parameter value stores the value of the item selected.
-         * 
-         * The value is then searched in the list and stores it in a TempData to be used by Index().
-         * */
-        [HttpPost]
-        public ActionResult DisplaySearchResult(string value)
-        {
-            List<RawItemMasterViewModel> RIMList = (List<RawItemMasterViewModel>) Session["ViewModelList"];
-            RawItemMasterViewModel RIMViewModel = RIMList.Where(o => o.RIMRIC.ToString().Equals(value)).FirstOrDefault();
-
-
-            TempData["SearchItemSelected"] = RIMViewModel;
-            return RedirectToAction("Index", "RawItemMaster");
         }
     }
 }
