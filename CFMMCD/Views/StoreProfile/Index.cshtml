@@ -56,7 +56,7 @@
                 <div class="col-lg-4">
                     <div class="container-fluid">
                         @Html.LabelFor(model => Model.STORE_NO, "Store number", new { @class = "form-label" })
-                        @Html.TextBoxFor(model => Model.STORE_NO, new { @class = "form-control input-sm" })
+                        @Html.TextBoxFor(model => Model.STORE_NO, new { @class = "form-control input-sm",@type = "number", @maxlength = "5" })
                     </div>
                 </div>
                 <div class="col-lg-4">

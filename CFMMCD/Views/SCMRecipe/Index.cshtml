@@ -86,10 +86,10 @@
                                     <tr>
                                         <td></td>
                                         @Html.HiddenFor(m => Model.RawItemList[i].CSMID)
-                                        <td> @Html.TextBoxFor(m => Model.RawItemList[i].RIMRIC, new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMRID, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.TextBoxFor(m => Model.RawItemList[i].RIMRIC, new { @class = "form-control input-sm",@type = "number", @maxlength = "5" }) </td>
+                                        <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMRID, new { @class = "form-control input-sm",@maxlength = "20" }) </td>
                                         <td> @Html.TextBoxFor(m => Model.RawItemList[i].CSMSFQ, new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMCPR, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMCPR, new { @class = "form-control input-sm",@type = "number", @maxlength = "15" }) </td>
                                         <td>
                                             @Html.DropDownListFor(m => Model.RawItemList[i].CSMCWC, new SelectList(new List<Object>() {
                                             new { value = "0" , text = "Active"  },
@@ -102,10 +102,10 @@
                             <!--Empty row-->
                             <tr>
                                 <td></td>
-                                <td> @Html.TextBoxFor(m => Model.RIMRIC[0], new { @class = "form-control input-sm" }) </td>
-                                <td> @Html.DisplayFor(m => Model.RIMRID[0], new { @class = "form-control input-sm" }) </td>
+                                <td> @Html.TextBoxFor(m => Model.RIMRIC[0], new { @class = "form-control input-sm", @type = "number", @maxlength = "5" }) </td>
+                                <td> @Html.DisplayFor(m => Model.RIMRID[0], new { @class = "form-control input-sm", @maxlength = "20" }) </td>
                                 <td> @Html.TextBoxFor(m => Model.CSMSFQ[0], new { @class = "form-control input-sm" }) </td>
-                                <td> @Html.DisplayFor(m => Model.RIMCPR[0], new { @class = "form-control input-sm" }) </td>
+                                <td> @Html.DisplayFor(m => Model.RIMCPR[0], new { @class = "form-control input-sm",@type = "number", @maxlength = "15" }) </td>
                                 <td>
                                     @Html.DropDownListFor(m => Model.CSMCWC[0], new SelectList(new List<Object>() {
                                             new { value = "0" , text = "Active"  },

@@ -60,7 +60,7 @@
                 <div class="col-lg-3 col-lg-offset-3">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.RIRMIC, "Menu item code", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.RIRMIC, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => Model.RIRMIC, new { @class = "form-control", @type = "number", @maxlength = "6" })
 
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                 <div class="col-lg-6 col-lg-offset-3">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.MIMDSC, "Description", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.MIMDSC, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => Model.MIMDSC, new { @class = "form-control", @maxlength = "16" })
                     </div>
                 </div>
             </div>
@@ -105,13 +105,13 @@
                                     <tr>
                                         @Html.HiddenFor(m => Model.MenuRecipeList[i].RIRRID)
                                         <td></td>
-                                        <td> @Html.TextBoxFor(m => Model.MenuRecipeList[i].RIRRIC, new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.DisplayFor(m => Model.MenuRecipeList[i].RIMRID, new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.TextBoxFor(m => Model.MenuRecipeList[i].RIRSFQ, new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.TextBoxFor(m => Model.MenuRecipeList[i].RIMCPR, new { @class = "form-control input-sm" }) </td>
+                                        <td> @Html.TextBoxFor(m => Model.MenuRecipeList[i].RIRRIC, new { @class = "form-control input-sm", @type = "number", @maxlength = "5"}) </td>
+                                        <td> @Html.DisplayFor(m => Model.MenuRecipeList[i].RIMRID, new { @class = "form-control input-sm", @maxlength = "20" }) </td>
+                                        <td> @Html.TextBoxFor(m => Model.MenuRecipeList[i].RIRSFQ, new { @class = "form-control input-sm",@type = "number", @maxlength = "5" }) </td>
+                                        <td> @Html.TextBoxFor(m => Model.MenuRecipeList[i].RIMCPR, new { @class = "form-control input-sm",@type = "number", @maxlength = "15" }) </td>
                                         <td> @Html.DropDownListFor(m => Model.MenuRecipeList[i].RIRCWC, new SelectList(new List<Object>() {
                                             new { value = "0" , text = "Active"  },
-                                            new { value = "1" , text = "Inactive" } }, "value", "text"), new { @class = "form-control input-sm" })
+                                            new { value = "1" , text = "Inactive" } }, "value", "text"), new { @class = "form-control input-sm", @maxlength = "1" })
                                         </td>
                                         <td>@Html.DisplayFor(m => Model.MenuRecipeList[i].STOATT, new { @class = "form-control input-sm" })</td>
                                     </tr>
@@ -120,14 +120,14 @@
                             <!--Empty row-->
                             <tr>
                                 <td></td>
-                                <td>@Html.TextBoxFor(m => m.RIRRIC[0], new { @class = "form-control input-sm" })</td>
-                                <td> @Html.DisplayFor(m => m.RIMRID[0], new { @class = "form-control input-sm" }) </td>
-                                <td> @Html.TextBoxFor(m => m.RIRSFQ[0], new { @class = "form-control input-sm" }) </td>
-                                <td> @Html.TextBoxFor(m => m.RIMCPR[0], new { @class = "form-control input-sm" }) </td>
+                                <td>@Html.TextBoxFor(m => m.RIRRIC[0], new { @class = "form-control input-sm", @type = "number", @maxlength = "5" })</td>
+                                <td> @Html.DisplayFor(m => m.RIMRID[0], new { @class = "form-control input-sm", @maxlength = "20" }) </td>
+                                <td> @Html.TextBoxFor(m => m.RIRSFQ[0], new { @class = "form-control input-sm", @type = "number", @maxlength = "5" }) </td>
+                                <td> @Html.TextBoxFor(m => m.RIMCPR[0], new { @class = "form-control input-sm", @type = "number", @maxlength = "15" }) </td>
                                 <td>
                                     @Html.DropDownListFor(m => m.RIRCWC[0], new SelectList( new List<Object>() {
                                             new { value = "0" , text = "Active"  },
-                                            new { value = "1" , text = "Inactive" } }, "value", "text"), new { @class = "form-control input-sm" })
+                                            new { value = "1" , text = "Inactive" } }, "value", "text"), new { @class = "form-control input-sm", @maxlength = "1" })
                                 </td>
                                 <td>@Html.DisplayFor(m => m.STOATT[0], new { @class = "form-control input-sm" })</td>
                             </tr>
