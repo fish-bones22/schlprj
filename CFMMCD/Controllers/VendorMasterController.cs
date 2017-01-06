@@ -23,24 +23,18 @@ namespace CFMMCD.Controllers
             // Set NavBar Links accordingly
             Session["CurrentPage"] = new CurrentPageSession("MIM", "HOME", "LOG");
 
-            // SearchItemSelected is assigned value at DisplaySearchResult
-            VendorMasterViewModel VMViewModel = (VendorMasterViewModel)TempData["SearchItemSelected"];
-            if (VMViewModel == null)
-                VMViewModel = new VendorMasterViewModel();
+            // Initialize page
+            VendorMasterManager VMManager = new VendorMasterManager();
+            VendorMasterViewModel VMViewModel = new VendorMasterViewModel();
+            VMViewModel.VendorMasterList = VMManager.SearchVendors("ALL");
             return View(VMViewModel);
         }
         [HttpPost]
-        public ActionResult Index(VendorMasterViewModel VMViewModel)
-        {   // Search
+        public ActionResult Index(VendorMasterViewModel VMViewModel, string value)
+        {
             VendorMasterManager VMManager = new VendorMasterManager();
-            VMViewModel.VendorMasterList = VMManager.SearchVendor(VMViewModel);
-            if (VMViewModel.VendorMasterList != null)
-            {
-                TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = VMViewModel.VendorMasterList;
-            }
-            else
-                ModelState.AddModelError("", "No results found");
+            VMViewModel = VMManager.SearchSingleVendor(value);
+            VMViewModel.VendorMasterList = VMManager.SearchVendors("ALL");
             return View(VMViewModel);
         }
         [HttpPost]
@@ -70,21 +64,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("Index");
-        }
-        /*
-         * This method is called after selecting an item from a list of search result.
-         * Parameter VMViewModel still holds the list of searched ViewModels and
-         * parameter value stores the value of the item selected.
-         * 
-         * The value is then searched in the list and stores it in a TempData to be used by Index().
-         * */
-        [HttpPost]
-        public ActionResult DisplaySearchResult(string value)
-        {
-            List<VendorMasterViewModel> VMList = (List<VendorMasterViewModel>)Session["ViewModelList"];
-            VendorMasterViewModel VMViewModel = VMList.Where(o => o.VEMVEN.ToString().Equals(value)).FirstOrDefault();
-            TempData["SearchItemSelected"] = VMViewModel;
-            return RedirectToAction("Index", "VendorMaster");
         }
     }
 }

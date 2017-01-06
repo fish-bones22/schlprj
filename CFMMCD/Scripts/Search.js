@@ -1,5 +1,16 @@
-﻿$("#SearchFrontEnd").keyup(filterSearch);
-$("#InactiveItemsCb").click(filterSearch);
+﻿$(window).ready(function () {
+    $("#SearchFrontEnd").keyup(filterSearch);
+    $("#InactiveItemsCb").click(filterSearch);
+    $("#search_dummy").click(function () {
+        $("#search-result-modal").modal("show");
+        $("#search_dummy").blur();
+        if (!$("#SearchFrontEnd").is(":focus") || $("#search-result-modal").hasClass("in")) {
+            console.log("focus");
+            $("#SearchFrontEnd").focus();
+        }
+    });
+});
+
 function filterSearch() {
     // Hide items not relevant to the search term
     if ($("#SearchFrontEnd").val() != "") {

@@ -25,9 +25,14 @@ namespace CFMMCD.Models.EntityManager
                     RIMRow = new INVRIMP0();
                     isUpdating = false;
                 }
-                RIMRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
-                RIMRow.RIMRID = RIMViewModel.RIMRID.Trim();
-                RIMRow.RIMRIG = RIMViewModel.RIMRIG.Trim();
+                if (RIMViewModel.RIMRIC != null)
+                    RIMRow.RIMRIC = int.Parse(RIMViewModel.RIMRIC);
+                else return false;
+                if (RIMViewModel.RIMRID != null)
+                    RIMRow.RIMRID = RIMViewModel.RIMRID.Trim();
+                else return false;
+                if (RIMViewModel.RIMRIG != null)
+                    RIMRow.RIMRIG = RIMViewModel.RIMRIG.Trim();
                 RIMRow.RIMPIS = RIMViewModel.RIMPIS.Trim();
                 RIMRow.RIMBVP = RIMViewModel.RIMBVP.Trim();
                 RIMRow.RIMBZP = RIMViewModel.RIMBZP.Trim();
@@ -40,13 +45,17 @@ namespace CFMMCD.Models.EntityManager
                 RIMRow.RIMPRO = RIMViewModel.RIMPRO.Trim();
                 RIMRow.RIMSE4 = RIMViewModel.RIMSE4.Trim();
                 RIMRow.RIMERT = RIMViewModel.RIMERT.Trim();
-                RIMRow.RIMUSF = double.Parse(RIMViewModel.RIMUSF);
-                RIMRow.RIMMSD = double.Parse(RIMViewModel.RIMMSD);
-                RIMRow.RIMMSL = double.Parse(RIMViewModel.RIMMSL);
+                if (RIMViewModel.RIMUSF != null)
+                    RIMRow.RIMUSF = double.Parse(RIMViewModel.RIMUSF);
+                if (RIMViewModel.RIMMSD != null)
+                    RIMRow.RIMMSD = double.Parse(RIMViewModel.RIMMSD);
+                if (RIMViewModel.RIMMSL != null)
+                    RIMRow.RIMMSL = double.Parse(RIMViewModel.RIMMSL);
                 RIMRow.RIMLA1 = RIMViewModel.RIMLA1.Trim();
                 RIMRow.RIMLA2 = RIMViewModel.RIMLA2.Trim();
                 RIMRow.RIMSTA = RIMViewModel.RIMSTA.Trim();
-                RIMRow.RIMEDT = DateTime.Parse(RIMViewModel.RIMEDT);
+                if (RIMViewModel.RIMEDT != null)
+                    RIMRow.RIMEDT = DateTime.Parse(RIMViewModel.RIMEDT);
                 RIMRow.RIMORD = RIMViewModel.RIMORD.Trim();
                 RIMRow.RIMADE = RIMViewModel.RIMADE.Trim();
                 RIMRow.RIMBAR = RIMViewModel.RIMBAR.Trim();
@@ -181,79 +190,92 @@ namespace CFMMCD.Models.EntityManager
          * 
          * Returns List<ViewModel> if true, otherwise returns null
          */
-        public List<RawItemMasterViewModel> SearchRawItem(RawItemMasterViewModel RIMViewModel)
+        public List<RawItemMasterViewModel> SearchRawItems(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<RawItemMasterViewModel> RIMList = new List<RawItemMasterViewModel>();
                 List<INVRIMP0> RIMRowList;
-                if (RIMViewModel.SearchItem == null || RIMViewModel.SearchItem.Equals(""))
+                if (SearchItem == null || SearchItem.Equals(""))
                     return null;
-                if (db.INVRIMP0.Where(o => o.RIMRID.Contains(RIMViewModel.SearchItem)).Any())
-                    RIMRowList = db.INVRIMP0.Where(o => o.RIMRID.Contains(RIMViewModel.SearchItem)).ToList();
-                else if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(RIMViewModel.SearchItem)).Any())
-                    RIMRowList = db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(RIMViewModel.SearchItem)).ToList();
+                if (db.INVRIMP0.Where(o => o.RIMRID.Contains(SearchItem)).Any())
+                    RIMRowList = db.INVRIMP0.Where(o => o.RIMRID.Contains(SearchItem)).ToList();
+                else if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(SearchItem)).Any())
+                    RIMRowList = db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(SearchItem)).ToList();
                 else
                     return null;
                 foreach ( INVRIMP0 rim in RIMRowList )
                 {
-                    // Check if 'Include inactive items' is checked
-                    if (RIMViewModel.InactiveItemsCb || rim.RIMSTA.Equals("0") )
-                    {
-                        RawItemMasterViewModel vm = new RawItemMasterViewModel();
-                        vm.RIMRIC = rim.RIMRIC.ToString();
-                        vm.RIMRID = rim.RIMRID.Trim();
-                        vm.RIMRIG = rim.RIMRIG.Trim();
-                        vm.RIMPIS = rim.RIMPIS.Trim();
-                        vm.RIMBVP = rim.RIMBVP.Trim();
-                        vm.RIMBZP = rim.RIMBZP.Trim();
-                        vm.RIMUMC = rim.RIMUMC.Trim();
-                        vm.RIMUPC = rim.RIMUPC.ToString();
-                        vm.RIMSUQ = rim.RIMSUQ.ToString();
-                        vm.RIMLAY = rim.RIMLAY.ToString();
-                        vm.RIMPVN = rim.RIMPVN.ToString();
-                        vm.RIMCWC = rim.RIMCWC.ToString();
-                        vm.RIMPRO = rim.RIMPRO.Trim();
-                        vm.RIMSE4 = rim.RIMSE4.Trim();
-                        vm.RIMERT = rim.RIMERT.Trim();
-                        vm.RIMUSF = rim.RIMUSF.ToString();
-                        vm.RIMMSD = rim.RIMMSD.ToString();
-                        vm.RIMMSL = rim.RIMMSL.ToString();
-                        vm.RIMLA1 = rim.RIMLA1.Trim();
-                        vm.RIMLA2 = rim.RIMLA2.Trim();
-                        vm.RIMSTA = rim.RIMSTA.Trim();
-                        vm.RIMEDT = ((DateTime)rim.RIMEDT).ToString("yyyy-MM-dd");
-                        vm.RIMORD = rim.RIMORD.Trim();
-                        vm.RIMADE = rim.RIMADE.Trim();
-                        vm.RIMBAR = rim.RIMBAR.Trim();
-                        var rowList = db.RIM_VEM_Lookup.Where(o => o.RIMRIC == rim.RIMRIC);
-                        int i = 0;
-                        foreach (var v in vm.VendorList)
-                        {
-                            if (rowList.Where(o => o.VEMVEN.ToString().Equals(v.value)).Any())
-                            {
-                                var row = rowList.Single(o => o.VEMVEN.ToString().Equals(v.value));
-                                vm.VendorsSelectedList[i] = true;
-                                vm.VendorCPR[i] = row.RIMCPR.ToString();
-                                vm.VendorPUN[i] = row.PPERUN.ToString();
-                                vm.VendorSCM[i] = row.SCMCOD.ToString();
-                            }
-                            else
-                            {
-                                vm.VendorsSelectedList[i] = false;
-                                vm.VendorCPR[i] = string.Empty;
-                                vm.VendorPUN[i] = string.Empty;
-                                vm.VendorSCM[i] = string.Empty;
-                            }
-                            i++;
-                        }
+                    RawItemMasterViewModel vm = new RawItemMasterViewModel();
+                    vm = SearchSingleRawItem(rim.RIMRID.ToString());
+                    if (vm != null)
                         RIMList.Add(vm);
-                    }
                 }
                 if (RIMList == null || RIMList.ElementAt(0) == null)
                     return null;
                 return RIMList;
             }
+        }
+
+        public RawItemMasterViewModel SearchSingleRawItem(string SearchItem)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                INVRIMP0 rim;
+                if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(SearchItem)).Any())
+                    rim = db.INVRIMP0.Single(o => o.RIMRIC.ToString().Equals(SearchItem));
+                else
+                    return null;
+                RawItemMasterViewModel vm = new RawItemMasterViewModel();
+                vm.RIMRIC = rim.RIMRIC.ToString();
+                vm.RIMRID = rim.RIMRID.Trim();
+                vm.RIMRIG = rim.RIMRIG.Trim();
+                vm.RIMPIS = rim.RIMPIS.Trim();
+                vm.RIMBVP = rim.RIMBVP.Trim();
+                vm.RIMBZP = rim.RIMBZP.Trim();
+                vm.RIMUMC = rim.RIMUMC.Trim();
+                vm.RIMUPC = rim.RIMUPC.ToString();
+                vm.RIMSUQ = rim.RIMSUQ.ToString();
+                vm.RIMLAY = rim.RIMLAY.ToString();
+                vm.RIMPVN = rim.RIMPVN.ToString();
+                vm.RIMCWC = rim.RIMCWC.ToString();
+                vm.RIMPRO = rim.RIMPRO.Trim();
+                vm.RIMSE4 = rim.RIMSE4.Trim();
+                vm.RIMERT = rim.RIMERT.Trim();
+                vm.RIMUSF = rim.RIMUSF.ToString();
+                vm.RIMMSD = rim.RIMMSD.ToString();
+                vm.RIMMSL = rim.RIMMSL.ToString();
+                vm.RIMLA1 = rim.RIMLA1.Trim();
+                vm.RIMLA2 = rim.RIMLA2.Trim();
+                vm.RIMSTA = rim.RIMSTA.Trim();
+                vm.RIMEDT = ((DateTime)rim.RIMEDT).ToString("yyyy-MM-dd");
+                vm.RIMORD = rim.RIMORD.Trim();
+                vm.RIMADE = rim.RIMADE.Trim();
+                vm.RIMBAR = rim.RIMBAR.Trim();
+                var rowList = db.RIM_VEM_Lookup.Where(o => o.RIMRIC == rim.RIMRIC);
+                int i = 0;
+                foreach (var v in vm.VendorList)
+                {
+                    if (rowList.Where(o => o.VEMVEN.ToString().Equals(v.value)).Any())
+                    {
+                        var row = rowList.Single(o => o.VEMVEN.ToString().Equals(v.value));
+                        vm.VendorsSelectedList[i] = true;
+                        vm.VendorCPR[i] = row.RIMCPR.ToString();
+                        vm.VendorPUN[i] = row.PPERUN.ToString();
+                        vm.VendorSCM[i] = row.SCMCOD.ToString();
+                    }
+                    else
+                    {
+                        vm.VendorsSelectedList[i] = false;
+                        vm.VendorCPR[i] = string.Empty;
+                        vm.VendorPUN[i] = string.Empty;
+                        vm.VendorSCM[i] = string.Empty;
+                    }
+                    i++;
+                }
+                return vm;
+            }
+           
         }
     }
 }

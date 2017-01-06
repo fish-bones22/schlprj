@@ -170,11 +170,16 @@ namespace CFMMCD.Models.EntityManager
             {
                 CSHMIMP0 MIMRow = new CSHMIMP0();
                 // Columns with Input fields
-                MIMRow.MIMMIC = int.Parse(MIMViewModel.MIMMIC);
+                if (MIMViewModel.MIMMIC != null)
+                    MIMRow.MIMMIC = int.Parse(MIMViewModel.MIMMIC);
+                else return false;
                 MIMRow.MIMSTA = MIMViewModel.MIMSTA.Trim();
                 MIMRow.MIMFGC = MIMViewModel.MIMFGC.Trim();
-                MIMRow.MIMNAM = MIMViewModel.MIMNAM.Trim();
-                MIMRow.MIMDSC = MIMViewModel.MIMDSC.Trim();
+                if (MIMViewModel.MIMNAM != null)
+                    MIMRow.MIMNAM = MIMViewModel.MIMNAM.Trim();
+                else return false;
+                if (MIMViewModel.MIMDSC != null)
+                    MIMRow.MIMDSC = MIMViewModel.MIMDSC.Trim();
                 MIMRow.MIMDPC = MIMViewModel.MIMDPC.Trim();
                 MIMRow.MIMTCI = MIMViewModel.MIMTCI.Trim();
                 MIMRow.MIMPRI = 0; //
@@ -184,9 +189,11 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.MIMPRG = 0; //
                 MIMRow.MIMPND = DateTime.Now; // 
                 MIMRow.MIMWGR = MIMViewModel.MIMWGR.Trim();
-                MIMRow.MIMUTC = int.Parse(MIMViewModel.MIMUTC);
+                if (MIMViewModel.MIMUTC != null)
+                    MIMRow.MIMUTC = int.Parse(MIMViewModel.MIMUTC);
                 MIMRow.MIMHPT = MIMViewModel.MIMHPT.Trim();
-                MIMRow.MIMEDT = Convert.ToDateTime(MIMViewModel.MIMEDT);
+                if (MIMViewModel.MIMEDT != null)
+                    MIMRow.MIMEDT = Convert.ToDateTime(MIMViewModel.MIMEDT);
                 MIMRow.MIMNPI = 0;
                 MIMRow.MIMNPO = 0;
                 MIMRow.MIMNPD = 0;
@@ -195,7 +202,8 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.MIMNPT = MIMViewModel.MIMNPT.Trim();
                 // Items not originally in the table but
                 // have Input field
-                MIMRow.MIMLON = MIMViewModel.MIMLON;
+                if (MIMViewModel.MIMLON != null)
+                    MIMRow.MIMLON = MIMViewModel.MIMLON;
                 // Items that do not have Input fields
                 // but included in the table
                 MIMRow.MIMSSC = "08";

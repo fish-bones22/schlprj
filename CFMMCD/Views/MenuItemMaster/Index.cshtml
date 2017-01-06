@@ -12,6 +12,7 @@
 
 
 <h2 align="center">@ViewBag.Title</h2>
+<hr />
 <!--Alerts-->
 <div class="container">
     @if (TempData["ErrorMessage"] != null)
@@ -25,8 +26,8 @@
 </div>
 <!--Main content starts here-->
 <div class="form-horizontal">
-    <div class="container-fluid">
-        <div class="col-lg-12">
+    <div class="container">
+        <div class="col-lg-10 col-lg-offset-1">
             <input type="text" class="form-control" placeholder="Search menu item" id="search_dummy" />
         </div>
     </div>
@@ -40,11 +41,11 @@
 
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" style="padding-left:0">
                                     @Html.LabelFor(m => Model.Trading_Area, "Trading area", new { @class = "form-label" } )
                                     @Html.DropDownListFor(m => Model.Trading_Area, new SelectList(Model.TradingAreaList, "value", "text", Model.Trading_Area), new { @class = "form-control input-sm"} )
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" style="padding:0">
                                     @Html.LabelFor(m => Model.Category, "Category", new { @class = "form-label" })
                                     @Html.DropDownListFor(m => Model.Category, new SelectList(Model.CategoryList, "value", "text", Model.Category), new { @class = "form-control input-sm" })
                                 </div>
@@ -64,7 +65,7 @@
                                     <div class="form-group">
                                         <div class="col-lg-6" style="padding-left:0">
                                             <label class="form-label">Menu item number</label>
-                                            @Html.TextBoxFor(m => Model.MIMMIC, new { @class = "form-control input-sm", @Value = Model.MIMMIC })
+                                            @Html.TextBoxFor(m => Model.MIMMIC, new { @class = "form-control input-sm", @Value = Model.MIMMIC, @type = "number", @maxlength = "6", @max = "999999" })
                                         </div>
                                         <div class="col-lg-6" style="padding:0">
                                             <label class="form-label">Short name</label>
@@ -82,7 +83,7 @@
                                     <div class="form-group">
                                         <div class="col-lg-6" style="padding-left:0">
                                             <label class="form-label">Menu item number (NP6)</label>
-                                            @Html.TextBoxFor(m => Model.MIMMIC_NP6, new { @class = "form-control input-sm", @Value = Model.MIMMIC_NP6 })
+                                            @Html.TextBoxFor(m => Model.MIMMIC_NP6, new { @class = "form-control input-sm", @Value = Model.MIMMIC_NP6, @type = "number", @maxlength = "6" })
                                         </div>
                                         <div class="col-lg-6" style="padding:0">
                                             <label class="form-label">Short name (NP6)</label>
@@ -143,7 +144,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Tax code</label>
-                                @Html.TextBoxFor(m => Model.MIMUTC, new { @class = "form-control input-sm" })
+                                @Html.TextBoxFor(m => Model.MIMUTC, new { @class = "form-control input-sm", @type = "number", @maxlength = "3" })
                             </div>
                         </div>
                     </div>
@@ -276,38 +277,38 @@
                         <tr>
                             <td>Tier A</td>
                             <td></td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPRA, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPAO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDAOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDNPA, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPRA, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPAO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDAOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDNPA, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.EDTA, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>New price</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPRA, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPAO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWAOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWNPA, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPRA, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPAO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWAOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWNPA, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.PNDA, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
 
                         <tr>
                             <td>Tier B</td>
                             <td></td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPRB, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPBO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDBOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDNPB, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPRB, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPBO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDBOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDNPB, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.EDTB, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>New price</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPRB, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPBO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWBOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWNPB, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPRB, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPBO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWBOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWNPB, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.PNDB, new { @class = "form-control input-sm", @type = "date" })</td>
 
                         </tr>
@@ -315,19 +316,19 @@
                         <tr>
                             <td>Tier C</td>
                             <td></td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPRC, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPCO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDCOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDNPC, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPRC, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPCO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDCOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDNPC, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.EDTC, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>New price</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPRC, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPCO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWCOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWNPC, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPRC, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPCO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWCOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWNPC, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.PNDC, new { @class = "form-control input-sm", @type = "date" })</td>
 
                         </tr>
@@ -335,19 +336,19 @@
                         <tr>
                             <td>Tier D</td>
                             <td></td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPRD, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPDO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDDOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDNPD, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPRD, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPDO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDDOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDNPD, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.EDTD, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>New price</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPRD, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPDO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWDOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWNPD, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPRD, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPDO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWDOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWNPD, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.PNDD, new { @class = "form-control input-sm", @type = "date" })</td>
 
                         </tr>
@@ -355,38 +356,38 @@
                         <tr>
                             <td>Tier E</td>
                             <td></td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPRE, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPEO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDEOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDNPE, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPRE, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPEO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDEOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDNPE, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.EDTE, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>New price</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPRE, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPEO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWEOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWNPE, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPRE, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPEO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWEOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWNPE, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.PNDE, new { @class = "form-control input-sm", @type = "date" })</td>
 
                         </tr>
                         <tr>
                             <td>Tier F</td>
                             <td></td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPRF, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPFO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDFOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDNPF, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPRF, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPFO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDFOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDNPF, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.EDTF, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>New price</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPRF, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPFO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWFOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWNPF, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPRF, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPFO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWFOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWNPF, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.PNDF, new { @class = "form-control input-sm", @type = "date" })</td>
 
                         </tr>
@@ -394,38 +395,38 @@
                         <tr>
                             <td>Tier MD</td>
                             <td></td>
-                            <td>@Html.TextBoxFor(m => Model.OLDMDS, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDMDO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDMOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDMDN, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDMDS, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDMDO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDMOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDMDN, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.EDTM, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>New price</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWMDS, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWMDO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWMOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWMDN, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWMDS, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWMDO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWMOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWMDN, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.PNDM, new { @class = "form-control input-sm", @type = "date" })</td>
 
                         </tr>
                         <tr>
                             <td>Tier S</td>
                             <td></td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPRS, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDPSO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDSOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.OLDNPS, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPRS, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDPSO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDSOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.OLDNPS, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.EDTS, new { @class = "form-control input-sm", @type = "date" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>New price</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPRS, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWPSO, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWSOT, new { @class = "form-control input-sm" })</td>
-                            <td>@Html.TextBoxFor(m => Model.NEWNPS, new { @class = "form-control input-sm" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPRS, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWPSO, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWSOT, new { @class = "form-control input-sm", @type = "number" })</td>
+                            <td>@Html.TextBoxFor(m => Model.NEWNPS, new { @class = "form-control input-sm", @type = "number" })</td>
                             <td>@Html.TextBoxFor(m => Model.PNDS, new { @class = "form-control input-sm", @type = "date" })</td>
 
                         </tr>
@@ -455,7 +456,7 @@
                 </div>
             </div>
         </div>
-        @using (Html.BeginForm("DisplaySearchResult", "MenuItemMaster", FormMethod.Post, new { }))
+        @using (Html.BeginForm())
         {
             <div class="modal-body">
                 @for (int i = 0; i < Model.MenuItemMasterList.Count(); i++)
@@ -497,15 +498,6 @@
          }
      }
     $(window).ready(function () {
-        $("#search_dummy").click(function () {
-            $("#search-result-modal").modal("show");
-            $("#search_dummy").blur();
-            if (!$("#SearchFrontEnd").is(":focus") || $("#search-result-modal").hasClass("in")) {
-                console.log("focus");
-                $("#SearchFrontEnd").focus();
-            }
-        });
-
         // Location Select
         $("option[value='@region'").attr("selected", "selected");
         updateProvince();

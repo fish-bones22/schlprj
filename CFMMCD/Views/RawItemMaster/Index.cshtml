@@ -54,7 +54,7 @@
 					<div class="col-lg-12">
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMRIC, "Raw item number", new { @class = "form-label"})
-							@Html.TextBoxFor(m => m.RIMRIC, new { @class = "form-control input-sm", @Value = Model.RIMRIC, @maxlength = "6", @type = "number" })
+							@Html.TextBoxFor(m => m.RIMRIC, new { @class = "form-control input-sm", @Value = Model.RIMRIC, @max = "99999", @type = "number" })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => m.RIMRID, "Raw item name", new { @class = "form-label" })
@@ -64,18 +64,16 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMPIS, "Inventory period", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMPIS, new SelectList( new List<Object>{
+									@Html.DropDownListFor(m => Model.RIMPIS, new SelectList( new List<Object>{
 									    new { value = "0" , text = "Day"  },
 									    new { value = "1" , text = "Week" },
-									    new { value = "2" , text = "Month" } }, "value", "text", "0"), new { @class = "form-control input-sm", @Value = Model.RIMPIS })
+									    new { value = "2" , text = "Month" } }, "value", "text", Model.RIMPIS), new { @class = "form-control input-sm" })
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMRIG, "Raw item group", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMRIG, new SelectList( new List<Object>{
-									    new { value = "00" , text = "Refer to"  },
-									    new { value = "01" , text = "Product Group" } }, "value", "text", "00"), new { @class = "form-control input-sm", @Value = Model.RIMRIG })
+									@Html.DropDownListFor(m => Model.RIMRIG, new SelectList( Model.MaterialsGroupList, "value", "text", Model.RIMRIG), new { @class = "form-control input-sm" })
 								</div>
 							</div>
 						</div>
@@ -83,15 +81,13 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMUMC, "Unit of Usage (UN)", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMUMC, new SelectList( new List<Object>{
-										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-										new { value = "TRY" , text = "Tray" }}, "value", "text", "BOX"), new { @class = "form-control input-sm", @Value = Model.RIMUMC })
+									@Html.DropDownListFor(m => Model.RIMUMC, new SelectList( Model.UnitOfMeasureList, "value", "text", Model.RIMUMC), new { @class = "form-control input-sm" })
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMUPC, "Unit of Usage per CS", new { @class = "form-label" })
-									@Html.TextBoxFor(m => m.RIMUPC, new { @class = "form-control input-sm", @Value = Model.RIMUPC, @type = "number", @maxlength = "9" })
+									@Html.TextBoxFor(m => Model.RIMUPC, new { @class = "form-control input-sm", @type = "number" })
 								</div>
 							</div>
 						</div>
@@ -99,15 +95,13 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMBZP, "Sub unit (TRAY)", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMBZP, new SelectList( new List<Object>{
-										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-										new { value = "TRY" , text = "Tray" } },"value", "text", "BOX"), new { @class = "form-control input-sm", @Value = Model.RIMBZP })
+									@Html.DropDownListFor(m => Model.RIMBZP, new SelectList(Model.UnitOfMeasureList,"value", "text", Model.RIMBZP), new { @class = "form-control input-sm" })
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMSUQ, "Sub unit per CS", new { @class = "form-label" })
-									@Html.TextBoxFor(m => m.RIMSUQ, new { @class = "form-control input-sm", @Value = Model.RIMSUQ, @type = "number", @maxlength = "8" })
+									@Html.TextBoxFor(m => Model.RIMSUQ, new { @class = "form-control input-sm", @type = "number", @maxlength = "8" })
 								</div>
 							</div>
 						</div>
@@ -115,15 +109,13 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMBVP, "Packing unit (CS)", new { @class = "form-label" })
-									@Html.DropDownListFor(m => m.RIMBVP, new SelectList( new List<Object>{
-										new { value = "BOX" , text = "Box"  }, // Sample OPTIONS only
-										new { value = "TRY" , text = "Tray" } }, "value", "text", "BOX"), new { @class = "form-control input-sm", @Value = Model.RIMBVP })
+									@Html.DropDownListFor(m => Model.RIMBVP, new SelectList(Model.UnitOfMeasureList, "value", "text", Model.RIMBVP), new { @class = "form-control input-sm" })
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
 									@Html.LabelFor(m => m.RIMLAY, "CS/Vendor unit", new { @class = "form-label" })
-									@Html.TextBoxFor(m => m.RIMLAY, new { @class = "form-control input-sm", @Value = Model.RIMLAY, @maxlength = "2" })
+									@Html.TextBoxFor(m => Model.RIMLAY, new { @class = "form-control input-sm", @maxlength = "2" })
 								</div>
 							</div>
 						</div>

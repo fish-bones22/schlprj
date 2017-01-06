@@ -3,11 +3,6 @@
 
 @{
     ViewBag.Title = "Vendor Master";
-    int HasSearch = 0;
-    if (TempData["SearchResult"] != null)
-    {
-        HasSearch = (int)TempData["SearchResult"];
-    }
 }
 
 <h2 align="center">@ViewBag.Title</h2>
@@ -25,27 +20,11 @@
 </div>
 <!-- Main body -->
 <div class="form-horizontal">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="container-fluid">
-            <div class="col-lg-3 text-right">
-                <label class="form-label" for="menu-item">Search Vendor number/description</label>
-            </div>
-            <div class="col-lg-6">
-                @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
-                <div class="input-group float-right" style="padding-top:8px">
-                    <label class="checkbox-inline form-label">
-                        @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
-                    </label>
-                </div>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-lg-1">
-                <button type="submit" class="btn btn-default" name="command" value="Search"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
-            </div>
+    <div class="container-fluid">
+        <div class="col-lg-8 col-lg-offset-2">
+            <input type="text" class="form-control" placeholder="Search vendor" id="search_dummy" />
         </div>
-    }
+    </div>
     <hr/>
     @using (Html.BeginForm("UpdateDelete", "VendorMaster", FormMethod.Post, new { }))
     {
@@ -54,7 +33,7 @@
                 <div class="col-lg-5">
                     <div class="form-group">
                         @Html.LabelFor(m => m.VEMVEN, "Vendor number", new {  @class = "form-label" } )
-                        @Html.TextBoxFor(m => Model.VEMVEN, new { @class = "form-control input-sm", @type = "number", @maxlength = "3" })
+                        @Html.TextBoxFor(m => Model.VEMVEN, new { @class = "form-control input-sm", @type = "number", @max = "999" })
                     </div>
                 </div>
                 <div class="col-lg-6 col-lg-offset-1">
@@ -210,42 +189,30 @@
     <div class="modal-content">
         <div class="modal-header">
             <button class="close" data-dismiss="modal">&times;</button>
-            <h4>Search results</h4>
+            <h4>All items</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search vendor" autofocus />
+            </div>
         </div>
-        @using (Html.BeginForm("DisplaySearchResult", "VendorMaster", FormMethod.Post, new { }))
+        @using (Html.BeginForm())
         {
-            List<VendorMasterViewModel> VEMList = (List<VendorMasterViewModel>)Session["ViewModelList"];
-            if (VEMList != null)
-            {
-                <div class="modal-body">
-                    @{if (HasSearch == 1 && VEMList != null)
-                        {
-                            foreach (VendorMasterViewModel vm in VEMList)
-                            {
-                                <button type="submit" class="modal-item-select" name="value" value=@vm.VEMVEN>
-                                    <div class="col-lg-3">
-                                        @vm.VEMVEN
-                                    </div>
-                                    <div class="col-lg-9">
-                                        @vm.VEMDS1
-                                    </div>
-                                </button>
-                            }
-                        }
-                    }
-                </div>
-            }
+            <div class="modal-body">
+                @for (int i = 0; i < Model.VendorMasterList.Count(); i++)
+                { 
+                    string ActiveInactive = "active";
+                    <button type="submit" class="modal-item-select tr-collapse @Model.VendorMasterList[i].VEMVEN @Model.VendorMasterList[i].VEMDS1 @ActiveInactive" name="value" value=@Model.VendorMasterList[i].VEMVEN>
+                        <div class="col-lg-3">
+                            @Model.VendorMasterList[i].VEMVEN
+                        </div>
+                        <div class="col-lg-9">
+                            @Model.VendorMasterList[i].VEMDS1
+                        </div>
+                    </button>
+                }
+            </div>
         }
     </div>
 </div>
-
-<script>
-    $(window).ready(function () {
-        if (@HasSearch === 1) {
-            $("#search-result-modal").modal('show');
-        }
-    });
-</script>
 <script>
  @{
         string region = "NCR";
@@ -265,10 +232,6 @@
         }
     }
     $(window).ready(function () {
-        // Modal
-		if (@HasSearch === 1) {
-			$("#search-result-modal").modal('show');
-		}
         // Location Select
 	    $("option[value='@region'").attr("selected", "selected");
 	    updateProvince();

@@ -24,28 +24,17 @@ namespace CFMMCD.Controllers
             // Set NavBar Links accordingly
             Session["CurrentPage"] = new CurrentPageSession("MIM", "HOME", "LOG");
 
-            // SearchItemSelected is assigned value at DisplaySearchResult
-            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MenuItemMasterViewModel MIMViewModel = (MenuItemMasterViewModel)TempData["SearchItemSelected"];
-            if (MIMViewModel == null)
-            {
-                MIMViewModel = new MenuItemMasterViewModel();
-            }
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("ALL");
+            // Initialize page
+            MenuItemMasterViewModel MIMViewModel = new MenuItemMasterViewModel();
+            MIMViewModel.MenuItemMasterList = new MenuItemMasterManager().SearchMenuItems("ALL");
             return View(MIMViewModel);
         }
         [HttpPost]
-        public ActionResult Index(MenuItemMasterViewModel MIMViewModel)
-        {   // Search
+        public ActionResult Index(MenuItemMasterViewModel MIMViewModel, string value)
+        {
             MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("");
-            if (MIMViewModel.MenuItemMasterList != null)
-            {
-                TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = MIMViewModel.MenuItemMasterList;
-            }
-            else
-                ModelState.AddModelError("", "No results found");
+            MIMViewModel = MIMManager.SearchSingleMenuItem(value);
+            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("ALL");
             return View(MIMViewModel);
         }
         [HttpPost]
@@ -75,21 +64,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("Index");
-        }
-        /*
-         * This method is called after selecting an item from a list of search result.
-         * Parameter MIMViewModel still holds the list of searched ViewModels and
-         * parameter value stores the value of the item selected.
-         * 
-         * The value is then searched in the list and stores it in a TempData to be used by Index().
-         * */
-        [HttpPost]
-        public ActionResult DisplaySearchResult(string value)
-        {
-            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MenuItemMasterViewModel MIMViewModel = MIMManager.SearchSingleMenuItem(value);
-            TempData["SearchItemSelected"] = MIMViewModel;
-            return RedirectToAction("Index", "MenuItemMaster");
         }
     }
 }

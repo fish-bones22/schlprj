@@ -264,7 +264,36 @@ namespace CFMMCD.DropDown
                 return list;
             }
         }
-       
+        public List<GenericDropDownList> SetMaterialsGroupList()
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<GenericDropDownList> list = new List<GenericDropDownList>();
+                foreach (var i in db.INVMGRP0)
+                {
+                    GenericDropDownList option = new GenericDropDownList();
+                    option.text = i.MGRTXT;
+                    option.value = i.MGRGRP;
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
+        public List<GenericDropDownList> SetUnitOfMeasureList()
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<GenericDropDownList> list = new List<GenericDropDownList>();
+                foreach (var i in db.INVUOMP0)
+                {
+                    GenericDropDownList option = new GenericDropDownList();
+                    option.text = i.UOMDEL;
+                    option.value = i.UOMDES;
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
         public List<CheckBoxList> SetVendorList()
         {
             using ( CFMMCDEntities db = new CFMMCDEntities() )

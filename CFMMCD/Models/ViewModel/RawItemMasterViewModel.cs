@@ -17,6 +17,8 @@ namespace CFMMCD.Models.ViewModel
             StoreList = tdd.SetStoreDropDown();
             LocationList = tdd.SetLocationDropDown();
             VendorList = tdd.SetVendorList();
+            UnitOfMeasureList = tdd.SetUnitOfMeasureList();
+            MaterialsGroupList = tdd.SetMaterialsGroupList();
             VendorsSelectedList = new List<bool>(VendorList.Count());
             VendorCPR = new List<string>(VendorList.Count());
             VendorPUN = new List<string>(VendorList.Count());
@@ -80,6 +82,8 @@ namespace CFMMCD.Models.ViewModel
         public string SOFT_SERVE_OR_VANILLA_POWDER_MIX { get; set; }
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
+        public List<GenericDropDownList> UnitOfMeasureList { get; set; }
+        public List<GenericDropDownList> MaterialsGroupList { get; set; }
         public List<GenericDropDownList> PrimaryVendorList { get; set; }
         public List<GenericDropDownList> StoreList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
