@@ -72,6 +72,13 @@ namespace CFMMCD.Models.EntityManager
                 // Existing
                 foreach (var v in CSMViewModel.RawItemList)
                 {
+                    // Delete overwritten RIMRIC entry
+                    if (!v.PreviousRIMRIC.Equals(v.RIMRIC) && db.CSM_Master_Recipe.Where(o => o.CSMDES.ToString().Equals(CSMViewModel.CSMDES)).Any())
+                    {
+                        SCM_Master_Recipe CSMRowToDelete = db.SCM_Master_Recipe.Single(o => o.CSMID.Equals(v.CSMID));
+                        db.SCM_Master_Recipe.Remove(CSMRowToDelete);
+                        db.SaveChanges();
+                    }
                     SCM_Master_Recipe CSMRow = new SCM_Master_Recipe();
                     CSMRow.CSMID =  v.CSMID;
                     CSMRow.CSMDES = CSMViewModel.CSMDES;

@@ -98,33 +98,23 @@ namespace CFMMCD.Controllers
             // Set NavBar Links accordingly
             Session["CurrentPage"] = new CurrentPageSession("UAP_EDIT", "HOME", "LOG");
 
-            // SearchItemSelected is assigned value at DisplaySearchResult
             AccountManager AManager = new AccountManager();
-            AccountViewModel AViewModel = (AccountViewModel)TempData["SearchItemSelected"];
-            if (AViewModel == null)
-            {
-                AViewModel = new AccountViewModel();
-            }
+            AccountViewModel AViewModel = new AccountViewModel();
+            AViewModel.AccountList = AManager.SearchAccounts("ALL");
             return View(AViewModel);
         }
 
         [HttpPost]
-        public ActionResult EditAccount ( AccountViewModel AViewModel, string command )
+        public ActionResult EditAccount ( AccountViewModel AViewModel, string command, string value )
         {
             AccountManager AManager = new AccountManager();
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
-            if ( command == "Search" )
+            if ( command == null )
             {
-                AViewModel.AccountList = AManager.SearchAccount(AViewModel.SearchItem);
-                if (AViewModel.AccountList != null)
-                {
-                    TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                    Session["ViewModelList"] = AViewModel.AccountList;
-                }
-                else
-                    ModelState.AddModelError("", "No results found");
+                AViewModel = AManager.SearchSingleAccount(value);
+                AViewModel.AccountList = AManager.SearchAccounts("ALL");
 
                 return View(AViewModel);
             }
@@ -156,15 +146,6 @@ namespace CFMMCD.Controllers
             return RedirectToAction("EditAccount");
         }
 
-        [HttpPost]
-        public ActionResult DisplaySearchResultEAcc(string value)
-        {
-            List<AccountViewModel> AList = (List<AccountViewModel>)Session["ViewModelList"];
-            AccountViewModel AViewModel = AList.Where(o => o.Username.ToString().Equals(value)).FirstOrDefault();
-            TempData["SearchItemSelected"] = AViewModel;
-            return RedirectToAction("EditAccount", "Account");
-        }
-
         public ActionResult EditAccess()
         {
             // Validate log in and user access
@@ -172,36 +153,25 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.UAP) return RedirectToAction("Login", "Account");
             // Set NavBar Links accordingly
             Session["CurrentPage"] = new CurrentPageSession("UAP_ACCESS_EDIT", "HOME", "LOG");
-
-            // SearchItemSelected is assigned value at DisplaySearchResult
+            
             AccountManager AManager = new AccountManager();
-            AccountViewModel AViewModel = (AccountViewModel)TempData["SearchItemSelected"];
-            if (AViewModel == null)
-            {
-                AViewModel = new AccountViewModel();
-            }
+            AccountViewModel AViewModel = new AccountViewModel();
+            AViewModel.AccountList = AManager.SearchAccounts("ALL");
             return View(AViewModel);
         }
 
         [HttpPost]
-        public ActionResult EditAccess(AccountViewModel AViewModel, string command)
+        public ActionResult EditAccess(AccountViewModel AViewModel, string command, string value)
         {
             AccountManager AManager = new AccountManager();
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
-            
-            if (command == "Search")
-            {
-                AViewModel.AccountList = AManager.SearchAccount(AViewModel.SearchItem);
-                if (AViewModel.AccountList != null)
-                {
-                    TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                    Session["ViewModelList"] = AViewModel.AccountList;
-                }
-                else
-                    ModelState.AddModelError("", "No results found");
 
+            if (command == null)
+            {
+                AViewModel = AManager.SearchSingleAccount(value);
+                AViewModel.AccountList = AManager.SearchAccounts("ALL");
                 return View(AViewModel);
             }
             else if (command == "Save")
@@ -219,15 +189,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("EditAccess");
-        }
-
-        [HttpPost]
-        public ActionResult DisplaySearchResultEA(string value)
-        {
-            List<AccountViewModel> AList = (List<AccountViewModel>)Session["ViewModelList"];
-            AccountViewModel AViewModel = AList.Where(o => o.Username.ToString().Equals(value)).FirstOrDefault();
-            TempData["SearchItemSelected"] = AViewModel;
-            return RedirectToAction("EditAccess", "Account");
         }
     }
 }

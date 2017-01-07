@@ -10,32 +10,32 @@ namespace CFMMCD.Models.EntityManager
 {
     public class ValueMealManager
     {
-        public List<ValueMealViewModel> SearchValueMeal(ValueMealViewModel VMViewModel)
+        public List<ValueMeal> SearchValueMeals(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<ValueMealViewModel> VMList = new List<ValueMealViewModel>();
+                List<ValueMeal> VMList = new List<ValueMeal>();
                 List<CSHVMLP0> MIVMowList;
-                if (VMViewModel.SearchItem == null || VMViewModel.SearchItem.Equals(""))
-                    return null;
-                if (db.CSHVMLP0.Where(o => o.VMLNUM.ToString().Equals(VMViewModel.SearchItem)).Any())
+                if (SearchItem.ToUpper().Equals("ALL"))
                 {
-                    MIVMowList = db.CSHVMLP0.Where(o => o.VMLNUM.ToString().Equals(VMViewModel.SearchItem)).ToList();
+                    MIVMowList = db.CSHVMLP0.ToList();
                 }
-                else if (db.CSHVMLP0.Where(o => o.VMLNAM.Trim().Equals(VMViewModel.SearchItem)).Any())
+                else if (db.CSHVMLP0.Where(o => o.VMLNUM.ToString().Equals(SearchItem)).Any())
                 {
-                    MIVMowList = db.CSHVMLP0.Where(o => o.VMLNAM.Trim().Equals(VMViewModel.SearchItem)).ToList();
+                    MIVMowList = db.CSHVMLP0.Where(o => o.VMLNUM.ToString().Equals(SearchItem)).ToList();
+                }
+                else if (db.CSHVMLP0.Where(o => o.VMLNAM.Trim().Equals(SearchItem)).Any())
+                {
+                    MIVMowList = db.CSHVMLP0.Where(o => o.VMLNAM.Trim().Equals(SearchItem)).ToList();
                 }
                 else
                     return null;
                 foreach (CSHVMLP0 rim in MIVMowList)
                 {
-                    ValueMealViewModel vm = new ValueMealViewModel();
+                    ValueMeal vm = new ValueMeal();
+                    vm.VMLID = rim.VMLID.Trim();
                     vm.VMLNUM = rim.VMLNUM.ToString();
                     vm.VMLNAM = rim.VMLNAM.Trim();
-                    vm.VMLPRI = rim.VMLPRI.ToString();
-                    vm.VMLPRO = rim.VMLPRI.ToString();
-                    vm.MenuItemList = SearchVMMenuItem(vm.VMLNUM);
                     VMList.Add(vm);
                 }
                 if (VMList == null || VMList.Count == 0)
@@ -44,6 +44,27 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
+        public ValueMealViewModel SearchSingleValueMeal( string SearchItem )
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                CSHVMLP0 VMRow;
+                if (db.CSHVMLP0.Where(o => o.VMLID.ToString().Equals(SearchItem)).Any())
+                {
+                    VMRow = db.CSHVMLP0.Single(o => o.VMLID.ToString().Equals(SearchItem));
+                }
+                else return null;
+                ValueMealViewModel vm = new ValueMealViewModel();
+                vm.VMLNUM = VMRow.VMLNUM.ToString();
+                vm.VMLNAM = VMRow.VMLNAM.Trim();
+                vm.VMLPRI = VMRow.VMLPRI.ToString();
+                vm.VMLPRO = VMRow.VMLPRI.ToString();
+                vm.MenuItemList = SearchVMMenuItem(vm.VMLNUM);
+                return vm;
+            }
+        }
+
+        // Searches Menu Items included in a value meal
         public List<VMMenuItem> SearchVMMenuItem(string ValueMealNumber)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
@@ -85,6 +106,16 @@ namespace CFMMCD.Models.EntityManager
                 // Existing
                 foreach (var v in VMViewModel.MenuItemList)
                 {
+                    // Delete overwritten MIMMIC entry
+                    if (!v.PreviousMIMMIC.Equals(v.MIMMIC) && db.CSHVMLP0.Where(o => o.VMLNUM.ToString().Equals(VMViewModel.VMLNUM)).Any())
+                    {
+                        CSHVMLP0 VMRowToDelete = db.CSHVMLP0.Single(o => o.VMLID.Equals(VMViewModel.VMLNUM + v.PreviousMIMMIC));
+                        db.CSHVMLP0.Remove(VMRowToDelete);
+                        db.SaveChanges();
+                    }
+                    // Skip if MIMMIC is null
+                    if (v.MIMMIC == null || v.MIMMIC.Equals(""))
+                        continue;
                     CSHVMLP0 VMRow = new CSHVMLP0();
                     VMRow.VMLID = VMViewModel.VMLNUM + v.MIMMIC;
                     VMRow.VMLNUM = int.Parse(VMViewModel.VMLNUM);
@@ -95,9 +126,9 @@ namespace CFMMCD.Models.EntityManager
                     VMRow.VMLPRO = double.Parse(VMViewModel.VMLPRO);
                     try
                     {
-                        if (db.CSHVMLP0.Where(o => o.VMLID == VMRow.VMLID).Any())
+                        if (db.CSHVMLP0.Where(o => o.VMLID.Equals(VMRow.VMLID)).Any())
                         {
-                            CSHVMLP0 rowToDelete = db.CSHVMLP0.Single(o => o.VMLID == VMRow.VMLID);
+                            CSHVMLP0 rowToDelete = db.CSHVMLP0.Single(o => o.VMLID.Equals(VMRow.VMLID));
                             db.CSHVMLP0.Remove(rowToDelete);
                             VMRow.STATUS = "E";
                             db.CSHVMLP0.Add(VMRow);
@@ -141,9 +172,9 @@ namespace CFMMCD.Models.EntityManager
                         VMRow.VMLPRO = double.Parse(VMViewModel.VMLPRO);
                         try
                         {
-                            if (db.CSHVMLP0.Where(o => o.VMLID == VMRow.VMLID).Any())
+                            if (db.CSHVMLP0.Where(o => o.VMLID.Equals(VMRow.VMLID)).Any())
                             {
-                                CSHVMLP0 rowToDelete = db.CSHVMLP0.Single(o => o.VMLID == VMRow.VMLID);
+                                CSHVMLP0 rowToDelete = db.CSHVMLP0.Single(o => o.VMLID.Equals(VMRow.VMLID));
                                 db.CSHVMLP0.Remove(rowToDelete);
                                 VMRow.STATUS = "E";
                                 db.CSHVMLP0.Add(VMRow);

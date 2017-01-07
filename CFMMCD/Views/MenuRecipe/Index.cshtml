@@ -1,12 +1,7 @@
 ﻿@model CFMMCD.Models.ViewModel.MenuRecipeViewModel
 @using CFMMCD.Models.ViewModel
 
-@{  int j = 0;
-    int HasSearch = 0;
-    if (TempData["SearchResult"] != null)
-    {
-        HasSearch = (int)TempData["SearchResult"];
-    }
+@{
     ViewBag.Title = "Menu Recipe";
 }
 
@@ -199,7 +194,6 @@
                     '<td><button type="button" class="close delete-row">&times;</button></td>' +
                 '</tr>';
 
-    console.log(newRow);
     $(window).ready(function () {
 
         setDeleteRowEventListener();

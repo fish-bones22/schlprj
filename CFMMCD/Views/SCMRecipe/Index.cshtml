@@ -1,13 +1,8 @@
 ﻿@model CFMMCD.Models.ViewModel.SCMRecipeViewModel
 @using CFMMCD.Models.ViewModel
 
-@{  int j = 0;
-    int HasSearch = 0;
-    if (TempData["SearchResult"] != null)
-    {
-        HasSearch = (int)TempData["SearchResult"];
-    }
-    ViewBag.Title = "SCM Recipe";
+@{
+    ViewBag.Title = "SCM Master Recipe";
 }
 
 
@@ -26,27 +21,6 @@
 </div>
 <!--Main content starts here-->
 <div class="form-horizontal">
-
-    <div class="form-horizontal">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="container-fluid">
-                <div class="col-lg-2 col-lg-offset-2">
-                    <label class="form-label" for="menu-item">Value meal name/number</label>
-                </div>
-                <div class="col-lg-5">
-                    @Html.TextBoxFor(m => m.SearchItem, new { @class = "form-control" })
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-lg-1">
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
-                </div>
-            </div>
-        }
-    </div>
-
-    <hr />
 
     <div class="form-horizontal">
         @using (Html.BeginForm("UpdateDelete", "SCMRecipe", FormMethod.Post, new { }))
@@ -82,37 +56,42 @@
                             {
                                 for (int i = 0; i < Model.RawItemList.Count(); i++)
                                 {
+                                    Model.RawItemList[i].PreviousRIMRIC = Model.RawItemList[i].RIMRIC;
                                     <!--Generated rows-->
                                     <tr>
                                         <td></td>
                                         @Html.HiddenFor(m => Model.RawItemList[i].CSMID)
-                                        <td> @Html.TextBoxFor(m => Model.RawItemList[i].RIMRIC, new { @class = "form-control input-sm",@type = "number", @maxlength = "5" }) </td>
-                                        <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMRID, new { @class = "form-control input-sm",@maxlength = "20" }) </td>
+                                        <td> 
+                                            @Html.TextBoxFor(m => Model.RawItemList[i].RIMRIC, new { @class = "tb-select form-control input-sm", @type = "number", @maxlength = "99999" }) 
+                                            @Html.HiddenFor(m => Model.RawItemList[i].PreviousRIMRIC)
+                                        </td>
+                                        <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMRID, new { @class = "form-control input-sm" }) </td>
                                         <td> @Html.TextBoxFor(m => Model.RawItemList[i].CSMSFQ, new { @class = "form-control input-sm" }) </td>
-                                        <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMCPR, new { @class = "form-control input-sm",@type = "number", @maxlength = "15" }) </td>
+                                        <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMCPR, new { @class = "form-control input-sm" }) </td>
                                         <td>
                                             @Html.DropDownListFor(m => Model.RawItemList[i].CSMCWC, new SelectList(new List<Object>() {
                                             new { value = "0" , text = "Active"  },
                                             new { value = "1" , text = "Inactive" } }, "value", "text"), new { @class = "form-control input-sm" })
                                         </td>
                                         <td> @Html.DisplayFor(m => Model.RawItemList[i].StoAtt, new { @class = "form-control input-sm" }) </td>
+                                        <td><button type="button" class="close delete-row">&times;</button></td>
                                     </tr>
                                 }
                             }
                             <!--Empty row-->
                             <tr>
                                 <td></td>
-                                <td> @Html.TextBoxFor(m => Model.RIMRIC[0], new { @class = "form-control input-sm", @type = "number", @maxlength = "5" }) </td>
-                                <td> @Html.DisplayFor(m => Model.RIMRID[0], new { @class = "form-control input-sm", @maxlength = "20" }) </td>
+                                <td> @Html.TextBoxFor(m => Model.RIMRIC[0], new { @class = "tb-select form-control input-sm", @type = "number", @maxlength = "5" }) </td>
+                                <td> @Html.DisplayFor(m => Model.RIMRID[0], new { @class = "form-control input-sm" }) </td>
                                 <td> @Html.TextBoxFor(m => Model.CSMSFQ[0], new { @class = "form-control input-sm" }) </td>
-                                <td> @Html.DisplayFor(m => Model.RIMCPR[0], new { @class = "form-control input-sm",@type = "number", @maxlength = "15" }) </td>
+                                <td> @Html.DisplayFor(m => Model.RIMCPR[0], new { @class = "form-control input-sm" }) </td>
                                 <td>
                                     @Html.DropDownListFor(m => Model.CSMCWC[0], new SelectList(new List<Object>() {
                                             new { value = "0" , text = "Active"  },
                                             new { value = "1" , text = "Inactive" } }, "value", "text"), new { @class = "form-control input-sm" })
                                 </td>
                                 <td>@Html.DisplayFor(m => Model.StoAtt[0], new { @class = "form-control input-sm" })</td>
-
+                                <td><button type="button" class="close delete-row">&times;</button></td>
                             </tr>
                         }
                     </tbody>
@@ -133,35 +112,34 @@
     </div>
 </div>
 
-<!--Search result modal-->
-<div class="modal fade" id="search-result-modal" role="dialog">
+<!--Search Menu Item Modal-->
+<div class="modal fade" id="search-item-modal" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
             <button class="close" data-dismiss="modal">&times;</button>
-            <h4>Search results</h4>
+            <h4>Select Menu item</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search value meal" autofocus />
+            </div>
         </div>
-        @using (Html.BeginForm("DisplaySearchResult", "SCMRecipe", FormMethod.Post, new { }))
-        {
-            List<SCMRecipeViewModel> VMList = (List<SCMRecipeViewModel>)Session["ViewModelList"];
-            if (VMList != null)
+        <div class="modal-body">
+            @for (int i = 0; i < Model.AllRawItems.Count(); i++)
             {
-                <div class="modal-body">
-                    @{
-                        if (HasSearch == 1 && VMList != null)
-                        {
-                            foreach (SCMRecipeViewModel vm in VMList)
-                            {
-                                <button type="submit" class="modal-item-select" name="value" value=@vm.CSMID>
-                                    <div class="col-lg-3">
-                                        @vm.CSMDES
-                                    </div>
-                                </button>
-                            }
-                        }
-                    }
-                </div>
+                string ActiveInactive = "active";
+                if (Model.AllRawItems[i].RIMSTA.Equals("1"))
+                {
+                    ActiveInactive = "inactive";
+                }
+                <button type="button" class="modal-item-select tr-collapse @Model.AllRawItems[i].RIMRID @Model.AllRawItems[i].RIMRIC @ActiveInactive" name="value" value=@Model.AllRawItems[i].RIMRIC data-dismiss="modal">
+                    <div class="col-lg-3">
+                        @Model.AllRawItems[i].RIMRIC
+                    </div>
+                    <div class="col-lg-9">
+                        @Model.AllRawItems[i].RIMRID
+                    </div>
+                </button>
             }
-        }
+        </div>
     </div>
 </div>
 
@@ -169,7 +147,7 @@
     var index = 0;
     var newRow = '<tr>'+
                     '<td></td>'+
-                    '<td> <input class="form-control input-sm" id="RIMRIC_'+(++index)+'_" name="RIMRIC['+index+']" type="text" value="" /> </td>'+
+                    '<td> <input class="tb-select form-control input-sm" id="RIMRIC_' + (++index) + '_" name="RIMRIC[' + index + ']" type="text" value="" /> </td>' +
                     '<td>  </td>'+
                     '<td> <input class="form-control input-sm" id="CSMSFQ_'+index+'_" name="CSMSFQ['+index+']" type="text" value="" /> </td>'+
                     '<td>  </td>'+
@@ -179,17 +157,43 @@
                             '<option value="1">Inactive</option>'+
                         '</select>'+
                    '</td>'+
-                    '<td></td>'+
+                    '<td></td>' +
+                    '<td><button type="button" class="close delete-row">&times;</button></td>' +
                 '</tr>';
 
-    console.log(newRow);
     $(window).ready(function () {
-        if (@HasSearch === 1) {
-            $("#search-result-modal").modal('show');
-        }
 
-        $("#add-row").click(function() {
-            $("tbody").append (newRow);
+        setEventListener();
+        $("#add-row").click(function () {
+            if ($("tbody tr:last-child").children("td").children("input[type=number]").val() != "" || $("tbody tr:last-child").hasClass("hidden")) {
+                $("tbody").append(newRow);
+                setEventListener();
+            }
         });
     });
+
+    function setEventListener() {
+        $(".delete-row").click(function () {
+            var hiddenTr = $("tbody .hidden").length;
+            var totalTr = $("tbody tr").length;
+            if (totalTr - hiddenTr > 1) {
+                $(this).parent().siblings("td").each(function () {
+                    $(this).children("input[type=number]").val("");
+                });
+                $(this).parent().parent("tr").addClass("hidden");
+            }
+        });
+
+
+        $(".tb-select").click(function () {
+            TextBoxPressed = $(this);
+            $("#search-item-modal").modal("show");
+        });
+
+        $(".modal-item-select").click(onItemSelected);
+    }
+
+    function onItemSelected() {
+        TextBoxPressed.val($(this).val());
+    }
 </script>

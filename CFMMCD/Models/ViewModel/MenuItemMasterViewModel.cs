@@ -13,7 +13,7 @@ namespace CFMMCD.Models.ViewModel
             TableDropDown tdd = new TableDropDown();
             LocationList = tdd.SetLocationDropDown();
             StoreList = tdd.SetStoreDropDown();
-            MenuItemMasterList = new List<MenuItemMasterViewModel>();
+            MenuItemMasterList = new List<MenuItem>();
             MenuRecipeList = new List<MenuRecipe>();
             TradingAreaList = tdd.SetTradingAreaList();
             CategoryList = tdd.SetCategoryList();
@@ -70,7 +70,7 @@ namespace CFMMCD.Models.ViewModel
         public bool SelectAllCb { get; set; }
         public bool SelectExcept { get; set; }
 
-        public List<MenuItemMasterViewModel> MenuItemMasterList { get; set; }
+        public List<MenuItem> MenuItemMasterList { get; set; }
 
         // Tier items
         public double OLDPRA { get; set; }

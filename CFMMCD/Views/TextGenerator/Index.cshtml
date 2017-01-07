@@ -4,74 +4,94 @@
     ViewBag.Title = "Text Generation";
 }
 
-<h2>@ViewBag.Title</h2>
-
+<h2 align="center">@ViewBag.Title</h2>
+<hr />
+<!--Alerts-->
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
 <div class="form-horizontal">
     @using (Html.BeginForm())
     {
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="row">
+                <div class="container-fluid">
+                    <div class="col-lg-8 col-lg-offset-2">
                         @Html.TextBoxFor(m => m.PromoTitle, new { @class = "form-control", @placeholder = "Promo Title" })
                     </div>
-                    <div class="row">
-                        <label class="checkbox-inline form-label">
-                            @Html.CheckBoxFor(m => m.IncludeMIM)Menu Item
-                        </label>
-                        <label class="checkbox-inline form-label">
-                            @Html.CheckBoxFor(m => m.IncludeREC)Recipe
-                        </label>
-                        <label class="checkbox-inline form-label">
-                            @Html.CheckBoxFor(m => m.IncludeRIM)Raw Item
-                        </label>
-                        <label class="checkbox-inline form-label">
-                            @Html.CheckBoxFor(m => m.IncludeAll)All Items
-                        </label>
+                </div>
+                <div class="container-fluid">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="col-lg-8">
+                            <label class="checkbox-inline form-label">
+                                @Html.CheckBoxFor(m => m.IncludeMIM)Menu Item
+                            </label>
+                            <label class="checkbox-inline form-label">
+                                @Html.CheckBoxFor(m => m.IncludeREC)Recipe
+                            </label>
+                            <label class="checkbox-inline form-label">
+                                @Html.CheckBoxFor(m => m.IncludeRIM)Raw Item
+                            </label>
+                            <label class="checkbox-inline form-label">
+                                @Html.CheckBoxFor(m => m.IncludeAll, new { @checked = "checked" })All Items
+                            </label>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.DateFrom, "Date from", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.DateFrom, new { @class = "form-control input-sm", @type = "date" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.DateTo, "Date to", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control input-sm", @type = "date" })
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="form-inline">
-                        @Html.LabelFor(m => m.DateFrom, "Date from", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => m.DateFrom, new { @class = "form-control input-sm", @type = "date" })
-                    </div><br/>
-                    <div class="form-inline">
-                        @Html.LabelFor(m => m.DateTo, "Date to", new { @class = "form-label" })&emsp;&nbsp;
-                        @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control input-sm", @type = "date" })
-                    </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <td>
+                                    @Html.CheckBoxFor(m => m.IncludeAllStores)
+                                    @Html.LabelFor(m=> Model.IncludeAllStores, "All Stores", new { @class = "form-label"})
+                                </td>
+                                <th>Store number</th>
+                                <th>Store name</th>
+                                <th>Company type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                for (int i = 0; i < Model.StoreList.Count(); i++)
+                                {
+                                    <tr>
+                                        <td>@Html.CheckBoxFor(m => Model.StoreList[i].Cb) </td>
+                                        <td>@Html.LabelFor(m => Model.StoreList[i].Cb, Model.StoreList[i].value, new { @class = "form-label" } )</td>
+                                        <td>@Html.LabelFor(m => Model.StoreList[i].Cb, Model.StoreList[i].text, new { @class = "form-label" })</td>
+                                        <td>@Html.LabelFor(m => Model.StoreList[i].Cb, Model.StoreList[i].text2, new { @class = "form-label" })</td>
+                                        @Html.HiddenFor(m => Model.StoreList[i].value)
+                                        @Html.HiddenFor(m => Model.StoreList[i].text)
+                                        @Html.HiddenFor(m => Model.StoreList[i].text2)
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <div class="row">
-                <label class="checkbox-inline form-label">
-                    @Html.CheckBoxFor(m => m.IncludeAllStores)All Stores
-                </label>
-            </div>
-
-            <div class="row">
-                <table class="table table-hover table-responsive">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Store number</th>
-                            <th>Store name</th>
-                            <th>Company type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@Html.CheckBox("storeCheckbox")</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row">
-                <div class="right-fixed">
-                    <button type="submit" class="btn btn-default">Generate packets</button>
-                </div>
+            <div class="form-inline bottom float" style="right:50px">
+                <button type="submit" class="btn btn-default">Generate packets</button>
             </div>
         </div>
     }

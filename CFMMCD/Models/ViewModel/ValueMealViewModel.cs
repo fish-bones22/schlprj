@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CFMMCD.Models.EntityManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,8 @@ namespace CFMMCD.Models.ViewModel
             MIMPRO.Add("");
             VMLQUA.Add("");
             MenuItemList = new List<VMMenuItem>();
+            ValueMealList = new List<ValueMeal>();
+            AllMenuItems = new MenuItemMasterManager().SearchMenuItems("ALL"); //*
         }
         public string SearchItem { get; set; }
         public string VMLNUM { get; set; }
@@ -34,8 +37,9 @@ namespace CFMMCD.Models.ViewModel
 
         public string VMLPRI { get; set; }
         public string VMLPRO { get; set; }
+        public List<MenuItem> AllMenuItems { get; set; }
         public List<VMMenuItem> MenuItemList { get; set; }
-        public List<ValueMealViewModel> ValueMealList { get; set; }
+        public List<ValueMeal> ValueMealList { get; set; }
     }
     public class VMMenuItem
     {
@@ -44,5 +48,12 @@ namespace CFMMCD.Models.ViewModel
         public string MIMPRI { get; set; }
         public string MIMPRO { get; set; }
         public string VMLQUA { get; set; }
+        public string PreviousMIMMIC { get; set; }
+    }
+    public class ValueMeal
+    {
+        public string VMLID { get; set; }
+        public string VMLNUM { get; set; }
+        public string VMLNAM { get; set; }
     }
 }

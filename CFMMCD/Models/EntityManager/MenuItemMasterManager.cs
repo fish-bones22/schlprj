@@ -16,12 +16,12 @@ namespace CFMMCD.Models.EntityManager
          * Calls SearchSingleMenuItem
          * Returns List<ViewModel> if true, otherwise returns null
          */
-        public List<MenuItemMasterViewModel> SearchMenuItems(string SearchItem)
+        public List<MenuItem> SearchMenuItems(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<CSHMIMP0> MIMRowList;
-                List<MenuItemMasterViewModel> MIMList = new List<MenuItemMasterViewModel>();
+                List<MenuItem> MIMList = new List<MenuItem>();
                 string ItemCode = "";
                 if (SearchItem.ToUpper().Equals("ALL"))
                 {
@@ -43,10 +43,11 @@ namespace CFMMCD.Models.EntityManager
 
                 foreach (var MIMRow in MIMRowList)
                 {
-                    MenuItemMasterViewModel vm = new MenuItemMasterViewModel();
-                    vm = SearchSingleMenuItem(MIMRow.MIMMIC.ToString());
-                    if (vm != null)
-                        MIMList.Add(vm);
+                    MenuItem vm = new MenuItem();
+                    vm.RIRMIC = MIMRow.MIMMIC.ToString();
+                    vm.MIMDSC = MIMRow.MIMNAM;
+                    vm.MIMSTA = MIMRow.MIMSTA;
+                    MIMList.Add(vm);
                 }
                if (MIMList == null || MIMList.Count() == 0 )
                     return null;

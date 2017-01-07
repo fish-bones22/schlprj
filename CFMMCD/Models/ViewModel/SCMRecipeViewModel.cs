@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CFMMCD.Models.EntityManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,6 +25,7 @@ namespace CFMMCD.Models.ViewModel
             StoAtt.Add("");
             CSMID.Add("");
             RawItemList = new List<SCMRawItem>();
+            AllRawItems = new RawItemMasterManager().GetRawItems("ALL"); //*
         }
         public string SearchItem { get; set; }
         public string CSMDES { get; set; }
@@ -37,6 +39,7 @@ namespace CFMMCD.Models.ViewModel
         public List<string> StoAtt { get; set; }
         
         public List<SCMRawItem> RawItemList { get; set; }
+        public List<RawItem> AllRawItems { get; set; }
         public List<SCMRecipeViewModel> SCMRecipeList { get; set; }
     }
     public class SCMRawItem
@@ -48,5 +51,6 @@ namespace CFMMCD.Models.ViewModel
         public string RIMCPR { get; set; }
         public string CSMCWC { get; set; }
         public string StoAtt { get; set; }
+        public string PreviousRIMRIC { get; set; }
     }
 }

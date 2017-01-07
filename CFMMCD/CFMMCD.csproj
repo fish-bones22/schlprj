@@ -241,6 +241,7 @@
     <Compile Include="Controllers\ValueMealController.cs" />
     <Compile Include="Controllers\VendorMasterController.cs" />
     <Compile Include="DropDown\TableDropDown.cs" />
+    <Compile Include="Generators\TextGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

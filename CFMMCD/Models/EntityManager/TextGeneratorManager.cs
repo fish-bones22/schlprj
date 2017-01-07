@@ -1,4 +1,5 @@
-﻿using CFMMCD.Models.DB;
+﻿using CFMMCD.Generators;
+using CFMMCD.Models.DB;
 using CFMMCD.Models.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,169 +13,227 @@ namespace CFMMCD.Models.EntityManager
     {
         /*
          * Generates text from database
-         * 
-         * Currently, yung unang Row lang po sa store ang nagagawan ng text kasi hindi pa po  namin alam
-         * kung ano ang mechanics / functionality nung table sa Text gemeration page.
          */
         public bool GeneratePackets(TextGeneratorViewModel TGViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                StringBuilder sb = new StringBuilder();
-                string StoreName = db.Store_Profile.First().STORE_NAME;
-                string StoreNo = db.Store_Profile.First().STORE_NO.ToString();
-                // Pad zeroes to left side of StoreNo
-                for (int i = 0; i < 5-StoreNo.Length+2; i++)
-                    StoreNo = "0" + StoreNo;
-                sb.Append("01," + StoreNo + "," + StoreName + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "," + TGViewModel.PromoTitle + "\n");
-                if (TGViewModel.IncludeAll || TGViewModel.IncludeMIM)
+                for (int i = 0; i < TGViewModel.StoreList.Count(); i++)
                 {
-                    foreach (CSHMIMP0 c in db.CSHMIMP0)
+                    if (TGViewModel.StoreList[i].Cb || TGViewModel.IncludeAllStores)
                     {
-                        string STATUS = c.STATUS;
-                        DateTime date = (DateTime) c.MIMEDT;
-                        DateTime dateFrom = DateTime.Parse(TGViewModel.DateFrom);
-                        DateTime dateTo = DateTime.Parse(TGViewModel.DateTo);
-
-                        if ((STATUS.Equals("A") || STATUS.Equals("E")) &&
-                            ((date.CompareTo(dateFrom) > 0) && (date.CompareTo(dateTo) <= 0)))
+                        StringBuilder sb = new StringBuilder();
+                        TextGenerator tg = new TextGenerator();
+                        string Store_No = TGViewModel.StoreList[i].value;
+                        string Store_Name = TGViewModel.StoreList[i].text;
+                        string DateAndTimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+                        DateTime DateFrom = DateTime.Parse(TGViewModel.DateFrom);
+                        DateTime DateTo = DateTime.Parse(TGViewModel.DateTo);
+                        // Used for file name
+                        string PaddedStore_No = TGViewModel.StoreList[i].value;
+                        for (int j = 0; j < 5 - PaddedStore_No.Length + 2; j++)
                         {
-                            sb.Append("02,");
-                            sb.Append(STATUS+",");
-                            if (c.CSHMIMP0_NP6 == null)
-                                sb.Append(c.MIMMIC + ",");
-                            else
-                                sb.Append(c.CSHMIMP0_NP6.MIMMIC + ",");
-                            sb.Append(c.MIMSTA + ",");
-                            sb.Append(c.MIMFGC + ",");
-                            if (c.CSHMIMP0_NP6 == null)
-                                sb.Append(c.MIMNAM + ",");
-                            else
-                                sb.Append(c.CSHMIMP0_NP6.MIMNAM + ",");
-                            sb.Append(c.MIMDSC.Trim() + ",");
-                            sb.Append(c.MIMSSC.Trim() + ",");
-                            sb.Append(c.MIMDPC.Trim() + ",");
-                            sb.Append(c.MIMCIN.Trim() + ",");
-                            sb.Append(c.MIMDGC + ",");
-                            sb.Append(c.MIMASC.Trim() + ",");
-                            sb.Append(c.MIMTXC.Trim() + ",");
-                            sb.Append(c.MIMUTC + ",");
-                            sb.Append(c.MIMDWE.Trim() + ",");
-                            sb.Append(c.MIMTCI.Trim() + ",");
-                            sb.Append(c.MIMPRI + ",");
-                            sb.Append(c.MIMTCA.Trim() + ",");
-                            sb.Append(c.MIMPRO + ",");
-                            sb.Append(c.MIMTCG.Trim() + ",");
-                            sb.Append(c.MIMPRG + ",");
-                            sb.Append(((DateTime)c.MIMPND).ToString("yyyy-MM-dd") + ",");
-                            sb.Append(c.MIMKBP + ",");
-                            sb.Append(c.MIMKSC.Trim() + ",");
-                            sb.Append(c.MIMSKT.Trim() + ",");
-                            sb.Append(c.MIMGRP.Trim() + ",");
-                            sb.Append(c.MIMWLV.Trim() + ",");
-                            sb.Append(c.MIMWSD.Trim() + ",");
-                            sb.Append(c.MIMWGR.Trim() + ",");
-                            sb.Append(c.MIMHPT.Trim() + ",");
-                            sb.Append(c.MIMUSR.Trim() + ",");
-                            sb.Append(((DateTime)c.MIMDAT).ToString("yyyy-MM-dd") + ",");
-                            sb.Append(((DateTime)c.MIMEDT).ToString("yyyy-MM-dd") + ",");
-                            sb.Append(c.MIMFLG + ",");
-                            sb.Append(c.MIMBIN.Trim() + ",");
-                            sb.Append(c.MIMBIT + ",");
-                            sb.Append(c.MIMBIR.Trim() + ",");
-                            sb.Append(c.MIMBGR.Trim() + ",");
-                            sb.Append(c.MIMBQU + ",");
-                            sb.Append(c.MIMGRA.Trim() + ",");
-                            sb.Append(c.MIMIST.Trim() + ",");
-                            sb.Append(c.MIMCLR.Trim() + ",");
-                            sb.Append(c.MIMNPI + ",");
-                            sb.Append(c.MIMNPO + ",");
-                            sb.Append(c.MIMNPD + ",");
-                            sb.Append(c.MIMSKI + ",");
-                            sb.Append(c.MIMBMI + ",");
-                            sb.Append(c.MIMNPA + ",");
-                            sb.Append(c.MIMNNP + ",");
-                            sb.Append(c.MIMNPT.Trim() + "\n");
-                        } // end if
-                    } // end for
+                            PaddedStore_No = "0" + PaddedStore_No;
+                        }
+                        // Append first line
+                        sb.Append("01," + Store_No + "," + Store_Name + "," + DateAndTimeNow + "," + TGViewModel.PromoTitle + "\n");
+
+                        if (TGViewModel.IncludeMIM || TGViewModel.IncludeAll)
+                        {
+                            List<CSHMIMP0> MIRows = GetMenutems(Store_No, DateFrom, DateTo);
+                            foreach (CSHMIMP0 mi in MIRows)
+                            {
+                                sb.Append(tg.GenerateMenuItemMasterText(mi));
+                            }
+                        }
+                        if (TGViewModel.IncludeRIM || TGViewModel.IncludeAll)
+                        {
+                            List<INVRIMP0> MIRows = GetRawItems(Store_No, DateFrom, DateTo);
+                            foreach (INVRIMP0 mi in MIRows)
+                            {
+                                sb.Append(tg.GenerateRawItemMasterText(mi));
+                            }
+                        }
+
+                        string filename = "CFM" + Store_No + "_" + DateTime.Now.ToString("MMddyyyy_HHmm");
+                        if (TGViewModel.IncludeAll)
+                            filename += ".ALL";
+                        else
+                            filename += ".PRO";
+                        System.IO.File.WriteAllText(@"C:/SMS/SMSWEBCFM/" + filename, sb.ToString());
+                        return true;
+                    }
                 }
-                if (TGViewModel.IncludeAll || TGViewModel.IncludeRIM)
+                return false;
+            }
+        }
+
+        public List<CSHMIMP0> GetMenutems(string Store_No, DateTime DateFrom, DateTime DateTo)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<CSHMIMP0> list = new List<CSHMIMP0>();
+                Store_Profile Store = db.Store_Profile.Single(o => o.STORE_NO.ToString().Equals(Store_No));
+                List<CSHMIMP0> itemsToAdd = db.CSHMIMP0.Where(o => o.Store.Equals(Store_No)).ToList();
+                itemsToAdd.AddRange(db.CSHMIMP0.Where(o => o.Store.Equals("ALL")).ToList());
+                foreach (var v in itemsToAdd)
                 {
-                    foreach (INVRIMP0 c in db.INVRIMP0)
+                    if (((v.Except_Store != null) && !v.Except_Store.Equals(Store_No)) && (((DateTime)v.MIMEDT).CompareTo(DateFrom) > 0 && ((DateTime)v.MIMEDT).CompareTo(DateTo) <= 0) && (v.STATUS.Equals("A") || v.STATUS.Equals("E")))
+                        list.Add(v);
+                }
+
+                foreach (CSHMIMP0 mi in list)
+                {
+                    string tierToUse;
+                    int tradingArea = (int) mi.Trading_Area;
+                    if (tradingArea == 0)
                     {
-                        string STATUS = c.STATUS;
-                        DateTime date = (DateTime)c.RIMEDT;
-                        DateTime dateFrom = DateTime.Parse(TGViewModel.DateFrom);
-                        DateTime dateTo = DateTime.Parse(TGViewModel.DateTo);
-
-                        if ((STATUS.Equals("A") || STATUS.Equals("E")) &&
-                            ((date.CompareTo(dateFrom) > 0) && (date.CompareTo(dateTo) <= 0)))
+                        // Price
+                        tierToUse = Store.BREAKFAST_PRICE_TIER;
+                        Tier_Lookup tier = db.Tier_Lookup.Single(o => o.MIMMIC == mi.MIMMIC);
+                        if (tierToUse.Equals("1"))
                         {
-                             sb.Append("03,");
-                             sb.Append(STATUS.Trim() + ",");
-                             sb.Append(c.RIMRIC + ",");
-                             sb.Append(c.RIMVPC + ",");
-                             sb.Append(c.RIMRID.Trim() + ",");
-                             sb.Append(c.RIMRIG.Trim() + ",");
-                             sb.Append(c.RIMTEM.Trim() + ",");
-                             sb.Append(c.RIMPGR.Trim() + ",");
-                             sb.Append(c.RIMPIS.Trim() + ",");
-                             sb.Append(c.RIMBVP.Trim() + ",");
-                             sb.Append(c.RIMBZP.Trim() + ",");
-                             sb.Append(c.RIMUMC.Trim() + ",");
-                             sb.Append(c.RIMUPC + ",");
-                             sb.Append(c.RIMSUQ + ",");
-                             sb.Append(c.RIMLAY + ",");
-                             sb.Append(c.RIMCPR + ",");
-                             sb.Append(c.RIMCPN + ",");
-                            sb.Append(((DateTime)c.RIMPDT).ToString("yyyy-MM-dd") + ",");
-                            sb.Append(c.RIMPVN + ",");
-                             sb.Append(c.RIMSVN + ",");
-                             sb.Append(c.RIMCWC.Trim() + ",");
-                             sb.Append(c.RIMPRO.Trim() + ",");
-                             sb.Append(c.RIMSE4.Trim() + ",");
-                             sb.Append(c.RIMERT.Trim() + ",");
-                             sb.Append(c.RIMUSF + ",");
-                             sb.Append(c.RIMSDP + ",");
-                             sb.Append(c.RIMUS1 + ",");
-                             sb.Append(c.RIMUS2 + ",");
-                             sb.Append(c.RIMUS3 + ",");
-                             sb.Append(c.RIMUS4 + ",");
-                             sb.Append(c.RIMUS5 + ",");
-                             sb.Append(c.RIMUSX + ",");
-                             sb.Append(c.RIMMSD + ",");
-                             sb.Append(c.RIMMSL + ",");
-                             sb.Append(c.RIMLA1.Trim() + ",");
-                             sb.Append(c.RIMLA2.Trim() + ",");
-                             sb.Append(c.RIMLP1 + ",");
-                             sb.Append(c.RIMLP2 + ",");
-                             sb.Append(c.RIMSTA.Trim() + ",");
-                             sb.Append(c.RIMUSR.Trim() + ",");
-                             sb.Append(((DateTime)c.RIMDAT).ToString("yyyy-MM-dd") + ",");
-                             sb.Append(((DateTime)c.RIMEDT).ToString("yyyy-MM-dd") + ",");
-                             sb.Append(c.RIMFLG + ",");
-                             sb.Append(c.RIMORD.Trim() + ",");
-                             sb.Append(c.RIMLIN + ",");
-                             sb.Append(c.RIMADE.Trim() + ",");
-                             sb.Append(c.RIMBAR.Trim() + "\n");
-                        } // end if
-                    } // end for
+                            mi.MIMPND = tier.PNDA;
+                            mi.MIMPRI = tier.OLDPRA;
+                            mi.MIMPRO = tier.OLDPAO;
+                            mi.MIMPRG = tier.OLDAOT;
+                            mi.MIMNPI = tier.NEWPRA;
+                            mi.MIMNPO = tier.NEWPAO;
+                            mi.MIMNPD = tier.NEWAOT;
+                            if (mi.MIMFGC.Trim().Equals("08"))
+                            {
+                                mi.MIMNPA = tier.OLDNPA;
+                                mi.MIMNNP = tier.NEWNPA;
+                            }
+                        }
+                        else if (tierToUse.Equals("2"))
+                        {
+                            mi.MIMPND = tier.PNDB;
+                            mi.MIMPRI = tier.OLDPRB;
+                            mi.MIMPRO = tier.OLDPBO;
+                            mi.MIMPRG = tier.OLDBOT;
+                            mi.MIMNPI = tier.NEWPRB;
+                            mi.MIMNPO = tier.NEWPBO;
+                            mi.MIMNPD = tier.NEWBOT;
+                            if (mi.MIMFGC.Trim().Equals("08"))
+                            {
+                                mi.MIMNPA = tier.OLDNPB;
+                                mi.MIMNNP = tier.NEWNPB;
+                            }
+                        }
+                        else if (tierToUse.Equals("3"))
+                        {
+                            mi.MIMPND = tier.PNDC;
+                            mi.MIMPRI = tier.OLDPRC;
+                            mi.MIMPRO = tier.OLDPCO;
+                            mi.MIMPRG = tier.OLDCOT;
+                            mi.MIMNPI = tier.NEWPRC;
+                            mi.MIMNPO = tier.NEWPCO;
+                            mi.MIMNPD = tier.NEWCOT;
+                            if (mi.MIMFGC.Trim().Equals("08"))
+                            {
+                                mi.MIMNPA = tier.OLDNPC;
+                                mi.MIMNNP = tier.NEWNPC;
+                            }
+                        }
+                        else if (tierToUse.Equals("4"))
+                        {
+                            mi.MIMPND = tier.PNDD;
+                            mi.MIMPRI = tier.OLDPRD;
+                            mi.MIMPRO = tier.OLDPDO;
+                            mi.MIMPRG = tier.OLDDOT;
+                            mi.MIMNPI = tier.NEWPRD;
+                            mi.MIMNPO = tier.NEWPDO;
+                            mi.MIMNPD = tier.NEWDOT;
+                            if (mi.MIMFGC.Trim().Equals("08"))
+                            {
+                                mi.MIMNPA = tier.OLDNPD;
+                                mi.MIMNNP = tier.NEWNPD;
+                            }
+                        }
+                        else if (tierToUse.Equals("5"))
+                        {
+                            mi.MIMPND = tier.PNDE;
+                            mi.MIMPRI = tier.OLDPRE;
+                            mi.MIMPRO = tier.OLDPEO;
+                            mi.MIMPRG = tier.OLDEOT;
+                            mi.MIMNPI = tier.NEWPRE;
+                            mi.MIMNPO = tier.NEWPEO;
+                            mi.MIMNPD = tier.NEWEOT;
+                            if (mi.MIMFGC.Trim().Equals("08"))
+                            {
+                                mi.MIMNPA = tier.OLDNPE;
+                                mi.MIMNNP = tier.NEWNPE;
+                            }
+                        }
+                        else if (tierToUse.Equals("6"))
+                        {
+                            mi.MIMPND = tier.PNDF;
+                            mi.MIMPRI = tier.OLDPRF;
+                            mi.MIMPRO = tier.OLDPFO;
+                            mi.MIMPRG = tier.OLDFOT;
+                            mi.MIMNPI = tier.NEWPRF;
+                            mi.MIMNPO = tier.NEWPFO;
+                            mi.MIMNPD = tier.NEWFOT;
+                            if (mi.MIMFGC.Trim().Equals("08"))
+                            {
+                                mi.MIMNPA = tier.OLDNPF;
+                                mi.MIMNNP = tier.NEWNPF;
+                            }
+                        }
+                        else if (tierToUse.Equals("7"))
+                        {
+                            mi.MIMPND = tier.PNDM;
+                            mi.MIMPRI = tier.OLDMDS;
+                            mi.MIMPRO = tier.OLDMDO;
+                            mi.MIMPRG = tier.OLDMOT;
+                            mi.MIMNPI = tier.NEWMDS;
+                            mi.MIMNPO = tier.NEWMDO;
+                            mi.MIMNPD = tier.NEWMOT;
+                            if (mi.MIMFGC.Trim().Equals("08"))
+                            {
+                                mi.MIMNPA = tier.OLDMDN;
+                                mi.MIMNNP = tier.NEWMDN;
+                            }
+                        }
+                        else if (tierToUse.Equals("8"))
+                        {
+                            mi.MIMPND = tier.PNDS;
+                            mi.MIMPRI = tier.OLDPRS;
+                            mi.MIMPRO = tier.OLDPSO;
+                            mi.MIMPRG = tier.OLDSOT;
+                            mi.MIMNPI = tier.NEWPRS;
+                            mi.MIMNPO = tier.NEWPSO;
+                            mi.MIMNPD = tier.NEWSOT;
+                            if (mi.MIMFGC.Trim().Equals("08"))
+                            {
+                                mi.MIMNPA = tier.OLDNPS;
+                                mi.MIMNNP = tier.NEWNPS;
+                            }
+                        }
+                    }
                 }
-                if (TGViewModel.IncludeAll || TGViewModel.IncludeREC)
+                return list;
+            }
+        }
+        
+        public List<INVRIMP0> GetRawItems(string Store_No, DateTime DateFrom, DateTime DateTo)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<INVRIMP0> list = new List<INVRIMP0>();
+                Store_Profile Store = db.Store_Profile.Single(o => o.STORE_NO.ToString().Equals(Store_No));
+                list = db.INVRIMP0.Where(o => o.Store.Equals(Store_No)).ToList();
+                List<INVRIMP0> itemsToAdd = db.INVRIMP0.Where(o => o.Store.Equals("ALL")).ToList();
+                foreach (var v in itemsToAdd)
                 {
-
+                    if (v.Except_Store != null && !v.Except_Store.Equals(Store_No))
+                        list.Add(v);
+                    else
+                        list.Add(v);
                 }
-                if (TGViewModel.IncludeAll)
-                {
 
-                }
-                string filename = "CFM" + StoreNo + "_" + DateTime.Now.ToString("MMddyyyy_HHmm");
-                if (TGViewModel.IncludeAll)
-                    filename += ".ALL";
-                else
-                    filename += ".PRO";
-                System.IO.File.WriteAllText(@"C:/SMS/SMSWEBCFM/"+filename, sb.ToString());
-                return true;
+                return list;
             }
         }
 

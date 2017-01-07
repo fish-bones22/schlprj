@@ -19,27 +19,17 @@ namespace CFMMCD.Controllers
             // Set NavBar Links accordingly
             Session["CurrentPage"] = new CurrentPageSession("VAM", "HOME", "LOG");
 
-            // SearchItemSelected is assigned value at DisplaySearchResult
-            ValueMealViewModel VMViewModel = (ValueMealViewModel)TempData["SearchItemSelected"];
             ValueMealManager VMManager = new ValueMealManager();
-            if (VMViewModel == null)
-            {
-                VMViewModel = new ValueMealViewModel();
-            }
+            ValueMealViewModel VMViewModel = new ValueMealViewModel();
+            VMViewModel.ValueMealList = VMManager.SearchValueMeals("ALL");
             return View(VMViewModel);
         }
         [HttpPost]
-        public ActionResult Index(ValueMealViewModel VMViewModel)
+        public ActionResult Index(ValueMealViewModel VMViewModel, string value)
         {
             ValueMealManager VMManager = new ValueMealManager();
-            VMViewModel.ValueMealList = VMManager.SearchValueMeal(VMViewModel);
-            if (VMViewModel.ValueMealList != null)
-            {
-                TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = VMViewModel.ValueMealList;
-            }
-            else
-                ModelState.AddModelError("", "No results found");
+            VMViewModel = VMManager.SearchSingleValueMeal(value);
+            VMViewModel.ValueMealList = VMManager.SearchValueMeals("ALL");
             return View(VMViewModel);
         }
 
@@ -65,15 +55,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult DisplaySearchResult(string value)
-        {
-            List<ValueMealViewModel> VMList = (List<ValueMealViewModel>)Session["ViewModelList"];
-            ValueMealViewModel VMViewModel = VMList.Where(o => o.VMLNUM.ToString().Equals(value)).FirstOrDefault();
-            TempData["SearchItemSelected"] = VMViewModel;
-            return RedirectToAction("Index", "ValueMeal");
         }
     }
 }

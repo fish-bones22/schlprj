@@ -56,7 +56,7 @@ namespace CFMMCD.Controllers
             bool result = false;
             if (command == "Save")
             {
-                result = MIMManager.UpdatePriceTier(MIMViewModel.MenuItemMasterList);
+                result = MIMManager.UpdatePriceTier(MIMViewModel);
                 PageAction = "Update price";
             }
             if (result)

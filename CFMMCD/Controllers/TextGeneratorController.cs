@@ -19,14 +19,23 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.TEG) return RedirectToAction("Login", "Account");
 
             Session["CurrentPage"] = new CurrentPageSession("TEG", "HOME", "LOG");
-            return View();
+            return View(new TextGeneratorViewModel());
         }
         [HttpPost]
         public ActionResult Index(TextGeneratorViewModel TGViewModel)
         {
             TextGeneratorManager TGManager = new TextGeneratorManager();
-            TGManager.GeneratePackets(TGViewModel);
-            return View();
+            bool result = TGManager.GeneratePackets(TGViewModel);
+            string PageAction = "Text Generation";
+            if (result)
+            {
+                TempData["SuccessMessage"] = PageAction + " successful";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = PageAction + " failed";
+            }
+            return View(new TextGeneratorViewModel());
         }
 
     }

@@ -136,13 +136,17 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public List<AccountViewModel> SearchAccount (string username)
+        public List<string> SearchAccounts (string username)
         {
             using ( CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<AccountViewModel> AList = new List<AccountViewModel>();
+                List<string> AList = new List<string >();
                 List<Account> ARowList;
-                if (db.Accounts.Where( o => o.Username.Equals(username)).Any())
+                if (username.ToUpper().Equals("ALL"))
+                {
+                    ARowList = db.Accounts.ToList();
+                }
+                else if (db.Accounts.Where( o => o.Username.Equals(username)).Any())
                 {
                     ARowList = db.Accounts.Where(o => o.Username.Equals(username)).ToList();
                 }
@@ -154,32 +158,7 @@ namespace CFMMCD.Models.EntityManager
                 {
                     foreach ( Account a in ARowList )
                     {
-                        AccountViewModel vm = new AccountViewModel();
-                        vm.Username = a.Username.Trim();
-                        vm.Password = a.Password.Trim();
-                        vm.UserAccess = a.UserAccess.Trim();
-                        vm.OldUsername = a.Username.Trim();
-
-                        bool[] UserAccessArr = GetUserAccessArray(a.Username);
-                        vm.MIMInput = UserAccessArr[0];
-                        vm.RIMInput = UserAccessArr[1];
-                        vm.MERInput = UserAccessArr[2];
-                        vm.STPInput = UserAccessArr[3];
-                        vm.SCMInput = UserAccessArr[4];
-                        vm.VEMInput = UserAccessArr[5];
-                        vm.VAMInput = UserAccessArr[6];
-                        vm.UAPInput = UserAccessArr[7];
-                        vm.MIPInput = UserAccessArr[8];
-                        vm.RIPInput = UserAccessArr[9];
-                        vm.AULInput = UserAccessArr[10];
-                        vm.REGInput = UserAccessArr[11];
-                        vm.TEGInput = UserAccessArr[12];
-                        vm.TIPInput = UserAccessArr[13];
-                        vm.BUEInput = UserAccessArr[14];
-                        vm.OWNInput = UserAccessArr[15];
-                        vm.PRCInput = UserAccessArr[16];
-                        vm.LOCInput = UserAccessArr[17];
-                        AList.Add(vm);
+                        AList.Add(a.Username);
                     }
                     if (AList == null || AList.ElementAt(0) == null)
                         return null;
@@ -205,7 +184,47 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
+        public AccountViewModel SearchSingleAccount(string Username)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                Account ARow = new Account();
+                if (db.Accounts.Where(o => o.Username.Equals(Username)).Any())
+                {
+                    ARow = db.Accounts.Single(o => o.Username.Equals(Username));
+                }
+                else
+                {
+                    return null;
+                }
+                AccountViewModel vm = new AccountViewModel();
+                vm.Username = ARow.Username.Trim();
+                vm.Password = ARow.Password.Trim();
+                vm.UserAccess = ARow.UserAccess.Trim();
+                vm.OldUsername = ARow.Username.Trim();
 
+                bool[] UserAccessArr = GetUserAccessArray(ARow.Username);
+                vm.MIMInput = UserAccessArr[0];
+                vm.RIMInput = UserAccessArr[1];
+                vm.MERInput = UserAccessArr[2];
+                vm.STPInput = UserAccessArr[3];
+                vm.SCMInput = UserAccessArr[4];
+                vm.VEMInput = UserAccessArr[5];
+                vm.VAMInput = UserAccessArr[6];
+                vm.UAPInput = UserAccessArr[7];
+                vm.MIPInput = UserAccessArr[8];
+                vm.RIPInput = UserAccessArr[9];
+                vm.AULInput = UserAccessArr[10];
+                vm.REGInput = UserAccessArr[11];
+                vm.TEGInput = UserAccessArr[12];
+                vm.TIPInput = UserAccessArr[13];
+                vm.BUEInput = UserAccessArr[14];
+                vm.OWNInput = UserAccessArr[15];
+                vm.PRCInput = UserAccessArr[16];
+                vm.LOCInput = UserAccessArr[17];
+                return vm;
+            }
+        }
 
         public int GetUserID(string username)
         {

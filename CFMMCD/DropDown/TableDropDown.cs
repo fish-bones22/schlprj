@@ -332,6 +332,24 @@ namespace CFMMCD.DropDown
                 return list;
             }
         }
+        public List<CheckBoxList> SetStoreInformationList()
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<CheckBoxList> list = new List<CheckBoxList>();
+                foreach (var i in db.Store_Profile)
+                {
+                    CheckBoxList option = new CheckBoxList();
+                    option.Cb = false;
+                    option.value = i.STORE_NO.ToString();
+                    option.text = i.STORE_NAME;
+                    string st = i.OWNERSHIP.Trim();
+                    option.text2 = db.OWNERSHIPs.Single(o => o.Id.ToString().Equals(st)).OWNSHP;
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
     }
 
     public class GenericDropDownList
@@ -343,7 +361,8 @@ namespace CFMMCD.DropDown
     {
         public bool Cb { get; set; }
         public string value { get; set; }
-       public string text { get; set; }
+        public string text { get; set; }
+        public string text2 { get; set; }
     }
     public class RecipeTextBox
     {
