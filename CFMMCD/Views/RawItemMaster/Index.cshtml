@@ -410,9 +410,9 @@
     </div>
 </div>
 
-<!--Modal Script & Dropdown script-->
 <script>
- @{
+    // Region, Province, and City Dropdown Handling
+    @{
         string region = "NCR";
         string province = "";
         string city = "";
@@ -429,13 +429,16 @@
             city = @Model.City;
         }
     }
+
     $(window).ready(function () {
-        // Location Select
+
+        // Region, Province, City
 	    $("option[value='@region'").attr("selected", "selected");
 	    updateProvince();
 	    $("option[value='@province'").attr("selected", "selected");
 	    updateCity();
 	    $("option[value='@city'").attr("selected", "selected");
+
         // Store Attribute Select
         setStoreAttribute();
         $(".store-attrib").click(function () {
@@ -446,7 +449,43 @@
             });
             setStoreAttribute();
         });
+
+        // Vendor search/ Auto filter
+        disableInputsOnCb();
+        setPrimaryVendor();
+        $("#SearchVendor").keyup(function () {
+            // Hide items not relevant to the search term
+            if ($("#SearchVendor").val() != "") {
+                var searchTerm = $("#SearchVendor").val().toLowerCase();
+                $(".tr-vendor").addClass("hidden");
+                $(".tr-vendor").each(function () {
+                    if ($(this).attr("class").toLowerCase().includes(searchTerm) ||
+                        $(this).children("td").children("[type='checkbox']").is(':checked'))
+                        $(this).removeClass("hidden");
+                });
+            } else {
+                $(".tr-vendor").removeClass("hidden");
+            }
+        });
+
+        // Disable Vendor TextBoxes if checkbox is not checked
+        $("[type='checkbox']").change(function () {
+            disableInputsOnCb();
+        });
+
+        // Primary vendor. Automatically activates vendor in the list
+        // if selected in the primary vendor dropdown
+        var primaryVendor;
+        var previousPrimary;
+        $("#RIMPVN").change(function () {
+            setPrimaryVendor();
+        });
+
     });
+    /* Sets the color of the dropdown 
+     * depending on the selected value
+     * to have a 'disabled' look
+     */
     function setStoreAttribute() {
         $(".store-attrib").each(function () {
             if ($(this).val() == "0") {
@@ -456,37 +495,9 @@
             }
         });
     }
-</script>
-<!--Vendor Search Script-->
-<script>
-    disableInputsOnCb();
-    setPrimaryVendor();
-	$("#SearchVendor").keyup(function () {
-		// Hide items not relevant to the search term
-		if ($("#SearchVendor").val() != "") {
-			var searchTerm = $("#SearchVendor").val().toLowerCase();
-			$(".tr-vendor").addClass("hidden");
-			$(".tr-vendor").each(function() {
-				if ($(this).attr("class").toLowerCase().includes(searchTerm) || 
-					$(this).children("td").children("[type='checkbox']").is(':checked'))
-					$(this).removeClass("hidden");
-			});
-		} else {
-			$(".tr-vendor").removeClass("hidden");
-		}
-	});
-	// Disable TextBoxes if sibling checkbox is not checked
-	$("[type='checkbox']").change(function() {
-		disableInputsOnCb();
-	});
-
-    // Primary vendor
-	var primaryVendor;
-	var previousPrimary;
-	$("#RIMPVN").change(function () {
-	    setPrimaryVendor();
-	});
-
+    /* Activates (checkbox checked, textbox eneabled) the vendor
+     * in the vendor list if the vendor is selected in the Primary Vendor dropdown
+     */
 	function setPrimaryVendor() {
 	    primaryVendor = $("#RIMPVN").val();
 	    // remove check and enable previously selected primary vendor
@@ -502,7 +513,9 @@
 	    disableInputsOnCb();
 	    previousPrimary = primaryVendor;
 	}
-
+    /* Disables textboxes in the row 
+     * if checkbox is unchecked, v/v
+    */
 	function disableInputsOnCb() {
 		$(".tr-vendor").each(function() {
 		    if (!$(this).children("td").children("[type='checkbox']").is(':checked')) {

@@ -24,43 +24,55 @@ namespace CFMMCD.Models.EntityManager
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                Store_Profile spRow = new Store_Profile();
-                spRow.STORE_NO = int.Parse(SPViewModel.STORE_NO);
-                spRow.STORE_NAME = SPViewModel.STORE_NAME;
-                spRow.OWNERSHIP = SPViewModel.OWNERSHIP;
-                spRow.BREAKFAST_PRICE_TIER = SPViewModel.BREAKFAST_PRICE_TIER;
-                spRow.REGULAR_PRICE_TIER = SPViewModel.REGULAR_PRICE_TIER;
-                spRow.DC_PRICE_TIER = SPViewModel.DC_PRICE_TIER;
-                spRow.MDS_PRICE_TIER = SPViewModel.MDS_PRICE_TIER;
-                spRow.MCCAFE_LEVEL_2_PRICE_TIER = SPViewModel.MCCAFE_LEVEL_2_PRICE_TIER;
-                spRow.MCCAFE_LEVEL_3_PRICE_TIER = SPViewModel.MCCAFE_LEVEL_3_PRICE_TIER;
-                spRow.MCCAFE_BISTRO_PRICE_TIER = SPViewModel.MCCAFE_BISTRO_PRICE_TIER;
-                spRow.PROJECT_GOLD_PRICE_TIER = SPViewModel.PROJECT_GOLD_PRICE_TIER;
-                spRow.BET = SetBusinessExtention(SPViewModel.BET);
-                spRow.PROFIT_CENTER = int.Parse(SPViewModel.PROFIT_CENTER);
-                spRow.REGION = SPViewModel.REGION;
-                spRow.PROVINCE = SPViewModel.PROVINCE;
-                spRow.LOCATION = SPViewModel.LOCATION;
-                spRow.ADDRESS = SPViewModel.ADDRESS;
-                spRow.CITY = SPViewModel.CITY;
-                spRow.FRESH_OR_FROZEN = SPViewModel.FRESH_OR_FROZEN;
-                spRow.PAPER_OR_PLASTIC = SPViewModel.PAPER_OR_PLASTIC;
-                spRow.SOFT_SERVE_OR_VANILLA_POWDER_MIX = SPViewModel.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
-                spRow.SIMPLOT_OR_MCCAIN = SPViewModel.SIMPLOT_OR_MCCAIN;
-                spRow.MCCORMICK_OR_GSF = SPViewModel.MCCORMICK_OR_GSF;
-                spRow.STATUS = "A";
+                Store_Profile SPRow;
+                bool isUpdating = false;
+                if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SPViewModel.STORE_NO)).Any())
+                {
+                    SPRow = db.Store_Profile.Single(o => o.STORE_NO.ToString().Equals(SPViewModel.STORE_NO));
+                    isUpdating = true;
+                }
+                else
+                    SPRow = new Store_Profile();
+
+                if (SPViewModel.STORE_NO != null && !SPViewModel.STORE_NO.Equals(""))
+                    SPRow.STORE_NO = int.Parse(SPViewModel.STORE_NO);
+                else return false;
+
+                if (SPViewModel.STORE_NAME != null && !SPViewModel.STORE_NAME.Equals(""))
+                    SPRow.STORE_NAME = SPViewModel.STORE_NAME;
+                else return false;
+
+                SPRow.OWNERSHIP = SPViewModel.OWNERSHIP;
+                SPRow.BREAKFAST_PRICE_TIER = SPViewModel.BREAKFAST_PRICE_TIER;
+                SPRow.REGULAR_PRICE_TIER = SPViewModel.REGULAR_PRICE_TIER;
+                SPRow.DC_PRICE_TIER = SPViewModel.DC_PRICE_TIER;
+                SPRow.MDS_PRICE_TIER = SPViewModel.MDS_PRICE_TIER;
+                SPRow.MCCAFE_LEVEL_2_PRICE_TIER = SPViewModel.MCCAFE_LEVEL_2_PRICE_TIER;
+                SPRow.MCCAFE_LEVEL_3_PRICE_TIER = SPViewModel.MCCAFE_LEVEL_3_PRICE_TIER;
+                SPRow.MCCAFE_BISTRO_PRICE_TIER = SPViewModel.MCCAFE_BISTRO_PRICE_TIER;
+                SPRow.PROJECT_GOLD_PRICE_TIER = SPViewModel.PROJECT_GOLD_PRICE_TIER;
+                SPRow.BET = SetBusinessExtention(SPViewModel.BET, SPViewModel.BusinessExtList);
+                SPRow.PROFIT_CENTER = int.Parse(SPViewModel.PROFIT_CENTER);
+                SPRow.REGION = SPViewModel.REGION;
+                SPRow.PROVINCE = SPViewModel.PROVINCE;
+                SPRow.LOCATION = SPViewModel.LOCATION;
+                SPRow.ADDRESS = SPViewModel.ADDRESS;
+                SPRow.CITY = SPViewModel.CITY;
+                SPRow.FRESH_OR_FROZEN = SPViewModel.FRESH_OR_FROZEN;
+                SPRow.PAPER_OR_PLASTIC = SPViewModel.PAPER_OR_PLASTIC;
+                SPRow.SOFT_SERVE_OR_VANILLA_POWDER_MIX = SPViewModel.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
+                SPRow.SIMPLOT_OR_MCCAIN = SPViewModel.SIMPLOT_OR_MCCAIN;
+                SPRow.MCCORMICK_OR_GSF = SPViewModel.MCCORMICK_OR_GSF;
+                SPRow.STATUS = "A";
                 try
                 {
                     // Check if STORE_NO already exists in the database, perform an update if true
-                    if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SPViewModel.STORE_NO)).Any())
+                    if (isUpdating)
                     {
-                        var rowToRemove = db.Store_Profile.Single(o => o.STORE_NO.ToString().Equals(SPViewModel.STORE_NO));
-                        spRow.STATUS = "E";
-                        db.Store_Profile.Remove(rowToRemove); // Remove old row      
-                        db.Store_Profile.Add(spRow);          // Insert replacement
+                        SPRow.STATUS = "E";
                     }
                     else
-                        db.Store_Profile.Add(spRow);
+                        db.Store_Profile.Add(SPRow);
                     db.SaveChanges();
                     return true;
                 }
@@ -95,15 +107,77 @@ namespace CFMMCD.Models.EntityManager
             {
                 Store_Profile SPRow;
                 if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SPViewModel.STORE_NO)).Any())
+                {
                     SPRow = db.Store_Profile.Single(sp => sp.STORE_NO.ToString().Equals(SPViewModel.STORE_NO));
+
+                    // Remove from Menu Items
+                    //      Remove from `Store`
+                    if (db.CSHMIMP0.Where(o => o.Store.Equals(SPViewModel.STORE_NO)).Any())
+                    {
+                        List<CSHMIMP0> MIRow = db.CSHMIMP0.Where(o => o.Store.Equals(SPViewModel.STORE_NO)).ToList();
+                        foreach (var v in MIRow)
+                        {
+                            v.Store = null;
+                        }
+                    }
+                    //      Remove from `Except_Store`
+                    if (db.CSHMIMP0.Where(o => o.Except_Store.Equals(SPViewModel.STORE_NO)).Any())
+                    {
+                        List<CSHMIMP0> MIRow = db.CSHMIMP0.Where(o => o.Except_Store.Equals(SPViewModel.STORE_NO)).ToList();
+                        foreach (var v in MIRow)
+                        {
+                            v.Store = null;
+                        }
+                    }
+                    // Remove from Raw Items
+                    //      Remove from `Store`
+                    if (db.INVRIMP0.Where(o => o.Store.Equals(SPViewModel.STORE_NO)).Any())
+                    {
+                        List<INVRIMP0> MIRow = db.INVRIMP0.Where(o => o.Store.Equals(SPViewModel.STORE_NO)).ToList();
+                        foreach (var v in MIRow)
+                        {
+                            v.Store = null;
+                        }
+                    }
+                    //      Remove from `Except_Store`
+                    if (db.INVRIMP0.Where(o => o.Except_Store.Equals(SPViewModel.STORE_NO)).Any())
+                    {
+                        List<INVRIMP0> MIRow = db.INVRIMP0.Where(o => o.Except_Store.Equals(SPViewModel.STORE_NO)).ToList();
+                        foreach (var v in MIRow)
+                        {
+                            v.Store = null;
+                        }
+                    }
+                    // Remove from Vendors
+                    //      Remove from `Store`
+                    if (db.INVVEMP0.Where(o => o.Store.Equals(SPViewModel.STORE_NO)).Any())
+                    {
+                        List<INVVEMP0> MIRow = db.INVVEMP0.Where(o => o.Store.Equals(SPViewModel.STORE_NO)).ToList();
+                        foreach (var v in MIRow)
+                        {
+                            v.Store = null;
+                        }
+                    }
+                    //      Remove from `Except_Store`
+                    if (db.INVVEMP0.Where(o => o.Except_Store.Equals(SPViewModel.STORE_NO)).Any())
+                    {
+                        List<INVVEMP0> MIRow = db.INVVEMP0.Where(o => o.Except_Store.Equals(SPViewModel.STORE_NO)).ToList();
+                        foreach (var v in MIRow)
+                        {
+                            v.Store = null;
+                        }
+                    }
+                }
                 else
                     return false;
+
                 try
                 {
                     db.Store_Profile.Remove(SPRow);
                     db.SaveChanges();
                     return true;
-                } catch ( Exception e )
+                }
+                catch ( Exception e )
                 {
                     System.Diagnostics.Debug.WriteLine(e.Source);
                     System.Diagnostics.Debug.WriteLine(e.Message);
@@ -125,78 +199,103 @@ namespace CFMMCD.Models.EntityManager
         /*
          * Searches for the StoreNumber/StoreName from the table
          */
-         public List<StoreProfileViewModel> SearchStore(StoreProfileViewModel SPViewModel)
+         public List<Store> SearchStores(string SearchItem)
          {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<Store_Profile> SPRowList;
-                List<StoreProfileViewModel> SPViewModelList = new List<StoreProfileViewModel>();
-                if (db.Store_Profile.Where(o => o.STORE_NAME.Contains(SPViewModel.StoreNameNumber)).Any())
-                    SPRowList = db.Store_Profile.Where(sp => sp.STORE_NAME.Contains(SPViewModel.StoreNameNumber)).ToList();
-                else if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SPViewModel.StoreNameNumber)).Any())
-                    SPRowList = db.Store_Profile.Where(sp => sp.STORE_NO.ToString().Equals(SPViewModel.StoreNameNumber)).ToList();
+                List<Store> SPList = new List<Store>();
+                if (SearchItem.ToUpper().Equals("ALL"))
+                    SPRowList = db.Store_Profile.ToList();
+                else if (db.Store_Profile.Where(o => o.STORE_NAME.Contains(SearchItem)).Any())
+                    SPRowList = db.Store_Profile.Where(sp => sp.STORE_NAME.Contains(SearchItem)).ToList();
+                else if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SearchItem)).Any())
+                    SPRowList = db.Store_Profile.Where(sp => sp.STORE_NO.ToString().Equals(SearchItem)).ToList();
                 else
                     return null; // Empty
                 foreach ( Store_Profile sp in SPRowList )
                 {
-                    StoreProfileViewModel vm = new StoreProfileViewModel();
-                    vm.STORE_NO = sp.STORE_NO.ToString().Trim();
-                    vm.STORE_NAME = sp.STORE_NAME.Trim();
-                    vm.OWNERSHIP = sp.OWNERSHIP.Trim();
-                    vm.BREAKFAST_PRICE_TIER = sp.BREAKFAST_PRICE_TIER.Trim();
-                    vm.REGULAR_PRICE_TIER = sp.REGULAR_PRICE_TIER.Trim();
-                    vm.DC_PRICE_TIER = sp.DC_PRICE_TIER.Trim();
-                    vm.MDS_PRICE_TIER = sp.MDS_PRICE_TIER.Trim();
-                    vm.MCCAFE_LEVEL_2_PRICE_TIER = sp.MCCAFE_LEVEL_2_PRICE_TIER.Trim();
-                    vm.MCCAFE_LEVEL_3_PRICE_TIER = sp.MCCAFE_LEVEL_3_PRICE_TIER.Trim();
-                    vm.MCCAFE_BISTRO_PRICE_TIER = sp.MCCAFE_BISTRO_PRICE_TIER.Trim();
-                    vm.PROJECT_GOLD_PRICE_TIER = sp.PROJECT_GOLD_PRICE_TIER.Trim();
-                    vm.PROFIT_CENTER = sp.PROFIT_CENTER.ToString();
-                    vm.REGION = sp.REGION.Trim();
-                    vm.PROVINCE = sp.PROVINCE.Trim();
-                    vm.LOCATION = sp.LOCATION.Trim();
-                    vm.ADDRESS = sp.ADDRESS.Trim();
-                    vm.CITY = sp.CITY.Trim();
-                    vm.FRESH_OR_FROZEN = sp.FRESH_OR_FROZEN.Trim();
-                    vm.PAPER_OR_PLASTIC = sp.PAPER_OR_PLASTIC.Trim();
-                    vm.SOFT_SERVE_OR_VANILLA_POWDER_MIX = sp.SOFT_SERVE_OR_VANILLA_POWDER_MIX.Trim();
-                    vm.SIMPLOT_OR_MCCAIN = sp.SIMPLOT_OR_MCCAIN.Trim();
-                    vm.MCCORMICK_OR_GSF = sp.MCCORMICK_OR_GSF.Trim();
-                    vm.BET = GetBusinessExtension(sp.BET);
-                    SPViewModelList.Add(vm);
+                    Store st = new Store();
+                    st.Store_No = sp.STORE_NO.ToString();
+                    st.Store_Name = sp.STORE_NAME;
+                    SPList.Add(st);
                 }
-                if (SPViewModelList == null || SPViewModelList.ElementAt(0) == null)
+                if (SPList == null || SPList.ElementAt(0) == null)
                     return null;
-                return SPViewModelList;
+                return SPList;
+            }
+        }
+
+        public StoreProfileViewModel SearchSingleStore (string SearchItem)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                Store_Profile SPRow;
+                if (db.Store_Profile.Where(o => o.STORE_NO.ToString().Equals(SearchItem)).Any())
+                    SPRow = db.Store_Profile.Single(sp => sp.STORE_NO.ToString().Equals(SearchItem));
+                else return null;
+
+                StoreProfileViewModel vm = new StoreProfileViewModel();
+                vm.STORE_NO = SPRow.STORE_NO.ToString().Trim();
+                vm.STORE_NAME = SPRow.STORE_NAME.Trim();
+                vm.OWNERSHIP = SPRow.OWNERSHIP.Trim();
+                vm.BREAKFAST_PRICE_TIER = SPRow.BREAKFAST_PRICE_TIER.Trim();
+                vm.REGULAR_PRICE_TIER = SPRow.REGULAR_PRICE_TIER.Trim();
+                vm.DC_PRICE_TIER = SPRow.DC_PRICE_TIER.Trim();
+                vm.MDS_PRICE_TIER = SPRow.MDS_PRICE_TIER.Trim();
+                vm.MCCAFE_LEVEL_2_PRICE_TIER = SPRow.MCCAFE_LEVEL_2_PRICE_TIER.Trim();
+                vm.MCCAFE_LEVEL_3_PRICE_TIER = SPRow.MCCAFE_LEVEL_3_PRICE_TIER.Trim();
+                vm.MCCAFE_BISTRO_PRICE_TIER = SPRow.MCCAFE_BISTRO_PRICE_TIER.Trim();
+                vm.PROJECT_GOLD_PRICE_TIER = SPRow.PROJECT_GOLD_PRICE_TIER.Trim();
+                vm.PROFIT_CENTER = SPRow.PROFIT_CENTER.ToString();
+                vm.REGION = SPRow.REGION.Trim();
+                vm.PROVINCE = SPRow.PROVINCE.Trim();
+                vm.LOCATION = SPRow.LOCATION.Trim();
+                vm.ADDRESS = SPRow.ADDRESS.Trim();
+                vm.CITY = SPRow.CITY.Trim();
+                vm.FRESH_OR_FROZEN = SPRow.FRESH_OR_FROZEN.Trim();
+                vm.PAPER_OR_PLASTIC = SPRow.PAPER_OR_PLASTIC.Trim();
+                vm.SOFT_SERVE_OR_VANILLA_POWDER_MIX = SPRow.SOFT_SERVE_OR_VANILLA_POWDER_MIX.Trim();
+                vm.SIMPLOT_OR_MCCAIN = SPRow.SIMPLOT_OR_MCCAIN.Trim();
+                vm.MCCORMICK_OR_GSF = SPRow.MCCORMICK_OR_GSF.Trim();
+                vm.BET = GetBusinessExtension(SPRow.BET, vm.BusinessExtList);
+                return vm;
             }
         }
         /*
-         * Creates a string list of the selected Business Extension
+         * Creates a List of bool from the string of 
+         * selected Business Extensions
+         * to be used in the View.
          */
-        private List<bool> GetBusinessExtension( string stArr )
+        private List<bool> GetBusinessExtension ( string stArr, List<CheckBoxList> lookUpList )
         {
             using ( CFMMCDEntities db = new CFMMCDEntities() )
             {
-                System.Diagnostics.Debug.WriteLine("BET (get):" + stArr);
-                int capacity = db.BUSINESS_EXT.Count();
+                int capacity = lookUpList.Count();
                 bool[] BEArr = new bool[capacity];
                 string[] initArr = stArr.Split(',');
                 for (int i = 0; i < capacity; i++)
                 {
-                    if (initArr.Contains(i.ToString()))
+                    int index = int.Parse(lookUpList[i].value);
+                    if (initArr.Contains(lookUpList[i].value))
+                    {
                         BEArr[i] = true;
-                    else
-                        BEArr[i] = false;
+                    } else BEArr[i] = false;
                 }
                 return BEArr.ToList();
             }
         }
-        private string SetBusinessExtention ( List<bool> boolArr )
+        /*
+         * Creates a string of bool delimited by ',' 
+         * that contains the selected Business Extensions
+         * to be inserted in DB
+         */
+        private string SetBusinessExtention ( List<bool> boolArr, List<CheckBoxList> lookUpList )
         {
             string st = "";
             for (int i = 0; i < boolArr.Count(); i++ )
                 if (boolArr[i])
-                    st += i + ",";
+                    st += lookUpList[i].value + ",";
             System.Diagnostics.Debug.WriteLine("BET (set):" + st);
             if (st.Length <= 0)
                 return st;

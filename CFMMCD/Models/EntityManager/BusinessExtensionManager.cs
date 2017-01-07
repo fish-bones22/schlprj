@@ -76,6 +76,19 @@ namespace CFMMCD.Models.EntityManager
                     bexRow = db.BUSINESS_EXT.Single(o => o.ID.ToString().Equals(BEXViewModel.ID));
                 else
                     return false;
+
+                // Get position in the table to be used in the deletion of entry in StoreProfile table
+                int index = db.BUSINESS_EXT.ToList().IndexOf(bexRow);
+                // Get Store_Profile rows that contain 'index' in `BET`
+                List<Store_Profile> SPRows = db.Store_Profile.Where(o => o.BET.Contains(index.ToString())).ToList();
+                for (int  i = 0; i < SPRows.Count(); i++)
+                {
+                    string BETString = SPRows[i].BET;
+                    BETString = BETString.Replace(index.ToString(), "");  // Replace the index with empty
+                    BETString = BETString.Replace(",,", ",");             // Removes instances of blank between delimiters
+                    SPRows[i].BET = BETString;                        // Replace old entry
+                }
+
                 try
                 {
                     db.BUSINESS_EXT.Remove(bexRow);

@@ -24,30 +24,16 @@ namespace CFMMCD.Controllers
 
             // SearchItemSelected is assigned value at DisplaySearchResult
             StoreProfileManager SPManager = new StoreProfileManager();
-            StoreProfileViewModel SPViewModel = (StoreProfileViewModel)TempData["SearchItemSelected"];
-            if (SPViewModel == null)
-            {
-                SPViewModel = new StoreProfileViewModel();
-            }
-
-            // DEBUGGING
-            foreach ( var v in SPViewModel.BusinessExtList)
-                System.Diagnostics.Debug.WriteLine("INDEX:" + v.value + " " + v.text+ ": " + v.Cb);
-
+            StoreProfileViewModel SPViewModel = new StoreProfileViewModel();
+            SPViewModel.StoreList = SPManager.SearchStores("ALL");
             return View(SPViewModel);
         }
         [HttpPost]
-        public ActionResult Index(StoreProfileViewModel SPViewModel)
+        public ActionResult Index(StoreProfileViewModel SPViewModel, string value)
         {
             StoreProfileManager SPManager = new StoreProfileManager();
-            SPViewModel.StoreList = SPManager.SearchStore(SPViewModel);
-            if (SPViewModel.StoreList != null)
-            {
-                TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = SPViewModel.StoreList;
-            }
-            else
-                ModelState.AddModelError("", "No results found");
+            SPViewModel = SPManager.SearchSingleStore(value);
+            SPViewModel.StoreList = SPManager.SearchStores("ALL");
             return View(SPViewModel);
         }
 
@@ -78,21 +64,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("Index");
-        }
-        /*
-         * This method is called after selecting an item from a list of search result.
-         * Parameter SPViewModel still holds the list of searched ViewModels and
-         * parameter value stores the value of the item selected.
-         * 
-         * The value is then searched in the list and stores it in a TempData to be used by Index().
-         * */
-        [HttpPost]
-        public ActionResult DisplaySearchResult(string value)
-        {
-            List<StoreProfileViewModel> SPList = (List<StoreProfileViewModel>)Session["ViewModelList"];
-            StoreProfileViewModel SPViewModel = SPList.Where(o => o.STORE_NO.ToString().Equals(value)).FirstOrDefault();
-            TempData["SearchItemSelected"] = SPViewModel;
-            return RedirectToAction("Index", "StoreProfile");
         }
     }
 }

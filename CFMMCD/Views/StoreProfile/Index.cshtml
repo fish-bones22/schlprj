@@ -1,53 +1,37 @@
 ﻿@model CFMMCD.Models.ViewModel.StoreProfileViewModel
-
 @using CFMMCD.Models.ViewModel
+
 @using CFMMCD.DropDown
 
 @{
     ViewBag.Title = "Store Profile";
-    int HasSearch = 0;
-    if (TempData["SearchResult"] != null)
-    {
-        HasSearch = (int)TempData["SearchResult"];
-    }
 }
 
 <h2 align="center">Store Profile</h2>
 
+<hr />
 
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
 
 <div class="form-horizontal">
+    <!--Search-->
+    <div class="container-fluid">
+        <div class="col-lg-10 col-lg-offset-1">
+            <input type="text" class="form-control" placeholder="Search store" id="search_dummy" />
+        </div>
+    </div>
+
     <hr />
 
-    <div class="container">
-        @if (TempData["ErrorMessage"] != null)
-        {
-        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
-        }
-        @if (TempData["SuccessMessage"] != null)
-        {
-        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
-        }
-    </div>
-    @using (Html.BeginForm("Index", "StoreProfile", FormMethod.Post, new { }))
-    {
-        @Html.AntiForgeryToken()
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="col-lg-4">
-                    @Html.LabelFor(model => Model.StoreNameNumber, "Store Name/Number", new { @class = "form-label right" })
-                </div>
-                <div class="col-lg-8">
-                    @Html.TextBoxFor(model => Model.StoreNameNumber, new { @class = "form-control input-sm" })
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <button type="submit" name="command" value="Search" class="btn btn-default">Search</button>
-            </div>
-        </div>
-    }
-    <hr />
     @using (Html.BeginForm("UpdateDelete", "StoreProfile", FormMethod.Post, new { }))
     {
         @Html.AntiForgeryToken()
@@ -56,7 +40,7 @@
                 <div class="col-lg-4">
                     <div class="container-fluid">
                         @Html.LabelFor(model => Model.STORE_NO, "Store number", new { @class = "form-label" })
-                        @Html.TextBoxFor(model => Model.STORE_NO, new { @class = "form-control input-sm",@type = "number", @maxlength = "5" })
+                        @Html.TextBoxFor(model => Model.STORE_NO, new { @class = "form-control input-sm", @type = "number", @max = "999999" })
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -76,12 +60,12 @@
             <div class="col-lg-4">
                 <h4><strong>Business Extension</strong></h4>
                 @{
-                    List<CheckBoxList> mod = Model.BusinessExtList;
                     for (int i = 0; i < Model.BusinessExtList.Count(); i++)
                     {
                         <div class="checkbox">
                             @Html.CheckBoxFor(m => Model.BET[i])
-                            @Html.LabelFor(m => Model.BET[i], mod[i].text, new { @class = "form-label" })
+                            @Html.LabelFor(m => Model.BET[i], Model.BusinessExtList[i].text, new { @class = "form-label" })
+                            @Html.HiddenFor(m => Model.BusinessExtList[i].value)
                         </div>
                     }
                 }
@@ -153,19 +137,16 @@
                     <div class="form-group">
                         @Html.LabelFor(model => Model.REGION, "Region", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.REGION, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "region", @Value = Model.REGION })
-                        <!--select id="region" name="REGION" class="form-control input-sm"></!--select-->
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.PROVINCE, "Province", new { @class = "form-label" })
                         @Html.DropDownListFor(m => Model.PROVINCE, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "province", @Value = Model.PROVINCE })
-                        <!--select-- id="province" name="PROVINCE" class="form-control input-sm"></!--select-->
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.CITY, "City", new { @class = "form-label col-md-3" })
                         @Html.DropDownListFor(m => Model.CITY, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "city", @Value = Model.CITY })
-                        <!--select id="city" name="CITY" class="form-control input-sm"></!--select>-->
                     </div>
                 </div>
             </div>
@@ -234,42 +215,39 @@
             <input type="submit" name="command" value="Delete" class="btn btn-default" />
         </div>
     }
-    </div>
-<!--Search result modal-->
+</div>
+
 <div class="modal fade" id="search-result-modal" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
             <button class="close" data-dismiss="modal">&times;</button>
-            <h4>Search results</h4>
+            <h4>All items</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search store" autofocus />
+            </div>
         </div>
-        @using (Html.BeginForm("DisplaySearchResult", "StoreProfile", FormMethod.Post, new { }))
+        @using (Html.BeginForm())
         {
-            List<StoreProfileViewModel> SPList = (List<StoreProfileViewModel>)Session["ViewModelList"];
-            if (SPList != null)
-            {
-                <div class="modal-body">
-                    @{if (HasSearch == 1 && SPList != null)
-                    {
-                        foreach (StoreProfileViewModel vm in SPList)
-                        {
-                                <button type="submit" class="modal-item-select" name="value" value=@vm.STORE_NO>
-                                    <div class="col-lg-3">
-                                        @vm.STORE_NO
-                                    </div>
-                                    <div class="col-lg-9">
-                                        @vm.STORE_NAME
-                                    </div>
-                                </button>
-                            }
-                        }
-                    }
-                </div>
-            }
+            <div class="modal-body">
+                @for (int i = 0; i < Model.StoreList.Count(); i++)
+                {
+                    string ActiveInactive = "active";
+                    <button type="submit" class="modal-item-select tr-collapse @Model.StoreList[i].Store_No @Model.StoreList[i].Store_Name @ActiveInactive" name="value" value=@Model.StoreList[i].Store_No>
+                        <div class="col-lg-3">
+                            @Model.StoreList[i].Store_No
+                        </div>
+                        <div class="col-lg-9">
+                            @Model.StoreList[i].Store_Name
+                        </div>
+                    </button>
+                }
+            </div>
         }
     </div>
 </div>
 
 <script>
+    // Region, Province, and City Dropdown Handling
     @{
         string region = "NCR";
         string province = "";
@@ -288,12 +266,6 @@
         }
     }
     $(window).ready(function () {
-        if (@HasSearch === 1) {
-            $("#search-result-modal").modal('show');
-
-            option = "";
-        }
-
         $("option[value='@region'").attr("selected", "selected");
         updateProvince();
         $("option[value='@province'").attr("selected", "selected");
