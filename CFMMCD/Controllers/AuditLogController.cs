@@ -40,9 +40,9 @@ namespace CFMMCD.Controllers
             }
             else if (command == "toPDF")
             {
-
+                AuditLogManager ALM = new AuditLogManager();
+                result = ALM.ExportToPDF(ALVM);
             }
-
             return RedirectToAction("Index");
         }
     }

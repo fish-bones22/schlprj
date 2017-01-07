@@ -8,6 +8,11 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.pdf;
 
 namespace CFMMCD.Models.EntityManager
 {
@@ -94,7 +99,7 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 //Creates a DataTable
-                DataTable dt = new DataTable();
+                DataTable dt = new DataTable("AL Report");
 
                 //Adds the Columns to the DataTable based on the AuditLog
                 dt.Columns.Add("UserId", typeof(string));
@@ -142,6 +147,63 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
             return true;
+        }
+        public bool ExportToPDF(AuditLogViewModel ALViewModel)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                //Creates a DataTable
+                DataTable dt = new DataTable("AL Report");
+
+                //Adds the Columns to the DataTable based on the AuditLog
+                dt.Columns.Add("UserId", typeof(string));
+                dt.Columns.Add("Date", typeof(string));
+                dt.Columns.Add("Time", typeof(string));
+                dt.Columns.Add("Page", typeof(string));
+                dt.Columns.Add("Page_Action", typeof(string));
+                dt.Columns.Add("ID", typeof(string));
+                dt.Columns.Add("Name", typeof(string));
+
+                //Puts all the rows of the Audit Log Table
+                List<Audit_Log> AlRow = db.Audit_Log.ToList();
+                foreach (var vm in AlRow)
+                {
+                    var row = dt.NewRow();
+                    row["UserId"] = vm.UserId;
+                    row["Date"] = vm.Date;
+                    row["Time"] = vm.Time;
+                    row["Page"] = vm.Page;
+                    row["Page_Action"] = vm.Page_Action;
+                    row["ID"] = vm.Id;
+                    row["Name"] = vm.Name;
+                    dt.Rows.Add(row);
+                }
+
+                //Creates a dummy Gridview
+                GridView gv = new GridView();
+                gv.AllowPaging = false;
+                gv.DataSource = dt;
+                gv.DataBind();
+
+                HttpContext.Current.Response.ContentType = "application/pdf";
+                HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=AuditLog.pdf");
+                HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter hw = new HtmlTextWriter(sw);
+                gv.RenderControl(hw);
+                StringReader sr = new StringReader(sw.ToString());
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+#pragma warning disable CS0612 // Type or member is obsolete
+                HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+#pragma warning restore CS0612 // Type or member is obsolete
+                PdfWriter.GetInstance(pdfDoc, HttpContext.Current.Response.OutputStream);
+                pdfDoc.Open();
+                htmlparser.Parse(sr);
+                pdfDoc.Close();
+                HttpContext.Current.Response.Write(pdfDoc);
+                HttpContext.Current.Response.End();
+            }
+                return true;
         }
     }
 }
