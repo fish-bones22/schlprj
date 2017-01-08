@@ -374,6 +374,7 @@
     <Compile Include="Models\EntityManager\RawItemMasterManager.cs" />
     <Compile Include="Models\EntityManager\RawItemPriceManager.cs" />
     <Compile Include="Models\EntityManager\RegularPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\ReportGenerationManager.cs" />
     <Compile Include="Models\EntityManager\SCMRecipeManager.cs" />
     <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
     <Compile Include="Models\EntityManager\ValueMealManager.cs" />

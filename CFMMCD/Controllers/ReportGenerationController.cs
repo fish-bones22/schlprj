@@ -11,15 +11,33 @@ namespace CFMMCD.Controllers
 {
     public class ReportGenerationController : Controller
     {
+        // GET: ReportGeneration
         public ActionResult Index()
         {
+            // Validate log in and user access
+            UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
+            if (UASession == null || !UASession.REG) return RedirectToAction("Login", "Account");
+
+            Session["CurrentPage"] = new CurrentPageSession("REG", "HOME", "LOG");
+            
             return View();
         }
-        public ActionResult ExportPDF()
+
+        [HttpPost]
+        public ActionResult Export(MenuItemMasterViewModel MIMVM, RawItemMasterViewModel RIMVM, MenuRecipeViewModel MRVM, StoreProfileViewModel SPVM, string command)
         {
-            var model = 0;//new GeneratePDF();
-            //Code to get content
-            return new Rotativa.ActionAsPdf("ReportGeneration", model) { FileName = "ReportGeneration.pdf" };
+            bool result = false;
+
+            if (command == "toExcel")
+            {
+                ReportGenerationManager RGM = new ReportGenerationManager();
+                result = RGM.RGtoExcel(MIMVM, MRVM, RIMVM, SPVM);
+            }
+            if (command == "toPDF")
+            {
+
+            }
+            return RedirectToAction("Index");
         }
     }
 }

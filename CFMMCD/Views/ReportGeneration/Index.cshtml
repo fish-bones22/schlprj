@@ -5,7 +5,7 @@
 }
 <div class="center">
     <h2>@ViewBag.Title</h2>
-</div><br/>
+</div><br />
 <div class="container">
     @if (TempData["ErrorMessage"] != null)
     {
@@ -67,7 +67,7 @@
 <hr />
 <!--store profile-->
 <div class="container-fluid">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Export", "ReportGeneration", FormMethod.Post, new { }))
     {
         @Html.AntiForgeryToken()
         <div class="row">
@@ -419,19 +419,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="checkbox col-lg-2 col-lg-offset-3">
-                    <label class="control=label">
-                        <input type="checkbox">Export to Excel
-                    </label>
-                </div><br />
-                <div class="checkbox col-lg-2">
-                    <label class="control=label">
-                        <input type="checkbox">Export to PDF
-                    </label>
-                </div>
-                <div class="col-lg-1">
-                    <a href="@Url.Action("ExportPDF", "ReportGeneration")" type="button" class="btn btn-danger">Export</a>
-                </div>
+                <button type="submit" class="btn btn-default" name="command" value="toPDF">Export to PDF</button>
+                <button type="submit" class="btn btn-default" name="command" value="toExcel">Export as Spreadsheet</button>
             </div>
         </div>
     }
