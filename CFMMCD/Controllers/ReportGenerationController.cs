@@ -35,7 +35,8 @@ namespace CFMMCD.Controllers
             }
             if (command == "toPDF")
             {
-
+                ReportGenerationManager RGMP = new ReportGenerationManager();
+                result = RGMP.ExportToPDF(MIMVM, MRVM, RIMVM, SPVM);
             }
             return RedirectToAction("Index");
         }
