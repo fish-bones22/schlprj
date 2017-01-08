@@ -51,6 +51,7 @@ namespace CFMMCD.Controllers
                     // Set User access
                     UserAccessSession UASession = new UserAccessSession();
                     Session["UserAccess"] = accMan.SetUserAccess(credentials.Username);
+                    accMan.LogDateTime(credentials.Username);
                     return RedirectToAction("Index", "Home");
                 }
                 else

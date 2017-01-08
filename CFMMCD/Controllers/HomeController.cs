@@ -1,4 +1,6 @@
-﻿using CFMMCD.Sessions;
+﻿using CFMMCD.Models.EntityManager;
+using CFMMCD.Models.ViewModel;
+using CFMMCD.Sessions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,13 @@ namespace CFMMCD.Controllers
             if (UASession == null) return RedirectToAction("Login", "Account");
 
             Session["CurrentPage"] = new CurrentPageSession("HOME", "LOG");
-            return View();
+
+            HomeManager HManager = new HomeManager();
+            UserSession user = (UserSession)Session["User"];
+            HomeViewModel HViewModel = new HomeViewModel();
+            HViewModel.MenuItemNotif = HManager.GetMenuItemNotification(user.Username);
+            HViewModel.RawItemNotif = HManager.GetRawItemNotification(user.Username);
+            return View(HViewModel);
         }
     }
 }

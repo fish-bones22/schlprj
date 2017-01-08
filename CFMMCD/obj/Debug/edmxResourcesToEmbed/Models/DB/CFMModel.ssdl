@@ -9,6 +9,7 @@
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="UserAccess" Type="varchar(max)" Nullable="false" />
     <Property Name="AdminStatus" Type="tinyint" Nullable="false" />
+    <Property Name="TimeLastLogged" Type="datetime" />
   </EntityType>
   <EntityType Name="Audit_Log">
     <Key>
@@ -18,7 +19,7 @@
     <Property Name="ItemId" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Date" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="Time" Type="nchar" MaxLength="5" Nullable="false" />
+    <Property Name="Time" Type="nchar" MaxLength="8" Nullable="false" />
     <Property Name="Page" Type="nchar" MaxLength="20" Nullable="false" />
     <Property Name="Page_Action" Type="nchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />

@@ -23,7 +23,7 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<AuditLogViewModel> ALList = new List<AuditLogViewModel>();
-                foreach (Audit_Log al in db.Audit_Log)
+                foreach (Audit_Log al in db.Audit_Log.OrderByDescending(m => m.Date))
                 {
                     AuditLogViewModel ALViewModel = new AuditLogViewModel();
 
@@ -85,7 +85,7 @@ namespace CFMMCD.Models.EntityManager
             {
                 UserId = UserName,
                 Date = Date_Time.ToString("yyyy-MM-dd"),
-                Time = Date_Time.ToString("hh:mm"),
+                Time = Date_Time.ToString("hh:mm tt"),
                 Name = Name,
                 Page = Page,
                 Page_Action = PageAction,

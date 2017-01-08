@@ -56,7 +56,7 @@ namespace CFMMCD.Controllers
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "Business Extension Model", PageAction, BEXViewModel.ID, BEXViewModel.LONGNM);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Business Extension", PageAction, BEXViewModel.ID, BEXViewModel.LONGNM);
             }
             else TempData["ErrorMessage"] = PageAction + " failed";
             return RedirectToAction("Index");

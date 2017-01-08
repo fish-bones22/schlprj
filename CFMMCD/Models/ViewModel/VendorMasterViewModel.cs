@@ -47,4 +47,9 @@ namespace CFMMCD.Models.ViewModel
         public List<GenericDropDownList> LocationList { get; set; }
         public List<VendorMasterViewModel> VendorMasterList { get; set; }
     }
+    public class Vendor
+    {
+        public string VEMVEN { get; set; }
+        public string VEMDS1 { get; set; }
+    }
 }

@@ -4,9 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c73a0b347ce49a9b17152b45363f091" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="5.75" PointY="3.75" />
+      <Diagram DiagramId="5c73a0b347ce49a9b17152b45363f091" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="CFMMCDModel.Breakfast_Price_Tier" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="CFMMCDModel.BUSINESS_EXT" Width="1.5" PointX="7.75" PointY="3.75" />
         <EntityTypeShape EntityType="CFMMCDModel.Category" Width="1.5" PointX="5.75" PointY="7.75" />
@@ -37,6 +35,8 @@
         <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" />
         <EntityTypeShape EntityType="CFMMCDModel.CSHPMGP0" Width="1.5" PointX="12.375" PointY="16.75" />
         <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="5.375" PointY="18.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="18.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

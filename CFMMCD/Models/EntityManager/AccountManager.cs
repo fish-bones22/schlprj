@@ -135,6 +135,20 @@ namespace CFMMCD.Models.EntityManager
                     return "";
             }
         }
+        public bool LogDateTime(string username)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                if (db.Accounts.Where(o => o.Username.Trim().Equals(username)).Any())
+                {
+                    Account ac = db.Accounts.SingleOrDefault(o => o.Username.Trim().Equals(username));
+                    ac.TimeLastLogged = DateTime.Now;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
 
         public List<string> SearchAccounts (string username)
         {

@@ -361,6 +361,7 @@
     <Compile Include="Models\EntityManager\BreakfastPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\BusinessExtensionManager.cs" />
     <Compile Include="Models\EntityManager\DessertPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\HomeManager.cs" />
     <Compile Include="Models\EntityManager\LocationManager.cs" />
     <Compile Include="Models\EntityManager\McCafeBistroPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\McCafeLevel2PriceTierManager.cs" />
@@ -381,6 +382,7 @@
     <Compile Include="Models\ViewModel\BreakfastPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\BusinessExtensionViewModel.cs" />
     <Compile Include="Models\ViewModel\DessertPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\LocationViewModel.cs" />
     <Compile Include="Models\ViewModel\McCafeBistroPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\McCafeLevel2PriceTierViewModel.cs" />

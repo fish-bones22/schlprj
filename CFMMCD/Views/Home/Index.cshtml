@@ -1,4 +1,5 @@
-﻿@using CFMMCD.Sessions
+﻿@model CFMMCD.Models.ViewModel.HomeViewModel
+@using CFMMCD.Sessions
 
 @{
     ViewBag.Title = "Home";
@@ -132,18 +133,36 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-8">
-        <div class="container-fluid">
-            <div class="panel panel-default">
-                <div class="panel-heading">Notifications</div>
-                <div class="panel-body">
-                    <table class="table table-responsive">
-                        <tbody>
-                            <tr>Under construction</tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="container-fluid">
+        <div class="col-lg-8">
+            <table class="table table-responsive">
+                <thead>Notifications</thead>
+                <tbody>
+                    @{ 
+                        if (UASession.MIM)
+                        {
+                            for (int i = 0; i < Model.MenuItemNotif.Count(); i++)
+                            {
+                                <tr>
+                                    <td>@Model.MenuItemNotif[i].RIRMIC</td>
+                                    <td>@Model.MenuItemNotif[i].MIMDSC</td>
+                                </tr>
+                            }
+                        }
+                        if (UASession.RIM)
+                        {
+                            for (int i = 0; i < Model.RawItemNotif.Count(); i++)
+                            {
+                                <tr>
+                                    <td>@Model.RawItemNotif[i].RIMRIC</td>
+                                    <td>@Model.RawItemNotif[i].RIMRID</td>
+                                </tr>
+                            }
+                        }
+                    }
+                    <tr></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
