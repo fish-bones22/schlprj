@@ -67,5 +67,3 @@ C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.W
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Mvc.xml
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\obj\Debug\CFMMCD.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\obj\Debug\CFMMCD.pdb
-C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\itextsharp.dll
-C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\itextsharp.xml
