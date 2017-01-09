@@ -21,7 +21,8 @@ namespace CFMMCD.Models.EntityManager
                 for (int i = 0; i < TGViewModel.StoreList.Count(); i++)
                 {
                     if (TGViewModel.StoreList[i].Cb || TGViewModel.IncludeAllStores)
-                    {
+                    {   
+                        // Data creation
                         StringBuilder sb = new StringBuilder();
                         TextGenerator tg = new TextGenerator();
                         string Store_No = TGViewModel.StoreList[i].value;
@@ -29,12 +30,7 @@ namespace CFMMCD.Models.EntityManager
                         string DateAndTimeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
                         DateTime DateFrom = DateTime.Parse(TGViewModel.DateFrom);
                         DateTime DateTo = DateTime.Parse(TGViewModel.DateTo);
-                        // Used for file name
-                        string PaddedStore_No = TGViewModel.StoreList[i].value;
-                        for (int j = 0; j < 5 - PaddedStore_No.Length + 2; j++)
-                        {
-                            PaddedStore_No = "0" + PaddedStore_No;
-                        }
+
                         // Append first line
                         sb.Append("01," + Store_No + "," + Store_Name + "," + DateAndTimeNow + "," + TGViewModel.PromoTitle + "\n");
 
@@ -54,17 +50,20 @@ namespace CFMMCD.Models.EntityManager
                                 sb.Append(tg.GenerateRawItemMasterText(mi));
                             }
                         }
-
-                        string filename = "CFM" + Store_No + "_" + DateTime.Now.ToString("MMddyyyy_HHmm");
+                        // File creation
+                        //  *Used for file name
+                        string PaddedStore_No = TGViewModel.StoreList[i].value;
+                        for (int j = 0; j < 5 - PaddedStore_No.Length + 2; j++)
+                            PaddedStore_No = "0" + PaddedStore_No;
+                        string filename = "CFM" + PaddedStore_No + "_" + DateTime.Now.ToString("MMddyyyy_HHmm");
                         if (TGViewModel.IncludeAll)
                             filename += ".ALL";
                         else
                             filename += ".PRO";
                         System.IO.File.WriteAllText(@"C:/SMS/SMSWEBCFM/" + filename, sb.ToString());
-                        return true;
                     }
                 }
-                return false;
+                return true;
             }
         }
 
@@ -72,15 +71,14 @@ namespace CFMMCD.Models.EntityManager
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<CSHMIMP0> list = new List<CSHMIMP0>();
                 Store_Profile Store = db.Store_Profile.Single(o => o.STORE_NO.ToString().Equals(Store_No));
-                List<CSHMIMP0> itemsToAdd = db.CSHMIMP0.Where(o => o.Store.Equals(Store_No)).ToList();
-                itemsToAdd.AddRange(db.CSHMIMP0.Where(o => o.Store.Equals("ALL")).ToList());
-                foreach (var v in itemsToAdd)
-                {
-                    if (((v.Except_Store != null) && !v.Except_Store.Equals(Store_No)) && (((DateTime)v.MIMEDT).CompareTo(DateFrom) > 0 && ((DateTime)v.MIMEDT).CompareTo(DateTo) <= 0) && (v.STATUS.Equals("A") || v.STATUS.Equals("E")))
-                        list.Add(v);
-                }
+                List<CSHMIMP0> list = db.CSHMIMP0.Where(o => o.Store.Equals(Store_No)).ToList();
+                list.AddRange(db.CSHMIMP0.Where(o => o.Store.Equals("ALL")).ToList());
+                list.RemoveAll(o => (o.Except_Store != null && o.Except_Store.Equals(Store_No)));
+                list.Where(o => o.STATUS.Equals("A"));
+                list.Where(o => o.STATUS.Equals("E"));
+                list.Where(o => o.MIMEDT >= DateFrom);
+                list.Where(o => o.MIMEDT <= DateTo);
 
                 foreach (CSHMIMP0 mi in list)
                 {
@@ -221,18 +219,13 @@ namespace CFMMCD.Models.EntityManager
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<INVRIMP0> list = new List<INVRIMP0>();
-                Store_Profile Store = db.Store_Profile.Single(o => o.STORE_NO.ToString().Equals(Store_No));
-                list = db.INVRIMP0.Where(o => o.Store.Equals(Store_No)).ToList();
-                List<INVRIMP0> itemsToAdd = db.INVRIMP0.Where(o => o.Store.Equals("ALL")).ToList();
-                foreach (var v in itemsToAdd)
-                {
-                    if (v.Except_Store != null && !v.Except_Store.Equals(Store_No))
-                        list.Add(v);
-                    else
-                        list.Add(v);
-                }
-
+                List<INVRIMP0> list = db.INVRIMP0.Where(o => o.Store.Equals(Store_No)).ToList();
+                list.AddRange(db.INVRIMP0.Where(o => o.Store.Equals("ALL")).ToList());
+                list.RemoveAll(o => (o.Except_Store != null && o.Except_Store.Equals(Store_No)));
+                list.Where(o => o.STATUS.Equals("A"));
+                list.Where(o => o.STATUS.Equals("E"));
+                list.Where(o => o.RIMEDT >= DateFrom);
+                list.Where(o => o.RIMEDT <= DateTo);
                 return list;
             }
         }

@@ -38,7 +38,7 @@ namespace CFMMCD.Models.EntityManager
                 DateTime lastUserAccess = (DateTime)db.Accounts.Single(o => o.Username.Equals(username)).TimeLastLogged;
                 foreach (var v in db.INVRIMP0)
                 {
-                    if (lastUserAccess.CompareTo(v.RIMDAT) < 0)
+                    if (lastUserAccess < v.RIMDAT)
                     {
                         RawItem mi = new RawItem();
                         mi.RIMRIC = v.RIMRIC.ToString();

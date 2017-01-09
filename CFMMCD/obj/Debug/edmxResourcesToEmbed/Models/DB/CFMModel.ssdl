@@ -9,6 +9,7 @@
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="UserAccess" Type="varchar(max)" Nullable="false" />
     <Property Name="AdminStatus" Type="tinyint" Nullable="false" />
+    <Property Name="TimeLastLogged" Type="datetime" />
   </EntityType>
   <EntityType Name="Audit_Log">
     <Key>
