@@ -343,7 +343,7 @@ namespace CFMMCD.DropDown
                     option.Cb = false;
                     option.value = i.STORE_NO.ToString();
                     option.text = i.STORE_NAME;
-                    string st = i.OWNERSHIP.Trim();
+                    string st = i.OWNERSHIP.ToString();
                     option.text2 = db.OWNERSHIPs.Single(o => o.Id.ToString().Equals(st)).OWNSHP;
                     list.Add(option);
                 }

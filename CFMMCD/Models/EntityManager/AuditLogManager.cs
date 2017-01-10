@@ -23,13 +23,12 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<AuditLogViewModel> ALList = new List<AuditLogViewModel>();
-                foreach (Audit_Log al in db.Audit_Log.OrderByDescending(m => m.Date))
+                foreach (Audit_Log al in db.Audit_Log.OrderByDescending(m => m.Date_Time))
                 {
                     AuditLogViewModel ALViewModel = new AuditLogViewModel();
 
                     ALViewModel.UserId = al.UserId;
-                    ALViewModel.Date = al.Date;
-                    ALViewModel.Time = al.Time;
+                    ALViewModel.Date_Time = al.Date_Time.ToString("yyyy-MM-dd hh:mm tt");
                     ALViewModel.Page = al.Page;
                     ALViewModel.ItemId = al.ItemId;
                     ALViewModel.Name = al.Name;
@@ -46,8 +45,7 @@ namespace CFMMCD.Models.EntityManager
                 Audit_Log alRow = new Audit_Log();
                 alRow.Id = int.Parse(DateTime.Now.ToString("yyMMdd")) + new Random().Next(999) + new Random().Next(999); // To be changed soon
                 alRow.UserId = ALViewModel.UserId;
-                alRow.Date = ALViewModel.Date;
-                alRow.Time = ALViewModel.Time;
+                alRow.Date_Time = DateTime.Parse(ALViewModel.Date_Time);
                 alRow.Page = ALViewModel.Page;
                 alRow.ItemId = ALViewModel.ItemId;
                 alRow.Page_Action = ALViewModel.Page_Action;
@@ -84,8 +82,7 @@ namespace CFMMCD.Models.EntityManager
             AuditLogViewModel ALViewModel = new AuditLogViewModel
             {
                 UserId = UserName,
-                Date = Date_Time.ToString("yyyy-MM-dd"),
-                Time = Date_Time.ToString("hh:mm tt"),
+                Date_Time = Date_Time.ToString("yyyy-MM-dd hh:mm tt"),
                 Name = Name,
                 Page = Page,
                 Page_Action = PageAction,
@@ -103,8 +100,7 @@ namespace CFMMCD.Models.EntityManager
 
                 //Adds the Columns to the DataTable based on the AuditLog
                 dt.Columns.Add("UserId", typeof(string));
-                dt.Columns.Add("Date", typeof(string));
-                dt.Columns.Add("Time", typeof(string));
+                dt.Columns.Add("Date_Tme", typeof(string));
                 dt.Columns.Add("Page", typeof(string));
                 dt.Columns.Add("Page_Action", typeof(string));
                 dt.Columns.Add("ID", typeof(string));
@@ -116,8 +112,7 @@ namespace CFMMCD.Models.EntityManager
                 {
                     var row = dt.NewRow();
                     row["UserId"] = vm.UserId;
-                    row["Date"] = vm.Date;
-                    row["Time"] = vm.Time;
+                    row["Date_Time"] = vm.Date_Time.ToString("yyyy-MM-dd hh:mm tt");
                     row["Page"] = vm.Page;
                     row["Page_Action"] = vm.Page_Action;
                     row["ID"] = vm.Id;
@@ -170,8 +165,7 @@ namespace CFMMCD.Models.EntityManager
                 {
                     var row = dt.NewRow();
                     row["UserId"] = vm.UserId;
-                    row["Date"] = vm.Date;
-                    row["Time"] = vm.Time;
+                    row["Date_Time"] = vm.Date_Time.ToString("yyyy-MM-dd hh:mm tt");
                     row["Page"] = vm.Page;
                     row["Page_Action"] = vm.Page_Action;
                     row["ID"] = vm.Id;

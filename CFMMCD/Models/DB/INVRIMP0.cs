@@ -62,7 +62,7 @@ namespace CFMMCD.Models.DB
         public string STATUS { get; set; }
         public string Store { get; set; }
         public string Except_Store { get; set; }
-        public string Location { get; set; }
+        public Nullable<int> Location { get; set; }
         public string Store_Attrib { get; set; }
         public string Region { get; set; }
         public string Province { get; set; }

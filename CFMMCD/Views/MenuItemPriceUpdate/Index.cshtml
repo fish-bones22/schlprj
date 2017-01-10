@@ -3,11 +3,6 @@
 
 @{
     ViewBag.Title = "Menu Item Price Update";
-    int HasSearch = 0;
-    if (TempData["SearchResult"] != null)
-    {
-        HasSearch = (int)TempData["SearchResult"];
-    }
 }
 <h2 align="center">@ViewBag.Title</h2>
 <hr/>
@@ -23,25 +18,8 @@
     }
 </div>
 <div class="form-horizontal">
-    <div class="row">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="container-fluid">
-                <div class="col-lg-2 text-right">
-                    <label class="form-label" for="menu-item">Menu item code / name</label>
-                </div>
-                <div class="col-lg-7">
-                    <input type="text" class="form-control" id="SearchFrontEnd"/>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-lg-3">
-                    <label class="checkbox-inline form-label">
-                        @Html.CheckBoxFor(m => m.InactiveItemsCb)Show inactive items
-                    </label>
-                </div>
-            </div>
-        }
+    <div class="container-fluid">
+        <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search menu item" />
     </div>
     <hr />
     <div class="row">
@@ -70,27 +48,27 @@
                     </thead>
                     <tbody>
                         @{ 
-                            for (int i = 0; i < Model.MenuItemMasterList.Count(); i++)
+                            for (int i = 0; i < Model.MenuItemPriceList.Count(); i++)
                             {
                                 string activeOrInactive = "active";
-                                if (Model.MenuItemMasterList[i].InactiveItemsCb)
+                                if (Model.MenuItemPriceList[i].MIMSTA.Equals("1"))
                                 {
                                     activeOrInactive = "inactive";
                                 }
-                                <tr class="@Model.MenuItemMasterList[i].MIMMIC @Model.MenuItemMasterList[i].MIMNAM @activeOrInactive tr-collapse">
+                                <tr class="@Model.MenuItemPriceList[i].MIMMIC @Model.MenuItemPriceList[i].MIMNAM @activeOrInactive tr-collapse">
                                     <td></td>
                                     <td>
-                                        @Html.LabelFor(m => Model.MenuItemMasterList[i].MIMMIC, Model.MenuItemMasterList[i].MIMMIC, new { @class = "form-label" })
-                                        @Html.HiddenFor(m => Model.MenuItemMasterList[i].MIMMIC)
+                                        @Html.LabelFor(m => Model.MenuItemPriceList[i].MIMMIC, Model.MenuItemPriceList[i].MIMMIC, new { @class = "form-label" })
+                                        @Html.HiddenFor(m => Model.MenuItemPriceList[i].MIMMIC)
                                     </td>
-                                    <td>@Html.LabelFor(m => Model.MenuItemMasterList[i].MIMNAM, Model.MenuItemMasterList[i].MIMNAM, new { @class = "form-label" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].OLDPRA, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].NEWPRA, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].OLDPRB, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].NEWPRB, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].OLDPRC, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].NEWPRC, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemMasterList[i].EffectiveDate, new { @class = "form-control", @type="date" })</td>
+                                    <td>@Html.LabelFor(m => Model.MenuItemPriceList[i].MIMNAM, Model.MenuItemPriceList[i].MIMNAM, new { @class = "form-label" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].OLDPRA, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].NEWPRA, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].OLDPRB, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].NEWPRB, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].OLDPRC, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].NEWPRC, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].EffectiveDate, new { @class = "form-control", @type="date" })</td>
                                 </tr>
                             }
                         }
@@ -279,47 +257,7 @@
     </div>
 </div>
 
-<!--Search result modal-->
-<div class="modal fade" id="search-result-modal" role="dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button class="close" data-dismiss="modal">&times;</button>
-            <h4>Search results</h4>
-        </div>
-        @using (Html.BeginForm("DisplaySearchResult", "MenuItemPriceUpdate", FormMethod.Post, new { }))
-        {
-            List<MenuItemMasterViewModel> MIMList = (List<MenuItemMasterViewModel>)Session["ViewModelList"];
-            if (MIMList != null)
-            {
-                <div class="modal-body">
-                    @{if (HasSearch == 1 && MIMList != null)
-                    {
-                        foreach (MenuItemMasterViewModel vm in MIMList)
-                        {
-                                <button type="submit" class="modal-item-select" name="value" value=@vm.MIMMIC>
-                                    <div class="col-lg-3">
-                                        @vm.MIMMIC
-                                    </div>
-                                    <div class="col-lg-9">
-                                        @vm.MIMNAM
-                                    </div>
-                                </button>
-                            }
-                        }
-                    }
-                </div>
-                }
-            }
-    </div>
-</div>
-
 
 <script>
-    $(window).ready(function () {
-        if (@HasSearch === 1) {
-            $("#search-result-modal").modal('show');
-        }
-        filterSearch();
-    });
    
 </script>

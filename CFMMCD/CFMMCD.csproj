@@ -327,6 +327,9 @@
     <Compile Include="Models\DB\MDS_Price_Tier.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\MIM_Price.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\OWNERSHIP.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>

@@ -16,20 +16,20 @@ namespace CFMMCD.Models.DB
     {
         public int STORE_NO { get; set; }
         public string STORE_NAME { get; set; }
-        public string OWNERSHIP { get; set; }
-        public string BREAKFAST_PRICE_TIER { get; set; }
-        public string REGULAR_PRICE_TIER { get; set; }
-        public string DC_PRICE_TIER { get; set; }
-        public string MDS_PRICE_TIER { get; set; }
-        public string MCCAFE_LEVEL_2_PRICE_TIER { get; set; }
-        public string MCCAFE_LEVEL_3_PRICE_TIER { get; set; }
-        public string MCCAFE_BISTRO_PRICE_TIER { get; set; }
-        public string PROJECT_GOLD_PRICE_TIER { get; set; }
+        public Nullable<int> OWNERSHIP { get; set; }
+        public Nullable<int> BREAKFAST_PRICE_TIER { get; set; }
+        public Nullable<int> REGULAR_PRICE_TIER { get; set; }
+        public Nullable<int> DC_PRICE_TIER { get; set; }
+        public Nullable<int> MDS_PRICE_TIER { get; set; }
+        public Nullable<int> MCCAFE_LEVEL_2_PRICE_TIER { get; set; }
+        public Nullable<int> MCCAFE_LEVEL_3_PRICE_TIER { get; set; }
+        public Nullable<int> MCCAFE_BISTRO_PRICE_TIER { get; set; }
+        public Nullable<int> PROJECT_GOLD_PRICE_TIER { get; set; }
         public string BET { get; set; }
         public Nullable<int> PROFIT_CENTER { get; set; }
         public string REGION { get; set; }
         public string PROVINCE { get; set; }
-        public string LOCATION { get; set; }
+        public Nullable<int> LOCATION { get; set; }
         public string ADDRESS { get; set; }
         public string CITY { get; set; }
         public string FRESH_OR_FROZEN { get; set; }
@@ -37,6 +37,7 @@ namespace CFMMCD.Models.DB
         public string SOFT_SERVE_OR_VANILLA_POWDER_MIX { get; set; }
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
+        public string FRESHB_OR_FROZENB { get; set; }
         public string STATUS { get; set; }
     }
 }

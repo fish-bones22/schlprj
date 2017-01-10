@@ -3,11 +3,6 @@
 
 @{
     ViewBag.Title = "Raw Item Price Update";
-    int HasSearch = 0;
-    if (TempData["SearchResult"] != null)
-    {
-        HasSearch = (int)TempData["SearchResult"];
-    }
 }
 <h2 align="center">@ViewBag.Title</h2>
 <hr />
@@ -118,47 +113,3 @@
         }
     </div>
 </div>
-
-<div class="modal fade" id="search-result-modal" role="dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button class="close" data-dismiss="modal">&times;</button>
-            <h4>Search results</h4>
-        </div>
-        @using (Html.BeginForm("DisplaySearchResult", "RawItemMaster", FormMethod.Post, new { }))
-        {
-            List<RawItemPriceUpdateViewModel> RIPList = (List<RawItemPriceUpdateViewModel>)Session["ViewModelList"];
-            if (RIPList != null)
-            {
-                <div class="modal-body">
-                    @{if (HasSearch == 1 && RIPList != null)
-                        {
-                            foreach (RawItemPriceUpdateViewModel vm in RIPList)
-                            {
-                                <button type="submit" class="modal-item-select" name="value" value=@vm.RIM_VEM_ID>
-                                    <div class="col-lg-2">
-                                        @vm.RIMRIC
-                                    </div>
-                                    <div class="col-lg-5">
-                                        @vm.RIMRID
-                                    </div>
-                                    <div class="col-lg-5">
-                                        @vm.VEMDS1
-                                    </div>
-                                </button>
-                            }
-                        }
-                    }
-                </div>
-            }
-        }
-    </div>
-</div>
-
-<script>
-    $(window).ready(function () {
-        if (@HasSearch === 1) {
-            $("#search-result-modal").modal('show');
-        }
-    });
-</script>

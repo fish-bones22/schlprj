@@ -5,10 +5,10 @@
       <PropertyRef Name="UserId" />
     </Key>
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="UserAccess" Type="varchar(max)" Nullable="false" />
-    <Property Name="AdminStatus" Type="tinyint" Nullable="false" />
+    <Property Name="AdminStatus" Type="bit" Nullable="false" />
     <Property Name="TimeLastLogged" Type="datetime" />
   </EntityType>
   <EntityType Name="Audit_Log">
@@ -18,8 +18,7 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="ItemId" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Date" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="Time" Type="nchar" MaxLength="5" Nullable="false" />
+    <Property Name="Date_Time" Type="datetime" Nullable="false" />
     <Property Name="Page" Type="nchar" MaxLength="20" Nullable="false" />
     <Property Name="Page_Action" Type="nchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -29,7 +28,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+    <Property Name="Price_Tier" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="BUSINESS_EXT">
     <Key>
@@ -103,11 +102,11 @@
     <Property Name="Category" Type="int" />
     <Property Name="Trading_Area" Type="int" />
     <Property Name="Location" Type="int" />
-    <Property Name="Region" Type="nvarchar" MaxLength="20" />
-    <Property Name="Province" Type="nvarchar" MaxLength="20" />
+    <Property Name="Region" Type="nvarchar" MaxLength="10" />
+    <Property Name="Province" Type="nvarchar" MaxLength="10" />
     <Property Name="City" Type="nvarchar" MaxLength="20" />
-    <Property Name="Store" Type="nvarchar" MaxLength="20" />
-    <Property Name="Except_Store" Type="nvarchar" MaxLength="20" />
+    <Property Name="Store" Type="nvarchar" MaxLength="10" />
+    <Property Name="Except_Store" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="CSHMIMP0_NP6">
     <Key>
@@ -115,8 +114,8 @@
     </Key>
     <Property Name="MIMMIC" Type="int" Nullable="false" />
     <Property Name="MIMSTA" Type="nchar" MaxLength="1" />
-    <Property Name="MIMNAM" Type="nchar" MaxLength="6" />
-    <Property Name="MIMLON" Type="nchar" MaxLength="16" />
+    <Property Name="MIMNAM" Type="nvarchar" MaxLength="6" />
+    <Property Name="MIMLON" Type="nvarchar" MaxLength="16" />
   </EntityType>
   <EntityType Name="CSHPMGP0">
     <Key>
@@ -127,6 +126,7 @@
     <Property Name="PMGNUM" Type="nchar" MaxLength="2" />
     <Property Name="PMGTXT" Type="nvarchar" MaxLength="20" />
     <Property Name="PMGSTA" Type="nchar" MaxLength="1" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="CSHVMLP0">
     <Key>
@@ -156,7 +156,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+    <Property Name="Price_Tier" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="INVMGRP0">
     <Key>
@@ -165,6 +165,7 @@
     <Property Name="MGRGRP" Type="nvarchar" MaxLength="6" Nullable="false" />
     <Property Name="MGRTXT" Type="nvarchar" MaxLength="20" />
     <Property Name="MGRSTA" Type="nchar" MaxLength="1" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="INVRIMP0">
     <Key>
@@ -218,8 +219,8 @@
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
     <Property Name="Store" Type="nvarchar" MaxLength="20" />
     <Property Name="Except_Store" Type="nvarchar" MaxLength="20" />
-    <Property Name="Location" Type="nvarchar" MaxLength="20" />
-    <Property Name="Store_Attrib" Type="nvarchar" MaxLength="20" />
+    <Property Name="Location" Type="int" />
+    <Property Name="Store_Attrib" Type="nvarchar" MaxLength="10" />
     <Property Name="Region" Type="nvarchar" MaxLength="20" />
     <Property Name="Province" Type="nvarchar" MaxLength="20" />
     <Property Name="City" Type="nvarchar" MaxLength="20" />
@@ -252,6 +253,7 @@
     <Property Name="UOMDEL" Type="nvarchar" MaxLength="15" />
     <Property Name="UOMDAT" Type="date" />
     <Property Name="UOMUSR" Type="nchar" MaxLength="3" />
+    <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="INVVEMP0">
     <Key>
@@ -263,24 +265,24 @@
     <Property Name="VEMDS2" Type="nchar" MaxLength="20" />
     <Property Name="VEMCCD" Type="nchar" MaxLength="3" />
     <Property Name="VEMZIP" Type="nchar" MaxLength="5" />
-    <Property Name="VEMCTY" Type="nchar" MaxLength="20" />
-    <Property Name="VEMSTR" Type="nchar" MaxLength="20" />
-    <Property Name="VEMTEL" Type="nchar" MaxLength="18" />
+    <Property Name="VEMCTY" Type="nvarchar" MaxLength="20" />
+    <Property Name="VEMSTR" Type="nvarchar" MaxLength="20" />
+    <Property Name="VEMTEL" Type="nvarchar" MaxLength="18" />
     <Property Name="VEMSTN" Type="nchar" MaxLength="5" />
     <Property Name="VEMLOC" Type="nchar" MaxLength="1" />
     <Property Name="VEMDAY" Type="float" />
-    <Property Name="VEMTID" Type="nchar" MaxLength="5" />
+    <Property Name="VEMTID" Type="nvarchar" MaxLength="5" />
     <Property Name="VEMSTA" Type="nchar" MaxLength="1" />
     <Property Name="VEMDAT" Type="date" />
     <Property Name="VEMUSR" Type="nchar" MaxLength="3" />
     <Property Name="VEMADE" Type="nchar" MaxLength="1" />
     <Property Name="VEMDEL" Type="nchar" MaxLength="1" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
-    <Property Name="Region" Type="nvarchar" MaxLength="20" />
-    <Property Name="Province" Type="nvarchar" MaxLength="20" />
+    <Property Name="Region" Type="nvarchar" MaxLength="10" />
+    <Property Name="Province" Type="nvarchar" MaxLength="10" />
     <Property Name="City" Type="nvarchar" MaxLength="20" />
-    <Property Name="Store" Type="nvarchar" MaxLength="20" />
-    <Property Name="Except_Store" Type="nvarchar" MaxLength="20" />
+    <Property Name="Store" Type="nvarchar" MaxLength="10" />
+    <Property Name="Except_Store" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="LOCATION">
     <Key>
@@ -294,28 +296,39 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+    <Property Name="Price_Tier" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="McCafe_Level_2_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+    <Property Name="Price_Tier" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="McCafe_Level_3_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+    <Property Name="Price_Tier" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="MDS_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+    <Property Name="Price_Tier" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="MIM_Price">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="MIMMIC" Type="int" />
+    <Property Name="MIMNAM" Type="nvarchar" MaxLength="6" />
+    <Property Name="MITIER" Type="int" />
+    <Property Name="MIMOLP" Type="float" />
+    <Property Name="MIMNEP" Type="float" />
   </EntityType>
   <EntityType Name="OWNERSHIP">
     <Key>
@@ -336,14 +349,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+    <Property Name="Price_Tier" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="Regular_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Price_Tier" Type="nchar" MaxLength="1" />
+    <Property Name="Price_Tier" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="RIM_VEM_Lookup">
     <Key>
@@ -384,27 +397,28 @@
     </Key>
     <Property Name="STORE_NO" Type="int" Nullable="false" />
     <Property Name="STORE_NAME" Type="nvarchar" MaxLength="50" />
-    <Property Name="OWNERSHIP" Type="nchar" MaxLength="10" />
-    <Property Name="BREAKFAST_PRICE_TIER" Type="nchar" MaxLength="1" />
-    <Property Name="REGULAR_PRICE_TIER" Type="nchar" MaxLength="1" />
-    <Property Name="DC_PRICE_TIER" Type="nchar" MaxLength="1" />
-    <Property Name="MDS_PRICE_TIER" Type="nchar" MaxLength="1" />
-    <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="nchar" MaxLength="1" />
-    <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="nchar" MaxLength="1" />
-    <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="nchar" MaxLength="1" />
-    <Property Name="PROJECT_GOLD_PRICE_TIER" Type="nchar" MaxLength="1" />
+    <Property Name="OWNERSHIP" Type="int" />
+    <Property Name="BREAKFAST_PRICE_TIER" Type="int" />
+    <Property Name="REGULAR_PRICE_TIER" Type="int" />
+    <Property Name="DC_PRICE_TIER" Type="int" />
+    <Property Name="MDS_PRICE_TIER" Type="int" />
+    <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="int" />
+    <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="int" />
+    <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="int" />
+    <Property Name="PROJECT_GOLD_PRICE_TIER" Type="int" />
     <Property Name="BET" Type="nvarchar(max)" />
     <Property Name="PROFIT_CENTER" Type="int" />
-    <Property Name="REGION" Type="nvarchar" MaxLength="50" />
-    <Property Name="PROVINCE" Type="nvarchar" MaxLength="50" />
-    <Property Name="LOCATION" Type="nvarchar" MaxLength="50" />
+    <Property Name="REGION" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROVINCE" Type="nvarchar" MaxLength="20" />
+    <Property Name="LOCATION" Type="int" />
     <Property Name="ADDRESS" Type="nvarchar(max)" />
     <Property Name="CITY" Type="nvarchar" MaxLength="50" />
-    <Property Name="FRESH_OR_FROZEN" Type="nchar" MaxLength="10" />
-    <Property Name="PAPER_OR_PLASTIC" Type="nchar" MaxLength="10" />
-    <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="nchar" MaxLength="20" />
-    <Property Name="SIMPLOT_OR_MCCAIN" Type="nchar" MaxLength="10" />
-    <Property Name="MCCORMICK_OR_GSF" Type="nchar" MaxLength="10" />
+    <Property Name="FRESH_OR_FROZEN" Type="nvarchar" MaxLength="10" />
+    <Property Name="PAPER_OR_PLASTIC" Type="nvarchar" MaxLength="10" />
+    <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="nvarchar" MaxLength="10" />
+    <Property Name="SIMPLOT_OR_MCCAIN" Type="nvarchar" MaxLength="10" />
+    <Property Name="MCCORMICK_OR_GSF" Type="nvarchar" MaxLength="10" />
+    <Property Name="FRESHB_OR_FROZENB" Type="nvarchar" MaxLength="10" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="Tier_Lookup">
@@ -534,6 +548,7 @@
     <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MIM_Price" EntityType="Self.MIM_Price" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OWNERSHIP" EntityType="Self.OWNERSHIP" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PROFIT_CEN" EntityType="Self.PROFIT_CEN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />

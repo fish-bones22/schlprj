@@ -25,11 +25,10 @@ namespace CFMMCD.Controllers
 
             // SearchItemSelected is assigned value at DisplaySearchResult
             MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MenuItemMasterViewModel MIMViewModel = (MenuItemMasterViewModel)TempData["SearchItemSelected"];
-            if (MIMViewModel == null)
-                MIMViewModel = new MenuItemMasterViewModel();
-            MIMViewModel.SearchItem = "ALL";
+            MenuItemMasterViewModel MIMViewModel = new MenuItemMasterViewModel();
             MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("ALL");
+            for (int i = 0; i < MIMViewModel.MenuItemMasterList.Count(); i++)
+                MIMViewModel.MenuItemPriceList.Add(MIMManager.SearchSingleMenuItem(MIMViewModel.MenuItemMasterList[i].RIRMIC));
             return View(MIMViewModel);
         }
 
@@ -56,7 +55,7 @@ namespace CFMMCD.Controllers
             bool result = false;
             if (command == "Save")
             {
-                result = MIMManager.UpdatePriceTier(MIMViewModel);
+                result = MIMManager.UpdatePriceTier(MIMViewModel.MenuItemPriceList);
                 PageAction = "Update price";
             }
             if (result)
@@ -69,21 +68,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("Index");
-        }
-        /*
-         * This method is called after selecting an item from a list of search result.
-         * Parameter MIMViewModel still holds the list of searched ViewModels and
-         * parameter value stores the value of the item selected.
-         * 
-         * The value is then searched in the list and stores it in a TempData to be used by Index().
-         * */
-        [HttpPost]
-        public ActionResult DisplaySearchResult(string value)
-        {
-            List<MenuItemMasterViewModel> MIMList = (List<MenuItemMasterViewModel>)Session["ViewModelList"];
-            MenuItemMasterViewModel MIMViewModel = MIMList.Where(o => o.MIMMIC.Equals(value)).FirstOrDefault();
-            TempData["SearchItemSelected"] = MIMViewModel;
-            return RedirectToAction("Index", "MenuItemPriceUpdate");
         }
     }
 }

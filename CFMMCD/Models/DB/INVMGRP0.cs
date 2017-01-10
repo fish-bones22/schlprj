@@ -17,5 +17,6 @@ namespace CFMMCD.Models.DB
         public string MGRGRP { get; set; }
         public string MGRTXT { get; set; }
         public string MGRSTA { get; set; }
+        public string STATUS { get; set; }
     }
 }

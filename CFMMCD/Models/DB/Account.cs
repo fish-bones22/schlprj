@@ -18,7 +18,7 @@ namespace CFMMCD.Models.DB
         public string Username { get; set; }
         public string Password { get; set; }
         public string UserAccess { get; set; }
-        public byte AdminStatus { get; set; }
+        public bool AdminStatus { get; set; }
         public Nullable<System.DateTime> TimeLastLogged { get; set; }
     }
 }

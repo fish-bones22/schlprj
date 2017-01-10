@@ -123,8 +123,6 @@ namespace CFMMCD.Models.EntityManager
                     vm.InactiveItemsCb = true;
                 else
                     vm.InactiveItemsCb = false;
-                vm.Location = "";
-                vm.Store = "";
                 // NP6
                 if (MIMRow.MIMMIC_NP6 != null || MIMRow.MIMMIC_NP6.HasValue)
                 {
@@ -358,7 +356,16 @@ namespace CFMMCD.Models.EntityManager
         {
             using (CFMMCDEntities db = new CFMMCDEntities() )
             {
-                Tier_Lookup tier = new Tier_Lookup();
+                Tier_Lookup tier;
+                if (db.Tier_Lookup.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
+                {
+                    tier = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
+                }
+                else
+                {
+                    tier = new Tier_Lookup();
+                }
+
                 tier.MIMMIC = int.Parse(MIMViewModel.MIMMIC);
                 tier.OLDPRA = MIMViewModel.OLDPRA;
                 tier.NEWPRA = MIMViewModel.NEWPRA;
@@ -444,13 +451,7 @@ namespace CFMMCD.Models.EntityManager
 
                 try
                 {
-                    if(db.Tier_Lookup.Where( o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
-                    {
-                        Tier_Lookup RowToDelete = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
-                        db.Tier_Lookup.Remove(RowToDelete);
-                        db.Tier_Lookup.Add(tier);
-                    }
-                    else
+                    if(!db.Tier_Lookup.Where( o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
                     {
                         db.Tier_Lookup.Add(tier);
                     }
@@ -476,6 +477,7 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
+
         /*
          * IMPORTANT: Method used by SearchMenuItem. Not designed to be used by Menu Item Price Tier, 
          * as it uses the same ViewModel of Menu Item Master.

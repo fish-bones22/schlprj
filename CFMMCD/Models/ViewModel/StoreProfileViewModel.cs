@@ -57,6 +57,7 @@ namespace CFMMCD.Models.ViewModel
         public string SOFT_SERVE_OR_VANILLA_POWDER_MIX { get; set; }
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
+        public string FRESHB_OR_FROZENB { get; set; }
 
         public List<bool> BET { get; set; }
 

@@ -18,5 +18,6 @@ namespace CFMMCD.Models.DB
         public string UOMDEL { get; set; }
         public Nullable<System.DateTime> UOMDAT { get; set; }
         public string UOMUSR { get; set; }
+        public string STATUS { get; set; }
     }
 }

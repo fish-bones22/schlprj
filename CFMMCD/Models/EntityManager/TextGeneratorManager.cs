@@ -44,23 +44,64 @@ namespace CFMMCD.Models.EntityManager
                         }
                         if (TGViewModel.IncludeRIM || TGViewModel.IncludeAll)
                         {
-                            List<INVRIMP0> MIRows = GetRawItems(Store_No, DateFrom, DateTo);
-                            foreach (INVRIMP0 mi in MIRows)
+                            List<INVRIMP0> RIRows = GetRawItems(Store_No, DateFrom, DateTo);
+                            foreach (INVRIMP0 ri in RIRows)
                             {
-                                sb.Append(tg.GenerateRawItemMasterText(mi));
+                                sb.Append(tg.GenerateRawItemMasterText(ri));
                             }
+                        }
+                        if (TGViewModel.IncludeREC || TGViewModel.IncludeAll)
+                        {
+                            List<INVRIRP0> RERows = GetRecipes(Store_No, DateFrom, DateTo);
+                            foreach(INVRIRP0 re in RERows)
+                            {
+                                sb.Append(tg.GenerateRecipeText(re));
+                            }
+                        }
+
+                        List<CSHVMLP0> VMRows = GetValueMeal(Store_No, DateFrom, DateTo);
+                        foreach (CSHVMLP0 vm in VMRows) { 
+                            sb.Append(tg.GenerateValueMealText(vm));
+                        }
+
+                        List<CSHPMGP0> PMGRows = GetProductMixGroup(Store_No, DateFrom, DateTo);
+                        foreach (CSHPMGP0 pmg in PMGRows)
+                        {
+                            sb.Append(tg.GenerateProductMixText(pmg));
+                        }
+
+                        List<INVMGRP0> MGRows = GetMaterialGroup(Store_No, DateFrom, DateTo);
+                        foreach (INVMGRP0 mg in MGRows)
+                        {
+                            sb.Append(tg.GenerateMaterialGroupText(mg));
+                        }
+                        List<INVUOMP0> UOMRows = GetUnitOfMeasure(Store_No, DateFrom, DateTo);
+                        foreach (INVUOMP0 uom in UOMRows)
+                        {
+                            sb.Append(tg.GenerateInitOfMeasureText(uom));
+                        }
+                        List<INVVEMP0>  VERows = GetVendor(Store_No, DateFrom, DateTo);
+                        foreach (INVVEMP0 ve in VERows)
+                        {
+                            sb.Append(tg.GenerateVendorText(ve));
                         }
                         // File creation
                         //  *Used for file name
                         string PaddedStore_No = TGViewModel.StoreList[i].value;
-                        for (int j = 0; j < 5 - PaddedStore_No.Length + 2; j++)
+                        int len = PaddedStore_No.Length;
+                        for (int j = 0; j < (5 - len); j++)
                             PaddedStore_No = "0" + PaddedStore_No;
                         string filename = "CFM" + PaddedStore_No + "_" + DateTime.Now.ToString("MMddyyyy_HHmm");
                         if (TGViewModel.IncludeAll)
                             filename += ".ALL";
                         else
                             filename += ".PRO";
-                        System.IO.File.WriteAllText(@"C:/SMS/SMSWEBCFM/" + filename, sb.ToString());
+                        string path = @"C:/SMS/SMSWEBCFM/";
+
+                        if (!System.IO.Directory.Exists(path))
+                            System.IO.Directory.CreateDirectory(path);
+
+                        System.IO.File.WriteAllText(path+filename, sb.ToString());
                     }
                 }
                 return true;
@@ -72,24 +113,34 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 Store_Profile Store = db.Store_Profile.Single(o => o.STORE_NO.ToString().Equals(Store_No));
-                List<CSHMIMP0> list = db.CSHMIMP0.Where(o => o.Store.Equals(Store_No)).ToList();
-                list.AddRange(db.CSHMIMP0.Where(o => o.Store.Equals("ALL")).ToList());
-                list.RemoveAll(o => (o.Except_Store != null && o.Except_Store.Equals(Store_No)));
-                list.Where(o => o.STATUS.Equals("A"));
-                list.Where(o => o.STATUS.Equals("E"));
-                list.Where(o => o.MIMEDT >= DateFrom);
-                list.Where(o => o.MIMEDT <= DateTo);
+                List<CSHMIMP0> sublist = db.CSHMIMP0.Where(o => o.STATUS.Equals("A")).ToList();
+                List<CSHMIMP0> list = new List<CSHMIMP0>();
+                List<CSHMIMP0> masterlist = new List<CSHMIMP0>();
+                list.AddRange(sublist);
+                sublist = db.CSHMIMP0.Where(o => o.STATUS.Equals("E")).ToList();
+                list.AddRange(sublist);
 
-                foreach (CSHMIMP0 mi in list)
+                sublist = list.Where(o => (o.Store != null && o.Store.Equals(Store_No))).ToList();
+                masterlist.AddRange(sublist);
+                
+                sublist = list.Where(o => (o.Store != null && o.Store.Equals("ALL"))).ToList();
+                masterlist.AddRange(sublist);
+
+                masterlist.RemoveAll(o => (o.Except_Store != null && o.Except_Store.Equals(Store_No)));
+
+                masterlist.RemoveAll(o => o.MIMDAT < DateFrom);
+                masterlist.RemoveAll(o => o.MIMDAT > DateTo);
+
+                foreach (CSHMIMP0 mi in masterlist)
                 {
-                    string tierToUse;
+                    int tierToUse;
                     int tradingArea = (int) mi.Trading_Area;
                     if (tradingArea == 0)
                     {
                         // Price
-                        tierToUse = Store.BREAKFAST_PRICE_TIER;
+                        tierToUse = (int) Store.BREAKFAST_PRICE_TIER;
                         Tier_Lookup tier = db.Tier_Lookup.Single(o => o.MIMMIC == mi.MIMMIC);
-                        if (tierToUse.Equals("1"))
+                        if (tierToUse == 1)
                         {
                             mi.MIMPND = tier.PNDA;
                             mi.MIMPRI = tier.OLDPRA;
@@ -104,7 +155,7 @@ namespace CFMMCD.Models.EntityManager
                                 mi.MIMNNP = tier.NEWNPA;
                             }
                         }
-                        else if (tierToUse.Equals("2"))
+                        else if (tierToUse == 2)
                         {
                             mi.MIMPND = tier.PNDB;
                             mi.MIMPRI = tier.OLDPRB;
@@ -119,7 +170,7 @@ namespace CFMMCD.Models.EntityManager
                                 mi.MIMNNP = tier.NEWNPB;
                             }
                         }
-                        else if (tierToUse.Equals("3"))
+                        else if (tierToUse == 3)
                         {
                             mi.MIMPND = tier.PNDC;
                             mi.MIMPRI = tier.OLDPRC;
@@ -134,7 +185,7 @@ namespace CFMMCD.Models.EntityManager
                                 mi.MIMNNP = tier.NEWNPC;
                             }
                         }
-                        else if (tierToUse.Equals("4"))
+                        else if (tierToUse == 4)
                         {
                             mi.MIMPND = tier.PNDD;
                             mi.MIMPRI = tier.OLDPRD;
@@ -149,7 +200,7 @@ namespace CFMMCD.Models.EntityManager
                                 mi.MIMNNP = tier.NEWNPD;
                             }
                         }
-                        else if (tierToUse.Equals("5"))
+                        else if (tierToUse == 5)
                         {
                             mi.MIMPND = tier.PNDE;
                             mi.MIMPRI = tier.OLDPRE;
@@ -164,7 +215,7 @@ namespace CFMMCD.Models.EntityManager
                                 mi.MIMNNP = tier.NEWNPE;
                             }
                         }
-                        else if (tierToUse.Equals("6"))
+                        else if (tierToUse == 6)
                         {
                             mi.MIMPND = tier.PNDF;
                             mi.MIMPRI = tier.OLDPRF;
@@ -179,7 +230,7 @@ namespace CFMMCD.Models.EntityManager
                                 mi.MIMNNP = tier.NEWNPF;
                             }
                         }
-                        else if (tierToUse.Equals("7"))
+                        else if (tierToUse == 7)
                         {
                             mi.MIMPND = tier.PNDM;
                             mi.MIMPRI = tier.OLDMDS;
@@ -194,7 +245,7 @@ namespace CFMMCD.Models.EntityManager
                                 mi.MIMNNP = tier.NEWMDN;
                             }
                         }
-                        else if (tierToUse.Equals("8"))
+                        else if (tierToUse == 8)
                         {
                             mi.MIMPND = tier.PNDS;
                             mi.MIMPRI = tier.OLDPRS;
@@ -211,7 +262,7 @@ namespace CFMMCD.Models.EntityManager
                         }
                     }
                 }
-                return list;
+                return masterlist;
             }
         }
         
@@ -219,14 +270,127 @@ namespace CFMMCD.Models.EntityManager
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<INVRIMP0> list = db.INVRIMP0.Where(o => o.Store.Equals(Store_No)).ToList();
-                list.AddRange(db.INVRIMP0.Where(o => o.Store.Equals("ALL")).ToList());
-                list.RemoveAll(o => (o.Except_Store != null && o.Except_Store.Equals(Store_No)));
-                list.Where(o => o.STATUS.Equals("A"));
-                list.Where(o => o.STATUS.Equals("E"));
-                list.Where(o => o.RIMEDT >= DateFrom);
-                list.Where(o => o.RIMEDT <= DateTo);
+                List<INVRIMP0> sublist = db.INVRIMP0.Where(o => o.STATUS.Equals("A")).ToList();
+                List<INVRIMP0> list = new List<INVRIMP0>();
+                List<INVRIMP0> masterlist = new List<INVRIMP0>();
+                list.AddRange(sublist);
+                sublist = db.INVRIMP0.Where(o => o.STATUS.Equals("E")).ToList();
+                list.AddRange(sublist);
+
+                sublist = list.Where(o => (o.Store != null && o.Store.Equals(Store_No))).ToList();
+                masterlist.AddRange(sublist);
+
+                sublist = list.Where(o => (o.Store != null && o.Store.Equals("ALL"))).ToList();
+                masterlist.AddRange(sublist);
+
+                masterlist.RemoveAll(o => (o.Except_Store != null && o.Except_Store.Equals(Store_No)));
+                masterlist.RemoveAll(o => o.RIMDAT < DateFrom);
+                masterlist.RemoveAll(o => o.RIMDAT > DateTo);
+
+                // Prices
+                foreach (var v in masterlist)
+                {
+                    RIM_VEM_Lookup RVLRow = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(v.RIMRIC + "" + v.RIMPVN));
+                    v.RIMCPR = RVLRow.RIMCPR;
+                    v.RIMCPN = RVLRow.RIMCPN;
+                    v.RIMPDT = RVLRow.RIMPDT; 
+                }
+
+                return masterlist;
+            }
+        }
+
+        public List<INVRIRP0> GetRecipes(string Store_No, DateTime DateFrom, DateTime DateTo)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<INVRIRP0> sublist = db.INVRIRP0.Where(o => o.STATUS.Equals("A")).ToList();
+                List<INVRIRP0> list = new List<INVRIRP0>();
+                list.AddRange(sublist);
+                sublist = db.INVRIRP0.Where(o => o.STATUS.Equals("E")).ToList();
+                list.AddRange(sublist);
+                list.RemoveAll(o => o.RIRDAT < DateFrom);
+                list.RemoveAll(o => o.RIRDAT > DateTo);
                 return list;
+            }
+        }
+
+        public List<CSHVMLP0> GetValueMeal(string Store_No, DateTime DateFrom, DateTime DateTo)
+        {
+            using (CFMMCDEntities db = new  CFMMCDEntities())
+            {
+                List<CSHVMLP0> sublist = db.CSHVMLP0.Where(o => o.STATUS.Equals("A")).ToList();
+                List<CSHVMLP0> list = new List<CSHVMLP0>();
+                list.AddRange(sublist);
+                sublist = db.CSHVMLP0.Where(o => o.STATUS.Equals("E")).ToList();
+                list.AddRange(sublist);
+                return list;
+            }
+        }
+
+        public List<CSHPMGP0> GetProductMixGroup(string Store_No, DateTime DateFrom, DateTime DateTo)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<CSHPMGP0> sublist = db.CSHPMGP0.Where(o => o.STATUS.Equals("A")).ToList();
+                List<CSHPMGP0> list = new List<CSHPMGP0>();
+                list.AddRange(sublist);
+                sublist = db.CSHPMGP0.Where(o => o.STATUS.Equals("E")).ToList();
+                list.AddRange(sublist);
+                return list;
+            }
+        }
+
+        public List<INVMGRP0> GetMaterialGroup(string Store_No, DateTime DateFrom, DateTime DateTo)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<INVMGRP0> sublist = db.INVMGRP0.Where(o => o.STATUS.Equals("A")).ToList();
+                List<INVMGRP0> list = new List<INVMGRP0>();
+                list.AddRange(sublist);
+                sublist = db.INVMGRP0.Where(o => o.STATUS.Equals("E")).ToList();
+                list.AddRange(sublist);
+                return list;
+            }
+        }
+
+        public List<INVUOMP0> GetUnitOfMeasure(string Store_No, DateTime DateFrom, DateTime DateTo)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<INVUOMP0> sublist = db.INVUOMP0.Where(o => o.STATUS.Equals("A")).ToList();
+                List<INVUOMP0> list = new List<INVUOMP0>();
+                List<INVUOMP0> masterlist = new List<INVUOMP0>();
+                list.AddRange(sublist);
+                sublist = db.INVUOMP0.Where(o => o.STATUS.Equals("E")).ToList();
+                list.AddRange(sublist);
+                list.RemoveAll(o => o.UOMDAT < DateFrom);
+                list.RemoveAll(o => o.UOMDAT > DateTo);
+                return list;
+            }
+        }
+        public List<INVVEMP0> GetVendor(string Store_No, DateTime DateFrom, DateTime DateTo)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<INVVEMP0> sublist = db.INVVEMP0.Where(o => o.STATUS.Equals("A")).ToList();
+                List<INVVEMP0> list = new List<INVVEMP0>();
+                List<INVVEMP0> masterlist = new List<INVVEMP0>();
+                list.AddRange(sublist);
+                sublist = db.INVVEMP0.Where(o => o.STATUS.Equals("E")).ToList();
+                list.AddRange(sublist);
+
+                sublist = list.Where(o => (o.Store != null && o.Store.Equals(Store_No))).ToList();
+                masterlist.AddRange(sublist);
+
+                sublist = list.Where(o => (o.Store != null && o.Store.Equals("ALL"))).ToList();
+                masterlist.AddRange(sublist);
+
+                masterlist.RemoveAll(o => (o.Except_Store != null && o.Except_Store.Equals(Store_No)));
+
+                masterlist.RemoveAll(o => o.VEMDAT < DateFrom);
+                masterlist.RemoveAll(o => o.VEMDAT > DateTo);
+                return masterlist;
             }
         }
 
@@ -240,7 +404,7 @@ namespace CFMMCD.Models.EntityManager
                     StoreProfileViewModel spViewModel = new StoreProfileViewModel();
                     spViewModel.STORE_NO = db.Store_Profile.ElementAt(i).STORE_NO.ToString();
                     spViewModel.STORE_NAME = db.Store_Profile.ElementAt(i).STORE_NAME;
-                    spViewModel.LOCATION = db.Store_Profile.ElementAt(i).LOCATION;
+                    spViewModel.LOCATION = db.Store_Profile.ElementAt(i).LOCATION.ToString();
                     spList.Add(spViewModel);
                 }
                 return spList;

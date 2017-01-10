@@ -267,7 +267,6 @@
                                 new { value = "0" , text = ""  },
                                 new { value = "SOFTSERVE" , text = "Soft serve"  },
                                 new { value = "VANILLA" , text = "Vanilla powder mix" }}, "value", "text", Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX), new { @class = "form-control input-sm store-attrib" })
-							@Html.ValidationMessageFor(m => Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "", new { @class = "text-danger" })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => Model.FRESH_OR_FROZEN, "Fresh or frozen", new { @class = "form-label" })
@@ -275,7 +274,6 @@
                                 new { value = "0" , text = ""  },
                                 new { value = "FRESH" , text = "Fresh"  },
                                 new { value = "FROZEN" , text = "Frozen" } }, "value", "text", Model.FRESH_OR_FROZEN), new { @class = "form-control input-sm store-attrib" })
-							@Html.ValidationMessageFor(m => Model.FRESH_OR_FROZEN, "", new { @class = "text-danger" })
 						</div>
 
 						<div class="form-group">
@@ -284,7 +282,6 @@
                                 new { value = "0" , text = ""  },
                                 new { value = "SIMPLOT" , text = "Simplot"  },
                                 new { value = "MCCAIN" , text = "McCain" } }, "value", "text", Model.SIMPLOT_OR_MCCAIN), new { @class = "form-control input-sm store-attrib" })
-							@Html.ValidationMessageFor(m => Model.SIMPLOT_OR_MCCAIN, "", new { @class = "text-danger" })
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => Model.PAPER_OR_PLASTIC, "Paper or plastic", new { @class = "form-label" })
@@ -292,7 +289,6 @@
                                 new { value = "0" , text = ""  },
                                 new { value = "PAPER" , text = "Paper"  },
                                 new { value = "PLASTIC" , text = "Plastic" }}, "value", "text", Model.PAPER_OR_PLASTIC ), new { @class = "form-control input-sm store-attrib" })
-							@Html.ValidationMessageFor(m => Model.PAPER_OR_PLASTIC, "", new { @class = "text-danger" })
 						</div>
 
 						<div class="form-group">
@@ -301,8 +297,16 @@
                                 new { value = "0" , text = ""  },
                                 new { value = "MCORMICK" , text = "McCormick"  },
                                 new { value = "GSF" , text = "GSF" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.MCCORMICK_OR_GSF })
-							@Html.ValidationMessageFor(m => Model.MCCORMICK_OR_GSF, "", new { @class = "text-danger" })
 						</div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.FRESHB_OR_FROZENB, "Fresh buns or Frozen buns", new { @class = "form-label" })
+                            @Html.DropDownListFor(m => Model.FRESHB_OR_FROZENB, new SelectList(new List<Object> {
+                                new { value = "0" , text = ""  },
+                                new { value = "FRESHB" , text = "Fresh buns"  },
+                                new { value = "FROZENB" , text = "Frozen buns" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.FRESHB_OR_FROZENB })
+                        </div>
+
 					</div>
 				</div>
 				<div class="col-lg-6" style="max-height:500px;overflow-y:auto">
@@ -318,8 +322,8 @@
 									<tr>
 										<th></th>
 										<th>Vendor</th>
-										<th>Price per CS</th>
-										<th>Price per UN</th>
+										<th>Standard pricing</th>
+										<th>Supplier's price per UN</th>
 										<th>SCM Code</th>
                                         <th></th>
 									</tr>

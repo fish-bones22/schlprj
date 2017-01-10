@@ -417,6 +417,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.DUMMY, "Fresh buns or Frozen buns", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => Model.DUMMY, new SelectList(new List<Object> {
+                                new { value = "0" , text = ""  },
+                                new { value = "FRESHB" , text = "Fresh buns"  },
+                                new { value = "FROZENB" , text = "Frozen buns" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.DUMMY })
+                </div>
             </div><br/>
             <div class="form-group">
                 <div class="dropup">

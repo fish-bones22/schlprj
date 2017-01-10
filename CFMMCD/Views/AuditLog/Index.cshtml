@@ -15,8 +15,7 @@
                 <tr>
                     <th></th>
                     <th>User ID</th>
-                    <th>Date</th>
-                    <th>Time</th>
+                    <th>Date and time</th>
                     <th>Page</th>
                     <th>Page action</th>
                     <th>ID</th>
@@ -29,8 +28,7 @@
                         <tr>
                             <td></td>
                             <td>@vm.UserId</td>
-                            <td>@vm.Date</td>
-                            <td>@vm.Time</td>
+                            <td>@vm.Date_Time</td>
                             <td>@vm.Page</td>
                             <td>@vm.Page_Action</td>
                             <td>@vm.ItemId</td>
@@ -42,7 +40,7 @@
         </table> 
         @using (Html.BeginForm("ExpToExcel", "AuditLog", FormMethod.Post, new { }))
         {
-            <div class="right-fixed">
+            <div class="form-inline bottom float" style="right:50px">
                 <button type="submit" class="btn btn-default" name="command" value="toPDF">Export to PDF</button>
                 <button type="submit" class="btn btn-default" name="command" value="toExcel">Export as Spreadsheet</button>
             </div>

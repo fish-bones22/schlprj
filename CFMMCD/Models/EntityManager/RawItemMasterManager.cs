@@ -63,7 +63,7 @@ namespace CFMMCD.Models.EntityManager
                 RIMRow.RIMUSR = user.Substring(0, 3).ToUpper();
                 RIMRow.RIMDAT = DateTime.Now;
                 // Location
-                RIMRow.Location = RIMViewModel.Location;
+                RIMRow.Location = int.Parse(RIMViewModel.Location);
                 RIMRow.Region = RIMViewModel.Region;
                 RIMRow.Province = RIMViewModel.Province;
                 RIMRow.City = RIMViewModel.City;
@@ -310,7 +310,7 @@ namespace CFMMCD.Models.EntityManager
                 vm.RIMADE = rim.RIMADE.Trim();
                 vm.RIMBAR = rim.RIMBAR.Trim();
                 // Location
-                vm.Location = rim.Location;
+                vm.Location = rim.Location.ToString();
                 vm.Region = rim.Region;
                 vm.Province = rim.Province;
                 vm.City = rim.City;
@@ -336,6 +336,8 @@ namespace CFMMCD.Models.EntityManager
                         vm.PAPER_OR_PLASTIC = rim.Store_Attrib;
                     else if (rim.Store_Attrib.Equals("MCORMICK") || rim.Store_Attrib.Equals("GSF"))
                         vm.MCCORMICK_OR_GSF = rim.Store_Attrib;
+                    else if (rim.Store_Attrib.Equals("FRESHB") || rim.Store_Attrib.Equals("FROZENB"))
+                        vm.FRESHB_OR_FROZENB = rim.Store_Attrib;
                 }
                 // Menu item list
                 var MIList = db.INVRIRP0.Where(o => o.RIRRIC == rim.RIMRIC).ToList();

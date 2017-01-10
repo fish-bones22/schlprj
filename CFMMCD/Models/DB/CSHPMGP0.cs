@@ -19,5 +19,6 @@ namespace CFMMCD.Models.DB
         public string PMGNUM { get; set; }
         public string PMGTXT { get; set; }
         public string PMGSTA { get; set; }
+        public string STATUS { get; set; }
     }
 }
