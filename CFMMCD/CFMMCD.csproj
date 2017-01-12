@@ -380,6 +380,7 @@
     <Compile Include="Models\EntityManager\ReportGenerationManager.cs" />
     <Compile Include="Models\EntityManager\SCMRecipeManager.cs" />
     <Compile Include="Models\EntityManager\TextGeneratorManager.cs" />
+    <Compile Include="Models\EntityManager\TierManager.cs" />
     <Compile Include="Models\EntityManager\ValueMealManager.cs" />
     <Compile Include="Models\EntityManager\VendorMasterManager.cs" />
     <Compile Include="Models\ViewModel\AuditLogViewModel.cs" />
