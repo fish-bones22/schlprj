@@ -17,8 +17,15 @@ namespace CFMMCD.Models.DB
         public string Id { get; set; }
         public Nullable<int> MIMMIC { get; set; }
         public string MIMNAM { get; set; }
-        public Nullable<int> MITIER { get; set; }
-        public Nullable<double> MIMOLP { get; set; }
-        public Nullable<double> MIMNEP { get; set; }
+        public string MITIER { get; set; }
+        public Nullable<double> MIMPRI { get; set; }
+        public Nullable<double> MIMPRO { get; set; }
+        public Nullable<double> MIMPRG { get; set; }
+        public Nullable<double> MIMNPA { get; set; }
+        public Nullable<double> MIMNPI { get; set; }
+        public Nullable<double> MIMNPO { get; set; }
+        public Nullable<double> MIMNPD { get; set; }
+        public Nullable<double> MIMNNP { get; set; }
+        public Nullable<System.DateTime> MIMPND { get; set; }
     }
 }

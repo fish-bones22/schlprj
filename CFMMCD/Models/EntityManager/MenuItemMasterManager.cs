@@ -94,6 +94,10 @@ namespace CFMMCD.Models.EntityManager
                 vm.MIMNPT = MIMRow.MIMNPT.Trim();
                 vm.MIMLON = MIMRow.MIMLON.Trim();
                 vm.MIMUTC = MIMRow.MIMUTC.ToString();
+
+                vm.Trading_Area = MIMRow.Trading_Area.ToString();
+                vm.Category = MIMRow.Category.ToString();
+
                 // Store
                 vm.Store = MIMRow.Store;
                 if ((MIMRow.Store != null) && MIMRow.Store.Equals("ALL"))
@@ -102,7 +106,10 @@ namespace CFMMCD.Models.EntityManager
                     vm.Store = "";
                 }
                 if ((MIMRow.Except_Store != null) && !(MIMRow.Except_Store.Equals("")))
+                {
                     vm.SelectExcept = true;
+                    vm.SelectAllCb = false;
+                }
                 // Attributes
                 if (MIMRow.Category != null)
                     vm.Category = MIMRow.Category.ToString();
@@ -134,7 +141,7 @@ namespace CFMMCD.Models.EntityManager
                 if (ItemCode.Equals(""))
                     ItemCode = MIMRow.MIMMIC.ToString();
                 // Price tier
-                vm = SearchPriceTier(vm);
+                vm.TierList = SearchPriceTier(vm.MIMMIC);
                 // Recipe List
                 List<INVRIRP0> RIRRowList;
                 if (db.INVRIRP0.Where(o => o.RIRMIC == MIMRow.MIMMIC).Any())
@@ -281,7 +288,7 @@ namespace CFMMCD.Models.EntityManager
                     {
                         db.CSHMIMP0.Add(MIMRow);
                     }
-                    UpdatePriceTier(MIMViewModel);
+                    UpdatePriceTier(MIMViewModel.TierList);
                     db.SaveChanges();
                     return true;
                 }
@@ -329,6 +336,15 @@ namespace CFMMCD.Models.EntityManager
                     {
                         db.INVRIRP0.Remove(ri);
                     }
+                    // Delete MIM_Price
+                    if (db.MIM_Price.Where(o => o.MIMMIC == MIMRow.MIMMIC).Any())
+                    {
+                        List<MIM_Price> MIMPrice = db.MIM_Price.Where(o => o.MIMMIC == MIMRow.MIMMIC).ToList();
+                        foreach (MIM_Price mp in MIMPrice)
+                        {
+                            db.MIM_Price.Remove(mp);
+                        }
+                    }
                     db.CSHMIMP0.Remove(MIMRow);
                     db.SaveChanges();
                     return true;
@@ -352,276 +368,57 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-        public bool UpdatePriceTier(MenuItemMasterViewModel MIMViewModel)
+        public bool UpdatePriceTier(List<Tier> TierList)
         {
             using (CFMMCDEntities db = new CFMMCDEntities() )
             {
-                Tier_Lookup tier;
-                if (db.Tier_Lookup.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
+                for (int i = 0; i < TierList.Count(); i++)
                 {
-                    tier = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
-                }
-                else
-                {
-                    tier = new Tier_Lookup();
-                }
-
-                tier.MIMMIC = int.Parse(MIMViewModel.MIMMIC);
-                tier.OLDPRA = MIMViewModel.OLDPRA;
-                tier.NEWPRA = MIMViewModel.NEWPRA;
-                tier.OLDPAO = MIMViewModel.OLDPAO;
-                tier.NEWPAO = MIMViewModel.NEWPAO;
-                tier.OLDAOT = MIMViewModel.OLDAOT;
-                tier.NEWAOT = MIMViewModel.NEWAOT;
-                tier.OLDNPA = MIMViewModel.OLDNPA;
-                tier.NEWNPA = MIMViewModel.NEWNPA;
-                tier.OLDPRB = MIMViewModel.OLDPRB;
-                tier.NEWPRB = MIMViewModel.NEWPRB;
-                tier.OLDPBO = MIMViewModel.OLDPBO;
-                tier.NEWPBO = MIMViewModel.NEWPBO;
-                tier.OLDBOT = MIMViewModel.OLDBOT;
-                tier.NEWBOT = MIMViewModel.NEWBOT;
-                tier.OLDNPB = MIMViewModel.OLDNPB;
-                tier.NEWNPB = MIMViewModel.NEWNPB;
-                tier.OLDPRC = MIMViewModel.OLDPRC;
-                tier.NEWPRC = MIMViewModel.NEWPRC;
-                tier.OLDPCO = MIMViewModel.OLDPCO;
-                tier.NEWPCO = MIMViewModel.NEWPCO;
-                tier.OLDCOT = MIMViewModel.OLDCOT;
-                tier.NEWCOT = MIMViewModel.NEWCOT;
-                tier.OLDNPC = MIMViewModel.OLDNPC;
-                tier.NEWNPC = MIMViewModel.NEWNPC;
-                tier.OLDPRD = MIMViewModel.OLDPRD;
-                tier.NEWPRD = MIMViewModel.NEWPRD;
-                tier.OLDPDO = MIMViewModel.OLDPDO;
-                tier.NEWPDO = MIMViewModel.NEWPDO;
-                tier.OLDDOT = MIMViewModel.OLDDOT;
-                tier.NEWDOT = MIMViewModel.NEWDOT;
-                tier.OLDNPD = MIMViewModel.OLDNPD;
-                tier.NEWNPD = MIMViewModel.NEWNPD;
-                tier.OLDPRE = MIMViewModel.OLDPRE;
-                tier.NEWPRE = MIMViewModel.NEWPRE;
-                tier.OLDPEO = MIMViewModel.OLDPEO;
-                tier.NEWPEO = MIMViewModel.NEWPEO;
-                tier.OLDEOT = MIMViewModel.OLDEOT;
-                tier.NEWEOT = MIMViewModel.NEWEOT;
-                tier.OLDNPE = MIMViewModel.OLDNPE;
-                tier.NEWNPE = MIMViewModel.NEWNPE;
-                tier.OLDPRF = MIMViewModel.OLDPRF;
-                tier.NEWPRF = MIMViewModel.NEWPRF;
-                tier.OLDPFO = MIMViewModel.OLDPFO;
-                tier.NEWPFO = MIMViewModel.NEWPFO;
-                tier.OLDFOT = MIMViewModel.OLDFOT;
-                tier.NEWFOT = MIMViewModel.NEWFOT;
-                tier.OLDNPF = MIMViewModel.OLDNPF;
-                tier.NEWNPF = MIMViewModel.NEWNPF;
-                tier.OLDMDS = MIMViewModel.OLDMDS;
-                tier.NEWMDS = MIMViewModel.NEWMDS;
-                tier.OLDMDO = MIMViewModel.OLDMDO;
-                tier.NEWMDO = MIMViewModel.NEWMDO;
-                tier.OLDMOT = MIMViewModel.OLDMOT;
-                tier.NEWMOT = MIMViewModel.NEWMOT;
-                tier.OLDMDN = MIMViewModel.OLDMDN;
-                tier.NEWMDN = MIMViewModel.NEWMDN;
-                tier.OLDPRS = MIMViewModel.OLDPRS;
-                tier.NEWPRS = MIMViewModel.NEWPRS;
-                tier.OLDPSO = MIMViewModel.OLDPSO;
-                tier.NEWPSO = MIMViewModel.NEWPSO;
-                tier.OLDSOT = MIMViewModel.OLDSOT;
-                tier.NEWSOT = MIMViewModel.NEWSOT;
-                tier.OLDNPS = MIMViewModel.OLDNPS;
-                tier.NEWNPS = MIMViewModel.NEWNPS;
-
-                tier.EDTA = DateTime.Parse(MIMViewModel.EDTA);
-                tier.PNDA = DateTime.Parse(MIMViewModel.PNDA);
-                tier.EDTB = DateTime.Parse(MIMViewModel.EDTB);
-                tier.PNDB = DateTime.Parse(MIMViewModel.PNDB);
-                tier.EDTC = DateTime.Parse(MIMViewModel.EDTC);
-                tier.PNDC = DateTime.Parse(MIMViewModel.PNDC);
-                tier.EDTD = DateTime.Parse(MIMViewModel.EDTD);
-                tier.PNDD = DateTime.Parse(MIMViewModel.PNDD);
-                tier.PNDE = DateTime.Parse(MIMViewModel.PNDE);
-                tier.EDTE = DateTime.Parse(MIMViewModel.EDTE);
-                tier.PNDF = DateTime.Parse(MIMViewModel.PNDF);
-                tier.EDTF = DateTime.Parse(MIMViewModel.EDTF);
-                tier.PNDM = DateTime.Parse(MIMViewModel.PNDM);
-                tier.EDTM = DateTime.Parse(MIMViewModel.EDTM);
-                tier.EDTS = DateTime.Parse(MIMViewModel.EDTS);
-                tier.PNDS = DateTime.Parse(MIMViewModel.PNDS);
-
-                try
-                {
-                    if(!db.Tier_Lookup.Where( o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
+                    bool IsUpdate = true;
+                    MIM_Price MIMPriceRow;
+                    if (TierList[i].MIMMIC == null || TierList[i].MIMMIC.Equals(""))
+                        continue;
+                    string id = TierList[i].MIMMIC + TierList[i].TierName;
+                    if (db.MIM_Price.Where(o => o.Id.Equals(id)).Any())
                     {
-                        db.Tier_Lookup.Add(tier);
+                        MIMPriceRow = db.MIM_Price.Single(o => o.Id.Equals(id));
                     }
-                    db.SaveChanges();
-                    return true;
-                }
-                catch ( Exception e )
-                {
-                    System.Diagnostics.Debug.WriteLine(e.Source);
-                    System.Diagnostics.Debug.WriteLine(e.Message);
-                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                    System.Diagnostics.Debug.WriteLine(e.InnerException);
-                    Exception f = e.InnerException;
-                    while (f != null)
+                    else
                     {
-                        System.Diagnostics.Debug.WriteLine("INNER:");
-                        System.Diagnostics.Debug.WriteLine(f.Message);
-                        System.Diagnostics.Debug.WriteLine(f.Source);
-                        f = f.InnerException;
+                        IsUpdate = false;
+                        MIMPriceRow = new MIM_Price();
+                        MIMPriceRow.Id = TierList[i].MIMMIC + TierList[i].TierName;
+                        MIMPriceRow.MIMMIC = int.Parse(TierList[i].MIMMIC);
+                        MIMPriceRow.MIMNAM = TierList[i].MIMNAM;
+                        MIMPriceRow.MITIER = TierList[i].TierName;
                     }
-                    System.Diagnostics.Debug.WriteLine(e.Data);
-                    return false;
-                }
-            }
-        }
-
-        /*
-         * IMPORTANT: Method used by SearchMenuItem. Not designed to be used by Menu Item Price Tier, 
-         * as it uses the same ViewModel of Menu Item Master.
-         * */
-        private MenuItemMasterViewModel SearchPriceTier(MenuItemMasterViewModel MIMViewModel)
-        {
-            using (CFMMCDEntities db = new CFMMCDEntities())
-            {
-                Tier_Lookup MIMRow;
-
-                if (db.Tier_Lookup.Where(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC)).Any())
-                    MIMRow = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC));
-                else
-                    return MIMViewModel;
-                MIMViewModel.MIMMIC = MIMRow.MIMMIC.ToString();
-                MIMViewModel.OLDPRA = (double)MIMRow.OLDPRA;
-                MIMViewModel.NEWPRA = (double)MIMRow.NEWPRA;
-                MIMViewModel.OLDPAO = (double)MIMRow.OLDPAO;
-                MIMViewModel.NEWPAO = (double)MIMRow.NEWPAO;
-                MIMViewModel.OLDAOT = (double)MIMRow.OLDAOT;
-                MIMViewModel.NEWAOT = (double)MIMRow.NEWAOT;
-                MIMViewModel.OLDNPA = (double)MIMRow.OLDNPA;
-                MIMViewModel.NEWNPA = (double)MIMRow.NEWNPA;
-                MIMViewModel.OLDPRB = (double)MIMRow.OLDPRB;
-                MIMViewModel.NEWPRB = (double)MIMRow.NEWPRB;
-                MIMViewModel.OLDPBO = (double)MIMRow.OLDPBO;
-                MIMViewModel.NEWPBO = (double)MIMRow.NEWPBO;
-                MIMViewModel.OLDBOT = (double)MIMRow.OLDBOT;
-                MIMViewModel.NEWBOT = (double)MIMRow.NEWBOT;
-                MIMViewModel.OLDNPB = (double)MIMRow.OLDNPB;
-                MIMViewModel.NEWNPB = (double)MIMRow.NEWNPB;
-                MIMViewModel.OLDPRC = (double)MIMRow.OLDPRC;
-                MIMViewModel.NEWPRC = (double)MIMRow.NEWPRC;
-                MIMViewModel.OLDPCO = (double)MIMRow.OLDPCO;
-                MIMViewModel.NEWPCO = (double)MIMRow.NEWPCO;
-                MIMViewModel.OLDCOT = (double)MIMRow.OLDCOT;
-                MIMViewModel.NEWCOT = (double)MIMRow.NEWCOT;
-                MIMViewModel.OLDNPC = (double)MIMRow.OLDNPC;
-                MIMViewModel.NEWNPC = (double)MIMRow.NEWNPC;
-                MIMViewModel.OLDPRD = (double)MIMRow.OLDPRD;
-                MIMViewModel.NEWPRD = (double)MIMRow.NEWPRD;
-                MIMViewModel.OLDPDO = (double)MIMRow.OLDPDO;
-                MIMViewModel.NEWPDO = (double)MIMRow.NEWPDO;
-                MIMViewModel.OLDDOT = (double)MIMRow.OLDDOT;
-                MIMViewModel.NEWDOT = (double)MIMRow.NEWDOT;
-                MIMViewModel.OLDNPD = (double)MIMRow.OLDNPD;
-                MIMViewModel.NEWNPD = (double)MIMRow.NEWNPD;
-                MIMViewModel.OLDPRE = (double)MIMRow.OLDPRE;
-                MIMViewModel.NEWPRE = (double)MIMRow.NEWPRE;
-                MIMViewModel.OLDPEO = (double)MIMRow.OLDPEO;
-                MIMViewModel.NEWPEO = (double)MIMRow.NEWPEO;
-                MIMViewModel.OLDEOT = (double)MIMRow.OLDEOT;
-                MIMViewModel.NEWEOT = (double)MIMRow.NEWEOT;
-                MIMViewModel.OLDNPE = (double)MIMRow.OLDNPE;
-                MIMViewModel.NEWNPE = (double)MIMRow.NEWNPE;
-                MIMViewModel.OLDPRF = (double)MIMRow.OLDPRF;
-                MIMViewModel.NEWPRF = (double)MIMRow.NEWPRF;
-                MIMViewModel.OLDPFO = (double)MIMRow.OLDPFO;
-                MIMViewModel.NEWPFO = (double)MIMRow.NEWPFO;
-                MIMViewModel.OLDFOT = (double)MIMRow.OLDFOT;
-                MIMViewModel.NEWFOT = (double)MIMRow.NEWFOT;
-                MIMViewModel.OLDNPF = (double)MIMRow.OLDNPF;
-                MIMViewModel.NEWNPF = (double)MIMRow.NEWNPF;
-                MIMViewModel.OLDMDS = (double)MIMRow.OLDMDS;
-                MIMViewModel.NEWMDS = (double)MIMRow.NEWMDS;
-                MIMViewModel.OLDMDO = (double)MIMRow.OLDMDO;
-                MIMViewModel.NEWMDO = (double)MIMRow.NEWMDO;
-                MIMViewModel.OLDMOT = (double)MIMRow.OLDMOT;
-                MIMViewModel.NEWMOT = (double)MIMRow.NEWMOT;
-                MIMViewModel.OLDMDN = (double)MIMRow.OLDMDN;
-                MIMViewModel.NEWMDN = (double)MIMRow.NEWMDN;
-                MIMViewModel.OLDPRS = (double)MIMRow.OLDPRS;
-                MIMViewModel.NEWPRS = (double)MIMRow.NEWPRS;
-                MIMViewModel.OLDPSO = (double)MIMRow.OLDPSO;
-                MIMViewModel.NEWPSO = (double)MIMRow.NEWPSO;
-                MIMViewModel.OLDSOT = (double)MIMRow.OLDSOT;
-                MIMViewModel.NEWSOT = (double)MIMRow.NEWSOT;
-                MIMViewModel.OLDNPS = (double)MIMRow.OLDNPS;
-                MIMViewModel.NEWNPS = (double)MIMRow.NEWNPS;
-
-                MIMViewModel.EDTA = ((DateTime)MIMRow.EDTA).ToString("yyyy-MM-dd");
-                MIMViewModel.PNDA = ((DateTime)MIMRow.PNDA).ToString("yyyy-MM-dd");
-                MIMViewModel.EDTB = ((DateTime)MIMRow.EDTB).ToString("yyyy-MM-dd");
-                MIMViewModel.PNDB = ((DateTime)MIMRow.PNDB).ToString("yyyy-MM-dd");
-                MIMViewModel.EDTC = ((DateTime)MIMRow.EDTC).ToString("yyyy-MM-dd");
-                MIMViewModel.PNDC = ((DateTime)MIMRow.PNDC).ToString("yyyy-MM-dd");
-                MIMViewModel.EDTD = ((DateTime)MIMRow.EDTD).ToString("yyyy-MM-dd");
-                MIMViewModel.PNDD = ((DateTime)MIMRow.PNDD).ToString("yyyy-MM-dd");
-                MIMViewModel.PNDE = ((DateTime)MIMRow.PNDE).ToString("yyyy-MM-dd");
-                MIMViewModel.EDTE = ((DateTime)MIMRow.EDTE).ToString("yyyy-MM-dd");
-                MIMViewModel.PNDF = ((DateTime)MIMRow.PNDF).ToString("yyyy-MM-dd");
-                MIMViewModel.EDTF = ((DateTime)MIMRow.EDTF).ToString("yyyy-MM-dd");
-                MIMViewModel.PNDM = ((DateTime)MIMRow.PNDM).ToString("yyyy-MM-dd");
-                MIMViewModel.EDTM = ((DateTime)MIMRow.EDTM).ToString("yyyy-MM-dd");
-                MIMViewModel.EDTS = ((DateTime)MIMRow.EDTS).ToString("yyyy-MM-dd");
-                MIMViewModel.PNDS = ((DateTime)MIMRow.PNDS).ToString("yyyy-MM-dd");
-                MIMViewModel.EffectiveDate = MIMViewModel.PNDA;
-                if (MIMViewModel == null || MIMViewModel.MIMMIC == null)
-                    return null;
-                return MIMViewModel;
-
-            }
-        }
-
-        public bool UpdatePriceTier(List<MenuItemMasterViewModel> MIMViewModelList)
-        {
-            using (CFMMCDEntities db = new CFMMCDEntities())
-            {
-                foreach (var vm in MIMViewModelList)
-                {
-                    Tier_Lookup MIMRow, RowToDelete;
-                    if (db.Tier_Lookup.Where(o => o.MIMMIC.ToString().Equals(vm.MIMMIC)).Any())
-                    {
-                        // Produce two copies of the row:
-                        // RowToDelete is to reference the original preupdate row
-                        // MIMRow is to hold values to be updated retaining original unupdated values.
-                        MIMRow = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(vm.MIMMIC));
-                        RowToDelete = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(vm.MIMMIC));
-                    }
-                    else continue;
-                    if (!vm.OLDPRA.Equals(""))
-                        MIMRow.OLDPRA = vm.OLDPRA;
-                    if (!vm.NEWPRA.Equals(""))
-                        MIMRow.NEWPRA = vm.NEWPRA;
-                    if (!vm.OLDPRB.Equals(""))
-                        MIMRow.OLDPRB = vm.OLDPRB;
-                    if (!vm.NEWPRB.Equals(""))
-                        MIMRow.NEWPRB = vm.NEWPRB;
-                    if (!vm.OLDPRC.Equals(""))
-                        MIMRow.OLDPRC = vm.OLDPRC;
-                    if (!vm.NEWPRC.Equals(""))
-                        MIMRow.NEWPRC = vm.NEWPRC;
-                    if (!vm.EffectiveDate.Equals(""))
-                    {
-                        MIMRow.PNDA = DateTime.Parse(vm.EffectiveDate);
-                        MIMRow.PNDB = DateTime.Parse(vm.EffectiveDate);
-                        MIMRow.PNDC = DateTime.Parse(vm.EffectiveDate);
-                    }
+                    if (TierList[i].MIMPRI != null && !TierList[i].MIMPRI.Equals(""))
+                        MIMPriceRow.MIMPRI = double.Parse(TierList[i].MIMPRI); // Eat in
+                    if (TierList[i].MIMPRO != null && !TierList[i].MIMPRO.Equals(""))
+                        MIMPriceRow.MIMPRO = double.Parse(TierList[i].MIMPRO); // Take out
+                    if (TierList[i].MIMPRG != null && !TierList[i].MIMPRG.Equals(""))
+                        MIMPriceRow.MIMPRG = double.Parse(TierList[i].MIMPRG); // Other
+                    if (TierList[i].MIMNPA != null && !TierList[i].MIMNPA.Equals(""))
+                        MIMPriceRow.MIMNPA = double.Parse(TierList[i].MIMNPA); // Non-product
+                    // New
+                    if (TierList[i].MIMNPI != null && !TierList[i].MIMNPI.Equals(""))
+                        MIMPriceRow.MIMNPI = double.Parse(TierList[i].MIMNPI); // Eat in new
+                    if (TierList[i].MIMNPO != null && !TierList[i].MIMNPO.Equals(""))
+                        MIMPriceRow.MIMNPO = double.Parse(TierList[i].MIMNPO); // Take out new
+                    if (TierList[i].MIMNPD != null && !TierList[i].MIMNPD.Equals(""))
+                        MIMPriceRow.MIMNPD = double.Parse(TierList[i].MIMNPD); // Other new
+                    if (TierList[i].MIMNNP != null && !TierList[i].MIMNNP.Equals(""))
+                        MIMPriceRow.MIMNNP = double.Parse(TierList[i].MIMNNP); // Non-product new
+                    // Effective date
+                    if (TierList[i].MIMPND != null && !TierList[i].MIMPND.Equals(""))
+                        MIMPriceRow.MIMPND = DateTime.Parse(TierList[i].MIMPND);
 
                     try
                     {
-                        db.Tier_Lookup.Remove(RowToDelete);
-                        db.SaveChanges();
-                        db.Tier_Lookup.Add(MIMRow);
+                        if (!IsUpdate)
+                        {
+                            db.MIM_Price.Add(MIMPriceRow);
+                        }
                         db.SaveChanges();
                     }
                     catch (Exception e)
@@ -643,6 +440,152 @@ namespace CFMMCD.Models.EntityManager
                     }
                 }
                 return true;
+
+            }
+        }
+        
+        public List<Tier> SearchPriceTier(string MIMMIC)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<MIM_Price> MIMPriceList;
+                List<Tier> TierList = new TierManager().SetTierList();
+                if (db.MIM_Price.Where(o => o.MIMMIC.ToString().Equals(MIMMIC)).Any())
+                    MIMPriceList = db.MIM_Price.Where(o => o.MIMMIC.ToString().Equals(MIMMIC)).ToList();
+                else return TierList;
+
+                foreach (var v in TierList)
+                {
+                    if (MIMPriceList.Where(o => o.MITIER.Equals(v.TierName)).Any())
+                    {
+                        MIM_Price MIMPrice = MIMPriceList.Single(m => m.MITIER.Equals(v.TierName));
+                        v.MIMMIC = MIMPrice.MIMMIC.ToString();
+                        v.MIMNAM = MIMPrice.MIMNAM;
+                        v.MIMPRI = MIMPrice.MIMPRI.ToString(); // Eat in
+                        v.MIMPRO = MIMPrice.MIMPRO.ToString(); // Take out
+                        v.MIMPRG = MIMPrice.MIMPRG.ToString(); // Other
+                        v.MIMNPA = MIMPrice.MIMNPA.ToString(); // Non-product
+                                                               // New
+                        v.MIMNPI = MIMPrice.MIMNPI.ToString(); // Eat in new
+                        v.MIMNPO = MIMPrice.MIMNPO.ToString(); // Take out new
+                        v.MIMNPD = MIMPrice.MIMNPD.ToString(); // Other new
+                        v.MIMNNP = MIMPrice.MIMNNP.ToString(); // Non-product new
+                                                               // Effective date
+                        if (MIMPrice.MIMPND != null)
+                            v.MIMPND = ((DateTime)MIMPrice.MIMPND).ToString("yyyy-MM-dd");
+                    }
+                    
+                }
+                return TierList;
+
+            }
+        }
+
+        public bool UpdatePriceTier(List<TierUpdate> TierList)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                for (int i = 0; i < TierList.Count(); i++)
+                {
+                    List<Tier> TierListToUpdate = SearchPriceTier(TierList[i].MIMMIC);
+                    if (TierListToUpdate == null)
+                        return false;
+                    if (TierListToUpdate.Where(o => o.TierName.Equals("A")).Any())
+                    {
+                        TierListToUpdate.Single(o => o.TierName.Equals("A")).MIMNPI = TierList[i].TierANew;
+                        TierListToUpdate.Single(o => o.TierName.Equals("A")).MIMPND = TierList[i].EffectiveDate;
+                    }
+                    if (TierListToUpdate.Where(o => o.TierName.Equals("B")).Any())
+                    {
+                        TierListToUpdate.Single(o => o.TierName.Equals("B")).MIMNPI = TierList[i].TierBNew;
+                        TierListToUpdate.Single(o => o.TierName.Equals("B")).MIMPND = TierList[i].EffectiveDate;
+                    }
+                    if (TierListToUpdate.Where(o => o.TierName.Equals("C")).Any())
+                    {
+                        TierListToUpdate.Single(o => o.TierName.Equals("C")).MIMNPI = TierList[i].TierCNew;
+                        TierListToUpdate.Single(o => o.TierName.Equals("C")).MIMPND = TierList[i].EffectiveDate;
+                    }
+                    if (!UpdatePriceTier(TierListToUpdate))
+                        return false;
+                }
+                return true;
+            }
+        }
+
+        public TierUpdate SearchPriceTierUpdate (string MIMMIC)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<MIM_Price> MIMPriceRowList;
+                List<TierUpdate> TierList = new List<TierUpdate>();
+                if (db.MIM_Price.Where(o => o.MIMMIC.ToString().Equals(MIMMIC)).Any())
+                {
+                    MIMPriceRowList = db.MIM_Price.Where(o => o.MIMMIC.ToString().Equals(MIMMIC)).ToList();
+                    TierUpdate tu = new TierUpdate();
+                    tu.MIMMIC = MIMMIC;
+                    tu.MIMNAM = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMMIC)).MIMNAM;
+                    tu.MIMSTA = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MIMMIC)).MIMSTA;
+                    if (MIMPriceRowList.Where(o => o.MITIER.Equals("A")).Any())
+                    {
+                        var v = MIMPriceRowList.Single(o => o.MITIER.Equals("A"));
+
+                        if (v.MIMNPI != null)
+                            tu.TierANew = v.MIMNPI.ToString();
+                        else tu.TierANew = "";
+
+                        if (v.MIMPRI != null)
+                            tu.TierAOld = v.MIMPRI.ToString();
+                        else tu.TierAOld = "";
+
+                        if (v.MIMPND != null)
+                            tu.EffectiveDate = ((DateTime)v.MIMPND).ToString("yyyy-MM-dd");
+                        else tu.EffectiveDate = "";
+
+                    }
+                    else
+                    {
+                        tu.TierANew = "";
+                        tu.TierAOld = "";
+                        tu.EffectiveDate = "";
+                    }
+                    if (MIMPriceRowList.Where(o => o.MITIER.Equals("B")).Any())
+                    {
+                        var v = MIMPriceRowList.Single(o => o.MITIER.Equals("B"));
+
+                        if (v.MIMNPI != null)
+                            tu.TierBNew = v.MIMNPI.ToString();
+                        else tu.TierBNew = "";
+
+                        if (v.MIMPRI != null)
+                            tu.TierBOld = v.MIMPRI.ToString();
+                        else tu.TierBOld = "";
+                    }
+                    else
+                    {
+                        tu.TierBNew = "";
+                        tu.TierBOld = "";
+                    }
+
+                    if (MIMPriceRowList.Where(o => o.MITIER.Equals("C")).Any())
+                    {
+                        var v = MIMPriceRowList.Single(o => o.MITIER.Equals("C"));
+
+                        if (v.MIMNPI != null)
+                            tu.TierCNew = v.MIMNPI.ToString();
+                        else tu.TierCNew = "";
+
+                        if (v.MIMPRI != null)
+                            tu.TierCOld = v.MIMPRI.ToString();
+                        else tu.TierCOld = "";
+                    }
+                    else
+                    {
+                        tu.TierCNew = "";
+                        tu.TierCOld = "";
+                    }
+                    return tu;
+                }
+                else return null;
             }
         }
     }

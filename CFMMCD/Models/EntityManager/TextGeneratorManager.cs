@@ -133,133 +133,73 @@ namespace CFMMCD.Models.EntityManager
 
                 foreach (CSHMIMP0 mi in masterlist)
                 {
-                    int tierToUse;
+                    int tierIdToUse;
+                    string tierToUse = "" ;
                     int tradingArea = (int) mi.Trading_Area;
-                    if (tradingArea == 0)
+                    if (tradingArea == 1)
                     {
-                        // Price
-                        tierToUse = (int) Store.BREAKFAST_PRICE_TIER;
-                        Tier_Lookup tier = db.Tier_Lookup.Single(o => o.MIMMIC == mi.MIMMIC);
-                        if (tierToUse == 1)
-                        {
-                            mi.MIMPND = tier.PNDA;
-                            mi.MIMPRI = tier.OLDPRA;
-                            mi.MIMPRO = tier.OLDPAO;
-                            mi.MIMPRG = tier.OLDAOT;
-                            mi.MIMNPI = tier.NEWPRA;
-                            mi.MIMNPO = tier.NEWPAO;
-                            mi.MIMNPD = tier.NEWAOT;
-                            if (mi.MIMFGC.Trim().Equals("08"))
-                            {
-                                mi.MIMNPA = tier.OLDNPA;
-                                mi.MIMNNP = tier.NEWNPA;
-                            }
-                        }
-                        else if (tierToUse == 2)
-                        {
-                            mi.MIMPND = tier.PNDB;
-                            mi.MIMPRI = tier.OLDPRB;
-                            mi.MIMPRO = tier.OLDPBO;
-                            mi.MIMPRG = tier.OLDBOT;
-                            mi.MIMNPI = tier.NEWPRB;
-                            mi.MIMNPO = tier.NEWPBO;
-                            mi.MIMNPD = tier.NEWBOT;
-                            if (mi.MIMFGC.Trim().Equals("08"))
-                            {
-                                mi.MIMNPA = tier.OLDNPB;
-                                mi.MIMNNP = tier.NEWNPB;
-                            }
-                        }
-                        else if (tierToUse == 3)
-                        {
-                            mi.MIMPND = tier.PNDC;
-                            mi.MIMPRI = tier.OLDPRC;
-                            mi.MIMPRO = tier.OLDPCO;
-                            mi.MIMPRG = tier.OLDCOT;
-                            mi.MIMNPI = tier.NEWPRC;
-                            mi.MIMNPO = tier.NEWPCO;
-                            mi.MIMNPD = tier.NEWCOT;
-                            if (mi.MIMFGC.Trim().Equals("08"))
-                            {
-                                mi.MIMNPA = tier.OLDNPC;
-                                mi.MIMNNP = tier.NEWNPC;
-                            }
-                        }
-                        else if (tierToUse == 4)
-                        {
-                            mi.MIMPND = tier.PNDD;
-                            mi.MIMPRI = tier.OLDPRD;
-                            mi.MIMPRO = tier.OLDPDO;
-                            mi.MIMPRG = tier.OLDDOT;
-                            mi.MIMNPI = tier.NEWPRD;
-                            mi.MIMNPO = tier.NEWPDO;
-                            mi.MIMNPD = tier.NEWDOT;
-                            if (mi.MIMFGC.Trim().Equals("08"))
-                            {
-                                mi.MIMNPA = tier.OLDNPD;
-                                mi.MIMNNP = tier.NEWNPD;
-                            }
-                        }
-                        else if (tierToUse == 5)
-                        {
-                            mi.MIMPND = tier.PNDE;
-                            mi.MIMPRI = tier.OLDPRE;
-                            mi.MIMPRO = tier.OLDPEO;
-                            mi.MIMPRG = tier.OLDEOT;
-                            mi.MIMNPI = tier.NEWPRE;
-                            mi.MIMNPO = tier.NEWPEO;
-                            mi.MIMNPD = tier.NEWEOT;
-                            if (mi.MIMFGC.Trim().Equals("08"))
-                            {
-                                mi.MIMNPA = tier.OLDNPE;
-                                mi.MIMNNP = tier.NEWNPE;
-                            }
-                        }
-                        else if (tierToUse == 6)
-                        {
-                            mi.MIMPND = tier.PNDF;
-                            mi.MIMPRI = tier.OLDPRF;
-                            mi.MIMPRO = tier.OLDPFO;
-                            mi.MIMPRG = tier.OLDFOT;
-                            mi.MIMNPI = tier.NEWPRF;
-                            mi.MIMNPO = tier.NEWPFO;
-                            mi.MIMNPD = tier.NEWFOT;
-                            if (mi.MIMFGC.Trim().Equals("08"))
-                            {
-                                mi.MIMNPA = tier.OLDNPF;
-                                mi.MIMNNP = tier.NEWNPF;
-                            }
-                        }
-                        else if (tierToUse == 7)
-                        {
-                            mi.MIMPND = tier.PNDM;
-                            mi.MIMPRI = tier.OLDMDS;
-                            mi.MIMPRO = tier.OLDMDO;
-                            mi.MIMPRG = tier.OLDMOT;
-                            mi.MIMNPI = tier.NEWMDS;
-                            mi.MIMNPO = tier.NEWMDO;
-                            mi.MIMNPD = tier.NEWMOT;
-                            if (mi.MIMFGC.Trim().Equals("08"))
-                            {
-                                mi.MIMNPA = tier.OLDMDN;
-                                mi.MIMNNP = tier.NEWMDN;
-                            }
-                        }
-                        else if (tierToUse == 8)
-                        {
-                            mi.MIMPND = tier.PNDS;
-                            mi.MIMPRI = tier.OLDPRS;
-                            mi.MIMPRO = tier.OLDPSO;
-                            mi.MIMPRG = tier.OLDSOT;
-                            mi.MIMNPI = tier.NEWPRS;
-                            mi.MIMNPO = tier.NEWPSO;
-                            mi.MIMNPD = tier.NEWSOT;
-                            if (mi.MIMFGC.Trim().Equals("08"))
-                            {
-                                mi.MIMNPA = tier.OLDNPS;
-                                mi.MIMNNP = tier.NEWNPS;
-                            }
-                        }
+                        tierIdToUse = (int) Store.BREAKFAST_PRICE_TIER;
+                        tierToUse = db.Breakfast_Price_Tier.Single(o => o.Id == tierIdToUse).Price_Tier;
+                    }
+                    else if (tradingArea == 2)
+                    {
+                        tierIdToUse = (int)Store.REGULAR_PRICE_TIER;
+                        tierToUse = db.Regular_Price_Tier.Single(o => o.Id == tierIdToUse).Price_Tier;
+                    }
+                    else if (tradingArea == 3)
+                    {
+                        tierIdToUse = (int)Store.MDS_PRICE_TIER;
+                        tierToUse = db.MDS_Price_Tier.Single(o => o.Id == tierIdToUse).Price_Tier;
+                    }
+                    else if (tradingArea == 4)
+                    {
+                        tierIdToUse = (int)Store.DC_PRICE_TIER;
+                        tierToUse = db.Dessert_Price_Tier.Single(o => o.Id == tierIdToUse).Price_Tier;
+                    }
+                    else if (tradingArea == 5)
+                    {
+                        tierIdToUse = (int)Store.PROJECT_GOLD_PRICE_TIER;
+                        tierToUse = db.Project_Gold_Price_Tier.Single(o => o.Id == tierIdToUse).Price_Tier;
+                    }
+                    else if (tradingArea == 6)
+                    {
+                        tierIdToUse = (int)Store.MCCAFE_LEVEL_2_PRICE_TIER;
+                        tierToUse = db.McCafe_Level_2_Price_Tier.Single(o => o.Id == tierIdToUse).Price_Tier;
+                    }
+                    else if (tradingArea == 7)
+                    {
+                        tierIdToUse = (int)Store.MCCAFE_LEVEL_3_PRICE_TIER;
+                        tierToUse = db.McCafe_Level_3_Price_Tier.Single(o => o.Id == tierIdToUse).Price_Tier;
+                    }
+                    else if (tradingArea == 8)
+                    {
+                        tierIdToUse = (int)Store.MCCAFE_BISTRO_PRICE_TIER;
+                        tierToUse = db.McCafe_Bistro_Price_Tier.Single(o => o.Id == tierIdToUse).Price_Tier;
+                    }
+                    string id = mi.MIMMIC + tierToUse;
+                    MIM_Price MIMPriceRow;
+                    if (db.MIM_Price.Where(o => o.Id.Equals(id)).Any())
+                    {
+                        MIMPriceRow = db.MIM_Price.Single(o => o.Id.Equals(id)); if (MIMPriceRow.MIMPRI != null && !MIMPriceRow.MIMPRI.Equals(""))
+                            mi.MIMPRI = MIMPriceRow.MIMPRI; // Eat in
+                        if (MIMPriceRow.MIMPRO != null && !MIMPriceRow.MIMPRO.Equals(""))
+                            mi.MIMPRO = MIMPriceRow.MIMPRO; // Take out
+                        if (MIMPriceRow.MIMPRG != null && !MIMPriceRow.MIMPRG.Equals(""))
+                            mi.MIMPRG = MIMPriceRow.MIMPRG; // Other
+                        if (MIMPriceRow.MIMNPA != null && !MIMPriceRow.MIMNPA.Equals(""))
+                            mi.MIMNPA = MIMPriceRow.MIMNPA; // Non-product
+                                                                          // New
+                        if (MIMPriceRow.MIMNPI != null && !MIMPriceRow.MIMNPI.Equals(""))
+                            mi.MIMNPI = MIMPriceRow.MIMNPI; // Eat in new
+                        if (MIMPriceRow.MIMNPO != null && !MIMPriceRow.MIMNPO.Equals(""))
+                            mi.MIMNPO = MIMPriceRow.MIMNPO; // Take out new
+                        if (MIMPriceRow.MIMNPD != null && !MIMPriceRow.MIMNPD.Equals(""))
+                            mi.MIMNPD = MIMPriceRow.MIMNPD; // Other new
+                        if (MIMPriceRow.MIMNNP != null && !MIMPriceRow.MIMNNP.Equals(""))
+                            mi.MIMNNP = MIMPriceRow.MIMNNP; // Non-product new
+                                                                          // Effective date
+                        if (MIMPriceRow.MIMPND != null && !MIMPriceRow.MIMPND.Equals(""))
+                            mi.MIMPND = MIMPriceRow.MIMPND;
                     }
                 }
                 return masterlist;

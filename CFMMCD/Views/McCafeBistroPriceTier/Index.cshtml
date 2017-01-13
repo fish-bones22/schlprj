@@ -2,7 +2,7 @@
 @using CFMMCD.Models.ViewModel;
 
 @{
-    ViewBag.Title = "McCafeBistro Price Tier";
+    ViewBag.Title = "McCafe Bistro Price Tier";
     List<McCafeBistroPriceTierViewModel> MBTList = (List<McCafeBistroPriceTierViewModel>)ViewData["ModelList"];
 }
 
@@ -67,7 +67,7 @@
                     </tbody>
                 </table>
                 <!--Right aligned button group-->
-                <div class="right-fixed" align="right">
+                <div class="form-inline bottom float" style="right:50px">
                     <button type="submit" class="btn btn-default" name="command" value="Save">Save</button>
                     <button type="submit" class="btn btn-default" name="command" value="Delete">Delete</button>
                 </div>

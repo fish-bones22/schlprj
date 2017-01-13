@@ -23,7 +23,7 @@ namespace CFMMCD.Controllers
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null) return RedirectToAction("Login", "Account");
 
-            Session["CurrentPage"] = new CurrentPageSession("HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("HOME", "HOME", "LOG");
 
             HomeManager HManager = new HomeManager();
             UserSession user = (UserSession)Session["User"];

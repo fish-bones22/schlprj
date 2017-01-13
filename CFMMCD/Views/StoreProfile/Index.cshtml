@@ -75,43 +75,42 @@
                 <div class="container-fluid">
                     <div class="form-group">
                         @Html.LabelFor(model => Model.BREAKFAST_PRICE_TIER, "Breakfast tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.BREAKFAST_PRICE_TIER, new SelectList(Model.BreakfastTier, "value", "text", Model.BreakfastTier[0].value), new { @class = "form-control input-sm" })
-                        @Html.ValidationMessageFor(model => Model.BREAKFAST_PRICE_TIER, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(m => Model.BREAKFAST_PRICE_TIER, new SelectList(Model.BreakfastTier, "value", "text", Model.BREAKFAST_PRICE_TIER), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.REGULAR_PRICE_TIER, "Regular price tier", new { @class = "form-label " })
-                        @Html.DropDownListFor(m => Model.REGULAR_PRICE_TIER, new SelectList(Model.RegularTier, "value", "text", Model.RegularTier[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.REGULAR_PRICE_TIER, new SelectList(Model.RegularTier, "value", "text", Model.REGULAR_PRICE_TIER), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.DC_PRICE_TIER, "DC price tier", new { @class = "form-label " })
-                        @Html.DropDownListFor(m => Model.DC_PRICE_TIER, new SelectList(Model.DCTier, "value", "text", Model.DCTier[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.DC_PRICE_TIER, new SelectList(Model.DCTier, "value", "text", Model.DC_PRICE_TIER), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.MDS_PRICE_TIER, "MDS price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.MDS_PRICE_TIER, new SelectList(Model.MDSTier, "value", "text", Model.MDSTier[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.MDS_PRICE_TIER, new SelectList(Model.MDSTier, "value", "text", Model.MDS_PRICE_TIER), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.MCCAFE_LEVEL_2_PRICE_TIER, "McCafe Level 2 price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_2_PRICE_TIER, new SelectList(Model.McCafeLevel2Tier, "value", "text", Model.McCafeLevel2Tier[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_2_PRICE_TIER, new SelectList(Model.McCafeLevel2Tier, "value", "text", Model.MCCAFE_LEVEL_2_PRICE_TIER), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.MCCAFE_LEVEL_3_PRICE_TIER, "McCafe Level 3 price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_3_PRICE_TIER, new SelectList(Model.McCafeLevel3Tier, "value", "text", Model.McCafeLevel3Tier[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_3_PRICE_TIER, new SelectList(Model.McCafeLevel3Tier, "value", "text", Model.MCCAFE_LEVEL_3_PRICE_TIER), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.MCCAFE_BISTRO_PRICE_TIER, "McCafe BISTRO price tier", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.MCCAFE_BISTRO_PRICE_TIER, new SelectList(Model.McCafeBistroTier, "value", "text", Model.McCafeBistroTier[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.MCCAFE_BISTRO_PRICE_TIER, new SelectList(Model.McCafeBistroTier, "value", "text", Model.MCCAFE_BISTRO_PRICE_TIER), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.PROJECT_GOLD_PRICE_TIER, "Project Gold price tier", new { @class = "form-label " })
-                        @Html.DropDownListFor(m => Model.PROJECT_GOLD_PRICE_TIER, new SelectList(Model.ProjectGoldTier, "value", "text", Model.ProjectGoldTier[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.PROJECT_GOLD_PRICE_TIER, new SelectList(Model.ProjectGoldTier, "value", "text", Model.PROJECT_GOLD_PRICE_TIER), new { @class = "form-control input-sm" })
                     </div>
                 </div>
             </div>
@@ -120,17 +119,17 @@
                 <div class="container-fluid">
                     <div class="form-group">
                         @Html.LabelFor(model => Model.PROFIT_CENTER, "Profit center", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.PROFIT_CENTER, new SelectList(Model.ProfitCenter, "value", "text", Model.ProfitCenter[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.PROFIT_CENTER, new SelectList(Model.ProfitCenter, "value", "text", Model.PROFIT_CENTER), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.OWNERSHIP, "Ownership", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.OWNERSHIP, new SelectList(Model.OwnershipList, "value", "text", Model.OwnershipList[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.OWNERSHIP, new SelectList(Model.OwnershipList, "value", "text", Model.OWNERSHIP), new { @class = "form-control input-sm" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => Model.LOCATION, "Location", new { @class = "form-label" })
-                        @Html.DropDownListFor(m => Model.LOCATION, new SelectList(Model.LocationList, "value", "text", Model.LocationList[0].value), new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(m => Model.LOCATION, new SelectList(Model.LocationList, "value", "text", Model.LOCATION), new { @class = "form-control input-sm" })
                     </div>
 
 
@@ -164,7 +163,7 @@
                                 new { value = "VANILLA" , text = "Vanilla powder mix" }}, "value", "text", Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX), new { @class = "form-control input-sm store-attrib" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => Model.FRESH_OR_FROZEN, "Fresh or frozen", new { @class = "form-label" })
+                       @Html.LabelFor(m => Model.FRESH_OR_FROZEN, "Fresh or frozen", new { @class = "form-label" })
                        @Html.DropDownListFor(m => Model.FRESH_OR_FROZEN, new SelectList(new List<Object>{
                                 new { value = "0" , text = ""  },
                                 new { value = "FRESH" , text = "Fresh"  },
@@ -227,6 +226,11 @@
             <h4>All items</h4>
             <div class="container-fluid">
                 <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search store" autofocus />
+            </div>
+            <hr />
+            <div class="container-fluid text-center">
+                <div class="col-lg-4">Store number</div>
+                <div class="col-lg-8">Store name</div>
             </div>
         </div>
         @using (Html.BeginForm())

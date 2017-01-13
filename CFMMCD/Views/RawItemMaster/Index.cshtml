@@ -1,4 +1,5 @@
-﻿@model CFMMCD.Models.ViewModel.RawItemMasterViewModel
+﻿
+@model CFMMCD.Models.ViewModel.RawItemMasterViewModel
 @using CFMMCD.Models.ViewModel
 @using CFMMCD.DropDown
 
@@ -311,10 +312,9 @@
 				</div>
 				<div class="col-lg-6" style="max-height:500px;overflow-y:auto">
 					<div class="col-lg-12">
-						<div class="form-inline">
-							<div class="col-lg-8">
-								@Html.TextBoxFor(m => Model.SearchVendor, new { @class = "form-control input-sm", @placeholder = "Search vendor" })
-							</div>
+						<div class="col-lg-12">
+							@*Html.TextBoxFor(m => Model.SearchVendor, new { @class = "form-control input-sm", @placeholder = "Search vendor" })*@
+                            <input class="form-control input-sm tb-select" placeholder="Search vendor" id="SearchVendor">
 						</div>
 						<div class="form-group">
 							<table class="table table-responsive table-hover">
@@ -357,6 +357,7 @@
                                                         @Html.TextBoxFor(m => Model.VendorSCM[i], new { @class = "form-control input-sm", @Value = Model.VendorSCM.ElementAt(i) })
 													</td>
                                                     <td class="primary"></td>
+                                                    <td><button type="button" class="close clear-search">&times;</button></td>
 												</tr>
                                             }
                                         }
@@ -389,6 +390,11 @@
             <div class="container-fluid">
                 <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search raw item" autofocus />
             </div>
+            <hr />
+            <div class="container-fluid text-center">
+                <div class="col-lg-4">Raw item code</div>
+                <div class="col-lg-8">Raw item name</div>
+            </div>
         </div>
         @using (Html.BeginForm())
         {
@@ -414,6 +420,38 @@
     </div>
 </div>
 
+<!--Search Vendor Item Modal-->
+<div class="modal fade" id="search-item-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Select Vendor</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search vendor" autofocus />
+            </div>
+        </div>
+        <hr />
+        <div class="container-fluid text-center">
+            <div class="col-lg-4">Raw item code</div>
+            <div class="col-lg-8">Raw item name</div>
+        </div>
+        <div class="modal-body">
+            @for (int i = 0; i < Model.VendorList.Count(); i++)
+            {
+                string ActiveInactive = "active";
+                <button type="button" class="modal-item-select tr-collapse @Model.VendorList[i].value @Model.VendorList[i].text @ActiveInactive" name="value" value="@Model.VendorList[i].value @Model.VendorList[i].text" data-dismiss="modal">
+                    <div class="col-lg-3">
+                        @Model.VendorList[i].value
+                    </div>
+                    <div class="col-lg-9">
+                        @Model.VendorList[i].text
+                    </div>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
 <script>
     // Region, Province, and City Dropdown Handling
     @{
@@ -434,6 +472,8 @@
         }
     }
 
+    var primaryVendor;
+    var previousPrimary;
     $(window).ready(function () {
 
         // Region, Province, City
@@ -456,20 +496,9 @@
 
         // Vendor search/ Auto filter
         disableInputsOnCb();
-        setPrimaryVendor();
+        getSearchItem();
         $("#SearchVendor").keyup(function () {
-            // Hide items not relevant to the search term
-            if ($("#SearchVendor").val() != "") {
-                var searchTerm = $("#SearchVendor").val().toLowerCase();
-                $(".tr-vendor").addClass("hidden");
-                $(".tr-vendor").each(function () {
-                    if ($(this).attr("class").toLowerCase().includes(searchTerm) ||
-                        $(this).children("td").children("[type='checkbox']").is(':checked'))
-                        $(this).removeClass("hidden");
-                });
-            } else {
-                $(".tr-vendor").removeClass("hidden");
-            }
+            getSearchItem();
         });
 
         // Disable Vendor TextBoxes if checkbox is not checked
@@ -479,10 +508,23 @@
 
         // Primary vendor. Automatically activates vendor in the list
         // if selected in the primary vendor dropdown
-        var primaryVendor;
-        var previousPrimary;
         $("#RIMPVN").change(function () {
             setPrimaryVendor();
+        });
+
+
+        $("#SearchVendor").click(function () {
+            $("#search-item-modal").modal("show");
+        });
+
+        $(".modal-item-select").click(function() {
+            onItemSelected($(this).val().trim());
+            getSearchItem();
+        });
+
+        $(".clear-search").click(function () {
+            $("#SearchVendor").val("");
+            getSearchItem();
         });
 
     });
@@ -514,6 +556,8 @@
 	    $("#tr-" + primaryVendor).children("td").children("[type='checkbox']").attr("checked", "checked");
 	    $("#tr-" + primaryVendor).children("td").children("[type='checkbox']").addClass("hidden");
 	    $("#tr-" + primaryVendor).children(".primary").text("Primary");
+	    if ($("#tr-" + primaryVendor).hasClass("hidden"))
+	        $("#tr-" + primaryVendor).removeClass("hidden");
 	    disableInputsOnCb();
 	    previousPrimary = primaryVendor;
 	}
@@ -544,6 +588,28 @@
 		        $(this).css("background-color", "#FFFFAA");
 		    }
 		});
+	}
+
+	function getSearchItem() {
+	    // Hide items not relevant to the search term
+	    $(".tr-vendor").each(function () {
+	        if (!$(this).children().first().children("input[type='checkbox']").is(':checked'))
+	            $(this).addClass("hidden");
+	    });
+
+	    if ($("#SearchVendor").val() != "") {
+	        var searchTerm = $("#SearchVendor").val().toLowerCase();
+	        $(".tr-vendor").each(function () {
+	            if ($(this).attr("class").toLowerCase().includes(searchTerm) ||
+                    $(this).children().first().children("input[type='checkbox']").is(':checked'))
+	                $(this).removeClass("hidden");
+	        });
+	    }
+	    setPrimaryVendor();
+	}
+
+	function onItemSelected(value) {
+	    $("#SearchVendor").val(value);
 	}
 </script>
 

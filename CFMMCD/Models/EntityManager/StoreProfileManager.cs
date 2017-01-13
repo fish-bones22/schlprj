@@ -63,6 +63,7 @@ namespace CFMMCD.Models.EntityManager
                 SPRow.SOFT_SERVE_OR_VANILLA_POWDER_MIX = SPViewModel.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
                 SPRow.SIMPLOT_OR_MCCAIN = SPViewModel.SIMPLOT_OR_MCCAIN;
                 SPRow.MCCORMICK_OR_GSF = SPViewModel.MCCORMICK_OR_GSF;
+                SPRow.FRESHB_OR_FROZENB = SPViewModel.FRESHB_OR_FROZENB;
                 SPRow.STATUS = "A";
                 try
                 {
@@ -258,6 +259,7 @@ namespace CFMMCD.Models.EntityManager
                 vm.SOFT_SERVE_OR_VANILLA_POWDER_MIX = SPRow.SOFT_SERVE_OR_VANILLA_POWDER_MIX.Trim();
                 vm.SIMPLOT_OR_MCCAIN = SPRow.SIMPLOT_OR_MCCAIN.Trim();
                 vm.MCCORMICK_OR_GSF = SPRow.MCCORMICK_OR_GSF.Trim();
+                vm.FRESHB_OR_FROZENB = SPRow.FRESHB_OR_FROZENB;
                 vm.BET = GetBusinessExtension(SPRow.BET, vm.BusinessExtList);
                 return vm;
             }

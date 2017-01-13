@@ -43,6 +43,7 @@ namespace CFMMCD.Models.ViewModel
         public List<string> STOATT { get; set; }
         public List<MenuItem> MenuItemList { get; set; }
         public List<MenuRecipe> MenuRecipeList { get; set; }
+        public List<RawItem> RawItemList { get; set; }
     }
 
     public class MenuItem

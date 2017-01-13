@@ -323,12 +323,19 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="11" Nullable="false" />
     <Property Name="MIMMIC" Type="int" />
     <Property Name="MIMNAM" Type="nvarchar" MaxLength="6" />
-    <Property Name="MITIER" Type="int" />
-    <Property Name="MIMOLP" Type="float" />
-    <Property Name="MIMNEP" Type="float" />
+    <Property Name="MITIER" Type="nvarchar" MaxLength="5" />
+    <Property Name="MIMPRI" Type="float" />
+    <Property Name="MIMPRO" Type="float" />
+    <Property Name="MIMPRG" Type="float" />
+    <Property Name="MIMNPA" Type="float" />
+    <Property Name="MIMNPI" Type="float" />
+    <Property Name="MIMNPO" Type="float" />
+    <Property Name="MIMNPD" Type="float" />
+    <Property Name="MIMNNP" Type="float" />
+    <Property Name="MIMPND" Type="date" />
   </EntityType>
   <EntityType Name="OWNERSHIP">
     <Key>
@@ -421,92 +428,6 @@
     <Property Name="FRESHB_OR_FROZENB" Type="nvarchar" MaxLength="10" />
     <Property Name="STATUS" Type="nchar" MaxLength="1" />
   </EntityType>
-  <EntityType Name="Tier_Lookup">
-    <Key>
-      <PropertyRef Name="MIMMIC" />
-    </Key>
-    <Property Name="MIMMIC" Type="int" Nullable="false" />
-    <Property Name="OLDPRA" Type="float" />
-    <Property Name="NEWPRA" Type="float" />
-    <Property Name="OLDPAO" Type="float" />
-    <Property Name="NEWPAO" Type="float" />
-    <Property Name="OLDAOT" Type="float" />
-    <Property Name="NEWAOT" Type="float" />
-    <Property Name="OLDNPA" Type="float" />
-    <Property Name="NEWNPA" Type="float" />
-    <Property Name="OLDPRB" Type="float" />
-    <Property Name="NEWPRB" Type="float" />
-    <Property Name="OLDPBO" Type="float" />
-    <Property Name="NEWPBO" Type="float" />
-    <Property Name="OLDBOT" Type="float" />
-    <Property Name="NEWBOT" Type="float" />
-    <Property Name="OLDNPB" Type="float" />
-    <Property Name="NEWNPB" Type="float" />
-    <Property Name="OLDPRC" Type="float" />
-    <Property Name="NEWPRC" Type="float" />
-    <Property Name="OLDPCO" Type="float" />
-    <Property Name="NEWPCO" Type="float" />
-    <Property Name="OLDCOT" Type="float" />
-    <Property Name="NEWCOT" Type="float" />
-    <Property Name="OLDNPC" Type="float" />
-    <Property Name="NEWNPC" Type="float" />
-    <Property Name="OLDPRD" Type="float" />
-    <Property Name="NEWPRD" Type="float" />
-    <Property Name="OLDPDO" Type="float" />
-    <Property Name="NEWPDO" Type="float" />
-    <Property Name="OLDDOT" Type="float" />
-    <Property Name="NEWDOT" Type="float" />
-    <Property Name="OLDNPD" Type="float" />
-    <Property Name="NEWNPD" Type="float" />
-    <Property Name="OLDPRE" Type="float" />
-    <Property Name="NEWPRE" Type="float" />
-    <Property Name="OLDPEO" Type="float" />
-    <Property Name="NEWPEO" Type="float" />
-    <Property Name="OLDEOT" Type="float" />
-    <Property Name="NEWEOT" Type="float" />
-    <Property Name="OLDNPE" Type="float" />
-    <Property Name="NEWNPE" Type="float" />
-    <Property Name="OLDPRF" Type="float" />
-    <Property Name="NEWPRF" Type="float" />
-    <Property Name="OLDPFO" Type="float" />
-    <Property Name="NEWPFO" Type="float" />
-    <Property Name="OLDFOT" Type="float" />
-    <Property Name="NEWFOT" Type="float" />
-    <Property Name="OLDNPF" Type="float" />
-    <Property Name="NEWNPF" Type="float" />
-    <Property Name="OLDMDS" Type="float" />
-    <Property Name="NEWMDS" Type="float" />
-    <Property Name="OLDMDO" Type="float" />
-    <Property Name="NEWMDO" Type="float" />
-    <Property Name="OLDMOT" Type="float" />
-    <Property Name="NEWMOT" Type="float" />
-    <Property Name="OLDMDN" Type="float" />
-    <Property Name="NEWMDN" Type="float" />
-    <Property Name="OLDPRS" Type="float" />
-    <Property Name="NEWPRS" Type="float" />
-    <Property Name="OLDPSO" Type="float" />
-    <Property Name="NEWPSO" Type="float" />
-    <Property Name="OLDSOT" Type="float" />
-    <Property Name="NEWSOT" Type="float" />
-    <Property Name="OLDNPS" Type="float" />
-    <Property Name="NEWNPS" Type="float" />
-    <Property Name="EDTA" Type="date" />
-    <Property Name="PNDA" Type="date" />
-    <Property Name="EDTB" Type="date" />
-    <Property Name="PNDB" Type="date" />
-    <Property Name="EDTC" Type="date" />
-    <Property Name="PNDC" Type="date" />
-    <Property Name="EDTD" Type="date" />
-    <Property Name="PNDD" Type="date" />
-    <Property Name="EDTE" Type="date" />
-    <Property Name="PNDE" Type="date" />
-    <Property Name="EDTF" Type="date" />
-    <Property Name="PNDF" Type="date" />
-    <Property Name="EDTM" Type="date" />
-    <Property Name="PNDM" Type="date" />
-    <Property Name="EDTS" Type="date" />
-    <Property Name="PNDS" Type="date" />
-  </EntityType>
   <EntityType Name="Trading_Area">
     <Key>
       <PropertyRef Name="Id" />
@@ -557,7 +478,6 @@
     <EntitySet Name="SCM_Master_Recipe" EntityType="Self.SCM_Master_Recipe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="Self.STORE_MIMMIC_Lookup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Store_Profile" EntityType="Self.Store_Profile" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Tier_Lookup" EntityType="Self.Tier_Lookup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Trading_Area" EntityType="Self.Trading_Area" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="Self.FK_CSHMIMP0_ToTable">
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />

@@ -24,7 +24,7 @@
 
     <!--Search-->
     <div class="container-fluid">
-        <div class="col-lg-4 col-lg-offset-2">
+        <div class="col-lg-8 col-lg-offset-2">
             <input type="text" class="form-control" placeholder="Search value meal" id="search_dummy" />
         </div>
     </div>
@@ -133,6 +133,11 @@
             <div class="container-fluid">
                 <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search value meal" autofocus />
             </div>
+            <hr />
+            <div class="container-fluid text-center">
+                <div class="col-lg-4">Value meal number</div>
+                <div class="col-lg-8">Value meal name</div>
+            </div>
         </div>
         @using (Html.BeginForm())
         {
@@ -160,8 +165,13 @@
             <button class="close" data-dismiss="modal">&times;</button>
             <h4>Select Menu item</h4>
             <div class="container-fluid">
-                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search value meal" autofocus />
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search menu item" autofocus />
             </div>
+        </div>
+        <hr />
+        <div class="container-fluid text-center">
+            <div class="col-lg-4">Menu item code</div>
+            <div class="col-lg-8">Menu item name</div>
         </div>
         <div class="modal-body">
             @for (int i = 0; i < Model.AllMenuItems.Count(); i++)

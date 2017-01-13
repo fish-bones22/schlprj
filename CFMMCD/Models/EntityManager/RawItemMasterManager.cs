@@ -322,7 +322,10 @@ namespace CFMMCD.Models.EntityManager
                     vm.StoreSelected = "";
                 }
                 if ((rim.Except_Store != null) && !(rim.Except_Store.Equals("")))
+                {
                     vm.SelectExceptCb = true;
+                    vm.SelectAllCb = false;
+                }
                 // Store attributes
                 if (rim.Store_Attrib != null)
                 {

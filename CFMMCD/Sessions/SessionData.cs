@@ -123,7 +123,7 @@ namespace CFMMCD.Sessions
                 {
                     LinkName = "Store Profile",
                     Action = "Index",
-                    Controller = "Store Profile"
+                    Controller = "StoreProfile"
                 };
             else if (key.Equals("AUL"))
                 return new CurrentPageSession.LinkString
@@ -146,7 +146,7 @@ namespace CFMMCD.Sessions
                     Action = "Index",
                     Controller = "VendorMaster"
                 };
-            else if(key.Equals("LOG"))
+            else if (key.Equals("LOG"))
                 return new CurrentPageSession.LinkString
                 {
                     LinkName = "Log out",
@@ -209,6 +209,63 @@ namespace CFMMCD.Sessions
                     Action = "Index",
                     Controller = "SCMRecipe"
                 };
+            else if (key.Equals("TIP_REG"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Regular Price Tier",
+                    Action = "Index",
+                    Controller = "RegularPriceTier"
+                };
+            else if (key.Equals("TIP_BRE"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Breakfast Price Tier",
+                    Action = "Index",
+                    Controller = "BreakfastPriceTier"
+                };
+            else if (key.Equals("TIP_DES"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Dessert Price Tier",
+                    Action = "Index",
+                    Controller = "DessertPriceTier"
+                };
+            else if (key.Equals("TIP_BIS"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "McCafe Bistro Price Tier",
+                    Action = "Index",
+                    Controller = "McCafeBistroPriceTier"
+                };
+            else if (key.Equals("TIP_LE2"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "McCafe Level 2 Price Tier",
+                    Action = "Index",
+                    Controller = "McCafeLevel2PriceTier"
+                };
+            else if (key.Equals("TIP_LE3"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "McCafe Level 3 Price Tier",
+                    Action = "Index",
+                    Controller = "McCafeLevel3PriceTier"
+                };
+            else if (key.Equals("TIP_GOL"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Project GOLD Price Tier",
+                    Action = "Index",
+                    Controller = "ProjectGoldPriceTier"
+                };
+            else if (key.Equals("TIP_MDS"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "MDS Price Tier",
+                    Action = "Index",
+                    Controller = "MDSPriceTier"
+                };
+
             else
                 return new CurrentPageSession.LinkString
                 {

@@ -22,7 +22,7 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("RPT", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("TIP_REG", "HOME", "LOG");
 
             // Get all data stored in DB table
             RegularPriceTierManager RPTManager = new RegularPriceTierManager();

@@ -1,4 +1,5 @@
 ﻿using CFMMCD.DropDown;
+using CFMMCD.Models.EntityManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,8 +15,8 @@ namespace CFMMCD.Models.ViewModel
             LocationList = tdd.SetLocationDropDown();
             StoreList = tdd.SetStoreDropDown();
             MenuItemMasterList = new List<MenuItem>();
-            MenuItemPriceList = new List<MenuItemMasterViewModel>();
             MenuRecipeList = new List<MenuRecipe>();
+            TierList = new TierManager().SetTierList();
             TradingAreaList = tdd.SetTradingAreaList();
             CategoryList = tdd.SetCategoryList();
             MIMFGCList = tdd.SetPMGList("PMGFGC");
@@ -27,11 +28,9 @@ namespace CFMMCD.Models.ViewModel
         public bool InactiveItemsCb { get; set; }
 
         // CHMMIMP0 Table Items
-        [Required(ErrorMessage = "This field is required")]
         public string MIMMIC { get; set; }
         public string MIMSTA { get; set; }
         public string MIMFGC { get; set; }
-        [Required(ErrorMessage = "This field is required")]
         public string MIMNAM { get; set; }
         public string MIMLON { get; set; }
         public string MIMDSC { get; set; }
@@ -45,7 +44,6 @@ namespace CFMMCD.Models.ViewModel
         public string MIMPND { get; set; }
         public string MIMWGR { get; set; }
         public string MIMHPT { get; set; }
-        [Required(ErrorMessage = "This field is required")]
         public string MIMUTC { get; set; }
         public string MIMEDT { get; set; }
         public string MIMNPI { get; set; }
@@ -156,7 +154,6 @@ namespace CFMMCD.Models.ViewModel
         public string EDTS { get; set; }
         public string PNDS { get; set; }
 
-        public string EffectiveDate { get; set; }
 
         public List<GenericDropDownList> TradingAreaList { get; set; }
         public List<GenericDropDownList> CategoryList { get; set; }
@@ -166,6 +163,51 @@ namespace CFMMCD.Models.ViewModel
         public List<GenericDropDownList> StoreList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
         public List<MenuRecipe> MenuRecipeList { get; set; }
-        public List<MenuItemMasterViewModel> MenuItemPriceList { get; set; }
+        public List<Tier> TierList { get; set; }
+    }
+
+    public class Tier
+    {
+        public string MIMMIC { get; set; }
+        public string MIMNAM { get; set; }
+
+        public int TierId { get; set; }
+        public string TierName { get; set; }
+        public string TradingAreas { get; set; }
+        // OLD
+        public string MIMPRI { get; set; } // Eat in
+        public string MIMPRO { get; set; } // Take out
+        public string MIMPRG { get; set; } // Other
+        public string MIMNPA { get; set; } // Non-product
+        // New
+        public string MIMNPI { get; set; } // Eat in new
+        public string MIMNPO { get; set; } // Take out new
+        public string MIMNPD { get; set; } // Other new
+        public string MIMNNP { get; set; } // Non-product new
+        // Effective date
+        public string MIMPND { get; set; }
+    }
+
+    public class MenuItemPriceUpdateViewModel
+    {
+        public MenuItemPriceUpdateViewModel()
+        {
+            TierUpdateList = new List<TierUpdate>();
+        }
+        public List<TierUpdate> TierUpdateList { get; set; }
+    }
+
+    public class TierUpdate
+    {
+        public string MIMMIC { get; set; }
+        public string MIMNAM { get; set; }
+        public string MIMSTA { get; set; }
+        public string TierAOld { get; set; }
+        public string TierANew { get; set; }
+        public string TierBOld { get; set; }
+        public string TierBNew { get; set; }
+        public string TierCOld { get; set; }
+        public string TierCNew { get; set; }
+        public string EffectiveDate { get; set; }
     }
 }

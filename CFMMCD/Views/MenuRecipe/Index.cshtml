@@ -89,7 +89,7 @@
                                         @Html.HiddenFor(m => Model.MenuRecipeList[i].RIRRID)
                                         <td></td>
                                         <td> 
-                                            @Html.TextBoxFor(m => Model.MenuRecipeList[i].RIRRIC, new { @class = "form-control input-sm", @type = "number", @max = "99999"})
+                                            @Html.TextBoxFor(m => Model.MenuRecipeList[i].RIRRIC, new { @class = "tb-select form-control input-sm", @type = "number", @max = "99999"})
                                             @Html.HiddenFor(m => Model.MenuRecipeList[i].PreviousRIRRIC)
                                         </td>
                                         <td> @Html.DisplayFor(m => Model.MenuRecipeList[i].RIMRID, new { @class = "form-control input-sm" }) </td>
@@ -107,7 +107,7 @@
                             <!--Empty row-->
                             <tr>
                                 <td></td>
-                                <td>@Html.TextBoxFor(m => m.RIRRIC[0], new { @class = "form-control input-sm", @type = "number", @max = "99999" })</td>
+                                <td>@Html.TextBoxFor(m => m.RIRRIC[0], new { @class = "tb-select form-control input-sm", @type = "number", @max = "99999" })</td>
                                 <td> @Html.DisplayFor(m => m.RIMRID[0], new { @class = "form-control input-sm", @maxlength = "20" }) </td>
                                 <td> @Html.TextBoxFor(m => m.RIRSFQ[0], new { @class = "form-control input-sm", @type = "number", @max = "99999" }) </td>
                                 <td> @Html.DisplayFor(m => m.RIMCPR[0], new { @class = "form-control input-sm" }) </td>
@@ -152,6 +152,11 @@
                     </label>
                 </div>
             </div>
+            <hr />
+            <div class="container-fluid text-center">
+                <div class="col-lg-4">Menu item code</div>
+                <div class="col-lg-8">Menu item name</div>
+            </div>
         </div>
         @using (Html.BeginForm())
         {
@@ -177,12 +182,49 @@
     </div>
 </div>
 
+<!--Search Raw Item Modal-->
+<div class="modal fade" id="search-item-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Select Raw item</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search raw item" autofocus />
+            </div>
+        </div>
+        <hr />
+        <div class="container-fluid text-center">
+            <div class="col-lg-4">Raw item code</div>
+            <div class="col-lg-8">Raw item name</div>
+        </div>
+        <div class="modal-body">
+            @for (int i = 0; i < Model.RawItemList.Count(); i++)
+            {
+                string ActiveInactive = "active";
+                if (Model.RawItemList[i].RIMSTA.Equals("1"))
+                {
+                    ActiveInactive = "inactive";
+                }
+                <button type="button" class="modal-item-select tr-collapse @Model.RawItemList[i].RIMRIC @Model.RawItemList[i].RIMRID @ActiveInactive" name="value" value=@Model.RawItemList[i].RIMRIC data-dismiss="modal">
+                    <div class="col-lg-3">
+                        @Model.RawItemList[i].RIMRIC
+                    </div>
+                    <div class="col-lg-9">
+                        @Model.RawItemList[i].RIMRID
+                    </div>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
 
 <script>
     var index = 0;
+    var TextBoxPressed;
     var newRow = '<tr>'+
                     '<td></td>'+
-                    '<td><input class="form-control input-sm" id="RIRRIC_'+(++index)+'_" name="RIRRIC['+index+']" type="number" max="99999" value="" /></td>' +
+                    '<td><input class="tb-select form-control input-sm" id="RIRRIC_' + (++index) + '_" name="RIRRIC[' + index + ']" type="number" max="99999" value="" /></td>' +
                     '<td>  </td>' +
                     '<td> <input class="form-control input-sm" id="RIRSFQ_'+index+'_" name="RIRSFQ['+index+']" type="number" max="99999" value="" /> </td>' +
                     '<td></td>' +
@@ -203,6 +245,13 @@
                 setDeleteRowEventListener();
             }
         });
+
+        $(".tb-select").click(function () {
+            TextBoxPressed = $(this);
+            $("#search-item-modal").modal("show");
+        });
+
+        $(".modal-item-select").click(onItemSelected);
     });
 
     function setDeleteRowEventListener() {
@@ -216,5 +265,9 @@
                 $(this).parent().parent("tr").addClass("hidden");
             }
         });
+    }
+
+    function onItemSelected() {
+        TextBoxPressed.val($(this).val());
     }
 </script>

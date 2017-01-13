@@ -15,7 +15,11 @@ namespace CFMMCD.Controllers
         public ActionResult Login()
         {   // Reset Sessions
             if (Session["User"] != null)
+            {
+                string username = ((UserSession)Session["User"]).Username;
+                AccountManager.LogDateTime(username);
                 Session["User"] = null;
+            }
             if (Session["UserAccess"] != null)
                 Session["UserAccess"] = null;
             if (Session["ViewModelList"] != null)
@@ -51,7 +55,6 @@ namespace CFMMCD.Controllers
                     // Set User access
                     UserAccessSession UASession = new UserAccessSession();
                     Session["UserAccess"] = accMan.SetUserAccess(credentials.Username);
-                    accMan.LogDateTime(credentials.Username);
                     return RedirectToAction("Index", "Home");
                 }
                 else

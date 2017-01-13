@@ -51,7 +51,7 @@
                     }
                     if (CPSession.Parent != null)
                     {
-                        if (CPSession.Parent.Controller.Equals("Home")) {
+                        if (CPSession.Parent.Controller.Equals("Home") || CPSession.Self.Controller.Equals("Home")) {
                             <li><a class="dropdown-toggle" type="button" data-toggle="dropdown" data-submenu aria-expanded="false" href="#">All Pages <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @{ if (UASession.MIM)
@@ -99,7 +99,7 @@
                                         }
                                         if (UASession.TEG)
                                         {
-                                            <li>@Html.ActionLink("Text Generation (UD)", "Index", "TextGenerator")</li>
+                                            <li>@Html.ActionLink("Text Generation", "Index", "TextGenerator")</li>
                                         }
                                         if (UASession.RIM)
                                         {
@@ -111,7 +111,7 @@
                                         }
                                         if (UASession.REG)
                                         {
-                                            <li>@Html.ActionLink("Report generation (UD)", "Index", "ReportGeneration")</li>
+                                            <li>@Html.ActionLink("Report generation", "Index", "ReportGeneration")</li>
                                         }
 
                                         <li class="dropdown-submenu">
@@ -124,14 +124,14 @@
                                                         <li class="dropdown-submenu">
                                                             <a role="menu" data-toggle="dropdown" tabindex="-1" href="#">Tier Page</a>
                                                             <ul class="dropdown-menu">
-                                                                <li>@Html.ActionLink("Dessert Enterprise Tier (UD)", "Index", "DessertPriceTier")</li>
-                                                                <li>@Html.ActionLink("Breakfast Price Tier (UD)", "Index", "BreakfastPriceTier")</li>
-                                                                <li>@Html.ActionLink("Regular Price Tier (UD)", "Index", "RegularPriceTier")</li>
-                                                                <li>@Html.ActionLink("McCafe level 2 Price Tier (UD)", "Index", "McCafeLevel2PriceTier")</li>
-                                                                <li>@Html.ActionLink("McCafe level 3 Price Tier (UD)", "Index", "McCafeLevel3PriceTier")</li>
-                                                                <li>@Html.ActionLink("McCafe BISTRO Price Tier (UD)", "Index", "McCafeBistroPriceTier")</li>
-                                                                <li>@Html.ActionLink("MDS Price Tier", "Index (UD)", "MDSPriceTier")</li>
-                                                                <li>@Html.ActionLink("Project Gold Price Tier (UD)", "Index", "ProjectGoldPriceTier")</li>
+                                                                <li>@Html.ActionLink("Dessert Enterprise Tier", "Index", "DessertPriceTier")</li>
+                                                                <li>@Html.ActionLink("Breakfast Price Tier", "Index", "BreakfastPriceTier")</li>
+                                                                <li>@Html.ActionLink("Regular Price Tier", "Index", "RegularPriceTier")</li>
+                                                                <li>@Html.ActionLink("McCafe level 2 Price Tier", "Index", "McCafeLevel2PriceTier")</li>
+                                                                <li>@Html.ActionLink("McCafe level 3 Price Tier", "Index", "McCafeLevel3PriceTier")</li>
+                                                                <li>@Html.ActionLink("McCafe BISTRO Price Tier", "Index", "McCafeBistroPriceTier")</li>
+                                                                <li>@Html.ActionLink("MDS Price Tier", "Index", "MDSPriceTier")</li>
+                                                                <li>@Html.ActionLink("Project Gold Price Tier", "Index", "ProjectGoldPriceTier")</li>
                                                             </ul>
                                                         </li>
                                                    
@@ -173,8 +173,8 @@
             </ul>
             @{if (CPSession.Self.Controller.Equals("MenuItemMaster") || CPSession.Self.Controller.Equals("RawItemMaster"))
                 {
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications <span class="badge">New</span></a></li>
+                    <ul class="nav navbar-nav navbar-right" style="padding-right:10px">
+                        <li><a data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications</a></li>
                         <li id="popover-content" class="hide col-lg-5">
                             <div class="content-height">
                                 <table class="table-hover table-responsive table-condensed">

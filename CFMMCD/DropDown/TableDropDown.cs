@@ -224,9 +224,13 @@ namespace CFMMCD.DropDown
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<GenericDropDownList> list = new List<GenericDropDownList>();
+                GenericDropDownList option = new GenericDropDownList();
+                option.text = "";
+                option.value = "0";
+                list.Add(option);
                 foreach (var i in db.Trading_Area)
                 {
-                    GenericDropDownList option = new GenericDropDownList();
+                    option = new GenericDropDownList();
                     option.text = i.Trading_Areea;
                     option.value = i.Id.ToString();
                     list.Add(option);
@@ -356,6 +360,7 @@ namespace CFMMCD.DropDown
     {
         public string value { get; set; }
         public string text { get; set; }
+        public string classvalue { get;set;}
     }
     public class CheckBoxList
     {

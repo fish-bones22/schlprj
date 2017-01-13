@@ -23,6 +23,7 @@ namespace CFMMCD.Controllers
             MenuRecipeManager MRManager = new MenuRecipeManager();
             MenuRecipeViewModel MRViewModel = new MenuRecipeViewModel();
             MRViewModel.MenuItemList = MRManager.SearchMenuItem("ALL");
+            MRViewModel.RawItemList = new RawItemMasterManager().GetRawItems("ALL");
             return View(MRViewModel);
         }
         [HttpPost]
@@ -31,6 +32,7 @@ namespace CFMMCD.Controllers
             MenuRecipeManager MRManager = new MenuRecipeManager();
             MRViewModel = new MenuRecipeManager().SearchMenuRecipe(value);
             MRViewModel.MenuItemList = MRManager.SearchMenuItem("ALL");
+            MRViewModel.RawItemList = new RawItemMasterManager().GetRawItems("ALL");
             return View(MRViewModel);
         }
 

@@ -30,13 +30,17 @@ namespace CFMMCD.Models.EntityManager
                 }
                 else
                     return null;
-                foreach (CSHVMLP0 rim in MIVMowList)
+                string previousVML = "";
+                foreach (CSHVMLP0 rim in MIVMowList.OrderBy(o => o.VMLNAM))
                 {
+                    if (previousVML.Equals(rim.VMLNAM.Trim()))
+                        continue;
                     ValueMeal vm = new ValueMeal();
                     vm.VMLID = rim.VMLID.Trim();
                     vm.VMLNUM = rim.VMLNUM.ToString();
                     vm.VMLNAM = rim.VMLNAM.Trim();
                     VMList.Add(vm);
+                    previousVML = rim.VMLNAM.Trim();
                 }
                 if (VMList == null || VMList.Count == 0)
                     return null;
@@ -80,10 +84,11 @@ namespace CFMMCD.Models.EntityManager
                     VMMenuItem mi = new VMMenuItem();
                     mi.MIMMIC = v.VMLMIC.ToString();
                     mi.MIMNAM = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(mi.MIMMIC)).MIMNAM;
-                    if (db.Tier_Lookup.Where(o => o.MIMMIC.ToString().Equals(mi.MIMMIC)).Any())
+                    string id = mi.MIMMIC + "A";
+                    if (db.MIM_Price.Where(o => o.Id.Equals(id)).Any())
                     {
-                        mi.MIMPRI = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(mi.MIMMIC)).OLDPRA.ToString();
-                        mi.MIMPRO = db.Tier_Lookup.Single(o => o.MIMMIC.ToString().Equals(mi.MIMMIC)).OLDPAO.ToString();
+                        mi.MIMPRI = db.MIM_Price.Single(o => o.Id.Equals(id)).MIMPRI.ToString();
+                        mi.MIMPRO = db.MIM_Price.Single(o => o.Id.Equals(id)).MIMPRO.ToString();
                     }
                     else
                     {

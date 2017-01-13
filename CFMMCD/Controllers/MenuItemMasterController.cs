@@ -57,7 +57,7 @@ namespace CFMMCD.Controllers
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "Raw Item Master", PageAction, MIMViewModel.MIMMIC, MIMViewModel.MIMNAM);
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Menu Item Master", PageAction, MIMViewModel.MIMMIC, MIMViewModel.MIMNAM);
             }
             else
             {

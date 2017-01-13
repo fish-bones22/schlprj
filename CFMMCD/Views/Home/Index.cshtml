@@ -12,7 +12,7 @@
 
 <div class="header"><h2>@ViewBag.Title</h2></div>
 <div class="container">
-    <div class="col-lg-4" style="padding-left:0">
+    <!--div class="col-lg-4" style="padding-left:0">
         <div class="scrollable-button">
             <div class="start">
                 <button role="tab" href="#collapse1" class="btn btn-default btn-blk" type="button" data-toggle="collapse"><span class="glyphicon glyphicon-align-right"></span> All Page</button>
@@ -22,29 +22,29 @@
                     <div id="collapse1" class="panel-collapse collapse">
                         <ul class="list-group">
 
-                            @{ if (UASession.MIM)
+                            #{ if (UASession.MIM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Menu Item Master", "Index", "MenuItemMaster")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Menu Item Master", "Index", "MenuItemMaster")</li>
                                 }
                                 if (UASession.RIM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Raw Item Master", "Index", "RawItemMaster")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Raw Item Master", "Index", "RawItemMaster")</li>
                                 }
                                 if (UASession.MER)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Menu Recipe", "Index", "MenuRecipe")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Menu Recipe", "Index", "MenuRecipe")</li>
                                 }
                                 if (UASession.STP)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Store Profile", "Index", "StoreProfile")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Store Profile", "Index", "StoreProfile")</li>
                                 }
                                 if (UASession.VEM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Vendor Master", "Index", "VendorMaster")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Vendor Master", "Index", "VendorMaster")</li>
                                 }
                                 if (UASession.VAM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Value Meal", "Index", "ValueMeal")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Value Meal", "Index", "ValueMeal")</li>
                                 }
                                 if (UASession.UAP)
                                 {
@@ -52,57 +52,57 @@
                                         <a role="menuitem" data-toggle="collapse" tabindex="-1" href="#collapse2">User access&emsp;<span class="glyphicon glyphicon-chevron-down right"></span></a>
                                         <div id="collapse2" class="panel-collapse collapse">
                                             <ul class="list-group">
-                                                <li class="list-group-item">@Html.ActionLink("Create user account", "CreateAccount", "Account")</li>
-                                                <li class="list-group-item">@Html.ActionLink("Manage user account", "EditAccount", "Account")</li>
-                                                <li class="list-group-item">@Html.ActionLink("Manage user access", "EditAccess", "Account")</li>
+                                                <li class="list-group-item">#Html.ActionLink("Create user account", "CreateAccount", "Account")</li>
+                                                <li class="list-group-item">#Html.ActionLink("Manage user account", "EditAccount", "Account")</li>
+                                                <li class="list-group-item">#Html.ActionLink("Manage user access", "EditAccess", "Account")</li>
                                             </ul>
                                         </div>
                                     </li>
                                 }
                                 if (UASession.MIP)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Menu Item Price Update", "Index", "MenuItemPriceUpdate")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Menu Item Price Update", "Index", "MenuItemPriceUpdate")</li>
                                 }
                                 if (UASession.SCM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("SCM Master Recipe", "Index", "SCMRecipe")</li>
+                                    <li class="list-group-item">#Html.ActionLink("SCM Master Recipe", "Index", "SCMRecipe")</li>
                                 }
                                 if (UASession.TEG)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Text Generation (UD)", "Index", "TextGenerator")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Text Generation (UD)", "Index", "TextGenerator")</li>
                                 }
                                 if (UASession.RIM)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Raw Item Price Update", "Index", "RawItemPriceUpdate")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Raw Item Price Update", "Index", "RawItemPriceUpdate")</li>
                                 }
                                 if (UASession.AUL)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Audit log", "Index", "AuditLog")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Audit log", "Index", "AuditLog")</li>
                                 }
                                 if (UASession.REG)
                                 {
-                                    <li class="list-group-item">@Html.ActionLink("Report generation (UD)", "Index", "ReportGeneration")</li>
+                                    <li class="list-group-item">#Html.ActionLink("Report generation (UD)", "Index", "ReportGeneration")</li>
                                 }
 
                                 <li class="list-group-item">
                                     <a role="menuitem" data-toggle="collapse" tabindex="-1" href="#collapse3">Table Maintenance&emsp;<span class="glyphicon glyphicon-chevron-down right"></span></a>
                                     <div id="collapse3" class="panel-collapse collapse">
                                         <ul class="list-group">
-                                            @{ if (UASession.LOC)
+                                            #{ if (UASession.LOC)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Location", "Index", "Location")</li>
+                                                    <li class="list-group-item">#Html.ActionLink("Location", "Index", "Location")</li>
                                                 }
                                                 if (UASession.PRC)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Profit center", "Index", "ProfitCenter")</li>
+                                                    <li class="list-group-item">#Html.ActionLink("Profit center", "Index", "ProfitCenter")</li>
                                                 }
                                                 if (UASession.OWN)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Ownership", "Index", "Ownership")</li>
+                                                    <li class="list-group-item">#Html.ActionLink("Ownership", "Index", "Ownership")</li>
                                                 }
                                                 if (UASession.BUE)
                                                 {
-                                                    <li class="list-group-item">@Html.ActionLink("Business Extension", "Index", "BusinessExtension")</li>
+                                                    <li class="list-group-item">#Html.ActionLink("Business Extension", "Index", "BusinessExtension")</li>
                                                 }
                                                 if (UASession.TIP)
                                                 {
@@ -110,14 +110,14 @@
                                                         <a role="menuitem" data-toggle="collapse" tabindex="-1" href="#collapse4">Tier Page&emsp;<span class="glyphicon glyphicon-chevron-down right"></span></a>
                                                         <div id="collapse4" class="panel-collapse collapse">
                                                             <ul class="list-group">
-                                                                <li class="list-group-item">@Html.ActionLink("Dessert Enterprise Tier (UD)", "Index", "DessertPriceTier")</li>
-                                                                <li class="list-group-item">@Html.ActionLink("Breakfast Price Tier (UD)", "Index", "BreakfastPriceTier")</li>
-                                                                <li class="list-group-item">@Html.ActionLink("Regular Price Tier (UD)", "Index", "RegularPriceTier")</li>
-                                                                <li class="list-group-item">@Html.ActionLink("McCafe level 2 Price Tier (UD)", "Index", "McCafeLevel2PriceTier")</li>
-                                                                <li class="list-group-item">@Html.ActionLink("McCafe level 3 Price Tier (UD)", "Index", "McCafeLevel3PriceTier")</li>
-                                                                <li class="list-group-item">@Html.ActionLink("McCafe BISTRO Price Tier (UD)", "Index", "McCafeBistroPriceTier")</li>
-                                                                <li class="list-group-item">@Html.ActionLink("MDS Price Tier", "Index (UD)", "MDSPriceTier")</li>
-                                                                <li class="list-group-item">@Html.ActionLink("Project Gold Price Tier (UD)", "Index", "ProjectGoldPriceTier")</li>
+                                                                <li class="list-group-item">#Html.ActionLink("Dessert Enterprise Tier (UD)", "Index", "DessertPriceTier")</li>
+                                                                <li class="list-group-item">#Html.ActionLink("Breakfast Price Tier (UD)", "Index", "BreakfastPriceTier")</li>
+                                                                <li class="list-group-item">#Html.ActionLink("Regular Price Tier (UD)", "Index", "RegularPriceTier")</li>
+                                                                <li class="list-group-item">#Html.ActionLink("McCafe level 2 Price Tier (UD)", "Index", "McCafeLevel2PriceTier")</li>
+                                                                <li class="list-group-item">#Html.ActionLink("McCafe level 3 Price Tier (UD)", "Index", "McCafeLevel3PriceTier")</li>
+                                                                <li class="list-group-item">#Html.ActionLink("McCafe BISTRO Price Tier (UD)", "Index", "McCafeBistroPriceTier")</li>
+                                                                <li class="list-group-item">#Html.ActionLink("MDS Price Tier", "Index (UD)", "MDSPriceTier")</li>
+                                                                <li class="list-group-item">#Html.ActionLink("Project Gold Price Tier (UD)", "Index", "ProjectGoldPriceTier")</li>
                                                             </ul>
                                                         </div>
                                                     </li>
@@ -132,7 +132,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </!--div-->
     <div class="container-fluid">
         <div class="col-lg-8">
             <table class="table table-responsive">

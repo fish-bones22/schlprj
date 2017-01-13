@@ -22,7 +22,7 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("DPT", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("TIP_DES", "HOME", "LOG");
 
             // Get all data stored in DB table
             DessertPriceTierManager DPTManager = new DessertPriceTierManager();

@@ -20,24 +20,15 @@ namespace CFMMCD.Controllers
 
             Session["CurrentPage"] = new CurrentPageSession("REG", "HOME", "LOG");
             
-            return View();
+            return View(new ReportGenerationViewModel());
         }
 
         [HttpPost]
-        public ActionResult Export(MenuItemMasterViewModel MIMVM, RawItemMasterViewModel RIMVM, MenuRecipeViewModel MRVM, StoreProfileViewModel SPVM, string command)
+        public ActionResult Export(ReportGenerationViewModel RGViewModel, string command)
         {
             bool result = false;
-
-            if (command == "toExcel")
-            {
-                ReportGenerationManager RGM = new ReportGenerationManager();
-                result = RGM.RGtoExcel(MIMVM, MRVM, RIMVM, SPVM);
-            }
-            if (command == "toPDF")
-            {
-                ReportGenerationManager RGMP = new ReportGenerationManager();
-                result = RGMP.ExportToPDF(MIMVM, MRVM, RIMVM, SPVM);
-            }
+            ReportGenerationManager RGManager = new ReportGenerationManager();
+            result = RGManager.ManageReport(RGViewModel, command);
             return RedirectToAction("Index");
         }
     }

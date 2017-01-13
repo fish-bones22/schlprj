@@ -135,7 +135,8 @@ namespace CFMMCD.Models.EntityManager
                     return "";
             }
         }
-        public bool LogDateTime(string username)
+
+        public static bool LogDateTime(string username)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {

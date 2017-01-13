@@ -22,7 +22,7 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.LOC) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("LCN", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("LOC", "HOME", "LOG");
 
             // Get all data stored in DB table
             LocationManager LCNManager = new LocationManager();

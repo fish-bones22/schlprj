@@ -22,7 +22,7 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("PGT", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("TIP_GOL", "HOME", "LOG");
 
             // Get all data stored in DB table
             ProjectGoldPriceTierManager PGTManager = new ProjectGoldPriceTierManager();

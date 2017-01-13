@@ -22,7 +22,6 @@
     <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="CFMMCDModel.McCafe_Level_2_Price_Tier" />
     <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="CFMMCDModel.McCafe_Level_3_Price_Tier" />
     <EntitySet Name="MDS_Price_Tier" EntityType="CFMMCDModel.MDS_Price_Tier" />
-    <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
     <EntitySet Name="OWNERSHIPs" EntityType="CFMMCDModel.OWNERSHIP" />
     <EntitySet Name="PROFIT_CEN" EntityType="CFMMCDModel.PROFIT_CEN" />
     <EntitySet Name="Project_Gold_Price_Tier" EntityType="CFMMCDModel.Project_Gold_Price_Tier" />
@@ -31,12 +30,12 @@
     <EntitySet Name="SCM_Master_Recipe" EntityType="CFMMCDModel.SCM_Master_Recipe" />
     <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="CFMMCDModel.STORE_MIMMIC_Lookup" />
     <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
-    <EntitySet Name="Tier_Lookup" EntityType="CFMMCDModel.Tier_Lookup" />
     <EntitySet Name="Trading_Area" EntityType="CFMMCDModel.Trading_Area" />
     <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="CFMMCDModel.FK_CSHMIMP0_ToTable">
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
+    <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
   </EntityContainer>
   <EntityType Name="Account">
     <Key>
@@ -359,17 +358,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="MIM_Price">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="MIMMIC" Type="Int32" />
-    <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-    <Property Name="MITIER" Type="Int32" />
-    <Property Name="MIMOLP" Type="Double" />
-    <Property Name="MIMNEP" Type="Double" />
-  </EntityType>
   <EntityType Name="OWNERSHIP">
     <Key>
       <PropertyRef Name="Id" />
@@ -461,92 +449,6 @@
     <Property Name="FRESHB_OR_FROZENB" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
   </EntityType>
-  <EntityType Name="Tier_Lookup">
-    <Key>
-      <PropertyRef Name="MIMMIC" />
-    </Key>
-    <Property Name="MIMMIC" Type="Int32" Nullable="false" />
-    <Property Name="OLDPRA" Type="Double" />
-    <Property Name="NEWPRA" Type="Double" />
-    <Property Name="OLDPAO" Type="Double" />
-    <Property Name="NEWPAO" Type="Double" />
-    <Property Name="OLDAOT" Type="Double" />
-    <Property Name="NEWAOT" Type="Double" />
-    <Property Name="OLDNPA" Type="Double" />
-    <Property Name="NEWNPA" Type="Double" />
-    <Property Name="OLDPRB" Type="Double" />
-    <Property Name="NEWPRB" Type="Double" />
-    <Property Name="OLDPBO" Type="Double" />
-    <Property Name="NEWPBO" Type="Double" />
-    <Property Name="OLDBOT" Type="Double" />
-    <Property Name="NEWBOT" Type="Double" />
-    <Property Name="OLDNPB" Type="Double" />
-    <Property Name="NEWNPB" Type="Double" />
-    <Property Name="OLDPRC" Type="Double" />
-    <Property Name="NEWPRC" Type="Double" />
-    <Property Name="OLDPCO" Type="Double" />
-    <Property Name="NEWPCO" Type="Double" />
-    <Property Name="OLDCOT" Type="Double" />
-    <Property Name="NEWCOT" Type="Double" />
-    <Property Name="OLDNPC" Type="Double" />
-    <Property Name="NEWNPC" Type="Double" />
-    <Property Name="OLDPRD" Type="Double" />
-    <Property Name="NEWPRD" Type="Double" />
-    <Property Name="OLDPDO" Type="Double" />
-    <Property Name="NEWPDO" Type="Double" />
-    <Property Name="OLDDOT" Type="Double" />
-    <Property Name="NEWDOT" Type="Double" />
-    <Property Name="OLDNPD" Type="Double" />
-    <Property Name="NEWNPD" Type="Double" />
-    <Property Name="OLDPRE" Type="Double" />
-    <Property Name="NEWPRE" Type="Double" />
-    <Property Name="OLDPEO" Type="Double" />
-    <Property Name="NEWPEO" Type="Double" />
-    <Property Name="OLDEOT" Type="Double" />
-    <Property Name="NEWEOT" Type="Double" />
-    <Property Name="OLDNPE" Type="Double" />
-    <Property Name="NEWNPE" Type="Double" />
-    <Property Name="OLDPRF" Type="Double" />
-    <Property Name="NEWPRF" Type="Double" />
-    <Property Name="OLDPFO" Type="Double" />
-    <Property Name="NEWPFO" Type="Double" />
-    <Property Name="OLDFOT" Type="Double" />
-    <Property Name="NEWFOT" Type="Double" />
-    <Property Name="OLDNPF" Type="Double" />
-    <Property Name="NEWNPF" Type="Double" />
-    <Property Name="OLDMDS" Type="Double" />
-    <Property Name="NEWMDS" Type="Double" />
-    <Property Name="OLDMDO" Type="Double" />
-    <Property Name="NEWMDO" Type="Double" />
-    <Property Name="OLDMOT" Type="Double" />
-    <Property Name="NEWMOT" Type="Double" />
-    <Property Name="OLDMDN" Type="Double" />
-    <Property Name="NEWMDN" Type="Double" />
-    <Property Name="OLDPRS" Type="Double" />
-    <Property Name="NEWPRS" Type="Double" />
-    <Property Name="OLDPSO" Type="Double" />
-    <Property Name="NEWPSO" Type="Double" />
-    <Property Name="OLDSOT" Type="Double" />
-    <Property Name="NEWSOT" Type="Double" />
-    <Property Name="OLDNPS" Type="Double" />
-    <Property Name="NEWNPS" Type="Double" />
-    <Property Name="EDTA" Type="DateTime" Precision="0" />
-    <Property Name="PNDA" Type="DateTime" Precision="0" />
-    <Property Name="EDTB" Type="DateTime" Precision="0" />
-    <Property Name="PNDB" Type="DateTime" Precision="0" />
-    <Property Name="EDTC" Type="DateTime" Precision="0" />
-    <Property Name="PNDC" Type="DateTime" Precision="0" />
-    <Property Name="EDTD" Type="DateTime" Precision="0" />
-    <Property Name="PNDD" Type="DateTime" Precision="0" />
-    <Property Name="EDTE" Type="DateTime" Precision="0" />
-    <Property Name="PNDE" Type="DateTime" Precision="0" />
-    <Property Name="EDTF" Type="DateTime" Precision="0" />
-    <Property Name="PNDF" Type="DateTime" Precision="0" />
-    <Property Name="EDTM" Type="DateTime" Precision="0" />
-    <Property Name="PNDM" Type="DateTime" Precision="0" />
-    <Property Name="EDTS" Type="DateTime" Precision="0" />
-    <Property Name="PNDS" Type="DateTime" Precision="0" />
-  </EntityType>
   <EntityType Name="Trading_Area">
     <Key>
       <PropertyRef Name="Id" />
@@ -566,4 +468,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="MIM_Price">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="MIMMIC" Type="Int32" />
+    <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="MITIER" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="MIMPRI" Type="Double" />
+    <Property Name="MIMPRO" Type="Double" />
+    <Property Name="MIMPRG" Type="Double" />
+    <Property Name="MIMNPA" Type="Double" />
+    <Property Name="MIMNPI" Type="Double" />
+    <Property Name="MIMNPO" Type="Double" />
+    <Property Name="MIMNPD" Type="Double" />
+    <Property Name="MIMNNP" Type="Double" />
+    <Property Name="MIMPND" Type="DateTime" Precision="0" />
+  </EntityType>
 </Schema>

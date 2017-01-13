@@ -49,7 +49,6 @@ namespace CFMMCD.Models.ViewModel
         public string REGION { get; set; }
         public string PROVINCE { get; set; }
         public string LOCATION { get; set; }
-        [Required(ErrorMessage = "This field is required")]
         public string ADDRESS { get; set; }
         public string CITY { get; set; }
         public string FRESH_OR_FROZEN { get; set; }

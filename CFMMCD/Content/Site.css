@@ -33,11 +33,14 @@ label {
   -moz-transition-duration: 0.4s;
   transition-duration: 0.4s;
 }
-.navbar-nav li a:hover {
-  background-color: rgb(235, 60, 30);
+.navbar-nav li a:focus {
+    background-color:inherit;
+}
+.nav .open>a {
+  background-color: rgb(235, 60, 30) !important;
   color: white !important;
 }
-.navbar-nav li a:focus {
+.navbar-nav li a:hover {
   background-color: rgb(235, 60, 30);
   color: white !important;
 }

@@ -22,7 +22,7 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.TIP) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("ML3", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("TIP_LE3", "HOME", "LOG");
 
             // Get all data stored in DB table
             McCafeLevel3PriceTierManager ML3Manager = new McCafeLevel3PriceTierManager();

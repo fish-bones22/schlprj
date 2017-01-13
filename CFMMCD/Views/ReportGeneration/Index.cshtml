@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "Report Generation";
 }
-<div class="center">
-    <h2>@ViewBag.Title</h2>
-</div><br />
-<div class="container">
+
+<h2 align="center">@ViewBag.Title</h2>
+<hr />
+<div class="container-fluid">
     @if (TempData["ErrorMessage"] != null)
     {
         <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
@@ -16,421 +16,240 @@
         <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
     }
 </div>
-<div class="container-fluid">
-    @using (Html.BeginForm())
-    {
+
+@using (Html.BeginForm("Export", "ReportGeneration", FormMethod.Post, new { }))
+{
+    <div class="container-fluid">
         @Html.AntiForgeryToken()
         <div class="row">
             <div class="col-lg-3">
-                <div class="col-lg-8  col-lg-offset-4">
-                    @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "Store Number"  }
-                            }, "value", "text", "0"), new { @class = "form-control input-sm" })
+                <div class="col-lg-12">
+                    <label class="form-label2"> @Html.RadioButtonFor(m => m.ItemToExport, "Store") List of Stores</label>
                 </div>
-                <div class="col-lg-8 col-lg-offset-4">
-                    <label class="form-label2"> @Html.RadioButtonFor(m => m.DUMMY, "List of Stores") List of Stores</label>
+                <div class="col-lg-12">
+                    @Html.DropDownListFor(m => m.Store, new SelectList(Model.StoreList, "value", "text", "0"), new { @class = "form-control input-sm" })
                 </div>
             </div>
-            <div class="col-lg-5">
-                @Html.TextBoxFor(m => m.DUMMY, new { @class = "form-control input-sm" })
+
+            <div class="col-lg-9">
+
+                <div class="col-lg-12">
+                    <label class="form-label2">@Html.RadioButtonFor(m => m.ItemToExport, "Item") Items:</label>
+                </div>
+                <div class="col-lg-2">
+                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.MenuItem)Menu Item</label>
+                </div>
+                <div class="col-lg-2">
+                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.Recipe)Recipe</label>
+                </div>
+                <div class="col-lg-2">
+                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.RawItem)Raw Items</label>
+                </div>
+
                 <div class="col-lg-3">
-                    <label class="form-label2">@Html.RadioButtonFor(m => m.DUMMY, "Items:") Items:</label>
+                    @Html.LabelFor(m => m.DateFrom, "Date from", new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.DateFrom, new { @class = "form-control input-sm", @type = "date" })
                 </div>
                 <div class="col-lg-3">
-                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.DUMMYb)Menu Item</label>
-                </div>
-                <div class="col-lg-3">
-                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.DUMMYb)Recipe</label>
-                </div>
-                <div class="col-lg-3">
-                    <label class="checkbox-inline form-label2">@Html.CheckBoxFor(m => m.DUMMYb)Raw Items</label>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="col-lg-5">
-                    <label class="form-label2 input-sm">Date From</label>
-                </div>
-                <div class="col-lg-7">
-                    @Html.TextBoxFor(m => m.DUMMY, new { @class = "form-control input-sm" })
-                </div><br /><br />
-                <div class="col-lg-5">
-                    <label class="form-label2 input-sm">Date To</label>
-                </div>
-                <div class="col-lg-7">
-                    @Html.TextBoxFor(m => m.DUMMY, new { @class = "form-control input-sm" })
+                    @Html.LabelFor(m => m.DateTo, "Date from", new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control input-sm", @type = "date" })
                 </div>
             </div>
         </div>
-    }
-</div>
-<hr />
-<!--store profile-->
-<div class="container-fluid">
-    @using (Html.BeginForm("Export", "ReportGeneration", FormMethod.Post, new { }))
-    {
-        @Html.AntiForgeryToken()
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="form-group form-horizontal">
-                    <div class="col-lg-offset-6">
-                        <h3><strong>Store Profile</strong></h3>
+    </div>
+    <hr />
+    <!--store profile-->
+    <div class="container-fluid">
+
+        <div class="col-lg-4">
+            <div class="container-fluid">
+                <h4 align="center"><strong>Store Profile</strong></h4>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.NP3)NP3</label>
                     </div>
-                    <div class="form-group">
-                        <div class="col-lg-4 col-lg-offset-1">
-                            <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)NP3</label>
-                        </div>
-                        <div class="col-lg-4">
-                            <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)NP6</label>
-                        </div>
+                    <div class="col-lg-4">
+                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.NP6)NP6</label>
                     </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-1">
-                            <div class="col-lg-6">
-                                <label class="form-label2 input-sm">Breakfast Price Tier</label>
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-1">
-                            <div class="col-lg-6">
-                                <label class="form-label2 input-sm">Regulars Price Tier</label>
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            }, "value", "text", "0"), new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-1">
-                            <div class="col-lg-6">
-                                <label class="form-label2 input-sm">McDelivery Price Tier</label>
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-1">
-                            <div class="col-lg-6">
-                                <label class="form-label2 input-sm">Dessert Center Price Tier</label>
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-1">
-                            <div class="col-lg-6">
-                                <label class="form-label2 input-sm">McCafe Level2 Price Tier</label>
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-1">
-                            <div class="col-lg-6">
-                                <label class="form-label2 input-sm">McCafe Level3 Price Tier</label>
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-1">
-                            <div class="col-lg-6">
-                                <label class="form-label2 input-sm">McCafe BISTRO Price Tier</label>
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-1">
-                            <div class="col-lg-6">
-                                <label class="form-label2 input-sm">Project Gold  Price Tier</label>
-                            </div>
-                            <div class="col-lg-6">
-                                @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.BREAKFAST_PRICE_TIER, "Breakfast tier", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => Model.BREAKFAST_PRICE_TIER, new SelectList(Model.BreakfastTier, "value", "text", Model.BREAKFAST_PRICE_TIER), new { @class = "form-control input-sm" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.REGULAR_PRICE_TIER, "Regular price tier", new { @class = "form-label " })
+                    @Html.DropDownListFor(m => Model.REGULAR_PRICE_TIER, new SelectList(Model.RegularTier, "value", "text", Model.REGULAR_PRICE_TIER), new { @class = "form-control input-sm" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.DC_PRICE_TIER, "DC price tier", new { @class = "form-label " })
+                    @Html.DropDownListFor(m => Model.DC_PRICE_TIER, new SelectList(Model.DCTier, "value", "text", Model.DC_PRICE_TIER), new { @class = "form-control input-sm" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.MDS_PRICE_TIER, "MDS price tier", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => Model.MDS_PRICE_TIER, new SelectList(Model.MDSTier, "value", "text", Model.MDS_PRICE_TIER), new { @class = "form-control input-sm" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.MCCAFE_LEVEL_2_PRICE_TIER, "McCafe Level 2 price tier", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_2_PRICE_TIER, new SelectList(Model.McCafeLevel2Tier, "value", "text", Model.MCCAFE_LEVEL_2_PRICE_TIER), new { @class = "form-control input-sm" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.MCCAFE_LEVEL_3_PRICE_TIER, "McCafe Level 3 price tier", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => Model.MCCAFE_LEVEL_3_PRICE_TIER, new SelectList(Model.McCafeLevel3Tier, "value", "text", Model.MCCAFE_LEVEL_3_PRICE_TIER), new { @class = "form-control input-sm" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.MCCAFE_BISTRO_PRICE_TIER, "McCafe BISTRO price tier", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => Model.MCCAFE_BISTRO_PRICE_TIER, new SelectList(Model.McCafeBistroTier, "value", "text", Model.MCCAFE_BISTRO_PRICE_TIER), new { @class = "form-control input-sm" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.PROJECT_GOLD_PRICE_TIER, "Project Gold price tier", new { @class = "form-label " })
+                    @Html.DropDownListFor(m => Model.PROJECT_GOLD_PRICE_TIER, new SelectList(Model.ProjectGoldTier, "value", "text", Model.PROJECT_GOLD_PRICE_TIER), new { @class = "form-control input-sm" })
                 </div>
             </div>
-            <div class="col-lg-4">
-                <br /><br /><br />
-                <div>
-                    <h4 align="center"><strong>Business Extension</strong></h4>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="container-fluid">
+                <h4 align="center"><strong>Business Extension</strong></h4>
+
+                <div class="form-group">
+                    @{
+                        for (int i = 0; i < Model.BusinessExtList.Count(); i++)
+                        {
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => Model.BET[i])
+                                @Html.LabelFor(m => Model.BET[i], Model.BusinessExtList[i].text, new { @class = "form-label" })
+                                @Html.HiddenFor(m => Model.BusinessExtList[i].value)
+                            </div>
+                        }
+                    }
                 </div>
-                <div class="form-group" contenteditable="false">
-                    <div class="col-lg-offset-1">
-                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)24HRS</label>
-                    </div>
-                    <div class="col-lg-offset-1">
-                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)Mall</label>
-                    </div>
-                    <div class="col-lg-offset-1">
-                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)McVan</label>
-                    </div>
-                    <div class="col-lg-offset-1">
-                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)McDelivery</label>
-                    </div>
-                    <div class="col-lg-offset-1">
-                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)Drive Thru</label>
-                    </div>
-                    <div class="col-lg-offset-1">
-                        <label class="checkbox-inline form-label">@Html.CheckBoxFor(m => m.DUMMYb)Take Out Counter</label>
-                    </div>
-                </div><br /><br />
+
                 <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">Ownership</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label2 input-sm">Profit Center</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
+                    @Html.LabelFor(model => Model.PROFIT_CENTER, "Profit center", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => Model.PROFIT_CENTER, new SelectList(Model.ProfitCenter, "value", "text", Model.ProfitCenter[0].value), new { @class = "form-control input-sm" })
                 </div>
-            </div><br /><br /><br />
-            <div class="col-lg-4">
-                <div align="center">
-                    <h4><strong>Raw Item Profile</strong></h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.OWNERSHIP, "Ownership", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => Model.OWNERSHIP, new SelectList(Model.OwnershipList, "value", "text", Model.OwnershipList[0].value), new { @class = "form-control input-sm" })
                 </div>
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">Location</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">Region</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">Province</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">City</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">Paper/Plastic</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">Frozen/Fresh</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">Simplot/McCain</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label input-sm">McCornick/GSF</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div><br /><br />
-                <div class="form-group">
-                    <div>
-                        <div class="col-lg-4">
-                            <label class="form-label2 input-sm">Soft Serve/Vanilla Powder Mix</label>
-                        </div>
-                        <div class="col-lg-6">
-                            @Html.DropDownListFor(m => m.DUMMY, new SelectList(
-                            new List<Object>{
-                                new { value = "0" , text = "1"  }
-                            },
-                            "value",
-                            "text",
-                            "0"), new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => Model.DUMMY, "Fresh buns or Frozen buns", new { @class = "form-label" })
-                    @Html.DropDownListFor(m => Model.DUMMY, new SelectList(new List<Object> {
-                                new { value = "0" , text = ""  },
-                                new { value = "FRESHB" , text = "Fresh buns"  },
-                                new { value = "FROZENB" , text = "Frozen buns" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.DUMMY })
-                </div>
-            </div><br/>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div align="center">
+                <h4><strong>Raw Item Profile</strong></h4>
+            </div>
+
             <div class="form-group">
-                <div class="dropup">
-                    <button href="#" type="submit" class="btn btn-default" name="command" value="toPDF">Export to PDF</button>
-                    <button type="submit" class="btn btn-default" name="command" value="toExcel">Export as Spreadsheet</button>
-                </div>
+                @Html.LabelFor(model => Model.LOCATION, "Location", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.LOCATION, new SelectList(Model.LocationList, "value", "text", Model.LocationList[0].value), new { @class = "form-control input-sm" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.REGION, "Region", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.REGION, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "region", @Value = Model.REGION })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.PROVINCE, "Province", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.PROVINCE, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "province", @Value = Model.PROVINCE })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.CITY, "City", new { @class = "form-label col-md-3" })
+                @Html.DropDownListFor(m => Model.CITY, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "city", @Value = Model.CITY })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, "Soft serve or vanilla powder mix", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX, new SelectList(new List<Object>{
+                            new { value = "0" , text = ""  },
+                            new { value = "SOFTSERVE" , text = "Soft serve"  },
+                            new { value = "VANILLA" , text = "Vanilla powder mix" }}, "value", "text", Model.SOFT_SERVE_OR_VANILLA_POWDER_MIX), new { @class = "form-control input-sm store-attrib" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => Model.FRESH_OR_FROZEN, "Fresh or frozen", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.FRESH_OR_FROZEN, new SelectList(new List<Object>{
+                            new { value = "0" , text = ""  },
+                            new { value = "FRESH" , text = "Fresh"  },
+                            new { value = "FROZEN" , text = "Frozen" } }, "value", "text", Model.FRESH_OR_FROZEN), new { @class = "form-control input-sm store-attrib" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => Model.SIMPLOT_OR_MCCAIN, "Simplot or McCain", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.SIMPLOT_OR_MCCAIN, new SelectList(new List<Object>{
+                            new { value = "0" , text = ""  },
+                            new { value = "SIMPLOT" , text = "Simplot"  },
+                            new { value = "MCCAIN" , text = "McCain" } }, "value", "text", Model.SIMPLOT_OR_MCCAIN), new { @class = "form-control input-sm store-attrib" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => Model.PAPER_OR_PLASTIC, "Paper or plastic", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.PAPER_OR_PLASTIC, new SelectList(new List<Object>{
+                            new { value = "0" , text = ""  },
+                            new { value = "PAPER" , text = "Paper"  },
+                            new { value = "PLASTIC" , text = "Plastic" }}, "value", "text", Model.PAPER_OR_PLASTIC), new { @class = "form-control input-sm store-attrib" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => Model.MCCORMICK_OR_GSF, "McCormick or GSF", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.MCCORMICK_OR_GSF, new SelectList(new List<Object> {
+                            new { value = "0" , text = ""  },
+                            new { value = "MCORMICK" , text = "McCormick"  },
+                            new { value = "GSF" , text = "GSF" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.MCCORMICK_OR_GSF })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => Model.FRESHB_OR_FROZENB, "Fresh buns or Frozen buns", new { @class = "form-label" })
+                @Html.DropDownListFor(m => Model.FRESHB_OR_FROZENB, new SelectList(new List<Object> {
+                            new { value = "0" , text = ""  },
+                            new { value = "FRESHB" , text = "Fresh buns"  },
+                            new { value = "FROZENB" , text = "Frozen buns" }}, "value", "text", "0"), new { @class = "form-control input-sm store-attrib", @Value = Model.FRESHB_OR_FROZENB })
             </div>
         </div>
+        <hr />
+        <div class="form-inline bottom float" style="right:50px">
+            <button href="#" type="submit" class="btn btn-default" name="command" value="toPDF">Export to PDF</button>
+            <button type="submit" class="btn btn-default" name="command" value="toExcel">Export as Spreadsheet</button>
+        </div>
+    </div>
+}
+
+<script>
+    $(window).ready(function() {
+        // Store Attribute Select
+            setStoreAttribute();
+        $(".store-attrib").click(function () {
+            $(".store-attrib").not(this).each(function () {
+                $(this).attr("value", "0");
+                $(this).val("0");
+                $(".store-attrib option[value='0']").attr("selected", "selected");
+            });
+            setStoreAttribute();
+        });
+    })
+    /* Sets the color of the dropdown 
+     * depending on the selected value
+     * to have a 'disabled' look
+     */
+    function setStoreAttribute() {
+        $(".store-attrib").each(function () {
+            if ($(this).val() == "0") {
+                $(this).css("background-color", "#eee");
+            } else {
+                $(this).css("background-color", "white");
+            }
+        });
     }
-</div>
+</script>

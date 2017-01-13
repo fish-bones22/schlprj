@@ -1,4 +1,4 @@
-﻿@model CFMMCD.Models.ViewModel.MenuItemMasterViewModel
+﻿@model CFMMCD.Models.ViewModel.MenuItemPriceUpdateViewModel
 @using CFMMCD.Models.ViewModel
 
 @{
@@ -48,27 +48,28 @@
                     </thead>
                     <tbody>
                         @{ 
-                            for (int i = 0; i < Model.MenuItemPriceList.Count(); i++)
+                            for (int i = 0; i < Model.TierUpdateList.Count(); i++)
                             {
                                 string activeOrInactive = "active";
-                                if (Model.MenuItemPriceList[i].MIMSTA.Equals("1"))
+                                if (Model.TierUpdateList[i].MIMSTA.Equals("1"))
                                 {
                                     activeOrInactive = "inactive";
                                 }
-                                <tr class="@Model.MenuItemPriceList[i].MIMMIC @Model.MenuItemPriceList[i].MIMNAM @activeOrInactive tr-collapse">
+                                <tr class="@Model.TierUpdateList[i].MIMMIC @Model.TierUpdateList[i].MIMNAM @activeOrInactive tr-collapse">
                                     <td></td>
                                     <td>
-                                        @Html.LabelFor(m => Model.MenuItemPriceList[i].MIMMIC, Model.MenuItemPriceList[i].MIMMIC, new { @class = "form-label" })
-                                        @Html.HiddenFor(m => Model.MenuItemPriceList[i].MIMMIC)
+                                        @Html.LabelFor(m => Model.TierUpdateList[i].MIMSTA, Model.TierUpdateList[i].MIMMIC, new { @class = "form-label" })
+                                        @Html.HiddenFor(m => Model.TierUpdateList[i].MIMMIC)
+                                        @Html.HiddenFor(m => Model.TierUpdateList[i].MIMNAM)
                                     </td>
-                                    <td>@Html.LabelFor(m => Model.MenuItemPriceList[i].MIMNAM, Model.MenuItemPriceList[i].MIMNAM, new { @class = "form-label" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].OLDPRA, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].NEWPRA, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].OLDPRB, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].NEWPRB, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].OLDPRC, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].NEWPRC, new { @class = "form-control", @type = "number" })</td>
-                                    <td>@Html.TextBoxFor(m => Model.MenuItemPriceList[i].EffectiveDate, new { @class = "form-control", @type="date" })</td>
+                                    <td>@Html.LabelFor(m => Model.TierUpdateList[i].MIMNAM, Model.TierUpdateList[i].MIMNAM, new { @class = "form-label" })</td>
+                                    <td>@Html.DisplayFor(m => Model.TierUpdateList[i].TierAOld, new { @class = "form-label" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.TierUpdateList[i].TierANew, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.DisplayFor(m => Model.TierUpdateList[i].TierBOld, new { @class = "form-label" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.TierUpdateList[i].TierBNew, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.DisplayFor(m => Model.TierUpdateList[i].TierCOld, new { @class = "form-label" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.TierUpdateList[i].TierCNew, new { @class = "form-control", @type = "number" })</td>
+                                    <td>@Html.TextBoxFor(m => Model.TierUpdateList[i].EffectiveDate, new { @class = "form-control", @type="date" })</td>
                                 </tr>
                             }
                         }
