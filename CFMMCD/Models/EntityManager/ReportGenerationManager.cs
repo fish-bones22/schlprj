@@ -471,7 +471,7 @@ namespace CFMMCD.Models.EntityManager
                     HttpContext.Current.Response.Clear();
                     HttpContext.Current.Response.Buffer = true;
                     HttpContext.Current.Response.Charset = "";
-                    string filename = "attachment;filename=Report" + DateTime.Now.ToString("yyyyMMddHH:mm");
+                    string filename = "attachment;filename=Report" + DateTime.Now.ToString("yyyyMMddHHmm") + ".xml";
                     HttpContext.Current.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                     HttpContext.Current.Response.AddHeader("content-disposition", filename);
                     using (MemoryStream MyMemoryStream = new MemoryStream())
@@ -491,7 +491,7 @@ namespace CFMMCD.Models.EntityManager
             {
                 DataSet ds = PrepareDataTable(MIMRow, RECRow, RIMRow, SPRow);
                 List<GridView> GVList = new List<GridView>();
-                string filename = "attachment;filename=Report" + DateTime.Now.ToString("yyyyMMddHH:mm");
+                string filename = "attachment;filename=Report" + DateTime.Now.ToString("yyyyMMddHHmm") + ".pdf";
                 HttpContext.Current.Response.ContentType = "application/pdf";
                 HttpContext.Current.Response.AddHeader("content-disposition", filename);
                 HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
