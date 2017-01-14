@@ -139,6 +139,13 @@ namespace CFMMCD.Sessions
                     Action = "Index",
                     Controller = "TextGenerator"
                 };
+            else if (key.Equals("REG"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Report generation",
+                    Action = "Index",
+                    Controller = "ReportGeneration"
+                };
             else if (key.Equals("VEM"))
                 return new CurrentPageSession.LinkString
                 {

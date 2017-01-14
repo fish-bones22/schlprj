@@ -22,7 +22,7 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.BUE) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("BEX", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("BUE", "HOME", "LOG");
 
             // Get all data stored in DB table
             BusinessExtensionManager BEXManager = new BusinessExtensionManager();

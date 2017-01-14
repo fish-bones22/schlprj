@@ -392,8 +392,8 @@
             </div>
             <hr />
             <div class="container-fluid text-center">
-                <div class="col-lg-4">Raw item code</div>
-                <div class="col-lg-8">Raw item name</div>
+                <div class="col-lg-4"><strong>Raw item code</strong></div>
+                <div class="col-lg-8"><strong>Raw item name</strong></div>
             </div>
         </div>
         @using (Html.BeginForm())
@@ -407,10 +407,10 @@
                         ActiveInactive = "inactive";
                     }
                     <button type="submit" class="modal-item-select tr-collapse @Model.RawItemMasterList[i].RIMRIC @Model.RawItemMasterList[i].RIMRID @ActiveInactive" name="value" value=@Model.RawItemMasterList[i].RIMRIC>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             @Model.RawItemMasterList[i].RIMRIC
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-8">
                             @Model.RawItemMasterList[i].RIMRID
                         </div>
                     </button>
@@ -432,18 +432,18 @@
         </div>
         <hr />
         <div class="container-fluid text-center">
-            <div class="col-lg-4">Raw item code</div>
-            <div class="col-lg-8">Raw item name</div>
+            <div class="col-lg-4"><strong>Vendor number</strong></div>
+            <div class="col-lg-8"><strong>Vendor name</strong></div>
         </div>
         <div class="modal-body">
             @for (int i = 0; i < Model.VendorList.Count(); i++)
             {
                 string ActiveInactive = "active";
                 <button type="button" class="modal-item-select tr-collapse @Model.VendorList[i].value @Model.VendorList[i].text @ActiveInactive" name="value" value="@Model.VendorList[i].value @Model.VendorList[i].text" data-dismiss="modal">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         @Model.VendorList[i].value
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-8">
                         @Model.VendorList[i].text
                     </div>
                 </button>

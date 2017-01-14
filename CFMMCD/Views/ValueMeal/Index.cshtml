@@ -135,8 +135,8 @@
             </div>
             <hr />
             <div class="container-fluid text-center">
-                <div class="col-lg-4">Value meal number</div>
-                <div class="col-lg-8">Value meal name</div>
+                <div class="col-lg-4"><strong>Value meal number</strong></div>
+                <div class="col-lg-8"><strong>Value meal name</strong></div>
             </div>
         </div>
         @using (Html.BeginForm())
@@ -146,10 +146,10 @@
                 {
                     string ActiveInactive = "active";
                     <button type="submit" class="modal-item-select tr-collapse @Model.ValueMealList[i].VMLNUM @Model.ValueMealList[i].VMLNAM @ActiveInactive" name="value" value=@Model.ValueMealList[i].VMLID >
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             @Model.ValueMealList[i].VMLNUM
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-8">
                             @Model.ValueMealList[i].VMLNAM
                         </div>
                     </button>
@@ -170,8 +170,8 @@
         </div>
         <hr />
         <div class="container-fluid text-center">
-            <div class="col-lg-4">Menu item code</div>
-            <div class="col-lg-8">Menu item name</div>
+            <div class="col-lg-4"><strong>Menu item code</strong></div>
+            <div class="col-lg-8"><strong>Menu item name</strong></div>
         </div>
         <div class="modal-body">
             @for (int i = 0; i < Model.AllMenuItems.Count(); i++)
@@ -182,10 +182,10 @@
                     ActiveInactive = "inactive";
                 }
                 <button type="button" class="modal-item-select tr-collapse @Model.AllMenuItems[i].RIRMIC @Model.AllMenuItems[i].MIMDSC @ActiveInactive" name="value" value=@Model.AllMenuItems[i].RIRMIC data-dismiss="modal">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         @Model.AllMenuItems[i].RIRMIC
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-8">
                         @Model.AllMenuItems[i].MIMDSC
                     </div>
                 </button>

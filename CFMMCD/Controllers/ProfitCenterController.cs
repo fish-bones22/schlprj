@@ -19,7 +19,7 @@ namespace CFMMCD.Controllers
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             // LOC -> ProfitCenter
             // Refer to UserAccessSession 
-            if (UASession == null || !UASession.LOC) return RedirectToAction("Login", "Account");
+            if (UASession == null || !UASession.PRC) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
             Session["CurrentPage"] = new CurrentPageSession("PRC", "HOME", "LOG");

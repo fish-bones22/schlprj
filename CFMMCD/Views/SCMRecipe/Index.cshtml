@@ -108,7 +108,7 @@
             <div class="form-inline bottom float" style="right:50px">
                 <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
             </div>
-                            }
+        }
     </div>
 </div>
 
@@ -123,8 +123,8 @@
             </div>
             <hr />
             <div class="container-fluid text-center">
-                <div class="col-lg-4">Menu item code</div>
-                <div class="col-lg-8">Menu item name</div>
+                <div class="col-lg-4"><strong>Menu item code</strong></div>
+                <div class="col-lg-8"><strong>Menu item name</strong></div>
             </div>
         </div>
         <div class="modal-body">
@@ -136,10 +136,10 @@
                     ActiveInactive = "inactive";
                 }
                 <button type="button" class="modal-item-select tr-collapse @Model.AllRawItems[i].RIMRID @Model.AllRawItems[i].RIMRIC @ActiveInactive" name="value" value=@Model.AllRawItems[i].RIMRIC data-dismiss="modal">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         @Model.AllRawItems[i].RIMRIC
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-8">
                         @Model.AllRawItems[i].RIMRID
                     </div>
                 </button>

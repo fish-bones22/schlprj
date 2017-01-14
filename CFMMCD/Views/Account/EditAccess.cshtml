@@ -174,7 +174,7 @@
 
             <hr />
             <div class="container-fluid text-center">
-                <div class="col-lg-4">Username</div>
+                <div class="col-lg-4"><strong>Username</strong></div>
             </div>
         </div>
         @using (Html.BeginForm("EditAccess", "Account", FormMethod.Post, new { }))
@@ -185,7 +185,7 @@
                 {
                     string ActiveInactive = "active";
                     <button type="submit" class="modal-item-select tr-collapse @Model.AccountList[i] @ActiveInactive" name="value" value=@Model.AccountList[i] >
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             @Model.AccountList[i]
                         </div>
                     </button>

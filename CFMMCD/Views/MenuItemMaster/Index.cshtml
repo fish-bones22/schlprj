@@ -324,8 +324,8 @@
             </div>
             <hr />
             <div class="container-fluid text-center">
-                <div class="col-lg-4">Menu item code</div>
-                <div class="col-lg-8">Menu item name</div>
+                <div class="col-lg-4"><strong>Menu item code</strong></div>
+                <div class="col-lg-8"><strong>Menu item name</strong></div>
             </div>
         </div>
         @using (Html.BeginForm())
@@ -339,10 +339,10 @@
                         ActiveInactive = "inactive";
                     }
                     <button type="submit" class="modal-item-select tr-collapse @Model.MenuItemMasterList[i].RIRMIC @Model.MenuItemMasterList[i].MIMDSC @ActiveInactive" name="value" value=@Model.MenuItemMasterList[i].RIRMIC>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             @Model.MenuItemMasterList[i].RIRMIC
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-8">
                             @Model.MenuItemMasterList[i].MIMDSC
                         </div>
                     </button>

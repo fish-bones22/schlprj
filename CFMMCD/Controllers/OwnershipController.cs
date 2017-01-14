@@ -22,7 +22,7 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.OWN) return RedirectToAction("Login", "Account");
 
             user = (UserSession)Session["User"];
-            Session["CurrentPage"] = new CurrentPageSession("OSP", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("OWN", "HOME", "LOG");
 
             // Get all data stored in DB table
             OwnershipManager OSPManager = new OwnershipManager();
