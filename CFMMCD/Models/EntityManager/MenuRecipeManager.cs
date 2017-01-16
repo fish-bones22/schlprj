@@ -9,7 +9,7 @@ namespace CFMMCD.Models.EntityManager
 {
     public class MenuRecipeManager
     {
-        public List<MenuItem> SearchMenuItem( string SearchItem)
+        public static List<MenuItem> SearchMenuItem( string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -46,7 +46,7 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public MenuRecipeViewModel SearchMenuRecipe(string MenuItemCode)
+        public static MenuRecipeViewModel SearchMenuRecipe(string MenuItemCode)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -83,7 +83,7 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public bool UpdateMenuItem(MenuRecipeViewModel MRViewModel, string user)
+        public static bool UpdateMenuItem(MenuRecipeViewModel MRViewModel, string user)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {

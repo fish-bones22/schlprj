@@ -471,7 +471,7 @@ namespace CFMMCD.Models.EntityManager
                     HttpContext.Current.Response.Clear();
                     HttpContext.Current.Response.Buffer = true;
                     HttpContext.Current.Response.Charset = "";
-                    string filename = "attachment;filename=Report" + DateTime.Now.ToString("yyyyMMddHHmm") + ".xml";
+                    string filename = "attachment;filename=Report" + DateTime.Now.ToString("yyyyMMddHHmm") + ".xlsx";
                     HttpContext.Current.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                     HttpContext.Current.Response.AddHeader("content-disposition", filename);
                     using (MemoryStream MyMemoryStream = new MemoryStream())

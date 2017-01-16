@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CFMMCDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="CFMMCDEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
     <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
     <EntitySet Name="Breakfast_Price_Tier" EntityType="CFMMCDModel.Breakfast_Price_Tier" />
     <EntitySet Name="BUSINESS_EXT" EntityType="CFMMCDModel.BUSINESS_EXT" />
@@ -36,18 +35,8 @@
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
     <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
+    <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
   </EntityContainer>
-  <EntityType Name="Account">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="AdminStatus" Type="Boolean" Nullable="false" />
-    <Property Name="TimeLastLogged" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="Audit_Log">
     <Key>
       <PropertyRef Name="Id" />
@@ -485,5 +474,16 @@
     <Property Name="MIMNPD" Type="Double" />
     <Property Name="MIMNNP" Type="Double" />
     <Property Name="MIMPND" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AdminStatus" Type="Boolean" Nullable="false" />
+    <Property Name="TimeLastLogged" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

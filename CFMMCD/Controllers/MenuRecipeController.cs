@@ -20,32 +20,29 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("MER", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
-            MenuRecipeManager MRManager = new MenuRecipeManager();
             MenuRecipeViewModel MRViewModel = new MenuRecipeViewModel();
-            MRViewModel.MenuItemList = MRManager.SearchMenuItem("ALL");
-            MRViewModel.RawItemList = new RawItemMasterManager().GetRawItems("ALL");
+            MRViewModel.MenuItemList = MenuRecipeManager.SearchMenuItem("ALL");
+            MRViewModel.RawItemList = RawItemMasterManager.GetRawItems("ALL");
             return View(MRViewModel);
         }
         [HttpPost]
         public ActionResult Index(MenuRecipeViewModel MRViewModel, string value)
         {
-            MenuRecipeManager MRManager = new MenuRecipeManager();
-            MRViewModel = new MenuRecipeManager().SearchMenuRecipe(value);
-            MRViewModel.MenuItemList = MRManager.SearchMenuItem("ALL");
-            MRViewModel.RawItemList = new RawItemMasterManager().GetRawItems("ALL");
+            MRViewModel = MenuRecipeManager.SearchMenuRecipe(value);
+            MRViewModel.MenuItemList = MenuRecipeManager.SearchMenuItem("ALL");
+            MRViewModel.RawItemList = RawItemMasterManager.GetRawItems("ALL");
             return View(MRViewModel);
         }
 
         public ActionResult UpdateDelete(MenuRecipeViewModel MRViewModel, string command)
         {
-            MenuRecipeManager MRManager = new MenuRecipeManager();
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
 
             if (command == "Save")
             {
-                result = MRManager.UpdateMenuItem(MRViewModel, user.Username);
+                result = MenuRecipeManager.UpdateMenuItem(MRViewModel, user.Username);
                 PageAction = "Update";
             }
             if (result)

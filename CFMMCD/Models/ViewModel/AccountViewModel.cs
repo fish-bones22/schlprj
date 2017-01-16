@@ -45,6 +45,8 @@ namespace CFMMCD.Models.ViewModel
 
         public bool EditMode { get; set; }
         public string OldUsername { get; set; }
+        public string AccountId { get; set; }
         public List<string> AccountList { get; set; }
+        public List<string> AccountIdList { get; set; }
     }
 }

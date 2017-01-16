@@ -6,7 +6,7 @@
     </Key>
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="UserAccess" Type="varchar(max)" Nullable="false" />
     <Property Name="AdminStatus" Type="bit" Nullable="false" />
     <Property Name="TimeLastLogged" Type="datetime" />

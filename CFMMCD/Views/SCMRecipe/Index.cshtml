@@ -62,7 +62,7 @@
                                         <td></td>
                                         @Html.HiddenFor(m => Model.RawItemList[i].CSMID)
                                         <td> 
-                                            @Html.TextBoxFor(m => Model.RawItemList[i].RIMRIC, new { @class = "tb-select form-control input-sm", @type = "number", @maxlength = "99999" }) 
+                                            @Html.TextBoxFor(m => Model.RawItemList[i].RIMRIC, new { @class = "tb-select form-control input-sm", @type = "number", @max = "99999" }) 
                                             @Html.HiddenFor(m => Model.RawItemList[i].PreviousRIMRIC)
                                         </td>
                                         <td> @Html.DisplayFor(m => Model.RawItemList[i].RIMRID, new { @class = "form-control input-sm" }) </td>
@@ -81,7 +81,7 @@
                             <!--Empty row-->
                             <tr>
                                 <td></td>
-                                <td> @Html.TextBoxFor(m => Model.RIMRIC[0], new { @class = "tb-select form-control input-sm", @type = "number", @maxlength = "5" }) </td>
+                                <td> @Html.TextBoxFor(m => Model.RIMRIC[0], new { @class = "tb-select form-control input-sm", @type = "number", @max = "99999" }) </td>
                                 <td> @Html.DisplayFor(m => Model.RIMRID[0], new { @class = "form-control input-sm" }) </td>
                                 <td> @Html.TextBoxFor(m => Model.CSMSFQ[0], new { @class = "form-control input-sm" }) </td>
                                 <td> @Html.DisplayFor(m => Model.RIMCPR[0], new { @class = "form-control input-sm" }) </td>
@@ -152,7 +152,7 @@
     var index = 0;
     var newRow = '<tr>'+
                     '<td></td>'+
-                    '<td> <input class="tb-select form-control input-sm" id="RIMRIC_' + (++index) + '_" name="RIMRIC[' + index + ']" type="text" value="" /> </td>' +
+                    '<td> <input class="tb-select form-control input-sm" id="RIMRIC_' + (++index) + '_" name="RIMRIC[' + index + ']" type="number" max="99999" value="" /> </td>' +
                     '<td>  </td>'+
                     '<td> <input class="form-control input-sm" id="CSMSFQ_'+index+'_" name="CSMSFQ['+index+']" type="text" value="" /> </td>'+
                     '<td>  </td>'+

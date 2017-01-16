@@ -28,7 +28,7 @@
     </div>
     <hr />
 	<div class="container-fluid">
-		@using (Html.BeginForm("UpdateDelete", "RawItemMaster", FormMethod.Post, new { }))
+		@using (Html.BeginForm("UpdateDelete", "RawItemMaster", FormMethod.Post, new { @id = "UpdateDelete" }))
 		{
 			<div class="row">
 				<!-- Row 1 Col 1-->
@@ -372,9 +372,10 @@
 					</div>
 				</div>
 			</div>
-			
+            <!--Hiddens-->
+            @Html.HiddenFor(m => Model.SwitchItem)
 			<div class="form-inline bottom float" style="right:50px">
-				<button type="submit" name="command" value="Switch" class="btn btn-default">Switch</button>
+				<button type="button" id="Switch" class="btn btn-default">Switch</button>
 				<button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
 				<button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
 			</div>
@@ -382,6 +383,8 @@
 	</div>
 </div>
 
+
+<!-- Main Search -->
 <div class="modal fade" id="search-result-modal" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -420,8 +423,8 @@
     </div>
 </div>
 
-<!--Search Vendor Item Modal-->
-<div class="modal fade" id="search-item-modal" role="dialog">
+<!--Search Vendor Modal-->
+<div class="modal fade" id="search-item-modal-vendor" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
             <button class="close" data-dismiss="modal">&times;</button>
@@ -439,7 +442,7 @@
             @for (int i = 0; i < Model.VendorList.Count(); i++)
             {
                 string ActiveInactive = "active";
-                <button type="button" class="modal-item-select tr-collapse @Model.VendorList[i].value @Model.VendorList[i].text @ActiveInactive" name="value" value="@Model.VendorList[i].value @Model.VendorList[i].text" data-dismiss="modal">
+                <button type="button" class="modal-item-select btn-select-vendor tr-collapse @Model.VendorList[i].value @Model.VendorList[i].text @ActiveInactive" name="value" value="@Model.VendorList[i].value @Model.VendorList[i].text" data-dismiss="modal">
                     <div class="col-lg-4">
                         @Model.VendorList[i].value
                     </div>
@@ -451,6 +454,39 @@
         </div>
     </div>
 </div>
+
+<!--Search Raw Item Modal-->
+<div class="modal fade" id="search-item-modal-raw" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Select Raw item</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search raw item" autofocus />
+            </div>
+        </div>
+        <hr />
+        <div class="container-fluid text-center">
+            <div class="col-lg-4"><strong>Raw item code</strong></div>
+            <div class="col-lg-8"><strong>Raw item name</strong></div>
+        </div>
+        <div class="modal-body">
+            @for (int i = 0; i < Model.RawItemMasterList.Count(); i++)
+            {
+                string ActiveInactive = "active";
+                <button type="button" class="modal-item-select btn-select-raw tr-collapse @Model.RawItemMasterList[i].RIMRIC @Model.RawItemMasterList[i].RIMRID @ActiveInactive" name="value" value="@Model.RawItemMasterList[i].RIMRIC" data-dismiss="modal">
+                    <div class="col-lg-4">
+                        @Model.RawItemMasterList[i].RIMRIC
+                    </div>
+                    <div class="col-lg-8">
+                        @Model.RawItemMasterList[i].RIMRID
+                    </div>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
 
 <script>
     // Region, Province, and City Dropdown Handling
@@ -512,14 +548,24 @@
             setPrimaryVendor();
         });
 
-
+        // Toggle vendor modal
         $("#SearchVendor").click(function () {
-            $("#search-item-modal").modal("show");
+            $("#search-item-modal-vendor").modal("show");
         });
 
-        $(".modal-item-select").click(function() {
+        // Toggle raw item modal for switch
+        $("#Switch").click(function () {
+            $("#search-item-modal-raw").modal("show");
+        });
+
+        $(".btn-select-vendor").click(function() {
             onItemSelected($(this).val().trim());
             getSearchItem();
+        });
+
+        $(".btn-select-raw").click(function () {
+            $("#SwitchItem").val($(this).val().trim());
+            $("#UpdateDelete").submit();
         });
 
         $(".clear-search").click(function () {
@@ -611,6 +657,7 @@
 	function onItemSelected(value) {
 	    $("#SearchVendor").val(value);
 	}
+
 </script>
 
 

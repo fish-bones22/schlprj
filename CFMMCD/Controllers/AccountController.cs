@@ -40,11 +40,8 @@ namespace CFMMCD.Controllers
             if (ModelState.IsValid)
             {
                 AccountManager accMan = new AccountManager();
-                string password = accMan.GetPassword(credentials.Username);
 
-                if (string.IsNullOrEmpty(password))
-                    ModelState.AddModelError("", "The username supplied is not valid");
-                else if (credentials.Password.Equals(password))
+                if (accMan.CheckPassword(credentials.Username, credentials.Password))
                 {
                     FormsAuthentication.SetAuthCookie(credentials.Username, false);
                     // Set User session
@@ -58,8 +55,7 @@ namespace CFMMCD.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 else
-                    ModelState.AddModelError("", "The password supplied is incorrect");
-
+                    ModelState.AddModelError("", "The password or username supplied is incorrect");
             }
             return View();
         }

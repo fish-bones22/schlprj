@@ -121,7 +121,6 @@ C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.W
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Webpages.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Webpages.Razor.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\ClosedXML.pdb
-C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\ClosedXML.xml
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\EntityFramework.xml
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\EntityFramework.SqlServer.xml
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\itextsharp.xml

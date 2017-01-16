@@ -24,35 +24,37 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("RIM", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
-            RawItemMasterManager RIMManager = new RawItemMasterManager();
             RawItemMasterViewModel RIMViewModel = new RawItemMasterViewModel();
-            RIMViewModel.RawItemMasterList = RIMManager.GetRawItems("ALL");
+            RIMViewModel.RawItemMasterList = RawItemMasterManager.GetRawItems("ALL");
             return View(RIMViewModel);
         }
         [HttpPost]
         public ActionResult Index(RawItemMasterViewModel RIMViewModel, string value)
         {   // Search
-            RawItemMasterManager RIMManager = new RawItemMasterManager();
-            RIMViewModel = RIMManager.SearchSingleRawItem(value);
-            RIMViewModel.RawItemMasterList = RIMManager.GetRawItems("ALL");
+            RIMViewModel = RawItemMasterManager.SearchSingleRawItem(value);
+            RIMViewModel.RawItemMasterList = RawItemMasterManager.GetRawItems("ALL");
             return View(RIMViewModel);
         }
         [HttpPost]
         public ActionResult UpdateDelete(RawItemMasterViewModel RIMViewModel, string command)
         {
-            RawItemMasterManager RIMManager = new RawItemMasterManager();
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
 
+            if (command == null)
+            {
+                result = RawItemMasterManager.SwitchRawItem(RIMViewModel.RIMRIC, RIMViewModel.SwitchItem, user.Username);
+                PageAction = "Switch";
+            }
             if (command == "Save")
             {
-                result = RIMManager.UpdateRawItem(RIMViewModel, user.Username);
+                result = RawItemMasterManager.UpdateRawItem(RIMViewModel, user.Username);
                 PageAction = "Update";
             }
             else if (command == "Delete")
             {
-                result = RIMManager.DeleteRawItem(RIMViewModel);
+                result = RawItemMasterManager.DeleteRawItem(RIMViewModel);
                 PageAction = "Delete";
             }
             if (result)

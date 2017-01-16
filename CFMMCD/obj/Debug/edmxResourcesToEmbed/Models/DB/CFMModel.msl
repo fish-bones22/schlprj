@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
-    <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="CFMMCDModel.Account">
-        <MappingFragment StoreEntitySet="Accounts">
-          <ScalarProperty Name="TimeLastLogged" ColumnName="TimeLastLogged" />
-          <ScalarProperty Name="AdminStatus" ColumnName="AdminStatus" />
-          <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Audit_Log">
       <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
         <MappingFragment StoreEntitySet="Audit_Log">
@@ -464,6 +452,18 @@
           <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
           <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="CFMMCDModel.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="TimeLastLogged" ColumnName="TimeLastLogged" />
+          <ScalarProperty Name="AdminStatus" ColumnName="AdminStatus" />
+          <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

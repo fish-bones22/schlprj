@@ -59,6 +59,17 @@ namespace CFMMCD.Controllers
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
+            if (Request.Files.Count > 0)
+            {
+                HttpPostedFileBase file = Request.Files["FileUploaded"];
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                {
+                    string fileName = file.FileName;
+                    // store the file inside ~/App_Data/uploads folder
+                    string path = "~/App_Data/uploads/" + fileName;
+                    file.SaveAs(Server.MapPath(path));
+                }
+            }
             if (command == "Save")
             {
                 result = MIMManager.UpdatePriceTier(MIPViewModel.TierUpdateList);

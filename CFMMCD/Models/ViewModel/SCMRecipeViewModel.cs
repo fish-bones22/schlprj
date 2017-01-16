@@ -25,7 +25,7 @@ namespace CFMMCD.Models.ViewModel
             StoAtt.Add("");
             CSMID.Add("");
             RawItemList = new List<SCMRawItem>();
-            AllRawItems = new RawItemMasterManager().GetRawItems("ALL"); //*
+            AllRawItems = RawItemMasterManager.GetRawItems("ALL"); //*
         }
         public string SearchItem { get; set; }
         public string CSMDES { get; set; }

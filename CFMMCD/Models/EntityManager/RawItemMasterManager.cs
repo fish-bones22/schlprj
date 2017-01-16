@@ -9,7 +9,7 @@ namespace CFMMCD.Models.EntityManager
 {
     public class RawItemMasterManager
     {
-        public bool UpdateRawItem(RawItemMasterViewModel RIMViewModel, string user)
+        public static bool UpdateRawItem(RawItemMasterViewModel RIMViewModel, string user)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -125,7 +125,7 @@ namespace CFMMCD.Models.EntityManager
                 int i = 0;
                 foreach (var vendor in RIMViewModel.VendorList)
                 {
-                    // If previous previous state is true and current state is false, perform deletion of vendor entry
+                    // If previous state is true and current state is false, perform deletion of vendor entry
                     if (RIMViewModel.PreviousVendorsSelectedList[i] && !RIMViewModel.VendorsSelectedList[i])
                     {
                         if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RIMViewModel.RIMRIC + vendor.value)).Any())
@@ -194,7 +194,7 @@ namespace CFMMCD.Models.EntityManager
                
             }
         }
-        public bool DeleteRawItem(RawItemMasterViewModel RIMViewModel)
+        public static bool DeleteRawItem(RawItemMasterViewModel RIMViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -246,7 +246,7 @@ namespace CFMMCD.Models.EntityManager
          * 
          * Returns List<ViewModel> if true, otherwise returns null
          */
-        public List<RawItem> GetRawItems(string SearchItem)
+        public static List<RawItem> GetRawItems(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -274,7 +274,7 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public RawItemMasterViewModel SearchSingleRawItem(string SearchItem)
+        public static RawItemMasterViewModel SearchSingleRawItem(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -319,12 +319,12 @@ namespace CFMMCD.Models.EntityManager
                 if ((rim.Store != null) && rim.Store.Equals("ALL"))
                 {
                     vm.SelectAllCb = true;
-                    vm.StoreSelected = "";
                 }
                 if ((rim.Except_Store != null) && !(rim.Except_Store.Equals("")))
                 {
                     vm.SelectExceptCb = true;
                     vm.SelectAllCb = false;
+                    vm.StoreSelected = rim.Except_Store;
                 }
                 // Store attributes
                 if (rim.Store_Attrib != null)
@@ -376,6 +376,111 @@ namespace CFMMCD.Models.EntityManager
                 return vm;
             }
            
+        }
+
+        public static bool SwitchRawItem (string rawItem, string switchItem, string user)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                RawItemMasterViewModel RIMViewModel;
+                RawItemMasterViewModel SwRIMViewModel;
+                List<MenuRecipeViewModel> RIRViewModel = new List<MenuRecipeViewModel>();
+                List<MenuRecipeViewModel> SwRIRViewModel = new List<MenuRecipeViewModel>();
+                string RIMRIC = "";
+                string RIMRID = "";
+                bool result = false;
+
+                // Switch Raw item
+                if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(rawItem)).Any())
+                {
+                    RIMViewModel = SearchSingleRawItem(rawItem);
+                    RIMRIC = rawItem;
+                    db.INVRIMP0.RemoveRange(db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(rawItem)));
+                }
+                else return false;
+                if (db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(switchItem)).Any())
+                {
+                    SwRIMViewModel = SearchSingleRawItem(switchItem);
+                    RIMRID = db.INVRIMP0.SingleOrDefault(o => o.RIMRIC.ToString().Equals(switchItem)).RIMRID;
+                    db.INVRIMP0.RemoveRange(db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(switchItem)));
+                }
+                else return false;
+
+                // Switch Vendor
+                if (db.RIM_VEM_Lookup.Where(o => o.RIMRIC.ToString().Equals(rawItem)).Any())
+                {
+                    List<RIM_VEM_Lookup> RVLRow = db.RIM_VEM_Lookup.Where(o => o.RIMRIC.ToString().Equals(rawItem)).ToList();
+                    db.RIM_VEM_Lookup.RemoveRange(RVLRow);
+                }
+
+                if (db.RIM_VEM_Lookup.Where(o => o.RIMRIC.ToString().Equals(switchItem)).Any())
+                {
+                    List<RIM_VEM_Lookup> RVLRow = db.RIM_VEM_Lookup.Where(o => o.RIMRIC.ToString().Equals(switchItem)).ToList();
+                    db.RIM_VEM_Lookup.RemoveRange(RVLRow);
+                }
+
+                // Switch Recipe
+                if (db.INVRIRP0.Where(o => o.RIRRIC.ToString().Equals(rawItem)).Any())
+                {
+                    List<INVRIRP0> RIRRow = db.INVRIRP0.Where(o => o.RIRRIC.ToString().Equals(rawItem)).ToList();
+                    for (int i = 0; i < RIRRow.Count(); i++)
+                    {
+                        RIRViewModel.Add(MenuRecipeManager.SearchMenuRecipe(RIRRow[i].RIRMIC.ToString()));
+                    }
+                    db.INVRIRP0.RemoveRange(RIRRow);
+                }
+                if (db.INVRIRP0.Where(o => o.RIRRIC.ToString().Equals(switchItem)).Any())
+                {
+                    List<INVRIRP0> RIRRow = db.INVRIRP0.Where(o => o.RIRRIC.ToString().Equals(switchItem)).ToList();
+                    for (int i = 0; i < RIRRow.Count(); i++)
+                    {
+                        SwRIRViewModel.Add(MenuRecipeManager.SearchMenuRecipe(RIRRow[i].RIRMIC.ToString()));
+                        foreach (var v in SwRIRViewModel[i].MenuRecipeList)
+                        {
+                            v.RIRRIC = RIMRIC;
+                            v.RIMRID = SwRIRViewModel[i].RIRMIC + v.RIRRIC;
+                            v.PreviousRIRRIC = RIMRIC;
+                        }
+                        db.INVRIRP0.Remove(RIRRow[i]);
+                    }
+                }
+
+                try
+                {
+                    db.SaveChanges();
+                    SwRIMViewModel.RIMRIC = RIMViewModel.RIMRIC;
+                    SwRIMViewModel.RIMRID = RIMViewModel.RIMRID;
+                    result = UpdateRawItem(SwRIMViewModel, user);
+                    if (!result) return result;
+
+                    if (SwRIRViewModel.Count() > 0)
+                    {
+                        foreach (var v in SwRIRViewModel)
+                        {
+                            result = MenuRecipeManager.UpdateMenuItem(v, user);
+                            if (!result) return result;
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Source);
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                    System.Diagnostics.Debug.WriteLine(e.InnerException);
+                    Exception f = e.InnerException;
+                    while (f != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("INNER:");
+                        System.Diagnostics.Debug.WriteLine(f.Message);
+                        System.Diagnostics.Debug.WriteLine(f.Source);
+                        f = f.InnerException;
+                    }
+                    System.Diagnostics.Debug.WriteLine(e.Data);
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

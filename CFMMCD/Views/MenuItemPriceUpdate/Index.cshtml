@@ -23,7 +23,7 @@
     </div>
     <hr />
     <div class="row">
-        @using (Html.BeginForm("UpdateDelete", "MenuItemPriceUpdate", FormMethod.Post, new { }))
+        @using (Html.BeginForm("UpdateDelete", "MenuItemPriceUpdate", FormMethod.Post, new { @id = "UpdateDelete", @enctype = "multipart/form-data" }))
         {
             <div class="col-lg-12">
                 <table class="table table-responsive table-hover">
@@ -79,6 +79,9 @@
             </div>
             <div class="form-inline bottom float" style="right:50px">
                 <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
+                <label class="btn btn-default">Import
+                    <input type="file" name="FileUploaded" accept="xls|xlsx" id="file" style="display:none">
+                </label>
             </div>
             <!--div class="row" style="overflow-y:scroll">
                 <table class="table table-responsive">
@@ -258,7 +261,11 @@
     </div>
 </div>
 
-
 <script>
-   
+    // File upload handler
+    $(window).ready(function () {
+        $("#file").change(function () {
+            $("#UpdateDelete").submit();
+        });
+    })
 </script>

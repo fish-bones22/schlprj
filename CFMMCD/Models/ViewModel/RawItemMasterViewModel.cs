@@ -99,6 +99,8 @@ namespace CFMMCD.Models.ViewModel
         public List<string> VendorSCM { get; set; }
         public List<CheckBoxList> VendorList { get; set; }
         public List<MenuItem> MenuItemList { get; set; }
+
+        public string SwitchItem { get; set; }
     }
     public class RawItem
     {

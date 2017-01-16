@@ -23,7 +23,7 @@
     </div>
     <hr />
     <div class="container-fluid">
-        @using (Html.BeginForm("UpdateDelete", "RawItemPriceUpdate", FormMethod.Post, new { }))
+        @using (Html.BeginForm("UpdateDelete", "RawItemPriceUpdate", FormMethod.Post, new { @id = "UpdateDelete", @enctype = "multipart/form-data" }))
         {
             <table class="table table-responsive table-hover md-element">
                 <thead>
@@ -69,9 +69,21 @@
 
             <div class="form-inline bottom float" style="right:50px">
                 <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
-                <button type="submit" name="command" value="Import" class="btn btn-default">Import</button>
+                <label class="btn btn-default">
+                    Import
+                    <input type="file" name="FileUploaded" value="Import" accept="xls|xlsx" id="file" style="display:none">
+                </label>
             </div>
 
         }
     </div>
 </div>
+
+<script>
+    // File upload handler
+    $(window).ready(function () {
+        $("#file").change(function () {
+            $("#UpdateDelete").submit();
+        })
+    })
+</script>

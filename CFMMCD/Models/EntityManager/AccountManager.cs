@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace CFMMCD.Models.EntityManager
@@ -19,33 +21,44 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 Account accRow = new Account();
-                accRow.UserId = int.Parse(DateTime.Now.ToString("yyMMdd")) + new Random().Next(999) + new Random().Next(999); // To be changed soon
-                accRow.Username = account.Username;
-                if (account.Password == null || account.Password.Equals(""))
-                    accRow.Password = GetPassword(account.OldUsername);
+                if (account.Username == null || account.Username.Equals(""))
+                    return false;
+                if (account.AccountId != null && !account.AccountId.Equals(""))
+                {
+                    accRow = db.Accounts.Single(o => o.UserId.ToString().Equals(account.AccountId));
+                    // Password
+                    if (account.Password == null || account.Password.Equals("")) // If password is unchanged
+                        accRow.Password = db.Accounts.Single(o => o.UserId.ToString().Equals(account.AccountId)).Password;
+                    else
+                    {
+                        string keys = GenerateKeys(15);
+                        string pass = keys + EncodePassword(account.Password, keys);
+                        accRow.Password = pass;
+                    }
+                }
                 else
-                    accRow.Password = account.Password;
+                {
+                    accRow.UserId = int.Parse(DateTime.Now.ToString("yyMMdd")) + new Random().Next(999) + new Random().Next(999); // To be changed soon
+                    // Create new password
+                    string keys = GenerateKeys(15);
+                    string pass = keys + EncodePassword(account.Password, keys);
+                    accRow.Password = pass;
+                }
+                // Set user name
+                accRow.Username = account.Username;
+                // Set User access
                 accRow.UserAccess = "";
                 accRow.UserAccess = new AccountManager().GetUserAccessString(account);
                 if (!accRow.UserAccess.Contains("True"))
                     accRow.UserAccess = account.UserAccess;
                 if (account.AllExceptUAC)
-                    accRow.UserAccess = "True,True,True,True,True,True,True,False,True,True,True,True,True,True,True,True,True,True"; 
+                    accRow.UserAccess = "True,True,True,True,True,True,True,False,True,True,True,True,True,True,True,True,True,True";
+
                 try
                 {
-                    if (db.Accounts.Where(o => o.Username.Equals(account.OldUsername)).Any())
-                    {
-                        Account RowToDelete = db.Accounts.Single(o => o.Username.Equals(account.OldUsername));
-                        Console.WriteLine("PASSED: Searched existing row");
-                        db.Accounts.Remove(RowToDelete);
-                        Console.WriteLine("PASSED: Deleted existing row");
-                        db.Accounts.Add(accRow);
-                        Console.WriteLine("PASSED: Added update row");
-                    }
-                    else
+                    if (!db.Accounts.Where(o => o.Username.Equals(account.OldUsername)).Any())
                     {
                         db.Accounts.Add(accRow);
-                        Console.WriteLine("PASSED: Added new row");
                     }
                     db.SaveChanges();
                     return true;
@@ -78,8 +91,7 @@ namespace CFMMCD.Models.EntityManager
                     ARow = db.Accounts.Single(o => o.Username.Equals(AViewModel.Username));
                 else
                     return false;
-                // Try...Catch to produce appropriate warnings if ever
-                // insertion is unsuccessful
+
                 try
                 {
                     db.Accounts.Remove(ARow);
@@ -106,7 +118,7 @@ namespace CFMMCD.Models.EntityManager
             }
         } 
         /*
-         * Used in AccountController to check whether given
+         * Check if given
          * username is available
          * 
          * Returns false if available (Username does not exist)
@@ -123,16 +135,26 @@ namespace CFMMCD.Models.EntityManager
          * 
          * Returns empty string if username does not exist
          */
-        public string GetPassword(string username)
+        public bool CheckPassword(string username, string password)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 // Get `Username` that matches the specified username parameter
                 var user = db.Accounts.Where(o => o.Username.Equals(username));
                 if (user.Any())
-                    return user.FirstOrDefault().Password;
+                {
+                    string pass = user.FirstOrDefault().Password;
+                    if (user.FirstOrDefault().Password.Equals(password))
+                        return true;
+                    string key = pass.Substring(0, 15);
+                    pass = pass.Substring(15);
+                    string encodedPass = EncodePassword(password, key);
+                    if (encodedPass.Equals(pass))
+                        return true;
+                    else return false;
+                }
                 else
-                    return "";
+                    return false;
             }
         }
 
@@ -155,7 +177,8 @@ namespace CFMMCD.Models.EntityManager
         {
             using ( CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<string> AList = new List<string >();
+                List<string> AList = new List<string>();
+                List<string> AIdList = new List<string>();
                 List<Account> ARowList;
                 if (username.ToUpper().Equals("ALL"))
                 {
@@ -174,6 +197,8 @@ namespace CFMMCD.Models.EntityManager
                     foreach ( Account a in ARowList )
                     {
                         AList.Add(a.Username);
+                        AIdList.Add(a.UserId.ToString());
+
                     }
                     if (AList == null || AList.ElementAt(0) == null)
                         return null;
@@ -217,6 +242,7 @@ namespace CFMMCD.Models.EntityManager
                 vm.Password = ARow.Password.Trim();
                 vm.UserAccess = ARow.UserAccess.Trim();
                 vm.OldUsername = ARow.Username.Trim();
+                vm.AccountId = ARow.UserId.ToString();
 
                 bool[] UserAccessArr = GetUserAccessArray(ARow.Username);
                 vm.MIMInput = UserAccessArr[0];
@@ -255,11 +281,11 @@ namespace CFMMCD.Models.EntityManager
         }
 
         /*
-* Creates a string list of the current logged account's accessible pages
-* listed as boolean delimited by commas.
-* 
-* Returns the string created
-*/
+        * Creates a string list of the current logged account's accessible pages
+        * listed as boolean delimited by commas.
+        * 
+        * Returns the string created
+        */
         private string GetUserAccessString(AccountViewModel account)
         {
             return (account.MIMInput.ToString() + "," + account.RIMInput.ToString() + "," + account.MERInput.ToString() + "," + account.STPInput.ToString() + "," + account.SCMInput.ToString() + "," + account.VEMInput.ToString() + "," + account.VAMInput.ToString() + "," + account.UAPInput.ToString() + "," + account.MIPInput.ToString() + "," + account.RIPInput.ToString() + "," + account.AULInput.ToString() + "," + account.REGInput.ToString() + "," + account.TEGInput.ToString() + "," + account.TIPInput.ToString() + "," + account.BUEInput.ToString() + "," + account.OWNInput.ToString() + "," + account.PRCInput.ToString() + "," + account.LOCInput.ToString());
@@ -317,6 +343,112 @@ namespace CFMMCD.Models.EntityManager
             UASession.PRC = UAArray[16];
             UASession.LOC = UAArray[17];
             return UASession;
+        }
+
+
+        // Encryption
+        // From http://www.c-sharpcorner.com/UploadFile/145c93/save-password-using-salted-hashing/
+        public static string GenerateKeys(int length) //length of salt    
+        {
+            const string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+            var randNum = new Random();
+            var chars = new char[length];
+            var allowedCharCount = allowedChars.Length;
+            for (var i = 0; i <= length - 1; i++)
+            {
+                int ind = Convert.ToInt32((allowedChars.Length) * randNum.NextDouble());
+                while (ind >= allowedChars.Length)
+                    ind = Convert.ToInt32((allowedChars.Length) * randNum.NextDouble());
+                chars[i] = allowedChars[ind];
+            }
+            return new string(chars);
+        }
+
+        public static string EncodePassword(string pass, string salt)
+        {
+            byte[] bytes = Encoding.Unicode.GetBytes(pass);
+            byte[] src = Encoding.Unicode.GetBytes(salt);
+            byte[] dst = new byte[src.Length + bytes.Length];
+
+            System.Buffer.BlockCopy(src, 0, dst, 0, src.Length);
+            System.Buffer.BlockCopy(bytes, 0, dst, src.Length, bytes.Length);
+            HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
+            byte[] inArray = algorithm.ComputeHash(dst);
+
+            return EncodePasswordMd5(Convert.ToBase64String(inArray));
+        }
+
+        public static string EncodePasswordMd5(string pass) //Encrypt using MD5    
+        {
+            Byte[] originalBytes;
+            Byte[] encodedBytes;
+            MD5 md5;
+            //Instantiate MD5CryptoServiceProvider, get bytes for original password and compute hash (encoded password)    
+            md5 = new MD5CryptoServiceProvider();
+            originalBytes = ASCIIEncoding.Default.GetBytes(pass);
+            encodedBytes = md5.ComputeHash(originalBytes);
+            //Convert encoded bytes back to a 'readable' string    
+            return BitConverter.ToString(encodedBytes);
+        }
+
+        public static string base64Encode(string sData) // Encode    
+        {
+            try
+            {
+                byte[] encData_byte = new byte[sData.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(sData);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Source);
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                System.Diagnostics.Debug.WriteLine(e.InnerException);
+                Exception f = e.InnerException;
+                while (f != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("INNER:");
+                    System.Diagnostics.Debug.WriteLine(f.Message);
+                    System.Diagnostics.Debug.WriteLine(f.Source);
+                    f = f.InnerException;
+                }
+                System.Diagnostics.Debug.WriteLine(e.Data);
+                return null;
+            }
+        }
+
+        public static string base64Decode(string sData) //Decode    
+        {
+            try
+            {
+                var encoder = new System.Text.UTF8Encoding();
+                System.Text.Decoder utf8Decode = encoder.GetDecoder();
+                byte[] todecodeByte = Convert.FromBase64String(sData);
+                int charCount = utf8Decode.GetCharCount(todecodeByte, 0, todecodeByte.Length);
+                char[] decodedChar = new char[charCount];
+                utf8Decode.GetChars(todecodeByte, 0, todecodeByte.Length, decodedChar, 0);
+                string result = new String(decodedChar);
+                return result;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Source);
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                System.Diagnostics.Debug.WriteLine(e.InnerException);
+                Exception f = e.InnerException;
+                while (f != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("INNER:");
+                    System.Diagnostics.Debug.WriteLine(f.Message);
+                    System.Diagnostics.Debug.WriteLine(f.Source);
+                    f = f.InnerException;
+                }
+                System.Diagnostics.Debug.WriteLine(e.Data);
+                return null;
+            }
         }
     }
 }

@@ -25,7 +25,6 @@ namespace CFMMCD.Models.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Audit_Log> Audit_Log { get; set; }
         public virtual DbSet<Breakfast_Price_Tier> Breakfast_Price_Tier { get; set; }
         public virtual DbSet<BUSINESS_EXT> BUSINESS_EXT { get; set; }
@@ -56,5 +55,6 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<Trading_Area> Trading_Area { get; set; }
         public virtual DbSet<MIM_Price> MIM_Price { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
     }
 }

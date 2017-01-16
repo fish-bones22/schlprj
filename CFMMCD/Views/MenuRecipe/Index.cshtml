@@ -243,13 +243,11 @@
             if ($("tbody tr:last-child").children("td").children("input[type=number]").val() != "" || $("tbody tr:last-child").hasClass("hidden")) {
                 $("tbody").append (newRow);
                 setDeleteRowEventListener();
+                setShowModalSelectListener();
             }
         });
 
-        $(".tb-select").click(function () {
-            TextBoxPressed = $(this);
-            $("#search-item-modal").modal("show");
-        });
+        setShowModalSelectListener();
 
         $(".modal-item-select").click(onItemSelected);
     });
@@ -264,6 +262,13 @@
                 });
                 $(this).parent().parent("tr").addClass("hidden");
             }
+        });
+    }
+
+    function setShowModalSelectListener() {
+        $(".tb-select").click(function () {
+            TextBoxPressed = $(this);
+            $("#search-item-modal").modal("show");
         });
     }
 

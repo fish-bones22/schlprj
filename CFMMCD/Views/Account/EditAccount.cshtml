@@ -30,6 +30,7 @@
     @using (Html.BeginForm("EditAccount", "Account", FormMethod.Post, new { }))
     {
         @Html.AntiForgeryToken()
+        @Html.HiddenFor( m => Model.AccountId )
         @Html.HiddenFor( m => Model.OldUsername ) // 
         @Html.HiddenFor( m => Model.EditMode, new { @Value = false })
         @Html.HiddenFor( m => Model.UserAccess )

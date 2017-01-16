@@ -15,15 +15,19 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<MenuItem> list = new List<MenuItem>();
-                DateTime lastUserAccess = (DateTime) db.Accounts.Single(o => o.Username.Equals(username)).TimeLastLogged;
-                foreach (var v in db.CSHMIMP0)
+                Account currentAccount = db.Accounts.Single(o => o.Username.Equals(username));
+                if (currentAccount.TimeLastLogged != null)
                 {
-                    if (lastUserAccess.CompareTo(v.MIMDAT) < 0)
+                    DateTime lastUserAccess = (DateTime)currentAccount.TimeLastLogged;
+                    foreach (var v in db.CSHMIMP0)
                     {
-                        MenuItem mi = new MenuItem();
-                        mi.RIRMIC = v.MIMMIC.ToString();
-                        mi.MIMDSC = v.MIMNAM.Trim();
-                        list.Add(mi);
+                        if (lastUserAccess.CompareTo(v.MIMDAT) < 0)
+                        {
+                            MenuItem mi = new MenuItem();
+                            mi.RIRMIC = v.MIMMIC.ToString();
+                            mi.MIMDSC = v.MIMNAM.Trim();
+                            list.Add(mi);
+                        }
                     }
                 }
                 return list;
@@ -35,15 +39,19 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<RawItem> list = new List<RawItem>();
-                DateTime lastUserAccess = (DateTime)db.Accounts.Single(o => o.Username.Equals(username)).TimeLastLogged;
-                foreach (var v in db.INVRIMP0)
+                Account currentAccount = db.Accounts.Single(o => o.Username.Equals(username));
+                if (currentAccount.TimeLastLogged != null)
                 {
-                    if (lastUserAccess < v.RIMDAT)
+                    DateTime lastUserAccess = (DateTime)currentAccount.TimeLastLogged;
+                    foreach (var v in db.INVRIMP0)
                     {
-                        RawItem mi = new RawItem();
-                        mi.RIMRIC = v.RIMRIC.ToString();
-                        mi.RIMRID = v.RIMRID.Trim();
-                        list.Add(mi);
+                        if (lastUserAccess < v.RIMDAT)
+                        {
+                            RawItem mi = new RawItem();
+                            mi.RIMRIC = v.RIMRIC.ToString();
+                            mi.RIMRID = v.RIMRID.Trim();
+                            list.Add(mi);
+                        }
                     }
                 }
                 return list;

@@ -12,7 +12,7 @@ namespace CFMMCD.Models.EntityManager
         /*
          * Overload method to accept List as parameter.
          * */
-        public bool UpdateRawItemPrice( List<RawItemPriceUpdateViewModel> RIPViewModelList )
+        public static bool UpdateRawItemPrice( List<RawItemPriceUpdateViewModel> RIPViewModelList )
         {
             bool result;
             foreach (var vm in RIPViewModelList)
@@ -23,7 +23,7 @@ namespace CFMMCD.Models.EntityManager
             return true;
         }
 
-        public bool UpdateRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
+        public static bool UpdateRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
         {
             using ( CFMMCDEntities db = new CFMMCDEntities() )
             {
@@ -68,7 +68,7 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-        public bool DeleteRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
+        public static bool DeleteRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -103,7 +103,7 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-        public List<RawItemPriceUpdateViewModel> SearchRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
+        public static List<RawItemPriceUpdateViewModel> SearchRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {

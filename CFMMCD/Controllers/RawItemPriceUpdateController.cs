@@ -24,19 +24,17 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("RIP", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
-            RawItemPriceManager RIMManager = new RawItemPriceManager();
             RawItemPriceUpdateViewModel RIPViewModel = (RawItemPriceUpdateViewModel)TempData["SearchItemSelected"];
             if (RIPViewModel == null)
                 RIPViewModel = new RawItemPriceUpdateViewModel();
             RIPViewModel.SearchItem = "ALL";
-            RIPViewModel.RawItemPriceMasterList = RIMManager.SearchRawItemPrice(RIPViewModel);
+            RIPViewModel.RawItemPriceMasterList = RawItemPriceManager.SearchRawItemPrice(RIPViewModel);
             return View(RIPViewModel);
         }
         [HttpPost]
         public ActionResult Index(RawItemPriceUpdateViewModel RIPViewModel)
         {   // Search
-            RawItemPriceManager RIMManager = new RawItemPriceManager();
-            RIPViewModel.RawItemPriceMasterList = RIMManager.SearchRawItemPrice(RIPViewModel);
+            RIPViewModel.RawItemPriceMasterList = RawItemPriceManager.SearchRawItemPrice(RIPViewModel);
             if (RIPViewModel.RawItemPriceMasterList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
@@ -49,13 +47,25 @@ namespace CFMMCD.Controllers
         [HttpPost]
         public ActionResult UpdateDelete(RawItemPriceUpdateViewModel RIPViewModel, string command)
         {
-            RawItemPriceManager RIPManager = new RawItemPriceManager();
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
+
+            if (Request.Files.Count > 0)
+            {
+                HttpPostedFileBase file = Request.Files["FileUploaded"];
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                {
+                    string fileName = file.FileName;
+                    // store the file inside ~/App_Data/uploads folder
+                    string path = "~/App_Data/uploads/" + fileName;
+                    file.SaveAs(Server.MapPath(path));
+                }
+            }
+
             if (command == "Save")
             {
-                result = RIPManager.UpdateRawItemPrice( RIPViewModel.RawItemPriceMasterList );
+                result = RawItemPriceManager.UpdateRawItemPrice( RIPViewModel.RawItemPriceMasterList );
                 PageAction = "Update price";
             }
             else if (command == "Import")
