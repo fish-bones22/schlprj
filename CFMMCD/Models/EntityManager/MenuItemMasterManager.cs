@@ -16,7 +16,7 @@ namespace CFMMCD.Models.EntityManager
          * Calls SearchSingleMenuItem
          * Returns List<ViewModel> if true, otherwise returns null
          */
-        public List<MenuItem> SearchMenuItems(string SearchItem)
+        public static List<MenuItem> SearchMenuItems(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -44,7 +44,7 @@ namespace CFMMCD.Models.EntityManager
                 foreach (var MIMRow in MIMRowList)
                 {
                     MenuItem vm = new MenuItem();
-                    vm.RIRMIC = MIMRow.MIMMIC.ToString();
+                    vm.MIMMIC = MIMRow.MIMMIC.ToString();
                     vm.MIMDSC = MIMRow.MIMNAM;
                     vm.MIMSTA = MIMRow.MIMSTA;
                     MIMList.Add(vm);
@@ -54,7 +54,7 @@ namespace CFMMCD.Models.EntityManager
                 return MIMList;
             }
         }
-        public MenuItemMasterViewModel SearchSingleMenuItem(string SearchItem)
+        public static MenuItemMasterViewModel SearchSingleMenuItem(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -170,7 +170,7 @@ namespace CFMMCD.Models.EntityManager
          *
          * Returns true if the operation is successful.
          * */
-        public bool UpdateMenuItem(MenuItemMasterViewModel MIMViewModel, string user)
+        public static bool UpdateMenuItem(MenuItemMasterViewModel MIMViewModel, string user)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -317,7 +317,7 @@ namespace CFMMCD.Models.EntityManager
          * 
          * Returns true if operation is successful.
          * */
-        public bool DeleteMenuItem(MenuItemMasterViewModel MIMViewModel)
+        public static bool DeleteMenuItem(MenuItemMasterViewModel MIMViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -368,7 +368,7 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-        public bool UpdatePriceTier(List<Tier> TierList)
+        public static bool UpdatePriceTier(List<Tier> TierList)
         {
             using (CFMMCDEntities db = new CFMMCDEntities() )
             {
@@ -444,7 +444,7 @@ namespace CFMMCD.Models.EntityManager
             }
         }
         
-        public List<Tier> SearchPriceTier(string MIMMIC)
+        public static List<Tier> SearchPriceTier(string MIMMIC)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -481,7 +481,7 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public bool UpdatePriceTier(List<TierUpdate> TierList)
+        public static bool UpdatePriceTier(List<TierUpdate> TierList)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -512,7 +512,7 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public TierUpdate SearchPriceTierUpdate (string MIMMIC)
+        public static TierUpdate SearchPriceTierUpdate (string MIMMIC)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {

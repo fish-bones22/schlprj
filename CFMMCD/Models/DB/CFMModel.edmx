@@ -289,6 +289,28 @@
           <Property Name="Store" Type="nvarchar" MaxLength="10" />
           <Property Name="Except_Store" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="ITMGRP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Group_Id" Type="int" Nullable="false" />
+          <Property Name="Group_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Item_Code" Type="int" Nullable="false" />
+          <Property Name="Item_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Item_Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ITMSTOGRP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Group_Id" Type="int" Nullable="false" />
+          <Property Name="Group_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Store_Id" Type="int" Nullable="false" />
+          <Property Name="Store_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Item_Type" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="LOCATION">
           <Key>
             <PropertyRef Name="Id" />
@@ -341,6 +363,16 @@
           <Property Name="MIMNPD" Type="float" />
           <Property Name="MIMNNP" Type="float" />
           <Property Name="MIMPND" Type="date" />
+        </EntityType>
+        <EntityType Name="MIMSTRGRP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Group_Id" Type="int" Nullable="false" />
+          <Property Name="Group_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Store_Id" Type="int" Nullable="false" />
+          <Property Name="Store_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="OWNERSHIP">
           <Key>
@@ -469,12 +501,15 @@
           <EntitySet Name="INVRIRP0" EntityType="Self.INVRIRP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVUOMP0" EntityType="Self.INVUOMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITMGRP" EntityType="Self.ITMGRP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITMSTOGRP" EntityType="Self.ITMSTOGRP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MIM_Price" EntityType="Self.MIM_Price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MIMSTRGRP" EntityType="Self.MIMSTRGRP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OWNERSHIP" EntityType="Self.OWNERSHIP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROFIT_CEN" EntityType="Self.PROFIT_CEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
@@ -529,6 +564,9 @@
           </AssociationSet>
           <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
           <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
+          <EntitySet Name="ITMGRPs" EntityType="CFMMCDModel.ITMGRP" />
+          <EntitySet Name="ITMSTOGRPs" EntityType="CFMMCDModel.ITMSTOGRP" />
+          <EntitySet Name="MIMSTRGRPs" EntityType="CFMMCDModel.MIMSTRGRP" />
         </EntityContainer>
         <EntityType Name="Audit_Log">
           <Key>
@@ -978,6 +1016,38 @@
           <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="AdminStatus" Type="Boolean" Nullable="false" />
           <Property Name="TimeLastLogged" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ITMGRP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Item_Code" Type="Int32" Nullable="false" />
+          <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Item_Type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ITMSTOGRP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Store_Id" Type="Int32" Nullable="false" />
+          <Property Name="Store_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Item_Type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MIMSTRGRP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Store_Id" Type="Int32" Nullable="false" />
+          <Property Name="Store_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1448,6 +1518,41 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITMGRPs">
+            <EntityTypeMapping TypeName="CFMMCDModel.ITMGRP">
+              <MappingFragment StoreEntitySet="ITMGRP">
+                <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITMSTOGRPs">
+            <EntityTypeMapping TypeName="CFMMCDModel.ITMSTOGRP">
+              <MappingFragment StoreEntitySet="ITMSTOGRP">
+                <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MIMSTRGRPs">
+            <EntityTypeMapping TypeName="CFMMCDModel.MIMSTRGRP">
+              <MappingFragment StoreEntitySet="MIMSTRGRP">
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -347,7 +347,7 @@ namespace CFMMCD.Models.EntityManager
                 foreach (var v in MIList)
                 {
                     MenuItem mi = new MenuItem();
-                    mi.RIRMIC = v.RIRMIC.ToString();
+                    mi.MIMMIC = v.RIRMIC.ToString();
                     mi.MIMDSC = db.CSHMIMP0.SingleOrDefault(o => o.MIMMIC == v.RIRMIC).MIMNAM;
                     vm.MenuItemList.Add(mi);
                 }

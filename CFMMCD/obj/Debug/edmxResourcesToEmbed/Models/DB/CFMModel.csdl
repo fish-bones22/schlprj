@@ -36,6 +36,9 @@
     </AssociationSet>
     <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
     <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
+    <EntitySet Name="ITMGRPs" EntityType="CFMMCDModel.ITMGRP" />
+    <EntitySet Name="ITMSTOGRPs" EntityType="CFMMCDModel.ITMSTOGRP" />
+    <EntitySet Name="MIMSTRGRPs" EntityType="CFMMCDModel.MIMSTRGRP" />
   </EntityContainer>
   <EntityType Name="Audit_Log">
     <Key>
@@ -485,5 +488,37 @@
     <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="AdminStatus" Type="Boolean" Nullable="false" />
     <Property Name="TimeLastLogged" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ITMGRP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Group_Id" Type="Int32" Nullable="false" />
+    <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Item_Code" Type="Int32" Nullable="false" />
+    <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Item_Type" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ITMSTOGRP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Group_Id" Type="Int32" Nullable="false" />
+    <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Store_Id" Type="Int32" Nullable="false" />
+    <Property Name="Store_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Item_Type" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MIMSTRGRP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Group_Id" Type="Int32" Nullable="false" />
+    <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Store_Id" Type="Int32" Nullable="false" />
+    <Property Name="Store_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

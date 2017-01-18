@@ -24,13 +24,12 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("MIP", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
-            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
             MenuItemMasterViewModel MIMViewModel = new MenuItemMasterViewModel();
             MenuItemPriceUpdateViewModel MIPViewModel = new MenuItemPriceUpdateViewModel();
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("ALL");
+            MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems("ALL");
             for (int i = 0; i < MIMViewModel.MenuItemMasterList.Count(); i++)
             {
-                TierUpdate tu = MIMManager.SearchPriceTierUpdate(MIMViewModel.MenuItemMasterList[i].RIRMIC);
+                TierUpdate tu = MenuItemMasterManager.SearchPriceTierUpdate(MIMViewModel.MenuItemMasterList[i].MIMMIC);
                 if (tu != null)
                     MIPViewModel.TierUpdateList.Add(tu);
             }
@@ -41,8 +40,7 @@ namespace CFMMCD.Controllers
         [HttpPost]
         public ActionResult Index(MenuItemMasterViewModel MIMViewModel)
         {   // Search
-            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems(MIMViewModel.SearchItem);
+            MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems(MIMViewModel.SearchItem);
             if (MIMViewModel.MenuItemMasterList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
@@ -55,7 +53,6 @@ namespace CFMMCD.Controllers
         [HttpPost]
         public ActionResult UpdateDelete(MenuItemPriceUpdateViewModel MIPViewModel, string command)
         {
-            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
@@ -72,7 +69,7 @@ namespace CFMMCD.Controllers
             }
             if (command == "Save")
             {
-                result = MIMManager.UpdatePriceTier(MIPViewModel.TierUpdateList);
+                result = MenuItemMasterManager.UpdatePriceTier(MIPViewModel.TierUpdateList);
                 PageAction = "Update price";
             }
             if (result)

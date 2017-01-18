@@ -229,6 +229,7 @@
     <Compile Include="Controllers\McCafeLevel2PriceTierController.cs" />
     <Compile Include="Controllers\McCafeLevel3PriceTierController.cs" />
     <Compile Include="Controllers\MDSPriceTierController.cs" />
+    <Compile Include="Controllers\MenuItemGroupController.cs" />
     <Compile Include="Controllers\MenuItemMasterController.cs" />
     <Compile Include="Controllers\MenuItemPriceUpdateController.cs" />
     <Compile Include="Controllers\MenuRecipeController.cs" />
@@ -312,6 +313,12 @@
     <Compile Include="Models\DB\INVVEMP0.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\ITMGRP.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\ITMSTOGRP.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\LOCATION.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
@@ -325,6 +332,9 @@
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\MDS_Price_Tier.cs">
+      <DependentUpon>CFMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\MIMSTRGRP.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\MIM_Price.cs">
@@ -361,6 +371,7 @@
     <Compile Include="Models\EntityManager\BreakfastPriceTierManager.cs" />
     <Compile Include="Models\EntityManager\BusinessExtensionManager.cs" />
     <Compile Include="Models\EntityManager\DessertPriceTierManager.cs" />
+    <Compile Include="Models\EntityManager\ItemGroupManager.cs" />
     <Compile Include="Models\EntityManager\HomeManager.cs" />
     <Compile Include="Models\EntityManager\LocationManager.cs" />
     <Compile Include="Models\EntityManager\McCafeBistroPriceTierManager.cs" />
@@ -385,6 +396,7 @@
     <Compile Include="Models\ViewModel\BusinessExtensionViewModel.cs" />
     <Compile Include="Models\ViewModel\DessertPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
+    <Compile Include="Models\ViewModel\ItemGroupViewModel.cs" />
     <Compile Include="Models\ViewModel\LocationViewModel.cs" />
     <Compile Include="Models\ViewModel\McCafeBistroPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\McCafeLevel2PriceTierViewModel.cs" />
@@ -465,6 +477,7 @@
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
     <Folder Include="SMS\SMSWEBCFM\" />
+    <Folder Include="Views\MenuItemGroup\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

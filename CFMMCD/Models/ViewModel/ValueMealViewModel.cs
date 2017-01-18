@@ -22,7 +22,7 @@ namespace CFMMCD.Models.ViewModel
             VMLQUA.Add("");
             MenuItemList = new List<VMMenuItem>();
             ValueMealList = new List<ValueMeal>();
-            AllMenuItems = new MenuItemMasterManager().SearchMenuItems("ALL"); //*
+            AllMenuItems = MenuItemMasterManager.SearchMenuItems("ALL"); //*
         }
         public string SearchItem { get; set; }
         public string VMLNUM { get; set; }

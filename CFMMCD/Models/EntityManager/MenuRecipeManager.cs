@@ -34,7 +34,7 @@ namespace CFMMCD.Models.EntityManager
                 foreach (CSHMIMP0 rim in MIMRowList)
                 {
                     MenuItem mi = new MenuItem();
-                    mi.RIRMIC = rim.MIMMIC.ToString();
+                    mi.MIMMIC = rim.MIMMIC.ToString();
                     mi.MIMDSC = rim.MIMDSC.Trim();
                     mi.MIMLON = rim.MIMLON.Trim();
                     mi.MIMSTA = rim.MIMSTA;

@@ -24,7 +24,7 @@ namespace CFMMCD.Models.EntityManager
                         if (lastUserAccess.CompareTo(v.MIMDAT) < 0)
                         {
                             MenuItem mi = new MenuItem();
-                            mi.RIRMIC = v.MIMMIC.ToString();
+                            mi.MIMMIC = v.MIMMIC.ToString();
                             mi.MIMDSC = v.MIMNAM.Trim();
                             list.Add(mi);
                         }

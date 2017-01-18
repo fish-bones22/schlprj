@@ -26,32 +26,30 @@ namespace CFMMCD.Controllers
 
             // Initialize page
             MenuItemMasterViewModel MIMViewModel = new MenuItemMasterViewModel();
-            MIMViewModel.MenuItemMasterList = new MenuItemMasterManager().SearchMenuItems("ALL");
+            MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems("ALL");
             return View(MIMViewModel);
         }
         [HttpPost]
         public ActionResult Index(MenuItemMasterViewModel MIMViewModel, string value)
         {
-            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
-            MIMViewModel = MIMManager.SearchSingleMenuItem(value);
-            MIMViewModel.MenuItemMasterList = MIMManager.SearchMenuItems("ALL");
+            MIMViewModel = MenuItemMasterManager.SearchSingleMenuItem(value);
+            MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems("ALL");
             return View(MIMViewModel);
         }
         [HttpPost]
         public ActionResult UpdateDelete(MenuItemMasterViewModel MIMViewModel, string command)
         {
-            MenuItemMasterManager MIMManager = new MenuItemMasterManager();
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
             if (command == "Save")
             {
-                result = MIMManager.UpdateMenuItem(MIMViewModel, user.Username);
+                result = MenuItemMasterManager.UpdateMenuItem(MIMViewModel, user.Username);
                 PageAction = "Update";
             }
             else if (command == "Delete")
             {
-                result = MIMManager.DeleteMenuItem(MIMViewModel);
+                result = MenuItemMasterManager.DeleteMenuItem(MIMViewModel);
                 PageAction = "Delete";
             }
             if (result)

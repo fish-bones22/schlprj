@@ -71,90 +71,6 @@ namespace CFMMCD.Models.ViewModel
 
         public List<MenuItem> MenuItemMasterList { get; set; }
 
-        // Tier items
-        public double OLDPRA { get; set; }
-        public double NEWPRA { get; set; }
-        public double OLDPAO { get; set; }
-        public double NEWPAO { get; set; }
-        public double OLDAOT { get; set; }
-        public double NEWAOT { get; set; }
-        public double OLDNPA { get; set; }
-        public double NEWNPA { get; set; }
-        public double OLDPRB { get; set; }
-        public double NEWPRB { get; set; }
-        public double OLDPBO { get; set; }
-        public double NEWPBO { get; set; }
-        public double OLDBOT { get; set; }
-        public double NEWBOT { get; set; }
-        public double OLDNPB { get; set; }
-        public double NEWNPB { get; set; }
-        public double OLDPRC { get; set; }
-        public double NEWPRC { get; set; }
-        public double OLDPCO { get; set; }
-        public double NEWPCO { get; set; }
-        public double OLDCOT { get; set; }
-        public double NEWCOT { get; set; }
-        public double OLDNPC { get; set; }
-        public double NEWNPC { get; set; }
-        public double OLDPRD { get; set; }
-        public double NEWPRD { get; set; }
-        public double OLDPDO { get; set; }
-        public double NEWPDO { get; set; }
-        public double OLDDOT { get; set; }
-        public double NEWDOT { get; set; }
-        public double OLDNPD { get; set; }
-        public double NEWNPD { get; set; }
-        public double OLDPRE { get; set; }
-        public double NEWPRE { get; set; }
-        public double OLDPEO { get; set; }
-        public double NEWPEO { get; set; }
-        public double OLDEOT { get; set; }
-        public double NEWEOT { get; set; }
-        public double OLDNPE { get; set; }
-        public double NEWNPE { get; set; }
-        public double OLDPRF { get; set; }
-        public double NEWPRF { get; set; }
-        public double OLDPFO { get; set; }
-        public double NEWPFO { get; set; }
-        public double OLDFOT { get; set; }
-        public double NEWFOT { get; set; }
-        public double OLDNPF { get; set; }
-        public double NEWNPF { get; set; }
-        public double OLDMDS { get; set; }
-        public double NEWMDS { get; set; }
-        public double OLDMDO { get; set; }
-        public double NEWMDO { get; set; }
-        public double OLDMOT { get; set; }
-        public double NEWMOT { get; set; }
-        public double OLDMDN { get; set; }
-        public double NEWMDN { get; set; }
-        public double OLDPRS { get; set; }
-        public double NEWPRS { get; set; }
-        public double OLDPSO { get; set; }
-        public double NEWPSO { get; set; }
-        public double OLDSOT { get; set; }
-        public double NEWSOT { get; set; }
-        public double OLDNPS { get; set; }
-        public double NEWNPS { get; set; }
-
-        public string EDTA { get; set; }
-        public string PNDA { get; set; }
-        public string EDTB { get; set; }
-        public string PNDB { get; set; }
-        public string EDTC { get; set; }
-        public string PNDC { get; set; }
-        public string EDTD { get; set; }
-        public string PNDD { get; set; }
-        public string PNDE { get; set; }
-        public string EDTE { get; set; }
-        public string PNDF { get; set; }
-        public string EDTF { get; set; }
-        public string PNDM { get; set; }
-        public string EDTM { get; set; }
-        public string EDTS { get; set; }
-        public string PNDS { get; set; }
-
-
         public List<GenericDropDownList> TradingAreaList { get; set; }
         public List<GenericDropDownList> CategoryList { get; set; }
         public List<GenericDropDownList> MIMFGCList { get; set; }
@@ -186,6 +102,14 @@ namespace CFMMCD.Models.ViewModel
         public string MIMNNP { get; set; } // Non-product new
         // Effective date
         public string MIMPND { get; set; }
+    }
+
+    public class MenuItem
+    {
+        public string MIMMIC { get; set; }
+        public string MIMLON { get; set; }
+        public string MIMDSC { get; set; }
+        public string MIMSTA { get; set; }
     }
 
     public class MenuItemPriceUpdateViewModel

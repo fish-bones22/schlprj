@@ -46,13 +46,6 @@ namespace CFMMCD.Models.ViewModel
         public List<RawItem> RawItemList { get; set; }
     }
 
-    public class MenuItem
-    {
-        public string RIRMIC { get; set; }
-        public string MIMLON { get; set; }
-        public string MIMDSC { get; set; }
-        public string MIMSTA { get; set; }
-    }
     public class MenuRecipe
     {
         public string RIRRID { get; set; }

@@ -56,5 +56,8 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<Trading_Area> Trading_Area { get; set; }
         public virtual DbSet<MIM_Price> MIM_Price { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<ITMGRP> ITMGRPs { get; set; }
+        public virtual DbSet<ITMSTOGRP> ITMSTOGRPs { get; set; }
+        public virtual DbSet<MIMSTRGRP> MIMSTRGRPs { get; set; }
     }
 }
