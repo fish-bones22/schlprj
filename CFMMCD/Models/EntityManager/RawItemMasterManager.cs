@@ -480,6 +480,20 @@ namespace CFMMCD.Models.EntityManager
                         db.INVRIRP0.Remove(RIRRow[i]);
                     }
                 }
+                // Switch Group
+                if (db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(rawItem)).Any())
+                {
+                    db.ITMGRPs.RemoveRange(db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(rawItem)));
+                }
+                if (db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(switchItem)).Any())
+                {
+                    List<ITMGRP> IGRows = db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(switchItem)).ToList();
+                    foreach(var v in IGRows)
+                    {
+                        v.Item_Code = int.Parse(RIMRIC);
+                        v.Item_Name = RIMRID;
+                    }
+                }
 
                 try
                 {
