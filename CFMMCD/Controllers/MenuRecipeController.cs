@@ -21,6 +21,8 @@ namespace CFMMCD.Controllers
 
             // SearchItemSelected is assigned value at DisplaySearchResult
             MenuRecipeViewModel MRViewModel = new MenuRecipeViewModel();
+            if (TempData["value"] != null)
+                MRViewModel = MenuRecipeManager.SearchMenuRecipe((string)TempData["value"]);
             MRViewModel.MenuItemList = MenuRecipeManager.SearchMenuItem("ALL");
             MRViewModel.RawItemList = RawItemMasterManager.GetRawItems("ALL");
             return View(MRViewModel);
@@ -44,6 +46,12 @@ namespace CFMMCD.Controllers
             {
                 result = MenuRecipeManager.UpdateMenuItem(MRViewModel, user.Username);
                 PageAction = "Update";
+            }
+            else
+            {
+                result = MenuRecipeManager.UpdateMenuItem(MRViewModel, user.Username);
+                TempData["value"] = MRViewModel.RIRMIC;
+                return RedirectToAction("Index");
             }
             if (result)
             {

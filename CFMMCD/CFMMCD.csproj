@@ -236,8 +236,10 @@
     <Compile Include="Controllers\OwnershipController.cs" />
     <Compile Include="Controllers\ProfitCenterController.cs" />
     <Compile Include="Controllers\ProjectGoldPriceTierController.cs" />
+    <Compile Include="Controllers\RawItemGroupController.cs" />
     <Compile Include="Controllers\RawItemMasterController.cs" />
     <Compile Include="Controllers\RawItemPriceUpdateController.cs" />
+    <Compile Include="Controllers\RecipeGroupController.cs" />
     <Compile Include="Controllers\RegularPriceTierController.cs" />
     <Compile Include="Controllers\ReportGenerationController.cs" />
     <Compile Include="Controllers\SCMRecipeController.cs" />
@@ -316,9 +318,6 @@
     <Compile Include="Models\DB\ITMGRP.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB\ITMSTOGRP.cs">
-      <DependentUpon>CFMModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DB\LOCATION.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
@@ -332,9 +331,6 @@
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\MDS_Price_Tier.cs">
-      <DependentUpon>CFMModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DB\MIMSTRGRP.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\MIM_Price.cs">
@@ -464,6 +460,9 @@
     <Content Include="Views\ReportGeneration\Index.cshtml" />
     <Content Include="Views\ValueMeal\Index.cshtml" />
     <Content Include="Views\SCMRecipe\Index.cshtml" />
+    <Content Include="Views\MenuItemGroup\Index.cshtml" />
+    <Content Include="Views\RawItemGroup\Index.cshtml" />
+    <Content Include="Views\RecipeGroup\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -477,7 +476,6 @@
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
     <Folder Include="SMS\SMSWEBCFM\" />
-    <Folder Include="Views\MenuItemGroup\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

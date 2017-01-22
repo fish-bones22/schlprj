@@ -29,15 +29,12 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<Breakfast_Price_Tier> Breakfast_Price_Tier { get; set; }
         public virtual DbSet<BUSINESS_EXT> BUSINESS_EXT { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CSHMIMP0> CSHMIMP0 { get; set; }
         public virtual DbSet<CSHMIMP0_NP6> CSHMIMP0_NP6 { get; set; }
         public virtual DbSet<CSHPMGP0> CSHPMGP0 { get; set; }
         public virtual DbSet<CSHVMLP0> CSHVMLP0 { get; set; }
         public virtual DbSet<CSM_Master_Recipe> CSM_Master_Recipe { get; set; }
         public virtual DbSet<Dessert_Price_Tier> Dessert_Price_Tier { get; set; }
         public virtual DbSet<INVMGRP0> INVMGRP0 { get; set; }
-        public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
-        public virtual DbSet<INVRIRP0> INVRIRP0 { get; set; }
         public virtual DbSet<INVUOMP0> INVUOMP0 { get; set; }
         public virtual DbSet<INVVEMP0> INVVEMP0 { get; set; }
         public virtual DbSet<LOCATION> LOCATIONs { get; set; }
@@ -52,12 +49,13 @@ namespace CFMMCD.Models.DB
         public virtual DbSet<RIM_VEM_Lookup> RIM_VEM_Lookup { get; set; }
         public virtual DbSet<SCM_Master_Recipe> SCM_Master_Recipe { get; set; }
         public virtual DbSet<STORE_MIMMIC_Lookup> STORE_MIMMIC_Lookup { get; set; }
-        public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<Trading_Area> Trading_Area { get; set; }
         public virtual DbSet<MIM_Price> MIM_Price { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<CSHMIMP0> CSHMIMP0 { get; set; }
+        public virtual DbSet<INVRIMP0> INVRIMP0 { get; set; }
+        public virtual DbSet<Store_Profile> Store_Profile { get; set; }
         public virtual DbSet<ITMGRP> ITMGRPs { get; set; }
-        public virtual DbSet<ITMSTOGRP> ITMSTOGRPs { get; set; }
-        public virtual DbSet<MIMSTRGRP> MIMSTRGRPs { get; set; }
+        public virtual DbSet<INVRIRP0> INVRIRP0 { get; set; }
     }
 }

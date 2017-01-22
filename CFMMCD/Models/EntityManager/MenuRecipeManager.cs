@@ -9,7 +9,7 @@ namespace CFMMCD.Models.EntityManager
 {
     public class MenuRecipeManager
     {
-        public static List<MenuItem> SearchMenuItem( string SearchItem)
+        public static List<MenuItem> SearchMenuItem(string SearchItem)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -61,6 +61,9 @@ namespace CFMMCD.Models.EntityManager
                 MRViewModel.RIRMIC = MenuItemCode;
                 MRViewModel.MIMDSC = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MenuItemCode)).MIMDSC;
                 MRViewModel.MIMLON = db.CSHMIMP0.Single(o => o.MIMMIC.ToString().Equals(MenuItemCode)).MIMLON;
+                if (MRRowList.Count() > 0 && MRRowList.FirstOrDefault().Group != null)
+                    MRViewModel.Group = (int)MRRowList.FirstOrDefault().Group;
+                else MRViewModel.Group = 0;
                 MRViewModel.MenuRecipeList = new List<MenuRecipe>();
                 foreach (var v in MRRowList)
                 {
@@ -96,6 +99,7 @@ namespace CFMMCD.Models.EntityManager
                     {
                         INVRIRP0 MRRowToDelete = db.INVRIRP0.Single(o => o.RIRRID.Equals(v.RIRRID));
                         db.INVRIRP0.Remove(MRRowToDelete);
+                        db.SaveChanges();
                     }
                     if (!db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(v.RIRRIC)).Any())
                         continue;
@@ -108,13 +112,47 @@ namespace CFMMCD.Models.EntityManager
                     MRRow.RIRMIC = int.Parse(MRViewModel.RIRMIC);
                     MRRow.RIRRIC = int.Parse(v.RIRRIC);
                     MRRow.RIRVPC = 0;
-                    MRRow.RIRSFQ = double.Parse(v.RIRSFQ);
+                    if (v.RIRSFQ != null && !v.RIRSFQ.Equals(""))
+                        MRRow.RIRSFQ = double.Parse(v.RIRSFQ);
                     MRRow.RIRCWC = v.RIRCWC;
                     MRRow.RIRSTA = "0";
                     MRRow.RIRVST = "";
                     MRRow.RIRUSR = user.Substring(0, 3).ToUpper();
                     MRRow.RIRDAT = DateTime.Now;
                     MRRow.RIRFLG = false;
+                    // Group
+                    var IGRowLookup = db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(MRViewModel.RIRMIC));
+                    IGRowLookup = IGRowLookup.Where(o => o.Item_Type == 4);
+                    if (IGRowLookup.Any())
+                    {
+                        if (MRViewModel.Group == 0)
+                        {
+                            int val = IGRowLookup.FirstOrDefault().Id;
+                            ItemGroupManager.DeleteItem(val);
+                        }
+                        else
+                        {
+                            IGRowLookup.FirstOrDefault().Item_Code = int.Parse(MRViewModel.RIRMIC);
+                            IGRowLookup.FirstOrDefault().Item_Name = MRViewModel.MIMDSC;
+                            IGRowLookup.FirstOrDefault().Group_Id = MRViewModel.Group;
+                            IGRowLookup.FirstOrDefault().Group_Name = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == MRViewModel.Group).Group_Name;
+                        }
+                    }
+                    else
+                    {
+                        if (MRViewModel.Group != 0)
+                        {
+                            ItemGroupViewModel IGRow = new ItemGroupViewModel();
+                            IGRow.GroupName = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == MRViewModel.Group).Group_Name;
+                            IGRow.GroupId = MRViewModel.Group;
+                            IGRow.ItemCode = int.Parse(MRViewModel.RIRMIC);
+                            IGRow.ItemName = MRViewModel.MIMDSC;
+                            IGRow.ItemType = 4;
+                            IGRow.GroupType = 4;
+                            ItemGroupManager.UpdateGroup(IGRow);
+                        }
+                    }
+                    MRRow.Group = MRViewModel.Group;
                     try
                     {
                         if (db.INVRIRP0.Where(o => o.RIRRID == MRRow.RIRRID).Any())
@@ -156,13 +194,47 @@ namespace CFMMCD.Models.EntityManager
                     MRRow.RIRMIC = int.Parse(MRViewModel.RIRMIC);
                     MRRow.RIRRIC = int.Parse(MRViewModel.RIRRIC[i]);
                     MRRow.RIRVPC = 0;
-                    MRRow.RIRSFQ = double.Parse(MRViewModel.RIRSFQ[i]);
+                    if (MRViewModel.RIRSFQ[i] != null && !MRViewModel.RIRSFQ[i].Equals(""))
+                        MRRow.RIRSFQ = double.Parse(MRViewModel.RIRSFQ[i]);
                     MRRow.RIRCWC = MRViewModel.RIRCWC[i];
                     MRRow.RIRSTA = "0";
                     MRRow.RIRVST = "";
                     MRRow.RIRUSR = user.Substring(0, 3).ToUpper();
                     MRRow.RIRDAT = DateTime.Now;
                     MRRow.RIRFLG = false;
+                    // Group
+                    var IGRowLookup = db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(MRViewModel.RIRMIC));
+                    IGRowLookup = IGRowLookup.Where(o => o.Item_Type == 4);
+                    if (IGRowLookup.Any())
+                    {
+                        if (MRViewModel.Group == 0)
+                        {
+                            int val = IGRowLookup.FirstOrDefault().Id;
+                            ItemGroupManager.DeleteItem(val);
+                        }
+                        else
+                        {
+                            IGRowLookup.FirstOrDefault().Item_Code = int.Parse(MRViewModel.RIRMIC);
+                            IGRowLookup.FirstOrDefault().Item_Name = MRViewModel.MIMDSC;
+                            IGRowLookup.FirstOrDefault().Group_Id = MRViewModel.Group;
+                            IGRowLookup.FirstOrDefault().Group_Name = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == MRViewModel.Group).Group_Name;
+                        }
+                    }
+                    else
+                    {
+                        if (MRViewModel.Group != 0)
+                        {
+                            ItemGroupViewModel IGRow = new ItemGroupViewModel();
+                            IGRow.GroupName = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == MRViewModel.Group).Group_Name;
+                            IGRow.GroupId = MRViewModel.Group;
+                            IGRow.ItemCode = int.Parse(MRViewModel.RIRMIC);
+                            IGRow.ItemName = MRViewModel.MIMDSC;
+                            IGRow.ItemType = 4;
+                            IGRow.GroupType = 4;
+                            ItemGroupManager.UpdateGroup(IGRow);
+                        }
+                    }
+                    MRRow.Group = MRViewModel.Group;
                     try
                     {
                         if (db.INVRIRP0.Where(o => o.RIRRID == MRRow.RIRRID).Any())
@@ -197,7 +269,18 @@ namespace CFMMCD.Models.EntityManager
                         return false;
                     }
                 }
-                return true;
+                List<INVRIRP0> MRRowList = db.INVRIRP0.Where(o => o.RIRMIC.ToString().Equals(MRViewModel.RIRMIC)).ToList();
+                if (MRRowList.Count() == 0)
+                {
+                    var RIRRow = db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(MRViewModel.RIRMIC));
+                    RIRRow = RIRRow.Where(o => o.Item_Type == 4);
+                    if (RIRRow.Any())
+                    {
+                        db.ITMGRPs.RemoveRange(RIRRow);
+                        db.SaveChanges();
+                    }
+                }
+                    return true;
             }
         }
     }

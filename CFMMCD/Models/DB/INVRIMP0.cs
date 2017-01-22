@@ -67,5 +67,6 @@ namespace CFMMCD.Models.DB
         public string Region { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
+        public Nullable<int> Group { get; set; }
     }
 }

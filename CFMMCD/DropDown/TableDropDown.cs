@@ -43,9 +43,13 @@ namespace CFMMCD.DropDown
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<GenericDropDownList> list = new List<GenericDropDownList>();
+                GenericDropDownList option = new GenericDropDownList();
+                option.text = "";
+                option.value = "0";
+                list.Add(option);
                 foreach (var i in db.LOCATIONs)
                 {
-                    GenericDropDownList option = new GenericDropDownList();
+                    option = new GenericDropDownList();
                     option.text = i.LOCATN;
                     option.value = i.Id.ToString();
                     list.Add(option);
@@ -178,9 +182,13 @@ namespace CFMMCD.DropDown
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<GenericDropDownList> list = new List<GenericDropDownList>();
+                GenericDropDownList option = new GenericDropDownList();
+                option.text = "";
+                option.value = "0";
+                list.Add(option);
                 foreach (var i in db.Store_Profile)
                 {
-                    GenericDropDownList option = new GenericDropDownList();
+                    option = new GenericDropDownList();
                     option.text = i.STORE_NAME;
                     option.value = i.STORE_NO.ToString();
                     list.Add(option);
@@ -209,9 +217,13 @@ namespace CFMMCD.DropDown
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<GenericDropDownList> list = new List<GenericDropDownList>();
+                GenericDropDownList option = new GenericDropDownList();
+                option.text = "";
+                option.value = "0";
+                list.Add(option);
                 foreach (var i in db.INVVEMP0)
                 {
-                    GenericDropDownList option = new GenericDropDownList();
+                    option = new GenericDropDownList();
                     option.text = i.VEMDS1;
                     option.value = i.VEMVEN.ToString();
                     list.Add(option);
@@ -293,6 +305,29 @@ namespace CFMMCD.DropDown
                     GenericDropDownList option = new GenericDropDownList();
                     option.text = i.UOMDEL;
                     option.value = i.UOMDES;
+                    list.Add(option);
+                }
+                return list;
+            }
+        }
+        public List<GenericDropDownList> SetGroupList()
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<GenericDropDownList> list = new List<GenericDropDownList>();
+                int previousGroup = 0;
+                GenericDropDownList option = new GenericDropDownList();
+                option.text = "";
+                option.value = "0";
+                list.Add(option);
+                foreach (var i in db.ITMGRPs.OrderBy(o => o.Group_Id))
+                {
+                    if (previousGroup == i.Group_Id)
+                        continue;
+                    previousGroup = i.Group_Id;
+                    option = new GenericDropDownList();
+                    option.text = i.Group_Name;
+                    option.value = i.Group_Id.ToString();
                     list.Add(option);
                 }
                 return list;

@@ -94,6 +94,9 @@ namespace CFMMCD.Models.EntityManager
                 vm.MIMNPT = MIMRow.MIMNPT.Trim();
                 vm.MIMLON = MIMRow.MIMLON.Trim();
                 vm.MIMUTC = MIMRow.MIMUTC.ToString();
+                if (MIMRow.Group != null)
+                    vm.Group = (int)MIMRow.Group;
+                else vm.Group = 0;
 
                 vm.Trading_Area = MIMRow.Trading_Area.ToString();
                 vm.Category = MIMRow.Category.ToString();
@@ -206,6 +209,39 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.MIMNPA = 0;
                 MIMRow.MIMNNP = 0;
                 MIMRow.MIMNPT = MIMViewModel.MIMNPT.Trim();
+                // Group
+                var IGRowLookup = db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(MIMViewModel.MIMMIC));
+                IGRowLookup = IGRowLookup.Where(o => o.Item_Type == 1);
+                if (IGRowLookup.Any())
+                {
+                    if (MIMViewModel.Group == 0)
+                    {
+                        int val = IGRowLookup.FirstOrDefault().Id;
+                        ItemGroupManager.DeleteItem(val);
+                    }
+                    else
+                    {
+                        IGRowLookup.FirstOrDefault().Item_Code = int.Parse(MIMViewModel.MIMMIC);
+                        IGRowLookup.FirstOrDefault().Item_Name = MIMViewModel.MIMNAM;
+                        IGRowLookup.FirstOrDefault().Group_Id = MIMViewModel.Group;
+                        IGRowLookup.FirstOrDefault().Group_Name = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == MIMViewModel.Group).Group_Name;
+                    }
+                }
+                else
+                {
+                    if (MIMViewModel.Group != 0)
+                    {
+                        ItemGroupViewModel IGRow = new ItemGroupViewModel();
+                        IGRow.GroupName = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == MIMViewModel.Group).Group_Name;
+                        IGRow.GroupId = MIMViewModel.Group;
+                        IGRow.ItemCode = int.Parse(MIMViewModel.MIMMIC);
+                        IGRow.ItemName = MIMViewModel.MIMNAM;
+                        IGRow.ItemType = 1;
+                        IGRow.GroupType = 1;
+                        ItemGroupManager.UpdateGroup(IGRow);
+                    }
+                }
+                MIMRow.Group = MIMViewModel.Group;
                 // Items not originally in the table but
                 // have Input field
                 if (MIMViewModel.MIMLON != null)
@@ -245,7 +281,7 @@ namespace CFMMCD.Models.EntityManager
                 MIMRow.City = MIMViewModel.City;
                 MIMRow.Province = MIMViewModel.Province;
                 MIMRow.Region = MIMViewModel.Region;
-                if (MIMViewModel.Location != null && MIMViewModel.Location.Equals(""))
+                if (MIMViewModel.Location != null && !MIMViewModel.Location.Equals(""))
                     MIMRow.Location = int.Parse(MIMViewModel.Location);
                 // Store
                 MIMRow.Store = MIMViewModel.Store;
@@ -332,18 +368,19 @@ namespace CFMMCD.Models.EntityManager
                 {
                     // Delete Recipe
                     List<INVRIRP0> MIRecipe = db.INVRIRP0.Where(o => o.RIRMIC == MIMRow.MIMMIC).ToList();
-                    foreach (INVRIRP0 ri in MIRecipe)
-                    {
-                        db.INVRIRP0.Remove(ri);
-                    }
+                    db.INVRIRP0.RemoveRange(MIRecipe);
                     // Delete MIM_Price
                     if (db.MIM_Price.Where(o => o.MIMMIC == MIMRow.MIMMIC).Any())
                     {
                         List<MIM_Price> MIMPrice = db.MIM_Price.Where(o => o.MIMMIC == MIMRow.MIMMIC).ToList();
-                        foreach (MIM_Price mp in MIMPrice)
-                        {
-                            db.MIM_Price.Remove(mp);
-                        }
+                        db.MIM_Price.RemoveRange(MIMPrice);
+                    }
+                    // Delete Group
+                    var IGRowLookup = db.ITMGRPs.Where(o => o.Item_Code == MIMRow.MIMMIC);
+                    IGRowLookup = IGRowLookup.Where(o => o.Item_Type == 1);
+                    if (IGRowLookup.Any())
+                    {
+                        db.ITMGRPs.RemoveRange(IGRowLookup);
                     }
                     db.CSHMIMP0.Remove(MIMRow);
                     db.SaveChanges();

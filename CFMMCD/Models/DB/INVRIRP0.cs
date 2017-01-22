@@ -29,5 +29,6 @@ namespace CFMMCD.Models.DB
         public Nullable<double> RIMCPR { get; set; }
         public string LongName { get; set; }
         public string Description { get; set; }
+        public Nullable<int> Group { get; set; }
     }
 }

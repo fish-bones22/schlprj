@@ -1,0 +1,309 @@
+﻿@model CFMMCD.Models.ViewModel.ItemGroupViewModel
+@using CFMMCD.Models.ViewModel
+@{
+    ViewBag.Title = "Menu Item Group";
+    string activeLi = "active";
+}
+
+<h2 align="center">@ViewBag.Title</h2>
+<hr />
+<!--Alerts-->
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable fade in">@TempData["SuccessMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
+    }
+</div>
+<div class="form-horizontal">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+
+            <div class="col-lg-2">
+                <br />
+                <strong>Group list</strong>
+                <hr />
+                <ul class="nav nav-pills nav-stacked">
+                    @{
+                        if (Model.GroupList.Count() > 0)
+                        {
+                            for (int i = 0; i < Model.GroupList.Count(); i++)
+                            {
+                                if (i == 0)
+                                {
+                                    activeLi = "active";
+                                }
+                                else
+                                {
+                                    activeLi = "";
+                                }
+
+                                <li class="@activeLi">
+
+                                    <a data-toggle="tab" href="#@Model.GroupList[i].GroupId">@Model.GroupList[i].GroupName</a>
+                                </li>
+                                activeLi = "";
+                            }
+                        }
+                        <li class="@activeLi"><a data-toggle="tab" href="#AddNew">+ Add group</a></li>
+
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-10">
+                <div class="tab-content">
+                    @{
+                        if (Model.GroupList.Count() > 0)
+                        {
+                            var mgl = Model.GroupList;
+                            for (int i = 0; i < Model.GroupList.Count(); i++)
+                            {
+                                if (i == 0)
+                                {
+                                    activeLi = "active";
+                                }
+                                else
+                                {
+                                    activeLi = "";
+                                }
+
+                                <div id="@mgl[i].GroupId" class="tab-pane fade in @activeLi">
+                                    <br />
+                                    <div class="container-fluid">
+                                        <!--Store-->
+                                        @using (Html.BeginForm("UpdateItem", "MenuItemGroup", FormMethod.Post, new { @Id = "Form-Store-" + @mgl[i].GroupId }))
+                                        {
+                                            <div class="col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-lg-5 col-lg-offset-1"><strong>Store number</strong></div>
+                                                    <div class="col-lg-5"><strong>Store name</strong></div>
+                                                </div>
+                                                <hr />
+                                                @for (int j = 0; j < mgl[i].StoreList.Count(); j++)
+                                                {
+                                                    Model.StoreList.Add(new Item());
+                                                    if (mgl[i].StoreList[j].ItemType == 3 && mgl[i].StoreList[j].ItemId != 0)
+                                                    {
+                                                        <div class="form-group">
+                                                            <div class="col-lg-5 col-lg-offset-1">@mgl[i].StoreList[j].ItemId</div>
+                                                            <div class="col-lg-5">
+                                                                @mgl[i].StoreList[j].Name
+                                                                <button type="submit" name="value" class="close item-delete" aria-label="close" value="@mgl[i].StoreList[j].Id">&times;</button>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                                <div class="col-lg-12">
+                                                    <button type="button" class="btn btn-default btn-add-store right" value="Store-@mgl[i].GroupId">Add store</button>
+                                                </div>
+                                                @Html.HiddenFor(m => Model.ItemCode, new { @class = "Code-Store-" + @mgl[i].GroupId })
+                                                @Html.HiddenFor(m => Model.ItemName, new { @class = "Name-Store-" + @mgl[i].GroupId })
+                                                @Html.HiddenFor(m => m.GroupType, new { @Value = 1 })
+                                                @Html.HiddenFor(m => m.ItemType, new { @Value = 3 })
+                                                @Html.HiddenFor(m => m.GroupId, new { @Value = mgl[i].GroupId })
+                                                @Html.HiddenFor(m => m.GroupName, new { @Value = mgl[i].GroupName })
+                                            </div>
+                                        }
+
+                                        <!--Item-->
+                                        @using (Html.BeginForm("UpdateItem", "MenuItemGroup", FormMethod.Post, new { @Id = "Form-Item-" + @mgl[i].GroupId }))
+                                        {
+                                            <div class="col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-lg-5 col-lg-offset-1"><strong>Menu item code</strong></div>
+                                                    <div class="col-lg-5"><strong>Menu item name</strong></div>
+                                                </div>
+                                                <hr />
+                                                @for (int j = 0; j < mgl[i].ItemList.Count(); j++)
+                                                {
+                                                    Model.ItemList.Add(new Item());
+                                                    if (mgl[i].ItemList[j].ItemType == 1 && mgl[i].ItemList[j].ItemId != 0)
+                                                    {
+                                                        <div class="form-group">
+                                                            <div class="col-lg-5 col-lg-offset-1">@mgl[i].ItemList[j].ItemId</div>
+                                                            <div class="col-lg-5">
+                                                                @mgl[i].ItemList[j].Name
+                                                                <button type="submit" name="value" class="close item-delete" aria-label="close" value="@mgl[i].ItemList[j].Id">&times;</button>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                                <div class="col-lg-12">
+                                                    <button type="button" class="btn btn-default right btn-add-item" value="Item-@mgl[i].GroupId">Add menu item</button>
+                                                </div>
+                                                @Html.HiddenFor(m => Model.ItemCode, new { @class = "Code-Item-" + @mgl[i].GroupId })
+                                                @Html.HiddenFor(m => Model.ItemName, new { @class = "Name-Item-" + @mgl[i].GroupId })
+                                                @Html.HiddenFor(m => m.GroupType, new { @Value = 1 })
+                                                @Html.HiddenFor(m => m.ItemType, new { @Value = 1 })
+                                                @Html.HiddenFor(m => m.GroupId, new { @Value = mgl[i].GroupId })
+                                                @Html.HiddenFor(m => m.GroupName, new { @Value = mgl[i].GroupName })
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                    <div class="form-inline bottom float" style="right:50px">
+                                        @using (Html.BeginForm("DeleteGroup", "MenuItemGroup", FormMethod.Post, new { @Id = "Form-" + @Model.GroupList[i].GroupId }))
+                                        {
+                                            <button name="value" type="button" class="btn btn-default group-delete" aria-label="close" value="@Model.GroupList[i].GroupId">Delete group</button>
+                                            <input type="hidden" name="value" value="@Model.GroupList[i].GroupId" />
+                                        }
+                                    </div>
+                                </div>
+                                activeLi = "";
+                            }
+                        }
+                    }
+
+                    <div id="AddNew" class="tab-pane fade in @activeLi">
+                        <br />
+                        <div class="container-fluid">
+                            <div class="col-lg-8 col-lg-offset-2">
+                                @using (Html.BeginForm("AddNewGroup", "MenuItemGroup", FormMethod.Post, new { }))
+                                {
+                                    @Html.TextBoxFor(m => m.GroupName, new { @class = "form-control input-sm", @placeholder = "Group name" })
+                                    @Html.HiddenFor(m => m.ItemType, new { @Value = 1 })
+                                    @Html.HiddenFor(m => m.GroupType, new { @Value = 1 })
+                                    <button type="submit" class="btn btn-default right">Add</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+</div>
+
+<!--Search Store modal-->
+<div class="modal fade" id="search-store-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Select store</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search store" autofocus />
+            </div>
+            <hr />
+            <div class="container-fluid text-center">
+                <div class="col-lg-4"><strong>Store number</strong></div>
+                <div class="col-lg-8"><strong>Store name</strong></div>
+            </div>
+        </div>
+        <div class="modal-body">
+            @for (int i = 0; i < Model.AllStoreList.Count(); i++)
+            {
+                <button type="submit" class="store-select modal-item-select tr-collapse @Model.AllStoreList[i].Store_No @Model.AllStoreList[i].Store_Name" name="value" value=@Model.AllStoreList[i].Store_No>
+                    <div class="col-lg-4">
+                        @Model.AllStoreList[i].Store_No
+                    </div>
+                    <div class="col-lg-8 name">
+                        @Model.AllStoreList[i].Store_Name
+                    </div>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+<!--Search item modal-->
+<div class="modal fade" id="search-item-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Select item</h4>
+            <div class="container-fluid">
+                <input type="search" class="form-control" id="SearchFrontEnd" placeholder="Search menu item" autofocus />
+                <div class="input-group float-right" style="padding-top:8px">
+                    <label class="checkbox-inline form-label">
+                        <input type="checkbox" id="InactiveItemsCb" name="InactiveItemsCb" />Show inactive items
+                    </label>
+                </div>
+            </div>
+            <hr />
+            <div class="container-fluid text-center">
+                <div class="col-lg-4"><strong>Menu item code</strong></div>
+                <div class="col-lg-8"><strong>Menu item name</strong></div>
+            </div>
+        </div>
+        <div class="modal-body">
+            @for (int i = 0; i < Model.MenuItemList.Count(); i++)
+            {
+                string ActiveInactive = "active";
+                if (Model.MenuItemList[i].MIMSTA.Equals("1"))
+                {
+                    ActiveInactive = "inactive";
+                }
+                <button type="submit" class="item-select modal-item-select tr-collapse @Model.MenuItemList[i].MIMMIC @Model.MenuItemList[i].MIMDSC @ActiveInactive" name="value" value=@Model.MenuItemList[i].MIMMIC>
+                    <div class="col-lg-4">
+                        @Model.MenuItemList[i].MIMMIC
+                    </div>
+                    <div class="col-lg-8 name">
+                        @Model.MenuItemList[i].MIMDSC
+                    </div>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="dialog-modal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Delete?</h4>
+        </div>
+        <div class="modal-body" style="overflow-y:hidden">
+            <button type="button" class="btn btn-default btn-modal-yes">Delete</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(window).ready(function () {
+        var formId = "";
+
+        $(".item-select").click(function () {
+            onModalItemSelect($(this), formId);
+        });
+
+        $(".store-select").click(function () {
+            onModalItemSelect($(this), formId);
+        });
+
+        $(".btn-add-store").click(function () {
+            $("#search-store-modal").modal("show");
+            formId = $(this).val();
+        });
+
+        $(".btn-add-item").click(function () {
+            $("#search-item-modal").modal("show");
+            formId = $(this).val();
+        });
+
+        $(".group-delete").click(function () {
+            var value = $(this).val();
+            $("#dialog-modal").modal("show");
+            $(".btn-modal-yes").click(function () {
+                $("#Form-" + value).submit();
+            });
+        });
+
+    });
+    // Modal select : Menu item
+    function onModalItemSelect(item, formValue) {
+        var value = item.val();
+        var name = item.children(".name").text().trim();
+        $(".Code-" + formValue).val(value);
+        $(".Name-" + formValue).val(name);
+        $("#Form-" + formValue).submit();
+    }
+</script>
+
+
+
+

@@ -243,7 +243,7 @@
                             @Html.DropDownListFor(m => Model.City, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "city", @Value = Model.City })
                             <!--select id="city" name="City" class="form-control input-sm"></!--select>-->
                         </div>
-
+                        <hr />
 						<div class="form-group">
 							<label class="form-label">Store list</label>
 							@Html.DropDownListFor( m => Model.StoreSelected, new SelectList( Model.StoreList, "value", "text", Model.StoreSelected), new { @class = "form-control input-sm"} )
@@ -258,6 +258,11 @@
 								Select except
 							</label>
 						</div>
+                        <hr />
+                        <div class="form-group">
+                            <label class="form-label">Group list</label>
+                            @Html.DropDownListFor(m => Model.Group, new SelectList(Model.GroupList, "value", "text", Model.Group), new { @class = "form-control input-sm" })
+                        </div>
 					</div>
 				</div>
 				<div class="col-lg-3">
@@ -375,9 +380,12 @@
             <!--Hiddens-->
             @Html.HiddenFor(m => Model.SwitchItem)
 			<div class="form-inline bottom float" style="right:50px">
-				<button type="button" id="Switch" class="btn btn-default">Switch</button>
 				<button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
-				<button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
+                @if (Model.RIMRIC != null && !Model.RIMRIC.Equals(""))
+                {
+                    <button type="button" id="Switch" class="btn btn-secondary">Switch</button>
+                    <button type="submit" name="command" value="Delete" class="btn btn-secondary">Delete</button>
+                }
 			</div>
 		}
 	</div>
@@ -491,7 +499,7 @@
 <script>
     // Region, Province, and City Dropdown Handling
     @{
-        string region = "NCR";
+        string region = "";
         string province = "";
         string city = "";
         if (@Model.Region != null)

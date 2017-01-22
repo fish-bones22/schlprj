@@ -25,6 +25,7 @@ namespace CFMMCD.Models.ViewModel
             McCafeBistroTier = tdd.SetMcCafeBistroPriceTierDropDown();
             ProjectGoldTier = tdd.SetProjectGoldPriceTierDropDown();
             BusinessExtList = tdd.SetBusinessExtensionList();
+            GroupList = tdd.SetGroupList();
             StoreList = new List<Store>();
             BET = new List<bool>();
             foreach (CheckBoxList cbl in BusinessExtList)
@@ -57,7 +58,7 @@ namespace CFMMCD.Models.ViewModel
         public string SIMPLOT_OR_MCCAIN { get; set; }
         public string MCCORMICK_OR_GSF { get; set; }
         public string FRESHB_OR_FROZENB { get; set; }
-
+        public int Group { get; set; }
         public List<bool> BET { get; set; }
 
         public List<CheckBoxList> BusinessExtList { get; set; }
@@ -72,6 +73,7 @@ namespace CFMMCD.Models.ViewModel
         public List<GenericDropDownList> McCafeLevel3Tier { get; set; }
         public List<GenericDropDownList> McCafeBistroTier { get; set; }
         public List<GenericDropDownList> ProjectGoldTier { get; set; }
+        public List<GenericDropDownList> GroupList { get; set; }
 
         public List<Store> StoreList { get; set; }
     }

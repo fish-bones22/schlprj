@@ -22,6 +22,7 @@ namespace CFMMCD.Models.ViewModel
             MIMFGCList = tdd.SetPMGList("PMGFGC");
             MIMHPTList = tdd.SetPMGList("PMGHPT");
             MIMWGRList = tdd.SetPMGList("PMGWGR");
+            GroupList = tdd.SetGroupList();
         }
 
         public string SearchItem { get; set; }
@@ -68,6 +69,7 @@ namespace CFMMCD.Models.ViewModel
         public string Store { get; set; }
         public bool SelectAllCb { get; set; }
         public bool SelectExcept { get; set; }
+        public int Group { get; set; }
 
         public List<MenuItem> MenuItemMasterList { get; set; }
 
@@ -80,6 +82,7 @@ namespace CFMMCD.Models.ViewModel
         public List<GenericDropDownList> LocationList { get; set; }
         public List<MenuRecipe> MenuRecipeList { get; set; }
         public List<Tier> TierList { get; set; }
+        public List<GenericDropDownList> GroupList { get; set; }
     }
 
     public class Tier

@@ -41,6 +41,7 @@ namespace CFMMCD.Models.ViewModel
         public bool OWNInput { get; set; }
         public bool PRCInput { get; set; }
         public bool LOCInput { get; set; }
+        public bool GRPInput { get; set; }
         public string UserAccess { get; set; }
 
         public bool EditMode { get; set; }

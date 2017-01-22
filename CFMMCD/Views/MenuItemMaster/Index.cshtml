@@ -161,6 +161,7 @@
                                 <label class="form-label">City</label>
                                 @Html.DropDownListFor(m => Model.City, new SelectList(new List<Object>()), new { @class = "form-control input-sm", @Id = "city", @Value = Model.City })
                             </div>
+                            <hr />
                             <div class="form-group">
                                 <label class="form-label">Store list</label>
                                 @Html.DropDownListFor(m => Model.Store, new SelectList(Model.StoreList, "value", "text", Model.Store), new { @class = "form-control input-sm" })
@@ -174,6 +175,11 @@
                                     @Html.CheckBoxFor(m => Model.SelectExcept)
                                     Select except
                                 </label>
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <label class="form-label">Group list</label>
+                                @Html.DropDownListFor(m => Model.Group, new SelectList(Model.GroupList, "value", "text", Model.Group), new { @class = "form-control input-sm" })
                             </div>
                         </div>
                     </div>
@@ -302,7 +308,10 @@
             </div>
             <div class="form-inline bottom float" style="right:50px">
                 <button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
-                <button type="submit" name="command" value="Delete" class="btn btn-default">Delete</button>
+                @if (Model.MIMMIC != null && !Model.MIMMIC.Equals(""))
+                {
+                    <button type="submit" name="command" value="Delete" class="btn btn-secondary">Delete</button>
+                }
             </div>
         }
     </div>
@@ -353,7 +362,7 @@
 </div>
 <script>
      @{
-         string region = "NCR";
+         string region = "";
          string province = "";
          string city = "";
          if (@Model.Region != null)

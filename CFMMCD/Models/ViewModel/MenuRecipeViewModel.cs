@@ -19,6 +19,7 @@ namespace CFMMCD.Models.ViewModel
             RIRCWC = new List<string>();
             RIRSTA = new List<string>();
             STOATT = new List<string>();
+            GroupList = tdd.SetGroupList();
             RIRRIC.Add("");
             RIMRID.Add("");
             RIMCPR.Add("");
@@ -33,6 +34,7 @@ namespace CFMMCD.Models.ViewModel
         public string RIRMIC { get; set; }
         public string MIMLON { get; set; }
         public string MIMDSC { get; set; }
+        public int Group { get; set; }
         public List<RecipeTextBox> RecipeList { get; set; }
         public List<string> RIRRIC { get; set; }
         public List<string> RIMRID { get; set; }
@@ -41,6 +43,7 @@ namespace CFMMCD.Models.ViewModel
         public List<string> RIRCWC { get; set; }
         public List<string> RIRSTA { get; set; }
         public List<string> STOATT { get; set; }
+        public List<GenericDropDownList> GroupList { get; set; }
         public List<MenuItem> MenuItemList { get; set; }
         public List<MenuRecipe> MenuRecipeList { get; set; }
         public List<RawItem> RawItemList { get; set; }

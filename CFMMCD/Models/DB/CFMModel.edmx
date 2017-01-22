@@ -112,6 +112,7 @@
           <Property Name="City" Type="nvarchar" MaxLength="20" />
           <Property Name="Store" Type="nvarchar" MaxLength="10" />
           <Property Name="Except_Store" Type="nvarchar" MaxLength="10" />
+          <Property Name="Group" Type="int" />
         </EntityType>
         <EntityType Name="CSHMIMP0_NP6">
           <Key>
@@ -229,6 +230,7 @@
           <Property Name="Region" Type="nvarchar" MaxLength="20" />
           <Property Name="Province" Type="nvarchar" MaxLength="20" />
           <Property Name="City" Type="nvarchar" MaxLength="20" />
+          <Property Name="Group" Type="int" />
         </EntityType>
         <EntityType Name="INVRIRP0">
           <Key>
@@ -249,6 +251,7 @@
           <Property Name="RIMCPR" Type="float" />
           <Property Name="LongName" Type="nvarchar" MaxLength="20" />
           <Property Name="Description" Type="nvarchar" MaxLength="20" />
+          <Property Name="Group" Type="int" />
         </EntityType>
         <EntityType Name="INVUOMP0">
           <Key>
@@ -266,8 +269,8 @@
           </Key>
           <Property Name="VEMVEN" Type="int" Nullable="false" />
           <Property Name="VEMWSI" Type="int" />
-          <Property Name="VEMDS1" Type="nchar" MaxLength="20" />
-          <Property Name="VEMDS2" Type="nchar" MaxLength="20" />
+          <Property Name="VEMDS1" Type="nvarchar" MaxLength="20" />
+          <Property Name="VEMDS2" Type="nvarchar" MaxLength="20" />
           <Property Name="VEMCCD" Type="nchar" MaxLength="3" />
           <Property Name="VEMZIP" Type="nchar" MaxLength="5" />
           <Property Name="VEMCTY" Type="nvarchar" MaxLength="20" />
@@ -297,19 +300,9 @@
           <Property Name="Group_Id" Type="int" Nullable="false" />
           <Property Name="Group_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Item_Code" Type="int" Nullable="false" />
-          <Property Name="Item_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Item_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Item_Type" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ITMSTOGRP">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Group_Id" Type="int" Nullable="false" />
-          <Property Name="Group_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Store_Id" Type="int" Nullable="false" />
-          <Property Name="Store_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Item_Type" Type="int" Nullable="false" />
+          <Property Name="Group_Type" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LOCATION">
           <Key>
@@ -363,16 +356,6 @@
           <Property Name="MIMNPD" Type="float" />
           <Property Name="MIMNNP" Type="float" />
           <Property Name="MIMPND" Type="date" />
-        </EntityType>
-        <EntityType Name="MIMSTRGRP">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Group_Id" Type="int" Nullable="false" />
-          <Property Name="Group_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Store_Id" Type="int" Nullable="false" />
-          <Property Name="Store_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="OWNERSHIP">
           <Key>
@@ -440,7 +423,7 @@
             <PropertyRef Name="STORE_NO" />
           </Key>
           <Property Name="STORE_NO" Type="int" Nullable="false" />
-          <Property Name="STORE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="STORE_NAME" Type="nvarchar" MaxLength="20" />
           <Property Name="OWNERSHIP" Type="int" />
           <Property Name="BREAKFAST_PRICE_TIER" Type="int" />
           <Property Name="REGULAR_PRICE_TIER" Type="int" />
@@ -464,6 +447,7 @@
           <Property Name="MCCORMICK_OR_GSF" Type="nvarchar" MaxLength="10" />
           <Property Name="FRESHB_OR_FROZENB" Type="nvarchar" MaxLength="10" />
           <Property Name="STATUS" Type="nchar" MaxLength="1" />
+          <Property Name="Group" Type="int" />
         </EntityType>
         <EntityType Name="Trading_Area">
           <Key>
@@ -502,14 +486,12 @@
           <EntitySet Name="INVUOMP0" EntityType="Self.INVUOMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVVEMP0" EntityType="Self.INVVEMP0" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ITMGRP" EntityType="Self.ITMGRP" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ITMSTOGRP" EntityType="Self.ITMSTOGRP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="Self.McCafe_Bistro_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="Self.McCafe_Level_2_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="Self.McCafe_Level_3_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDS_Price_Tier" EntityType="Self.MDS_Price_Tier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MIM_Price" EntityType="Self.MIM_Price" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MIMSTRGRP" EntityType="Self.MIMSTRGRP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OWNERSHIP" EntityType="Self.OWNERSHIP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROFIT_CEN" EntityType="Self.PROFIT_CEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project_Gold_Price_Tier" EntityType="Self.Project_Gold_Price_Tier" Schema="dbo" store:Type="Tables" />
@@ -533,15 +515,12 @@
           <EntitySet Name="Breakfast_Price_Tier" EntityType="CFMMCDModel.Breakfast_Price_Tier" />
           <EntitySet Name="BUSINESS_EXT" EntityType="CFMMCDModel.BUSINESS_EXT" />
           <EntitySet Name="Categories" EntityType="CFMMCDModel.Category" />
-          <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
           <EntitySet Name="CSHMIMP0_NP6" EntityType="CFMMCDModel.CSHMIMP0_NP6" />
           <EntitySet Name="CSHPMGP0" EntityType="CFMMCDModel.CSHPMGP0" />
           <EntitySet Name="CSHVMLP0" EntityType="CFMMCDModel.CSHVMLP0" />
           <EntitySet Name="CSM_Master_Recipe" EntityType="CFMMCDModel.CSM_Master_Recipe" />
           <EntitySet Name="Dessert_Price_Tier" EntityType="CFMMCDModel.Dessert_Price_Tier" />
           <EntitySet Name="INVMGRP0" EntityType="CFMMCDModel.INVMGRP0" />
-          <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
-          <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
           <EntitySet Name="INVUOMP0" EntityType="CFMMCDModel.INVUOMP0" />
           <EntitySet Name="INVVEMP0" EntityType="CFMMCDModel.INVVEMP0" />
           <EntitySet Name="LOCATIONs" EntityType="CFMMCDModel.LOCATION" />
@@ -556,17 +535,18 @@
           <EntitySet Name="RIM_VEM_Lookup" EntityType="CFMMCDModel.RIM_VEM_Lookup" />
           <EntitySet Name="SCM_Master_Recipe" EntityType="CFMMCDModel.SCM_Master_Recipe" />
           <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="CFMMCDModel.STORE_MIMMIC_Lookup" />
-          <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
           <EntitySet Name="Trading_Area" EntityType="CFMMCDModel.Trading_Area" />
+          <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
+          <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
+          <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
+          <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
           <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="CFMMCDModel.FK_CSHMIMP0_ToTable">
             <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
             <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
           </AssociationSet>
-          <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
-          <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
+          <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
           <EntitySet Name="ITMGRPs" EntityType="CFMMCDModel.ITMGRP" />
-          <EntitySet Name="ITMSTOGRPs" EntityType="CFMMCDModel.ITMSTOGRP" />
-          <EntitySet Name="MIMSTRGRPs" EntityType="CFMMCDModel.MIMSTRGRP" />
+          <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
         </EntityContainer>
         <EntityType Name="Audit_Log">
           <Key>
@@ -600,71 +580,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Category1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="CSHMIMP0">
-          <Key>
-            <PropertyRef Name="MIMMIC" />
-          </Key>
-          <Property Name="MIMMIC" Type="Int32" Nullable="false" />
-          <Property Name="MIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="MIMFGC" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="MIMDSC" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="MIMSSC" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="MIMDPC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMCIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMDGC" Type="Int32" />
-          <Property Name="MIMASC" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMTXC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMUTC" Type="Int32" />
-          <Property Name="MIMDWE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMTCI" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMPRI" Type="Double" />
-          <Property Name="MIMTCA" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMPRO" Type="Double" />
-          <Property Name="MIMTCG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMPRG" Type="Double" />
-          <Property Name="MIMPND" Type="DateTime" Precision="0" />
-          <Property Name="MIMKBP" Type="Int32" />
-          <Property Name="MIMKSC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMSKT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMGRP" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMWLV" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMWSD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMWGR" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMHPT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="MIMDAT" Type="DateTime" Precision="0" />
-          <Property Name="MIMEDT" Type="DateTime" Precision="0" />
-          <Property Name="MIMFLG" Type="Boolean" />
-          <Property Name="MIMBIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMBIT" Type="Int32" />
-          <Property Name="MIMBIR" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMBGR" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
-          <Property Name="MIMBQU" Type="Int32" />
-          <Property Name="MIMGRA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMIST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="MIMCLR" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="MIMNPI" Type="Double" />
-          <Property Name="MIMNPO" Type="Double" />
-          <Property Name="MIMNPD" Type="Double" />
-          <Property Name="MIMSKI" Type="Int32" />
-          <Property Name="MIMBMI" Type="Int32" />
-          <Property Name="MIMNPA" Type="Double" />
-          <Property Name="MIMNNP" Type="Double" />
-          <Property Name="MIMNPT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="MIMMIC_NP6" Type="Int32" />
-          <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="Category" Type="Int32" />
-          <Property Name="Trading_Area" Type="Int32" />
-          <Property Name="Location" Type="Int32" />
-          <Property Name="Region" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Province" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Except_Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CSHMIMP0_NP6" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0" ToRole="CSHMIMP0_NP6" />
         </EntityType>
         <EntityType Name="CSHMIMP0_NP6">
           <Key>
@@ -726,84 +641,6 @@
           <Property Name="MGRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityType Name="INVRIMP0">
-          <Key>
-            <PropertyRef Name="RIMRIC" />
-          </Key>
-          <Property Name="RIMRIC" Type="Int32" Nullable="false" />
-          <Property Name="RIMVPC" Type="Int32" />
-          <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMUPC" Type="Double" />
-          <Property Name="RIMSUQ" Type="Double" />
-          <Property Name="RIMLAY" Type="Int32" />
-          <Property Name="RIMCPR" Type="Double" />
-          <Property Name="RIMCPN" Type="Double" />
-          <Property Name="RIMPDT" Type="DateTime" Precision="0" />
-          <Property Name="RIMPVN" Type="Int32" />
-          <Property Name="RIMSVN" Type="Int32" />
-          <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMUSF" Type="Double" />
-          <Property Name="RIMSDP" Type="Double" />
-          <Property Name="RIMUS1" Type="Double" />
-          <Property Name="RIMUS2" Type="Double" />
-          <Property Name="RIMUS3" Type="Double" />
-          <Property Name="RIMUS4" Type="Double" />
-          <Property Name="RIMUS5" Type="Double" />
-          <Property Name="RIMUSX" Type="Double" />
-          <Property Name="RIMMSD" Type="Double" />
-          <Property Name="RIMMSL" Type="Double" />
-          <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMLP1" Type="Int32" />
-          <Property Name="RIMLP2" Type="Int32" />
-          <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIMDAT" Type="DateTime" Precision="0" />
-          <Property Name="RIMEDT" Type="DateTime" Precision="0" />
-          <Property Name="RIMFLG" Type="Boolean" />
-          <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMLIN" Type="Int32" />
-          <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Except_Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="Int32" />
-          <Property Name="Store_Attrib" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Region" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="INVRIRP0">
-          <Key>
-            <PropertyRef Name="RIRRID" />
-          </Key>
-          <Property Name="RIRRID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RIRMIC" Type="Int32" />
-          <Property Name="RIRRIC" Type="Int32" />
-          <Property Name="RIRVPC" Type="Int32" />
-          <Property Name="RIRSFQ" Type="Double" />
-          <Property Name="RIRCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIRVST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIRUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="RIRDAT" Type="DateTime" Precision="0" />
-          <Property Name="RIRFLG" Type="Boolean" />
-          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="RIMCPR" Type="Double" />
-          <Property Name="LongName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="INVUOMP0">
           <Key>
             <PropertyRef Name="UOMDES" />
@@ -820,8 +657,8 @@
           </Key>
           <Property Name="VEMVEN" Type="Int32" Nullable="false" />
           <Property Name="VEMWSI" Type="Int32" />
-          <Property Name="VEMDS1" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="VEMDS2" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="VEMDS1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VEMDS2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="VEMCCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
           <Property Name="VEMZIP" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
           <Property Name="VEMCTY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -939,36 +776,6 @@
           <Property Name="STORE_NO" Type="Int32" />
           <Property Name="MIMMIC" Type="Int32" />
         </EntityType>
-        <EntityType Name="Store_Profile">
-          <Key>
-            <PropertyRef Name="STORE_NO" />
-          </Key>
-          <Property Name="STORE_NO" Type="Int32" Nullable="false" />
-          <Property Name="STORE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OWNERSHIP" Type="Int32" />
-          <Property Name="BREAKFAST_PRICE_TIER" Type="Int32" />
-          <Property Name="REGULAR_PRICE_TIER" Type="Int32" />
-          <Property Name="DC_PRICE_TIER" Type="Int32" />
-          <Property Name="MDS_PRICE_TIER" Type="Int32" />
-          <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="Int32" />
-          <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="Int32" />
-          <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="Int32" />
-          <Property Name="PROJECT_GOLD_PRICE_TIER" Type="Int32" />
-          <Property Name="BET" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PROFIT_CENTER" Type="Int32" />
-          <Property Name="REGION" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PROVINCE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LOCATION" Type="Int32" />
-          <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FRESH_OR_FROZEN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="PAPER_OR_PLASTIC" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="SIMPLOT_OR_MCCAIN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="MCCORMICK_OR_GSF" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="FRESHB_OR_FROZENB" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-        </EntityType>
         <EntityType Name="Trading_Area">
           <Key>
             <PropertyRef Name="Id" />
@@ -976,18 +783,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Trading_Areea" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_CSHMIMP0_ToTable">
-          <End Type="CFMMCDModel.CSHMIMP0_NP6" Role="CSHMIMP0_NP6" Multiplicity="0..1" />
-          <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CSHMIMP0_NP6">
-              <PropertyRef Name="MIMMIC" />
-            </Principal>
-            <Dependent Role="CSHMIMP0">
-              <PropertyRef Name="MIMMIC_NP6" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="MIM_Price">
           <Key>
             <PropertyRef Name="Id" />
@@ -1017,6 +812,174 @@
           <Property Name="AdminStatus" Type="Boolean" Nullable="false" />
           <Property Name="TimeLastLogged" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="CSHMIMP0">
+          <Key>
+            <PropertyRef Name="MIMMIC" />
+          </Key>
+          <Property Name="MIMMIC" Type="Int32" Nullable="false" />
+          <Property Name="MIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MIMFGC" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="MIMDSC" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="MIMSSC" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="MIMDPC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMCIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMDGC" Type="Int32" />
+          <Property Name="MIMASC" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMTXC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMUTC" Type="Int32" />
+          <Property Name="MIMDWE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMTCI" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMPRI" Type="Double" />
+          <Property Name="MIMTCA" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMPRO" Type="Double" />
+          <Property Name="MIMTCG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMPRG" Type="Double" />
+          <Property Name="MIMPND" Type="DateTime" Precision="0" />
+          <Property Name="MIMKBP" Type="Int32" />
+          <Property Name="MIMKSC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMSKT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMGRP" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMWLV" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMWSD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMWGR" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMHPT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="MIMDAT" Type="DateTime" Precision="0" />
+          <Property Name="MIMEDT" Type="DateTime" Precision="0" />
+          <Property Name="MIMFLG" Type="Boolean" />
+          <Property Name="MIMBIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMBIT" Type="Int32" />
+          <Property Name="MIMBIR" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMBGR" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="MIMBQU" Type="Int32" />
+          <Property Name="MIMGRA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMIST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MIMCLR" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="MIMNPI" Type="Double" />
+          <Property Name="MIMNPO" Type="Double" />
+          <Property Name="MIMNPD" Type="Double" />
+          <Property Name="MIMSKI" Type="Int32" />
+          <Property Name="MIMBMI" Type="Int32" />
+          <Property Name="MIMNPA" Type="Double" />
+          <Property Name="MIMNNP" Type="Double" />
+          <Property Name="MIMNPT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="MIMMIC_NP6" Type="Int32" />
+          <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Category" Type="Int32" />
+          <Property Name="Trading_Area" Type="Int32" />
+          <Property Name="Location" Type="Int32" />
+          <Property Name="Region" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Except_Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="Int32" />
+          <NavigationProperty Name="CSHMIMP0_NP6" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0" ToRole="CSHMIMP0_NP6" />
+        </EntityType>
+        <EntityType Name="INVRIMP0">
+          <Key>
+            <PropertyRef Name="RIMRIC" />
+          </Key>
+          <Property Name="RIMRIC" Type="Int32" Nullable="false" />
+          <Property Name="RIMVPC" Type="Int32" />
+          <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RIMRIG" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="RIMTEM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMPGR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RIMPIS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMBVP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMBZP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMUMC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMUPC" Type="Double" />
+          <Property Name="RIMSUQ" Type="Double" />
+          <Property Name="RIMLAY" Type="Int32" />
+          <Property Name="RIMCPR" Type="Double" />
+          <Property Name="RIMCPN" Type="Double" />
+          <Property Name="RIMPDT" Type="DateTime" Precision="0" />
+          <Property Name="RIMPVN" Type="Int32" />
+          <Property Name="RIMSVN" Type="Int32" />
+          <Property Name="RIMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMPRO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMSE4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMERT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMUSF" Type="Double" />
+          <Property Name="RIMSDP" Type="Double" />
+          <Property Name="RIMUS1" Type="Double" />
+          <Property Name="RIMUS2" Type="Double" />
+          <Property Name="RIMUS3" Type="Double" />
+          <Property Name="RIMUS4" Type="Double" />
+          <Property Name="RIMUS5" Type="Double" />
+          <Property Name="RIMUSX" Type="Double" />
+          <Property Name="RIMMSD" Type="Double" />
+          <Property Name="RIMMSL" Type="Double" />
+          <Property Name="RIMLA1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMLA2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMLP1" Type="Int32" />
+          <Property Name="RIMLP2" Type="Int32" />
+          <Property Name="RIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIMDAT" Type="DateTime" Precision="0" />
+          <Property Name="RIMEDT" Type="DateTime" Precision="0" />
+          <Property Name="RIMFLG" Type="Boolean" />
+          <Property Name="RIMORD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMLIN" Type="Int32" />
+          <Property Name="RIMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMBAR" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Except_Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="Int32" />
+          <Property Name="Store_Attrib" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_CSHMIMP0_ToTable">
+          <End Type="CFMMCDModel.CSHMIMP0_NP6" Role="CSHMIMP0_NP6" Multiplicity="0..1" />
+          <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSHMIMP0_NP6">
+              <PropertyRef Name="MIMMIC" />
+            </Principal>
+            <Dependent Role="CSHMIMP0">
+              <PropertyRef Name="MIMMIC_NP6" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Store_Profile">
+          <Key>
+            <PropertyRef Name="STORE_NO" />
+          </Key>
+          <Property Name="STORE_NO" Type="Int32" Nullable="false" />
+          <Property Name="STORE_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OWNERSHIP" Type="Int32" />
+          <Property Name="BREAKFAST_PRICE_TIER" Type="Int32" />
+          <Property Name="REGULAR_PRICE_TIER" Type="Int32" />
+          <Property Name="DC_PRICE_TIER" Type="Int32" />
+          <Property Name="MDS_PRICE_TIER" Type="Int32" />
+          <Property Name="MCCAFE_LEVEL_2_PRICE_TIER" Type="Int32" />
+          <Property Name="MCCAFE_LEVEL_3_PRICE_TIER" Type="Int32" />
+          <Property Name="MCCAFE_BISTRO_PRICE_TIER" Type="Int32" />
+          <Property Name="PROJECT_GOLD_PRICE_TIER" Type="Int32" />
+          <Property Name="BET" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PROFIT_CENTER" Type="Int32" />
+          <Property Name="REGION" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PROVINCE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LOCATION" Type="Int32" />
+          <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FRESH_OR_FROZEN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PAPER_OR_PLASTIC" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SIMPLOT_OR_MCCAIN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MCCORMICK_OR_GSF" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FRESHB_OR_FROZENB" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Group" Type="Int32" />
+        </EntityType>
         <EntityType Name="ITMGRP">
           <Key>
             <PropertyRef Name="Id" />
@@ -1025,29 +988,30 @@
           <Property Name="Group_Id" Type="Int32" Nullable="false" />
           <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Item_Code" Type="Int32" Nullable="false" />
-          <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Item_Type" Type="Int32" Nullable="false" />
+          <Property Name="Group_Type" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="ITMSTOGRP">
+        <EntityType Name="INVRIRP0">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="RIRRID" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Group_Id" Type="Int32" Nullable="false" />
-          <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Store_Id" Type="Int32" Nullable="false" />
-          <Property Name="Store_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Item_Type" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="MIMSTRGRP">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Group_Id" Type="Int32" Nullable="false" />
-          <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Store_Id" Type="Int32" Nullable="false" />
-          <Property Name="Store_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RIRRID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RIRMIC" Type="Int32" />
+          <Property Name="RIRRIC" Type="Int32" />
+          <Property Name="RIRVPC" Type="Int32" />
+          <Property Name="RIRSFQ" Type="Double" />
+          <Property Name="RIRCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIRVST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIRUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="RIRDAT" Type="DateTime" Precision="0" />
+          <Property Name="RIRFLG" Type="Boolean" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="RIMCPR" Type="Double" />
+          <Property Name="LongName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1089,71 +1053,6 @@
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="Category1" ColumnName="Category" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CSHMIMP0">
-            <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0">
-              <MappingFragment StoreEntitySet="CSHMIMP0">
-                <ScalarProperty Name="Except_Store" ColumnName="Except_Store" />
-                <ScalarProperty Name="Store" ColumnName="Store" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Province" ColumnName="Province" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Trading_Area" ColumnName="Trading_Area" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="MIMLON" ColumnName="MIMLON" />
-                <ScalarProperty Name="MIMMIC_NP6" ColumnName="MIMMIC_NP6" />
-                <ScalarProperty Name="MIMNPT" ColumnName="MIMNPT" />
-                <ScalarProperty Name="MIMNNP" ColumnName="MIMNNP" />
-                <ScalarProperty Name="MIMNPA" ColumnName="MIMNPA" />
-                <ScalarProperty Name="MIMBMI" ColumnName="MIMBMI" />
-                <ScalarProperty Name="MIMSKI" ColumnName="MIMSKI" />
-                <ScalarProperty Name="MIMNPD" ColumnName="MIMNPD" />
-                <ScalarProperty Name="MIMNPO" ColumnName="MIMNPO" />
-                <ScalarProperty Name="MIMNPI" ColumnName="MIMNPI" />
-                <ScalarProperty Name="MIMCLR" ColumnName="MIMCLR" />
-                <ScalarProperty Name="MIMIST" ColumnName="MIMIST" />
-                <ScalarProperty Name="MIMGRA" ColumnName="MIMGRA" />
-                <ScalarProperty Name="MIMBQU" ColumnName="MIMBQU" />
-                <ScalarProperty Name="MIMBGR" ColumnName="MIMBGR" />
-                <ScalarProperty Name="MIMBIR" ColumnName="MIMBIR" />
-                <ScalarProperty Name="MIMBIT" ColumnName="MIMBIT" />
-                <ScalarProperty Name="MIMBIN" ColumnName="MIMBIN" />
-                <ScalarProperty Name="MIMFLG" ColumnName="MIMFLG" />
-                <ScalarProperty Name="MIMEDT" ColumnName="MIMEDT" />
-                <ScalarProperty Name="MIMDAT" ColumnName="MIMDAT" />
-                <ScalarProperty Name="MIMUSR" ColumnName="MIMUSR" />
-                <ScalarProperty Name="MIMHPT" ColumnName="MIMHPT" />
-                <ScalarProperty Name="MIMWGR" ColumnName="MIMWGR" />
-                <ScalarProperty Name="MIMWSD" ColumnName="MIMWSD" />
-                <ScalarProperty Name="MIMWLV" ColumnName="MIMWLV" />
-                <ScalarProperty Name="MIMGRP" ColumnName="MIMGRP" />
-                <ScalarProperty Name="MIMSKT" ColumnName="MIMSKT" />
-                <ScalarProperty Name="MIMKSC" ColumnName="MIMKSC" />
-                <ScalarProperty Name="MIMKBP" ColumnName="MIMKBP" />
-                <ScalarProperty Name="MIMPND" ColumnName="MIMPND" />
-                <ScalarProperty Name="MIMPRG" ColumnName="MIMPRG" />
-                <ScalarProperty Name="MIMTCG" ColumnName="MIMTCG" />
-                <ScalarProperty Name="MIMPRO" ColumnName="MIMPRO" />
-                <ScalarProperty Name="MIMTCA" ColumnName="MIMTCA" />
-                <ScalarProperty Name="MIMPRI" ColumnName="MIMPRI" />
-                <ScalarProperty Name="MIMTCI" ColumnName="MIMTCI" />
-                <ScalarProperty Name="MIMDWE" ColumnName="MIMDWE" />
-                <ScalarProperty Name="MIMUTC" ColumnName="MIMUTC" />
-                <ScalarProperty Name="MIMTXC" ColumnName="MIMTXC" />
-                <ScalarProperty Name="MIMASC" ColumnName="MIMASC" />
-                <ScalarProperty Name="MIMDGC" ColumnName="MIMDGC" />
-                <ScalarProperty Name="MIMCIN" ColumnName="MIMCIN" />
-                <ScalarProperty Name="MIMDPC" ColumnName="MIMDPC" />
-                <ScalarProperty Name="MIMSSC" ColumnName="MIMSSC" />
-                <ScalarProperty Name="MIMDSC" ColumnName="MIMDSC" />
-                <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
-                <ScalarProperty Name="MIMFGC" ColumnName="MIMFGC" />
-                <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
-                <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1219,86 +1118,6 @@
                 <ScalarProperty Name="MGRSTA" ColumnName="MGRSTA" />
                 <ScalarProperty Name="MGRTXT" ColumnName="MGRTXT" />
                 <ScalarProperty Name="MGRGRP" ColumnName="MGRGRP" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="INVRIMP0">
-            <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
-              <MappingFragment StoreEntitySet="INVRIMP0">
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Province" ColumnName="Province" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Store_Attrib" ColumnName="Store_Attrib" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Except_Store" ColumnName="Except_Store" />
-                <ScalarProperty Name="Store" ColumnName="Store" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="RIMBAR" ColumnName="RIMBAR" />
-                <ScalarProperty Name="RIMADE" ColumnName="RIMADE" />
-                <ScalarProperty Name="RIMLIN" ColumnName="RIMLIN" />
-                <ScalarProperty Name="RIMORD" ColumnName="RIMORD" />
-                <ScalarProperty Name="RIMFLG" ColumnName="RIMFLG" />
-                <ScalarProperty Name="RIMEDT" ColumnName="RIMEDT" />
-                <ScalarProperty Name="RIMDAT" ColumnName="RIMDAT" />
-                <ScalarProperty Name="RIMUSR" ColumnName="RIMUSR" />
-                <ScalarProperty Name="RIMSTA" ColumnName="RIMSTA" />
-                <ScalarProperty Name="RIMLP2" ColumnName="RIMLP2" />
-                <ScalarProperty Name="RIMLP1" ColumnName="RIMLP1" />
-                <ScalarProperty Name="RIMLA2" ColumnName="RIMLA2" />
-                <ScalarProperty Name="RIMLA1" ColumnName="RIMLA1" />
-                <ScalarProperty Name="RIMMSL" ColumnName="RIMMSL" />
-                <ScalarProperty Name="RIMMSD" ColumnName="RIMMSD" />
-                <ScalarProperty Name="RIMUSX" ColumnName="RIMUSX" />
-                <ScalarProperty Name="RIMUS5" ColumnName="RIMUS5" />
-                <ScalarProperty Name="RIMUS4" ColumnName="RIMUS4" />
-                <ScalarProperty Name="RIMUS3" ColumnName="RIMUS3" />
-                <ScalarProperty Name="RIMUS2" ColumnName="RIMUS2" />
-                <ScalarProperty Name="RIMUS1" ColumnName="RIMUS1" />
-                <ScalarProperty Name="RIMSDP" ColumnName="RIMSDP" />
-                <ScalarProperty Name="RIMUSF" ColumnName="RIMUSF" />
-                <ScalarProperty Name="RIMERT" ColumnName="RIMERT" />
-                <ScalarProperty Name="RIMSE4" ColumnName="RIMSE4" />
-                <ScalarProperty Name="RIMPRO" ColumnName="RIMPRO" />
-                <ScalarProperty Name="RIMCWC" ColumnName="RIMCWC" />
-                <ScalarProperty Name="RIMSVN" ColumnName="RIMSVN" />
-                <ScalarProperty Name="RIMPVN" ColumnName="RIMPVN" />
-                <ScalarProperty Name="RIMPDT" ColumnName="RIMPDT" />
-                <ScalarProperty Name="RIMCPN" ColumnName="RIMCPN" />
-                <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
-                <ScalarProperty Name="RIMLAY" ColumnName="RIMLAY" />
-                <ScalarProperty Name="RIMSUQ" ColumnName="RIMSUQ" />
-                <ScalarProperty Name="RIMUPC" ColumnName="RIMUPC" />
-                <ScalarProperty Name="RIMUMC" ColumnName="RIMUMC" />
-                <ScalarProperty Name="RIMBZP" ColumnName="RIMBZP" />
-                <ScalarProperty Name="RIMBVP" ColumnName="RIMBVP" />
-                <ScalarProperty Name="RIMPIS" ColumnName="RIMPIS" />
-                <ScalarProperty Name="RIMPGR" ColumnName="RIMPGR" />
-                <ScalarProperty Name="RIMTEM" ColumnName="RIMTEM" />
-                <ScalarProperty Name="RIMRIG" ColumnName="RIMRIG" />
-                <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
-                <ScalarProperty Name="RIMVPC" ColumnName="RIMVPC" />
-                <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="INVRIRP0">
-            <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
-              <MappingFragment StoreEntitySet="INVRIRP0">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="LongName" ColumnName="LongName" />
-                <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="RIRFLG" ColumnName="RIRFLG" />
-                <ScalarProperty Name="RIRDAT" ColumnName="RIRDAT" />
-                <ScalarProperty Name="RIRUSR" ColumnName="RIRUSR" />
-                <ScalarProperty Name="RIRVST" ColumnName="RIRVST" />
-                <ScalarProperty Name="RIRSTA" ColumnName="RIRSTA" />
-                <ScalarProperty Name="RIRCWC" ColumnName="RIRCWC" />
-                <ScalarProperty Name="RIRSFQ" ColumnName="RIRSFQ" />
-                <ScalarProperty Name="RIRVPC" ColumnName="RIRVPC" />
-                <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
-                <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
-                <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1451,37 +1270,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Store_Profile">
-            <EntityTypeMapping TypeName="CFMMCDModel.Store_Profile">
-              <MappingFragment StoreEntitySet="Store_Profile">
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="FRESHB_OR_FROZENB" ColumnName="FRESHB_OR_FROZENB" />
-                <ScalarProperty Name="MCCORMICK_OR_GSF" ColumnName="MCCORMICK_OR_GSF" />
-                <ScalarProperty Name="SIMPLOT_OR_MCCAIN" ColumnName="SIMPLOT_OR_MCCAIN" />
-                <ScalarProperty Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" ColumnName="SOFT_SERVE_OR_VANILLA_POWDER_MIX" />
-                <ScalarProperty Name="PAPER_OR_PLASTIC" ColumnName="PAPER_OR_PLASTIC" />
-                <ScalarProperty Name="FRESH_OR_FROZEN" ColumnName="FRESH_OR_FROZEN" />
-                <ScalarProperty Name="CITY" ColumnName="CITY" />
-                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
-                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
-                <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
-                <ScalarProperty Name="REGION" ColumnName="REGION" />
-                <ScalarProperty Name="PROFIT_CENTER" ColumnName="PROFIT_CENTER" />
-                <ScalarProperty Name="BET" ColumnName="BET" />
-                <ScalarProperty Name="PROJECT_GOLD_PRICE_TIER" ColumnName="PROJECT_GOLD_PRICE_TIER" />
-                <ScalarProperty Name="MCCAFE_BISTRO_PRICE_TIER" ColumnName="MCCAFE_BISTRO_PRICE_TIER" />
-                <ScalarProperty Name="MCCAFE_LEVEL_3_PRICE_TIER" ColumnName="MCCAFE_LEVEL_3_PRICE_TIER" />
-                <ScalarProperty Name="MCCAFE_LEVEL_2_PRICE_TIER" ColumnName="MCCAFE_LEVEL_2_PRICE_TIER" />
-                <ScalarProperty Name="MDS_PRICE_TIER" ColumnName="MDS_PRICE_TIER" />
-                <ScalarProperty Name="DC_PRICE_TIER" ColumnName="DC_PRICE_TIER" />
-                <ScalarProperty Name="REGULAR_PRICE_TIER" ColumnName="REGULAR_PRICE_TIER" />
-                <ScalarProperty Name="BREAKFAST_PRICE_TIER" ColumnName="BREAKFAST_PRICE_TIER" />
-                <ScalarProperty Name="OWNERSHIP" ColumnName="OWNERSHIP" />
-                <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
-                <ScalarProperty Name="STORE_NO" ColumnName="STORE_NO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Trading_Area">
             <EntityTypeMapping TypeName="CFMMCDModel.Trading_Area">
               <MappingFragment StoreEntitySet="Trading_Area">
@@ -1521,9 +1309,168 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CSHMIMP0">
+            <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0">
+              <MappingFragment StoreEntitySet="CSHMIMP0">
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Except_Store" ColumnName="Except_Store" />
+                <ScalarProperty Name="Store" ColumnName="Store" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Trading_Area" ColumnName="Trading_Area" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="MIMLON" ColumnName="MIMLON" />
+                <ScalarProperty Name="MIMMIC_NP6" ColumnName="MIMMIC_NP6" />
+                <ScalarProperty Name="MIMNPT" ColumnName="MIMNPT" />
+                <ScalarProperty Name="MIMNNP" ColumnName="MIMNNP" />
+                <ScalarProperty Name="MIMNPA" ColumnName="MIMNPA" />
+                <ScalarProperty Name="MIMBMI" ColumnName="MIMBMI" />
+                <ScalarProperty Name="MIMSKI" ColumnName="MIMSKI" />
+                <ScalarProperty Name="MIMNPD" ColumnName="MIMNPD" />
+                <ScalarProperty Name="MIMNPO" ColumnName="MIMNPO" />
+                <ScalarProperty Name="MIMNPI" ColumnName="MIMNPI" />
+                <ScalarProperty Name="MIMCLR" ColumnName="MIMCLR" />
+                <ScalarProperty Name="MIMIST" ColumnName="MIMIST" />
+                <ScalarProperty Name="MIMGRA" ColumnName="MIMGRA" />
+                <ScalarProperty Name="MIMBQU" ColumnName="MIMBQU" />
+                <ScalarProperty Name="MIMBGR" ColumnName="MIMBGR" />
+                <ScalarProperty Name="MIMBIR" ColumnName="MIMBIR" />
+                <ScalarProperty Name="MIMBIT" ColumnName="MIMBIT" />
+                <ScalarProperty Name="MIMBIN" ColumnName="MIMBIN" />
+                <ScalarProperty Name="MIMFLG" ColumnName="MIMFLG" />
+                <ScalarProperty Name="MIMEDT" ColumnName="MIMEDT" />
+                <ScalarProperty Name="MIMDAT" ColumnName="MIMDAT" />
+                <ScalarProperty Name="MIMUSR" ColumnName="MIMUSR" />
+                <ScalarProperty Name="MIMHPT" ColumnName="MIMHPT" />
+                <ScalarProperty Name="MIMWGR" ColumnName="MIMWGR" />
+                <ScalarProperty Name="MIMWSD" ColumnName="MIMWSD" />
+                <ScalarProperty Name="MIMWLV" ColumnName="MIMWLV" />
+                <ScalarProperty Name="MIMGRP" ColumnName="MIMGRP" />
+                <ScalarProperty Name="MIMSKT" ColumnName="MIMSKT" />
+                <ScalarProperty Name="MIMKSC" ColumnName="MIMKSC" />
+                <ScalarProperty Name="MIMKBP" ColumnName="MIMKBP" />
+                <ScalarProperty Name="MIMPND" ColumnName="MIMPND" />
+                <ScalarProperty Name="MIMPRG" ColumnName="MIMPRG" />
+                <ScalarProperty Name="MIMTCG" ColumnName="MIMTCG" />
+                <ScalarProperty Name="MIMPRO" ColumnName="MIMPRO" />
+                <ScalarProperty Name="MIMTCA" ColumnName="MIMTCA" />
+                <ScalarProperty Name="MIMPRI" ColumnName="MIMPRI" />
+                <ScalarProperty Name="MIMTCI" ColumnName="MIMTCI" />
+                <ScalarProperty Name="MIMDWE" ColumnName="MIMDWE" />
+                <ScalarProperty Name="MIMUTC" ColumnName="MIMUTC" />
+                <ScalarProperty Name="MIMTXC" ColumnName="MIMTXC" />
+                <ScalarProperty Name="MIMASC" ColumnName="MIMASC" />
+                <ScalarProperty Name="MIMDGC" ColumnName="MIMDGC" />
+                <ScalarProperty Name="MIMCIN" ColumnName="MIMCIN" />
+                <ScalarProperty Name="MIMDPC" ColumnName="MIMDPC" />
+                <ScalarProperty Name="MIMSSC" ColumnName="MIMSSC" />
+                <ScalarProperty Name="MIMDSC" ColumnName="MIMDSC" />
+                <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
+                <ScalarProperty Name="MIMFGC" ColumnName="MIMFGC" />
+                <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
+                <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVRIMP0">
+            <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
+              <MappingFragment StoreEntitySet="INVRIMP0">
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Store_Attrib" ColumnName="Store_Attrib" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Except_Store" ColumnName="Except_Store" />
+                <ScalarProperty Name="Store" ColumnName="Store" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="RIMBAR" ColumnName="RIMBAR" />
+                <ScalarProperty Name="RIMADE" ColumnName="RIMADE" />
+                <ScalarProperty Name="RIMLIN" ColumnName="RIMLIN" />
+                <ScalarProperty Name="RIMORD" ColumnName="RIMORD" />
+                <ScalarProperty Name="RIMFLG" ColumnName="RIMFLG" />
+                <ScalarProperty Name="RIMEDT" ColumnName="RIMEDT" />
+                <ScalarProperty Name="RIMDAT" ColumnName="RIMDAT" />
+                <ScalarProperty Name="RIMUSR" ColumnName="RIMUSR" />
+                <ScalarProperty Name="RIMSTA" ColumnName="RIMSTA" />
+                <ScalarProperty Name="RIMLP2" ColumnName="RIMLP2" />
+                <ScalarProperty Name="RIMLP1" ColumnName="RIMLP1" />
+                <ScalarProperty Name="RIMLA2" ColumnName="RIMLA2" />
+                <ScalarProperty Name="RIMLA1" ColumnName="RIMLA1" />
+                <ScalarProperty Name="RIMMSL" ColumnName="RIMMSL" />
+                <ScalarProperty Name="RIMMSD" ColumnName="RIMMSD" />
+                <ScalarProperty Name="RIMUSX" ColumnName="RIMUSX" />
+                <ScalarProperty Name="RIMUS5" ColumnName="RIMUS5" />
+                <ScalarProperty Name="RIMUS4" ColumnName="RIMUS4" />
+                <ScalarProperty Name="RIMUS3" ColumnName="RIMUS3" />
+                <ScalarProperty Name="RIMUS2" ColumnName="RIMUS2" />
+                <ScalarProperty Name="RIMUS1" ColumnName="RIMUS1" />
+                <ScalarProperty Name="RIMSDP" ColumnName="RIMSDP" />
+                <ScalarProperty Name="RIMUSF" ColumnName="RIMUSF" />
+                <ScalarProperty Name="RIMERT" ColumnName="RIMERT" />
+                <ScalarProperty Name="RIMSE4" ColumnName="RIMSE4" />
+                <ScalarProperty Name="RIMPRO" ColumnName="RIMPRO" />
+                <ScalarProperty Name="RIMCWC" ColumnName="RIMCWC" />
+                <ScalarProperty Name="RIMSVN" ColumnName="RIMSVN" />
+                <ScalarProperty Name="RIMPVN" ColumnName="RIMPVN" />
+                <ScalarProperty Name="RIMPDT" ColumnName="RIMPDT" />
+                <ScalarProperty Name="RIMCPN" ColumnName="RIMCPN" />
+                <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
+                <ScalarProperty Name="RIMLAY" ColumnName="RIMLAY" />
+                <ScalarProperty Name="RIMSUQ" ColumnName="RIMSUQ" />
+                <ScalarProperty Name="RIMUPC" ColumnName="RIMUPC" />
+                <ScalarProperty Name="RIMUMC" ColumnName="RIMUMC" />
+                <ScalarProperty Name="RIMBZP" ColumnName="RIMBZP" />
+                <ScalarProperty Name="RIMBVP" ColumnName="RIMBVP" />
+                <ScalarProperty Name="RIMPIS" ColumnName="RIMPIS" />
+                <ScalarProperty Name="RIMPGR" ColumnName="RIMPGR" />
+                <ScalarProperty Name="RIMTEM" ColumnName="RIMTEM" />
+                <ScalarProperty Name="RIMRIG" ColumnName="RIMRIG" />
+                <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
+                <ScalarProperty Name="RIMVPC" ColumnName="RIMVPC" />
+                <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Profile">
+            <EntityTypeMapping TypeName="CFMMCDModel.Store_Profile">
+              <MappingFragment StoreEntitySet="Store_Profile">
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="FRESHB_OR_FROZENB" ColumnName="FRESHB_OR_FROZENB" />
+                <ScalarProperty Name="MCCORMICK_OR_GSF" ColumnName="MCCORMICK_OR_GSF" />
+                <ScalarProperty Name="SIMPLOT_OR_MCCAIN" ColumnName="SIMPLOT_OR_MCCAIN" />
+                <ScalarProperty Name="SOFT_SERVE_OR_VANILLA_POWDER_MIX" ColumnName="SOFT_SERVE_OR_VANILLA_POWDER_MIX" />
+                <ScalarProperty Name="PAPER_OR_PLASTIC" ColumnName="PAPER_OR_PLASTIC" />
+                <ScalarProperty Name="FRESH_OR_FROZEN" ColumnName="FRESH_OR_FROZEN" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="PROFIT_CENTER" ColumnName="PROFIT_CENTER" />
+                <ScalarProperty Name="BET" ColumnName="BET" />
+                <ScalarProperty Name="PROJECT_GOLD_PRICE_TIER" ColumnName="PROJECT_GOLD_PRICE_TIER" />
+                <ScalarProperty Name="MCCAFE_BISTRO_PRICE_TIER" ColumnName="MCCAFE_BISTRO_PRICE_TIER" />
+                <ScalarProperty Name="MCCAFE_LEVEL_3_PRICE_TIER" ColumnName="MCCAFE_LEVEL_3_PRICE_TIER" />
+                <ScalarProperty Name="MCCAFE_LEVEL_2_PRICE_TIER" ColumnName="MCCAFE_LEVEL_2_PRICE_TIER" />
+                <ScalarProperty Name="MDS_PRICE_TIER" ColumnName="MDS_PRICE_TIER" />
+                <ScalarProperty Name="DC_PRICE_TIER" ColumnName="DC_PRICE_TIER" />
+                <ScalarProperty Name="REGULAR_PRICE_TIER" ColumnName="REGULAR_PRICE_TIER" />
+                <ScalarProperty Name="BREAKFAST_PRICE_TIER" ColumnName="BREAKFAST_PRICE_TIER" />
+                <ScalarProperty Name="OWNERSHIP" ColumnName="OWNERSHIP" />
+                <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+                <ScalarProperty Name="STORE_NO" ColumnName="STORE_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ITMGRPs">
             <EntityTypeMapping TypeName="CFMMCDModel.ITMGRP">
               <MappingFragment StoreEntitySet="ITMGRP">
+                <ScalarProperty Name="Group_Type" ColumnName="Group_Type" />
                 <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
                 <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
                 <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
@@ -1533,26 +1480,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ITMSTOGRPs">
-            <EntityTypeMapping TypeName="CFMMCDModel.ITMSTOGRP">
-              <MappingFragment StoreEntitySet="ITMSTOGRP">
-                <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
-                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
-                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
-                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
-                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MIMSTRGRPs">
-            <EntityTypeMapping TypeName="CFMMCDModel.MIMSTRGRP">
-              <MappingFragment StoreEntitySet="MIMSTRGRP">
-                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
-                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
-                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
-                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="INVRIRP0">
+            <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
+              <MappingFragment StoreEntitySet="INVRIRP0">
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LongName" ColumnName="LongName" />
+                <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="RIRFLG" ColumnName="RIRFLG" />
+                <ScalarProperty Name="RIRDAT" ColumnName="RIRDAT" />
+                <ScalarProperty Name="RIRUSR" ColumnName="RIRUSR" />
+                <ScalarProperty Name="RIRVST" ColumnName="RIRVST" />
+                <ScalarProperty Name="RIRSTA" ColumnName="RIRSTA" />
+                <ScalarProperty Name="RIRCWC" ColumnName="RIRCWC" />
+                <ScalarProperty Name="RIRSFQ" ColumnName="RIRSFQ" />
+                <ScalarProperty Name="RIRVPC" ColumnName="RIRVPC" />
+                <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
+                <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
+                <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

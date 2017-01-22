@@ -40,117 +40,155 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar glyphicon-menu-hamburger glyphicon"></span>
             </button>
-            <a class="navbar-brand" href="/Home/Index"><img class="img-responsive" src="~/Content/Images/logo.png"></a>
+            <a class="navbar-brand" href="/Home/Index"><img class="brand-img img-responsive" src="~/Content/Images/logo.png"></a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 @{
                     if (CPSession.Grandparent != null)
                     {
-                        <li>@Html.ActionLink(CPSession.Grandparent.LinkName, CPSession.Grandparent.Action, CPSession.Grandparent.Controller)</li>
+                        <li>@Html.ActionLink(CPSession.Grandparent.LinkName, CPSession.Grandparent.Action, CPSession.Grandparent.Controller, new { }, new { @class = "navbar-a"} )</li>
                     }
                     if (CPSession.Parent != null)
                     {
                         if (CPSession.Parent.Controller.Equals("Home") || CPSession.Self.Controller.Equals("Home")) {
-                            <li><a class="dropdown-toggle" type="button" data-toggle="dropdown" data-submenu aria-expanded="false" href="#">All Pages <span class="caret"></span></a>
+                            <li class="navbar-li"><a class="dropdown-toggle navbar-a dropdown-item" type="button" data-toggle="dropdown" data-submenu aria-expanded="false" href="#">All Pages <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @{ if (UASession.MIM)
                                         {
-                                            <li>@Html.ActionLink("Menu Item Master", "Index", "MenuItemMaster")</li>
+                                            <li>@Html.ActionLink("Menu Item Master", "Index", "MenuItemMaster", new { }, new { @class="dropdown-item" })</li>
+                                            <hr class="dropdown-hr"/>
                                         }
                                         if (UASession.RIM)
                                         {
-                                            <li>@Html.ActionLink("Raw Item Master", "Index", "RawItemMaster")</li>
+                                            <li>@Html.ActionLink("Raw Item Master", "Index", "RawItemMaster", new { }, new { @class = "dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
                                         if (UASession.MER)
                                         {
-                                            <li>@Html.ActionLink("Menu Recipe", "Index", "MenuRecipe")</li>
+                                            <li>@Html.ActionLink("Menu Recipe", "Index", "MenuRecipe", new { }, new { @class = "dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
                                         if (UASession.STP)
                                         {
-                                            <li>@Html.ActionLink("Store Profile", "Index", "StoreProfile")</li>
+                                            <li>@Html.ActionLink("Store Profile", "Index", "StoreProfile", new { }, new { @class = "dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
                                         if (UASession.VEM)
                                         {
-                                            <li>@Html.ActionLink("Vendor Master", "Index", "VendorMaster")</li>
+                                            <li>@Html.ActionLink("Vendor Master", "Index", "VendorMaster", new { }, new { @class = "dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
+                                        }
+                                        if (UASession.SCM)
+                                        {
+                                            <li>@Html.ActionLink("SCM Master Recipe", "Index", "SCMRecipe", new { }, new { @class = "dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
                                         if (UASession.VAM)
                                         {
-                                            <li>@Html.ActionLink("Value Meal", "Index", "ValueMeal")</li>
+                                            <li>@Html.ActionLink("Value Meal", "Index", "ValueMeal", new { }, new { @class = "dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
                                         if (UASession.UAP)
                                         {
                                             <li class="dropdown-submenu">
-                                                <a role="menu" data-toggle="dropdown" tabindex="-1" href="#">User access&emsp;</a>
+                                                <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-1" href="#">User access&emsp;</a>
                                                 <ul class="dropdown-menu">
-                                                    <li>@Html.ActionLink("Create user account", "CreateAccount", "Account")</li>
-                                                    <li>@Html.ActionLink("Manage user account", "EditAccount", "Account")</li>
-                                                    <li>@Html.ActionLink("Manage user access", "EditAccess", "Account")</li>
+                                                    <li>@Html.ActionLink("Create user account", "CreateAccount", "Account", new { }, new { @class="dropdown-item" })</li>
+                                                    <hr class="dropdown-hr" />
+                                                    <li>@Html.ActionLink("Manage user account", "EditAccount", "Account", new { }, new { @class="dropdown-item" })</li>
+                                                    <hr class="dropdown-hr" />
+                                                    <li>@Html.ActionLink("Manage user access", "EditAccess", "Account", new { }, new { @class="dropdown-item" })</li>
                                                 </ul>
                                             </li>
+                                            <hr class="dropdown-hr" />
                                         }
                                         if (UASession.MIP)
                                         {
-                                            <li>@Html.ActionLink("Menu Item Price Update", "Index", "MenuItemPriceUpdate")</li>
-                                        }
-                                        if (UASession.SCM)
-                                        {
-                                            <li>@Html.ActionLink("SCM Master Recipe", "Index", "SCMRecipe")</li>
-                                        }
-                                        if (UASession.TEG)
-                                        {
-                                            <li>@Html.ActionLink("Text Generation", "Index", "TextGenerator")</li>
+                                            <li>@Html.ActionLink("Menu Item Price Update", "Index", "MenuItemPriceUpdate", new { }, new { @class="dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
                                         if (UASession.RIM)
                                         {
-                                            <li>@Html.ActionLink("Raw Item Price Update", "Index", "RawItemPriceUpdate")</li>
+                                            <li>@Html.ActionLink("Raw Item Price Update", "Index", "RawItemPriceUpdate", new { }, new { @class="dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
-                                        if (UASession.AUL)
+                                        if (UASession.TEG)
                                         {
-                                            <li>@Html.ActionLink("Audit log", "Index", "AuditLog")</li>
+                                            <li>@Html.ActionLink("Text Generation", "Index", "TextGenerator", new { }, new { @class="dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
                                         if (UASession.REG)
                                         {
-                                            <li>@Html.ActionLink("Report generation", "Index", "ReportGeneration")</li>
+                                            <li>@Html.ActionLink("Report generation", "Index", "ReportGeneration", new { }, new { @class="dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
                                         }
-
+                                        if (UASession.AUL)
+                                        {
+                                            <li>@Html.ActionLink("Audit log", "Index", "AuditLog", new { }, new { @class="dropdown-item" })</li>
+                                            <hr class="dropdown-hr" />
+                                        }
+                                        if (UASession.GRP)
+                                        {
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-1" href="#">Group maintenance&emsp;</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>@Html.ActionLink("Menu Item Group", "Index", "MenuItemGroup", new { }, new { @class="dropdown-item" })</li>
+                                                    <hr class="dropdown-hr" />
+                                                    <li>@Html.ActionLink("Raw Item Group", "Index", "RawItemGroup", new { }, new { @class="dropdown-item" })</li>
+                                                    <hr class="dropdown-hr" />
+                                                    <li>@Html.ActionLink("Recipe Group", "Index", "RecipeGroup", new { }, new { @class="dropdown-item" })</li>
+                                                </ul>
+                                            </li>
+                                            <hr class="dropdown-hr" />
+                                        }
                                         <li class="dropdown-submenu">
-                                            <a role="menu" data-toggle="dropdown" tabindex="-0" href="#">Table Maintenance</a>
+                                            <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-0" href="#">Table Maintenance</a>
                                             <ul class="dropdown-menu">
                                                 @{  
                                                     if (UASession.TIP)
                                                     {
                                                
                                                         <li class="dropdown-submenu">
-                                                            <a role="menu" data-toggle="dropdown" tabindex="-1" href="#">Tier Page</a>
+                                                            <a role="menu" data-toggle="dropdown" tabindex="-1" href="#" style="color:white">Tier Page</a>
                                                             <ul class="dropdown-menu">
-                                                                <li>@Html.ActionLink("Dessert Enterprise Tier", "Index", "DessertPriceTier")</li>
-                                                                <li>@Html.ActionLink("Breakfast Price Tier", "Index", "BreakfastPriceTier")</li>
-                                                                <li>@Html.ActionLink("Regular Price Tier", "Index", "RegularPriceTier")</li>
-                                                                <li>@Html.ActionLink("McCafe level 2 Price Tier", "Index", "McCafeLevel2PriceTier")</li>
-                                                                <li>@Html.ActionLink("McCafe level 3 Price Tier", "Index", "McCafeLevel3PriceTier")</li>
-                                                                <li>@Html.ActionLink("McCafe BISTRO Price Tier", "Index", "McCafeBistroPriceTier")</li>
-                                                                <li>@Html.ActionLink("MDS Price Tier", "Index", "MDSPriceTier")</li>
-                                                                <li>@Html.ActionLink("Project Gold Price Tier", "Index", "ProjectGoldPriceTier")</li>
+                                                                <li>@Html.ActionLink("Dessert Enterprise Tier", "Index", "DessertPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("Breakfast Price Tier", "Index", "BreakfastPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("Regular Price Tier", "Index", "RegularPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("McCafe level 2 Price Tier", "Index", "McCafeLevel2PriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("McCafe level 3 Price Tier", "Index", "McCafeLevel3PriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("McCafe BISTRO Price Tier", "Index", "McCafeBistroPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("MDS Price Tier", "Index", "MDSPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("Project Gold Price Tier", "Index", "ProjectGoldPriceTier", new { }, new { @class="dropdown-item" })</li>
                                                             </ul>
                                                         </li>
-                                                   
+                                                        <hr class="dropdown-hr" />
                                                     }
                                                     if (UASession.OWN)
                                                     {
-                                                        <li>@Html.ActionLink("Ownership", "Index", "Ownership")</li>
+                                                        <li>@Html.ActionLink("Ownership", "Index", "Ownership", new { }, new { @class="dropdown-item" })</li>
+                                                        <hr class="dropdown-hr" />
                                                     }
                                                     if (UASession.BUE)
                                                     {
-                                                        <li>@Html.ActionLink("Business Extension", "Index", "BusinessExtension")</li>
+                                                        <li>@Html.ActionLink("Business Extension", "Index", "BusinessExtension", new { }, new { @class="dropdown-item" })</li>
+                                                        <hr class="dropdown-hr" />
                                                     }
                                                     if (UASession.LOC)
                                                     {
-                                                        <li>@Html.ActionLink("Location", "Index", "Location")</li>
+                                                        <li>@Html.ActionLink("Location", "Index", "Location", new { }, new { @class="dropdown-item" })</li>
+                                                        <hr class="dropdown-hr" />
                                                     }
                                                     if (UASession.PRC)
                                                     {
-                                                        <li>@Html.ActionLink("Profit center", "Index", "ProfitCenter")</li>
+                                                        <li>@Html.ActionLink("Profit center", "Index", "ProfitCenter", new { }, new { @class="dropdown-item" })</li>
                                                     }
                                                 }
                                             </ul>
@@ -162,19 +200,19 @@
                         }
                         else 
                         {
-                            <li>@Html.ActionLink(CPSession.Parent.LinkName, CPSession.Parent.Action, CPSession.Parent.Controller)</li>
+                            <li class="navbar-li">@Html.ActionLink(CPSession.Parent.LinkName, CPSession.Parent.Action, CPSession.Parent.Controller, new { }, new { @class = "navbar-a" })</li>
                         }
                     }
                     if (CPSession.Self != null)
                     {
-                        <li>@Html.ActionLink(CPSession.Self.LinkName, CPSession.Self.Action, CPSession.Self.Controller)</li>
+                        <li class="navbar-li">@Html.ActionLink(CPSession.Self.LinkName, CPSession.Self.Action, CPSession.Self.Controller, new { }, new { @class = "navbar-a" })</li>
                     }
                 }
             </ul>
             @{if (CPSession.Self.Controller.Equals("MenuItemMaster") || CPSession.Self.Controller.Equals("RawItemMaster"))
                 {
                     <ul class="nav navbar-nav navbar-right" style="padding-right:10px">
-                        <li><a data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications</a></li>
+                        <li ><a class="navbar-a" data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications</a></li>
                         <li id="popover-content" class="hide col-lg-5">
                             <div class="content-height">
                                 <table class="table-hover table-responsive table-condensed">

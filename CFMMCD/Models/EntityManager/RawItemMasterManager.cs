@@ -40,7 +40,8 @@ namespace CFMMCD.Models.EntityManager
                 RIMRow.RIMUPC = double.Parse(RIMViewModel.RIMUPC);
                 RIMRow.RIMSUQ = double.Parse(RIMViewModel.RIMSUQ);
                 RIMRow.RIMLAY = int.Parse(RIMViewModel.RIMLAY);
-                RIMRow.RIMPVN = int.Parse(RIMViewModel.RIMPVN);
+                if (!RIMViewModel.RIMPVN.Equals("0"))
+                    RIMRow.RIMPVN = int.Parse(RIMViewModel.RIMPVN);
                 RIMRow.RIMCWC = RIMViewModel.RIMCWC.Trim();
                 RIMRow.RIMPRO = RIMViewModel.RIMPRO.Trim();
                 RIMRow.RIMSE4 = RIMViewModel.RIMSE4.Trim();
@@ -62,8 +63,40 @@ namespace CFMMCD.Models.EntityManager
                 // Non-field Row with default values
                 RIMRow.RIMUSR = user.Substring(0, 3).ToUpper();
                 RIMRow.RIMDAT = DateTime.Now;
+                // Group
+                if (db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(RIMViewModel.RIMRIC)).Any())
+                {
+                    if (RIMViewModel.Group == 0)
+                    {
+                        int val = db.ITMGRPs.FirstOrDefault(o => o.Item_Code.ToString().Equals(RIMViewModel.RIMRIC)).Id;
+                        ItemGroupManager.DeleteItem(val);
+                    }
+                    else
+                    {
+                        db.ITMGRPs.Single(o => o.Item_Code.ToString().Equals(RIMViewModel.RIMRIC)).Item_Code = int.Parse(RIMViewModel.RIMRIC);
+                        db.ITMGRPs.Single(o => o.Item_Code.ToString().Equals(RIMViewModel.RIMRIC)).Item_Name = RIMViewModel.RIMRID;
+                        db.ITMGRPs.Single(o => o.Item_Code.ToString().Equals(RIMViewModel.RIMRIC)).Group_Id = RIMViewModel.Group;
+                        db.ITMGRPs.Single(o => o.Item_Code.ToString().Equals(RIMViewModel.RIMRIC)).Group_Name = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == RIMViewModel.Group).Group_Name;
+                    }
+                }
+                else
+                {
+                    if (RIMViewModel.Group != 0)
+                    {
+                        ItemGroupViewModel IGRow = new ItemGroupViewModel();
+                        IGRow.GroupName = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == RIMViewModel.Group).Group_Name;
+                        IGRow.GroupId = RIMViewModel.Group;
+                        IGRow.ItemCode = int.Parse(RIMViewModel.RIMRIC);
+                        IGRow.ItemName = RIMViewModel.RIMRID;
+                        IGRow.ItemType = 2;
+                        IGRow.GroupType = 2;
+                        ItemGroupManager.UpdateGroup(IGRow);
+                    }
+                }
+                RIMRow.Group = RIMViewModel.Group;
                 // Location
-                RIMRow.Location = int.Parse(RIMViewModel.Location);
+                if (RIMViewModel.Location != null && !RIMViewModel.Equals(""))
+                    RIMRow.Location = int.Parse(RIMViewModel.Location);
                 RIMRow.Region = RIMViewModel.Region;
                 RIMRow.Province = RIMViewModel.Province;
                 RIMRow.City = RIMViewModel.City;
@@ -205,16 +238,16 @@ namespace CFMMCD.Models.EntityManager
                         INVRIMP0 rowToRemove = db.INVRIMP0.FirstOrDefault(o => o.RIMRIC.ToString().Equals(RIMViewModel.RIMRIC));
                         // Remove vendor
                         List<RIM_VEM_Lookup> RIVendor = db.RIM_VEM_Lookup.Where(o => o.RIMRIC == rowToRemove.RIMRIC).ToList();
-                        foreach ( RIM_VEM_Lookup RVLRow in RIVendor)
-                        {
-                            db.RIM_VEM_Lookup.Remove(RVLRow);
-                        }
+                        db.RIM_VEM_Lookup.RemoveRange(RIVendor);
                         // Remove recipe
                         List<INVRIRP0> RIRecipe = db.INVRIRP0.Where(o => o.RIRRIC == rowToRemove.RIMRIC).ToList();
-                        foreach ( INVRIRP0 ri in RIRecipe )
+                        db.INVRIRP0.RemoveRange(RIRecipe);
+                        // Remove Group
+                        if (db.ITMGRPs.Where(o => o.Item_Code == rowToRemove.RIMRIC).Any())
                         {
-                            db.INVRIRP0.Remove(ri);
+                            db.ITMGRPs.RemoveRange(db.ITMGRPs.Where(o => o.Item_Code == rowToRemove.RIMRIC));
                         }
+
                         db.INVRIMP0.Remove(rowToRemove);
                         db.SaveChanges();
                         return true;
@@ -309,6 +342,9 @@ namespace CFMMCD.Models.EntityManager
                 vm.RIMORD = rim.RIMORD.Trim();
                 vm.RIMADE = rim.RIMADE.Trim();
                 vm.RIMBAR = rim.RIMBAR.Trim();
+                if (rim.Group != null)
+                    vm.Group = (int)rim.Group;
+                else vm.Group = 0;
                 // Location
                 vm.Location = rim.Location.ToString();
                 vm.Region = rim.Region;

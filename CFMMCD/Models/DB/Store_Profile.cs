@@ -39,5 +39,6 @@ namespace CFMMCD.Models.DB
         public string MCCORMICK_OR_GSF { get; set; }
         public string FRESHB_OR_FROZENB { get; set; }
         public string STATUS { get; set; }
+        public Nullable<int> Group { get; set; }
     }
 }

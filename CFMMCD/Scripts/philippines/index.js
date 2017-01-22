@@ -1,21 +1,21 @@
 var regions = [
-                  { "name": "NCR", "long": "National Capital Region", "key": "NCR" },
-                  { "name": "CAR", "long": "Cordillera Admininstrative Region", "key": "CAR" },
-                  { "name": "Region I", "long": "Ilocos Region", "key": "I" },
-                  { "name": "Region II", "long": "Cagayan Valley", "key": "II" },
-                  { "name": "Region III", "long": "Central Luzon", "key": "III" },
-                  { "name": "Region IV-A", "long": "CALABARZON", "key": "IV-A" },
-                  { "name": "Region IV-B", "long": "MIMAROPA", "key": "IV-B" },
-                  { "name": "Region V", "long": "Bicol Region", "key": "V" },
-                  { "name": "Region VI", "long": "Western Visayas", "key": "VI" },
-                  { "name": "Region VII", "long": "Central Visayas", "key": "VII" },
-                  { "name": "Region VIII", "long": "Eastern Visayas", "key": "VIII" },
-                  { "name": "Region IX", "long": "Zamboange Peninsula", "key": "IX" },
-                  { "name": "Region X", "long": "Northen Mindanao", "key": "X" },
-                  { "name": "Region XI", "long": "Davao Region", "key": "XI" },
-                  { "name": "Region XII", "long": "SOCCSKARGEN", "key": "XII" },
-                  { "name": "Region XIII", "long": "Caraga", "key": "XIII" },
-                  { "name": "ARMM", "long": "Autonomous Region in Muslim Mindanao", "key": "ARMM" }
+                  { "name": "NCR", "long": "National Capital Region", "key": "NCR", "location":"Luzon" },
+                  { "name": "CAR", "long": "Cordillera Admininstrative Region", "key": "CAR", "location": "Luzon" },
+                  { "name": "Region I", "long": "Ilocos Region", "key": "I", "location": "Luzon" },
+                  { "name": "Region II", "long": "Cagayan Valley", "key": "II", "location": "Luzon" },
+                  { "name": "Region III", "long": "Central Luzon", "key": "III", "location": "Luzon" },
+                  { "name": "Region IV-A", "long": "CALABARZON", "key": "IV-A", "location": "Luzon" },
+                  { "name": "Region IV-B", "long": "MIMAROPA", "key": "IV-B", "location": "Luzon" },
+                  { "name": "Region V", "long": "Bicol Region", "key": "V", "location": "Luzon" },
+                  { "name": "Region VI", "long": "Western Visayas", "key": "VI", "location": "Visayas" },
+                  { "name": "Region VII", "long": "Central Visayas", "key": "VII", "location": "Visayas" },
+                  { "name": "Region VIII", "long": "Eastern Visayas", "key": "VIII", "location": "Visayas" },
+                  { "name": "Region IX", "long": "Zamboange Peninsula", "key": "IX", "location": "Mindanao" },
+                  { "name": "Region X", "long": "Northen Mindanao", "key": "X", "location": "Mindanao" },
+                  { "name": "Region XI", "long": "Davao Region", "key": "XI", "location": "Mindanao"  },
+                  { "name": "Region XII", "long": "SOCCSKARGEN", "key": "XII", "location": "Mindanao" },
+                  { "name": "Region XIII", "long": "Caraga", "key": "XIII", "location": "Mindanao" },
+                  { "name": "ARMM", "long": "Autonomous Region in Muslim Mindanao", "key": "ARMM", "location": "Mindanao" }
 ];
 var provinces = [
                   { "name": "Metro Manila", "region": "NCR", "key": "MM" },
@@ -1836,8 +1836,7 @@ var cities = [
 ];
 
 $(window).ready(function () {
-    var option = "";
-    console.log($("#region").val());
+    var option = '<option></option>';
     for (var i = 0; i < regions.length; i++) {
         option += '<option value="' + regions[i]["key"] + '" ';
         if (($("#region").val() != null && $("#region").val() != "") &&
@@ -1861,7 +1860,7 @@ $(window).ready(function () {
 });
 
 function updateCity() {
-    option = "";
+    option = '<option></option>';
     $("#city").empty();
     var selectedProvince = $("#province").val();
     for (var i = 0; i < cities.length; i++) {
@@ -1871,7 +1870,7 @@ function updateCity() {
     $("#city").append(option);
 }
 function updateProvince() {
-    option = "";
+    option = '<option></option>';
     $("#province").empty();
     var selectedRegion = $("#region").val();
     for (var i = 0; i < provinces.length; i++) {

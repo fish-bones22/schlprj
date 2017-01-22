@@ -73,6 +73,7 @@ namespace CFMMCD.Models.DB
         public string City { get; set; }
         public string Store { get; set; }
         public string Except_Store { get; set; }
+        public Nullable<int> Group { get; set; }
     
         public virtual CSHMIMP0_NP6 CSHMIMP0_NP6 { get; set; }
     }

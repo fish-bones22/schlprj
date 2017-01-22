@@ -19,6 +19,7 @@ namespace CFMMCD.Models.ViewModel
             VendorList = tdd.SetVendorList();
             UnitOfMeasureList = tdd.SetUnitOfMeasureList();
             MaterialsGroupList = tdd.SetMaterialsGroupList();
+            GroupList = tdd.SetGroupList();
             RawItemMasterList = new List<RawItem>();
             MenuItemList = new List<MenuItem>();
             VendorsSelectedList = new List<bool>(VendorList.Count());
@@ -75,6 +76,7 @@ namespace CFMMCD.Models.ViewModel
         public string Region { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
+        public int Group { get; set; }
         public bool SelectAllCb { get; set; }
         public bool SelectExceptCb { get; set; }
 
@@ -90,6 +92,7 @@ namespace CFMMCD.Models.ViewModel
         public List<GenericDropDownList> PrimaryVendorList { get; set; }
         public List<GenericDropDownList> StoreList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }
+        public List<GenericDropDownList> GroupList { get; set; }
         public string SearchVendor { get; set; }
         public List<RawItem> RawItemMasterList { get; set; }
         public List<bool> VendorsSelectedList { get; set; }

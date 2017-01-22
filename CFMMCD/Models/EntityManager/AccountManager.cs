@@ -52,7 +52,7 @@ namespace CFMMCD.Models.EntityManager
                 if (!accRow.UserAccess.Contains("True"))
                     accRow.UserAccess = account.UserAccess;
                 if (account.AllExceptUAC)
-                    accRow.UserAccess = "True,True,True,True,True,True,True,False,True,True,True,True,True,True,True,True,True,True";
+                    accRow.UserAccess = "True,True,True,True,True,True,True,False,True,True,True,True,True,True,True,True,True,True,True";
 
                 try
                 {
@@ -263,6 +263,7 @@ namespace CFMMCD.Models.EntityManager
                 vm.OWNInput = UserAccessArr[15];
                 vm.PRCInput = UserAccessArr[16];
                 vm.LOCInput = UserAccessArr[17];
+                vm.GRPInput = UserAccessArr[18];
                 return vm;
             }
         }
@@ -288,7 +289,7 @@ namespace CFMMCD.Models.EntityManager
         */
         private string GetUserAccessString(AccountViewModel account)
         {
-            return (account.MIMInput.ToString() + "," + account.RIMInput.ToString() + "," + account.MERInput.ToString() + "," + account.STPInput.ToString() + "," + account.SCMInput.ToString() + "," + account.VEMInput.ToString() + "," + account.VAMInput.ToString() + "," + account.UAPInput.ToString() + "," + account.MIPInput.ToString() + "," + account.RIPInput.ToString() + "," + account.AULInput.ToString() + "," + account.REGInput.ToString() + "," + account.TEGInput.ToString() + "," + account.TIPInput.ToString() + "," + account.BUEInput.ToString() + "," + account.OWNInput.ToString() + "," + account.PRCInput.ToString() + "," + account.LOCInput.ToString());
+            return (account.MIMInput.ToString() + "," + account.RIMInput.ToString() + "," + account.MERInput.ToString() + "," + account.STPInput.ToString() + "," + account.SCMInput.ToString() + "," + account.VEMInput.ToString() + "," + account.VAMInput.ToString() + "," + account.UAPInput.ToString() + "," + account.MIPInput.ToString() + "," + account.RIPInput.ToString() + "," + account.AULInput.ToString() + "," + account.REGInput.ToString() + "," + account.TEGInput.ToString() + "," + account.TIPInput.ToString() + "," + account.BUEInput.ToString() + "," + account.OWNInput.ToString() + "," + account.PRCInput.ToString() + "," + account.LOCInput.ToString()) + "," + account.GRPInput.ToString();
         }
         /*
          * Gets `UserAcces` string from `Accounts` and converts it into
@@ -314,7 +315,7 @@ namespace CFMMCD.Models.EntityManager
                 else
                 {
                     userAccessArray = new bool[18];
-                    for (int i = 0; i < 18; i++)
+                    for (int i = 0; i < 19; i++)
                         userAccessArray[i] = false;
                 }
                 return userAccessArray;
@@ -342,6 +343,7 @@ namespace CFMMCD.Models.EntityManager
             UASession.OWN = UAArray[15];
             UASession.PRC = UAArray[16];
             UASession.LOC = UAArray[17];
+            UASession.GRP = UAArray[18];
             return UASession;
         }
 

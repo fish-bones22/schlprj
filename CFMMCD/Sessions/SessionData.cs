@@ -33,6 +33,7 @@ namespace CFMMCD.Sessions
         public bool OWN { get; set; }
         public bool PRC { get; set; }
         public bool LOC { get; set; }
+        public bool GRP { get; set; }
     }
     [Serializable]
     public class CurrentPageSession
@@ -272,7 +273,27 @@ namespace CFMMCD.Sessions
                     Action = "Index",
                     Controller = "MDSPriceTier"
                 };
-
+            else if (key.Equals("GRP_MIM"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Menu Item Group",
+                    Action = "Index",
+                    Controller = "MenuItemGroup"
+                };
+            else if (key.Equals("GRP_RIM"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Raw Item Group",
+                    Action = "Index",
+                    Controller = "RawItemGroup"
+                };
+            else if (key.Equals("GRP_RIR"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "Recipe Group",
+                    Action = "Index",
+                    Controller = "RecipeGroup"
+                };
             else
                 return new CurrentPageSession.LinkString
                 {

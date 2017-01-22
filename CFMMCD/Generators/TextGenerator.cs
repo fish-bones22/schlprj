@@ -89,7 +89,7 @@ namespace CFMMCD.Generators
             if (MenuItem.MIMNNP != null)
                 sb.Append(((double)MenuItem.MIMNNP).ToString("0.00,") + ",");
             else sb.Append("0.00,");
-            sb.Append(MenuItem.MIMNPT.Trim() + "\n");
+            sb.Append(MenuItem.MIMNPT.Trim() + System.Environment.NewLine);
 
             return sb;
         }
@@ -177,7 +177,7 @@ namespace CFMMCD.Generators
             sb.Append(RawItem.RIMORD.Trim() + ",");
             sb.Append(RawItem.RIMLIN + ",");
             sb.Append(RawItem.RIMADE.Trim() + ",");
-            sb.Append(RawItem.RIMBAR.Trim() + "\n");
+            sb.Append(RawItem.RIMBAR.Trim() +  System.Environment.NewLine);
             return sb;
         }
 
@@ -216,8 +216,8 @@ namespace CFMMCD.Generators
             else
                 sb.Append(Recipe.RIRDAT.ToString() + ",");
             if (Recipe.RIRFLG != null)
-                sb.Append(Recipe.RIRFLG.ToString() + "\n");
-            else sb.Append("\n");
+                sb.Append(Recipe.RIRFLG.ToString() +  System.Environment.NewLine);
+            else sb.Append( System.Environment.NewLine);
             return sb;
         }
 
@@ -231,8 +231,8 @@ namespace CFMMCD.Generators
                 sb.Append(ValueMeal.VMLMIC.ToString() + ",");
             else sb.Append(",");
             if (ValueMeal.VMLQUA != null)
-                sb.Append(ValueMeal.VMLQUA.ToString() + "\n");
-            else sb.Append("\n");
+                sb.Append(ValueMeal.VMLQUA.ToString() +  System.Environment.NewLine);
+            else sb.Append( System.Environment.NewLine);
             return sb;
         }
 
@@ -251,8 +251,8 @@ namespace CFMMCD.Generators
                 sb.Append(ProductMixGroup.PMGTXT.Trim() + ",");
             else sb.Append(",");
             if (ProductMixGroup.PMGSTA != null)
-                sb.Append(ProductMixGroup.PMGSTA.Trim() + "\n");
-            else sb.Append("\n");
+                sb.Append(ProductMixGroup.PMGSTA.Trim() +  System.Environment.NewLine);
+            else sb.Append( System.Environment.NewLine);
             return sb;
         }
 
@@ -270,8 +270,8 @@ namespace CFMMCD.Generators
                 sb.Append(MaterialGroup.MGRTXT.Trim() + ",");
             else sb.Append(",");
             if (MaterialGroup.MGRSTA != null)
-                sb.Append(MaterialGroup.MGRSTA.Trim() + "\n");
-            else sb.Append("\n");
+                sb.Append(MaterialGroup.MGRSTA.Trim() +  System.Environment.NewLine);
+            else sb.Append( System.Environment.NewLine);
             return sb;
         }
 
@@ -291,8 +291,8 @@ namespace CFMMCD.Generators
             else
                 sb.Append(((DateTime)UnitOfMeasure.UOMDAT).ToString("yyyy-MM-dd") + ",");
             if (UnitOfMeasure.UOMUSR != null)
-                sb.Append(UnitOfMeasure.UOMUSR.Trim() + "\n");
-            else sb.Append("\n");
+                sb.Append(UnitOfMeasure.UOMUSR.Trim() +  System.Environment.NewLine);
+            else sb.Append( System.Environment.NewLine);
             return sb;
         }
 
@@ -347,8 +347,8 @@ namespace CFMMCD.Generators
                 sb.Append(Vendor.VEMADE.Trim() + ",");
             else sb.Append(",");
             if (Vendor.VEMDEL != null)
-                sb.Append(Vendor.VEMDEL.Trim() + "\n");
-            else sb.Append("\n");
+                sb.Append(Vendor.VEMDEL.Trim() +  System.Environment.NewLine);
+            else sb.Append( System.Environment.NewLine);
             return sb;
         }
     }

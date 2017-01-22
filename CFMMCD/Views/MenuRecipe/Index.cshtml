@@ -33,7 +33,7 @@
     <hr />
 
     <div class="form-horizontal">
-        @using (Html.BeginForm("UpdateDelete", "MenuRecipe", FormMethod.Post, new { }))
+        @using (Html.BeginForm("UpdateDelete", "MenuRecipe", FormMethod.Post, new { @Id = "RecipeForm" }))
         {
             <div class="container-fluid">
                 <div class="col-lg-3 col-lg-offset-3">
@@ -51,10 +51,17 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-lg-offset-3">
+                <div class="col-lg-3 col-lg-offset-3">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.MIMDSC, "Description", new { @class = "form-label" })
                         @Html.TextBoxFor(m => Model.MIMDSC, new { @class = "form-control", @maxlength = "16" })
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="col-lg-12">
+                        @Html.LabelFor(m => Model.Group, new { @class = "form-label" })
+                        @Html.DropDownListFor(m => Model.Group, new SelectList(Model.GroupList, "value", "text", Model.Group), new { @class = "form-control input-sm" })
                     </div>
                 </div>
             </div>
@@ -205,14 +212,14 @@
                 {
                     ActiveInactive = "inactive";
                 }
-                <button type="button" class="modal-item-select tr-collapse @Model.RawItemList[i].RIMRIC @Model.RawItemList[i].RIMRID @ActiveInactive" name="value" value=@Model.RawItemList[i].RIMRIC data-dismiss="modal">
-                    <div class="col-lg-3">
-                        @Model.RawItemList[i].RIMRIC
-                    </div>
-                    <div class="col-lg-9">
-                        @Model.RawItemList[i].RIMRID
-                    </div>
-                </button>
+                    <button type="button" class="modal-item-select tr-collapse @Model.RawItemList[i].RIMRIC @Model.RawItemList[i].RIMRID @ActiveInactive" name="value" value=@Model.RawItemList[i].RIMRIC data-dismiss="modal">
+                        <div class="col-lg-3">
+                            @Model.RawItemList[i].RIMRIC
+                        </div>
+                        <div class="col-lg-9">
+                            @Model.RawItemList[i].RIMRID
+                        </div>
+                    </button>
             }
         </div>
     </div>
@@ -274,5 +281,6 @@
 
     function onItemSelected() {
         TextBoxPressed.val($(this).val());
+        $("#RecipeForm").submit();
     }
 </script>

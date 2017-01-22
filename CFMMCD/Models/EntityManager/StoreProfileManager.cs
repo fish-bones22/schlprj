@@ -55,7 +55,8 @@ namespace CFMMCD.Models.EntityManager
                 SPRow.PROFIT_CENTER = int.Parse(SPViewModel.PROFIT_CENTER);
                 SPRow.REGION = SPViewModel.REGION;
                 SPRow.PROVINCE = SPViewModel.PROVINCE;
-                SPRow.LOCATION = int.Parse(SPViewModel.LOCATION);
+                if (SPViewModel.LOCATION != null && !SPViewModel.LOCATION.Equals(""))
+                    SPRow.LOCATION = int.Parse(SPViewModel.LOCATION);
                 SPRow.ADDRESS = SPViewModel.ADDRESS;
                 SPRow.CITY = SPViewModel.CITY;
                 SPRow.FRESH_OR_FROZEN = SPViewModel.FRESH_OR_FROZEN;
@@ -65,6 +66,37 @@ namespace CFMMCD.Models.EntityManager
                 SPRow.MCCORMICK_OR_GSF = SPViewModel.MCCORMICK_OR_GSF;
                 SPRow.FRESHB_OR_FROZENB = SPViewModel.FRESHB_OR_FROZENB;
                 SPRow.STATUS = "A";
+                // Group
+                if (db.ITMGRPs.Where(o => o.Item_Code.ToString().Equals(SPViewModel.STORE_NO)).Any())
+                {
+                    if (SPViewModel.Group == 0)
+                    {
+                        int val = db.ITMGRPs.FirstOrDefault(o => o.Item_Code.ToString().Equals(SPViewModel.STORE_NO)).Id;
+                        ItemGroupManager.DeleteItem(val);
+                    }
+                    else
+                    {
+                        db.ITMGRPs.Single(o => o.Item_Code.ToString().Equals(SPViewModel.STORE_NO)).Item_Code = int.Parse(SPViewModel.STORE_NO);
+                        db.ITMGRPs.Single(o => o.Item_Code.ToString().Equals(SPViewModel.STORE_NO)).Item_Name = SPViewModel.STORE_NAME;
+                        db.ITMGRPs.Single(o => o.Item_Code.ToString().Equals(SPViewModel.STORE_NO)).Group_Id = SPViewModel.Group;
+                        db.ITMGRPs.Single(o => o.Item_Code.ToString().Equals(SPViewModel.STORE_NO)).Group_Name = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == SPViewModel.Group).Group_Name;
+                    }
+                }
+                else
+                {
+                    if (SPViewModel.Group != 0)
+                    {
+                        ItemGroupViewModel IGRow = new ItemGroupViewModel();
+                        IGRow.GroupName = db.ITMGRPs.FirstOrDefault(o => o.Group_Id == SPViewModel.Group).Group_Name;
+                        IGRow.GroupId = SPViewModel.Group;
+                        IGRow.ItemCode = int.Parse(SPViewModel.STORE_NO);
+                        IGRow.ItemName = SPViewModel.STORE_NAME;
+                        IGRow.ItemType = 3;
+                        IGRow.GroupType = 3;
+                        ItemGroupManager.UpdateGroup(IGRow);
+                    }
+                }
+                SPRow.Group = SPViewModel.Group;
                 try
                 {
                     // Check if STORE_NO already exists in the database, perform an update if true
@@ -168,6 +200,11 @@ namespace CFMMCD.Models.EntityManager
                             v.Store = null;
                         }
                     }
+                    // Delete Group
+                    if (db.ITMGRPs.Where(o => o.Item_Code == SPRow.STORE_NO).Any())
+                    {
+                        db.ITMGRPs.RemoveRange(db.ITMGRPs.Where(o => o.Item_Code == SPRow.STORE_NO));
+                    }
                 }
                 else
                     return false;
@@ -261,6 +298,9 @@ namespace CFMMCD.Models.EntityManager
                 vm.MCCORMICK_OR_GSF = SPRow.MCCORMICK_OR_GSF.Trim();
                 vm.FRESHB_OR_FROZENB = SPRow.FRESHB_OR_FROZENB;
                 vm.BET = GetBusinessExtension(SPRow.BET, vm.BusinessExtList);
+                if (SPRow != null)
+                    vm.Group = (int)SPRow.Group;
+                else vm.Group = 0;
                 return vm;
             }
         }
