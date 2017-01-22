@@ -19,7 +19,9 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.TEG) return RedirectToAction("Login", "Account");
 
             Session["CurrentPage"] = new CurrentPageSession("TEG", "HOME", "LOG");
-            return View(new TextGeneratorViewModel());
+            TextGeneratorViewModel TGViewModel = new TextGeneratorViewModel();
+            TGViewModel.IncludeAll = true;
+            return View(TGViewModel);
         }
         [HttpPost]
         public ActionResult Index(TextGeneratorViewModel TGViewModel)

@@ -82,6 +82,27 @@ label {
 .header {
   text-align: center;
 }
+.home-title {
+    font-weight:800;
+    font-size:8em;
+    line-height:1;
+}
+.home-subtitle {
+    background-color:rgb(235, 90, 60);
+    padding:5px;
+}
+.home-a {
+    font-size:1.3em;
+    color:white;
+    padding-left:10px;
+    padding-right:10px;
+    text-transform:uppercase;
+}
+.home-a:hover {
+    background-color:rgb(235, 60, 30);
+    color:white;
+    text-decoration:none;
+}
 .input-sm {
   height: 30px;
 }
@@ -158,20 +179,22 @@ label {
   color: white;
 }
 .btn-default:active {
-  background-color: rgb(255, 217, 102);
+    background-color: rgb(255, 217, 102);
+    outline: 0 none -webkit-focus-ring-color;
 }
 .btn-secondary {
-  background-color: rgb(80, 80, 80);
-  border-radius:25px;
-  color: white !important;
-  font-variant:small-caps;
+    background-color: rgb(80, 80, 80);
+    border-radius:25px;
+    color: white !important;
+    font-variant:small-caps;
 }
 .btn-secondary:hover, .btn-secondary:focus {
-  background-color: rgb(100, 100, 100);
-  color: white;
-  -webkit-transition-duration: 0.4s;
-  -moz-transition-duration: 0.4s;
-  transition-duration: 0.4s;
+    background-color: rgb(100, 100, 100);
+    color: white;
+    outline: 0 none -webkit-focus-ring-color;
+    -webkit-transition-duration: 0.4s;
+    -moz-transition-duration: 0.4s;
+    transition-duration: 0.4s;
 }
 .center-sm {
     max-width: 400px;
@@ -260,28 +283,6 @@ li {
   .list-group-item a:focus{
     outline: 0 none -webkit-focus-ring-color;
  }
-.start {
-    left:0;
-    width: 100%;
-    position:relative;
-}
-.start button {
-    width:30%;
-    border-radius: 0;
-}
-.scrollable-button{
-    padding-left:0;
-    position:fixed;
-    left:0;
-    width: 500px;
-}
-.scrollable-button .panel {
-    max-height:80%;
-    overflow-x:hidden;
-    overflow-y:visible;
-    position:fixed;
-    margin-bottom:20px;
-}
 .popover {
     max-height: 20%;
     position: absolute;

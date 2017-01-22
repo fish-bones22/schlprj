@@ -27,7 +27,7 @@
                     <div class="col-lg-10 col-lg-offset-1">
                         <div class="col-lg-4">
                             @Html.LabelFor(m => m.ID, "Id", new { @class = "form-label"})
-                            @Html.TextBoxFor(m => m.ID, new { @class = "form-control input-sm", @Value = Model.ID, @maxlength = "6" })
+                            @Html.TextBoxFor(m => m.ID, new { @class = "form-control input-sm", @Value = Model.ID, @maxlength = "6", @required = "required" })
                         </div>
                         <div class="col-lg-8">
                             @Html.LabelFor(m => m.LONGNM, "Business Extension", new { @class = "form-label" })

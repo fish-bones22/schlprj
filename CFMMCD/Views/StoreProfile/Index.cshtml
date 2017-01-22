@@ -40,19 +40,19 @@
                 <div class="col-lg-4">
                     <div class="container-fluid">
                         @Html.LabelFor(model => Model.STORE_NO, "Store number", new { @class = "form-label" })
-                        @Html.TextBoxFor(model => Model.STORE_NO, new { @class = "form-control input-sm", @type = "number", @max = "999999" })
+                        @Html.TextBoxFor(model => Model.STORE_NO, new { @class = "form-control input-sm", @type = "number", @max = "999999", @required = "required" })
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="container-fluid">
                         @Html.LabelFor(model => Model.STORE_NAME, "Store name", new { @class = "form-label" })
-                        @Html.TextBoxFor(model => Model.STORE_NAME, new { @class = "form-control input-sm" })
+                        @Html.TextBoxFor(model => Model.STORE_NAME, new { @class = "form-control input-sm", @required = "required" })
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="container-fluid">
                         @Html.LabelFor(model => Model.ADDRESS, "Address", new { @class = "form-label" })
-                        @Html.TextBoxFor(model => Model.ADDRESS, new { @class = "form-control input-sm" })
+                        @Html.TextBoxFor(model => Model.ADDRESS, new { @class = "form-control input-sm", @required = "required" })
                     </div>
                 </div>
             </div>
@@ -221,7 +221,7 @@
             <input type="submit" name="command" value="Save" class="btn btn-default" />
             @if (Model.STORE_NO != null && !Model.STORE_NO.Equals(""))
             {
-                <input type="submit" name="command" value="Delete" class="btn btn-default" />
+                <input type="submit" name="command" value="Delete" class="btn btn-secondary" />
             }
         </div>
     }

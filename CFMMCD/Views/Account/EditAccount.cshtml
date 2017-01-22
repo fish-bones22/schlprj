@@ -35,13 +35,13 @@
         @Html.HiddenFor( m => Model.EditMode, new { @Value = false })
         @Html.HiddenFor( m => Model.UserAccess )
         <div class="form-group">
-            @Html.TextBoxFor(m => Model.Username, new { @class = "form-control", @placeholder = "Username" })
+            @Html.TextBoxFor(m => Model.Username, new { @class = "form-control", @placeholder = "Username", @required = "required" })
         </div>
         <div class="form-group">
-            @Html.PasswordFor(m => Model.Password, new { @class = "form-control", @placeholder = "Password" })
+            @Html.PasswordFor(m => Model.Password, new { @class = "form-control", @placeholder = "Password", @required = "required" })
         </div>
         <div class="form-group">
-            @Html.PasswordFor(m => Model.PasswordVerify, new { @class = "form-control", @placeholder = "Confirm password" })
+            @Html.PasswordFor(m => Model.PasswordVerify, new { @class = "form-control", @placeholder = "Confirm password", @required = "required" })
         </div>
         <div class="form-group">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })

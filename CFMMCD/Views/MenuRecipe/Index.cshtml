@@ -39,7 +39,7 @@
                 <div class="col-lg-3 col-lg-offset-3">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.RIRMIC, "Menu item code", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.RIRMIC, new { @class = "form-control", @type = "number", @maxlength = "6" })
+                        @Html.TextBoxFor(m => Model.RIRMIC, new { @class = "form-control", @type = "number", @max = "999999", @required = "required" })
 
                     </div>
                 </div>
@@ -47,14 +47,14 @@
                 <div class="col-lg-3">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.MIMLON, "Menu item long name", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.MIMLON, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => Model.MIMLON, new { @class = "form-control", @required = "required" })
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-lg-offset-3">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.MIMDSC, "Description", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.MIMDSC, new { @class = "form-control", @maxlength = "16" })
+                        @Html.TextBoxFor(m => Model.MIMDSC, new { @class = "form-control", @maxlength = "16", @required = "required" })
                     </div>
                 </div>
 

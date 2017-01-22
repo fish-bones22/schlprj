@@ -148,7 +148,7 @@
                                     <div class="form-inline bottom float" style="right:50px">
                                         @using (Html.BeginForm("DeleteGroup", "MenuItemGroup", FormMethod.Post, new { @Id = "Form-" + @Model.GroupList[i].GroupId }))
                                         {
-                                            <button name="value" type="button" class="btn btn-default group-delete" aria-label="close" value="@Model.GroupList[i].GroupId">Delete group</button>
+                                            <button name="value" type="button" class="btn btn-secondary group-delete" aria-label="close" value="@Model.GroupList[i].GroupId">Delete group</button>
                                             <input type="hidden" name="value" value="@Model.GroupList[i].GroupId" />
                                         }
                                     </div>
@@ -164,10 +164,13 @@
                             <div class="col-lg-8 col-lg-offset-2">
                                 @using (Html.BeginForm("AddNewGroup", "MenuItemGroup", FormMethod.Post, new { }))
                                 {
-                                    @Html.TextBoxFor(m => m.GroupName, new { @class = "form-control input-sm", @placeholder = "Group name" })
+                                    @Html.TextBoxFor(m => m.GroupName, new { @class = "form-control input-sm", @placeholder = "Group name", @required = "required" })
                                     @Html.HiddenFor(m => m.ItemType, new { @Value = 1 })
                                     @Html.HiddenFor(m => m.GroupType, new { @Value = 1 })
-                                    <button type="submit" class="btn btn-default right">Add</button>
+                                    <br />
+                                    <div class="col-lg-12" >
+                                        <button type="submit" class="btn btn-default right">Add</button>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -258,7 +261,7 @@
         </div>
         <div class="modal-body" style="overflow-y:hidden">
             <button type="button" class="btn btn-default btn-modal-yes">Delete</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
         </div>
     </div>
 </div>

@@ -33,13 +33,13 @@
                 <div class="col-lg-5">
                     <div class="form-group">
                         @Html.LabelFor(m => m.VEMVEN, "Vendor number", new {  @class = "form-label" } )
-                        @Html.TextBoxFor(m => Model.VEMVEN, new { @class = "form-control input-sm", @type = "number", @max = "999" })
+                        @Html.TextBoxFor(m => Model.VEMVEN, new { @class = "form-control input-sm", @type = "number", @max = "999", @required = "required" })
                     </div>
                 </div>
                 <div class="col-lg-6 col-lg-offset-1">
                     <div class="form-group">
                         @Html.LabelFor(m => m.VEMDS1, "Vendor description", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.VEMDS1, new { @class = "form-control input-sm", @maxlength = "20" })
+                        @Html.TextBoxFor(m => Model.VEMDS1, new { @class = "form-control input-sm", @maxlength = "20", @required = "required" })
                     </div>
                  </div>
             </div>

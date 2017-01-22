@@ -17,7 +17,6 @@ namespace CFMMCD.Controllers
             if (Session["User"] != null)
             {
                 string username = ((UserSession)Session["User"]).Username;
-                AccountManager.LogDateTime(username);
                 Session["User"] = null;
             }
             if (Session["UserAccess"] != null)

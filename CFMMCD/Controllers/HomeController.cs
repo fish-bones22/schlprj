@@ -30,6 +30,7 @@ namespace CFMMCD.Controllers
             HomeViewModel HViewModel = new HomeViewModel();
             HViewModel.MenuItemNotif = HManager.GetMenuItemNotification(user.Username);
             HViewModel.RawItemNotif = HManager.GetRawItemNotification(user.Username);
+            AccountManager.LogDateTime(user.Username);
             return View(HViewModel);
         }
     }

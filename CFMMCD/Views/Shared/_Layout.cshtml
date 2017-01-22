@@ -179,22 +179,21 @@
                                                     }
                                                 }
                                             </ul>
-
+                                            <hr class="dropdown-hr" />
                                         </li>
-                                                    if (UASession.GRP)
-                                                    {
-                                                        <li class="dropdown-submenu">
-                                                            <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-1" href="#">Group maintenance&emsp;</a>
-                                                            <ul class="dropdown-menu">
-                                                                <li>@Html.ActionLink("Menu Item Group", "Index", "MenuItemGroup", new { }, new { @class = "dropdown-item" })</li>
-                                                                <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("Raw Item Group", "Index", "RawItemGroup", new { }, new { @class = "dropdown-item" })</li>
-                                                                <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("Recipe Group", "Index", "RecipeGroup", new { }, new { @class = "dropdown-item" })</li>
-                                                            </ul>
-                                                        </li>
-                                                        <hr class="dropdown-hr" />
-                                                    }
+                                        if (UASession.GRP)
+                                        {
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-1" href="#">Group maintenance&emsp;</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>@Html.ActionLink("Menu Item Group", "Index", "MenuItemGroup", new { }, new { @class = "dropdown-item" })</li>
+                                                    <hr class="dropdown-hr" />
+                                                    <li>@Html.ActionLink("Raw Item Group", "Index", "RawItemGroup", new { }, new { @class = "dropdown-item" })</li>
+                                                    <hr class="dropdown-hr" />
+                                                    <li>@Html.ActionLink("Recipe Group", "Index", "RecipeGroup", new { }, new { @class = "dropdown-item" })</li>
+                                                </ul>
+                                            </li>
+                                        }
                                     }
                                 </ul>
                             </li>             
@@ -212,7 +211,7 @@
             </ul>
             @{if (CPSession.Self.Controller.Equals("MenuItemMaster") || CPSession.Self.Controller.Equals("RawItemMaster"))
                 {
-                    <ul class="nav navbar-nav navbar-right" style="padding-right:10px">
+                    <ul class="nav navbar-nav navbar-right" style="padding-right:20px">
                         <li ><a class="navbar-a" data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications</a></li>
                         <li id="popover-content" class="hide col-lg-5">
                             <div class="content-height">

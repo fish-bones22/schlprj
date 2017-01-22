@@ -9,9 +9,13 @@
         UASession = (UserAccessSession)Session["UserAccess"];
     }
 }
-
-<div class="header"><h2>@ViewBag.Title</h2></div>
-<div class="container">
+<style>
+    .body-content {
+        margin-left:10px;
+        margin-right:10px;
+    }
+</style>
+<div class="container" style="padding-top:50px">
     <!--div class="col-lg-4" style="padding-left:0">
         <div class="scrollable-button">
             <div class="start">
@@ -133,36 +137,57 @@
             </div>
         </div>
     </!--div-->
-    <div class="container-fluid">
-        <div class="col-lg-8">
-            <table class="table table-responsive">
-                <thead>Notifications</thead>
-                <tbody>
-                    @{ 
-                        if (UASession.MIM)
+    <div class="col-lg-8">
+        <div class="home-title">
+            <div style="font-weight:500">Central file</div>
+            <div>maintenance.</div>
+        </div>
+        <div class="container-fluid home-subtitle">
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th colspan="2" class="right">
+                        @if (Model.MenuItemNotif.Count() > 0 && Model.RawItemNotif.Count() > 0)
                         {
-                            for (int i = 0; i < Model.MenuItemNotif.Count(); i++)
-                            {
-                                <tr>
-                                    <td>@Model.MenuItemNotif[i].MIMMIC</td>
-                                    <td>@Model.MenuItemNotif[i].MIMDSC</td>
-                                </tr>
-                            }
+                            <h3>Notifications</h3>
                         }
-                        if (UASession.RIM)
+                        else
                         {
-                            for (int i = 0; i < Model.RawItemNotif.Count(); i++)
-                            {
-                                <tr>
-                                    <td>@Model.RawItemNotif[i].RIMRIC</td>
-                                    <td>@Model.RawItemNotif[i].RIMRID</td>
-                                </tr>
-                            }
+                            <h4>No notifications</h4>
+                        }
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (UASession.MIM && Model.MenuItemNotif.Count() > 0)
+                    {
+                        <tr><th colspan="2"><h4>New menu item</h4></th></tr>
+                        for (int i = 0; i < Model.MenuItemNotif.Count(); i++)
+                        {
+                            <tr>
+                                <td>@Model.MenuItemNotif[i].MIMMIC</td>
+                                <td>@Model.MenuItemNotif[i].MIMDSC</td>
+                            </tr>
                         }
                     }
-                    <tr></tr>
-                </tbody>
-            </table>
-        </div>
+                    if (UASession.RIM && Model.RawItemNotif.Count() > 0)
+                    {
+                        <tr><th colspan="2"><h4>New raw item</h4></th></tr>
+                        for (int i = 0; i < Model.RawItemNotif.Count(); i++)
+                        {
+                            <tr>
+                                <td>@Model.RawItemNotif[i].RIMRIC</td>
+                                <td>@Model.RawItemNotif[i].RIMRID</td>
+                            </tr>
+                        }
+                    }
+                }
+                <tr></tr>
+            </tbody>
+        </table>
     </div>
 </div>

@@ -21,7 +21,7 @@ namespace CFMMCD.Controllers
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null || !UASession.VEM) return RedirectToAction("Login", "Account");
             // Set NavBar Links accordingly
-            Session["CurrentPage"] = new CurrentPageSession("MIM", "HOME", "LOG");
+            Session["CurrentPage"] = new CurrentPageSession("VEM", "HOME", "LOG");
 
             // Initialize page
             VendorMasterManager VMManager = new VendorMasterManager();

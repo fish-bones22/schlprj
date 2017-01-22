@@ -38,19 +38,19 @@
                 <div class="col-lg-4 col-lg-offset-2">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.VMLNUM, "Value meal number", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.VMLNUM, new { @class = "form-control",@type = "number",@maxlength = "6" })
+                        @Html.TextBoxFor(m => Model.VMLNUM, new { @class = "form-control", @type = "number", @max = "999999", @required = "required" })
 
                     </div>
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.VMLNAM, "Value meal name", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.VMLNAM, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => Model.VMLNAM, new { @class = "form-control", @required = "required" })
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.VMLPRI, "Price in", new { @class = "form-label" })
-                        @Html.TextBoxFor(m => Model.VMLPRI, new { @class = "form-control",@type = "number" })
+                        @Html.TextBoxFor(m => Model.VMLPRI, new { @class = "form-control", @type = "number" })
 
                     </div>
                     <div class="col-lg-12">
