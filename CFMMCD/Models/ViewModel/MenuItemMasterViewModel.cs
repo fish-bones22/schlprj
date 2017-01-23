@@ -16,13 +16,14 @@ namespace CFMMCD.Models.ViewModel
             StoreList = tdd.SetStoreDropDown();
             MenuItemMasterList = new List<MenuItem>();
             MenuRecipeList = new List<MenuRecipe>();
-            TierList = new TierManager().SetTierList();
+            TierList = TierManager.SetTierList();
             TradingAreaList = tdd.SetTradingAreaList();
             CategoryList = tdd.SetCategoryList();
             MIMFGCList = tdd.SetPMGList("PMGFGC");
             MIMHPTList = tdd.SetPMGList("PMGHPT");
             MIMWGRList = tdd.SetPMGList("PMGWGR");
             GroupList = tdd.SetGroupList();
+            MasterList = new List<MenuItemMasterViewModel>();
         }
 
         public string SearchItem { get; set; }
@@ -71,34 +72,46 @@ namespace CFMMCD.Models.ViewModel
         public bool SelectExcept { get; set; }
         public int Group { get; set; }
 
+        public string EffectiveDate { get; set; }
+
         public List<MenuItem> MenuItemMasterList { get; set; }
 
         public List<GenericDropDownList> TradingAreaList { get; set; }
-        public List<GenericDropDownList> CategoryList { get; set; }
-        public List<GenericDropDownList> MIMFGCList { get; set; }
-        public List<GenericDropDownList> MIMHPTList { get; set; }
-        public List<GenericDropDownList> MIMWGRList { get; set; }
-        public List<GenericDropDownList> StoreList { get; set; }
-        public List<GenericDropDownList> LocationList { get; set; }
-        public List<MenuRecipe> MenuRecipeList { get; set; }
-        public List<Tier> TierList { get; set; }
-        public List<GenericDropDownList> GroupList { get; set; }
+        public List<GenericDropDownList> CategoryList    { get; set; }
+        public List<GenericDropDownList> MIMFGCList      { get; set; }
+        public List<GenericDropDownList> MIMHPTList      { get; set; }
+        public List<GenericDropDownList> MIMWGRList      { get; set; }
+        public List<GenericDropDownList> StoreList       { get; set; }
+        public List<GenericDropDownList> LocationList    { get; set; }
+        public List<MenuRecipe>          MenuRecipeList  { get; set; }
+        public List<Tier>                TierList        { get; set; }
+        public List<GenericDropDownList> GroupList       { get; set; }
+
+        public List<MenuItemMasterViewModel> MasterList { get; set; }
     }
 
     public class Tier
     {
+        public Tier()
+        {
+            OldPrices = new List<string>();
+            NewPrices = new List<string>();
+        }
         public string MIMMIC { get; set; }
         public string MIMNAM { get; set; }
+        public string MIMSTA { get; set; }
 
         public int TierId { get; set; }
         public string TierName { get; set; }
         public string TradingAreas { get; set; }
         // OLD
+        public List<string> OldPrices { get; set; }
         public string MIMPRI { get; set; } // Eat in
         public string MIMPRO { get; set; } // Take out
         public string MIMPRG { get; set; } // Other
         public string MIMNPA { get; set; } // Non-product
         // New
+        public List<string> NewPrices { get; set; }
         public string MIMNPI { get; set; } // Eat in new
         public string MIMNPO { get; set; } // Take out new
         public string MIMNPD { get; set; } // Other new

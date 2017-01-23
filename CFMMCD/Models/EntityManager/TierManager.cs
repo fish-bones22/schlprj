@@ -9,7 +9,11 @@ namespace CFMMCD.Models.EntityManager
 {
     public class TierManager
     {
-        public List<Tier> SetTierList()
+        /*
+         * Returns a list of available Tiers for an MI depending on
+         * the `Trading Area` 
+         */
+        public static List<Tier> SetTierList()
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {

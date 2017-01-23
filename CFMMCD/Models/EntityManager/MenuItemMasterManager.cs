@@ -22,7 +22,6 @@ namespace CFMMCD.Models.EntityManager
             {
                 List<CSHMIMP0> MIMRowList;
                 List<MenuItem> MIMList = new List<MenuItem>();
-                string ItemCode = "";
                 if (SearchItem.ToUpper().Equals("ALL"))
                 {
                     MIMRowList = db.CSHMIMP0.ToList();
@@ -30,7 +29,6 @@ namespace CFMMCD.Models.EntityManager
                 else if (db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(SearchItem)).Any())
                 {
                     MIMRowList = db.CSHMIMP0.Where(o => o.MIMMIC.ToString().Equals(SearchItem)).ToList();
-                    ItemCode = SearchItem;
                 }
                 else if (db.CSHMIMP0.Where(o => o.MIMNAM.ToString().Contains(SearchItem)).Any())
                 {
@@ -93,7 +91,8 @@ namespace CFMMCD.Models.EntityManager
                 vm.MIMNNP = MIMRow.MIMNNP.ToString();
                 vm.MIMNPT = MIMRow.MIMNPT.Trim();
                 vm.MIMLON = MIMRow.MIMLON.Trim();
-                vm.MIMUTC = MIMRow.MIMUTC.ToString();
+                if (MIMRow.MIMUTC != null)
+                    vm.MIMUTC = MIMRow.MIMUTC.ToString();
                 if (MIMRow.Group != null)
                     vm.Group = (int)MIMRow.Group;
                 else vm.Group = 0;
@@ -140,11 +139,10 @@ namespace CFMMCD.Models.EntityManager
                     vm.MIMNAM_NP6 = MIMRow.CSHMIMP0_NP6.MIMNAM.Trim();
                     vm.MIMLON_NP6 = MIMRow.CSHMIMP0_NP6.MIMLON.Trim();
                 }
-                // Initialize external table row values
-                if (ItemCode.Equals(""))
-                    ItemCode = MIMRow.MIMMIC.ToString();
                 // Price tier
-                vm.TierList = SearchPriceTier(vm.MIMMIC);
+                vm.TierList = GetPriceTier(vm.MIMMIC);
+                if (vm.TierList.Count() > 0)
+                    vm.EffectiveDate = vm.TierList[0].MIMPND;
                 // Recipe List
                 List<INVRIRP0> RIRRowList;
                 if (db.INVRIRP0.Where(o => o.RIRMIC == MIMRow.MIMMIC).Any())
@@ -480,13 +478,30 @@ namespace CFMMCD.Models.EntityManager
 
             }
         }
-        
-        public static List<Tier> SearchPriceTier(string MIMMIC)
+
+        public static bool UpdatePriceTier(MenuItemMasterViewModel MIMViewModel, string user)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                MenuItemMasterViewModel mi = SearchSingleMenuItem(MIMViewModel.MIMMIC);
+                mi.TierList = MIMViewModel.TierList;
+                if (MIMViewModel.EffectiveDate != null)
+                {
+                    foreach (var v in mi.TierList)
+                    {
+                        v.MIMPND = MIMViewModel.EffectiveDate;
+                    }
+                }
+                return UpdateMenuItem(mi, user);
+            }
+        }
+
+        public static List<Tier> GetPriceTier(string MIMMIC)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 List<MIM_Price> MIMPriceList;
-                List<Tier> TierList = new TierManager().SetTierList();
+                List<Tier> TierList = TierManager.SetTierList();
                 if (db.MIM_Price.Where(o => o.MIMMIC.ToString().Equals(MIMMIC)).Any())
                     MIMPriceList = db.MIM_Price.Where(o => o.MIMMIC.ToString().Equals(MIMMIC)).ToList();
                 else return TierList;
@@ -515,37 +530,6 @@ namespace CFMMCD.Models.EntityManager
                 }
                 return TierList;
 
-            }
-        }
-
-        public static bool UpdatePriceTier(List<TierUpdate> TierList)
-        {
-            using (CFMMCDEntities db = new CFMMCDEntities())
-            {
-                for (int i = 0; i < TierList.Count(); i++)
-                {
-                    List<Tier> TierListToUpdate = SearchPriceTier(TierList[i].MIMMIC);
-                    if (TierListToUpdate == null)
-                        return false;
-                    if (TierListToUpdate.Where(o => o.TierName.Equals("A")).Any())
-                    {
-                        TierListToUpdate.Single(o => o.TierName.Equals("A")).MIMNPI = TierList[i].TierANew;
-                        TierListToUpdate.Single(o => o.TierName.Equals("A")).MIMPND = TierList[i].EffectiveDate;
-                    }
-                    if (TierListToUpdate.Where(o => o.TierName.Equals("B")).Any())
-                    {
-                        TierListToUpdate.Single(o => o.TierName.Equals("B")).MIMNPI = TierList[i].TierBNew;
-                        TierListToUpdate.Single(o => o.TierName.Equals("B")).MIMPND = TierList[i].EffectiveDate;
-                    }
-                    if (TierListToUpdate.Where(o => o.TierName.Equals("C")).Any())
-                    {
-                        TierListToUpdate.Single(o => o.TierName.Equals("C")).MIMNPI = TierList[i].TierCNew;
-                        TierListToUpdate.Single(o => o.TierName.Equals("C")).MIMPND = TierList[i].EffectiveDate;
-                    }
-                    if (!UpdatePriceTier(TierListToUpdate))
-                        return false;
-                }
-                return true;
             }
         }
 

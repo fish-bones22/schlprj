@@ -25,33 +25,18 @@ namespace CFMMCD.Controllers
 
             // SearchItemSelected is assigned value at DisplaySearchResult
             MenuItemMasterViewModel MIMViewModel = new MenuItemMasterViewModel();
-            MenuItemPriceUpdateViewModel MIPViewModel = new MenuItemPriceUpdateViewModel();
             MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems("ALL");
-            for (int i = 0; i < MIMViewModel.MenuItemMasterList.Count(); i++)
-            {
-                TierUpdate tu = MenuItemMasterManager.SearchPriceTierUpdate(MIMViewModel.MenuItemMasterList[i].MIMMIC);
-                if (tu != null)
-                    MIPViewModel.TierUpdateList.Add(tu);
-            }
-                
-            return View(MIPViewModel);
-        }
-
-        [HttpPost]
-        public ActionResult Index(MenuItemMasterViewModel MIMViewModel)
-        {   // Search
-            MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems(MIMViewModel.SearchItem);
-            if (MIMViewModel.MenuItemMasterList != null)
-            {
-                TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
-                Session["ViewModelList"] = MIMViewModel.TierList;
-            }
-            else
-                ModelState.AddModelError("", "No results found");
             return View(MIMViewModel);
         }
         [HttpPost]
-        public ActionResult UpdateDelete(MenuItemPriceUpdateViewModel MIPViewModel, string command)
+        public ActionResult Index(MenuItemMasterViewModel MIMViewModel, string value)
+        {
+            MIMViewModel = MenuItemMasterManager.SearchSingleMenuItem(value);
+            MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems("ALL");
+            return View(MIMViewModel);
+        }
+        [HttpPost]
+        public ActionResult UpdateDelete(MenuItemMasterViewModel MIMViewModel, string command)
         {
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
@@ -69,16 +54,13 @@ namespace CFMMCD.Controllers
             }
             if (command == "Save")
             {
-                result = MenuItemMasterManager.UpdatePriceTier(MIPViewModel.TierUpdateList);
+                result = MenuItemMasterManager.UpdatePriceTier(MIMViewModel, user.Username);
                 PageAction = "Update price";
             }
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                foreach (var v in MIPViewModel.TierUpdateList)
-                {
-                    new AuditLogManager().Audit(user.Username, DateTime.Now, "Menu Item Price Update", PageAction, v.MIMMIC, v.MIMNAM);
-                }
+                new AuditLogManager().Audit(user.Username, DateTime.Now, "Menu Item Price Update", PageAction, MIMViewModel.MIMMIC, MIMViewModel.MIMNAM);
             }
             else
             {

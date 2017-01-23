@@ -44,7 +44,7 @@ namespace CFMMCD.Controllers
             bool result = false;
             if (command == "Save")
             {
-                result = MenuItemMasterManager.UpdateMenuItem(MIMViewModel, user.Username);
+                //result = MenuItemMasterManager.UpdateMenuItem(MIMViewModel, user.Username);
                 PageAction = "Update";
             }
             else if (command == "Delete")
