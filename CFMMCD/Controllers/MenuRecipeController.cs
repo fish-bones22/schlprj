@@ -12,7 +12,7 @@ namespace CFMMCD.Controllers
     public class MenuRecipeController : Controller
     {
         // GET: MenuRecipe
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null || !UASession.MER) return RedirectToAction("Login", "Account");
@@ -21,8 +21,8 @@ namespace CFMMCD.Controllers
 
             // SearchItemSelected is assigned value at DisplaySearchResult
             MenuRecipeViewModel MRViewModel = new MenuRecipeViewModel();
-            if (TempData["value"] != null)
-                MRViewModel = MenuRecipeManager.SearchMenuRecipe((string)TempData["value"]);
+            if (id != null)
+                MRViewModel = MenuRecipeManager.SearchMenuRecipe(id);
             MRViewModel.MenuItemList = MenuRecipeManager.SearchMenuItem("ALL");
             MRViewModel.RawItemList = RawItemMasterManager.GetRawItems("ALL");
             return View(MRViewModel);
@@ -51,7 +51,7 @@ namespace CFMMCD.Controllers
             {
                 result = MenuRecipeManager.UpdateMenuItem(MRViewModel, user.Username);
                 TempData["value"] = MRViewModel.RIRMIC;
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = MRViewModel.RIRMIC });
             }
             if (result)
             {

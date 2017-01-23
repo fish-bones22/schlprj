@@ -53,9 +53,13 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 CSHVMLP0 VMRow;
-                if (db.CSHVMLP0.Where(o => o.VMLID.ToString().Equals(SearchItem)).Any())
+                if (db.CSHVMLP0.Where(o => o.VMLNUM.ToString().Equals(SearchItem)).Any())
                 {
-                    VMRow = db.CSHVMLP0.Single(o => o.VMLID.ToString().Equals(SearchItem));
+                    VMRow = db.CSHVMLP0.FirstOrDefault(o => o.VMLNUM.ToString().Equals(SearchItem));
+                }
+                else if (db.CSHVMLP0.Where(o => o.VMLID.ToString().Equals(SearchItem)).Any())
+                {
+                    VMRow = db.CSHVMLP0.FirstOrDefault(o => o.VMLID.ToString().Equals(SearchItem));
                 }
                 else return null;
                 ValueMealViewModel vm = new ValueMealViewModel();
@@ -126,7 +130,8 @@ namespace CFMMCD.Models.EntityManager
                     VMRow.VMLNUM = int.Parse(VMViewModel.VMLNUM);
                     VMRow.VMLNAM = VMViewModel.VMLNAM.ToString();
                     VMRow.VMLMIC = int.Parse(v.MIMMIC);
-                    VMRow.VMLQUA = int.Parse(v.VMLQUA);
+                    if (v.VMLQUA != null && !v.VMLQUA.Equals(""))
+                        VMRow.VMLQUA = int.Parse(v.VMLQUA);
                     VMRow.VMLPRI = double.Parse(VMViewModel.VMLPRI);
                     VMRow.VMLPRO = double.Parse(VMViewModel.VMLPRO);
                     try
@@ -172,7 +177,8 @@ namespace CFMMCD.Models.EntityManager
                         VMRow.VMLNUM = int.Parse(VMViewModel.VMLNUM);
                         VMRow.VMLNAM = VMViewModel.VMLNAM.ToString();
                         VMRow.VMLMIC = int.Parse(VMViewModel.MIMMIC[i]);
-                        VMRow.VMLQUA = int.Parse(VMViewModel.VMLQUA[i]);
+                        if (VMViewModel.VMLQUA[i] != null && !VMViewModel.VMLQUA[i].Equals(""))
+                            VMRow.VMLQUA = int.Parse(VMViewModel.VMLQUA[i]);
                         VMRow.VMLPRI = double.Parse(VMViewModel.VMLPRI);
                         VMRow.VMLPRO = double.Parse(VMViewModel.VMLPRO);
                         try

@@ -12,7 +12,7 @@ namespace CFMMCD.Controllers
     public class SCMRecipeController : Controller
     {
         // GET: ValueMeal
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null || !UASession.SCM) return RedirectToAction("Login", "Account");
@@ -20,19 +20,15 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("SCM", "HOME", "LOG");
 
             // SearchItemSelected is assigned value at DisplaySearchResult
-            SCMRecipeViewModel SCMViewModel = (SCMRecipeViewModel)TempData["SearchItemSelected"];
-            SCMRecipeManager SCMManager = new SCMRecipeManager();
-            if (SCMViewModel == null)
-            {
-                SCMViewModel = new SCMRecipeViewModel();
-            }
+            SCMRecipeViewModel SCMViewModel = new SCMRecipeViewModel();
+            if (id != null)
+                SCMViewModel = SCMRecipeManager.SearchSCMRecipe(id);
             return View(SCMViewModel);
         }
         [HttpPost]
-        public ActionResult Index(SCMRecipeViewModel SCMViewModel)
+        public ActionResult Index(SCMRecipeViewModel SCMViewModel, string command)
         {
-            SCMRecipeManager SCMManager = new SCMRecipeManager();
-            SCMViewModel.SCMRecipeList = SCMManager.SearchSCMRecipe(SCMViewModel);
+            SCMViewModel = SCMRecipeManager.SearchSCMRecipe(SCMViewModel.SearchItem);
             if (SCMViewModel.SCMRecipeList != null)
             {
                 TempData["SearchResult"] = 1;   // Stores 1 if a search returned results.
@@ -52,8 +48,13 @@ namespace CFMMCD.Controllers
 
             if (command == "Save")
             {
-                result = SCMManager.UpdateSCMRecipe(SCMViewModel, user.Username);
+                result = SCMRecipeManager.UpdateSCMRecipe(SCMViewModel, user.Username);
                 PageAction = "Update";
+            }
+            else
+            {
+                result = SCMRecipeManager.UpdateSCMRecipe(SCMViewModel, user.Username);
+                return RedirectToAction("Index", new { id = SCMViewModel.CSMDES });
             }
             if (result)
             {
@@ -65,15 +66,6 @@ namespace CFMMCD.Controllers
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult DisplaySearchResult(string value)
-        {
-            List<SCMRecipeViewModel> VMList = (List<SCMRecipeViewModel>)Session["ViewModelList"];
-            SCMRecipeViewModel SCMViewModel = VMList.Where(o => o.CSMID.ToString().Equals(value)).FirstOrDefault();
-            TempData["SearchItemSelected"] = SCMViewModel;
-            return RedirectToAction("Index", "SCMRecipe");
         }
     }
 }

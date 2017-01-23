@@ -12,7 +12,7 @@ namespace CFMMCD.Controllers
     public class ValueMealController : Controller
     {
         // GET: ValueMeal
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
             if (UASession == null || !UASession.VAM) return RedirectToAction("Login", "Account");
@@ -21,6 +21,11 @@ namespace CFMMCD.Controllers
 
             ValueMealManager VMManager = new ValueMealManager();
             ValueMealViewModel VMViewModel = new ValueMealViewModel();
+            if (id != null)
+            {
+                VMViewModel = VMManager.SearchSingleValueMeal(id);
+                VMViewModel.ValueMealList = new List<ValueMeal>();
+            }
             VMViewModel.ValueMealList = VMManager.SearchValueMeals("ALL");
             return View(VMViewModel);
         }
@@ -45,6 +50,11 @@ namespace CFMMCD.Controllers
                 result = VMManager.UpdateValueMeal(VMViewModel, user.Username);
                 PageAction = "Update";
             }
+            else
+            {
+                result = VMManager.UpdateValueMeal(VMViewModel, user.Username);
+                return RedirectToAction("Index", new { id = VMViewModel.VMLNUM + VMViewModel.VMLMIC });
+            }
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
@@ -54,7 +64,7 @@ namespace CFMMCD.Controllers
             {
                 TempData["ErrorMessage"] = PageAction + " failed";
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = VMViewModel.VMLNUM + VMViewModel.VMLMIC });
         }
     }
 }

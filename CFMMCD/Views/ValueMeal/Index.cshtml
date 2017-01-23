@@ -32,7 +32,7 @@
     <hr />
 
     <div class="form-horizontal">
-        @using (Html.BeginForm("UpdateDelete", "ValueMeal", FormMethod.Post, new { }))
+        @using (Html.BeginForm("UpdateDelete", "ValueMeal", FormMethod.Post, new { @Id = "Form"}))
         {
             <div class="container-fluid">
                 <div class="col-lg-4 col-lg-offset-2">
@@ -181,7 +181,7 @@
                 {
                     ActiveInactive = "inactive";
                 }
-                <button type="button" class="modal-item-select tr-collapse @Model.AllMenuItems[i].MIMMIC @Model.AllMenuItems[i].MIMDSC @ActiveInactive" name="value" value=@Model.AllMenuItems[i].MIMMIC data-dismiss="modal">
+                <button type="button" class="modal-item modal-item-select tr-collapse @Model.AllMenuItems[i].MIMMIC @Model.AllMenuItems[i].MIMDSC @ActiveInactive" name="value" value=@Model.AllMenuItems[i].MIMMIC data-dismiss="modal">
                     <div class="col-lg-4">
                         @Model.AllMenuItems[i].MIMMIC
                     </div>
@@ -236,10 +236,11 @@
             $("#search-item-modal").modal("show");
         });
 
-        $(".modal-item-select").click(onItemSelected);
+        $(".modal-item").click(onItemSelected);
     }
 
     function onItemSelected() {
         TextBoxPressed.val($(this).val());
+        $("#Form").submit();
     }
 </script>

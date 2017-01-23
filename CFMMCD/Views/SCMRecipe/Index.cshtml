@@ -9,7 +9,7 @@
 <h2 align="center">@ViewBag.Title</h2>
 <hr />
 <!--Alerts-->
-<div class="container">
+<div class="container-fluid">
     @if (TempData["ErrorMessage"] != null)
     {
         <div class="alert alert-danger alert-dismissable fade in">@TempData["ErrorMessage"]<button class="close" data-dismiss="alert" aria-label="close">&times;</button></div>
@@ -23,14 +23,13 @@
 <div class="form-horizontal">
 
     <div class="form-horizontal">
-        @using (Html.BeginForm("UpdateDelete", "SCMRecipe", FormMethod.Post, new { }))
+        @using (Html.BeginForm("UpdateDelete", "SCMRecipe", FormMethod.Post, new { @Id = "RecipeForm" }))
         {
             <div class="container-fluid">
                 <div class="col-lg-6 col-lg-offset-3">
                     <div class="col-lg-12">
                         @Html.LabelFor(m => Model.CSMDES, "Description", new { @class = "form-label" })
                         @Html.TextBoxFor(m => Model.CSMDES, new { @class = "form-control", @required = "required" })
-
                     </div>
                 </div>
             </div>
@@ -52,8 +51,6 @@
                     </thead>
                     <tbody>
                         @{
-                            if (Model.RawItemList != null || Model.RawItemList.Count() <= 1)
-                            {
                                 for (int i = 0; i < Model.RawItemList.Count(); i++)
                                 {
                                     Model.RawItemList[i].PreviousRIMRIC = Model.RawItemList[i].RIMRIC;
@@ -77,7 +74,6 @@
                                         <td><button type="button" class="close delete-row">&times;</button></td>
                                     </tr>
                                 }
-                            }
                             <!--Empty row-->
                             <tr>
                                 <td></td>
@@ -149,6 +145,7 @@
 </div>
 
 <script>
+    var TextBoxPressed;
     var index = 0;
     var newRow = '<tr>'+
                     '<td></td>'+
@@ -175,6 +172,8 @@
                 setEventListener();
             }
         });
+
+        setShowModalSelectListener();
     });
 
     function setEventListener() {
@@ -189,16 +188,18 @@
             }
         });
 
+        $(".modal-item-select").click(onItemSelected);
+    }
 
+    function setShowModalSelectListener() {
         $(".tb-select").click(function () {
             TextBoxPressed = $(this);
             $("#search-item-modal").modal("show");
         });
-
-        $(".modal-item-select").click(onItemSelected);
     }
 
     function onItemSelected() {
         TextBoxPressed.val($(this).val());
+        $("#RecipeForm").submit();
     }
 </script>
