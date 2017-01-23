@@ -128,20 +128,7 @@
                                             <li>@Html.ActionLink("Audit log", "Index", "AuditLog", new { }, new { @class="dropdown-item" })</li>
                                             <hr class="dropdown-hr" />
                                         }
-                                        if (UASession.GRP)
-                                        {
-                                            <li class="dropdown-submenu">
-                                                <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-1" href="#">Group maintenance&emsp;</a>
-                                                <ul class="dropdown-menu">
-                                                    <li>@Html.ActionLink("Menu Item Group", "Index", "MenuItemGroup", new { }, new { @class="dropdown-item" })</li>
-                                                    <hr class="dropdown-hr" />
-                                                    <li>@Html.ActionLink("Raw Item Group", "Index", "RawItemGroup", new { }, new { @class="dropdown-item" })</li>
-                                                    <hr class="dropdown-hr" />
-                                                    <li>@Html.ActionLink("Recipe Group", "Index", "RecipeGroup", new { }, new { @class="dropdown-item" })</li>
-                                                </ul>
-                                            </li>
-                                            <hr class="dropdown-hr" />
-                                        }
+                                      
                                         <li class="dropdown-submenu">
                                             <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-0" href="#">Table Maintenance</a>
                                             <ul class="dropdown-menu">
@@ -194,6 +181,20 @@
                                             </ul>
 
                                         </li>
+                                                    if (UASession.GRP)
+                                                    {
+                                                        <li class="dropdown-submenu">
+                                                            <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-1" href="#">Group maintenance&emsp;</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li>@Html.ActionLink("Menu Item Group", "Index", "MenuItemGroup", new { }, new { @class = "dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("Raw Item Group", "Index", "RawItemGroup", new { }, new { @class = "dropdown-item" })</li>
+                                                                <hr class="dropdown-hr" />
+                                                                <li>@Html.ActionLink("Recipe Group", "Index", "RecipeGroup", new { }, new { @class = "dropdown-item" })</li>
+                                                            </ul>
+                                                        </li>
+                                                        <hr class="dropdown-hr" />
+                                                    }
                                     }
                                 </ul>
                             </li>             
