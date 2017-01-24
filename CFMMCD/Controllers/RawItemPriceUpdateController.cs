@@ -3,6 +3,7 @@ using CFMMCD.Models.ViewModel;
 using CFMMCD.Sessions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -57,15 +58,14 @@ namespace CFMMCD.Controllers
                 if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
                 {
                     string fileName = file.FileName;
-                    // store the file inside ~/App_Data/uploads folder
                     string path = "~/App_Data/uploads/" + fileName;
-                    file.SaveAs(Server.MapPath(path));
+                    result = RawItemPriceManager.ImportExcel(file.InputStream);
+                    PageAction = "Import";
                 }
             }
-
             if (command == "Save")
             {
-                result = RawItemPriceManager.UpdateRawItemPrice( RIPViewModel.RawItemPriceMasterList );
+                result = RawItemPriceManager.UpdateRawItemPrice(RIPViewModel.RawItemPriceMasterList);
                 PageAction = "Update price";
             }
             else if (command == "Import")
