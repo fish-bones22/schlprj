@@ -1,9 +1,13 @@
 ﻿using CFMMCD.Models.DB;
 using CFMMCD.Models.ViewModel;
+using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace CFMMCD.Models.EntityManager
 {
@@ -12,7 +16,7 @@ namespace CFMMCD.Models.EntityManager
         /*
          * Overload method to accept List as parameter.
          * */
-        public static bool UpdateRawItemPrice( List<RawItemPriceUpdateViewModel> RIPViewModelList )
+        public static bool UpdateRawItemPrice(List<RawItemPriceUpdateViewModel> RIPViewModelList)
         {
             bool result;
             foreach (var vm in RIPViewModelList)
@@ -23,9 +27,9 @@ namespace CFMMCD.Models.EntityManager
             return true;
         }
 
-        public static bool UpdateRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
+        public static bool UpdateRawItemPrice(RawItemPriceUpdateViewModel RIPViewModel)
         {
-            using ( CFMMCDEntities db = new CFMMCDEntities() )
+            using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 RIM_VEM_Lookup RVLRow;
                 if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RIPViewModel.RIM_VEM_ID)).Any())
@@ -44,12 +48,12 @@ namespace CFMMCD.Models.EntityManager
 
                 try
                 {
-                    if (!db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RIPViewModel.RIM_VEM_ID)).Any() )
+                    if (!db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RIPViewModel.RIM_VEM_ID)).Any())
                         db.RIM_VEM_Lookup.Add(RVLRow);
                     db.SaveChanges();
                     return true;
                 }
-                catch ( Exception e )
+                catch (Exception e)
                 {
                     System.Diagnostics.Debug.WriteLine(e.Source);
                     System.Diagnostics.Debug.WriteLine(e.Message);
@@ -68,7 +72,7 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-        public static bool DeleteRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
+        public static bool DeleteRawItemPrice(RawItemPriceUpdateViewModel RIPViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -103,7 +107,7 @@ namespace CFMMCD.Models.EntityManager
                 }
             }
         }
-        public static List<RawItemPriceUpdateViewModel> SearchRawItemPrice( RawItemPriceUpdateViewModel RIPViewModel )
+        public static List<RawItemPriceUpdateViewModel> SearchRawItemPrice(RawItemPriceUpdateViewModel RIPViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -142,6 +146,49 @@ namespace CFMMCD.Models.EntityManager
                 if (RIPList == null || RIPList.ElementAt(0) == null)
                     return null;
                 return RIPList;
+            }
+        }
+        public static bool ImportExcel(Stream fileName)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                using (XLWorkbook workBook = new XLWorkbook(fileName))
+                {
+                    IXLWorksheet workSheet = workBook.Worksheet(1);
+
+                    DataTable dt = new DataTable();
+                    var RIPViewModelList = new List<RawItemPriceUpdateViewModel>();
+                    bool firstRow = true;
+                    System.Diagnostics.Debug.WriteLine(workSheet.Rows().Count());
+                    foreach (IXLRow row in workSheet.Rows())
+                    {
+                        if (firstRow)
+                        {
+                            foreach (IXLCell cell in row.Cells())
+                            {
+                                dt.Columns.Add(cell.Value.ToString());
+                            }
+                            firstRow = false;
+                        }
+                        else
+                        {
+                            if (row.Cells() == null || row.Cells().Count() <= 0)
+                                continue;
+                            RawItemPriceUpdateViewModel vm = new RawItemPriceUpdateViewModel();
+                            vm.RIMRIC = row.Cells().ElementAt(0).Value.ToString();
+                            vm.RIMRID = row.Cells().ElementAt(1).Value.ToString();
+                            vm.RIMCPR = row.Cells().ElementAt(2).Value.ToString();
+                            vm.VEMDS1 = row.Cells().ElementAt(3).Value.ToString();
+                            if (!db.INVRIMP0.Where(o => o.RIMRIC.ToString().Equals(vm.RIMRIC)).Any())
+                                continue;
+                            if (!db.INVVEMP0.Where(o => o.VEMDS1.Equals(vm.VEMDS1)).Any())
+                                continue;
+                            vm.VEMVEN = db.INVVEMP0.FirstOrDefault(o => o.VEMDS1.Equals(vm.VEMDS1)).VEMVEN.ToString();
+                            RIPViewModelList.Add(vm);
+                        }
+                    }
+                    return UpdateRawItemPrice(RIPViewModelList);
+                }
             }
         }
     }
