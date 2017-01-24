@@ -71,6 +71,7 @@ namespace CFMMCD.Models.ViewModel
         public bool SelectAllCb { get; set; }
         public bool SelectExcept { get; set; }
         public int Group { get; set; }
+        public bool HasSearched { get; set; }
 
         public string EffectiveDate { get; set; }
 

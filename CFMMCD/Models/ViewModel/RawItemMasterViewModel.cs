@@ -79,7 +79,7 @@ namespace CFMMCD.Models.ViewModel
         public int Group { get; set; }
         public bool SelectAllCb { get; set; }
         public bool SelectExceptCb { get; set; }
-
+        public bool HasSearched { get; set; }
 
         public string FRESH_OR_FROZEN { get; set; }
         public string PAPER_OR_PLASTIC { get; set; }

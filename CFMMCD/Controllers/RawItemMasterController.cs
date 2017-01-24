@@ -15,7 +15,7 @@ namespace CFMMCD.Controllers
          * Default method.
          * TempData is used to store the ViewModel after a Search action.
          */
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
@@ -25,6 +25,8 @@ namespace CFMMCD.Controllers
 
             // SearchItemSelected is assigned value at DisplaySearchResult
             RawItemMasterViewModel RIMViewModel = new RawItemMasterViewModel();
+            if (id != null)
+                RIMViewModel = RawItemMasterManager.SearchSingleRawItem(id);
             RIMViewModel.RawItemMasterList = RawItemMasterManager.GetRawItems("ALL");
             return View(RIMViewModel);
         }
@@ -32,6 +34,7 @@ namespace CFMMCD.Controllers
         public ActionResult Index(RawItemMasterViewModel RIMViewModel, string value)
         {   // Search
             RIMViewModel = RawItemMasterManager.SearchSingleRawItem(value);
+            RIMViewModel.HasSearched = true;
             RIMViewModel.RawItemMasterList = RawItemMasterManager.GetRawItems("ALL");
             return View(RIMViewModel);
         }
@@ -51,6 +54,8 @@ namespace CFMMCD.Controllers
             {
                 result = RawItemMasterManager.UpdateRawItem(RIMViewModel, user.Username);
                 PageAction = "Update";
+                if (!RIMViewModel.HasSearched)
+                    PageAction = "Create";
             }
             else if (command == "Delete")
             {

@@ -100,7 +100,7 @@ namespace CFMMCD.Models.EntityManager
 
                 //Adds the Columns to the DataTable based on the AuditLog
                 dt.Columns.Add("UserId", typeof(string));
-                dt.Columns.Add("Date_Tme", typeof(string));
+                dt.Columns.Add("Date_Time", typeof(string));
                 dt.Columns.Add("Page", typeof(string));
                 dt.Columns.Add("Page_Action", typeof(string));
                 dt.Columns.Add("ID", typeof(string));

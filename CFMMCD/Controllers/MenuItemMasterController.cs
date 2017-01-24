@@ -16,7 +16,7 @@ namespace CFMMCD.Controllers
         * Default method.
         * TempData is used to store the ViewModel after a Search action.
         */
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
@@ -26,6 +26,8 @@ namespace CFMMCD.Controllers
 
             // Initialize page
             MenuItemMasterViewModel MIMViewModel = new MenuItemMasterViewModel();
+            if (id != null)
+                MIMViewModel = MenuItemMasterManager.SearchSingleMenuItem(id);
             MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems("ALL");
             return View(MIMViewModel);
         }
@@ -33,6 +35,7 @@ namespace CFMMCD.Controllers
         public ActionResult Index(MenuItemMasterViewModel MIMViewModel, string value)
         {
             MIMViewModel = MenuItemMasterManager.SearchSingleMenuItem(value);
+            MIMViewModel.HasSearched = true;
             MIMViewModel.MenuItemMasterList = MenuItemMasterManager.SearchMenuItems("ALL");
             return View(MIMViewModel);
         }
@@ -44,8 +47,10 @@ namespace CFMMCD.Controllers
             bool result = false;
             if (command == "Save")
             {
-                //result = MenuItemMasterManager.UpdateMenuItem(MIMViewModel, user.Username);
+                result = MenuItemMasterManager.UpdateMenuItem(MIMViewModel, user.Username);
                 PageAction = "Update";
+                if (!MIMViewModel.HasSearched)
+                    PageAction = "Create";
             }
             else if (command == "Delete")
             {
@@ -56,12 +61,13 @@ namespace CFMMCD.Controllers
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
                 new AuditLogManager().Audit(user.Username, DateTime.Now, "Menu Item Master", PageAction, MIMViewModel.MIMMIC, MIMViewModel.MIMNAM);
+                return RedirectToAction("Index", new { id = MIMViewModel.MIMMIC });
             }
             else
             {
                 TempData["ErrorMessage"] = PageAction + " failed";
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
         }
     }
 }

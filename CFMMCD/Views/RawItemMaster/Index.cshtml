@@ -94,13 +94,15 @@
 									@Html.DropDownListFor(m => Model.RIMBVP, new SelectList(Model.UnitOfMeasureList, "value", "text", Model.RIMBVP), new { @class = "form-control input-sm" })
 								</div>
 							</div>
-							<div class="col-lg-6">
-								<div class="form-group">
-									@Html.LabelFor(m => Model.RIMLAY, "CS/Vendor unit", new { @class = "form-label" })
-									@Html.TextBoxFor(m => Model.RIMLAY, new { @class = "form-control input-sm", @maxlength = "2" })
-								</div>
-							</div>
 						</div>
+                        <div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => Model.RIMLAY, "CS/Vendor unit", new { @class = "form-label" })
+                                    @Html.TextBoxFor(m => Model.RIMLAY, new { @class = "form-control input-sm", @maxlength = "2" })
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 				<!--Row 1 Col 2-->
@@ -125,10 +127,10 @@
 						</div>
 						<div class="form-group">
 							@Html.LabelFor(m => Model.RIMUSF, "Yield", new { @class = "form-label" })
-							@Html.TextBoxFor(m => Model.RIMUSF, new { @class = "form-control input-sm", @type = "number", @max = "8" })
+							@Html.TextBoxFor(m => Model.RIMUSF, new { @class = "form-control input-sm", @type = "number", @max = "9" })
 						</div>
 						<div class="form-group">
-							@Html.LabelFor(m => Model.RIMERT, "Warehouse 2", new { @class = "form-label" })
+							@Html.LabelFor(m => Model.RIMERT, "Yield", new { @class = "form-label" })
 							@Html.DropDownListFor(m => Model.RIMERT, new SelectList( new List<Object>{
 								new { value = "0" , text = "Yes"  },
 								new { value = "1" , text = "No" } }, "value", "text", Model.RIMERT ), new { @class = "form-control input-sm" })
@@ -379,6 +381,7 @@
 			</div>
             <!--Hiddens-->
             @Html.HiddenFor(m => Model.SwitchItem)
+            @Html.HiddenFor(m => Model.HasSearched)
 			<div class="form-inline bottom float" style="right:50px">
 				<button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
                 @if (Model.RIMRIC != null && !Model.RIMRIC.Equals(""))
