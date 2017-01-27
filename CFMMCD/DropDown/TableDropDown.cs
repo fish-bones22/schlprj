@@ -344,6 +344,17 @@ namespace CFMMCD.DropDown
                     option.Cb = false;
                     option.value = i.VEMVEN.ToString();
                     option.text = i.VEMDS1.ToString();
+                    option.text2 = "";
+                    if (i.VEMLOC != null)
+                        option.text2 += " LOCATION:" + i.VEMLOC;
+                    if (i.Region != null)
+                        option.text2 += " REGION:" + i.Region;
+                    if (i.Province != null)
+                        option.text2 += " PROVINCE:" + i.Province;
+                    if (i.City != null)
+                        option.text2 += " CITY:" + i.City;
+                    if (i.Store != null)
+                        option.text2 += " STORE:" + i.Store;
                     list.Add(option);
                 }
                 return list;

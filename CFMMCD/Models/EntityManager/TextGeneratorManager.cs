@@ -3,7 +3,10 @@ using CFMMCD.Models.DB;
 using CFMMCD.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
@@ -14,16 +17,21 @@ namespace CFMMCD.Models.EntityManager
         /*
          * Generates text from database
          */
-        public bool GeneratePackets(TextGeneratorViewModel TGViewModel)
+        public ReportViewModel GeneratePackets(TextGeneratorViewModel TGViewModel)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
+                ReportViewModel report = new ReportViewModel();
+                string key = GenerateKey();
+                report.Message = key;
+
                 for (int i = 0; i < TGViewModel.StoreList.Count(); i++)
                 {
                     if (TGViewModel.StoreList[i].Cb || TGViewModel.IncludeAllStores)
-                    {   
+                    {
                         // Data creation
-                        StringBuilder sb = new StringBuilder();
+                        MemoryStream ms = new MemoryStream();
+                        StreamWriter sb = new StreamWriter(ms);
                         TextGenerator tg = new TextGenerator();
                         string Store_No = TGViewModel.StoreList[i].value;
                         string Store_Name = TGViewModel.StoreList[i].text;
@@ -32,14 +40,15 @@ namespace CFMMCD.Models.EntityManager
                         DateTime DateTo = DateTime.Parse(TGViewModel.DateTo);
 
                         // Append first line
-                        sb.Append("01," + Store_No + "," + Store_Name + "," + DateAndTimeNow + "," + TGViewModel.PromoTitle + "\n");
+                        sb.Write("01," + Store_No + "," + Store_Name + "," + DateAndTimeNow + "," + TGViewModel.PromoTitle + "\n");
 
                         if (TGViewModel.IncludeMIM || TGViewModel.IncludeAll)
                         {
                             List<CSHMIMP0> MIRows = GetMenutems(Store_No, DateFrom, DateTo);
                             foreach (CSHMIMP0 mi in MIRows)
                             {
-                                sb.Append(tg.GenerateMenuItemMasterText(mi));
+                                sb.Write(tg.GenerateMenuItemMasterText(mi));
+                                mi.STATUS = "0";
                             }
                         }
                         if (TGViewModel.IncludeRIM || TGViewModel.IncludeAll)
@@ -47,7 +56,8 @@ namespace CFMMCD.Models.EntityManager
                             List<INVRIMP0> RIRows = GetRawItems(Store_No, DateFrom, DateTo);
                             foreach (INVRIMP0 ri in RIRows)
                             {
-                                sb.Append(tg.GenerateRawItemMasterText(ri));
+                                sb.Write(tg.GenerateRawItemMasterText(ri));
+                                ri.STATUS = "0";
                             }
                         }
                         if (TGViewModel.IncludeREC || TGViewModel.IncludeAll)
@@ -55,35 +65,41 @@ namespace CFMMCD.Models.EntityManager
                             List<INVRIRP0> RERows = GetRecipes(Store_No, DateFrom, DateTo);
                             foreach(INVRIRP0 re in RERows)
                             {
-                                sb.Append(tg.GenerateRecipeText(re));
+                                sb.Write(tg.GenerateRecipeText(re));
+                                re.STATUS = "0";
                             }
                         }
 
                         List<CSHVMLP0> VMRows = GetValueMeal(Store_No, DateFrom, DateTo);
                         foreach (CSHVMLP0 vm in VMRows) { 
-                            sb.Append(tg.GenerateValueMealText(vm));
+                            sb.Write(tg.GenerateValueMealText(vm));
+                            vm.STATUS = "0";
                         }
 
                         List<CSHPMGP0> PMGRows = GetProductMixGroup(Store_No, DateFrom, DateTo);
                         foreach (CSHPMGP0 pmg in PMGRows)
                         {
-                            sb.Append(tg.GenerateProductMixText(pmg));
+                            sb.Write(tg.GenerateProductMixText(pmg));
+                            pmg.STATUS = "0";
                         }
 
                         List<INVMGRP0> MGRows = GetMaterialGroup(Store_No, DateFrom, DateTo);
                         foreach (INVMGRP0 mg in MGRows)
                         {
-                            sb.Append(tg.GenerateMaterialGroupText(mg));
+                            sb.Write(tg.GenerateMaterialGroupText(mg));
+                            mg.STATUS = "0";
                         }
                         List<INVUOMP0> UOMRows = GetUnitOfMeasure(Store_No, DateFrom, DateTo);
                         foreach (INVUOMP0 uom in UOMRows)
                         {
-                            sb.Append(tg.GenerateInitOfMeasureText(uom));
+                            sb.Write(tg.GenerateInitOfMeasureText(uom));
+                            uom.STATUS = "0";
                         }
                         List<INVVEMP0>  VERows = GetVendor(Store_No, DateFrom, DateTo);
                         foreach (INVVEMP0 ve in VERows)
                         {
-                            sb.Append(tg.GenerateVendorText(ve));
+                            sb.Write(tg.GenerateVendorText(ve));
+                            ve.STATUS = "0";
                         }
                         // File creation
                         //  *Used for file name
@@ -101,10 +117,36 @@ namespace CFMMCD.Models.EntityManager
                         if (!System.IO.Directory.Exists(path))
                             System.IO.Directory.CreateDirectory(path);
 
-                        System.IO.File.WriteAllText(path+filename, sb.ToString());
+                        FileStream file = new FileStream(path+"e"+filename, FileMode.Create, FileAccess.ReadWrite);
+                        ms.WriteTo(file);
+                        file.Close();
+                        ms.Close();
+                        EncryptText(path + "e" + filename, path + filename, key);
+                        File.Delete(path + "e" + filename);
+
+                        try
+                        {
+                            db.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            System.Diagnostics.Debug.WriteLine(e.Source);
+                            System.Diagnostics.Debug.WriteLine(e.Message);
+                            System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                            System.Diagnostics.Debug.WriteLine(e.InnerException);
+                            Exception f = e.InnerException;
+                            while (f != null)
+                            {
+                                System.Diagnostics.Debug.WriteLine("INNER:");
+                                System.Diagnostics.Debug.WriteLine(f.Message);
+                                System.Diagnostics.Debug.WriteLine(f.Source);
+                                f = f.InnerException;
+                            }
+                            System.Diagnostics.Debug.WriteLine(e.Data);
+                        }
                     }
                 }
-                return true;
+                return report;
             }
         }
 
@@ -230,10 +272,13 @@ namespace CFMMCD.Models.EntityManager
                 // Prices
                 foreach (var v in masterlist)
                 {
-                    RIM_VEM_Lookup RVLRow = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(v.RIMRIC + "" + v.RIMPVN));
-                    v.RIMCPR = RVLRow.RIMCPR;
-                    v.RIMCPN = RVLRow.RIMCPN;
-                    v.RIMPDT = RVLRow.RIMPDT; 
+                    if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(v.RIMRIC + "" + v.RIMPVN)).Any())
+                    {
+                        RIM_VEM_Lookup RVLRow = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(v.RIMRIC + "" + v.RIMPVN));
+                        v.RIMCPR = RVLRow.RIMCPR;
+                        v.RIMCPN = RVLRow.RIMCPN;
+                        v.RIMPDT = RVLRow.RIMPDT;
+                    }
                 }
 
                 return masterlist;
@@ -349,6 +394,38 @@ namespace CFMMCD.Models.EntityManager
                 }
                 return spList;
             }
+        }
+
+        private void EncryptText(string input, string output, string key)
+        {
+            FileStream fsInput = new FileStream(input,
+                        FileMode.Open,
+                        FileAccess.Read);
+
+            FileStream fsEncrypted = new FileStream(output, FileMode.Create, FileAccess.Write);
+            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            DES.Key = Encoding.ASCII.GetBytes(key);
+            DES.IV = Encoding.ASCII.GetBytes(key);
+            ICryptoTransform desencrypt = DES.CreateEncryptor();
+            CryptoStream cryptostream = new CryptoStream(fsEncrypted, desencrypt, CryptoStreamMode.Write);
+
+            byte[] bytearrayinput = new byte[fsInput.Length];
+            fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
+            cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
+
+            cryptostream.Close();
+            fsInput.Close();
+            fsEncrypted.Close();
+        }
+
+
+        static string GenerateKey()
+        {
+            // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
+            DESCryptoServiceProvider desCrypto = (DESCryptoServiceProvider)DES.Create();
+
+            // Use the Automatically generated key for Encryption. 
+            return Encoding.ASCII.GetString(desCrypto.Key);
         }
     }
 }

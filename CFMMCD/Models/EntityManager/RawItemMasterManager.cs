@@ -50,6 +50,8 @@ namespace CFMMCD.Models.EntityManager
                 RIMRow.RIMLAY = int.Parse(RIMViewModel.RIMLAY);
                 if (!RIMViewModel.RIMPVN.Equals("0"))
                     RIMRow.RIMPVN = int.Parse(RIMViewModel.RIMPVN);
+                else
+                    RIMRow.RIMPVN = 0;
                 RIMRow.RIMCWC = RIMViewModel.RIMCWC.Trim();
                 RIMRow.RIMPRO = RIMViewModel.RIMPRO.Trim();
                 RIMRow.RIMSE4 = RIMViewModel.RIMSE4.Trim();

@@ -301,7 +301,7 @@ li {
 .notification-popover {
     color:white;
     min-height: 20%;
-    width:auto;
+    width:256\apx;
 }
 .badge {
     background-color: rgb(235, 60, 30);

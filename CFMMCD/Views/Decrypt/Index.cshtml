@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Developer page: Decryption testing";
+}
+
+<h2 align="center">@ViewBag.Title</h2>
+<hr />
+<div class="container">
+    <div class="col-lg-8 col-lg-offset-2">
+
+        @using (Html.BeginForm("Index", "Decrypt", FormMethod.Post, new { @id = "dec", @enctype = "multipart/form-data" }))
+        {
+            <input type="text" name="key" class="form-control" placeholder="Key"/>
+            <hr />
+            <div class="col-lg-12 right">
+                <button type="submit" class="btn btn-default">Test</button>
+                <label class="btn btn-secondary">
+                    Upload
+                    <input type="file" name="FileUploaded" value="Upload" accept="xls|xlsx" id="file" style="display:none">
+                </label>
+
+            </div>
+        }
+    </div>
+</div>
+

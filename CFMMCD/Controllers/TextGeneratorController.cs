@@ -27,11 +27,12 @@ namespace CFMMCD.Controllers
         public ActionResult Index(TextGeneratorViewModel TGViewModel)
         {
             TextGeneratorManager TGManager = new TextGeneratorManager();
-            bool result = TGManager.GeneratePackets(TGViewModel);
+            ReportViewModel report = TGManager.GeneratePackets(TGViewModel);
+            bool result = report.Result;
             string PageAction = "Text Generation";
             if (result)
             {
-                TempData["SuccessMessage"] = PageAction + " successful";
+                TempData["SuccessMessage"] = PageAction + " successful. Key: " + report.Message;
             }
             else
             {

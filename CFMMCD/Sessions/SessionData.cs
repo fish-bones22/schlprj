@@ -294,6 +294,13 @@ namespace CFMMCD.Sessions
                     Action = "Index",
                     Controller = "RecipeGroup"
                 };
+            else if (key.Equals("DEV"))
+                return new CurrentPageSession.LinkString
+                {
+                    LinkName = "DEVELOPER",
+                    Action = "Index",
+                    Controller = "Decrypt"
+                };
             else
                 return new CurrentPageSession.LinkString
                 {

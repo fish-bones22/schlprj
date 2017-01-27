@@ -217,6 +217,7 @@
     <Compile Include="Controllers\AuditLogController.cs" />
     <Compile Include="Controllers\BreakfastPriceTierController.cs" />
     <Compile Include="Controllers\BusinessExtensionController.cs" />
+    <Compile Include="Controllers\DecryptController.cs" />
     <Compile Include="Controllers\DessertPriceTierController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
@@ -459,6 +460,7 @@
     <Content Include="Views\MenuItemGroup\Index.cshtml" />
     <Content Include="Views\RawItemGroup\Index.cshtml" />
     <Content Include="Views\RecipeGroup\Index.cshtml" />
+    <Content Include="Views\Decrypt\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

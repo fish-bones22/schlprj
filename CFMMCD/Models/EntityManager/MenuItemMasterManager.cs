@@ -213,6 +213,8 @@ namespace CFMMCD.Models.EntityManager
                 if (MIMViewModel.MIMNAM != null)
                     MIMRow.MIMNAM = MIMViewModel.MIMNAM.Trim();
                 else return false;
+                if (db.CSHMIMP0.Where(o => (!o.MIMMIC.ToString().Equals(MIMViewModel.MIMMIC) && o.MIMNAM.Equals(MIMViewModel.MIMNAM))).Any())
+                    return false;
                 if (MIMViewModel.MIMDSC != null)
                     MIMRow.MIMDSC = MIMViewModel.MIMDSC.Trim();
                 if (MIMViewModel.MIMDPC != null && !MIMViewModel.MIMDPC.Equals(""))

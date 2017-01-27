@@ -22,7 +22,10 @@ namespace CFMMCD.Controllers
             // SearchItemSelected is assigned value at DisplaySearchResult
             MenuRecipeViewModel MRViewModel = new MenuRecipeViewModel();
             if (id != null)
+            {
                 MRViewModel = MenuRecipeManager.SearchMenuRecipe(id);
+                MRViewModel.HasSearched = true;
+            }
             MRViewModel.MenuItemList = MenuRecipeManager.SearchMenuItem("ALL");
             MRViewModel.RawItemList = RawItemMasterManager.GetRawItems("ALL");
             return View(MRViewModel);

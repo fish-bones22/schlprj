@@ -116,6 +116,7 @@ namespace CFMMCD.Models.EntityManager
                     MRRow.RIRMIC = int.Parse(MRViewModel.RIRMIC);
                     MRRow.RIRRIC = int.Parse(v.RIRRIC);
                     MRRow.RIRVPC = 0;
+                    MRRow.LongName = MRViewModel.MIMLON;
                     if (v.RIRSFQ != null && !v.RIRSFQ.Equals(""))
                         MRRow.RIRSFQ = double.Parse(v.RIRSFQ);
                     MRRow.RIRCWC = v.RIRCWC;
@@ -198,6 +199,7 @@ namespace CFMMCD.Models.EntityManager
                     MRRow.RIRMIC = int.Parse(MRViewModel.RIRMIC);
                     MRRow.RIRRIC = int.Parse(MRViewModel.RIRRIC[i]);
                     MRRow.RIRVPC = 0;
+                    MRRow.LongName = MRViewModel.MIMLON;
                     if (MRViewModel.RIRSFQ[i] != null && !MRViewModel.RIRSFQ[i].Equals(""))
                         MRRow.RIRSFQ = double.Parse(MRViewModel.RIRSFQ[i]);
                     MRRow.RIRCWC = MRViewModel.RIRCWC[i];

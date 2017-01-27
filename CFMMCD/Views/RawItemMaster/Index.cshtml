@@ -114,8 +114,24 @@
 					<div class="col-lg-12">
 						<div class="form-group">
 							@Html.LabelFor(m => Model.RIMPVN, "Primary vendor", new { @class = "form-label" })
-							@Html.DropDownListFor(m => Model.RIMPVN, new SelectList( Model.PrimaryVendorList, "value", "text", Model.RIMPVN), new { @class = "form-control input-sm" })
-						</div>
+                            <select class="form-control input-sm" id="RIMPVN" name="RIMPVN">
+                                @{ 
+                                    <option value="0"></option>
+                                    foreach (var v in Model.VendorList)
+                                    {
+                                        if (v.value.Trim().Equals(Model.RIMPVN))
+                                        {
+                                            <option value="@v.value" class="PVN-option @v.text2" selected>@v.text</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@v.value" class="PVN-option @v.text2">@v.text</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
 						<div class="form-group">
 							@Html.LabelFor(m => Model.RIMLA1, "Warehouse 1", new { @class = "form-label" })
 							@Html.DropDownListFor(m => Model.RIMLA1, new SelectList( new List<Object>{
@@ -347,7 +363,7 @@
                                                 // In case a selected vendor has been unselected,
                                                 // the receiving method can compare the current vs previous checkbox values
                                                 Model.PreviousVendorsSelectedList[i] = Model.VendorsSelectedList[i];
-												<tr id="tr-@Model.VendorList[i].value" class="tr-vendor @Model.VendorList[i].value @Model.VendorList[i].text" for="@Model.VendorsSelectedList[i]">
+												<tr id="tr-@Model.VendorList[i].value" class="tr-vendor @Model.VendorList[i].value @Model.VendorList[i].text @Model.VendorList[i].text2" for="@Model.VendorsSelectedList[i]">
 													<td>
 														@Html.CheckBoxFor(m => Model.VendorsSelectedList[i] )
                                                         @Html.HiddenFor(m => Model.PreviousVendorsSelectedList[i])
@@ -460,7 +476,7 @@
             @for (int i = 0; i < Model.VendorList.Count(); i++)
             {
                 string ActiveInactive = "active";
-                <button type="button" class="modal-item-select btn-select-vendor tr-collapse @Model.VendorList[i].value @Model.VendorList[i].text @ActiveInactive" name="value" value="@Model.VendorList[i].value @Model.VendorList[i].text" data-dismiss="modal">
+                <button type="button" class="modal-item-select btn-select-vendor tr-collapse @Model.VendorList[i].value @Model.VendorList[i].text @ActiveInactive @Model.VendorList[i].text2" name="value" value="@Model.VendorList[i].value @Model.VendorList[i].text" data-dismiss="modal">
                     <div class="col-lg-4">
                         @Model.VendorList[i].value
                     </div>
@@ -548,6 +564,15 @@
             setStoreAttribute();
         });
 
+        filterVendorByLocation();
+        $("#Location").change(filterVendorByLocation);
+        $("#region").change(filterVendorByLocation);
+        $("#province").change(filterVendorByLocation);
+        $("#city").change(filterVendorByLocation);
+        $("#StoreSelected").change(filterVendorByLocation);
+        $("#SelectAllCb").change(filterVendorByLocation);
+        $("#SelectExceptCb").change(filterVendorByLocation);
+
         // Vendor search/ Auto filter
         disableInputsOnCb();
         getSearchItem();
@@ -575,6 +600,7 @@
         $("#Switch").click(function () {
             $("#search-item-modal-raw").modal("show");
         });
+
 
         $(".btn-select-vendor").click(function() {
             onItemSelected($(this).val().trim());
@@ -610,7 +636,7 @@
             }
         });
     }
-    /* Activates (checkbox checked, textbox eneabled) the vendor
+    /* Activates (checkbox checked, textbox enabled) the vendor
      * in the vendor list if the vendor is selected in the Primary Vendor dropdown
      */
 	function setPrimaryVendor() {
@@ -657,6 +683,83 @@
 		        $(this).css("background-color", "#FFFFAA");
 		    }
 		});
+	}
+
+	function filterVendorByLocation() {
+	    var loc = "LOCATION:" + $("#Location").val();;
+	    var reg = "";
+	    var pro = "";
+	    var cit = "";
+
+	    var sto = "";
+
+	    if ($("#region").val() != null && $("#region").val() != "")
+	        reg = "REGION:" + $("#region").val();
+	    if ($("#province").val() != null && $("#province").val() != "")
+            pro = "PROVINCE:" + $("#province").val();
+	    if ($("#city").val() != null && $("#city").val() != "")
+	        cit = "CITY:" + $("#city").val();
+
+	    var cl = loc + " " + reg + " " + pro + " " + cit;
+	    // Filter Primary vendor list
+	    $(".PVN-option").each(function () {
+	        if ($(this).hasClass(cl.trim())) {
+	            $(this).removeClass("hidden");
+	        } else {
+	            $(this).addClass("hidden");
+	        }
+	        // But if store is selected, ignore location 
+	        // filter and reapply filter according to store
+	        if (($("#StoreSelected").val() != null && $("#StoreSelected").val() != "0") || // if Store is selected or
+                 $("#SelectAllCb").is(":checked")) {                                       // Select all is checked
+	            sto = "STORE:" + $("#StoreSelected").val();
+	            if ($("#SelectAllCb").is(":checked"))
+	                sto = "STORE:ALL";
+	            if ($(this).hasClass(sto)) {
+	                $(this).removeClass("hidden");
+	            } else {
+	                $(this).addClass("hidden");
+	            }
+	        }
+	        if ($("#SelectExceptCb").is(":checked")) {       // if select except is checked
+	            sto = "STORE:" + $("#StoreSelected").val();
+	            if ($(this).hasClass(sto)) {
+	                $(this).addClass("hidden");
+	            } else {
+	                $(this).removeClass("hidden");
+	            }
+	        }
+	    });
+
+	    // Filter Modal vendor list
+	    $(".btn-select-vendor").each(function () {
+	        if ($(this).hasClass(cl.trim())) {
+	            $(this).removeClass("hidden");
+	        } else {
+	            $(this).addClass("hidden");
+	        }
+	        // But if store is selected, ignore location 
+	        // filter and reapply filter according to store
+	        if (($("#StoreSelected").val() != null && $("#StoreSelected").val() != "0") || // if Store is selected or
+                 $("#SelectAllCb").is(":checked")) {                                       // Select all is checked
+	            sto = "STORE:" + $("#StoreSelected").val();
+	            if ($("#SelectAllCb").is(":checked"))
+	                sto = "STORE:ALL";
+	            if ($(this).hasClass(sto)) {
+	                $(this).removeClass("hidden");
+	            } else {
+	                $(this).addClass("hidden");
+	            }
+	        }
+	        if ($("#SelectExceptCb").is(":checked")) {       // if select except is checked
+	            sto = "STORE:" + $("#StoreSelected").val();
+	            if ($(this).hasClass(sto)) {
+	                $(this).addClass("hidden");
+	            } else {
+	                $(this).removeClass("hidden");
+	            }
+	        }
+	    });
 	}
 
 	function getSearchItem() {
