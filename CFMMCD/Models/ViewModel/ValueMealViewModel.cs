@@ -28,6 +28,7 @@ namespace CFMMCD.Models.ViewModel
         public string VMLNUM { get; set; }
         public string VMLNAM { get; set; }
         public string VMLMIC { get; set; }
+        public bool HasSearched { get; set; }
 
         public List<string> MIMMIC { get; set; }
         public List<string> MIMNAM { get; set; }

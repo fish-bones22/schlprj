@@ -9,12 +9,20 @@ namespace CFMMCD.Models.ViewModel
     {
         public HomeViewModel()
         {
-            MenuItemNotif = new List<MenuItem>();
-            RawItemNotif = new List<RawItem>();
-            VendorNotif = new List<Vendor>();
+            MenuItemNotif = new List<NotificationViewModel>();
+            RawItemNotif = new List<NotificationViewModel>();
+            VendorNotif = new List<NotificationViewModel>();
         }
-        public List<MenuItem> MenuItemNotif { get; set; }
-        public List<RawItem> RawItemNotif { get; set; }
-        public List<Vendor> VendorNotif { get; set; }
+        public List<NotificationViewModel> MenuItemNotif { get; set; }
+        public List<NotificationViewModel> RawItemNotif { get; set; }
+        public List<NotificationViewModel> VendorNotif { get; set; }
+    }
+
+    public class NotificationViewModel
+    {
+        public string ItemName { get; set; }
+        public string ItemCode { get; set; }
+        public string Action { get; set; }
+        public string Page { get; set; }
     }
 }

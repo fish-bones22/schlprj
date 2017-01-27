@@ -19,10 +19,18 @@ namespace CFMMCD.Controllers
                 string username = ((UserSession)Session["User"]).Username;
                 Session["User"] = null;
             }
+
             if (Session["UserAccess"] != null)
                 Session["UserAccess"] = null;
             if (Session["ViewModelList"] != null)
                 Session["ViewModelList"] = null;
+
+            if (Session["MenuItemNotif"] != null)
+                Session["MenuItemNotif"] = null;
+            if (Session["RawItemNotif"] != null)
+                Session["RawItemNotif"] = null;
+            if (Session["VendorNotif"] != null)
+                Session["VendorNotif"] = null;
 
             Session["CurrentPage"] = new CurrentPageSession("LOGIN");
             return View();
@@ -65,12 +73,18 @@ namespace CFMMCD.Controllers
             if (UASession == null || !UASession.UAP) return RedirectToAction("Login", "Account");
 
             Session["CurrentPage"] = new CurrentPageSession("UAP_CREATE", "HOME", "LOG");
-            return View();
+            AccountViewModel AViewModel = new AccountViewModel();
+            AccountManager AManager = new AccountManager();
+            AViewModel.AccountList = AManager.SearchAccounts("ALL");
+            return View(AViewModel);
         }
         [HttpPost]
         public ActionResult CreateAccount(AccountViewModel CAViewModel)
         {
-            if(ModelState.IsValid)
+            AccountViewModel AViewModel = new AccountViewModel();
+            AccountManager AManager = new AccountManager();
+            AViewModel.AccountList = AManager.SearchAccounts("ALL");
+            if (ModelState.IsValid)
             {
                 AccountManager accMan = new AccountManager();
                 if (!accMan.IsUsernameExist(CAViewModel.Username))
@@ -85,7 +99,7 @@ namespace CFMMCD.Controllers
                 else
                     ModelState.AddModelError("", "Username already taken");
             }
-            return View(new AccountViewModel());
+            return View(AViewModel);
         }
 
 

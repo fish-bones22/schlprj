@@ -34,10 +34,14 @@ namespace CFMMCD.Models.EntityManager
                 foreach (CSHMIMP0 rim in MIMRowList)
                 {
                     MenuItem mi = new MenuItem();
-                    mi.MIMMIC = rim.MIMMIC.ToString();
-                    mi.MIMDSC = rim.MIMDSC.Trim();
-                    mi.MIMLON = rim.MIMLON.Trim();
-                    mi.MIMSTA = rim.MIMSTA;
+                    if (rim.MIMMIC != 0)
+                        mi.MIMMIC = rim.MIMMIC.ToString();
+                    if (rim.MIMDSC != null)
+                        mi.MIMDSC = rim.MIMDSC.Trim();
+                    if (rim.MIMLON != null)
+                        mi.MIMLON = rim.MIMLON.Trim();
+                    if (rim.MIMSTA != null)
+                        mi.MIMSTA = rim.MIMSTA;
                     MIList.Add(mi);
                 }
                 if (MIList == null || MIList.ElementAt(0) == null)

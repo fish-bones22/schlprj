@@ -146,42 +146,56 @@
         </div>
     </div>
     <div class="col-lg-4">
+        <div class="right">
+            @if (Model.MenuItemNotif.Count() > 0 || Model.RawItemNotif.Count() > 0 || Model.VendorNotif.Count() > 0)
+            {
+                <h3>Notifications</h3>
+            }
+            else
+            {
+                <h4>No notifications</h4>
+            }
+            <hr style="margin:0" />
+        </div>
         <table class="table table-responsive table-hover">
-            <thead>
-                <tr>
-                    <th colspan="2" class="right">
-                        @if (Model.MenuItemNotif.Count() > 0 && Model.RawItemNotif.Count() > 0)
-                        {
-                            <h3>Notifications</h3>
-                        }
-                        else
-                        {
-                            <h4>No notifications</h4>
-                        }
-                    </th>
-                </tr>
-            </thead>
             <tbody>
                 @{
                     if (UASession.MIM && Model.MenuItemNotif.Count() > 0)
                     {
-                        <tr><th colspan="2"><h4>New menu item</h4></th></tr>
-                        for (int i = 0; i < Model.MenuItemNotif.Count(); i++)
+                        <tr><th colspan="4"><h4>Menu item</h4></th></tr>
+                        foreach (var v in Model.MenuItemNotif)
                         {
                             <tr>
-                                <td>@Model.MenuItemNotif[i].MIMMIC</td>
-                                <td>@Model.MenuItemNotif[i].MIMDSC</td>
+                                <td>@v.ItemCode</td>
+                                <td>@v.ItemName</td>
+                                <td>@v.Action</td>
+                                <td>@v.Page</td>
                             </tr>
                         }
                     }
                     if (UASession.RIM && Model.RawItemNotif.Count() > 0)
                     {
-                        <tr><th colspan="2"><h4>New raw item</h4></th></tr>
-                        for (int i = 0; i < Model.RawItemNotif.Count(); i++)
+                        <tr><th colspan="4"><h4>Raw item</h4></th></tr>
+                        foreach (var v in Model.RawItemNotif)
                         {
                             <tr>
-                                <td>@Model.RawItemNotif[i].RIMRIC</td>
-                                <td>@Model.RawItemNotif[i].RIMRID</td>
+                                <td>@v.ItemCode</td>
+                                <td>@v.ItemName</td>
+                                <td>@v.Action</td>
+                                <td>@v.Page</td>
+                            </tr>
+                        }
+                    }
+                    if (UASession.VEM && Model.VendorNotif.Count() > 0)
+                    {
+                        <tr><th colspan="4"><h4>Vendor</h4></th></tr>
+                        foreach (var v in Model.VendorNotif)
+                        {
+                            <tr>
+                                <td>@v.ItemCode</td>
+                                <td>@v.ItemName</td>
+                                <td>@v.Action</td>
+                                <td>@v.Page</td>
                             </tr>
                         }
                     }

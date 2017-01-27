@@ -59,6 +59,7 @@ namespace CFMMCD.Models.ViewModel
         public string MCCORMICK_OR_GSF { get; set; }
         public string FRESHB_OR_FROZENB { get; set; }
         public int Group { get; set; }
+        public bool HasSearched { get; set; }
         public List<bool> BET { get; set; }
 
         public List<CheckBoxList> BusinessExtList { get; set; }

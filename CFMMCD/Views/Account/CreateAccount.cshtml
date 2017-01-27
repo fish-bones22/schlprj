@@ -19,6 +19,7 @@
         <div class="form-group">
             @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Username", @required = "required" })
             @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+            <label class="text-danger" id="error"></label>
         </div>
         <div class="form-group">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @required = "required" })
@@ -156,8 +157,29 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-default btn-block">
+            <input type="submit" id="submit" class="btn btn-default btn-block">
         </div>
+            string usr = "";
+            foreach (var v in Model.AccountList)
+            {
+                usr += v.ToString() + " ";
+            }
+            <input type="hidden" id="usr" class="@usr" />
+        
     }
 </div>
 
+<script>
+    $("#Username").keyup(function () {
+        var value = $(this).val();
+        if ($("#usr").hasClass(value)) {
+            console.log(value);
+            $("#submit").attr("disabled", "disabled");
+            $("#error").text("Username already taken");
+        }
+        else {
+            $("#submit").removeAttr("disabled");
+            $("#error").text("");
+        }
+    })
+</script>

@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
-    <EntitySetMapping Name="Audit_Log">
-      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
-        <MappingFragment StoreEntitySet="Audit_Log">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
-          <ScalarProperty Name="Page" ColumnName="Page" />
-          <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Breakfast_Price_Tier">
       <EntityTypeMapping TypeName="CFMMCDModel.Breakfast_Price_Tier">
         <MappingFragment StoreEntitySet="Breakfast_Price_Tier">
@@ -481,6 +468,19 @@
           <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
           <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
           <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit_Log">
+      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
+        <MappingFragment StoreEntitySet="Audit_Log">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
+          <ScalarProperty Name="Page" ColumnName="Page" />
+          <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

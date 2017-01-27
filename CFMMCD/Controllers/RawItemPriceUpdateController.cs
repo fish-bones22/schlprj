@@ -57,8 +57,6 @@ namespace CFMMCD.Controllers
                 HttpPostedFileBase file = Request.Files["FileUploaded"];
                 if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
                 {
-                    string fileName = file.FileName;
-                    string path = "~/App_Data/uploads/" + fileName;
                     result = RawItemPriceManager.ImportExcel(file.InputStream);
                     PageAction = "Import";
                 }

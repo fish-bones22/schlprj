@@ -28,8 +28,12 @@ namespace CFMMCD.Controllers
             HomeManager HManager = new HomeManager();
             UserSession user = (UserSession)Session["User"];
             HomeViewModel HViewModel = new HomeViewModel();
+            Session["MenuItemNotif"] = HManager.GetMenuItemNotification(user.Username);
+            Session["RawItemNotif"] = HManager.GetRawItemNotification(user.Username);
+            Session["VendorNotif"] = HManager.GetVendorItemNotification(user.Username);
             HViewModel.MenuItemNotif = HManager.GetMenuItemNotification(user.Username);
             HViewModel.RawItemNotif = HManager.GetRawItemNotification(user.Username);
+            HViewModel.VendorNotif = HManager.GetVendorItemNotification(user.Username);
             AccountManager.LogDateTime(user.Username);
             return View(HViewModel);
         }

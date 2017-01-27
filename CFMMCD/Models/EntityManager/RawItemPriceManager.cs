@@ -35,7 +35,9 @@ namespace CFMMCD.Models.EntityManager
                 if (db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(RIPViewModel.RIM_VEM_ID)).Any())
                     RVLRow = db.RIM_VEM_Lookup.Single(o => o.RIM_VEM_ID.Equals(RIPViewModel.RIM_VEM_ID));
                 else
+                {
                     RVLRow = new RIM_VEM_Lookup();
+                }
 
                 RVLRow.RIM_VEM_ID = RIPViewModel.RIM_VEM_ID;
                 RVLRow.RIMRIC = int.Parse(RIPViewModel.RIMRIC);
@@ -148,26 +150,20 @@ namespace CFMMCD.Models.EntityManager
                 return RIPList;
             }
         }
-        public static bool ImportExcel(Stream fileName)
+        public static bool ImportExcel(Stream file)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                using (XLWorkbook workBook = new XLWorkbook(fileName))
+                using (XLWorkbook workBook = new XLWorkbook(file))
                 {
                     IXLWorksheet workSheet = workBook.Worksheet(1);
-
-                    DataTable dt = new DataTable();
+                    
                     var RIPViewModelList = new List<RawItemPriceUpdateViewModel>();
                     bool firstRow = true;
-                    System.Diagnostics.Debug.WriteLine(workSheet.Rows().Count());
                     foreach (IXLRow row in workSheet.Rows())
                     {
                         if (firstRow)
                         {
-                            foreach (IXLCell cell in row.Cells())
-                            {
-                                dt.Columns.Add(cell.Value.ToString());
-                            }
                             firstRow = false;
                         }
                         else
@@ -184,6 +180,9 @@ namespace CFMMCD.Models.EntityManager
                             if (!db.INVVEMP0.Where(o => o.VEMDS1.Equals(vm.VEMDS1)).Any())
                                 continue;
                             vm.VEMVEN = db.INVVEMP0.FirstOrDefault(o => o.VEMDS1.Equals(vm.VEMDS1)).VEMVEN.ToString();
+                            vm.RIM_VEM_ID = vm.RIMRIC + vm.VEMVEN;
+                            if (!db.RIM_VEM_Lookup.Where(o => o.RIM_VEM_ID.Equals(vm.RIM_VEM_ID)).Any())
+                                continue;
                             RIPViewModelList.Add(vm);
                         }
                     }

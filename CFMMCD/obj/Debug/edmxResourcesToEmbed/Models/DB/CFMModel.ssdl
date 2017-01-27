@@ -19,8 +19,8 @@
     <Property Name="ItemId" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Date_Time" Type="datetime" Nullable="false" />
-    <Property Name="Page" Type="nchar" MaxLength="20" Nullable="false" />
-    <Property Name="Page_Action" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Page" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Page_Action" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Breakfast_Price_Tier">

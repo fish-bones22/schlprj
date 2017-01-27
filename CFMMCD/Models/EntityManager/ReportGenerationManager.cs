@@ -150,16 +150,6 @@ namespace CFMMCD.Models.EntityManager
                         dt1.Columns.Add("MIMNNP", typeof(string));
                         dt1.Columns.Add("MIMNPT", typeof(string));
                         dt1.Columns.Add("MIMMIC_NP6", typeof(string));
-                        dt1.Columns.Add("MIMLON", typeof(string));
-                        dt1.Columns.Add("STATUS", typeof(string));
-                        dt1.Columns.Add("Category", typeof(string));
-                        dt1.Columns.Add("Trading_Area", typeof(string));
-                        dt1.Columns.Add("Location", typeof(string));
-                        dt1.Columns.Add("Region", typeof(string));
-                        dt1.Columns.Add("Province", typeof(string));
-                        dt1.Columns.Add("City", typeof(string));
-                        dt1.Columns.Add("Store", typeof(string));
-                        dt1.Columns.Add("Except_Store", typeof(string));
 
                         foreach (var vm in MIMRow)
                         {
@@ -213,16 +203,6 @@ namespace CFMMCD.Models.EntityManager
                             row["MIMNNP"] = vm.MIMNNP;
                             row["MIMNPT"] = vm.MIMNPT;
                             row["MIMMIC_NP6"] = vm.MIMMIC_NP6;
-                            row["MIMLON"] = vm.MIMLON;
-                            row["STATUS"] = vm.STATUS;
-                            row["Category"] = vm.Category;
-                            row["Trading_Area"] = vm.Trading_Area;
-                            row["Location"] = vm.Location;
-                            row["Region"] = vm.Region;
-                            row["Province"] = vm.Province;
-                            row["City"] = vm.City;
-                            row["Store"] = vm.Store;
-                            row["Except_Store"] = vm.Except_Store;
                             dt1.Rows.Add(row);
                         }
                         ds.Tables.Add(dt1);
@@ -276,14 +256,6 @@ namespace CFMMCD.Models.EntityManager
                         dt2.Columns.Add("RIMLIN", typeof(string));
                         dt2.Columns.Add("RIMADE", typeof(string));
                         dt2.Columns.Add("RIMBAR", typeof(string));
-                        dt2.Columns.Add("STATUS", typeof(string));
-                        dt2.Columns.Add("Store", typeof(string));
-                        dt2.Columns.Add("Except_Store", typeof(string));
-                        dt2.Columns.Add("Location", typeof(string));
-                        dt2.Columns.Add("Stre_Attrib", typeof(string));
-                        dt2.Columns.Add("Region", typeof(string));
-                        dt2.Columns.Add("Province", typeof(string));
-                        dt2.Columns.Add("City", typeof(string));
 
                         foreach (var vm in RIMRow)
                         {
@@ -334,14 +306,6 @@ namespace CFMMCD.Models.EntityManager
                             row["RIMLIN"] = vm.RIMLIN;
                             row["RIMADE"] = vm.RIMADE;
                             row["RIMBAR"] = vm.RIMBAR;
-                            row["STATUS"] = vm.STATUS;
-                            row["Store"] = vm.Store;
-                            row["Except_Store"] = vm.Except_Store;
-                            row["Location"] = vm.Location;
-                            row["Stre_Attrib"] = vm.Store_Attrib;
-                            row["Region"] = vm.Region;
-                            row["Province"] = vm.Province;
-                            row["City"] = vm.City;
                             dt2.Rows.Add(row);
                         }
                         ds.Tables.Add(dt2);
@@ -373,7 +337,7 @@ namespace CFMMCD.Models.EntityManager
                         dt3.Columns.Add("SOFT_SERVE_OR_VANILLA_POWDER_MIX", typeof(string));
                         dt3.Columns.Add("SIMPLOT_OR_MCCAIN", typeof(string));
                         dt3.Columns.Add("MCCOMICK_OR_GSF", typeof(string));
-                        dt3.Columns.Add("STATUS", typeof(string));
+                        dt3.Columns.Add("FRESHB_OR_FROZENB", typeof(string));
 
                         foreach (var vm in SPRow)
                         {
@@ -402,7 +366,7 @@ namespace CFMMCD.Models.EntityManager
                             row["SOFT_SERVE_OR_VANILLA_POWDER_MIX"] = vm.SOFT_SERVE_OR_VANILLA_POWDER_MIX;
                             row["SIMPLOT_OR_MCCAIN"] = vm.SIMPLOT_OR_MCCAIN;
                             row["MCCOMICK_OR_GSF"] = vm.MCCORMICK_OR_GSF;
-                            row["STATUS"] = vm.STATUS;
+                            row["FRESHB_OR_FROZENB"] = vm.FRESHB_OR_FROZENB;
                             dt3.Rows.Add(row);
                         }
                         ds.Tables.Add(dt3);
@@ -424,8 +388,6 @@ namespace CFMMCD.Models.EntityManager
                         dt4.Columns.Add("RIRFLG", typeof(string));
                         dt4.Columns.Add("STATUS", typeof(string));
                         dt4.Columns.Add("RIMCPR", typeof(string));
-                        dt4.Columns.Add("LongName", typeof(string));
-                        dt4.Columns.Add("Description", typeof(string));
 
                         foreach (var vm in RECRow)
                         {
@@ -444,8 +406,6 @@ namespace CFMMCD.Models.EntityManager
                             row["RIRFLG"] = vm.RIRFLG;
                             row["STATUS"] = vm.STATUS;
                             row["RIMCPR"] = vm.RIMCPR;
-                            row["LongName"] = vm.LongName;
-                            row["Description"] = vm.Description;
                             dt4.Rows.Add(row);
                         }
                         ds.Tables.Add(dt4);

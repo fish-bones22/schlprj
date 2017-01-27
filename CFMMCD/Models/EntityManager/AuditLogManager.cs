@@ -43,7 +43,7 @@ namespace CFMMCD.Models.EntityManager
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 Audit_Log alRow = new Audit_Log();
-                alRow.Id = int.Parse(DateTime.Now.ToString("yyMMdd")) + new Random().Next(999) + new Random().Next(999); // To be changed soon
+                alRow.Id = new Random().Next(1, 999999999); // To be changed soon
                 alRow.UserId = ALViewModel.UserId;
                 alRow.Date_Time = DateTime.Parse(ALViewModel.Date_Time);
                 alRow.Page = ALViewModel.Page;

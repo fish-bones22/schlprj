@@ -97,10 +97,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -202,7 +198,6 @@
       <DependentUpon>CFMModel.edmx</DependentUpon>
       <LastGenOutput>CFMModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -391,6 +386,7 @@
     <Compile Include="Models\ViewModel\BreakfastPriceTierViewModel.cs" />
     <Compile Include="Models\ViewModel\BusinessExtensionViewModel.cs" />
     <Compile Include="Models\ViewModel\DessertPriceTierViewModel.cs" />
+    <Compile Include="Models\ViewModel\ReportViewModel.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\ItemGroupViewModel.cs" />
     <Compile Include="Models\ViewModel\LocationViewModel.cs" />

@@ -33,6 +33,7 @@ namespace CFMMCD.Controllers
             MRViewModel = MenuRecipeManager.SearchMenuRecipe(value);
             MRViewModel.MenuItemList = MenuRecipeManager.SearchMenuItem("ALL");
             MRViewModel.RawItemList = RawItemMasterManager.GetRawItems("ALL");
+            MRViewModel.HasSearched = true;
             return View(MRViewModel);
         }
 
@@ -45,7 +46,9 @@ namespace CFMMCD.Controllers
             if (command == "Save")
             {
                 result = MenuRecipeManager.UpdateMenuItem(MRViewModel, user.Username);
-                PageAction = "Update";
+                PageAction = "Create";
+                if (MRViewModel.HasSearched)
+                    PageAction = "Update";
             }
             else
             {
@@ -57,12 +60,13 @@ namespace CFMMCD.Controllers
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
                 new AuditLogManager().Audit(user.Username, DateTime.Now, "Menu Recipe Master", PageAction, MRViewModel.RIRMIC, MRViewModel.MIMLON);
+                return RedirectToAction("Index", new { id = MRViewModel.RIRMIC } );
             }
             else
             {
                 TempData["ErrorMessage"] = PageAction + " failed";
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
         }
     }
 }

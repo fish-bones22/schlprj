@@ -25,14 +25,17 @@
 <div class="form-horizontal">
     <!--Search-->
     <div class="container-fluid">
-        <div class="col-lg-10 col-lg-offset-1">
+        <div class="col-lg-9 col-lg-offset-1">
             <input type="text" class="form-control" placeholder="Search store" id="search_dummy" />
+        </div>
+        <div class="col-lg-1">
+            <a href="~/StoreProfile/Index" class="btn btn-default btn-circle"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
     </div>
 
     <hr />
 
-    @using (Html.BeginForm("UpdateDelete", "StoreProfile", FormMethod.Post, new { }))
+    @using (Html.BeginForm("UpdateDelete", "StoreProfile", FormMethod.Post, new { @id = "UpdateDelete", @enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="container-fluid">
@@ -217,8 +220,13 @@
             </div>
         </div>
 
+        @Html.HiddenFor(m => Model.HasSearched)
         <div class="form-inline bottom float" style="right:50px">
             <input type="submit" name="command" value="Save" class="btn btn-default" />
+            <label class="btn btn-secondary">
+                Import
+                <input type="file" name="FileUploaded" value="Import" accept="xls|xlsx" id="file" style="display:none">
+            </label>
             @if (Model.STORE_NO != null && !Model.STORE_NO.Equals(""))
             {
                 <input type="submit" name="command" value="Delete" class="btn btn-secondary" />
@@ -296,6 +304,11 @@
                 $(".store-attrib option[value='0']").attr("selected", "selected");
             });
             setStoreAttribute();
+        });
+
+        // File upload handler
+        $("#file").change(function () {
+            $("#UpdateDelete").submit();
         });
     });
     /* Sets the color of the dropdown 

@@ -24,8 +24,8 @@
           <Property Name="ItemId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date_Time" Type="datetime" Nullable="false" />
-          <Property Name="Page" Type="nchar" MaxLength="20" Nullable="false" />
-          <Property Name="Page_Action" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Page" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Page_Action" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Breakfast_Price_Tier">
@@ -511,7 +511,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="CFMMCDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CFMMCDEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
           <EntitySet Name="Breakfast_Price_Tier" EntityType="CFMMCDModel.Breakfast_Price_Tier" />
           <EntitySet Name="BUSINESS_EXT" EntityType="CFMMCDModel.BUSINESS_EXT" />
           <EntitySet Name="Categories" EntityType="CFMMCDModel.Category" />
@@ -547,19 +546,8 @@
           <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
           <EntitySet Name="ITMGRPs" EntityType="CFMMCDModel.ITMGRP" />
           <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
+          <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
         </EntityContainer>
-        <EntityType Name="Audit_Log">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Breakfast_Price_Tier">
           <Key>
             <PropertyRef Name="Id" />
@@ -1013,25 +1001,24 @@
           <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Group" Type="Int32" />
         </EntityType>
+        <EntityType Name="Audit_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
-          <EntitySetMapping Name="Audit_Log">
-            <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
-              <MappingFragment StoreEntitySet="Audit_Log">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
-                <ScalarProperty Name="Page" ColumnName="Page" />
-                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Breakfast_Price_Tier">
             <EntityTypeMapping TypeName="CFMMCDModel.Breakfast_Price_Tier">
               <MappingFragment StoreEntitySet="Breakfast_Price_Tier">
@@ -1499,6 +1486,19 @@
                 <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
                 <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
                 <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit_Log">
+            <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
+              <MappingFragment StoreEntitySet="Audit_Log">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

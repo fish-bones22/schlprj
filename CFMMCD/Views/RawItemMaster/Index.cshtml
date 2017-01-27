@@ -22,14 +22,17 @@
 </div>
 <div class="form-horizontal">
     <div class="container-fluid">
-        <div class="col-lg-10 col-lg-offset-1">
+        <div class="col-lg-9 col-lg-offset-1">
             <input type="text" class="form-control" placeholder="Search raw item" id="search_dummy" />
+        </div>
+        <div class="col-lg-1">
+            <a href="~/RawItemMaster/Index" class="btn btn-default btn-circle"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
     </div>
     <hr />
 	<div class="container-fluid">
-		@using (Html.BeginForm("UpdateDelete", "RawItemMaster", FormMethod.Post, new { @id = "UpdateDelete" }))
-		{
+		@using (Html.BeginForm("UpdateDelete", "RawItemMaster", FormMethod.Post, new { @id = "UpdateDelete", @enctype = "multipart/form-data" }))
+        {
 			<div class="row">
 				<!-- Row 1 Col 1-->
 				<div class="col-lg-4">
@@ -384,6 +387,10 @@
             @Html.HiddenFor(m => Model.HasSearched)
 			<div class="form-inline bottom float" style="right:50px">
 				<button type="submit" name="command" value="Save" class="btn btn-default">Save</button>
+                <label class="btn btn-secondary">
+                    Import
+                    <input type="file" name="FileUploaded" value="Import" accept="xls|xlsx" id="file" style="display:none">
+                </label>
                 @if (Model.RIMRIC != null && !Model.RIMRIC.Equals(""))
                 {
                     <button type="button" id="Switch" class="btn btn-secondary">Switch</button>
@@ -582,6 +589,11 @@
         $(".clear-search").click(function () {
             $("#SearchVendor").val("");
             getSearchItem();
+        });
+
+        // File upload handler
+        $("#file").change(function () {
+            $("#UpdateDelete").submit();
         });
 
     });

@@ -160,8 +160,13 @@ label {
 .label-container-right {
   padding-left: 0;
 }
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    background-color: rgb(255, 217, 102);
+    outline:0 none -webkit-focus-ring-color !important;
+}
 .btn-default {
   background-color: rgb(235, 90, 60);
+  border-color: none;
   border-radius:25px;
   color: white !important;
   font-variant:small-caps;
@@ -174,13 +179,23 @@ label {
   -moz-transition-duration: 0.4s;
   transition-duration: 0.4s;
 }
-.btn-default:focus {
+.btn-default:focus  {
   background-color: rgb(235, 60, 30);
   color: white;
 }
 .btn-default:active {
     background-color: rgb(255, 217, 102);
     outline: 0 none -webkit-focus-ring-color;
+}
+.btn-circle {
+    background-color:white;
+    border-radius:13px;
+    color:black !important;
+    height:27px;
+    text-align:center;
+    padding:0;
+    padding-top:5px;
+    width:27px;
 }
 .btn-secondary {
     background-color: rgb(80, 80, 80);
@@ -283,17 +298,13 @@ li {
   .list-group-item a:focus{
     outline: 0 none -webkit-focus-ring-color;
  }
-.popover {
-    max-height: 20%;
-    position: absolute;
-    right:0;
-}
-.content-height{
-    overflow: auto;
-    height: 100px;
+.notification-popover {
+    color:white;
+    min-height: 20%;
+    width:auto;
 }
 .badge {
-    background-color: salmon;
+    background-color: rgb(235, 60, 30);
 }
 .tr-element:hover {
     cursor:pointer;

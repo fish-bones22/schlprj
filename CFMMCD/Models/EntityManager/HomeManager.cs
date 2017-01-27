@@ -10,23 +10,25 @@ namespace CFMMCD.Models.EntityManager
 {
     public class HomeManager
     {
-        public List<MenuItem> GetMenuItemNotification(string username)
+        public List<NotificationViewModel> GetMenuItemNotification(string username)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<MenuItem> list = new List<MenuItem>();
+                List<NotificationViewModel> list = new List<NotificationViewModel>();
                 Account currentAccount = db.Accounts.Single(o => o.Username.Equals(username));
                 if (currentAccount.TimeLastLogged != null)
                 {
                     DateTime lastUserAccess = (DateTime)currentAccount.TimeLastLogged;
-                    foreach (var v in db.CSHMIMP0)
+                    foreach (var v in db.Audit_Log.Where(o => o.Page.Contains("Menu Item Master")))
                     {
-                        if (lastUserAccess.CompareTo(v.MIMDAT) < 0)
+                        if (lastUserAccess < v.Date_Time)
                         {
-                            MenuItem mi = new MenuItem();
-                            mi.MIMMIC = v.MIMMIC.ToString();
-                            mi.MIMDSC = v.MIMNAM.Trim();
-                            list.Add(mi);
+                            NotificationViewModel notif = new NotificationViewModel();
+                            notif.ItemCode = v.ItemId;
+                            notif.ItemName = v.Name;
+                            notif.Action = v.Page_Action;
+                            notif.Page = "Menu item";
+                            list.Add(notif);
                         }
                     }
                 }
@@ -34,23 +36,51 @@ namespace CFMMCD.Models.EntityManager
             }
         }
 
-        public List<RawItem> GetRawItemNotification(string username)
+        public List<NotificationViewModel> GetRawItemNotification(string username)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
-                List<RawItem> list = new List<RawItem>();
+                List<NotificationViewModel> list = new List<NotificationViewModel>();
                 Account currentAccount = db.Accounts.Single(o => o.Username.Equals(username));
                 if (currentAccount.TimeLastLogged != null)
                 {
                     DateTime lastUserAccess = (DateTime)currentAccount.TimeLastLogged;
-                    foreach (var v in db.INVRIMP0)
+                    foreach (var v in db.Audit_Log.Where(o => o.Page.Contains("Raw Item Master")))
                     {
-                        if (lastUserAccess < v.RIMDAT)
+                        if (lastUserAccess < v.Date_Time)
                         {
-                            RawItem mi = new RawItem();
-                            mi.RIMRIC = v.RIMRIC.ToString();
-                            mi.RIMRID = v.RIMRID.Trim();
-                            list.Add(mi);
+                            NotificationViewModel notif = new NotificationViewModel();
+                            notif.ItemCode = v.ItemId;
+                            notif.ItemName = v.Name;
+                            notif.Action = v.Page_Action;
+                            notif.Page = "Raw item";
+                            list.Add(notif);
+                        }
+                    }
+                }
+                return list;
+            }
+        }
+
+        public List<NotificationViewModel> GetVendorItemNotification(string username)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                List<NotificationViewModel> list = new List<NotificationViewModel>();
+                Account currentAccount = db.Accounts.Single(o => o.Username.Equals(username));
+                if (currentAccount.TimeLastLogged != null)
+                {
+                    DateTime lastUserAccess = (DateTime)currentAccount.TimeLastLogged;
+                    foreach (var v in db.Audit_Log.Where(o => o.Page.Contains("Vendor Master")))
+                    {
+                        if (lastUserAccess < v.Date_Time)
+                        {
+                            NotificationViewModel notif = new NotificationViewModel();
+                            notif.ItemCode = v.ItemId;
+                            notif.ItemName = v.Name;
+                            notif.Action = v.Page_Action;
+                            notif.Page = "Vendor";
+                            list.Add(notif);
                         }
                     }
                 }

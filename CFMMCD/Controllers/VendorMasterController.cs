@@ -15,7 +15,7 @@ namespace CFMMCD.Controllers
          * Default method.
          * TempData is used to store the ViewModel after a Search action.
          */
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             // Validate log in and user access
             UserAccessSession UASession = (UserAccessSession)Session["UserAccess"];
@@ -24,17 +24,17 @@ namespace CFMMCD.Controllers
             Session["CurrentPage"] = new CurrentPageSession("VEM", "HOME", "LOG");
 
             // Initialize page
-            VendorMasterManager VMManager = new VendorMasterManager();
             VendorMasterViewModel VMViewModel = new VendorMasterViewModel();
-            VMViewModel.VendorMasterList = VMManager.SearchVendors("ALL");
+            if (id != null)
+                VMViewModel = VendorMasterManager.SearchSingleVendor(id);
+            VMViewModel.VendorMasterList = VendorMasterManager.SearchVendors("ALL");
             return View(VMViewModel);
         }
         [HttpPost]
         public ActionResult Index(VendorMasterViewModel VMViewModel, string value)
         {
-            VendorMasterManager VMManager = new VendorMasterManager();
-            VMViewModel = VMManager.SearchSingleVendor(value);
-            VMViewModel.VendorMasterList = VMManager.SearchVendors("ALL");
+            VMViewModel = VendorMasterManager.SearchSingleVendor(value);
+            VMViewModel.VendorMasterList = VendorMasterManager.SearchVendors("ALL");
             return View(VMViewModel);
         }
         [HttpPost]
@@ -44,20 +44,46 @@ namespace CFMMCD.Controllers
             UserSession user = (UserSession)Session["User"];
             string PageAction = "";
             bool result = false;
+
+            if (Request.Files.Count > 0)
+            {
+                HttpPostedFileBase file = Request.Files["FileUploaded"];
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                {
+                    ReportViewModel report = VendorMasterManager.ImportExcel(file.InputStream, user.Username);
+                    PageAction = "Import";
+                    result = report.Result;
+                    if (!result)
+                    {
+                        if (report.ErrorLevel == 2)
+                            PageAction = report.Message + ": Import partially";
+                        else
+                            PageAction = report.Message + ": Import";
+                    }
+                    else
+                        PageAction = report.Message + ": Import";
+                }
+            }
+
             if (command == "Save")
             {
-                result = VMManager.UpdateVendor(VMViewModel, user.Username);
+                result = VendorMasterManager.UpdateVendor(VMViewModel, user.Username);
                 PageAction = "Update";
             }
+
             else if (command == "Delete")
             {
-                result = VMManager.DeleteVendor(VMViewModel);
+                result = VendorMasterManager.DeleteVendor(VMViewModel);
                 PageAction = "Delete";
             }
+
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
                 new AuditLogManager().Audit(user.Username, DateTime.Now, "Vendor Master", PageAction, VMViewModel.VEMVEN, VMViewModel.VEMDS1);
+
+                if (!PageAction.Equals("Delete"))
+                    return RedirectToAction("Index", new { id = VMViewModel.VEMVEN });
             }
             else
             {

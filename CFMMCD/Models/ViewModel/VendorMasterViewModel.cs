@@ -42,6 +42,7 @@ namespace CFMMCD.Models.ViewModel
         public string Store { get; set; }
         public bool SelectAllCb { get; set; }
         public bool SelectExceptCb { get; set; }
+        public bool HasSearched { get; set; }
 
         public List<GenericDropDownList> StoreList { get; set; }
         public List<GenericDropDownList> LocationList { get; set; }

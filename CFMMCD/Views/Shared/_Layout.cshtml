@@ -1,4 +1,5 @@
 ﻿@using CFMMCD.Sessions
+@using CFMMCD.Models.ViewModel
 @{
     UserAccessSession UASession = new UserAccessSession();
     if (Session["UserAccess"] != null)
@@ -48,7 +49,7 @@
                 @{
                     if (CPSession.Grandparent != null)
                     {
-                        <li>@Html.ActionLink(CPSession.Grandparent.LinkName, CPSession.Grandparent.Action, CPSession.Grandparent.Controller, new { }, new { @class = "navbar-a"} )</li>
+                        <li>@Html.ActionLink(CPSession.Grandparent.LinkName, CPSession.Grandparent.Action, CPSession.Grandparent.Controller, new { }, new { @class = "navbar-a" })</li>
                     }
                     if (CPSession.Parent != null)
                     {
@@ -57,7 +58,7 @@
                                 <ul class="dropdown-menu">
                                     @{ if (UASession.MIM)
                                         {
-                                            <li>@Html.ActionLink("Menu Item Master", "Index", "MenuItemMaster", new { }, new { @class="dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Menu Item Master", "Index", "MenuItemMaster", new { }, new { @class = "dropdown-item" })</li>
                                             <hr class="dropdown-hr"/>
                                         }
                                         if (UASession.RIM)
@@ -95,95 +96,95 @@
                                             <li class="dropdown-submenu">
                                                 <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-1" href="#">User access&emsp;</a>
                                                 <ul class="dropdown-menu">
-                                                    <li>@Html.ActionLink("Create user account", "CreateAccount", "Account", new { }, new { @class="dropdown-item" })</li>
+                                                    <li>@Html.ActionLink("Create user account", "CreateAccount", "Account", new { }, new { @class = "dropdown-item" })</li>
                                                     <hr class="dropdown-hr" />
-                                                    <li>@Html.ActionLink("Manage user account", "EditAccount", "Account", new { }, new { @class="dropdown-item" })</li>
+                                                    <li>@Html.ActionLink("Manage user account", "EditAccount", "Account", new { }, new { @class = "dropdown-item" })</li>
                                                     <hr class="dropdown-hr" />
-                                                    <li>@Html.ActionLink("Manage user access", "EditAccess", "Account", new { }, new { @class="dropdown-item" })</li>
+                                                    <li>@Html.ActionLink("Manage user access", "EditAccess", "Account", new { }, new { @class = "dropdown-item" })</li>
                                                 </ul>
                                             </li>
                                             <hr class="dropdown-hr" />
                                         }
                                         if (UASession.MIP)
                                         {
-                                            <li>@Html.ActionLink("Menu Item Price Update", "Index", "MenuItemPriceUpdate", new { }, new { @class="dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Menu Item Price Update", "Index", "MenuItemPriceUpdate", new { }, new { @class = "dropdown-item" })</li>
                                             <hr class="dropdown-hr" />
                                         }
                                         if (UASession.RIM)
                                         {
-                                            <li>@Html.ActionLink("Raw Item Price Update", "Index", "RawItemPriceUpdate", new { }, new { @class="dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Raw Item Price Update", "Index", "RawItemPriceUpdate", new { }, new { @class = "dropdown-item" })</li>
                                             <hr class="dropdown-hr" />
                                         }
                                         if (UASession.TEG)
                                         {
-                                            <li>@Html.ActionLink("Text Generation", "Index", "TextGenerator", new { }, new { @class="dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Text Generation", "Index", "TextGenerator", new { }, new { @class = "dropdown-item" })</li>
                                             <hr class="dropdown-hr" />
                                         }
                                         if (UASession.REG)
                                         {
-                                            <li>@Html.ActionLink("Report generation", "Index", "ReportGeneration", new { }, new { @class="dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Report generation", "Index", "ReportGeneration", new { }, new { @class = "dropdown-item" })</li>
                                             <hr class="dropdown-hr" />
                                         }
                                         if (UASession.AUL)
                                         {
-                                            <li>@Html.ActionLink("Audit log", "Index", "AuditLog", new { }, new { @class="dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Audit log", "Index", "AuditLog", new { }, new { @class = "dropdown-item" })</li>
                                             <hr class="dropdown-hr" />
                                         }
-                                      
+
                                         <li class="dropdown-submenu">
                                             <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-0" href="#">Table Maintenance</a>
                                             <ul class="dropdown-menu">
                                                 @{  
                                                     if (UASession.TIP)
                                                     {
-                                               
+
                                                         <li class="dropdown-submenu">
                                                             <a role="menu" data-toggle="dropdown" tabindex="-1" href="#" style="color:white">Tier Page</a>
                                                             <ul class="dropdown-menu">
-                                                                <li>@Html.ActionLink("Dessert Enterprise Tier", "Index", "DessertPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <li>@Html.ActionLink("Dessert Enterprise Tier", "Index", "DessertPriceTier", new { }, new { @class = "dropdown-item" })</li>
                                                                 <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("Breakfast Price Tier", "Index", "BreakfastPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <li>@Html.ActionLink("Breakfast Price Tier", "Index", "BreakfastPriceTier", new { }, new { @class = "dropdown-item" })</li>
                                                                 <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("Regular Price Tier", "Index", "RegularPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <li>@Html.ActionLink("Regular Price Tier", "Index", "RegularPriceTier", new { }, new { @class = "dropdown-item" })</li>
                                                                 <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("McCafe level 2 Price Tier", "Index", "McCafeLevel2PriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <li>@Html.ActionLink("McCafe level 2 Price Tier", "Index", "McCafeLevel2PriceTier", new { }, new { @class = "dropdown-item" })</li>
                                                                 <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("McCafe level 3 Price Tier", "Index", "McCafeLevel3PriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <li>@Html.ActionLink("McCafe level 3 Price Tier", "Index", "McCafeLevel3PriceTier", new { }, new { @class = "dropdown-item" })</li>
                                                                 <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("McCafe BISTRO Price Tier", "Index", "McCafeBistroPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <li>@Html.ActionLink("McCafe BISTRO Price Tier", "Index", "McCafeBistroPriceTier", new { }, new { @class = "dropdown-item" })</li>
                                                                 <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("MDS Price Tier", "Index", "MDSPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <li>@Html.ActionLink("MDS Price Tier", "Index", "MDSPriceTier", new { }, new { @class = "dropdown-item" })</li>
                                                                 <hr class="dropdown-hr" />
-                                                                <li>@Html.ActionLink("Project Gold Price Tier", "Index", "ProjectGoldPriceTier", new { }, new { @class="dropdown-item" })</li>
+                                                                <li>@Html.ActionLink("Project Gold Price Tier", "Index", "ProjectGoldPriceTier", new { }, new { @class = "dropdown-item" })</li>
                                                             </ul>
                                                         </li>
                                                         <hr class="dropdown-hr" />
                                                     }
                                                     if (UASession.OWN)
                                                     {
-                                                        <li>@Html.ActionLink("Ownership", "Index", "Ownership", new { }, new { @class="dropdown-item" })</li>
+                                                        <li>@Html.ActionLink("Ownership", "Index", "Ownership", new { }, new { @class = "dropdown-item" })</li>
                                                         <hr class="dropdown-hr" />
                                                     }
                                                     if (UASession.BUE)
                                                     {
-                                                        <li>@Html.ActionLink("Business Extension", "Index", "BusinessExtension", new { }, new { @class="dropdown-item" })</li>
+                                                        <li>@Html.ActionLink("Business Extension", "Index", "BusinessExtension", new { }, new { @class = "dropdown-item" })</li>
                                                         <hr class="dropdown-hr" />
                                                     }
                                                     if (UASession.LOC)
                                                     {
-                                                        <li>@Html.ActionLink("Location", "Index", "Location", new { }, new { @class="dropdown-item" })</li>
+                                                        <li>@Html.ActionLink("Location", "Index", "Location", new { }, new { @class = "dropdown-item" })</li>
                                                         <hr class="dropdown-hr" />
                                                     }
                                                     if (UASession.PRC)
                                                     {
-                                                        <li>@Html.ActionLink("Profit center", "Index", "ProfitCenter", new { }, new { @class="dropdown-item" })</li>
+                                                        <li>@Html.ActionLink("Profit center", "Index", "ProfitCenter", new { }, new { @class = "dropdown-item" })</li>
                                                     }
                                                 }
                                             </ul>
                                             <hr class="dropdown-hr" />
                                         </li>
-                                        if (UASession.GRP)
-                                        {
+                                                    if (UASession.GRP)
+                                                    {
                                             <li class="dropdown-submenu">
                                                 <a class="dropdown-item" role="menu" data-toggle="dropdown" tabindex="-1" href="#">Group maintenance&emsp;</a>
                                                 <ul class="dropdown-menu">
@@ -194,34 +195,140 @@
                                                     <li>@Html.ActionLink("Recipe Group", "Index", "RecipeGroup", new { }, new { @class = "dropdown-item" })</li>
                                                 </ul>
                                             </li>
-                                        }
+                                                    }
                                     }
                                 </ul>
                             </li>             
-                        }
-                        else 
-                        {
+                                                    }
+                                                    else
+                                                    {
                             <li class="navbar-li">@Html.ActionLink(CPSession.Parent.LinkName, CPSession.Parent.Action, CPSession.Parent.Controller, new { }, new { @class = "navbar-a" })</li>
-                        }
-                    }
-                    if (CPSession.Self != null)
-                    {
+                                                        }
+                                                    }
+                                                    if (CPSession.Self != null)
+                                                    {
                         <li class="navbar-li">@Html.ActionLink(CPSession.Self.LinkName, CPSession.Self.Action, CPSession.Self.Controller, new { }, new { @class = "navbar-a" })</li>
-                    }
+                                                    }
                 }
             </ul>
-            @{if (CPSession.Self.Controller.Equals("MenuItemMaster") || CPSession.Self.Controller.Equals("RawItemMaster"))
+            @{ 
+                List<NotificationViewModel> notif = new List<NotificationViewModel>();
+                string header = "New items";
+                if (CPSession.Self.Controller.Equals("MenuItemMaster"))
                 {
-                    <ul class="nav navbar-nav navbar-right" style="padding-right:20px">
-                        <li ><a class="navbar-a" data-placement="bottom" data-toggle="popover" data-title="Notifications" data-container="body" data-html="true" href="#">Notifications</a></li>
-                        <li id="popover-content" class="hide col-lg-5">
-                            <div class="content-height">
-                                <table class="table-hover table-responsive table-condensed">
-                                    <tbody>
-                                        <tr>Under construction</tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    if (Session["MenuItemNotif"] != null)
+                    {
+                        notif = ((List<NotificationViewModel>)Session["MenuItemNotif"]);
+                        header = "New Menu item";
+                        if (notif.Count() > 1)
+                        {
+                            header = "New Menu items";
+                        }
+
+                    }
+                }
+                else if (CPSession.Self.Controller.Equals("RawItemMaster"))
+                {
+                    if (Session["RawItemNotif"] != null)
+                    {
+                        notif = ((List<NotificationViewModel>)Session["RawItemNotif"]);
+                        header = "New Raw item";
+                        if (notif.Count() > 1)
+                        {
+                            header = "New Raw items";
+                        }
+                    }
+                }
+                else if (CPSession.Self.Controller.Equals("VendorMaster"))
+                {
+                    if (Session["VendorNotif"] != null)
+                    {
+                        notif = ((List<NotificationViewModel>)Session["VendorNotif"]);
+                        header = "New Vendor";
+                        if (notif.Count() > 1)
+                        {
+                            header = "New Vendors";
+                        }
+                    }
+                }
+                else if (CPSession.Self.Controller.Equals("TextGenerator") || CPSession.Self.Controller.Equals("ReportGeneration"))
+                {
+                    if (Session["MenuItemNotif"] != null)
+                    {
+                        notif.AddRange((List<NotificationViewModel>)Session["MenuItemNotif"]);
+                    }
+                    if (Session["RawItemNotif"] != null)
+                    {
+                        notif.AddRange((List<NotificationViewModel>)Session["RawItemNotif"]);
+                    }
+                    if (Session["VendorNotif"] != null)
+                    {
+                        notif.AddRange((List<NotificationViewModel>)Session["VendorNotif"]);
+                    }
+                    header = "New Item";
+                    if (notif.Count() > 1)
+                    {
+                        header = "New Items";
+                    }
+                }
+                else if (CPSession.Self.Controller.Equals("MenuRecipe"))
+                {
+                    if (Session["MenuItemNotif"] != null)
+                    {
+                        notif.AddRange((List<NotificationViewModel>)Session["MenuItemNotif"]);
+                    }
+                    if (Session["RawItemNotif"] != null)
+                    {
+                        notif.AddRange((List<NotificationViewModel>)Session["RawItemNotif"]);
+                    }
+                    header = "New Item";
+                    if (notif.Count() > 1)
+                    {
+                        header = "New Items";
+                    }
+                }
+            }
+            @{if (  CPSession.Self.Controller.Equals("MenuItemMaster") || 
+                    CPSession.Self.Controller.Equals("RawItemMaster") || 
+                    CPSession.Self.Controller.Equals("VendorMaster") || 
+                    CPSession.Self.Controller.Equals("TextGenerator") ||
+                    CPSession.Self.Controller.Equals("ReportGeneration") ||
+                    CPSession.Self.Controller.Equals("MenuRecipe"))
+                {
+                    
+                    <ul class="nav navbar-nav navbar-right " style="padding-right:20px">
+                        <li class="navbar-li" ><a class="navbar-a dropdown-toggle navbar-a dropdown-item" data-toggle="dropdown" data-submenu aria-expanded="false" href="#">Notifications@{ if (notif.Count() > 0) { <span class="badge">@notif.Count()</span> } }</a>
+                            <ul id="dropdown-menu" class="dropdown-menu col-lg-5 notification-popover">
+                                <li class="">
+                                    <div class="content">
+                                        <table class="table-condensed">
+                                            @{
+                                                if (notif.Count() > 0)
+                                                {
+                                                    <thead><tr><th colspan="4">@header</th></tr></thead>
+                                                    <tbody>
+                                                        @foreach (var v in notif)
+                                                        {
+                                                            <tr>
+                                                                <td>@v.ItemCode</td>
+                                                                <td>@v.ItemName</td>
+                                                                <td>@v.Action</td>
+                                                                <td>@v.Page</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                }
+                                                else
+                                                {
+                                                    <tbody>
+                                                        <tr><td colspan="4">No notifications</td></tr>
+                                                    </tbody>
+                                                }
+                                            }
+                                        </table>
+                                    </div>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 }

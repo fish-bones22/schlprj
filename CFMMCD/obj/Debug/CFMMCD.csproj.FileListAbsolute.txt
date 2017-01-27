@@ -42,7 +42,6 @@ C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsof
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsoft.ApplicationInsights.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\Rotativa.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Helpers.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Mvc.dll
 C:\Users\samue\Documents\Visual Studio 2015\Projects\schlprj\CFMMCD\bin\System.Web.Razor.dll

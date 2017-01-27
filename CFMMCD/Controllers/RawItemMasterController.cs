@@ -38,6 +38,18 @@ namespace CFMMCD.Controllers
             RIMViewModel.RawItemMasterList = RawItemMasterManager.GetRawItems("ALL");
             return View(RIMViewModel);
         }
+        /*
+         * UpdateDelete Method is generally composed of three possible actions: Import, Save/Update, and Delete.
+         * Import action base solely on the availability of Request File. If Request File Count is zero, then the 
+         * action is skipped.
+         * The Save/Update and Delete actions rely on the value of the parameter 'command' sent by the View
+         * These actions are logged if successully performed with the exception for Import action since it Updates/Creates data
+         * one batch at a time thus logging is handled in the Entity Manager.
+         * 
+         * Misc actions available in RawItemController: Switch
+         * Switch action is performed if the ViewModel for 'SwitchRawItem' is not null nor empty.
+         * 
+         */
         [HttpPost]
         public ActionResult UpdateDelete(RawItemMasterViewModel RIMViewModel, string command)
         {
@@ -45,7 +57,26 @@ namespace CFMMCD.Controllers
             string PageAction = "";
             bool result = false;
 
-            if (command == null)
+            if (Request.Files.Count > 0)
+            {
+                HttpPostedFileBase file = Request.Files["FileUploaded"];
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                {
+                    ReportViewModel report = RawItemMasterManager.ImportExcel(file.InputStream, user.Username);
+                    PageAction = "Import";
+                    result = report.Result;
+                    if (!result)
+                    {
+                        if (report.ErrorLevel == 2)
+                            PageAction = report.Message + ": Import partially";
+                        else
+                            PageAction = report.Message + ": Import";
+                    }
+                    else
+                        PageAction = report.Message + ": Import";
+                }
+            }
+            if (command == null && !(RIMViewModel.SwitchItem == null))
             {
                 result = RawItemMasterManager.SwitchRawItem(RIMViewModel.RIMRIC, RIMViewModel.SwitchItem, user.Username);
                 PageAction = "Switch";
@@ -65,7 +96,10 @@ namespace CFMMCD.Controllers
             if (result)
             {
                 TempData["SuccessMessage"] = PageAction + " successful";
-                new AuditLogManager().Audit(user.Username, DateTime.Now, "Raw Item Master", PageAction, RIMViewModel.RIMRIC, RIMViewModel.RIMRID);
+                if (PageAction.Equals("Switch") || PageAction.Equals("Update") || PageAction.Equals("Create"))
+                    new AuditLogManager().Audit(user.Username, DateTime.Now, "Raw Item Master", PageAction, RIMViewModel.RIMRIC, RIMViewModel.RIMRID);
+                if (RIMViewModel.RIMRIC != null && !RIMViewModel.RIMRIC.Equals("") && !PageAction.Equals("Delete"))
+                    return RedirectToAction("Index", new { id = RIMViewModel.RIMRIC });
             }
             else
             {
