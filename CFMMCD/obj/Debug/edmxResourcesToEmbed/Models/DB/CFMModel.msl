@@ -1,6 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CFMMCDModelStoreContainer" CdmEntityContainer="CFMMCDEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="CFMMCDModel.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="TimeLastLogged" ColumnName="TimeLastLogged" />
+          <ScalarProperty Name="AdminStatus" ColumnName="AdminStatus" />
+          <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit_Log">
+      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
+        <MappingFragment StoreEntitySet="Audit_Log">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
+          <ScalarProperty Name="Page" ColumnName="Page" />
+          <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Breakfast_Price_Tier">
       <EntityTypeMapping TypeName="CFMMCDModel.Breakfast_Price_Tier">
         <MappingFragment StoreEntitySet="Breakfast_Price_Tier">
@@ -22,259 +47,6 @@
         <MappingFragment StoreEntitySet="Category">
           <ScalarProperty Name="Category1" ColumnName="Category" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CSHMIMP0_NP6">
-      <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0_NP6">
-        <MappingFragment StoreEntitySet="CSHMIMP0_NP6">
-          <ScalarProperty Name="MIMLON" ColumnName="MIMLON" />
-          <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
-          <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
-          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CSHPMGP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.CSHPMGP0">
-        <MappingFragment StoreEntitySet="CSHPMGP0">
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="PMGSTA" ColumnName="PMGSTA" />
-          <ScalarProperty Name="PMGTXT" ColumnName="PMGTXT" />
-          <ScalarProperty Name="PMGNUM" ColumnName="PMGNUM" />
-          <ScalarProperty Name="PMGGRP" ColumnName="PMGGRP" />
-          <ScalarProperty Name="PMGGID" ColumnName="PMGGID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CSHVMLP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.CSHVMLP0">
-        <MappingFragment StoreEntitySet="CSHVMLP0">
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="VMLID" ColumnName="VMLID" />
-          <ScalarProperty Name="VMLPRO" ColumnName="VMLPRO" />
-          <ScalarProperty Name="VMLPRI" ColumnName="VMLPRI" />
-          <ScalarProperty Name="VMLNAM" ColumnName="VMLNAM" />
-          <ScalarProperty Name="VMLQUA" ColumnName="VMLQUA" />
-          <ScalarProperty Name="VMLMIC" ColumnName="VMLMIC" />
-          <ScalarProperty Name="VMLNUM" ColumnName="VMLNUM" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CSM_Master_Recipe">
-      <EntityTypeMapping TypeName="CFMMCDModel.CSM_Master_Recipe">
-        <MappingFragment StoreEntitySet="CSM_Master_Recipe">
-          <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
-          <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
-          <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
-          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
-          <ScalarProperty Name="CSMID" ColumnName="CSMID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Dessert_Price_Tier">
-      <EntityTypeMapping TypeName="CFMMCDModel.Dessert_Price_Tier">
-        <MappingFragment StoreEntitySet="Dessert_Price_Tier">
-          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="INVMGRP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.INVMGRP0">
-        <MappingFragment StoreEntitySet="INVMGRP0">
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="MGRSTA" ColumnName="MGRSTA" />
-          <ScalarProperty Name="MGRTXT" ColumnName="MGRTXT" />
-          <ScalarProperty Name="MGRGRP" ColumnName="MGRGRP" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="INVUOMP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.INVUOMP0">
-        <MappingFragment StoreEntitySet="INVUOMP0">
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="UOMUSR" ColumnName="UOMUSR" />
-          <ScalarProperty Name="UOMDAT" ColumnName="UOMDAT" />
-          <ScalarProperty Name="UOMDEL" ColumnName="UOMDEL" />
-          <ScalarProperty Name="UOMDES" ColumnName="UOMDES" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="INVVEMP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.INVVEMP0">
-        <MappingFragment StoreEntitySet="INVVEMP0">
-          <ScalarProperty Name="Except_Store" ColumnName="Except_Store" />
-          <ScalarProperty Name="Store" ColumnName="Store" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Province" ColumnName="Province" />
-          <ScalarProperty Name="Region" ColumnName="Region" />
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="VEMDEL" ColumnName="VEMDEL" />
-          <ScalarProperty Name="VEMADE" ColumnName="VEMADE" />
-          <ScalarProperty Name="VEMUSR" ColumnName="VEMUSR" />
-          <ScalarProperty Name="VEMDAT" ColumnName="VEMDAT" />
-          <ScalarProperty Name="VEMSTA" ColumnName="VEMSTA" />
-          <ScalarProperty Name="VEMTID" ColumnName="VEMTID" />
-          <ScalarProperty Name="VEMDAY" ColumnName="VEMDAY" />
-          <ScalarProperty Name="VEMLOC" ColumnName="VEMLOC" />
-          <ScalarProperty Name="VEMSTN" ColumnName="VEMSTN" />
-          <ScalarProperty Name="VEMTEL" ColumnName="VEMTEL" />
-          <ScalarProperty Name="VEMSTR" ColumnName="VEMSTR" />
-          <ScalarProperty Name="VEMCTY" ColumnName="VEMCTY" />
-          <ScalarProperty Name="VEMZIP" ColumnName="VEMZIP" />
-          <ScalarProperty Name="VEMCCD" ColumnName="VEMCCD" />
-          <ScalarProperty Name="VEMDS2" ColumnName="VEMDS2" />
-          <ScalarProperty Name="VEMDS1" ColumnName="VEMDS1" />
-          <ScalarProperty Name="VEMWSI" ColumnName="VEMWSI" />
-          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LOCATIONs">
-      <EntityTypeMapping TypeName="CFMMCDModel.LOCATION">
-        <MappingFragment StoreEntitySet="LOCATION">
-          <ScalarProperty Name="LOCATN" ColumnName="LOCATN" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="McCafe_Bistro_Price_Tier">
-      <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Bistro_Price_Tier">
-        <MappingFragment StoreEntitySet="McCafe_Bistro_Price_Tier">
-          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="McCafe_Level_2_Price_Tier">
-      <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Level_2_Price_Tier">
-        <MappingFragment StoreEntitySet="McCafe_Level_2_Price_Tier">
-          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="McCafe_Level_3_Price_Tier">
-      <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Level_3_Price_Tier">
-        <MappingFragment StoreEntitySet="McCafe_Level_3_Price_Tier">
-          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MDS_Price_Tier">
-      <EntityTypeMapping TypeName="CFMMCDModel.MDS_Price_Tier">
-        <MappingFragment StoreEntitySet="MDS_Price_Tier">
-          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OWNERSHIPs">
-      <EntityTypeMapping TypeName="CFMMCDModel.OWNERSHIP">
-        <MappingFragment StoreEntitySet="OWNERSHIP">
-          <ScalarProperty Name="OWNSHP" ColumnName="OWNSHP" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PROFIT_CEN">
-      <EntityTypeMapping TypeName="CFMMCDModel.PROFIT_CEN">
-        <MappingFragment StoreEntitySet="PROFIT_CEN">
-          <ScalarProperty Name="PRFCNT" ColumnName="PRFCNT" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Project_Gold_Price_Tier">
-      <EntityTypeMapping TypeName="CFMMCDModel.Project_Gold_Price_Tier">
-        <MappingFragment StoreEntitySet="Project_Gold_Price_Tier">
-          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Regular_Price_Tier">
-      <EntityTypeMapping TypeName="CFMMCDModel.Regular_Price_Tier">
-        <MappingFragment StoreEntitySet="Regular_Price_Tier">
-          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RIM_VEM_Lookup">
-      <EntityTypeMapping TypeName="CFMMCDModel.RIM_VEM_Lookup">
-        <MappingFragment StoreEntitySet="RIM_VEM_Lookup">
-          <ScalarProperty Name="RIMPDT" ColumnName="RIMPDT" />
-          <ScalarProperty Name="RIMCPN" ColumnName="RIMCPN" />
-          <ScalarProperty Name="SCMCOD" ColumnName="SCMCOD" />
-          <ScalarProperty Name="PPERUN" ColumnName="PPERUN" />
-          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
-          <ScalarProperty Name="VEMDS1" ColumnName="VEMDS1" />
-          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
-          <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
-          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
-          <ScalarProperty Name="RIM_VEM_ID" ColumnName="RIM_VEM_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SCM_Master_Recipe">
-      <EntityTypeMapping TypeName="CFMMCDModel.SCM_Master_Recipe">
-        <MappingFragment StoreEntitySet="SCM_Master_Recipe">
-          <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
-          <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
-          <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
-          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
-          <ScalarProperty Name="CSMID" ColumnName="CSMID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="STORE_MIMMIC_Lookup">
-      <EntityTypeMapping TypeName="CFMMCDModel.STORE_MIMMIC_Lookup">
-        <MappingFragment StoreEntitySet="STORE_MIMMIC_Lookup">
-          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
-          <ScalarProperty Name="STORE_NO" ColumnName="STORE_NO" />
-          <ScalarProperty Name="STORE_MIMMIC_Id" ColumnName="STORE_MIMMIC_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Trading_Area">
-      <EntityTypeMapping TypeName="CFMMCDModel.Trading_Area">
-        <MappingFragment StoreEntitySet="Trading_Area">
-          <ScalarProperty Name="Trading_Areea" ColumnName="Trading_Areea" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MIM_Price">
-      <EntityTypeMapping TypeName="CFMMCDModel.MIM_Price">
-        <MappingFragment StoreEntitySet="MIM_Price">
-          <ScalarProperty Name="MIMPND" ColumnName="MIMPND" />
-          <ScalarProperty Name="MIMNNP" ColumnName="MIMNNP" />
-          <ScalarProperty Name="MIMNPD" ColumnName="MIMNPD" />
-          <ScalarProperty Name="MIMNPO" ColumnName="MIMNPO" />
-          <ScalarProperty Name="MIMNPI" ColumnName="MIMNPI" />
-          <ScalarProperty Name="MIMNPA" ColumnName="MIMNPA" />
-          <ScalarProperty Name="MIMPRG" ColumnName="MIMPRG" />
-          <ScalarProperty Name="MIMPRO" ColumnName="MIMPRO" />
-          <ScalarProperty Name="MIMPRI" ColumnName="MIMPRI" />
-          <ScalarProperty Name="MITIER" ColumnName="MITIER" />
-          <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
-          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="CFMMCDModel.Account">
-        <MappingFragment StoreEntitySet="Accounts">
-          <ScalarProperty Name="TimeLastLogged" ColumnName="TimeLastLogged" />
-          <ScalarProperty Name="AdminStatus" ColumnName="AdminStatus" />
-          <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -344,6 +116,71 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CSHMIMP0_NP6">
+      <EntityTypeMapping TypeName="CFMMCDModel.CSHMIMP0_NP6">
+        <MappingFragment StoreEntitySet="CSHMIMP0_NP6">
+          <ScalarProperty Name="MIMLON" ColumnName="MIMLON" />
+          <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
+          <ScalarProperty Name="MIMSTA" ColumnName="MIMSTA" />
+          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CSHPMGP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.CSHPMGP0">
+        <MappingFragment StoreEntitySet="CSHPMGP0">
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PMGSTA" ColumnName="PMGSTA" />
+          <ScalarProperty Name="PMGTXT" ColumnName="PMGTXT" />
+          <ScalarProperty Name="PMGNUM" ColumnName="PMGNUM" />
+          <ScalarProperty Name="PMGGRP" ColumnName="PMGGRP" />
+          <ScalarProperty Name="PMGGID" ColumnName="PMGGID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CSHVMLP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.CSHVMLP0">
+        <MappingFragment StoreEntitySet="CSHVMLP0">
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VMLID" ColumnName="VMLID" />
+          <ScalarProperty Name="VMLPRO" ColumnName="VMLPRO" />
+          <ScalarProperty Name="VMLPRI" ColumnName="VMLPRI" />
+          <ScalarProperty Name="VMLNAM" ColumnName="VMLNAM" />
+          <ScalarProperty Name="VMLQUA" ColumnName="VMLQUA" />
+          <ScalarProperty Name="VMLMIC" ColumnName="VMLMIC" />
+          <ScalarProperty Name="VMLNUM" ColumnName="VMLNUM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CSM_Master_Recipe">
+      <EntityTypeMapping TypeName="CFMMCDModel.CSM_Master_Recipe">
+        <MappingFragment StoreEntitySet="CSM_Master_Recipe">
+          <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
+          <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
+          <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
+          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+          <ScalarProperty Name="CSMID" ColumnName="CSMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dessert_Price_Tier">
+      <EntityTypeMapping TypeName="CFMMCDModel.Dessert_Price_Tier">
+        <MappingFragment StoreEntitySet="Dessert_Price_Tier">
+          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVMGRP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.INVMGRP0">
+        <MappingFragment StoreEntitySet="INVMGRP0">
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="MGRSTA" ColumnName="MGRSTA" />
+          <ScalarProperty Name="MGRTXT" ColumnName="MGRTXT" />
+          <ScalarProperty Name="MGRGRP" ColumnName="MGRGRP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="INVRIMP0">
       <EntityTypeMapping TypeName="CFMMCDModel.INVRIMP0">
         <MappingFragment StoreEntitySet="INVRIMP0">
@@ -404,6 +241,200 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="INVRIRP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
+        <MappingFragment StoreEntitySet="INVRIRP0">
+          <ScalarProperty Name="Group" ColumnName="Group" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LongName" ColumnName="LongName" />
+          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="RIRFLG" ColumnName="RIRFLG" />
+          <ScalarProperty Name="RIRDAT" ColumnName="RIRDAT" />
+          <ScalarProperty Name="RIRUSR" ColumnName="RIRUSR" />
+          <ScalarProperty Name="RIRVST" ColumnName="RIRVST" />
+          <ScalarProperty Name="RIRSTA" ColumnName="RIRSTA" />
+          <ScalarProperty Name="RIRCWC" ColumnName="RIRCWC" />
+          <ScalarProperty Name="RIRSFQ" ColumnName="RIRSFQ" />
+          <ScalarProperty Name="RIRVPC" ColumnName="RIRVPC" />
+          <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
+          <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
+          <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVUOMP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.INVUOMP0">
+        <MappingFragment StoreEntitySet="INVUOMP0">
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="UOMUSR" ColumnName="UOMUSR" />
+          <ScalarProperty Name="UOMDAT" ColumnName="UOMDAT" />
+          <ScalarProperty Name="UOMDEL" ColumnName="UOMDEL" />
+          <ScalarProperty Name="UOMDES" ColumnName="UOMDES" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVVEMP0">
+      <EntityTypeMapping TypeName="CFMMCDModel.INVVEMP0">
+        <MappingFragment StoreEntitySet="INVVEMP0">
+          <ScalarProperty Name="Except_Store" ColumnName="Except_Store" />
+          <ScalarProperty Name="Store" ColumnName="Store" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VEMDEL" ColumnName="VEMDEL" />
+          <ScalarProperty Name="VEMADE" ColumnName="VEMADE" />
+          <ScalarProperty Name="VEMUSR" ColumnName="VEMUSR" />
+          <ScalarProperty Name="VEMDAT" ColumnName="VEMDAT" />
+          <ScalarProperty Name="VEMSTA" ColumnName="VEMSTA" />
+          <ScalarProperty Name="VEMTID" ColumnName="VEMTID" />
+          <ScalarProperty Name="VEMDAY" ColumnName="VEMDAY" />
+          <ScalarProperty Name="VEMLOC" ColumnName="VEMLOC" />
+          <ScalarProperty Name="VEMSTN" ColumnName="VEMSTN" />
+          <ScalarProperty Name="VEMTEL" ColumnName="VEMTEL" />
+          <ScalarProperty Name="VEMSTR" ColumnName="VEMSTR" />
+          <ScalarProperty Name="VEMCTY" ColumnName="VEMCTY" />
+          <ScalarProperty Name="VEMZIP" ColumnName="VEMZIP" />
+          <ScalarProperty Name="VEMCCD" ColumnName="VEMCCD" />
+          <ScalarProperty Name="VEMDS2" ColumnName="VEMDS2" />
+          <ScalarProperty Name="VEMDS1" ColumnName="VEMDS1" />
+          <ScalarProperty Name="VEMWSI" ColumnName="VEMWSI" />
+          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ITMGRPs">
+      <EntityTypeMapping TypeName="CFMMCDModel.ITMGRP">
+        <MappingFragment StoreEntitySet="ITMGRP">
+          <ScalarProperty Name="Group_Type" ColumnName="Group_Type" />
+          <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+          <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOCATIONs">
+      <EntityTypeMapping TypeName="CFMMCDModel.LOCATION">
+        <MappingFragment StoreEntitySet="LOCATION">
+          <ScalarProperty Name="LOCATN" ColumnName="LOCATN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="McCafe_Bistro_Price_Tier">
+      <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Bistro_Price_Tier">
+        <MappingFragment StoreEntitySet="McCafe_Bistro_Price_Tier">
+          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="McCafe_Level_2_Price_Tier">
+      <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Level_2_Price_Tier">
+        <MappingFragment StoreEntitySet="McCafe_Level_2_Price_Tier">
+          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="McCafe_Level_3_Price_Tier">
+      <EntityTypeMapping TypeName="CFMMCDModel.McCafe_Level_3_Price_Tier">
+        <MappingFragment StoreEntitySet="McCafe_Level_3_Price_Tier">
+          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MDS_Price_Tier">
+      <EntityTypeMapping TypeName="CFMMCDModel.MDS_Price_Tier">
+        <MappingFragment StoreEntitySet="MDS_Price_Tier">
+          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIM_Price">
+      <EntityTypeMapping TypeName="CFMMCDModel.MIM_Price">
+        <MappingFragment StoreEntitySet="MIM_Price">
+          <ScalarProperty Name="MIMPND" ColumnName="MIMPND" />
+          <ScalarProperty Name="MIMNNP" ColumnName="MIMNNP" />
+          <ScalarProperty Name="MIMNPD" ColumnName="MIMNPD" />
+          <ScalarProperty Name="MIMNPO" ColumnName="MIMNPO" />
+          <ScalarProperty Name="MIMNPI" ColumnName="MIMNPI" />
+          <ScalarProperty Name="MIMNPA" ColumnName="MIMNPA" />
+          <ScalarProperty Name="MIMPRG" ColumnName="MIMPRG" />
+          <ScalarProperty Name="MIMPRO" ColumnName="MIMPRO" />
+          <ScalarProperty Name="MIMPRI" ColumnName="MIMPRI" />
+          <ScalarProperty Name="MITIER" ColumnName="MITIER" />
+          <ScalarProperty Name="MIMNAM" ColumnName="MIMNAM" />
+          <ScalarProperty Name="MIMMIC" ColumnName="MIMMIC" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OWNERSHIPs">
+      <EntityTypeMapping TypeName="CFMMCDModel.OWNERSHIP">
+        <MappingFragment StoreEntitySet="OWNERSHIP">
+          <ScalarProperty Name="OWNSHP" ColumnName="OWNSHP" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROFIT_CEN">
+      <EntityTypeMapping TypeName="CFMMCDModel.PROFIT_CEN">
+        <MappingFragment StoreEntitySet="PROFIT_CEN">
+          <ScalarProperty Name="PRFCNT" ColumnName="PRFCNT" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project_Gold_Price_Tier">
+      <EntityTypeMapping TypeName="CFMMCDModel.Project_Gold_Price_Tier">
+        <MappingFragment StoreEntitySet="Project_Gold_Price_Tier">
+          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regular_Price_Tier">
+      <EntityTypeMapping TypeName="CFMMCDModel.Regular_Price_Tier">
+        <MappingFragment StoreEntitySet="Regular_Price_Tier">
+          <ScalarProperty Name="Price_Tier" ColumnName="Price_Tier" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RIM_VEM_Lookup">
+      <EntityTypeMapping TypeName="CFMMCDModel.RIM_VEM_Lookup">
+        <MappingFragment StoreEntitySet="RIM_VEM_Lookup">
+          <ScalarProperty Name="RIMPDT" ColumnName="RIMPDT" />
+          <ScalarProperty Name="RIMCPN" ColumnName="RIMCPN" />
+          <ScalarProperty Name="SCMCOD" ColumnName="SCMCOD" />
+          <ScalarProperty Name="PPERUN" ColumnName="PPERUN" />
+          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
+          <ScalarProperty Name="VEMDS1" ColumnName="VEMDS1" />
+          <ScalarProperty Name="VEMVEN" ColumnName="VEMVEN" />
+          <ScalarProperty Name="RIMRID" ColumnName="RIMRID" />
+          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+          <ScalarProperty Name="RIM_VEM_ID" ColumnName="RIM_VEM_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCM_Master_Recipe">
+      <EntityTypeMapping TypeName="CFMMCDModel.SCM_Master_Recipe">
+        <MappingFragment StoreEntitySet="SCM_Master_Recipe">
+          <ScalarProperty Name="CSMDES" ColumnName="CSMDES" />
+          <ScalarProperty Name="CSMCWC" ColumnName="CSMCWC" />
+          <ScalarProperty Name="CSMSFQ" ColumnName="CSMSFQ" />
+          <ScalarProperty Name="RIMRIC" ColumnName="RIMRIC" />
+          <ScalarProperty Name="CSMID" ColumnName="CSMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Store_Profile">
       <EntityTypeMapping TypeName="CFMMCDModel.Store_Profile">
         <MappingFragment StoreEntitySet="Store_Profile">
@@ -436,50 +467,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ITMGRPs">
-      <EntityTypeMapping TypeName="CFMMCDModel.ITMGRP">
-        <MappingFragment StoreEntitySet="ITMGRP">
-          <ScalarProperty Name="Group_Type" ColumnName="Group_Type" />
-          <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
-          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
-          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
-          <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
-          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="INVRIRP0">
-      <EntityTypeMapping TypeName="CFMMCDModel.INVRIRP0">
-        <MappingFragment StoreEntitySet="INVRIRP0">
-          <ScalarProperty Name="Group" ColumnName="Group" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="LongName" ColumnName="LongName" />
-          <ScalarProperty Name="RIMCPR" ColumnName="RIMCPR" />
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="RIRFLG" ColumnName="RIRFLG" />
-          <ScalarProperty Name="RIRDAT" ColumnName="RIRDAT" />
-          <ScalarProperty Name="RIRUSR" ColumnName="RIRUSR" />
-          <ScalarProperty Name="RIRVST" ColumnName="RIRVST" />
-          <ScalarProperty Name="RIRSTA" ColumnName="RIRSTA" />
-          <ScalarProperty Name="RIRCWC" ColumnName="RIRCWC" />
-          <ScalarProperty Name="RIRSFQ" ColumnName="RIRSFQ" />
-          <ScalarProperty Name="RIRVPC" ColumnName="RIRVPC" />
-          <ScalarProperty Name="RIRRIC" ColumnName="RIRRIC" />
-          <ScalarProperty Name="RIRMIC" ColumnName="RIRMIC" />
-          <ScalarProperty Name="RIRRID" ColumnName="RIRRID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Audit_Log">
-      <EntityTypeMapping TypeName="CFMMCDModel.Audit_Log">
-        <MappingFragment StoreEntitySet="Audit_Log">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Page_Action" ColumnName="Page_Action" />
-          <ScalarProperty Name="Page" ColumnName="Page" />
-          <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+    <EntitySetMapping Name="Trading_Area">
+      <EntityTypeMapping TypeName="CFMMCDModel.Trading_Area">
+        <MappingFragment StoreEntitySet="Trading_Area">
+          <ScalarProperty Name="Trading_Areea" ColumnName="Trading_Areea" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

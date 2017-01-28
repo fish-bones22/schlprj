@@ -1,49 +1,136 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CFMMCDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="CFMMCDEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
+    <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
     <EntitySet Name="Breakfast_Price_Tier" EntityType="CFMMCDModel.Breakfast_Price_Tier" />
     <EntitySet Name="BUSINESS_EXT" EntityType="CFMMCDModel.BUSINESS_EXT" />
     <EntitySet Name="Categories" EntityType="CFMMCDModel.Category" />
+    <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
     <EntitySet Name="CSHMIMP0_NP6" EntityType="CFMMCDModel.CSHMIMP0_NP6" />
     <EntitySet Name="CSHPMGP0" EntityType="CFMMCDModel.CSHPMGP0" />
     <EntitySet Name="CSHVMLP0" EntityType="CFMMCDModel.CSHVMLP0" />
     <EntitySet Name="CSM_Master_Recipe" EntityType="CFMMCDModel.CSM_Master_Recipe" />
     <EntitySet Name="Dessert_Price_Tier" EntityType="CFMMCDModel.Dessert_Price_Tier" />
     <EntitySet Name="INVMGRP0" EntityType="CFMMCDModel.INVMGRP0" />
+    <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
+    <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
     <EntitySet Name="INVUOMP0" EntityType="CFMMCDModel.INVUOMP0" />
     <EntitySet Name="INVVEMP0" EntityType="CFMMCDModel.INVVEMP0" />
+    <EntitySet Name="ITMGRPs" EntityType="CFMMCDModel.ITMGRP" />
     <EntitySet Name="LOCATIONs" EntityType="CFMMCDModel.LOCATION" />
     <EntitySet Name="McCafe_Bistro_Price_Tier" EntityType="CFMMCDModel.McCafe_Bistro_Price_Tier" />
     <EntitySet Name="McCafe_Level_2_Price_Tier" EntityType="CFMMCDModel.McCafe_Level_2_Price_Tier" />
     <EntitySet Name="McCafe_Level_3_Price_Tier" EntityType="CFMMCDModel.McCafe_Level_3_Price_Tier" />
     <EntitySet Name="MDS_Price_Tier" EntityType="CFMMCDModel.MDS_Price_Tier" />
+    <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
     <EntitySet Name="OWNERSHIPs" EntityType="CFMMCDModel.OWNERSHIP" />
     <EntitySet Name="PROFIT_CEN" EntityType="CFMMCDModel.PROFIT_CEN" />
     <EntitySet Name="Project_Gold_Price_Tier" EntityType="CFMMCDModel.Project_Gold_Price_Tier" />
     <EntitySet Name="Regular_Price_Tier" EntityType="CFMMCDModel.Regular_Price_Tier" />
     <EntitySet Name="RIM_VEM_Lookup" EntityType="CFMMCDModel.RIM_VEM_Lookup" />
     <EntitySet Name="SCM_Master_Recipe" EntityType="CFMMCDModel.SCM_Master_Recipe" />
-    <EntitySet Name="STORE_MIMMIC_Lookup" EntityType="CFMMCDModel.STORE_MIMMIC_Lookup" />
+    <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
     <EntitySet Name="Trading_Area" EntityType="CFMMCDModel.Trading_Area" />
-    <EntitySet Name="MIM_Price" EntityType="CFMMCDModel.MIM_Price" />
-    <EntitySet Name="Accounts" EntityType="CFMMCDModel.Account" />
-    <EntitySet Name="CSHMIMP0" EntityType="CFMMCDModel.CSHMIMP0" />
-    <EntitySet Name="INVRIMP0" EntityType="CFMMCDModel.INVRIMP0" />
-    <AssociationSet Name="FK_CSHMIMP0_ToTable" Association="CFMMCDModel.FK_CSHMIMP0_ToTable">
+    <AssociationSet Name="FK_Store_Profile_Breakfast_Price_Tier" Association="CFMMCDModel.FK_Store_Profile_Breakfast_Price_Tier">
+      <End Role="Breakfast_Price_Tier" EntitySet="Breakfast_Price_Tier" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CSHMIMP0_CSHMIMP0_NP6" Association="CFMMCDModel.FK_CSHMIMP0_CSHMIMP0_NP6">
       <End Role="CSHMIMP0_NP6" EntitySet="CSHMIMP0_NP6" />
       <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
     </AssociationSet>
-    <EntitySet Name="Store_Profile" EntityType="CFMMCDModel.Store_Profile" />
-    <EntitySet Name="ITMGRPs" EntityType="CFMMCDModel.ITMGRP" />
-    <EntitySet Name="INVRIRP0" EntityType="CFMMCDModel.INVRIRP0" />
-    <EntitySet Name="Audit_Log" EntityType="CFMMCDModel.Audit_Log" />
+    <AssociationSet Name="FK_INVRIRP0_CSHMIMP0" Association="CFMMCDModel.FK_INVRIRP0_CSHMIMP0">
+      <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+      <End Role="INVRIRP0" EntitySet="INVRIRP0" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MIM_Price_CSHMIMP0" Association="CFMMCDModel.FK_MIM_Price_CSHMIMP0">
+      <End Role="CSHMIMP0" EntitySet="CSHMIMP0" />
+      <End Role="MIM_Price" EntitySet="MIM_Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_Dessert_Price_Tier" Association="CFMMCDModel.FK_Store_Profile_Dessert_Price_Tier">
+      <End Role="Dessert_Price_Tier" EntitySet="Dessert_Price_Tier" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INVRIMP0_INVUOMP0" Association="CFMMCDModel.FK_INVRIMP0_INVUOMP0">
+      <End Role="INVUOMP0" EntitySet="INVUOMP0" />
+      <End Role="INVRIMP0" EntitySet="INVRIMP0" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INVRIMP0_INVUOMP0_2" Association="CFMMCDModel.FK_INVRIMP0_INVUOMP0_2">
+      <End Role="INVUOMP0" EntitySet="INVUOMP0" />
+      <End Role="INVRIMP0" EntitySet="INVRIMP0" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INVRIMP0_INVUOMP0_3" Association="CFMMCDModel.FK_INVRIMP0_INVUOMP0_3">
+      <End Role="INVUOMP0" EntitySet="INVUOMP0" />
+      <End Role="INVRIMP0" EntitySet="INVRIMP0" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INVRIRP0_INVRIMP0" Association="CFMMCDModel.FK_INVRIRP0_INVRIMP0">
+      <End Role="INVRIMP0" EntitySet="INVRIMP0" />
+      <End Role="INVRIRP0" EntitySet="INVRIRP0" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_McCafe_LOCATION" Association="CFMMCDModel.FK_Store_Profile_McCafe_LOCATION">
+      <End Role="LOCATION" EntitySet="LOCATIONs" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_McCafe_Bistro_Price_Tier" Association="CFMMCDModel.FK_Store_Profile_McCafe_Bistro_Price_Tier">
+      <End Role="McCafe_Bistro_Price_Tier" EntitySet="McCafe_Bistro_Price_Tier" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_McCafe_Level_2_Price_Tier" Association="CFMMCDModel.FK_Store_Profile_McCafe_Level_2_Price_Tier">
+      <End Role="McCafe_Level_2_Price_Tier" EntitySet="McCafe_Level_2_Price_Tier" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_McCafe_Level_3_Price_Tier" Association="CFMMCDModel.FK_Store_Profile_McCafe_Level_3_Price_Tier">
+      <End Role="McCafe_Level_3_Price_Tier" EntitySet="McCafe_Level_3_Price_Tier" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_MDS_Price_Tier" Association="CFMMCDModel.FK_Store_Profile_MDS_Price_Tier">
+      <End Role="MDS_Price_Tier" EntitySet="MDS_Price_Tier" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_OWNERSHIP" Association="CFMMCDModel.FK_Store_Profile_OWNERSHIP">
+      <End Role="OWNERSHIP" EntitySet="OWNERSHIPs" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_Project_Gold_Price_Tier" Association="CFMMCDModel.FK_Store_Profile_Project_Gold_Price_Tier">
+      <End Role="Project_Gold_Price_Tier" EntitySet="Project_Gold_Price_Tier" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Store_Profile_Regular_Price_Tier" Association="CFMMCDModel.FK_Store_Profile_Regular_Price_Tier">
+      <End Role="Regular_Price_Tier" EntitySet="Regular_Price_Tier" />
+      <End Role="Store_Profile" EntitySet="Store_Profile" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AdminStatus" Type="Boolean" Nullable="false" />
+    <Property Name="TimeLastLogged" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Audit_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date_Time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Breakfast_Price_Tier">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_Breakfast_Price_Tier" FromRole="Breakfast_Price_Tier" ToRole="Store_Profile" />
   </EntityType>
   <EntityType Name="BUSINESS_EXT">
     <Key>
@@ -58,237 +145,6 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Category1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="CSHMIMP0_NP6">
-    <Key>
-      <PropertyRef Name="MIMMIC" />
-    </Key>
-    <Property Name="MIMMIC" Type="Int32" Nullable="false" />
-    <Property Name="MIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-    <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CSHMIMP0" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0_NP6" ToRole="CSHMIMP0" />
-  </EntityType>
-  <EntityType Name="CSHPMGP0">
-    <Key>
-      <PropertyRef Name="PMGGID" />
-    </Key>
-    <Property Name="PMGGID" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="PMGGRP" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-    <Property Name="PMGNUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-    <Property Name="PMGTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="PMGSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="CSHVMLP0">
-    <Key>
-      <PropertyRef Name="VMLID" />
-    </Key>
-    <Property Name="VMLNUM" Type="Int32" Nullable="false" />
-    <Property Name="VMLMIC" Type="Int32" />
-    <Property Name="VMLQUA" Type="Int32" />
-    <Property Name="VMLNAM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="VMLPRI" Type="Double" />
-    <Property Name="VMLPRO" Type="Double" />
-    <Property Name="VMLID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="CSM_Master_Recipe">
-    <Key>
-      <PropertyRef Name="CSMID" />
-    </Key>
-    <Property Name="CSMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="RIMRIC" Type="Int32" />
-    <Property Name="CSMSFQ" Type="Double" />
-    <Property Name="CSMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="CSMDES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Dessert_Price_Tier">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="INVMGRP0">
-    <Key>
-      <PropertyRef Name="MGRGRP" />
-    </Key>
-    <Property Name="MGRGRP" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
-    <Property Name="MGRTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MGRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="INVUOMP0">
-    <Key>
-      <PropertyRef Name="UOMDES" />
-    </Key>
-    <Property Name="UOMDES" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="UOMDEL" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="UOMDAT" Type="DateTime" Precision="0" />
-    <Property Name="UOMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="INVVEMP0">
-    <Key>
-      <PropertyRef Name="VEMVEN" />
-    </Key>
-    <Property Name="VEMVEN" Type="Int32" Nullable="false" />
-    <Property Name="VEMWSI" Type="Int32" />
-    <Property Name="VEMDS1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="VEMDS2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="VEMCCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="VEMZIP" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-    <Property Name="VEMCTY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="VEMSTR" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="VEMTEL" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
-    <Property Name="VEMSTN" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-    <Property Name="VEMLOC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="VEMDAY" Type="Double" />
-    <Property Name="VEMTID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-    <Property Name="VEMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="VEMDAT" Type="DateTime" Precision="0" />
-    <Property Name="VEMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="VEMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="VEMDEL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="Region" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="Province" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="Except_Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="LOCATION">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="LOCATN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="McCafe_Bistro_Price_Tier">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="McCafe_Level_2_Price_Tier">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="McCafe_Level_3_Price_Tier">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="MDS_Price_Tier">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="OWNERSHIP">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="OWNSHP" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-  </EntityType>
-  <EntityType Name="PROFIT_CEN">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="PRFCNT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Project_Gold_Price_Tier">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Regular_Price_Tier">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="RIM_VEM_Lookup">
-    <Key>
-      <PropertyRef Name="RIM_VEM_ID" />
-    </Key>
-    <Property Name="RIM_VEM_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="RIMRIC" Type="Int32" />
-    <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="VEMVEN" Type="Int32" />
-    <Property Name="VEMDS1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="RIMCPR" Type="Double" />
-    <Property Name="PPERUN" Type="Double" />
-    <Property Name="SCMCOD" Type="Double" />
-    <Property Name="RIMCPN" Type="Double" />
-    <Property Name="RIMPDT" Type="DateTime" Precision="0" />
-  </EntityType>
-  <EntityType Name="SCM_Master_Recipe">
-    <Key>
-      <PropertyRef Name="CSMID" />
-    </Key>
-    <Property Name="CSMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="RIMRIC" Type="Int32" />
-    <Property Name="CSMSFQ" Type="Double" />
-    <Property Name="CSMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="CSMDES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="STORE_MIMMIC_Lookup">
-    <Key>
-      <PropertyRef Name="STORE_MIMMIC_Id" />
-    </Key>
-    <Property Name="STORE_MIMMIC_Id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="STORE_NO" Type="Int32" />
-    <Property Name="MIMMIC" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Trading_Area">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Trading_Areea" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="MIM_Price">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
-    <Property Name="MIMMIC" Type="Int32" />
-    <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-    <Property Name="MITIER" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-    <Property Name="MIMPRI" Type="Double" />
-    <Property Name="MIMPRO" Type="Double" />
-    <Property Name="MIMPRG" Type="Double" />
-    <Property Name="MIMNPA" Type="Double" />
-    <Property Name="MIMNPI" Type="Double" />
-    <Property Name="MIMNPO" Type="Double" />
-    <Property Name="MIMNPD" Type="Double" />
-    <Property Name="MIMNNP" Type="Double" />
-    <Property Name="MIMPND" Type="DateTime" Precision="0" />
-  </EntityType>
-  <EntityType Name="Account">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="UserAccess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="AdminStatus" Type="Boolean" Nullable="false" />
-    <Property Name="TimeLastLogged" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="CSHMIMP0">
     <Key>
@@ -354,7 +210,70 @@
     <Property Name="Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Except_Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Group" Type="Int32" />
-    <NavigationProperty Name="CSHMIMP0_NP6" Relationship="CFMMCDModel.FK_CSHMIMP0_ToTable" FromRole="CSHMIMP0" ToRole="CSHMIMP0_NP6" />
+    <NavigationProperty Name="CSHMIMP0_NP6" Relationship="CFMMCDModel.FK_CSHMIMP0_CSHMIMP0_NP6" FromRole="CSHMIMP0" ToRole="CSHMIMP0_NP6" />
+    <NavigationProperty Name="INVRIRP0" Relationship="CFMMCDModel.FK_INVRIRP0_CSHMIMP0" FromRole="CSHMIMP0" ToRole="INVRIRP0" />
+    <NavigationProperty Name="MIM_Price" Relationship="CFMMCDModel.FK_MIM_Price_CSHMIMP0" FromRole="CSHMIMP0" ToRole="MIM_Price" />
+  </EntityType>
+  <EntityType Name="CSHMIMP0_NP6">
+    <Key>
+      <PropertyRef Name="MIMMIC" />
+    </Key>
+    <Property Name="MIMMIC" Type="Int32" Nullable="false" />
+    <Property Name="MIMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="MIMLON" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CSHMIMP0" Relationship="CFMMCDModel.FK_CSHMIMP0_CSHMIMP0_NP6" FromRole="CSHMIMP0_NP6" ToRole="CSHMIMP0" />
+  </EntityType>
+  <EntityType Name="CSHPMGP0">
+    <Key>
+      <PropertyRef Name="PMGGID" />
+    </Key>
+    <Property Name="PMGGID" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="PMGGRP" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="PMGNUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="PMGTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PMGSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CSHVMLP0">
+    <Key>
+      <PropertyRef Name="VMLID" />
+    </Key>
+    <Property Name="VMLNUM" Type="Int32" Nullable="false" />
+    <Property Name="VMLMIC" Type="Int32" />
+    <Property Name="VMLQUA" Type="Int32" />
+    <Property Name="VMLNAM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="VMLPRI" Type="Double" />
+    <Property Name="VMLPRO" Type="Double" />
+    <Property Name="VMLID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CSM_Master_Recipe">
+    <Key>
+      <PropertyRef Name="CSMID" />
+    </Key>
+    <Property Name="CSMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RIMRIC" Type="Int32" />
+    <Property Name="CSMSFQ" Type="Double" />
+    <Property Name="CSMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="CSMDES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Dessert_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_Dessert_Price_Tier" FromRole="Dessert_Price_Tier" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="INVMGRP0">
+    <Key>
+      <PropertyRef Name="MGRGRP" />
+    </Key>
+    <Property Name="MGRGRP" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="MGRTXT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MGRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="INVRIMP0">
     <Key>
@@ -414,19 +333,203 @@
     <Property Name="Province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Group" Type="Int32" />
+    <NavigationProperty Name="INVUOMP0" Relationship="CFMMCDModel.FK_INVRIMP0_INVUOMP0" FromRole="INVRIMP0" ToRole="INVUOMP0" />
+    <NavigationProperty Name="INVUOMP01" Relationship="CFMMCDModel.FK_INVRIMP0_INVUOMP0_2" FromRole="INVRIMP0" ToRole="INVUOMP0" />
+    <NavigationProperty Name="INVUOMP02" Relationship="CFMMCDModel.FK_INVRIMP0_INVUOMP0_3" FromRole="INVRIMP0" ToRole="INVUOMP0" />
+    <NavigationProperty Name="INVRIRP0" Relationship="CFMMCDModel.FK_INVRIRP0_INVRIMP0" FromRole="INVRIMP0" ToRole="INVRIRP0" />
   </EntityType>
-  <Association Name="FK_CSHMIMP0_ToTable">
-    <End Type="CFMMCDModel.CSHMIMP0_NP6" Role="CSHMIMP0_NP6" Multiplicity="0..1" />
-    <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CSHMIMP0_NP6">
-        <PropertyRef Name="MIMMIC" />
-      </Principal>
-      <Dependent Role="CSHMIMP0">
-        <PropertyRef Name="MIMMIC_NP6" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="INVRIRP0">
+    <Key>
+      <PropertyRef Name="RIRRID" />
+    </Key>
+    <Property Name="RIRRID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RIRMIC" Type="Int32" />
+    <Property Name="RIRRIC" Type="Int32" />
+    <Property Name="RIRVPC" Type="Int32" />
+    <Property Name="RIRSFQ" Type="Double" />
+    <Property Name="RIRCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIRVST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIRUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="RIRDAT" Type="DateTime" Precision="0" />
+    <Property Name="RIRFLG" Type="Boolean" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="RIMCPR" Type="Double" />
+    <Property Name="LongName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Group" Type="Int32" />
+    <NavigationProperty Name="CSHMIMP0" Relationship="CFMMCDModel.FK_INVRIRP0_CSHMIMP0" FromRole="INVRIRP0" ToRole="CSHMIMP0" />
+    <NavigationProperty Name="INVRIMP0" Relationship="CFMMCDModel.FK_INVRIRP0_INVRIMP0" FromRole="INVRIRP0" ToRole="INVRIMP0" />
+  </EntityType>
+  <EntityType Name="INVUOMP0">
+    <Key>
+      <PropertyRef Name="UOMDES" />
+    </Key>
+    <Property Name="UOMDES" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="UOMDEL" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="UOMDAT" Type="DateTime" Precision="0" />
+    <Property Name="UOMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="INVRIMP0" Relationship="CFMMCDModel.FK_INVRIMP0_INVUOMP0" FromRole="INVUOMP0" ToRole="INVRIMP0" />
+    <NavigationProperty Name="INVRIMP01" Relationship="CFMMCDModel.FK_INVRIMP0_INVUOMP0_2" FromRole="INVUOMP0" ToRole="INVRIMP0" />
+    <NavigationProperty Name="INVRIMP02" Relationship="CFMMCDModel.FK_INVRIMP0_INVUOMP0_3" FromRole="INVUOMP0" ToRole="INVRIMP0" />
+  </EntityType>
+  <EntityType Name="INVVEMP0">
+    <Key>
+      <PropertyRef Name="VEMVEN" />
+    </Key>
+    <Property Name="VEMVEN" Type="Int32" Nullable="false" />
+    <Property Name="VEMWSI" Type="Int32" />
+    <Property Name="VEMDS1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="VEMDS2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="VEMCCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="VEMZIP" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="VEMCTY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="VEMSTR" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="VEMTEL" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
+    <Property Name="VEMSTN" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="VEMLOC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="VEMDAY" Type="Double" />
+    <Property Name="VEMTID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="VEMSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="VEMDAT" Type="DateTime" Precision="0" />
+    <Property Name="VEMUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="VEMADE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="VEMDEL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Province" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Except_Store" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ITMGRP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Group_Id" Type="Int32" Nullable="false" />
+    <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Item_Code" Type="Int32" Nullable="false" />
+    <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Item_Type" Type="Int32" Nullable="false" />
+    <Property Name="Group_Type" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LOCATION">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="LOCATN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_McCafe_LOCATION" FromRole="LOCATION" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="McCafe_Bistro_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_McCafe_Bistro_Price_Tier" FromRole="McCafe_Bistro_Price_Tier" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="McCafe_Level_2_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_McCafe_Level_2_Price_Tier" FromRole="McCafe_Level_2_Price_Tier" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="McCafe_Level_3_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_McCafe_Level_3_Price_Tier" FromRole="McCafe_Level_3_Price_Tier" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="MDS_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_MDS_Price_Tier" FromRole="MDS_Price_Tier" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="MIM_Price">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="MIMMIC" Type="Int32" />
+    <Property Name="MIMNAM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="MITIER" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="MIMPRI" Type="Double" />
+    <Property Name="MIMPRO" Type="Double" />
+    <Property Name="MIMPRG" Type="Double" />
+    <Property Name="MIMNPA" Type="Double" />
+    <Property Name="MIMNPI" Type="Double" />
+    <Property Name="MIMNPO" Type="Double" />
+    <Property Name="MIMNPD" Type="Double" />
+    <Property Name="MIMNNP" Type="Double" />
+    <Property Name="MIMPND" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="CSHMIMP0" Relationship="CFMMCDModel.FK_MIM_Price_CSHMIMP0" FromRole="MIM_Price" ToRole="CSHMIMP0" />
+  </EntityType>
+  <EntityType Name="OWNERSHIP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="OWNSHP" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_OWNERSHIP" FromRole="OWNERSHIP" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="PROFIT_CEN">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="PRFCNT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Project_Gold_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_Project_Gold_Price_Tier" FromRole="Project_Gold_Price_Tier" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="Regular_Price_Tier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Price_Tier" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Store_Profile" Relationship="CFMMCDModel.FK_Store_Profile_Regular_Price_Tier" FromRole="Regular_Price_Tier" ToRole="Store_Profile" />
+  </EntityType>
+  <EntityType Name="RIM_VEM_Lookup">
+    <Key>
+      <PropertyRef Name="RIM_VEM_ID" />
+    </Key>
+    <Property Name="RIM_VEM_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="RIMRIC" Type="Int32" />
+    <Property Name="RIMRID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="VEMVEN" Type="Int32" />
+    <Property Name="VEMDS1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RIMCPR" Type="Double" />
+    <Property Name="PPERUN" Type="Double" />
+    <Property Name="SCMCOD" Type="Double" />
+    <Property Name="RIMCPN" Type="Double" />
+    <Property Name="RIMPDT" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="SCM_Master_Recipe">
+    <Key>
+      <PropertyRef Name="CSMID" />
+    </Key>
+    <Property Name="CSMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RIMRIC" Type="Int32" />
+    <Property Name="CSMSFQ" Type="Double" />
+    <Property Name="CSMCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="CSMDES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Store_Profile">
     <Key>
       <PropertyRef Name="STORE_NO" />
@@ -457,50 +560,226 @@
     <Property Name="FRESHB_OR_FROZENB" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
     <Property Name="Group" Type="Int32" />
+    <NavigationProperty Name="Breakfast_Price_Tier1" Relationship="CFMMCDModel.FK_Store_Profile_Breakfast_Price_Tier" FromRole="Store_Profile" ToRole="Breakfast_Price_Tier" />
+    <NavigationProperty Name="Dessert_Price_Tier" Relationship="CFMMCDModel.FK_Store_Profile_Dessert_Price_Tier" FromRole="Store_Profile" ToRole="Dessert_Price_Tier" />
+    <NavigationProperty Name="LOCATION1" Relationship="CFMMCDModel.FK_Store_Profile_McCafe_LOCATION" FromRole="Store_Profile" ToRole="LOCATION" />
+    <NavigationProperty Name="McCafe_Bistro_Price_Tier1" Relationship="CFMMCDModel.FK_Store_Profile_McCafe_Bistro_Price_Tier" FromRole="Store_Profile" ToRole="McCafe_Bistro_Price_Tier" />
+    <NavigationProperty Name="McCafe_Level_2_Price_Tier1" Relationship="CFMMCDModel.FK_Store_Profile_McCafe_Level_2_Price_Tier" FromRole="Store_Profile" ToRole="McCafe_Level_2_Price_Tier" />
+    <NavigationProperty Name="McCafe_Level_3_Price_Tier1" Relationship="CFMMCDModel.FK_Store_Profile_McCafe_Level_3_Price_Tier" FromRole="Store_Profile" ToRole="McCafe_Level_3_Price_Tier" />
+    <NavigationProperty Name="MDS_Price_Tier1" Relationship="CFMMCDModel.FK_Store_Profile_MDS_Price_Tier" FromRole="Store_Profile" ToRole="MDS_Price_Tier" />
+    <NavigationProperty Name="OWNERSHIP1" Relationship="CFMMCDModel.FK_Store_Profile_OWNERSHIP" FromRole="Store_Profile" ToRole="OWNERSHIP" />
+    <NavigationProperty Name="Project_Gold_Price_Tier1" Relationship="CFMMCDModel.FK_Store_Profile_Project_Gold_Price_Tier" FromRole="Store_Profile" ToRole="Project_Gold_Price_Tier" />
+    <NavigationProperty Name="Regular_Price_Tier1" Relationship="CFMMCDModel.FK_Store_Profile_Regular_Price_Tier" FromRole="Store_Profile" ToRole="Regular_Price_Tier" />
   </EntityType>
-  <EntityType Name="ITMGRP">
+  <EntityType Name="Trading_Area">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Group_Id" Type="Int32" Nullable="false" />
-    <Property Name="Group_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="Item_Code" Type="Int32" Nullable="false" />
-    <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Item_Type" Type="Int32" Nullable="false" />
-    <Property Name="Group_Type" Type="Int32" Nullable="false" />
+    <Property Name="Trading_Areea" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="INVRIRP0">
-    <Key>
-      <PropertyRef Name="RIRRID" />
-    </Key>
-    <Property Name="RIRRID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="RIRMIC" Type="Int32" />
-    <Property Name="RIRRIC" Type="Int32" />
-    <Property Name="RIRVPC" Type="Int32" />
-    <Property Name="RIRSFQ" Type="Double" />
-    <Property Name="RIRCWC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIRSTA" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIRVST" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIRUSR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-    <Property Name="RIRDAT" Type="DateTime" Precision="0" />
-    <Property Name="RIRFLG" Type="Boolean" />
-    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="RIMCPR" Type="Double" />
-    <Property Name="LongName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Group" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Audit_Log">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Date_Time" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Page" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Page_Action" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
+  <Association Name="FK_Store_Profile_Breakfast_Price_Tier">
+    <End Type="CFMMCDModel.Breakfast_Price_Tier" Role="Breakfast_Price_Tier" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Breakfast_Price_Tier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="BREAKFAST_PRICE_TIER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CSHMIMP0_CSHMIMP0_NP6">
+    <End Type="CFMMCDModel.CSHMIMP0_NP6" Role="CSHMIMP0_NP6" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSHMIMP0_NP6">
+        <PropertyRef Name="MIMMIC" />
+      </Principal>
+      <Dependent Role="CSHMIMP0">
+        <PropertyRef Name="MIMMIC_NP6" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVRIRP0_CSHMIMP0">
+    <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.INVRIRP0" Role="INVRIRP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSHMIMP0">
+        <PropertyRef Name="MIMMIC" />
+      </Principal>
+      <Dependent Role="INVRIRP0">
+        <PropertyRef Name="RIRMIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MIM_Price_CSHMIMP0">
+    <End Type="CFMMCDModel.CSHMIMP0" Role="CSHMIMP0" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.MIM_Price" Role="MIM_Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSHMIMP0">
+        <PropertyRef Name="MIMMIC" />
+      </Principal>
+      <Dependent Role="MIM_Price">
+        <PropertyRef Name="MIMMIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_Dessert_Price_Tier">
+    <End Type="CFMMCDModel.Dessert_Price_Tier" Role="Dessert_Price_Tier" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dessert_Price_Tier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="DC_PRICE_TIER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVRIMP0_INVUOMP0">
+    <End Type="CFMMCDModel.INVUOMP0" Role="INVUOMP0" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.INVRIMP0" Role="INVRIMP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INVUOMP0">
+        <PropertyRef Name="UOMDES" />
+      </Principal>
+      <Dependent Role="INVRIMP0">
+        <PropertyRef Name="RIMBVP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVRIMP0_INVUOMP0_2">
+    <End Type="CFMMCDModel.INVUOMP0" Role="INVUOMP0" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.INVRIMP0" Role="INVRIMP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INVUOMP0">
+        <PropertyRef Name="UOMDES" />
+      </Principal>
+      <Dependent Role="INVRIMP0">
+        <PropertyRef Name="RIMBZP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVRIMP0_INVUOMP0_3">
+    <End Type="CFMMCDModel.INVUOMP0" Role="INVUOMP0" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.INVRIMP0" Role="INVRIMP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INVUOMP0">
+        <PropertyRef Name="UOMDES" />
+      </Principal>
+      <Dependent Role="INVRIMP0">
+        <PropertyRef Name="RIMUMC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVRIRP0_INVRIMP0">
+    <End Type="CFMMCDModel.INVRIMP0" Role="INVRIMP0" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.INVRIRP0" Role="INVRIRP0" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INVRIMP0">
+        <PropertyRef Name="RIMRIC" />
+      </Principal>
+      <Dependent Role="INVRIRP0">
+        <PropertyRef Name="RIRRIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_McCafe_LOCATION">
+    <End Type="CFMMCDModel.LOCATION" Role="LOCATION" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOCATION">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="LOCATION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_McCafe_Bistro_Price_Tier">
+    <End Type="CFMMCDModel.McCafe_Bistro_Price_Tier" Role="McCafe_Bistro_Price_Tier" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="McCafe_Bistro_Price_Tier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="MCCAFE_BISTRO_PRICE_TIER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_McCafe_Level_2_Price_Tier">
+    <End Type="CFMMCDModel.McCafe_Level_2_Price_Tier" Role="McCafe_Level_2_Price_Tier" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="McCafe_Level_2_Price_Tier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="MCCAFE_LEVEL_2_PRICE_TIER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_McCafe_Level_3_Price_Tier">
+    <End Type="CFMMCDModel.McCafe_Level_3_Price_Tier" Role="McCafe_Level_3_Price_Tier" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="McCafe_Level_3_Price_Tier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="MCCAFE_LEVEL_3_PRICE_TIER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_MDS_Price_Tier">
+    <End Type="CFMMCDModel.MDS_Price_Tier" Role="MDS_Price_Tier" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MDS_Price_Tier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="MDS_PRICE_TIER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_OWNERSHIP">
+    <End Type="CFMMCDModel.OWNERSHIP" Role="OWNERSHIP" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OWNERSHIP">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="OWNERSHIP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_Project_Gold_Price_Tier">
+    <End Type="CFMMCDModel.Project_Gold_Price_Tier" Role="Project_Gold_Price_Tier" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project_Gold_Price_Tier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="PROJECT_GOLD_PRICE_TIER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Store_Profile_Regular_Price_Tier">
+    <End Type="CFMMCDModel.Regular_Price_Tier" Role="Regular_Price_Tier" Multiplicity="0..1" />
+    <End Type="CFMMCDModel.Store_Profile" Role="Store_Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Regular_Price_Tier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store_Profile">
+        <PropertyRef Name="REGULAR_PRICE_TIER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

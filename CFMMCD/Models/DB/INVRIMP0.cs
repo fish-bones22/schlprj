@@ -14,6 +14,12 @@ namespace CFMMCD.Models.DB
     
     public partial class INVRIMP0
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public INVRIMP0()
+        {
+            this.INVRIRP0 = new HashSet<INVRIRP0>();
+        }
+    
         public int RIMRIC { get; set; }
         public Nullable<int> RIMVPC { get; set; }
         public string RIMRID { get; set; }
@@ -68,5 +74,11 @@ namespace CFMMCD.Models.DB
         public string Province { get; set; }
         public string City { get; set; }
         public Nullable<int> Group { get; set; }
+    
+        public virtual INVUOMP0 INVUOMP0 { get; set; }
+        public virtual INVUOMP0 INVUOMP01 { get; set; }
+        public virtual INVUOMP0 INVUOMP02 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INVRIRP0> INVRIRP0 { get; set; }
     }
 }

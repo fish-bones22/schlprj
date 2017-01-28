@@ -47,12 +47,15 @@ namespace CFMMCD.Models.EntityManager
 
                 if (VMViewModel.Region != null)
                     VMRow.Region = VMViewModel.Region;
+                else VMRow.Region = null;
 
                 if (VMViewModel.Province != null)
                     VMRow.Province = VMViewModel.Province;
+                else VMRow.Province = null;
 
                 if (VMViewModel.City != null)
                     VMRow.City = VMViewModel.City;
+                else VMRow.City = null;
 
                 VMRow.Store = VMViewModel.Store;
                 if (VMViewModel.SelectAllCb)

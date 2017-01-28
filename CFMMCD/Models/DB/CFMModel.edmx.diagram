@@ -4,40 +4,55 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c73a0b347ce49a9b17152b45363f091" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="CFMMCDModel.Breakfast_Price_Tier" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.BUSINESS_EXT" Width="1.5" PointX="7.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Category" Width="1.5" PointX="5.75" PointY="7.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0_NP6" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSHPMGP0" Width="1.5" PointX="7.75" PointY="6.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSHVMLP0" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSM_Master_Recipe" Width="1.5" PointX="9.75" PointY="4.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Dessert_Price_Tier" Width="1.5" PointX="9.75" PointY="7.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVMGRP0" Width="1.5" PointX="5.75" PointY="10.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVUOMP0" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVVEMP0" Width="1.5" PointX="11.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.LOCATION" Width="1.5" PointX="11.75" PointY="10.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Bistro_Price_Tier" Width="1.5" PointX="13.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_2_Price_Tier" Width="1.5" PointX="13.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_3_Price_Tier" Width="1.5" PointX="13.75" PointY="6.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.MDS_Price_Tier" Width="1.5" PointX="13.75" PointY="9.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.OWNERSHIP" Width="1.5" PointX="13.75" PointY="12.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.PROFIT_CEN" Width="1.5" PointX="15.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Project_Gold_Price_Tier" Width="1.5" PointX="0.75" PointY="15.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Regular_Price_Tier" Width="1.5" PointX="2.75" PointY="15.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.RIM_VEM_Lookup" Width="1.5" PointX="15.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.SCM_Master_Recipe" Width="1.5" PointX="4.75" PointY="15.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.STORE_MIMMIC_Lookup" Width="1.5" PointX="15.75" PointY="7.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Trading_Area" Width="1.5" PointX="11.75" PointY="16.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.MIM_Price" Width="1.5" PointX="14.375" PointY="17.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="16.375" PointY="17.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0" Width="1.5" PointX="3" PointY="1.375" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="7.375" PointY="15.75" />
-        <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_ToTable" />
-        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="18.375" PointY="0.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.ITMGRP" Width="1.5" PointX="16.375" PointY="10.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.INVRIRP0" Width="1.5" PointX="8.375" PointY="10.75" />
-        <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="0.75" PointY="18.75" />
+      <Diagram DiagramId="5c73a0b347ce49a9b17152b45363f091" Name="Diagram1" ZoomLevel="44">
+        <EntityTypeShape EntityType="CFMMCDModel.Account" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Audit_Log" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Breakfast_Price_Tier" Width="1.5" PointX="0.75" PointY="21.625" />
+        <EntityTypeShape EntityType="CFMMCDModel.BUSINESS_EXT" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Category" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0" Width="1.5" PointX="8" PointY="15" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHMIMP0_NP6" Width="1.5" PointX="5.75" PointY="20.5" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHPMGP0" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSHVMLP0" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.CSM_Master_Recipe" Width="1.5" PointX="12.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Dessert_Price_Tier" Width="1.5" PointX="0.75" PointY="26.25" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVMGRP0" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVRIMP0" Width="1.5" PointX="8" PointY="1.375" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVRIRP0" Width="1.5" PointX="10.25" PointY="5.25" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVUOMP0" Width="1.5" PointX="5.75" PointY="6.25" />
+        <EntityTypeShape EntityType="CFMMCDModel.INVVEMP0" Width="1.5" PointX="4.75" PointY="13.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.ITMGRP" Width="1.5" PointX="10.75" PointY="13.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.LOCATION" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Bistro_Price_Tier" Width="1.5" PointX="0.75" PointY="14.625" />
+        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_2_Price_Tier" Width="1.5" PointX="0.75" PointY="24" />
+        <EntityTypeShape EntityType="CFMMCDModel.McCafe_Level_3_Price_Tier" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="CFMMCDModel.MDS_Price_Tier" Width="1.5" PointX="0.75" PointY="19.25" />
+        <EntityTypeShape EntityType="CFMMCDModel.MIM_Price" Width="1.5" PointX="10.25" PointY="19.625" />
+        <EntityTypeShape EntityType="CFMMCDModel.OWNERSHIP" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="CFMMCDModel.PROFIT_CEN" Width="1.5" PointX="12.75" PointY="13.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Project_Gold_Price_Tier" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="CFMMCDModel.Regular_Price_Tier" Width="1.5" PointX="0.75" PointY="16.875" />
+        <EntityTypeShape EntityType="CFMMCDModel.RIM_VEM_Lookup" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.SCM_Master_Recipe" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CFMMCDModel.Store_Profile" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="CFMMCDModel.Trading_Area" Width="1.5" PointX="14.75" PointY="7.75" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_Breakfast_Price_Tier" />
+        <AssociationConnector Association="CFMMCDModel.FK_CSHMIMP0_CSHMIMP0_NP6" />
+        <AssociationConnector Association="CFMMCDModel.FK_INVRIRP0_CSHMIMP0" />
+        <AssociationConnector Association="CFMMCDModel.FK_MIM_Price_CSHMIMP0" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_Dessert_Price_Tier" />
+        <AssociationConnector Association="CFMMCDModel.FK_INVRIMP0_INVUOMP0" />
+        <AssociationConnector Association="CFMMCDModel.FK_INVRIMP0_INVUOMP0_2" />
+        <AssociationConnector Association="CFMMCDModel.FK_INVRIMP0_INVUOMP0_3" />
+        <AssociationConnector Association="CFMMCDModel.FK_INVRIRP0_INVRIMP0" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_McCafe_LOCATION" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_McCafe_Bistro_Price_Tier" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_McCafe_Level_2_Price_Tier" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_McCafe_Level_3_Price_Tier" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_MDS_Price_Tier" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_OWNERSHIP" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_Project_Gold_Price_Tier" />
+        <AssociationConnector Association="CFMMCDModel.FK_Store_Profile_Regular_Price_Tier" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

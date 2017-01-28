@@ -40,5 +40,16 @@ namespace CFMMCD.Models.DB
         public string FRESHB_OR_FROZENB { get; set; }
         public string STATUS { get; set; }
         public Nullable<int> Group { get; set; }
+    
+        public virtual Breakfast_Price_Tier Breakfast_Price_Tier1 { get; set; }
+        public virtual Dessert_Price_Tier Dessert_Price_Tier { get; set; }
+        public virtual LOCATION LOCATION1 { get; set; }
+        public virtual McCafe_Bistro_Price_Tier McCafe_Bistro_Price_Tier1 { get; set; }
+        public virtual McCafe_Level_2_Price_Tier McCafe_Level_2_Price_Tier1 { get; set; }
+        public virtual McCafe_Level_3_Price_Tier McCafe_Level_3_Price_Tier1 { get; set; }
+        public virtual MDS_Price_Tier MDS_Price_Tier1 { get; set; }
+        public virtual OWNERSHIP OWNERSHIP1 { get; set; }
+        public virtual Project_Gold_Price_Tier Project_Gold_Price_Tier1 { get; set; }
+        public virtual Regular_Price_Tier Regular_Price_Tier1 { get; set; }
     }
 }

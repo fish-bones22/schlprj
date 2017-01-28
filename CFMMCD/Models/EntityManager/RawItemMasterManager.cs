@@ -105,8 +105,7 @@ namespace CFMMCD.Models.EntityManager
                 }
                 RIMRow.Group = RIMViewModel.Group;
                 // Location
-                if (RIMViewModel.Location != null && !RIMViewModel.Equals(""))
-                    RIMRow.Location = int.Parse(RIMViewModel.Location);
+                RIMRow.Location = int.Parse(RIMViewModel.Location);
                 RIMRow.Region = RIMViewModel.Region;
                 RIMRow.Province = RIMViewModel.Province;
                 RIMRow.City = RIMViewModel.City;

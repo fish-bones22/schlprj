@@ -14,6 +14,13 @@ namespace CFMMCD.Models.DB
     
     public partial class CSHMIMP0
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CSHMIMP0()
+        {
+            this.INVRIRP0 = new HashSet<INVRIRP0>();
+            this.MIM_Price = new HashSet<MIM_Price>();
+        }
+    
         public int MIMMIC { get; set; }
         public string MIMSTA { get; set; }
         public string MIMFGC { get; set; }
@@ -76,5 +83,9 @@ namespace CFMMCD.Models.DB
         public Nullable<int> Group { get; set; }
     
         public virtual CSHMIMP0_NP6 CSHMIMP0_NP6 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INVRIRP0> INVRIRP0 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MIM_Price> MIM_Price { get; set; }
     }
 }

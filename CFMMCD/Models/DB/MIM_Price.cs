@@ -27,5 +27,7 @@ namespace CFMMCD.Models.DB
         public Nullable<double> MIMNPD { get; set; }
         public Nullable<double> MIMNNP { get; set; }
         public Nullable<System.DateTime> MIMPND { get; set; }
+    
+        public virtual CSHMIMP0 CSHMIMP0 { get; set; }
     }
 }

@@ -30,5 +30,8 @@ namespace CFMMCD.Models.DB
         public string LongName { get; set; }
         public string Description { get; set; }
         public Nullable<int> Group { get; set; }
+    
+        public virtual CSHMIMP0 CSHMIMP0 { get; set; }
+        public virtual INVRIMP0 INVRIMP0 { get; set; }
     }
 }

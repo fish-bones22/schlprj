@@ -14,7 +14,16 @@ namespace CFMMCD.Models.DB
     
     public partial class Breakfast_Price_Tier
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Breakfast_Price_Tier()
+        {
+            this.Store_Profile = new HashSet<Store_Profile>();
+        }
+    
         public int Id { get; set; }
         public string Price_Tier { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Store_Profile> Store_Profile { get; set; }
     }
 }

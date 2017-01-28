@@ -350,9 +350,6 @@
     <Compile Include="Models\DB\SCM_Master_Recipe.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB\STORE_MIMMIC_Lookup.cs">
-      <DependentUpon>CFMModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DB\Store_Profile.cs">
       <DependentUpon>CFMModel.tt</DependentUpon>
     </Compile>

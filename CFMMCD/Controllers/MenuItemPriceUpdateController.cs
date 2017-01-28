@@ -46,10 +46,22 @@ namespace CFMMCD.Controllers
                 HttpPostedFileBase file = Request.Files["FileUploaded"];
                 if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
                 {
-                    string fileName = file.FileName;
+                    //string fileName = file.FileName;
                     // store the file inside ~/App_Data/uploads folder
-                    string path = "~/App_Data/uploads/" + fileName;
-                    file.SaveAs(Server.MapPath(path));
+                    //string path = "~/App_Data/uploads/" + fileName;
+                    //file.SaveAs(Server.MapPath(path));
+                    ReportViewModel report = MenuItemMasterManager.ImportExcelUpdate(file.InputStream, user.Username);
+                    PageAction = "Import";
+                    result = report.Result;
+                    if (!result)
+                    {
+                        if (report.ErrorLevel == 2)
+                            PageAction = report.Message + ": Import partially";
+                        else
+                            PageAction = report.Message + ": Import";
+                    }
+                    else
+                        PageAction = report.Message + ": Import";
                 }
             }
             if (command == "Save")
