@@ -49,7 +49,7 @@ namespace CFMMCD.Models.EntityManager
                     vm.MIMSTA = MIMRow.MIMSTA;
                     MIMList.Add(vm);
                 }
-               if (MIMList == null || MIMList.Count() == 0 )
+                if (MIMList == null || MIMList.Count() == 0)
                     return null;
                 return MIMList;
             }
@@ -175,7 +175,7 @@ namespace CFMMCD.Models.EntityManager
                     RIRRowList = db.INVRIRP0.Where(o => o.RIRMIC == MIMRow.MIMMIC).ToList();
                 else
                     RIRRowList = new List<INVRIRP0>();
-                foreach(INVRIRP0 RIRRow in RIRRowList)
+                foreach (INVRIRP0 RIRRow in RIRRowList)
                 {
                     MenuRecipe mr = new MenuRecipe();
                     mr.RIRRIC = RIRRow.RIRRIC.ToString();
@@ -435,7 +435,7 @@ namespace CFMMCD.Models.EntityManager
         }
         public static bool UpdatePriceTier(List<Tier> TierList)
         {
-            using (CFMMCDEntities db = new CFMMCDEntities() )
+            using (CFMMCDEntities db = new CFMMCDEntities())
             {
                 for (int i = 0; i < TierList.Count(); i++)
                 {
@@ -557,14 +557,14 @@ namespace CFMMCD.Models.EntityManager
                         if (MIMPrice.MIMPND != null)
                             v.MIMPND = ((DateTime)MIMPrice.MIMPND).ToString("yyyy-MM-dd");
                     }
-                    
+
                 }
                 return TierList;
 
             }
         }
 
-        public static TierUpdate SearchPriceTierUpdate (string MIMMIC)
+        public static TierUpdate SearchPriceTierUpdate(string MIMMIC)
         {
             using (CFMMCDEntities db = new CFMMCDEntities())
             {
@@ -1007,7 +1007,7 @@ namespace CFMMCD.Models.EntityManager
                                    FirstRow.Cell(i).Value.ToString().ToUpper().Contains("ITEM STATUS"))
                             {
                                 if (row.Cell(i).Value != null && !row.Cell(i).Value.ToString().Equals(""))
-                                    MIMRow.MIMIST = row.Cell(i).Value.ToString(); 
+                                    MIMRow.MIMIST = row.Cell(i).Value.ToString();
                             }
 
                             else if (FirstRow.Cell(i).Value.ToString().ToUpper().Equals("MIMCLR") ||
@@ -1280,5 +1280,188 @@ namespace CFMMCD.Models.EntityManager
                 return error;
             }
         }
+        public static ReportViewModel ImportExcelUpdate(Stream file, string user)
+        {
+            using (CFMMCDEntities db = new CFMMCDEntities())
+            {
+                ReportViewModel error = new ReportViewModel();
+
+                XLWorkbook workBook;
+                try
+                {
+                    workBook = new XLWorkbook(file);
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    error.Result = false;
+                    error.Message = "File format not supported";
+                    error.ErrorLevel = 3;
+                    return error;
+                }
+
+                IXLWorksheet workSheet = workBook.Worksheet(1);
+                var MIMRowList = new List<MIM_Price>();
+                bool IsFirstRow = true;
+                IXLRow FirstRow = workSheet.Rows().ElementAt(0);
+                if (FirstRow == null || FirstRow.CellCount() <= 0)
+                {
+                    error.Result = false;
+                    error.ErrorLevel = 3;
+                    error.Message = "File has incorrect or unsupported format";
+                    return error;
+                }
+                int index = 1;
+                int succesfulRows = 0;
+                int blankCounter = 0;
+                foreach (IXLRow row in workSheet.Rows())
+                {
+                    if (row == null)
+                        break;
+
+                    if (IsFirstRow)
+                    {
+                        FirstRow = row;
+                        IsFirstRow = false;
+                    }
+                    else
+                    {
+                        if (row.Cells() == null || row.CellCount() <= 0)
+                            break;
+
+                        MIM_Price vm = new MIM_Price();
+                        int errorLevel = 0;
+                        for (int i = 1; i < row.CellCount(); i++)
+                        {
+
+                            if (FirstRow.Cell(i).Value.ToString().ToUpper().Contains("MIMMIC") ||
+                                FirstRow.Cell(i).Value.ToString().ToUpper().Contains("MENU ITEM CODE"))
+                            {
+                                if (row.Cell(i).Value != null && !row.Cell(i).Value.ToString().Equals(""))
+                                    vm.MIMMIC = int.Parse(row.Cell(i).Value.ToString());
+                                else
+                                {
+                                    error.Message += "[MIMMIC]/Menu item code at {Row " + index + "} not in the correct format. | ";
+                                    if (error.ErrorLevel != 3) errorLevel = 2;
+                                    error.Result = false;
+                                }
+                            }
+
+                            else if (FirstRow.Cell(i).Value.ToString().ToUpper().Contains("MIMNAM") ||
+                                    FirstRow.Cell(i).Value.ToString().ToUpper().Contains("MENU ITEM NAME"))
+                            {
+                                if (row.Cell(i).Value != null && !row.Cell(i).Value.ToString().Equals(""))
+                                    vm.MIMNAM = row.Cell(i).Value.ToString();
+                            }
+
+                            else if (FirstRow.Cell(i).Value.ToString().ToUpper().Contains("MITIER") ||
+                                    FirstRow.Cell(i).Value.ToString().ToUpper().Contains("TIER"))
+                            {
+                                if (row.Cell(i).Value != null && !row.Cell(i).Value.ToString().Equals(""))
+                                    vm.MITIER = row.Cell(i).Value.ToString();
+                            }
+
+                            else if (FirstRow.Cell(i).Value.ToString().ToUpper().Contains("MIMPND") ||
+                                   FirstRow.Cell(i).Value.ToString().ToUpper().Contains("EFFECTIVE DATE"))
+                            {
+                                if (row.Cell(i).Value != null && !row.Cell(i).Value.ToString().Equals(""))
+                                    vm.MIMPND = DateTime.Parse(row.Cell(i).Value.ToString());
+                                else
+                                {
+                                    error.Result = false;
+                                    error.Message += "[MIMPND]/Effective date at {Row " + index + "} not in the correct format. | ";
+                                    if (error.ErrorLevel != 3) errorLevel = 2;
+                                }
+                            }
+
+                            else if (FirstRow.Cell(i).Value.ToString().ToUpper().Contains("MIMPRI") ||
+                                    FirstRow.Cell(i).Value.ToString().ToUpper().Contains("OLD PRICE"))
+                            {
+                                if (row.Cell(i).Value != null && !row.Cell(i).Value.ToString().Equals(""))
+                                    vm.MIMPRI = int.Parse(row.Cell(i).Value.ToString());
+                            }
+
+                            else if (FirstRow.Cell(i).Value.ToString().ToUpper().Contains("MIMNPI") ||
+                                    FirstRow.Cell(i).Value.ToString().ToUpper().Contains("NEW PRICE"))
+                            {
+                                if (row.Cell(i).Value != null && !row.Cell(i).Value.ToString().Equals(""))
+                                    vm.MIMNPI = int.Parse(row.Cell(i).Value.ToString());
+                            }
+
+                            else if (FirstRow.Cell(i).Value == null ||
+                                   FirstRow.Cell(i).Value.ToString().ToUpper().Contains(""))
+                            {
+                                blankCounter++;
+                                if (blankCounter > 20) break;
+                                else continue;
+                            }
+
+                            if (vm.MITIER != null && vm.MIMMIC != null)
+                            {
+                                vm.Id = vm.MIMMIC + vm.MITIER;
+                            }
+
+                            if (vm.MIMNAM == null || vm.MIMMIC == null)
+                            {
+                                error.Result = false;
+                                error.Message += "{Row " + index + "} has incorrect format | ";
+                                errorLevel = 2;
+                                break;
+                            }
+
+                            if (errorLevel == 2)
+                                error.Message += "{Row " + index + "} not inserted | ";
+
+                            if (errorLevel < 2)
+                            {
+                                MIMRowList.Add(vm);
+                                db.MIM_Price.Add(vm);
+                            }
+                            try
+                            {
+                                db.SaveChanges();// Special case for logging import 
+                                new AuditLogManager().Audit(user, DateTime.Now, "Menu Item Price Update", "Import", vm.MIMMIC.ToString(), vm.Id);
+                                succesfulRows++;
+                            }
+                            catch (Exception e)
+                            {
+                                System.Diagnostics.Debug.WriteLine(e.Source);
+                                System.Diagnostics.Debug.WriteLine(e.Message);
+                                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                                System.Diagnostics.Debug.WriteLine(e.InnerException);
+                                Exception f = e.InnerException;
+                                while (f != null)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("INNER:");
+                                    System.Diagnostics.Debug.WriteLine(f.Message);
+                                    System.Diagnostics.Debug.WriteLine(f.Source);
+                                    f = f.InnerException;
+                                }
+                                System.Diagnostics.Debug.WriteLine(e.Data);
+                                error.Result = false;
+                                error.Message += "{Row " + index + "} failed to insert." + Environment.NewLine;
+                                errorLevel = 2;
+                            }
+                        }
+                        error.ErrorLevel = errorLevel;
+                        index++;
+                    }
+                }
+                if (succesfulRows <= 0)
+                {
+                    error.Result = false;
+                    error.Message += "No rows imported | ";
+                    error.ErrorLevel = 3;
+                }
+                else if (succesfulRows >= index)
+                {
+                    error.ErrorLevel = 0;
+                    error.Result = true;
+                }
+                return error;
+            }
+        }
     }
 }
+        
+    
